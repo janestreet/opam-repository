@@ -1,0 +1,3 @@
+Jane Street build server
+This package is used internally to get a package that we can build on
+OSX, to bootstrap the system.
