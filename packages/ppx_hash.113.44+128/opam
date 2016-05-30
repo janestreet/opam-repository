@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_hash"
+bug-reports: "https://github.com/janestreet/ppx_hash/issues"
+dev-repo: "https://github.com/janestreet/ppx_hash.git"
+license: "Apache-2.0"
+build: [
+  ["./configure" "--prefix" prefix]
+  [make]
+]
+depends: [
+  "ocamlbuild"     {build}
+  "oasis"          {build & >= "0.4"}
+  "ocamlfind"      {build & >= "1.3.2"}
+  "js-build-tools" {build}
+  "ppx_compare"
+  "ppx_core"
+  "ppx_driver"
+  "ppx_sexp_conv"
+  "ppx_tools"      {>= "0.99.3"}
+  "ppx_type_conv"
+  "sexplib"
+]
+available: [ ocaml-version = "4.02.3" ]
