@@ -18,7 +18,6 @@ depends: [
   "conf-openssl"
   "core"
   "ctypes"
-  "ctypes-foreign"
   "fieldslib"
   "js-build-tools"  {build}
   "ppx_assert"
