@@ -1,1 +1,1 @@
-Prout
+A wrapper around json_wheel to add our usual ppx derivers on `Json_type.t`
