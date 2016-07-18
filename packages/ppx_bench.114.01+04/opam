@@ -19,4 +19,4 @@ depends: [
   "ppx_inline_test"
   "ppx_tools"       {>= "0.99.3"}
 ]
-available: [ ocaml-version = "4.02.3" ]
+available: [ ocaml-version = "4.03.0" ]
