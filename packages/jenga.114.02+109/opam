@@ -28,7 +28,7 @@ depends: [
   "ppx_hash"
   "ppx_inline_test"
   "ppx_jane"
-  "re2"
+  "re"
   "sexplib"
   "typerep"
   "variantslib"
