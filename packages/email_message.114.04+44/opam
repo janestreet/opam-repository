@@ -17,6 +17,7 @@ depends: [
   "bin_prot"
   "core"
   "core_extended"
+  "cryptokit"
   "fieldslib"
   "js-build-tools"  {build}
   "magic-mime"
