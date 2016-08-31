@@ -10,15 +10,16 @@ build: [
   [make]
 ]
 depends: [
-  "ocamlbuild"     {build}
-  "oasis"          {build & >= "0.4" & < "0.4.7"}
-  "ocamlfind"      {build & >= "1.3.2"}
-  "js-build-tools" {build}
+  "ocamlbuild"          {build}
+  "oasis"               {build & >= "0.4" & < "0.4.7"}
+  "ocamlfind"           {build & >= "1.3.2"}
+  "jane-street-headers"
+  "js-build-tools"      {build}
   "ppx_compare"
   "ppx_core"
   "ppx_driver"
   "ppx_sexp_conv"
-  "ppx_tools"      {>= "0.99.3"}
+  "ppx_tools"           {>= "0.99.3"}
   "ppx_type_conv"
   "sexplib"
 ]
