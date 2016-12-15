@@ -1,0 +1,32 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_jane"
+bug-reports: "https://github.com/janestreet/ppx_jane/issues"
+dev-repo: "https://github.com/janestreet/ppx_jane.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_jane" "-j" jobs]
+]
+depends: [
+  "jbuilder"
+  "ppx_assert"
+  "ppx_base"
+  "ppx_bench"
+  "ppx_bin_prot"
+  "ppx_custom_printf"
+  "ppx_driver"
+  "ppx_expect"
+  "ppx_fail"
+  "ppx_fields_conv"
+  "ppx_here"
+  "ppx_inline_test"
+  "ppx_let"
+  "ppx_optional"
+  "ppx_pipebang"
+  "ppx_sexp_message"
+  "ppx_sexp_value"
+  "ppx_typerep_conv"
+  "ppx_variants_conv"
+]
+available: [ ocaml-version >= "4.03.0" ]

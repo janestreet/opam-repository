@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_bin_prot"
+bug-reports: "https://github.com/janestreet/ppx_bin_prot/issues"
+dev-repo: "https://github.com/janestreet/ppx_bin_prot.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_bin_prot" "-j" jobs]
+]
+depends: [
+  "bin_prot"
+  "jbuilder"
+  "ppx_core"
+  "ppx_driver"
+  "ppx_here"
+  "ppx_type_conv"
+  "ppx_tools"     {>= "0.99.3"}
+]
+available: [ ocaml-version >= "4.03.0" ]

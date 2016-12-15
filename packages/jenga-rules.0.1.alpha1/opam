@@ -1,0 +1,18 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/jenga-rules"
+bug-reports: "https://github.com/janestreet/jenga-rules/issues"
+dev-repo: "https://github.com/janestreet/jenga-rules.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "jenga-rules" "-j" jobs]
+]
+depends: [
+  "jbuilder"
+  "jenga"
+  "ppx_driver"
+  "ppx_jane"
+  "re"
+]
+available: [ ocaml-version >= "4.03.0" ]

@@ -1,0 +1,23 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/email_message"
+bug-reports: "https://github.com/janestreet/email_message/issues"
+dev-repo: "https://github.com/janestreet/email_message.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "email_message" "-j" jobs]
+]
+depends: [
+  "async"
+  "core"
+  "core_extended"
+  "jbuilder"
+  "ppx_driver"
+  "ppx_jane"
+  "re2"
+  "cryptokit"
+  "magic-mime"
+  "ounit"
+]
+available: [ ocaml-version >= "4.03.0" ]

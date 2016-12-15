@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/async_extra"
+bug-reports: "https://github.com/janestreet/async_extra/issues"
+dev-repo: "https://github.com/janestreet/async_extra.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "async_extra" "-j" jobs]
+]
+depends: [
+  "async_kernel"
+  "async_rpc_kernel"
+  "async_unix"
+  "core"
+  "jbuilder"
+  "ppx_driver"
+  "ppx_jane"
+]
+available: [ ocaml-version >= "4.03.0" ]

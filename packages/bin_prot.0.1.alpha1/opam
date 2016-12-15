@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/bin_prot"
+bug-reports: "https://github.com/janestreet/bin_prot/issues"
+dev-repo: "https://github.com/janestreet/bin_prot.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "bin_prot" "-j" jobs]
+]
+depends: [
+  "base"
+  "jbuilder"
+  "ppx_compare"
+  "ppx_custom_printf"
+  "ppx_driver"
+  "ppx_fields_conv"
+  "ppx_sexp_conv"
+  "ppx_variants_conv"
+  "sexplib"
+]
+available: [ ocaml-version >= "4.03.0" ]
+depopts: [
+  "mirage-xen-ocaml"
+]

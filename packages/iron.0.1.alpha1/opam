@@ -1,0 +1,28 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/iron"
+bug-reports: "https://github.com/janestreet/iron/issues"
+dev-repo: "https://github.com/janestreet/iron.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "iron" "-j" jobs]
+]
+depends: [
+  "async"
+  "async_extended"
+  "async_interactive"
+  "command_rpc"
+  "core"
+  "core_extended"
+  "incremental"
+  "jbuilder"
+  "patdiff"
+  "patience_diff"
+  "ppx_driver"
+  "ppx_jane"
+  "re2"
+  "textutils"
+  "topological_sort"
+]
+available: [ ocaml-version >= "4.03.0" ]

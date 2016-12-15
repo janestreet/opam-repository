@@ -1,0 +1,24 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/incr_dom"
+bug-reports: "https://github.com/janestreet/incr_dom/issues"
+dev-repo: "https://github.com/janestreet/incr_dom.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "incr_dom" "-j" jobs]
+]
+depends: [
+  "async_js"
+  "async_kernel"
+  "core_kernel"
+  "incr_map"
+  "incr_select"
+  "incremental_kernel"
+  "jbuilder"
+  "ppx_driver"
+  "ppx_jane"
+  "virtual_dom"
+  "js_of_ocaml"
+]
+available: [ ocaml-version >= "4.03.0" ]
