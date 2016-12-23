@@ -11,6 +11,7 @@ build: [
 depends: [
   "jbuilder"
   "jenga"
+  "parsexp"
   "ppx_driver"
   "ppx_jane"
   "re"
