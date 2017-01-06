@@ -10,10 +10,13 @@ build: [
 ]
 depends: [
   "async"
+  "base"
+  "configurator"
   "core"
   "jbuilder"
   "ppx_driver"
   "ppx_jane"
+  "stdio"
   "conf-openssl"
   "ctypes"
 ]
