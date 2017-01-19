@@ -11,6 +11,7 @@ build: [
 depends: [
   "bin_prot"
   "core"
+  "expect_test_helpers"
   "fieldslib"
   "jbuilder"
   "ppx_driver"
