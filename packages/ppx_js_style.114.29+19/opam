@@ -1,0 +1,18 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_js_style"
+bug-reports: "https://github.com/janestreet/ppx_js_style/issues"
+dev-repo: "https://github.com/janestreet/ppx_js_style.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_js_style" "-j" jobs]
+]
+depends: [
+  "jbuilder"
+  "ppx_core"
+  "ppx_driver"
+  "ppx_metaquot"
+  "octavius"
+]
+available: [ ocaml-version >= "4.03.0" ]

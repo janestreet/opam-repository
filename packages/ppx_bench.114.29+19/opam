@@ -1,0 +1,18 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_bench"
+bug-reports: "https://github.com/janestreet/ppx_bench/issues"
+dev-repo: "https://github.com/janestreet/ppx_bench.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_bench" "-j" jobs]
+]
+depends: [
+  "jbuilder"
+  "ppx_core"
+  "ppx_driver"
+  "ppx_inline_test"
+  "ppx_metaquot"
+]
+available: [ ocaml-version >= "4.03.0" ]

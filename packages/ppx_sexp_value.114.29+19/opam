@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_sexp_value"
+bug-reports: "https://github.com/janestreet/ppx_sexp_value/issues"
+dev-repo: "https://github.com/janestreet/ppx_sexp_value.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_sexp_value" "-j" jobs]
+]
+depends: [
+  "jbuilder"
+  "ppx_core"
+  "ppx_driver"
+  "ppx_here"
+  "ppx_metaquot"
+  "ppx_sexp_conv"
+  "sexplib"
+]
+available: [ ocaml-version >= "4.03.0" ]
