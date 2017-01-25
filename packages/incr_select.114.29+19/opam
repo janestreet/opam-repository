@@ -9,11 +9,11 @@ build: [
   ["jbuilder" "build-package" "incr_select" "-j" jobs]
 ]
 depends: [
-  "core_kernel"        {= 114.29+19}
-  "incremental_kernel" {= 114.29+19}
-  "jbuilder"           {= 114.29+19}
-  "ppx_driver"         {= 114.29+19}
-  "ppx_jane"           {= 114.29+19}
+  "core_kernel"        {= "114.29+19"}
+  "incremental_kernel" {= "114.29+19"}
+  "jbuilder"           {= "114.29+19"}
+  "ppx_driver"         {= "114.29+19"}
+  "ppx_jane"           {= "114.29+19"}
   "js_of_ocaml"
 ]
 available: [ ocaml-version >= "4.03.0" ]

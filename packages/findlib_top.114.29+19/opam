@@ -9,6 +9,6 @@ build: [
   ["jbuilder" "build-package" "findlib_top" "-j" jobs]
 ]
 depends: [
-  "jbuilder" {= 114.29+19}
+  "jbuilder" {= "114.29+19"}
 ]
 available: [ ocaml-version >= "4.03.0" ]

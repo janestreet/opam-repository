@@ -9,16 +9,16 @@ build: [
   ["jbuilder" "build-package" "incr_dom" "-j" jobs]
 ]
 depends: [
-  "async_js"           {= 114.29+19}
-  "async_kernel"       {= 114.29+19}
-  "core_kernel"        {= 114.29+19}
-  "incr_map"           {= 114.29+19}
-  "incr_select"        {= 114.29+19}
-  "incremental_kernel" {= 114.29+19}
-  "jbuilder"           {= 114.29+19}
-  "ppx_driver"         {= 114.29+19}
-  "ppx_jane"           {= 114.29+19}
-  "virtual_dom"        {= 114.29+19}
+  "async_js"           {= "114.29+19"}
+  "async_kernel"       {= "114.29+19"}
+  "core_kernel"        {= "114.29+19"}
+  "incr_map"           {= "114.29+19"}
+  "incr_select"        {= "114.29+19"}
+  "incremental_kernel" {= "114.29+19"}
+  "jbuilder"           {= "114.29+19"}
+  "ppx_driver"         {= "114.29+19"}
+  "ppx_jane"           {= "114.29+19"}
+  "virtual_dom"        {= "114.29+19"}
   "js_of_ocaml"
 ]
 available: [ ocaml-version >= "4.03.0" ]

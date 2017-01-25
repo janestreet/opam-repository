@@ -9,10 +9,10 @@ build: [
   ["jbuilder" "build-package" "configurator" "-j" jobs]
 ]
 depends: [
-  "base"       {= 114.29+19}
-  "jbuilder"   {= 114.29+19}
-  "ppx_base"   {= 114.29+19}
-  "ppx_driver" {= 114.29+19}
-  "stdio"      {= 114.29+19}
+  "base"       {= "114.29+19"}
+  "jbuilder"   {= "114.29+19"}
+  "ppx_base"   {= "114.29+19"}
+  "ppx_driver" {= "114.29+19"}
+  "stdio"      {= "114.29+19"}
 ]
 available: [ ocaml-version >= "4.03.0" ]

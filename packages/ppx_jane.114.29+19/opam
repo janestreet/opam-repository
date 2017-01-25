@@ -9,24 +9,24 @@ build: [
   ["jbuilder" "build-package" "ppx_jane" "-j" jobs]
 ]
 depends: [
-  "jbuilder"          {= 114.29+19}
-  "ppx_assert"        {= 114.29+19}
-  "ppx_base"          {= 114.29+19}
-  "ppx_bench"         {= 114.29+19}
-  "ppx_bin_prot"      {= 114.29+19}
-  "ppx_custom_printf" {= 114.29+19}
-  "ppx_driver"        {= 114.29+19}
-  "ppx_expect"        {= 114.29+19}
-  "ppx_fail"          {= 114.29+19}
-  "ppx_fields_conv"   {= 114.29+19}
-  "ppx_here"          {= 114.29+19}
-  "ppx_inline_test"   {= 114.29+19}
-  "ppx_let"           {= 114.29+19}
-  "ppx_optional"      {= 114.29+19}
-  "ppx_pipebang"      {= 114.29+19}
-  "ppx_sexp_message"  {= 114.29+19}
-  "ppx_sexp_value"    {= 114.29+19}
-  "ppx_typerep_conv"  {= 114.29+19}
-  "ppx_variants_conv" {= 114.29+19}
+  "jbuilder"          {= "114.29+19"}
+  "ppx_assert"        {= "114.29+19"}
+  "ppx_base"          {= "114.29+19"}
+  "ppx_bench"         {= "114.29+19"}
+  "ppx_bin_prot"      {= "114.29+19"}
+  "ppx_custom_printf" {= "114.29+19"}
+  "ppx_driver"        {= "114.29+19"}
+  "ppx_expect"        {= "114.29+19"}
+  "ppx_fail"          {= "114.29+19"}
+  "ppx_fields_conv"   {= "114.29+19"}
+  "ppx_here"          {= "114.29+19"}
+  "ppx_inline_test"   {= "114.29+19"}
+  "ppx_let"           {= "114.29+19"}
+  "ppx_optional"      {= "114.29+19"}
+  "ppx_pipebang"      {= "114.29+19"}
+  "ppx_sexp_message"  {= "114.29+19"}
+  "ppx_sexp_value"    {= "114.29+19"}
+  "ppx_typerep_conv"  {= "114.29+19"}
+  "ppx_variants_conv" {= "114.29+19"}
 ]
 available: [ ocaml-version >= "4.03.0" ]

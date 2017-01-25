@@ -9,17 +9,17 @@ build: [
   ["jbuilder" "build-package" "async_extended" "-j" jobs]
 ]
 depends: [
-  "async"             {= 114.29+19}
-  "async_find"        {= 114.29+19}
-  "async_inotify"     {= 114.29+19}
-  "async_interactive" {= 114.29+19}
-  "async_shell"       {= 114.29+19}
-  "command_rpc"       {= 114.29+19}
-  "core"              {= 114.29+19}
-  "core_extended"     {= 114.29+19}
-  "jbuilder"          {= 114.29+19}
-  "ppx_driver"        {= 114.29+19}
-  "ppx_jane"          {= 114.29+19}
-  "textutils"         {= 114.29+19}
+  "async"             {= "114.29+19"}
+  "async_find"        {= "114.29+19"}
+  "async_inotify"     {= "114.29+19"}
+  "async_interactive" {= "114.29+19"}
+  "async_shell"       {= "114.29+19"}
+  "command_rpc"       {= "114.29+19"}
+  "core"              {= "114.29+19"}
+  "core_extended"     {= "114.29+19"}
+  "jbuilder"          {= "114.29+19"}
+  "ppx_driver"        {= "114.29+19"}
+  "ppx_jane"          {= "114.29+19"}
+  "textutils"         {= "114.29+19"}
 ]
 available: [ ocaml-version >= "4.03.0" ]

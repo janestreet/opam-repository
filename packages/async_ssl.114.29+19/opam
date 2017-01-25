@@ -9,14 +9,14 @@ build: [
   ["jbuilder" "build-package" "async_ssl" "-j" jobs]
 ]
 depends: [
-  "async"        {= 114.29+19}
-  "base"         {= 114.29+19}
-  "configurator" {= 114.29+19}
-  "core"         {= 114.29+19}
-  "jbuilder"     {= 114.29+19}
-  "ppx_driver"   {= 114.29+19}
-  "ppx_jane"     {= 114.29+19}
-  "stdio"        {= 114.29+19}
+  "async"        {= "114.29+19"}
+  "base"         {= "114.29+19"}
+  "configurator" {= "114.29+19"}
+  "core"         {= "114.29+19"}
+  "jbuilder"     {= "114.29+19"}
+  "ppx_driver"   {= "114.29+19"}
+  "ppx_jane"     {= "114.29+19"}
+  "stdio"        {= "114.29+19"}
   "conf-openssl"
   "ctypes"
 ]

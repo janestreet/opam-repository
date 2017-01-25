@@ -9,11 +9,11 @@ build: [
   ["jbuilder" "build-package" "jane-build" "-j" jobs]
 ]
 depends: [
-  "core"        {= 114.29+19}
-  "jbuilder"    {= 114.29+19}
-  "jenga"       {= 114.29+19}
-  "jenga-rules" {= 114.29+19}
-  "ppx_driver"  {= 114.29+19}
-  "ppx_jane"    {= 114.29+19}
+  "core"        {= "114.29+19"}
+  "jbuilder"    {= "114.29+19"}
+  "jenga"       {= "114.29+19"}
+  "jenga-rules" {= "114.29+19"}
+  "ppx_driver"  {= "114.29+19"}
+  "ppx_jane"    {= "114.29+19"}
 ]
 available: [ ocaml-version >= "4.03.0" ]

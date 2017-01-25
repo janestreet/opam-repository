@@ -9,12 +9,12 @@ build: [
   ["jbuilder" "build-package" "async_extra" "-j" jobs]
 ]
 depends: [
-  "async_kernel"     {= 114.29+19}
-  "async_rpc_kernel" {= 114.29+19}
-  "async_unix"       {= 114.29+19}
-  "core"             {= 114.29+19}
-  "jbuilder"         {= 114.29+19}
-  "ppx_driver"       {= 114.29+19}
-  "ppx_jane"         {= 114.29+19}
+  "async_kernel"     {= "114.29+19"}
+  "async_rpc_kernel" {= "114.29+19"}
+  "async_unix"       {= "114.29+19"}
+  "core"             {= "114.29+19"}
+  "jbuilder"         {= "114.29+19"}
+  "ppx_driver"       {= "114.29+19"}
+  "ppx_jane"         {= "114.29+19"}
 ]
 available: [ ocaml-version >= "4.03.0" ]

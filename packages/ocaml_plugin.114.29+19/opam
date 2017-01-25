@@ -9,12 +9,12 @@ build: [
   ["jbuilder" "build-package" "ocaml_plugin" "-j" jobs]
 ]
 depends: [
-  "async"      {= 114.29+19}
-  "core"       {= 114.29+19}
-  "jbuilder"   {= 114.29+19}
-  "ppx_driver" {= 114.29+19}
-  "ppx_jane"   {= 114.29+19}
-  "sexplib"    {= 114.29+19}
+  "async"      {= "114.29+19"}
+  "core"       {= "114.29+19"}
+  "jbuilder"   {= "114.29+19"}
+  "ppx_driver" {= "114.29+19"}
+  "ppx_jane"   {= "114.29+19"}
+  "sexplib"    {= "114.29+19"}
   "ocamlbuild"
 ]
 available: [ ocaml-version >= "4.03.0" ]
