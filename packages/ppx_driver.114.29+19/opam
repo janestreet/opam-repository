@@ -9,9 +9,9 @@ build: [
   ["jbuilder" "build-package" "ppx_driver" "-j" jobs]
 ]
 depends: [
-  "jbuilder"
-  "ppx_core"
-  "ppx_optcomp"
+  "jbuilder"    {= 114.29+19}
+  "ppx_core"    {= 114.29+19}
+  "ppx_optcomp" {= 114.29+19}
   "ocamlbuild"
 ]
 available: [ ocaml-version >= "4.03.0" ]

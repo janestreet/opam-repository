@@ -9,13 +9,13 @@ build: [
   ["jbuilder" "build-package" "email_message" "-j" jobs]
 ]
 depends: [
-  "async"
-  "core"
-  "core_extended"
-  "jbuilder"
-  "ppx_driver"
-  "ppx_jane"
-  "re2"
+  "async"         {= 114.29+19}
+  "core"          {= 114.29+19}
+  "core_extended" {= 114.29+19}
+  "jbuilder"      {= 114.29+19}
+  "ppx_driver"    {= 114.29+19}
+  "ppx_jane"      {= 114.29+19}
+  "re2"           {= 114.29+19}
   "cryptokit"
   "magic-mime"
   "ounit"

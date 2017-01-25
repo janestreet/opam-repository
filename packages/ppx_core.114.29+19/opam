@@ -9,11 +9,11 @@ build: [
   ["jbuilder" "build-package" "ppx_core" "-j" jobs]
 ]
 depends: [
-  "base"
-  "jbuilder"
-  "ocaml-compiler-libs"
-  "ppx_ast"
-  "ppx_traverse_builtins"
-  "stdio"
+  "base"                  {= 114.29+19}
+  "jbuilder"              {= 114.29+19}
+  "ocaml-compiler-libs"   {= 114.29+19}
+  "ppx_ast"               {= 114.29+19}
+  "ppx_traverse_builtins" {= 114.29+19}
+  "stdio"                 {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

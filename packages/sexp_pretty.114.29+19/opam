@@ -9,11 +9,11 @@ build: [
   ["jbuilder" "build-package" "sexp_pretty" "-j" jobs]
 ]
 depends: [
-  "base"
-  "jbuilder"
-  "ppx_base"
-  "ppx_driver"
-  "sexplib"
+  "base"       {= 114.29+19}
+  "jbuilder"   {= 114.29+19}
+  "ppx_base"   {= 114.29+19}
+  "ppx_driver" {= 114.29+19}
+  "sexplib"    {= 114.29+19}
   "re"
 ]
 available: [ ocaml-version >= "4.03.0" ]

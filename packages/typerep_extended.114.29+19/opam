@@ -9,17 +9,17 @@ build: [
   ["jbuilder" "build-package" "typerep_extended" "-j" jobs]
 ]
 depends: [
-  "bin_prot"
-  "core_kernel"
-  "jbuilder"
-  "ppx_bin_prot"
-  "ppx_driver"
-  "ppx_jane"
-  "ppx_sexp_conv"
-  "ppx_sexp_value"
-  "ppx_type_conv"
-  "ppx_typerep_conv"
-  "sexplib"
-  "typerep"
+  "bin_prot"         {= 114.29+19}
+  "core_kernel"      {= 114.29+19}
+  "jbuilder"         {= 114.29+19}
+  "ppx_bin_prot"     {= 114.29+19}
+  "ppx_driver"       {= 114.29+19}
+  "ppx_jane"         {= 114.29+19}
+  "ppx_sexp_conv"    {= 114.29+19}
+  "ppx_sexp_value"   {= 114.29+19}
+  "ppx_type_conv"    {= 114.29+19}
+  "ppx_typerep_conv" {= 114.29+19}
+  "sexplib"          {= 114.29+19}
+  "typerep"          {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

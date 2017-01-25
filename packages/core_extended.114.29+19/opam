@@ -9,16 +9,16 @@ build: [
   ["jbuilder" "build-package" "core_extended" "-j" jobs]
 ]
 depends: [
-  "bin_prot"
-  "core"
-  "expect_test_helpers"
-  "fieldslib"
-  "jbuilder"
-  "ppx_driver"
-  "ppx_jane"
-  "re2"
-  "sexplib"
-  "textutils"
+  "bin_prot"            {= 114.29+19}
+  "core"                {= 114.29+19}
+  "expect_test_helpers" {= 114.29+19}
+  "fieldslib"           {= 114.29+19}
+  "jbuilder"            {= 114.29+19}
+  "ppx_driver"          {= 114.29+19}
+  "ppx_jane"            {= 114.29+19}
+  "re2"                 {= 114.29+19}
+  "sexplib"             {= 114.29+19}
+  "textutils"           {= 114.29+19}
   "base-threads"
 ]
 available: [ ocaml-version >= "4.03.0" ]

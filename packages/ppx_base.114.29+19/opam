@@ -9,13 +9,13 @@ build: [
   ["jbuilder" "build-package" "ppx_base" "-j" jobs]
 ]
 depends: [
-  "jbuilder"
-  "ppx_compare"
-  "ppx_driver"
-  "ppx_enumerate"
-  "ppx_hash"
-  "ppx_js_style"
-  "ppx_sexp_conv"
-  "ppx_type_conv"
+  "jbuilder"      {= 114.29+19}
+  "ppx_compare"   {= 114.29+19}
+  "ppx_driver"    {= 114.29+19}
+  "ppx_enumerate" {= 114.29+19}
+  "ppx_hash"      {= 114.29+19}
+  "ppx_js_style"  {= 114.29+19}
+  "ppx_sexp_conv" {= 114.29+19}
+  "ppx_type_conv" {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

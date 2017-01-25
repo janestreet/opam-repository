@@ -9,10 +9,10 @@ build: [
   ["jbuilder" "build-package" "async_rpc_kernel" "-j" jobs]
 ]
 depends: [
-  "async_kernel"
-  "core_kernel"
-  "jbuilder"
-  "ppx_driver"
-  "ppx_jane"
+  "async_kernel" {= 114.29+19}
+  "core_kernel"  {= 114.29+19}
+  "jbuilder"     {= 114.29+19}
+  "ppx_driver"   {= 114.29+19}
+  "ppx_jane"     {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

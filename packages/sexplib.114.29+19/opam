@@ -9,7 +9,7 @@ build: [
   ["jbuilder" "build-package" "sexplib" "-j" jobs]
 ]
 depends: [
-  "base"
-  "jbuilder"
+  "base"     {= 114.29+19}
+  "jbuilder" {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

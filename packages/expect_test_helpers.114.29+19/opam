@@ -9,12 +9,12 @@ build: [
   ["jbuilder" "build-package" "expect_test_helpers" "-j" jobs]
 ]
 depends: [
-  "async"
-  "core"
-  "expect_test_helpers_kernel"
-  "jbuilder"
-  "ppx_driver"
-  "ppx_jane"
-  "sexp_pretty"
+  "async"                      {= 114.29+19}
+  "core"                       {= 114.29+19}
+  "expect_test_helpers_kernel" {= 114.29+19}
+  "jbuilder"                   {= 114.29+19}
+  "ppx_driver"                 {= 114.29+19}
+  "ppx_jane"                   {= 114.29+19}
+  "sexp_pretty"                {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

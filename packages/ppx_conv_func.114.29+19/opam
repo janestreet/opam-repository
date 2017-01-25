@@ -9,10 +9,10 @@ build: [
   ["jbuilder" "build-package" "ppx_conv_func" "-j" jobs]
 ]
 depends: [
-  "jbuilder"
-  "ppx_core"
-  "ppx_driver"
-  "ppx_metaquot"
-  "ppx_type_conv"
+  "jbuilder"      {= 114.29+19}
+  "ppx_core"      {= 114.29+19}
+  "ppx_driver"    {= 114.29+19}
+  "ppx_metaquot"  {= 114.29+19}
+  "ppx_type_conv" {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

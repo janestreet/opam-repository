@@ -9,23 +9,23 @@ build: [
   ["jbuilder" "build-package" "core_kernel" "-j" jobs]
 ]
 depends: [
-  "base"
-  "bin_prot"
-  "configurator"
-  "fieldslib"
-  "jane-street-headers"
-  "jbuilder"
-  "ppx_assert"
-  "ppx_base"
-  "ppx_driver"
-  "ppx_hash"
-  "ppx_inline_test"
-  "ppx_jane"
-  "ppx_sexp_conv"
-  "ppx_sexp_message"
-  "sexplib"
-  "stdio"
-  "typerep"
-  "variantslib"
+  "base"                {= 114.29+19}
+  "bin_prot"            {= 114.29+19}
+  "configurator"        {= 114.29+19}
+  "fieldslib"           {= 114.29+19}
+  "jane-street-headers" {= 114.29+19}
+  "jbuilder"            {= 114.29+19}
+  "ppx_assert"          {= 114.29+19}
+  "ppx_base"            {= 114.29+19}
+  "ppx_driver"          {= 114.29+19}
+  "ppx_hash"            {= 114.29+19}
+  "ppx_inline_test"     {= 114.29+19}
+  "ppx_jane"            {= 114.29+19}
+  "ppx_sexp_conv"       {= 114.29+19}
+  "ppx_sexp_message"    {= 114.29+19}
+  "sexplib"             {= 114.29+19}
+  "stdio"               {= 114.29+19}
+  "typerep"             {= 114.29+19}
+  "variantslib"         {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]

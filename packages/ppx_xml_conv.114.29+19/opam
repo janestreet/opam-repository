@@ -9,12 +9,12 @@ build: [
   ["jbuilder" "build-package" "ppx_xml_conv" "-j" jobs]
 ]
 depends: [
-  "csvfields"
-  "jbuilder"
-  "ppx_conv_func"
-  "ppx_core"
-  "ppx_driver"
-  "ppx_metaquot"
-  "ppx_type_conv"
+  "csvfields"     {= 114.29+19}
+  "jbuilder"      {= 114.29+19}
+  "ppx_conv_func" {= 114.29+19}
+  "ppx_core"      {= 114.29+19}
+  "ppx_driver"    {= 114.29+19}
+  "ppx_metaquot"  {= 114.29+19}
+  "ppx_type_conv" {= 114.29+19}
 ]
 available: [ ocaml-version >= "4.03.0" ]
