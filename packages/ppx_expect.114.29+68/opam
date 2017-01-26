@@ -1,0 +1,29 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_expect"
+bug-reports: "https://github.com/janestreet/ppx_expect/issues"
+dev-repo: "https://github.com/janestreet/ppx_expect.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_expect" "-j" jobs]
+]
+depends: [
+  "base"              {= "114.29+68"}
+  "jbuilder"          {= "114.29+68"}
+  "ppx_assert"        {= "114.29+68"}
+  "ppx_compare"       {= "114.29+68"}
+  "ppx_core"          {= "114.29+68"}
+  "ppx_custom_printf" {= "114.29+68"}
+  "ppx_driver"        {= "114.29+68"}
+  "ppx_fields_conv"   {= "114.29+68"}
+  "ppx_here"          {= "114.29+68"}
+  "ppx_inline_test"   {= "114.29+68"}
+  "ppx_metaquot"      {= "114.29+68"}
+  "ppx_sexp_conv"     {= "114.29+68"}
+  "ppx_traverse"      {= "114.29+68"}
+  "ppx_variants_conv" {= "114.29+68"}
+  "stdio"             {= "114.29+68"}
+  "re"
+]
+available: [ ocaml-version >= "4.03.0" ]

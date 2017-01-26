@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/bignum"
+bug-reports: "https://github.com/janestreet/bignum/issues"
+dev-repo: "https://github.com/janestreet/bignum.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "bignum" "-j" jobs]
+]
+depends: [
+  "core_kernel" {= "114.29+68"}
+  "jbuilder"    {= "114.29+68"}
+  "ppx_driver"  {= "114.29+68"}
+  "ppx_jane"    {= "114.29+68"}
+  "typerep"     {= "114.29+68"}
+  "zarith"      {>= "1.4"}
+]
+available: [ ocaml-version >= "4.03.0" ]
