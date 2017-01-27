@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/incr_select"
+bug-reports: "https://github.com/janestreet/incr_select/issues"
+dev-repo: "https://github.com/janestreet/incr_select.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "incr_select" "-j" jobs]
+]
+depends: [
+  "core_kernel"        {= "114.29+81"}
+  "incremental_kernel" {= "114.29+81"}
+  "jbuilder"           {= "114.29+81"}
+  "ppx_driver"         {= "114.29+81"}
+  "ppx_jane"           {= "114.29+81"}
+  "js_of_ocaml"
+]
+available: [ ocaml-version >= "4.03.0" ]
