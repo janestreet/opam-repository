@@ -1,0 +1,27 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/async_smtp"
+bug-reports: "https://github.com/janestreet/async_smtp/issues"
+dev-repo: "https://github.com/janestreet/async_smtp.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "async_smtp" "-j" jobs]
+]
+depends: [
+  "async"                          {= "114.30+05"}
+  "async_extended"                 {= "114.30+05"}
+  "async_shell"                    {= "114.30+05"}
+  "async_ssl"                      {= "114.30+05"}
+  "core"                           {= "114.30+05"}
+  "core_extended"                  {= "114.30+05"}
+  "email_message"                  {= "114.30+05"}
+  "jbuilder"                       {= "114.30+05"}
+  "json-wheel_jane_street_overlay" {= "114.30+05"}
+  "ppx_driver"                     {= "114.30+05"}
+  "ppx_jane"                       {= "114.30+05"}
+  "re2"                            {= "114.30+05"}
+  "textutils"                      {= "114.30+05"}
+  "cryptokit"
+]
+available: [ ocaml-version >= "4.03.0" ]
