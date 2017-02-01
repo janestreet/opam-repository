@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/core_extended"
+bug-reports: "https://github.com/janestreet/core_extended/issues"
+dev-repo: "https://github.com/janestreet/core_extended.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "core_extended" "-j" jobs]
+]
+depends: [
+  "bin_prot"            {= "114.30+61"}
+  "core"                {= "114.30+61"}
+  "core_kernel"         {= "114.30+61"}
+  "expect_test_helpers" {= "114.30+61"}
+  "fieldslib"           {= "114.30+61"}
+  "jbuilder"            {= "114.30+61"}
+  "ppx_driver"          {= "114.30+61"}
+  "ppx_jane"            {= "114.30+61"}
+  "re2"                 {= "114.30+61"}
+  "sexplib"             {= "114.30+61"}
+  "textutils"           {= "114.30+61"}
+  "base-threads"
+]
+available: [ ocaml-version >= "4.03.0" ]
