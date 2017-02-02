@@ -1,1 +1,1 @@
-git: "git://github.com/diml/js_of_ocaml.git#fix-compat-with-ppx-driver-dev"
+git: "git://github.com/ocsigen/js_of_ocaml.git#master"
