@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_typerep_conv"
+bug-reports: "https://github.com/janestreet/ppx_typerep_conv/issues"
+dev-repo: "https://github.com/janestreet/ppx_typerep_conv.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_typerep_conv" "-j" jobs]
+]
+depends: [
+  "jbuilder"      {= "114.30+114"}
+  "ppx_core"      {= "114.30+114"}
+  "ppx_driver"    {= "114.30+114"}
+  "ppx_metaquot"  {= "114.30+114"}
+  "ppx_type_conv" {= "114.30+114"}
+  "typerep"       {= "114.30+114"}
+]
+available: [ ocaml-version >= "4.03.0" ]
