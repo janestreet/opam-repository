@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/core_bench"
+bug-reports: "https://github.com/janestreet/core_bench/issues"
+dev-repo: "https://github.com/janestreet/core_bench.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "core_bench" "-j" jobs]
+]
+depends: [
+  "core"          {= "114.31+04"}
+  "core_extended" {= "114.31+04"}
+  "jbuilder"      {= "114.31+04"}
+  "ppx_driver"    {= "114.31+04"}
+  "ppx_jane"      {= "114.31+04"}
+  "textutils"     {= "114.31+04"}
+  "re"            {>= "1.5.0"}
+]
+available: [ ocaml-version >= "4.03.0" ]
