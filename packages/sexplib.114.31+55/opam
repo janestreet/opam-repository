@@ -1,0 +1,15 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/sexplib"
+bug-reports: "https://github.com/janestreet/sexplib/issues"
+dev-repo: "https://github.com/janestreet/sexplib.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "sexplib" "-j" jobs]
+]
+depends: [
+  "base"     {= "114.31+55"}
+  "jbuilder" {= "114.31+55"}
+]
+available: [ ocaml-version >= "4.03.0" ]
