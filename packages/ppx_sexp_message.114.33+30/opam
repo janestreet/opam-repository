@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_sexp_message"
+bug-reports: "https://github.com/janestreet/ppx_sexp_message/issues"
+dev-repo: "https://github.com/janestreet/ppx_sexp_message.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "ppx_sexp_message" "-j" jobs]
+]
+depends: [
+  "jbuilder"      {= "114.33+30"}
+  "ppx_core"      {= "114.33+30"}
+  "ppx_driver"    {= "114.33+30"}
+  "ppx_here"      {= "114.33+30"}
+  "ppx_metaquot"  {= "114.33+30"}
+  "ppx_sexp_conv" {= "114.33+30"}
+  "sexplib"       {= "114.33+30"}
+]
+available: [ ocaml-version >= "4.03.0" ]

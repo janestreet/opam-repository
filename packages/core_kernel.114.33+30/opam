@@ -1,0 +1,31 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/core_kernel"
+bug-reports: "https://github.com/janestreet/core_kernel/issues"
+dev-repo: "https://github.com/janestreet/core_kernel.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "core_kernel" "-j" jobs]
+]
+depends: [
+  "base"                {= "114.33+30"}
+  "bin_prot"            {= "114.33+30"}
+  "configurator"        {= "114.33+30"}
+  "fieldslib"           {= "114.33+30"}
+  "jane-street-headers" {= "114.33+30"}
+  "jbuilder"            {= "114.33+30"}
+  "ppx_assert"          {= "114.33+30"}
+  "ppx_base"            {= "114.33+30"}
+  "ppx_driver"          {= "114.33+30"}
+  "ppx_hash"            {= "114.33+30"}
+  "ppx_inline_test"     {= "114.33+30"}
+  "ppx_jane"            {= "114.33+30"}
+  "ppx_sexp_conv"       {= "114.33+30"}
+  "ppx_sexp_message"    {= "114.33+30"}
+  "sexplib"             {= "114.33+30"}
+  "stdio"               {= "114.33+30"}
+  "typerep"             {= "114.33+30"}
+  "variantslib"         {= "114.33+30"}
+]
+available: [ ocaml-version >= "4.03.0" ]
