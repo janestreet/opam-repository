@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/jane-street-build-server"
+bug-reports: "https://github.com/janestreet/jane-street-build-server/issues"
+dev-repo: "https://github.com/janestreet/jane-street-build-server.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "jane-street-build-server" "-j" jobs]
+]
+depends: [
+  "async"            {= "114.34+58"}
+  "async_rpc_kernel" {= "114.34+58"}
+  "core"             {= "114.34+58"}
+  "core_kernel"      {= "114.34+58"}
+  "jbuilder"         {= "114.34+58"}
+  "ppx_driver"       {= "114.34+58"}
+  "ppx_jane"         {= "114.34+58"}
+]
+available: [ ocaml-version >= "4.03.0" ]

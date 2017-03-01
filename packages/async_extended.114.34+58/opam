@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/async_extended"
+bug-reports: "https://github.com/janestreet/async_extended/issues"
+dev-repo: "https://github.com/janestreet/async_extended.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "async_extended" "-j" jobs]
+]
+depends: [
+  "async"             {= "114.34+58"}
+  "async_find"        {= "114.34+58"}
+  "async_inotify"     {= "114.34+58"}
+  "async_interactive" {= "114.34+58"}
+  "async_shell"       {= "114.34+58"}
+  "command_rpc"       {= "114.34+58"}
+  "core"              {= "114.34+58"}
+  "core_extended"     {= "114.34+58"}
+  "jbuilder"          {= "114.34+58"}
+  "ppx_driver"        {= "114.34+58"}
+  "ppx_jane"          {= "114.34+58"}
+  "textutils"         {= "114.34+58"}
+]
+available: [ ocaml-version >= "4.03.0" ]

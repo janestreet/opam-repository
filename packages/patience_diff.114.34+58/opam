@@ -1,0 +1,17 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/patience_diff"
+bug-reports: "https://github.com/janestreet/patience_diff/issues"
+dev-repo: "https://github.com/janestreet/patience_diff.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "patience_diff" "-j" jobs]
+]
+depends: [
+  "core_kernel" {= "114.34+58"}
+  "jbuilder"    {= "114.34+58"}
+  "ppx_driver"  {= "114.34+58"}
+  "ppx_jane"    {= "114.34+58"}
+]
+available: [ ocaml-version >= "4.03.0" ]
