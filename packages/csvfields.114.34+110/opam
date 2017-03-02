@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/csvfields/issues"
 dev-repo: "https://github.com/janestreet/csvfields.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "csvfields" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "csvfields" "--root" "." "-j" jobs]
 ]
 depends: [
   "core"       {= "114.34+110"}

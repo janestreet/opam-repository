@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/ocaml_plugin/issues"
 dev-repo: "https://github.com/janestreet/ocaml_plugin.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "ocaml_plugin" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "ocaml_plugin" "--root" "." "-j" jobs]
 ]
 depends: [
   "async"      {= "114.34+110"}

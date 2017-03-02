@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/spawn/issues"
 dev-repo: "https://github.com/janestreet/spawn.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "spawn" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "spawn" "--root" "." "-j" jobs]
 ]
 depends: [
   "jbuilder" {= "114.34+110"}

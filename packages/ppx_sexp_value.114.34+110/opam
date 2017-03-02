@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/ppx_sexp_value/issues"
 dev-repo: "https://github.com/janestreet/ppx_sexp_value.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "ppx_sexp_value" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "ppx_sexp_value" "--root" "." "-j" jobs]
 ]
 depends: [
   "jbuilder"      {= "114.34+110"}

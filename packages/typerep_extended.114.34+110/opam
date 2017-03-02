@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/typerep_extended/issues"
 dev-repo: "https://github.com/janestreet/typerep_extended.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "typerep_extended" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "typerep_extended" "--root" "." "-j" jobs]
 ]
 depends: [
   "bin_prot"         {= "114.34+110"}

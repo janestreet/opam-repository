@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/incr_map/issues"
 dev-repo: "https://github.com/janestreet/incr_map.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "incr_map" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "incr_map" "--root" "." "-j" jobs]
 ]
 depends: [
   "core_kernel"        {= "114.34+110"}

@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/async_inotify/issues"
 dev-repo: "https://github.com/janestreet/async_inotify.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "async_inotify" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "async_inotify" "--root" "." "-j" jobs]
 ]
 depends: [
   "async"      {= "114.34+110"}

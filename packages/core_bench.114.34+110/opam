@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/core_bench/issues"
 dev-repo: "https://github.com/janestreet/core_bench.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "core_bench" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "core_bench" "--root" "." "-j" jobs]
 ]
 depends: [
   "core"          {= "114.34+110"}

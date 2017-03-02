@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/ppx_fields_conv/issues"
 dev-repo: "https://github.com/janestreet/ppx_fields_conv.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "ppx_fields_conv" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "ppx_fields_conv" "--root" "." "-j" jobs]
 ]
 depends: [
   "fieldslib"     {= "114.34+110"}

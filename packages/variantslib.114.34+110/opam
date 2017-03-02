@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/variantslib/issues"
 dev-repo: "https://github.com/janestreet/variantslib.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "variantslib" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "variantslib" "--root" "." "-j" jobs]
 ]
 depends: [
   "base"       {= "114.34+110"}

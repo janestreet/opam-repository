@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/ocaml-compiler-libs/issues"
 dev-repo: "https://github.com/janestreet/ocaml-compiler-libs.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "ocaml-compiler-libs" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "ocaml-compiler-libs" "--root" "." "-j" jobs]
 ]
 depends: [
   "jbuilder" {= "114.34+110"}

@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/expect_test_helpers_kernel/issues"
 dev-repo: "https://github.com/janestreet/expect_test_helpers_kernel.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "expect_test_helpers_kernel" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "expect_test_helpers_kernel" "--root" "." "-j" jobs]
 ]
 depends: [
   "core_kernel" {= "114.34+110"}

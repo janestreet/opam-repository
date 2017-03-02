@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/async_rpc_kernel/issues"
 dev-repo: "https://github.com/janestreet/async_rpc_kernel.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "async_rpc_kernel" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "async_rpc_kernel" "--root" "." "-j" jobs]
 ]
 depends: [
   "async_kernel" {= "114.34+110"}

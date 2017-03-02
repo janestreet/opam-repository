@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/ppx_core/issues"
 dev-repo: "https://github.com/janestreet/ppx_core.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "ppx_core" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "ppx_core" "--root" "." "-j" jobs]
 ]
 depends: [
   "base"                  {= "114.34+110"}

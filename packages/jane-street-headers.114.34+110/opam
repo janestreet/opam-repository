@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/jane-street-headers/issues"
 dev-repo: "https://github.com/janestreet/jane-street-headers.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "jane-street-headers" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "jane-street-headers" "--root" "." "-j" jobs]
 ]
 depends: [
   "jbuilder" {= "114.34+110"}

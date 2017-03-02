@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/topological_sort/issues"
 dev-repo: "https://github.com/janestreet/topological_sort.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "topological_sort" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "topological_sort" "--root" "." "-j" jobs]
 ]
 depends: [
   "core_kernel" {= "114.34+110"}

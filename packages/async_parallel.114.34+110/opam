@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/async_parallel/issues"
 dev-repo: "https://github.com/janestreet/async_parallel.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "async_parallel" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "async_parallel" "--root" "." "-j" jobs]
 ]
 depends: [
   "async"      {= "114.34+110"}

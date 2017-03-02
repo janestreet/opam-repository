@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/cinaps/issues"
 dev-repo: "https://github.com/janestreet/cinaps.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "cinaps" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "cinaps" "--root" "." "-j" jobs]
 ]
 depends: [
   "jbuilder" {= "114.34+110"}

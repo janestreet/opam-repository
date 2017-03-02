@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/core_profiler/issues"
 dev-repo: "https://github.com/janestreet/core_profiler.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build-package" "core_profiler" "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "core_profiler" "--root" "." "-j" jobs]
 ]
 depends: [
   "core"          {= "114.34+110"}
