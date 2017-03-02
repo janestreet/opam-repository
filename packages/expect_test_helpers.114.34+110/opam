@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/expect_test_helpers"
+bug-reports: "https://github.com/janestreet/expect_test_helpers/issues"
+dev-repo: "https://github.com/janestreet/expect_test_helpers.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build-package" "expect_test_helpers" "-j" jobs]
+]
+depends: [
+  "async"                      {= "114.34+110"}
+  "core"                       {= "114.34+110"}
+  "expect_test_helpers_kernel" {= "114.34+110"}
+  "jbuilder"                   {= "114.34+110"}
+  "ppx_driver"                 {= "114.34+110"}
+  "ppx_jane"                   {= "114.34+110"}
+  "sexp_pretty"                {= "114.34+110"}
+]
+available: [ ocaml-version >= "4.03.0" ]
