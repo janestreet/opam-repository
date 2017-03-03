@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/ppx_js_style/issues"
 dev-repo: "https://github.com/janestreet/ppx_js_style.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build" "--only-packages" "ppx_js_style" "--root" "." "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "ppx_js_style" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
   "jbuilder"     {= "114.34+110"}

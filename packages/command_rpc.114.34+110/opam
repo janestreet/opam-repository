@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/command_rpc/issues"
 dev-repo: "https://github.com/janestreet/command_rpc.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build" "--only-packages" "command_rpc" "--root" "." "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "command_rpc" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
   "async"      {= "114.34+110"}

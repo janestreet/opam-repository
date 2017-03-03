@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/async_js/issues"
 dev-repo: "https://github.com/janestreet/async_js.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build" "--only-packages" "async_js" "--root" "." "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "async_js" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
   "async_kernel"     {= "114.34+110"}

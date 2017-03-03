@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/stdio/issues"
 dev-repo: "https://github.com/janestreet/stdio.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build" "--only-packages" "stdio" "--root" "." "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "stdio" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
   "base"     {= "114.34+110"}

@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/ppx_assert/issues"
 dev-repo: "https://github.com/janestreet/ppx_assert.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build" "--only-packages" "ppx_assert" "--root" "." "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "ppx_assert" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
   "base"          {= "114.34+110"}

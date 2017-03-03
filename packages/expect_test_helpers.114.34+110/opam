@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/expect_test_helpers/issues"
 dev-repo: "https://github.com/janestreet/expect_test_helpers.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build" "--only-packages" "expect_test_helpers" "--root" "." "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "expect_test_helpers" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
   "async"                      {= "114.34+110"}

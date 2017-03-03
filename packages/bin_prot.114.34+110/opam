@@ -6,7 +6,7 @@ bug-reports: "https://github.com/janestreet/bin_prot/issues"
 dev-repo: "https://github.com/janestreet/bin_prot.git"
 license: "Apache-2.0"
 build: [
-  ["jbuilder" "build" "--only-packages" "bin_prot" "--root" "." "-j" jobs]
+  ["jbuilder" "build" "--only-packages" "bin_prot" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
   "base"              {= "114.34+110"}
