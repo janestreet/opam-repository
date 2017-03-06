@@ -1,0 +1,33 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_jane"
+bug-reports: "https://github.com/janestreet/ppx_jane/issues"
+dev-repo: "https://github.com/janestreet/ppx_jane.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build" "--only-packages" "ppx_jane" "--root" "." "-j" jobs "@install"]
+]
+depends: [
+  "jbuilder"                {= "114.35+03" & build}
+  "ppx_assert"              {= "114.35+03"}
+  "ppx_base"                {= "114.35+03"}
+  "ppx_bench"               {= "114.35+03"}
+  "ppx_bin_prot"            {= "114.35+03"}
+  "ppx_custom_printf"       {= "114.35+03"}
+  "ppx_driver"              {= "114.35+03"}
+  "ppx_expect"              {= "114.35+03"}
+  "ppx_fail"                {= "114.35+03"}
+  "ppx_fields_conv"         {= "114.35+03"}
+  "ppx_here"                {= "114.35+03"}
+  "ppx_inline_test"         {= "114.35+03"}
+  "ppx_let"                 {= "114.35+03"}
+  "ppx_optional"            {= "114.35+03"}
+  "ppx_pipebang"            {= "114.35+03"}
+  "ppx_sexp_message"        {= "114.35+03"}
+  "ppx_sexp_value"          {= "114.35+03"}
+  "ppx_typerep_conv"        {= "114.35+03"}
+  "ppx_variants_conv"       {= "114.35+03"}
+  "ocaml-migrate-parsetree"
+]
+available: [ ocaml-version >= "4.03.0" ]

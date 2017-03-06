@@ -1,0 +1,24 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/jenga"
+bug-reports: "https://github.com/janestreet/jenga/issues"
+dev-repo: "https://github.com/janestreet/jenga.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build" "--only-packages" "jenga" "--root" "." "-j" jobs "@install"]
+]
+depends: [
+  "async"                   {= "114.35+03"}
+  "async_inotify"           {= "114.35+03"}
+  "command_rpc"             {= "114.35+03"}
+  "core"                    {= "114.35+03"}
+  "fieldslib"               {= "114.35+03"}
+  "jbuilder"                {= "114.35+03" & build}
+  "ocaml_plugin"            {= "114.35+03"}
+  "ppx_driver"              {= "114.35+03"}
+  "ppx_jane"                {= "114.35+03"}
+  "sexplib"                 {= "114.35+03"}
+  "ocaml-migrate-parsetree"
+]
+available: [ ocaml-version >= "4.03.0" ]
