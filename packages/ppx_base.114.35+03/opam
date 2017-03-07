@@ -9,7 +9,7 @@ build: [
   ["jbuilder" "build" "--only-packages" "ppx_base" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
-  "jbuilder"                {build & = "114.35+03"}
+  "jbuilder"                {build}
   "ppx_compare"             {= "114.35+03"}
   "ppx_driver"              {= "114.35+03"}
   "ppx_enumerate"           {= "114.35+03"}

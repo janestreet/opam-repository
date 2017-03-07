@@ -11,7 +11,7 @@ build: [
 depends: [
   "core_kernel"             {= "114.35+03"}
   "incremental_kernel"      {= "114.35+03"}
-  "jbuilder"                {build & = "114.35+03"}
+  "jbuilder"                {build}
   "ppx_driver"              {= "114.35+03"}
   "ppx_jane"                {= "114.35+03"}
   "js_of_ocaml"

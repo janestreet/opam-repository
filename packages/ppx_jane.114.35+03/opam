@@ -9,7 +9,7 @@ build: [
   ["jbuilder" "build" "--only-packages" "ppx_jane" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
-  "jbuilder"                {build & = "114.35+03"}
+  "jbuilder"                {build}
   "ppx_assert"              {= "114.35+03"}
   "ppx_base"                {= "114.35+03"}
   "ppx_bench"               {= "114.35+03"}

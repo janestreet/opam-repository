@@ -13,7 +13,7 @@ depends: [
   "async_kernel"            {= "114.35+03"}
   "async_unix"              {= "114.35+03"}
   "core"                    {= "114.35+03"}
-  "jbuilder"                {build & = "114.35+03"}
+  "jbuilder"                {build}
   "ppx_driver"              {= "114.35+03"}
   "ppx_jane"                {= "114.35+03"}
   "ocaml-migrate-parsetree"
