@@ -12,7 +12,7 @@ depends: [
   "async"                   {= "114.35+03"}
   "core"                    {= "114.35+03"}
   "core_extended"           {= "114.35+03"}
-  "jbuilder"                {= "114.35+03" & build}
+  "jbuilder"                {build & = "114.35+03"}
   "ppx_driver"              {= "114.35+03"}
   "ppx_jane"                {= "114.35+03"}
   "re2"                     {= "114.35+03"}

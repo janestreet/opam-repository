@@ -9,7 +9,7 @@ build: [
   ["jbuilder" "build" "--only-packages" "ppx_ast" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
-  "jbuilder"                {= "114.35+03" & build}
+  "jbuilder"                {build & = "114.35+03"}
   "ocaml-compiler-libs"     {= "114.35+03"}
   "ocaml-migrate-parsetree"
 ]

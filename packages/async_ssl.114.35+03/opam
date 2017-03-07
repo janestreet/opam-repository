@@ -13,7 +13,7 @@ depends: [
   "base"                    {= "114.35+03"}
   "configurator"            {= "114.35+03"}
   "core"                    {= "114.35+03"}
-  "jbuilder"                {= "114.35+03" & build}
+  "jbuilder"                {build & = "114.35+03"}
   "ppx_driver"              {= "114.35+03"}
   "ppx_jane"                {= "114.35+03"}
   "stdio"                   {= "114.35+03"}

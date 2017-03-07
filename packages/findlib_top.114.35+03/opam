@@ -9,6 +9,6 @@ build: [
   ["jbuilder" "build" "--only-packages" "findlib_top" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
-  "jbuilder" {= "114.35+03" & build}
+  "jbuilder" {build & = "114.35+03"}
 ]
 available: [ ocaml-version >= "4.03.0" ]

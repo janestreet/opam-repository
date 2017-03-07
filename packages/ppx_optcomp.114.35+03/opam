@@ -9,7 +9,7 @@ build: [
   ["jbuilder" "build" "--only-packages" "ppx_optcomp" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
-  "jbuilder" {= "114.35+03" & build}
+  "jbuilder" {build & = "114.35+03"}
   "ppx_core" {= "114.35+03"}
 ]
 available: [ ocaml-version >= "4.03.0" ]
