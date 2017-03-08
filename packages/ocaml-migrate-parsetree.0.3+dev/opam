@@ -1,6 +1,6 @@
 opam-version: "1.2"
 maintainer: "frederic.bour@lakaban.net"
-authors: [ 
+authors: [
   "Frédéric Bour <frederic.bour@lakaban.net>"
   "Jérémie Dimino <jeremie@dimino.org>"
 ]
@@ -9,11 +9,11 @@ homepage: "https://github.com/let-def/ocaml-migrate-parsetree"
 bug-reports: "https://github.com/let-def/ocaml-migrate-parsetree/issues"
 dev-repo: "git://github.com/let-def/ocaml-migrate-parsetree.git"
 tags: [ "syntax" "org:ocamllabs" ]
-build: [[make "all"]]
-install: [[make "install"]]
-remove: [["ocamlfind" "remove" "ocaml-migrate-parsetree"]]
+build: [
+  ["jbuilder" "build" "--only-packages" "ocaml-migrate-parsetree" "--root" "." "-j" jobs "@install"]
+]
 depends: [
-  "ocamlfind" {build & >= "1.5.0"}
   "result"
+  "jbuilder" {build}
 ]
 available: ocaml-version >= "4.02.0"
