@@ -9,6 +9,7 @@ build: [
   ["jbuilder" "build" "--only-packages" "virtual_dom" "--root" "." "-j" jobs "@install"]
 ]
 depends: [
+  "async_js"                {= "114.35+03"}
   "base"                    {= "114.35+03"}
   "jbuilder"                {build & >= "1.0+beta2"}
   "ppx_driver"              {= "114.35+03"}
