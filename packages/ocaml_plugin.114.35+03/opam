@@ -11,11 +11,11 @@ build: [
 depends: [
   "async"                   {= "114.35+03"}
   "core"                    {= "114.35+03"}
-  "jbuilder"                {build}
+  "jbuilder"                {build & >= "1.0+beta2"}
   "ppx_driver"              {= "114.35+03"}
   "ppx_jane"                {= "114.35+03"}
   "sexplib"                 {= "114.35+03"}
-  "ocaml-migrate-parsetree"
+  "ocaml-migrate-parsetree" {>= "0.4"}
   "ocamlbuild"
 ]
 available: [ ocaml-version >= "4.03.0" ]
