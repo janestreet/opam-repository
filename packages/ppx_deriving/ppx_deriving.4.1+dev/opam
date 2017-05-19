@@ -30,4 +30,3 @@ depends: [
   "ppx_derivers"
 ]
 available: [ ocaml-version >= "4.02.1" & ocaml-version < "4.05" & opam-version >= "1.2" ]
-patches: [ "fix_ppx_deriving_make_mllib.patch" ]
