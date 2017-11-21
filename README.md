@@ -3,12 +3,6 @@
 This repository is a package repository for the [opam pacakge
 manager](https://opam.ocaml.org).
 
-It conains the development version of all Jane Street pacakges. To use
-it, type:
-
-```sh
-opam repo add janestreet-bleeding https://ocaml.janestreet.com/opam-repository
-```
-
-Note that the above url is not the one of this github repository. It
-is a mirror with static tarballs, which is more convenient to use.
+This branch contains the external packages which haven't been released on the
+main opam-repository yet but are required by our own dev packages (available on
+the master branch).
