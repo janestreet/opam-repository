@@ -1,6 +1,6 @@
 # opam-repository
 
-This repository is a package repository for the [opam pacakge
+This repository is a package repository for the [opam package
 manager](https://opam.ocaml.org).
 
 It conains the development version of all Jane Street pacakges. To use
