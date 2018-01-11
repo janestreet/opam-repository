@@ -1,0 +1,4 @@
+An interface to the Net-SNMP client library
+
+Provides a wrapper around the Net-SNMP client libraries including
+MIB handling and SNMP requests
