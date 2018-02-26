@@ -15,7 +15,7 @@ depends: [
   "typerep"                 {= "v0.10.116.14+12"}
   "jbuilder"                {build & >= "1.0+beta12"}
   "num"
-  "ocaml-migrate-parsetree" {>= "0.4"}
+  "ocaml-migrate-parsetree" {>= "1.0"}
   "zarith"                  {>= "1.4"}
 ]
 available: [ ocaml-version >= "4.04.1" ]
