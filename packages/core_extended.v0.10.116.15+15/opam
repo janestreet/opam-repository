@@ -1,0 +1,26 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/core_extended"
+bug-reports: "https://github.com/janestreet/core_extended/issues"
+dev-repo: "git+https://github.com/janestreet/core_extended.git"
+license: "Apache-2.0"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "bin_prot"                {= "v0.10.116.15+15"}
+  "core"                    {= "v0.10.116.15+15"}
+  "core_kernel"             {= "v0.10.116.15+15"}
+  "fieldslib"               {= "v0.10.116.15+15"}
+  "ppx_driver"              {= "v0.10.116.15+15"}
+  "ppx_jane"                {= "v0.10.116.15+15"}
+  "re2"                     {= "v0.10.116.15+15"}
+  "sexplib"                 {= "v0.10.116.15+15"}
+  "textutils"               {= "v0.10.116.15+15"}
+  "base-threads"
+  "jbuilder"                {build & >= "1.0+beta12"}
+  "ocaml-migrate-parsetree" {>= "1.0"}
+  "re"                      {>= "1.5.0"}
+]
+available: [ ocaml-version >= "4.04.1" ]
