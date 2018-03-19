@@ -22,6 +22,6 @@ depends: [
   "ocaml-compiler-libs"     {>= "v0.10.0" & = "v0.11.116.17+187"}
   "ocaml-migrate-parsetree" {>= "1.0"}
   "ocamlfind"               {>= "1.7.2"}
-  "ppxlib"                  {>= "0.1.1"}
+  "ppxlib"                  {>= "0.1.0"}
 ]
 available: [ ocaml-version >= "4.04.1" ]

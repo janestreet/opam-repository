@@ -13,6 +13,6 @@ depends: [
   "fieldslib"               {= "v0.11.116.17+187"}
   "jbuilder"                {build & >= "1.0+beta18.1"}
   "ocaml-migrate-parsetree" {>= "1.0"}
-  "ppxlib"                  {>= "0.1.1"}
+  "ppxlib"                  {>= "0.1.0"}
 ]
 available: [ ocaml-version >= "4.04.1" ]
