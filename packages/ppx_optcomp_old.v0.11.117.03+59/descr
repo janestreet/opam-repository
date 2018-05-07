@@ -1,5 +1,0 @@
-[DEPRECATED] Optional compilation for OCaml (old syntax)
-
-This package is deprecated. It implements the old syntax based on #-directives.
-
-ppx_optcomp is now using a new syntax.
