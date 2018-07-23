@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/expect_test_helpers_kernel"
+bug-reports: "https://github.com/janestreet/expect_test_helpers_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/expect_test_helpers_kernel.git"
+license: "MIT"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "core_kernel"             {= "v0.11.117.15+173"}
+  "ppx_jane"                {= "v0.11.117.15+173"}
+  "sexp_pretty"             {= "v0.11.117.15+173"}
+  "jbuilder"                {build & >= "1.0+beta18.1"}
+  "ocaml-migrate-parsetree" {>= "1.0"}
+  "ppxlib"                  {>= "0.1.0"}
+  "re"                      {>= "1.5.0"}
+]
+available: [ ocaml-version >= "4.06.1" ]
