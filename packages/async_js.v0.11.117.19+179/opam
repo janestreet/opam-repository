@@ -1,0 +1,22 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/async_js"
+bug-reports: "https://github.com/janestreet/async_js/issues"
+dev-repo: "git+https://github.com/janestreet/async_js.git"
+license: "MIT"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "async_kernel"            {= "v0.11.117.19+179"}
+  "async_rpc_kernel"        {= "v0.11.117.19+179"}
+  "ppx_jane"                {= "v0.11.117.19+179"}
+  "jbuilder"                {build & >= "1.0+beta18.1"}
+  "js_of_ocaml"             {>= "3.0"}
+  "js_of_ocaml-ppx"
+  "ocaml-migrate-parsetree" {>= "1.0"}
+  "ppxlib"                  {>= "0.1.0"}
+  "uri"                     {>= "1.9.6"}
+]
+available: [ ocaml-version >= "4.04.2" ]
