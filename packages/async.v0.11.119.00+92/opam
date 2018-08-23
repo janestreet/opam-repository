@@ -1,0 +1,23 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/async"
+bug-reports: "https://github.com/janestreet/async/issues"
+dev-repo: "git+https://github.com/janestreet/async.git"
+license: "MIT"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "async_extra"             {= "v0.11.119.00+92"}
+  "async_kernel"            {= "v0.11.119.00+92"}
+  "async_unix"              {= "v0.11.119.00+92"}
+  "core"                    {= "v0.11.119.00+92"}
+  "core_kernel"             {= "v0.11.119.00+92"}
+  "ppx_jane"                {= "v0.11.119.00+92"}
+  "textutils"               {= "v0.11.119.00+92"}
+  "jbuilder"                {build & >= "1.0+beta18.1"}
+  "ocaml-migrate-parsetree" {>= "1.0"}
+  "ppxlib"                  {>= "0.1.0"}
+]
+available: [ ocaml-version >= "4.06.1" ]
