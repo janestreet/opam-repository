@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/csvfields"
+bug-reports: "https://github.com/janestreet/csvfields/issues"
+dev-repo: "git+https://github.com/janestreet/csvfields.git"
+license: "MIT"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "core"                    {= "v0.11.120.04+54"}
+  "ppx_jane"                {= "v0.11.120.04+54"}
+  "sexplib"                 {= "v0.11.120.04+54"}
+  "jbuilder"                {build & >= "1.0+beta18.1"}
+  "num"
+  "ocaml-migrate-parsetree" {>= "1.0"}
+  "ppxlib"                  {>= "0.1.0"}
+]
+available: [ ocaml-version >= "4.06.1" ]
