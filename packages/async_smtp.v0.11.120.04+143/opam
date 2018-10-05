@@ -1,0 +1,30 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/async_smtp"
+bug-reports: "https://github.com/janestreet/async_smtp/issues"
+dev-repo: "git+https://github.com/janestreet/async_smtp.git"
+license: "MIT"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "async"                   {= "v0.11.120.04+143"}
+  "async_inotify"           {= "v0.11.120.04+143"}
+  "async_sendfile"          {= "v0.11.120.04+143"}
+  "async_shell"             {= "v0.11.120.04+143"}
+  "async_ssl"               {= "v0.11.120.04+143"}
+  "core"                    {= "v0.11.120.04+143"}
+  "core_extended"           {= "v0.11.120.04+143"}
+  "email_message"           {= "v0.11.120.04+143"}
+  "ppx_jane"                {= "v0.11.120.04+143"}
+  "re2"                     {= "v0.11.120.04+143"}
+  "resource_cache"          {= "v0.11.120.04+143"}
+  "sexp_macro"              {= "v0.11.120.04+143"}
+  "textutils"               {= "v0.11.120.04+143"}
+  "cryptokit"
+  "jbuilder"                {build & >= "1.0+beta18.1"}
+  "ocaml-migrate-parsetree" {>= "1.0"}
+  "ppxlib"                  {>= "0.1.0"}
+]
+available: [ ocaml-version >= "4.06.1" ]
