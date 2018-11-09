@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/sexp"
+bug-reports: "https://github.com/janestreet/sexp/issues"
+dev-repo: "git+https://github.com/janestreet/sexp.git"
+license: "MIT"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "async"                   {= "v0.11.120.09+146"}
+  "core"                    {= "v0.11.120.09+146"}
+  "core_kernel"             {= "v0.11.120.09+146"}
+  "csvfields"               {= "v0.11.120.09+146"}
+  "ppx_jane"                {= "v0.11.120.09+146"}
+  "re2"                     {= "v0.11.120.09+146"}
+  "sexp_macro"              {= "v0.11.120.09+146"}
+  "sexp_pretty"             {= "v0.11.120.09+146"}
+  "sexplib"                 {= "v0.11.120.09+146"}
+  "jbuilder"                {build & >= "1.0+beta18.1"}
+  "ocaml-migrate-parsetree" {>= "1.0"}
+  "ppxlib"                  {>= "0.1.0"}
+]
+available: [ ocaml-version >= "4.06.1" ]
