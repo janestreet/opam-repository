@@ -1,7 +1,0 @@
-RTL Hardware Design in OCaml.
-
-Hardcaml is an embedded DSL for designing and simulating hardware in OCaml.
-Generic hardware designs are easily expressed using features such as higher
-order functions, lists, maps etc.  A built in simulator allows designs to
-be simulated within Hardcaml.  Designs are converted to either Verilog or
-VHDL to interact with standard back end tooling.

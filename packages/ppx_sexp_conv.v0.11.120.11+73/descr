@@ -1,3 +1,0 @@
-[@@deriving] plugin to generate S-expression conversion functions
-
-Part of the Jane Street's PPX rewriters collection.

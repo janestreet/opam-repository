@@ -1,7 +1,0 @@
-Rewrite OCaml records for use as Hardcaml Interfaces.
-
-An interface in Hardcaml is an OCaml record with special attributes including
-a bit width and RTL netlist name.  Input and output ports of a hardware design
-can then be accessed through the OCaml record.  This allows easier management
-of bundles of ports when working with the Simulator, Netlist generation or
-hierarchical designs.
