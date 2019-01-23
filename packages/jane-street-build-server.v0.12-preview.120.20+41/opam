@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/jane-street-build-server"
+bug-reports: "https://github.com/janestreet/jane-street-build-server/issues"
+dev-repo: "git+https://github.com/janestreet/jane-street-build-server.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/jane-street-build-server/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "4.07.0"}
+  "async"            {= "v0.12-preview.120.20+41"}
+  "async_rpc_kernel" {= "v0.12-preview.120.20+41"}
+  "core"             {= "v0.12-preview.120.20+41"}
+  "core_kernel"      {= "v0.12-preview.120.20+41"}
+  "ppx_jane"         {= "v0.12-preview.120.20+41"}
+  "dune"             {build & >= "1.5.1"}
+]
+synopsis: "Jane Street build server"
+description: "
+This package is used internally to get a package that we can build on
+OSX, to bootstrap the system.
+"
