@@ -11,8 +11,8 @@ build: [
 ]
 depends: [
   "ocaml"        {>= "4.07.0"}
-  "config_h"     {= "v0.13-preview.120.22+294"}
   "core_kernel"  {= "v0.13-preview.120.22+294"}
+  "jst-config"   {= "v0.13-preview.120.22+294"}
   "ppx_jane"     {= "v0.13-preview.120.22+294"}
   "sexplib"      {= "v0.13-preview.120.22+294"}
   "base-threads"

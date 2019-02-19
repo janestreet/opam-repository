@@ -15,9 +15,9 @@ depends: [
   "base_bigstring"      {= "v0.13-preview.120.22+294"}
   "base_quickcheck"     {= "v0.13-preview.120.22+294"}
   "bin_prot"            {= "v0.13-preview.120.22+294"}
-  "config_h"            {= "v0.13-preview.120.22+294"}
   "fieldslib"           {= "v0.13-preview.120.22+294"}
   "jane-street-headers" {= "v0.13-preview.120.22+294"}
+  "jst-config"          {= "v0.13-preview.120.22+294"}
   "ppx_assert"          {= "v0.13-preview.120.22+294"}
   "ppx_base"            {= "v0.13-preview.120.22+294"}
   "ppx_hash"            {= "v0.13-preview.120.22+294"}
