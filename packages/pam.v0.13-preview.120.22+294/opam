@@ -13,6 +13,7 @@ depends: [
   "ocaml"    {>= "4.07.0"}
   "core"     {= "v0.13-preview.120.22+294"}
   "ppx_jane" {= "v0.13-preview.120.22+294"}
+  "conf-pam"
   "dune"     {build & >= "1.5.1"}
 ]
 synopsis: "OCaml bindings for the Linux-PAM library"
