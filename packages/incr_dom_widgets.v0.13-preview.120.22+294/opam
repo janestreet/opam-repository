@@ -25,11 +25,7 @@ depends: [
   "js_of_ocaml"     {>= "3.2.1"}
   "js_of_ocaml-ppx"
 ]
-synopsis: "A library of libraries and widgets for Incr_dom applications"
+synopsis: "Utilities for Incr_dom"
 description: "
-For the moment, most of the libraries contained here are about
-efficient rendering of tabular data, in particular supporting /partial
-rendering/, /i.e./, only rendering a subset of the widgets that are
-logically in the view, depending on what is expected to be visible to
-the end user.
+A collection of utilities and widgets for Incr_dom applications. Note that this library is in the process of being reorganized, and much of its present functionality will be moved out to other libraries.  Longer term, we expect this to contain easy to use wrappers of simple elements like buttons and text entry boxes.
 "
