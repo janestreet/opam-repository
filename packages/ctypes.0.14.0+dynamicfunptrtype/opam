@@ -57,6 +57,6 @@ This will make the `ctypes.foreign` ocamlfind subpackage available."""
 authors: "yallop@gmail.com"
 flags: light-uninstall
 url {
-  src: "https://github.com/tiash/ocaml-ctypes/archive/b19b190ad5083d03130dd67508705da77c1c5089.tar.gz"
-  checksum: "md5=5a781d3b1a97812eb02394d7a88c8343"
+  src: "https://github.com/tiash/ocaml-ctypes/archive/6508a62fbac3fc2ade1ec641895a7c5944231235.tar.gz"
+  checksum: "md5=3026e29ecae64bd5a110fd02d7c111fe"
 }
