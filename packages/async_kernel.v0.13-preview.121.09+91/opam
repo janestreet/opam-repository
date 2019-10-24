@@ -13,7 +13,7 @@ depends: [
   "ocaml"       {>= "4.08.0"}
   "core_kernel" {= "v0.13-preview.121.09+91"}
   "ppx_jane"    {= "v0.13-preview.121.09+91"}
-  "dune"        {build & >= "1.5.1"}
+  "dune"        {>= "1.5.1"}
 ]
 synopsis: "Monadic concurrency library"
 description: "

@@ -14,7 +14,7 @@ depends: [
   "base"       {= "v0.13-preview.121.09+91"}
   "ppx_assert" {= "v0.13-preview.121.09+91"}
   "stdio"      {= "v0.13-preview.121.09+91"}
-  "dune"       {build & >= "1.5.1"}
+  "dune"       {>= "1.5.1"}
 ]
 synopsis: "Compile-time configuration for Jane Street libraries"
 description: "

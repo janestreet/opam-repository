@@ -14,7 +14,7 @@ depends: [
   "async"    {= "v0.13-preview.121.09+91"}
   "core"     {= "v0.13-preview.121.09+91"}
   "ppx_jane" {= "v0.13-preview.121.09+91"}
-  "dune"     {build & >= "1.5.1"}
+  "dune"     {>= "1.5.1"}
 ]
 synopsis: "Utilities for building simple command-line based user interfaces"
 description: "

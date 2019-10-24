@@ -31,7 +31,7 @@ depends: [
   "time_now"            {= "v0.13-preview.121.09+91"}
   "typerep"             {= "v0.13-preview.121.09+91"}
   "variantslib"         {= "v0.13-preview.121.09+91"}
-  "dune"                {build & >= "1.5.1"}
+  "dune"                {>= "1.5.1"}
 ]
 synopsis: "Industrial strength alternative to OCaml's standard library"
 description: "

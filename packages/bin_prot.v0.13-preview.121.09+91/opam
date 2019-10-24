@@ -17,7 +17,7 @@ depends: [
   "ppx_fields_conv"   {= "v0.13-preview.121.09+91"}
   "ppx_sexp_conv"     {= "v0.13-preview.121.09+91"}
   "ppx_variants_conv" {= "v0.13-preview.121.09+91"}
-  "dune"              {build & >= "1.5.1"}
+  "dune"              {>= "1.5.1"}
 ]
 depopts: [
   "mirage-xen-ocaml"

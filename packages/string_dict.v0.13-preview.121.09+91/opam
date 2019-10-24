@@ -14,7 +14,7 @@ depends: [
   "base"        {= "v0.13-preview.121.09+91"}
   "ppx_compare" {= "v0.13-preview.121.09+91"}
   "ppx_hash"    {= "v0.13-preview.121.09+91"}
-  "dune"        {build & >= "1.5.1"}
+  "dune"        {>= "1.5.1"}
 ]
 synopsis: "Efficient static string dictionaries"
 description: "

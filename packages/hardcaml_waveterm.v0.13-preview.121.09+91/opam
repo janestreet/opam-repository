@@ -16,7 +16,7 @@ depends: [
   "notty_async" {= "v0.13-preview.121.09+91"}
   "ppx_jane"    {= "v0.13-preview.121.09+91"}
   "stdio"       {= "v0.13-preview.121.09+91"}
-  "dune"        {build & >= "1.5.1"}
+  "dune"        {>= "1.5.1"}
   "notty"       {>= "0.2.1"}
   "num"
   "re"          {>= "1.8.0"}

@@ -14,7 +14,7 @@ depends: [
   "core_kernel" {= "v0.13-preview.121.09+91"}
   "incremental" {= "v0.13-preview.121.09+91"}
   "ppx_jane"    {= "v0.13-preview.121.09+91"}
-  "dune"        {build & >= "1.5.1"}
+  "dune"        {>= "1.5.1"}
 ]
 synopsis: "Handling of large set of incremental outputs from a single input"
 description: "

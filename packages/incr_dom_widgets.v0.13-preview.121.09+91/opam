@@ -20,7 +20,7 @@ depends: [
   "ppx_jane"        {= "v0.13-preview.121.09+91"}
   "splay_tree"      {= "v0.13-preview.121.09+91"}
   "virtual_dom"     {= "v0.13-preview.121.09+91"}
-  "dune"            {build & >= "1.5.1"}
+  "dune"            {>= "1.5.1"}
   "js_of_ocaml"     {>= "3.4.1"}
   "js_of_ocaml-ppx"
 ]

@@ -16,7 +16,7 @@ depends: [
   "splittable_random" {= "v0.13-preview.121.09+91"}
   "typerep"           {= "v0.13-preview.121.09+91"}
   "zarith_stubs_js"   {= "v0.13-preview.121.09+91"}
-  "dune"              {build & >= "1.5.1"}
+  "dune"              {>= "1.5.1"}
   "num"
   "zarith"            {>= "1.5"}
 ]

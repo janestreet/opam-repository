@@ -22,7 +22,7 @@ depends: [
   "sexp_pretty"      {= "v0.13-preview.121.09+91"}
   "sexp_select"      {= "v0.13-preview.121.09+91"}
   "sexplib"          {= "v0.13-preview.121.09+91"}
-  "dune"             {build & >= "1.5.1"}
+  "dune"             {>= "1.5.1"}
 ]
 synopsis: "S-expression swiss knife"
 description: "

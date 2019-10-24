@@ -17,7 +17,7 @@ depends: [
   "shell"            {= "v0.13-preview.121.09+91"}
   "textutils"        {= "v0.13-preview.121.09+91"}
   "textutils_kernel" {= "v0.13-preview.121.09+91"}
-  "dune"             {build & >= "1.5.1"}
+  "dune"             {>= "1.5.1"}
 ]
 synopsis: "Profiling library"
 description: "

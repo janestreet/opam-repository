@@ -11,7 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"  {>= "4.02.3"}
-  "dune"   {build & >= "1.5.1"}
+  "dune"   {>= "1.5.1"}
   "yojson" {>= "1.7.0"}
 ]
 synopsis: "Runtime lib for ppx_yojson_conv"
