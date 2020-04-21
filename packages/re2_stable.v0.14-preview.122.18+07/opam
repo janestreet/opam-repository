@@ -1,0 +1,23 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/re2_stable"
+bug-reports: "https://github.com/janestreet/re2_stable/issues"
+dev-repo: "git+https://github.com/janestreet/re2_stable.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/re2_stable/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.07.0"}
+  "core"     {= "v0.14-preview.122.18+07"}
+  "ppx_jane" {= "v0.14-preview.122.18+07"}
+  "re2"      {= "v0.14-preview.122.18+07"}
+  "dune"     {>= "2.0.0"}
+]
+synopsis: "Re2_stable adds an incomplete but stable serialization of Re2"
+description: "
+Re2_stable adds an incomplete but stable serialization of Re2. This
+ serialization only transmits the pattern, not the options
+"
