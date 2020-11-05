@@ -18,6 +18,7 @@ depends: [
   "logs" {>= "0.5.0"}
   "ipaddr" {>= "4.0.0"}
   "ipaddr-sexp"
+  "async"
 ]
 build: [
   ["dune" "subst"] {pinned}
