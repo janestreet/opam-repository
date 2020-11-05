@@ -48,6 +48,8 @@ depends: [
   "jsonm" {build}
   "alcotest" {with-test}
   "cohttp"
+  "conduit-async"
+  "async_unix"
 ]
 build: [
   ["dune" "subst"] {pinned}
