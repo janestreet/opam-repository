@@ -1,0 +1,65 @@
+opam-version: "2.0"
+maintainer: "anil@recoil.org"
+authors: [
+  "Anil Madhavapeddy"
+  "Stefano Zacchiroli"
+  "David Sheets"
+  "Thomas Gazagnaire"
+  "David Scott"
+  "Rudi Grinberg"
+  "Andy Ray"
+]
+synopsis: "An OCaml library for HTTP clients and servers"
+description: """
+Cohttp is an OCaml library for creating HTTP daemons. It has a portable
+HTTP parser, and implementations using various asynchronous programming
+libraries.
+
+See the cohttp-async, cohttp-lwt, cohttp-lwt-unix, cohttp-lwt-jsoo and
+cohttp-mirage libraries for concrete implementations for particular
+targets.
+
+You can implement other targets using the parser very easily. Look at the `IO`
+signature in `lib/s.mli` and implement that in the desired backend.
+
+You can activate some runtime debugging by setting `COHTTP_DEBUG` to any
+value, and all requests and responses will be written to stderr.  Further
+debugging of the connection layer can be obtained by setting `CONDUIT_DEBUG`
+to any value."""
+license: "ISC"
+tags: ["org:mirage" "org:xapi-project"]
+homepage: "https://github.com/mirage/ocaml-cohttp"
+doc: "https://mirage.github.io/ocaml-cohttp/"
+bug-reports: "https://github.com/mirage/ocaml-cohttp/issues"
+depends: [
+  "ocaml" {>= "4.04.1"}
+  "dune" {>= "1.1.0"}
+  "re" {>= "1.9.0"}
+  "uri" {>= "2.0.0"}
+  "uri-sexp"
+  "fieldslib"
+  "sexplib0"
+  "ppx_fields_conv" {>= "v0.9.0"}
+  "ppx_sexp_conv" {>= "v0.13.0"}
+  "stringext"
+  "base64" {>= "3.1.0"}
+  "stdlib-shims"
+  "fmt" {with-test}
+  "jsonm" {build}
+  "alcotest" {with-test}
+]
+build: [
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+dev-repo: "git+https://github.com/mirage/ocaml-cohttp.git"
+x-commit-hash: "c087cea1f43a867c0d9790e9cc803b5c3ce74c64"
+url {
+  src:
+    "https://github.com/xclerc/ocaml-cohttp/archive/c363230adcdf1378606ea94f0c6abfafedd556dd.tar.gz"
+  checksum: [
+    "sha256=64237301670a9b8cb95a894f6a43e47c750e581ecc73ce476dc7f81fd43a8a7d"
+    "sha512=5f374968791fabe8d51244b7de2f54cd50fca08efaee7c7d50b01206506cd3fa07cd851f43c1ed0692f1fe1ee80037e964d458856ec87f4ec9d7c8435b478363"
+  ]
+}
