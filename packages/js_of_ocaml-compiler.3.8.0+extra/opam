@@ -14,16 +14,25 @@ environment like browsers and Node.js
 build: [["dune" "build" "-p" name "-j" jobs]]
 
 depends: [
-  "ocaml" {>= "4.02.0"}
+  "ocaml" {>= "4.02.0" & < "4.12.0"}
   "dune" {>= "2.5"}
-  "ppxlib" {>= "0.15.0" }
-  "uchar"
-  "js_of_ocaml-compiler" {= version}
+  "ppx_expect" {with-test & >= "v0.12.0"}
+  "cmdliner"
+  "menhir"
+  "ppxlib" {>= "0.15.0"}
+  "yojson" # It's optional, but we want users to be able to use source-map without pain.
+]
+
+depopts: [ "ocamlfind" ]
+
+conflicts: [
+  "ocamlfind"   {< "1.5.1"}
+  "js_of_ocaml" {< "3.0"}
 ]
 url {
   src:
        "https://github.com/ocsigen/js_of_ocaml/archive/c82a8c49a1476fb1823cfc28e462e2459542dcc7.tar.gz"
   checksum: [
-    "sha256=9ed1424afd3eeafa5c5a031d817326edd751da58bda9a16fb4fcb1ee55f43211"
+    "sha256=8994a7cafd88a6829a34129605c248eaf2417e6220332fe7a0800590c608d25e"
   ]
 }
