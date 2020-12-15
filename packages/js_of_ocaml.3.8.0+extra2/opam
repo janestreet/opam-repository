@@ -16,13 +16,14 @@ build: [["dune" "build" "-p" name "-j" jobs]]
 depends: [
   "ocaml" {>= "4.02.0"}
   "dune" {>= "2.5"}
-  "ppxlib" {>= "0.15.0"}
-  "js_of_ocaml" {= version}
+  "ppxlib" {>= "0.15.0" }
+  "uchar"
+  "js_of_ocaml-compiler" {= version}
 ]
 url {
   src:
-       "https://github.com/ocsigen/js_of_ocaml/archive/c82a8c49a1476fb1823cfc28e462e2459542dcc7.tar.gz"
+       "https://github.com/ocsigen/js_of_ocaml/archive/7ce9e9821ccb67fbaf7c170646c64758a641f652.tar.gz"
   checksum: [
-    "sha256=8994a7cafd88a6829a34129605c248eaf2417e6220332fe7a0800590c608d25e"
+    "sha256=96563f159707bd3d24b2778bb384bba81c783066060d3638b86b5340af6df39b"
   ]
 }
