@@ -31,8 +31,8 @@ conflicts: [
 ]
 url {
   src:
-       "https://github.com/ocsigen/js_of_ocaml/archive/7ce9e9821ccb67fbaf7c170646c64758a641f652.tar.gz"
+       "https://github.com/ocsigen/js_of_ocaml/archive/62d598ba40baa63de02c9bd619add0072629acdf.tar.gz"
   checksum: [
-    "sha256=96563f159707bd3d24b2778bb384bba81c783066060d3638b86b5340af6df39b"
+    "sha256=102b8ac64ab01aff7655f9ad5138d18e208933f6cc39401726c2875d6960a87e"
   ]
 }
