@@ -12,3 +12,10 @@ opam repo add janestreet-bleeding https://ocaml.janestreet.com/opam-repository
 
 Note that the above url is not the one of this github repository. It
 is a mirror with static tarballs, which is more convenient to use.
+
+Some packages depend on unreleased versions of non-Jane Street packages. These
+can be made available with:
+
+```sh
+opam repo add janestreet-bleeding-external https://github.com/janestreet/opam-repository.git#external-packages
+```
