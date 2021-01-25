@@ -31,7 +31,7 @@ available: [
 x-commit-hash: "43cc9dfe04cbb9c087dd999a7a1d18a729e58cec"
 url {
   src:
-    "https://github.com/janestreet/memtrace/releases/download/v0.2/memtrace-v0.2.tbz"
+    "https://github.com/janestreet/memtrace/archive/v0.2.tar.gz"
   checksum: [
     "sha256=46670690f2f8b922caaf45803a24e2854505f5cc82019830f25a2eccc7dedae0"
  ]
