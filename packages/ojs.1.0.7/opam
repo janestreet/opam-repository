@@ -27,6 +27,6 @@ build: [
 url {
   src: "https://github.com/LexiFi/gen_js_api/archive/v1.0.7.tar.gz"
   checksum: [
-    "sha256=93b93542649466ef9b97b535daf39e62063a0366fc4870e372aa0db1cda86566"
+    "sha256=7d92fc0dc25254e219412768b6e2dfbdb863491373412688deb07cb272068467"
   ]
 }
