@@ -19,7 +19,7 @@ depends: [
   "ppx_sexp_value"    {= "v0.15~preview.124.18+348"}
   "splittable_random" {= "v0.15~preview.124.18+348"}
   "dune"              {>= "2.0.0"}
-  "ppxlib"            {>= "0.15.0" & < "0.18.0"}
+  "ppxlib" {>= "0.18.0"}
 ]
 synopsis: "Randomized testing framework, designed for compatibility with Base"
 description: "

@@ -15,7 +15,7 @@ depends: [
   "ppx_here"      {= "v0.15~preview.124.18+348"}
   "ppx_sexp_conv" {= "v0.15~preview.124.18+348"}
   "dune"          {>= "2.0.0"}
-  "ppxlib"        {>= "0.15.0" & < "0.18.0"}
+  "ppxlib" {>= "0.18.0"}
 ]
 synopsis: "A ppx rewriter for easy construction of s-expressions"
 description: "

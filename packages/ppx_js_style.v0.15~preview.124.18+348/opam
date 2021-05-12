@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.15~preview.124.18+348"}
   "dune"     {>= "2.0.0"}
   "octavius"
-  "ppxlib"   {>= "0.15.0" & < "0.18.0"}
+  "ppxlib" {>= "0.18.0"}
 ]
 synopsis: "Code style checker for Jane Street Packages"
 description: "

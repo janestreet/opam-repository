@@ -16,7 +16,7 @@ depends: [
   "stdio"    {= "v0.15~preview.124.18+348"}
   "time_now" {= "v0.15~preview.124.18+348"}
   "dune"     {>= "2.0.0"}
-  "ppxlib"   {>= "0.15.0" & < "0.18.0"}
+  "ppxlib" {>= "0.18.0"}
 ]
 synopsis: "Ppx rewriter that records top-level module startup times"
 description: "
