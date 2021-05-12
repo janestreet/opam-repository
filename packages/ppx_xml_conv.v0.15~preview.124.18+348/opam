@@ -16,7 +16,7 @@ depends: [
   "ppx_conv_func"   {= "v0.15~preview.124.18+348"}
   "ppx_fields_conv" {= "v0.15~preview.124.18+348"}
   "dune"            {>= "2.0.0"}
-  "ppxlib" {>= "0.18.0"}
+  "ppxlib" {>= "0.18.0" & < "0.22.0"}
 ]
 synopsis: "Generate XML conversion functions from records"
 description: "
