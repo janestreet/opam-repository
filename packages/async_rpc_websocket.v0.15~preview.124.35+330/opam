@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/async_rpc_websocket"
+bug-reports: "https://github.com/janestreet/async_rpc_websocket/issues"
+dev-repo: "git+https://github.com/janestreet/async_rpc_websocket.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_rpc_websocket/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                  {>= "4.08.0"}
+  "async_rpc_kernel"       {= "v0.15~preview.124.35+330"}
+  "cohttp_async_websocket" {= "v0.15~preview.124.35+330"}
+  "ppx_jane"               {= "v0.15~preview.124.35+330"}
+  "cohttp-async"           {>= "2.5.4"}
+  "dune"                   {>= "2.0.0"}
+]
+synopsis: "Library to serve and dispatch Async RPCs over websockets"
+description: "
+Library to serve and dispatch Async RPCs over websockets.
+
+Rpc_websocket makes it easy to serve and send Async RPCs with
+HTTP+Websocket underlying the transport. It also provides a mechanism to share the
+RPC implementations between a vanilla TCP server and a HTTP server.
+
+On the server side, the library detects when a websocket connection
+is established, and routes to an optionally provided vanilla HTTP handler
+when non-websocket traffic occurs.
+"

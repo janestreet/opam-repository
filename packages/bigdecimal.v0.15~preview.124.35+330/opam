@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/bigdecimal"
+bug-reports: "https://github.com/janestreet/bigdecimal/issues"
+dev-repo: "git+https://github.com/janestreet/bigdecimal.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/bigdecimal/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.08.0"}
+  "bignum"                   {= "v0.15~preview.124.35+330"}
+  "core_kernel"              {= "v0.15~preview.124.35+330"}
+  "expect_test_helpers_core" {= "v0.15~preview.124.35+330"}
+  "ppx_jane"                 {= "v0.15~preview.124.35+330"}
+  "dune"                     {>= "2.0.0"}
+  "zarith"                   {>= "1.11"}
+]
+synopsis: "Arbitrary-precision decimal based on Zarith"
+description: "
+A high-precision representation of decimal numbers as [mantissa * 10^exponent], where
+the mantissa is internally a [Bigint.t] and the exponent is an [int].
+"

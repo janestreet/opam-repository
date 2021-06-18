@@ -1,0 +1,23 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/zstandard"
+bug-reports: "https://github.com/janestreet/zstandard/issues"
+dev-repo: "git+https://github.com/janestreet/zstandard.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/zstandard/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.08.0"}
+  "core_kernel" {= "v0.15~preview.124.35+330"}
+  "ppx_jane"    {= "v0.15~preview.124.35+330"}
+  "conf-zstd"
+  "ctypes"      {>= "0.16.0" & < "0.18.0"}
+  "dune"        {>= "2.0.0"}
+]
+synopsis: "OCaml bindings to Zstandard"
+description: "
+Zstandard is a real-time compression algorithm which provides high compression ratios.
+"
