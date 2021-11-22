@@ -23,3 +23,6 @@ description: "
 A high-precision representation of decimal numbers as [mantissa * 10^exponent], where
 the mantissa is internally a [Bigint.t] and the exponent is an [int].
 "
+url {
+src: "git+https://github.com/janestreet/bigdecimal#5f9482a793fc76fe7f32ccd1c1af66fd85007dda"
+}

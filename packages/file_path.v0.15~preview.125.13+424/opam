@@ -23,3 +23,6 @@ synopsis: "A library for typed manipulation of UNIX-style file paths."
 description: "
 A library for typed manipulation of UNIX-style file paths.
 "
+url {
+src: "git+https://github.com/janestreet/file_path#c45fdc863413ada8d8088abd71064368252d0b72"
+}

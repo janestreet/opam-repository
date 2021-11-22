@@ -21,3 +21,6 @@ depends: [
 synopsis: "Text output utilities"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/textutils#beb91c17488530e72ac6a4613602687643dc726e"
+}

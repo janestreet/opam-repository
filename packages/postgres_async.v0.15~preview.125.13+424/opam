@@ -24,3 +24,6 @@ regular queries (including support for 'parameters': \"SELECT * WHERE a = $1\")
 and COPY IN mode. The interface presented is minimal to keep the library simple
 for now, though in the future a layer on top may add convenience functions.
 "
+url {
+src: "git+https://github.com/janestreet/postgres_async#4d0058137f880d8a03dd38427f4b87f4dcfa3d29"
+}

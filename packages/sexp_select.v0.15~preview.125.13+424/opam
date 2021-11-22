@@ -20,3 +20,6 @@ description: "
 This library provides a convenient method to traverse sexp trees
 and return subtrees that match the given program.
 "
+url {
+src: "git+https://github.com/janestreet/sexp_select#e8cb229ac334673d17d6e476090439989b09b197"
+}

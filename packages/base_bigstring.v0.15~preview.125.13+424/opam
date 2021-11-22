@@ -20,3 +20,6 @@ synopsis: "String type based on [Bigarray], for use in I/O and C-bindings"
 description: "
 String type based on [Bigarray], for use in I/O and C-bindings.
 "
+url {
+src: "git+https://github.com/janestreet/base_bigstring#1a1dd71358d6815e1ea7a89d0d7698024bf5b6ae"
+}

@@ -34,3 +34,6 @@ It implements a large portion of RFC6445. The library has been
 hardened with many applications using it for several year, in
 conjunction with async-js and google-chrome.
 "
+url {
+src: "git+https://github.com/janestreet/cohttp_async_websocket#e42b35d25018bbf59aabe6e61b1d44620f3f0dce"
+}

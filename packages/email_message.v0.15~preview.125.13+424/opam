@@ -25,3 +25,6 @@ depends: [
 synopsis: "E-mail message parser"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/email_message#62879fe326e1ab95b6a99a2de685c43e2ee07146"
+}

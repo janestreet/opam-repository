@@ -21,3 +21,6 @@ synopsis: "A library for parsing, manipulating, and serializing data structured 
 description: "
 A library for parsing, manipulating, and serializing data structured as JSON.
 "
+url {
+src: "git+https://github.com/janestreet/jsonaf#45c4ebabd03dc099e6de76714d86c53e0879558c"
+}

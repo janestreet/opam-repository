@@ -20,3 +20,6 @@ depends: [
 synopsis: "Runtime support for ppx_xml_conv and ppx_csv_conv"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/csvfields#76604c3c180e5c5a37fd9327e52d06f621ca6dd4"
+}

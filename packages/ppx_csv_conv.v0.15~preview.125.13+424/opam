@@ -22,3 +22,6 @@ synopsis: "Generate functions to read/write records in csv format"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_csv_conv#77595dd14fd24de462610b4a540eb8590920ef7d"
+}

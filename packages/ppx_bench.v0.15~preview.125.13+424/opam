@@ -19,3 +19,6 @@ synopsis: "Syntax extension for writing in-line benchmarks in ocaml code"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_bench#ee034b79d99c5da7af25880777a0aaf9c5fd9b68"
+}

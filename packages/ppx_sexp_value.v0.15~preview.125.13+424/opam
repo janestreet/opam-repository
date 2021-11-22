@@ -21,3 +21,6 @@ synopsis: "A ppx rewriter that simplifies building s-expressions from ocaml valu
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_sexp_value#7c9e1fc5eb17cb1af2679c0c9ba4e7afadda5410"
+}

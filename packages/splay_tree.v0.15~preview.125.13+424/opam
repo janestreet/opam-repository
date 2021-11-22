@@ -29,3 +29,6 @@ Notably, this splay tree implementation is parameterized by a
 reduction operation which lets you specify an extra accumulator value,
 which can then be searched by efficiently.
 "
+url {
+src: "git+https://github.com/janestreet/splay_tree#053977bd0f53b9e19c3db3e277e83760d89557bb"
+}

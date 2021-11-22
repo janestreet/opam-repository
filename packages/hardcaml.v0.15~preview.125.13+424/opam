@@ -29,3 +29,6 @@ order functions, lists, maps etc.  A built in simulator allows designs to
 be simulated within Hardcaml.  Designs are converted to either Verilog or
 VHDL to interact with standard back end tooling.
 "
+url {
+src: "git+https://github.com/janestreet/hardcaml#c77a4b97d322b84d0ae64b10555b57b65bc6ec7f"
+}

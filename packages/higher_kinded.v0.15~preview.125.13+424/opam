@@ -22,3 +22,6 @@ of a type constructor may only be types, not arbitrary type constructors. This l
 makes it possible to parameterize a type with a witness that represents a type
 constructor.
 "
+url {
+src: "git+https://github.com/janestreet/higher_kinded#2eda850e1f6a8cf84ec26db69966969a087c99d1"
+}

@@ -26,3 +26,6 @@ in a sequence of lines in an intelligent way.
 
 It comes as a binary and an emacs mode.
 "
+url {
+src: "git+https://github.com/janestreet/line-up-words#7f51793fa6c037a90a90e47b433cc8a773a3b552"
+}

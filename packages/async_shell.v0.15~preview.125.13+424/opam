@@ -20,3 +20,6 @@ depends: [
 synopsis: "Shell helpers for Async"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/async_shell#dd3f89dae841757e3f87b241e94aad11373a9b92"
+}

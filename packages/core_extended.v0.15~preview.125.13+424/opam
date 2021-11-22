@@ -24,3 +24,6 @@ The Core suite of libraries is an industrial strength alternative to
 OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
+url {
+src: "git+https://github.com/janestreet/core_extended#079a1f597c9c522ac8d446a05747f5a2306b1aa9"
+}

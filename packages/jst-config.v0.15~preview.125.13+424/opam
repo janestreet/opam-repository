@@ -25,3 +25,6 @@ This package has an unstable interface; it is intended only to share configurati
 different packages from Jane Street. Future updates may not be backward-compatible, and we
 do not recommend using this package directly.
 "
+url {
+src: "git+https://github.com/janestreet/jst-config#07ee59e7c02ba7b2eb23c319f3cd7b48f8f26203"
+}

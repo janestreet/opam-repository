@@ -20,3 +20,6 @@ description: "
 The code behind the [diff] subcommand of the Jane Street's [sexp]
 command line tool.
 "
+url {
+src: "git+https://github.com/janestreet/sexp_diff#d0c16e344dad7b7101fc647555465a8f260309a1"
+}

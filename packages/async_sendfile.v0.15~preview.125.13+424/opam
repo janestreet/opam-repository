@@ -20,3 +20,6 @@ depends: [
 synopsis: "Thin wrapper around [Linux_ext.sendfile] to send full files"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/async_sendfile#b589bf83caace9acb6cb1063785c6b562f2558cf"
+}

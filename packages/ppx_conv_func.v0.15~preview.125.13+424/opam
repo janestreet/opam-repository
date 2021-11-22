@@ -19,3 +19,6 @@ synopsis: "Deprecated"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_conv_func#32e28e199eddc85e68c322a42b6732915b1a7ede"
+}

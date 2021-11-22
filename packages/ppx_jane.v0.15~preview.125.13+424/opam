@@ -44,3 +44,6 @@ description: "
 This package installs a ppx-jane executable, which is a ppx driver
 including all standard Jane Street ppx rewriters.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_jane#b080c37a66808a3aa6a180d9c7f44a6e47429a64"
+}

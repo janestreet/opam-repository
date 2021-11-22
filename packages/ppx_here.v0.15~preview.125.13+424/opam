@@ -19,3 +19,6 @@ synopsis: "Expands [%here] into its location"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_here#b5263f635776b0dd1c4e17c1e3755f1bf2278e2a"
+}

@@ -21,3 +21,6 @@ synopsis: "Durable connections for use with async"
 description: "
 Async_durable helps recover from errors when connections can be easily be recreated.
 "
+url {
+src: "git+https://github.com/janestreet/async_durable#5fb1b58066f7203ca2f9fa123b28e33b4e89bff0"
+}

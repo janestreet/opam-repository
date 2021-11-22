@@ -25,3 +25,6 @@ description: "
 Ecaml is a library for writing Emacs plugins in OCaml. It uses Emacs
 25 support for plugins to load native OCaml compiled code.
 "
+url {
+src: "git+https://github.com/janestreet/ecaml#ee3e18d87ac674cad2a55a1f8173bb36fbbce2f3"
+}

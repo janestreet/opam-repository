@@ -22,3 +22,6 @@ depends: [
 synopsis: "Async wrapper for inotify"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/async_inotify#f4c8aebb7956001f7d468cb2fc0ac10561f0ab3e"
+}

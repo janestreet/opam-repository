@@ -19,3 +19,6 @@ synopsis: "A table of [Async.Sequencer]'s, indexed by key"
 description: "
 A single-module library for a data structure.
 "
+url {
+src: "git+https://github.com/janestreet/sequencer_table#5f6ee92d5890c1384155b13ac23f4d66e0104c41"
+}

@@ -23,3 +23,6 @@ synopsis: "Assert-like extension nodes that raise useful errors on failure"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_assert#c342339c3293c6e6a1cae5f0332f4aae07aa4aef"
+}

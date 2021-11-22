@@ -37,3 +37,6 @@ This library is portable and doesn't provide IO functions. To read
 s-expressions from files or other external sources, you should use
 parsexp_io.
 "
+url {
+src: "git+https://github.com/janestreet/parsexp#6dafece69e2318479fcdfd8bea3dcf0649d8740f"
+}

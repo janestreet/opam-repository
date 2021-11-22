@@ -22,3 +22,6 @@ depends: [
 synopsis: "Automatically build and dynlink OCaml source files"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/ocaml_plugin#ff15650b1ae1fa20c4485c480c08aae8a373ff68"
+}

@@ -21,3 +21,6 @@ synopsis: "Generation of bin_prot readers and writers from types"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_bin_prot#63889943ddfc756020c45c3cfffbd7d23cc2c516"
+}

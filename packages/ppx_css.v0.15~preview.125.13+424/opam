@@ -27,3 +27,6 @@ synopsis: "A ppx that takes in css strings and produces a module for accessing t
 description: "
 A ppx that takes in css strings and produces a module for accessing the unique names defined within.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_css#7f17051782776a76986472429126f9e2d7f6cfe1"
+}

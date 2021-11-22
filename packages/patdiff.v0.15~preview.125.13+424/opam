@@ -23,3 +23,6 @@ depends: [
 synopsis: "File Diff using the Patience Diff algorithm"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/patdiff#b9abd4db7293e3ef5cf4f65692c6d857b75a5a43"
+}

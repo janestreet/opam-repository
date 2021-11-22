@@ -19,3 +19,6 @@ description: "
 Ignore Jane Street specific instrumentation extensions from internal PPXs or compiler 
    features not yet upstreamed.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_ignore_instrumentation#3e0059c8b92d32857ba1885c1206e0f67fd79897"
+}

@@ -21,3 +21,6 @@ synopsis: "OCaml bindings to Zstandard"
 description: "
 Zstandard is a real-time compression algorithm which provides high compression ratios.
 "
+url {
+src: "git+https://github.com/janestreet/zstandard#8233812546164fbe3d67f4fe02b57f8bec5288d7"
+}

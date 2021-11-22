@@ -25,3 +25,6 @@ depends: [
 synopsis: "Benchmarking library"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/core_bench#746d2440aa10795f1ef286df64be46e7d4ff768c"
+}

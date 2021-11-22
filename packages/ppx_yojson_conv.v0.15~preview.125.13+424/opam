@@ -21,3 +21,6 @@ synopsis: "[@@deriving] plugin to generate Yojson conversion functions"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_yojson_conv#716f2b0be9b016ac942cbcf6da6bc10eb55a888d"
+}

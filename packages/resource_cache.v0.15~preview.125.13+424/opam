@@ -23,3 +23,6 @@ This library offers a functor to create a resource cache over some
 abstract [Resource] type. The cache enables resource reuse while
 obeying various limits.
 "
+url {
+src: "git+https://github.com/janestreet/resource_cache#0e06b0b03824b546c20720b6e70600226c03c257"
+}

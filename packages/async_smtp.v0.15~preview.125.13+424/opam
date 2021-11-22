@@ -32,3 +32,6 @@ depends: [
 synopsis: "SMTP client and server"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/async_smtp#79b841cafa44c3b3897b15734af238d37f99764e"
+}

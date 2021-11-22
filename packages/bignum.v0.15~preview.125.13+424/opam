@@ -23,3 +23,6 @@ depends: [
 synopsis: "Core-flavoured wrapper around zarith's arbitrary-precision rationals"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/bignum#cae496fde6ced85a417bc793763bb3f94ce9416b"
+}

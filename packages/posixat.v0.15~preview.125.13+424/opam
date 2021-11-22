@@ -25,3 +25,6 @@ The posix *at functions takes the current working directory as a file
 descriptor. For instance this allows to reliably maintain several
 working directories inside the same process.
 "
+url {
+src: "git+https://github.com/janestreet/posixat#90fcd3551f41747975c5da632f6a6be7b04669bf"
+}

@@ -23,3 +23,6 @@ Part of the Jane Street's PPX rewriters collection.
 This packages is a no-op ppx rewriter. It is used as a 'lint' tool to
 enforce some coding conventions across all Jane Street packages.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_js_style#f74a839c53c3d8290b3ddca3513f99160484152c"
+}

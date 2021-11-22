@@ -25,3 +25,6 @@ can then be accessed through the OCaml record.  This allows easier management
 of bundles of ports when working with the Simulator, Netlist generation or
 hierarchical designs.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_deriving_hardcaml#5d33916cea0875f4b06a65f0f5f3883936558cc7"
+}

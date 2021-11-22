@@ -23,3 +23,6 @@ synopsis: "Cram like framework for OCaml"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_expect#fd01b49ee105b94c2ff8df82777d8e285e595a7e"
+}

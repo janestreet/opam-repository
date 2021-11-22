@@ -19,3 +19,6 @@ synopsis: "Expands [@disable_unused_warnings] into [@warning \"-20-26-32-33-34-3
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_disable_unused_warnings#1b34d06dd9d02aa0fb42076420887d132a87676d"
+}

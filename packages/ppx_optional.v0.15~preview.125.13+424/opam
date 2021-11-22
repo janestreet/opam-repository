@@ -20,3 +20,6 @@ description: "
 A ppx rewriter that rewrites simple match statements with an if then
 else expression.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_optional#d6a92f105b509b5986fe7bb7d5775f095b2ceaa5"
+}

@@ -33,3 +33,6 @@ This PPX currently supports deriving type-directed values for records, ordinary
 & polymorphic variants and tuples. It also supports custom user-defined attributes
 on record and variant fields.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_type_directed_value#d4fae33bb389b438037c0a03009fa9f96f88a707"
+}

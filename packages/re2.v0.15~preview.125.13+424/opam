@@ -19,3 +19,6 @@ depends: [
 synopsis: "OCaml bindings for RE2, Google's regular expression library"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/re2#89373a48bc786be9b2a7f530dd5954222515c048"
+}

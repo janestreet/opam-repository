@@ -20,3 +20,6 @@ description: "
 Timezone handles parsing timezone data and create [Timezone.t] that
 can later be used to manipulate time in core_kernel or core.
 "
+url {
+src: "git+https://github.com/janestreet/timezone#d07afbac9892326b118f89912ab06f91901e132a"
+}

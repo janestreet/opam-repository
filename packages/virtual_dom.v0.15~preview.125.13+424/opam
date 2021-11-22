@@ -26,3 +26,6 @@ description: "
 The library itself may be found at
 https://github.com/Matt-Esch/virtual-dom.
 "
+url {
+src: "git+https://github.com/janestreet/virtual_dom#53466b0f06875cafd30ee2d22536e494e7237b3a"
+}

@@ -19,3 +19,6 @@ depends: [
 synopsis: "Utilities for Versioned RPC communication with a child process over stdin and stdout"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/command_rpc#1e394b857979025f5d5ddb81bd8dc1ffe3cd2d4e"
+}

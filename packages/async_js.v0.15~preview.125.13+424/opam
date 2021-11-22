@@ -23,3 +23,6 @@ depends: [
 synopsis: "A small library that provide Async support for JavaScript platforms"
 description: "
 "
+url {
+src: "git+https://github.com/janestreet/async_js#4dc6de8018913e82e468eefaf589465d28e9fd96"
+}

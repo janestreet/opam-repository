@@ -20,3 +20,6 @@ synopsis: "Monadic let-bindings"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_let#ba57b07188cfdbb00664c0c9fd8ae81b316cc0ea"
+}

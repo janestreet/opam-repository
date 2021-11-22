@@ -18,3 +18,6 @@ synopsis: "Runtime lib for ppx_yojson_conv"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_yojson_conv_lib#99a766ad01dc7b9cd76c69524749d0e8aca783b5"
+}

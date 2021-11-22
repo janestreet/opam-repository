@@ -21,3 +21,6 @@ synopsis: "A ppx rewriter for easy construction of s-expressions"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_sexp_message#2619c0447631838ac9be7b7b85db37ef674496cb"
+}

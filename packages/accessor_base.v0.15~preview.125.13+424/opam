@@ -22,3 +22,6 @@ synopsis: "Accessors for Base types, for use with the Accessor library"
 description: "
 This library provides accessors for numerous types in Base.
 "
+url {
+src: "git+https://github.com/janestreet/accessor_base#2a65ee1f53104aefd2b2e12042def26b140a4f16"
+}

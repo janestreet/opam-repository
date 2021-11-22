@@ -25,3 +25,6 @@ spawn workers as separate processes, and communicate with them using
 Async Rpc.
 
 "
+url {
+src: "git+https://github.com/janestreet/rpc_parallel#a7c5b4199152bcf83d4c97d97e43cf810b27c065"
+}

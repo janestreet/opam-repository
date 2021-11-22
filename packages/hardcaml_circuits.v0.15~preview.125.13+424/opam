@@ -21,3 +21,6 @@ synopsis: "Hardcaml Circuits"
 description: "
 A small library of useful/interesting Hardcaml circuits.
 "
+url {
+src: "git+https://github.com/janestreet/hardcaml_circuits#eec49560a697c495e356ab61e815851b6b2006a6"
+}

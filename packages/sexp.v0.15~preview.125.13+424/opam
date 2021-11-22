@@ -31,3 +31,6 @@ A suite of tools for working with s-expressions from the command line.
 It contains subcommands for pretty printing, querying, and modifying
 sexps, as well as some conversions to and from other formats.
 "
+url {
+src: "git+https://github.com/janestreet/sexp#07214db8c8567b7bcf9805acbcb0700059d995d6"
+}

@@ -20,3 +20,6 @@ synopsis: "Syntax extension for writing in-line tests in ocaml code"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_inline_test#1f2b0fee2aa5bd841082acc656a44e08cf553cd5"
+}

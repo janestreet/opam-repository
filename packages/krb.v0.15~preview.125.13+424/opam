@@ -30,3 +30,6 @@ Jane Street's library for Kerberizing RPC connections so that
     every incoming connection, and
   - RPC communication may be encrypted, if necessary.
 "
+url {
+src: "git+https://github.com/janestreet/krb#8fdd7ca4f18973555e37237c140a2704b1963415"
+}

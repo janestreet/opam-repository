@@ -24,3 +24,6 @@ configuration from an environment variable. Its goal is to make it easy
 to override a configuration that is loaded from disk, computed, or embedded
 in a library.
 "
+url {
+src: "git+https://github.com/janestreet/env_config#62807cddb17a870adf3b958637b275b3e0214e4b"
+}

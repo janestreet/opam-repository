@@ -24,3 +24,6 @@ synopsis: "A library to help writing wrappers around ocaml code for python"
 description: "
 This library helps exposing ocaml functions to python. The python runtime interaction is handled by pyml.
 "
+url {
+src: "git+https://github.com/janestreet/pythonlib#4d07848cace4cc28cb927ad0a85ebaca27466bb5"
+}

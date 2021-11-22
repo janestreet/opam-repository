@@ -19,3 +19,6 @@ synopsis: "Generate a list containing all values of a finite type"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_enumerate#5720715bfabb1dd70f117ff98b6b230c478e4086"
+}

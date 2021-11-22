@@ -23,3 +23,6 @@ description: "
 Provides a wrapper around the Net-SNMP client libraries including
 MIB handling and SNMP requests
 "
+url {
+src: "git+https://github.com/janestreet/netsnmp#67264e5044a329d9ea5ada0baf85059427aeb429"
+}

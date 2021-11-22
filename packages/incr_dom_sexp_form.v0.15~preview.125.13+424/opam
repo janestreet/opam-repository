@@ -27,3 +27,6 @@ synopsis: "A library for building forms that allow the user to edit complicated 
 description: "
 It relies on the fact that the type of the value being edited can be serialized via sexps.
 "
+url {
+src: "git+https://github.com/janestreet/incr_dom_sexp_form#4e3cef0bd45b72c35b64a82dfa7446a084dfb415"
+}

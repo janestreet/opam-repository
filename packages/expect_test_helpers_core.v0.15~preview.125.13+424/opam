@@ -27,3 +27,6 @@ This library provides helper functions for writing expect tests.
 If you want helpers for writing expect tests using the Async library,
 look at expect_test_helpers_async.
 "
+url {
+src: "git+https://github.com/janestreet/expect_test_helpers_core#ab32de5456788f55542ad0a472820b6a486f4af9"
+}

@@ -20,3 +20,6 @@ synopsis: "[@@deriving] plugin to generate S-expression conversion functions"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_sexp_conv#e8404bcacb24c36d5ba1f1e6b035ff4f7921119d"
+}

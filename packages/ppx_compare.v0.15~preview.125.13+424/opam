@@ -19,3 +19,6 @@ synopsis: "Generation of comparison functions from types"
 description: "
 Part of the Jane Street's PPX rewriters collection.
 "
+url {
+src: "git+https://github.com/janestreet/ppx_compare#cca196b6724a2ab7eed4d397e0adbfd4470a931c"
+}
