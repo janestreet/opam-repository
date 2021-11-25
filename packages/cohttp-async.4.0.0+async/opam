@@ -49,12 +49,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-dev-repo: "git+https://github.com/mirage/ocaml-cohttp.git"
-x-commit-hash: "e99c69b2bbc675c0884f3da9fd69e4f27217d9cc"
 url {
   src:
-    "https://github.com/aalekseyev/ocaml-cohttp/archive/e99c69b2bbc675c0884f3da9fd69e4f27217d9cc.tar.gz"
-  checksum: [
-    "sha256=30f4eb518a926b5e2db7f5c7bd90f117599f2bf9a18c7695b6769ece632df3ac"
-  ]
+    "git+https://github.com/aalekseyev/ocaml-cohttp#1413e3efd957682b9e61d4bf0081bdb8b74524ed"
 }
