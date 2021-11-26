@@ -10,15 +10,15 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
-  "uutf"        {>= "1.0.2"}
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane" {= "v0.15~preview.125.15+452"}
+  "dune"     {>= "2.0.0"}
+  "uutf"     {>= "1.0.2"}
 ]
 synopsis: "Text output utilities"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/textutils_kernel#579fb17f95b8674497518c85cd0aed60a1410a5d"
+src: "git+https://github.com/janestreet/textutils_kernel#9a18d29af12b5a12e24b3406e0a697e53cc97820"
 }

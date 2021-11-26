@@ -11,6 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"       {>= "4.08.0"}
+  "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
   "conf-g++"    {build}
@@ -20,5 +21,5 @@ synopsis: "OCaml bindings for RE2, Google's regular expression library"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/re2#89373a48bc786be9b2a7f530dd5954222515c048"
+src: "git+https://github.com/janestreet/re2#31dded71e73189a5c8ed87c7832ee0180de15926"
 }

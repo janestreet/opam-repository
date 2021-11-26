@@ -10,12 +10,12 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_expect"  {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
-  "ppxlib"      {>= "0.23.0"}
+  "ocaml"      {>= "4.08.0"}
+  "core"       {= "v0.15~preview.125.15+452"}
+  "ppx_expect" {= "v0.15~preview.125.15+452"}
+  "ppx_jane"   {= "v0.15~preview.125.15+452"}
+  "dune"       {>= "2.0.0"}
+  "ppxlib"     {>= "0.23.0"}
 ]
 synopsis: "Parsing of top-expect files"
 description: "
@@ -24,5 +24,5 @@ sessions) both to power toplevel expect tests and to support a tool that convert
 .mlt files into .org files, for literate-style documentation.
 "
 url {
-src: "git+https://github.com/janestreet/mlt_parser#a3302fd4de498e83ee9fc4fa1ede9ebdaaba849a"
+src: "git+https://github.com/janestreet/mlt_parser#5a97908f5825599297fe98bc6bdb866820cbd763"
 }

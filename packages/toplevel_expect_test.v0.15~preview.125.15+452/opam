@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"               {>= "4.08.0"}
   "core"                {= "v0.15~preview.125.15+452"}
-  "core_kernel"         {= "v0.15~preview.125.15+452"}
+  "core_unix"           {= "v0.15~preview.125.15+452"}
   "mlt_parser"          {= "v0.15~preview.125.15+452"}
   "ppx_expect"          {= "v0.15~preview.125.15+452"}
   "ppx_inline_test"     {= "v0.15~preview.125.15+452"}
@@ -32,5 +32,5 @@ compilations errors as well as provide a nice alternative to using
 the toplevel in a terminal.
 "
 url {
-src: "git+https://github.com/janestreet/toplevel_expect_test#6f2288e52dc62f669ad23e7b528f1c52730fef46"
+src: "git+https://github.com/janestreet/toplevel_expect_test#ee10532ba753d881b2256667b7600231de0431f4"
 }

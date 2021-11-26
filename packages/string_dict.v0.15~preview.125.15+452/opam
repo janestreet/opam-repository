@@ -26,5 +26,5 @@ This uses the algorithm the OCaml compiler uses for pattern matching
 on strings.
 "
 url {
-src: "git+https://github.com/janestreet/string_dict#892071b1fafdcd6a704ec69ac99bbb6cc4836008"
+src: "git+https://github.com/janestreet/string_dict#5636eeb3bfdb169c01a4d2c2f1d4f7e22e29a588"
 }

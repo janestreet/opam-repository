@@ -12,6 +12,7 @@ build: [
 depends: [
   "ocaml"                    {>= "4.11.0"}
   "async"                    {= "v0.15~preview.125.15+452"}
+  "core"                     {= "v0.15~preview.125.15+452"}
   "core_kernel"              {= "v0.15~preview.125.15+452"}
   "expect_test_helpers_core" {= "v0.15~preview.125.15+452"}
   "ppx_jane"                 {= "v0.15~preview.125.15+452"}
@@ -22,5 +23,5 @@ description: "
 A library that wraps the Mercurial command line interface.
 "
 url {
-src: "git+https://github.com/janestreet/hg_lib#1785e9ec203dc42a74f1a1f5cbbb1a8ec5f73231"
+src: "git+https://github.com/janestreet/hg_lib#f06a077fee30e0ad66b0b6ff201b352ddc76f655"
 }

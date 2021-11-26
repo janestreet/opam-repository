@@ -10,12 +10,12 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "async"       {= "v0.15~preview.125.15+452"}
-  "core"        {= "v0.15~preview.125.15+452"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
+  "ocaml"     {>= "4.08.0"}
+  "async"     {= "v0.15~preview.125.15+452"}
+  "core"      {= "v0.15~preview.125.15+452"}
+  "core_unix" {= "v0.15~preview.125.15+452"}
+  "ppx_jane"  {= "v0.15~preview.125.15+452"}
+  "dune"      {>= "2.0.0"}
 ]
 synopsis: "Files contents as module constants"
 description: "
@@ -23,5 +23,5 @@ Embed-file takes some files and generates code for an OCaml module
 defining string constants containing the contents of those files.
 "
 url {
-src: "git+https://github.com/janestreet/ocaml-embed-file#13fae03474037ad5edc5aab733a8c0c771122805"
+src: "git+https://github.com/janestreet/ocaml-embed-file#721359ba60a369f4f25ccbb7551f2b5bac588d8b"
 }

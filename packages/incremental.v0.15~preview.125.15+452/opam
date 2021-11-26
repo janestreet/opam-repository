@@ -11,6 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"       {>= "4.08.0"}
+  "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
   "dune"        {>= "2.0.0"}
@@ -23,5 +24,5 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "git+https://github.com/janestreet/incremental#a1037f4f937915d678cf07e70bc6ca0a744d52d4"
+src: "git+https://github.com/janestreet/incremental#dfb6b8a0dd6c1d3edf8541aee658bacf176e349e"
 }

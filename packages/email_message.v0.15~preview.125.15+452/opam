@@ -14,6 +14,7 @@ depends: [
   "async"       {= "v0.15~preview.125.15+452"}
   "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
+  "core_unix"   {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
   "re2"         {= "v0.15~preview.125.15+452"}
   "angstrom"    {>= "0.14.1"}
@@ -26,5 +27,5 @@ synopsis: "E-mail message parser"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/email_message#62879fe326e1ab95b6a99a2de685c43e2ee07146"
+src: "git+https://github.com/janestreet/email_message#38bf31c7749a80ce2d68d8c5bbbdfb8246c577b0"
 }

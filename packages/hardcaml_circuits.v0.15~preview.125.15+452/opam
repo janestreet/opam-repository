@@ -22,5 +22,5 @@ description: "
 A small library of useful/interesting Hardcaml circuits.
 "
 url {
-src: "git+https://github.com/janestreet/hardcaml_circuits#0ef70e2a74b57550a05c044ec66c808344f18084"
+src: "git+https://github.com/janestreet/hardcaml_circuits#1bf1b3cbe8dd2ca8fed83a2d4c5b03973b4fbdfd"
 }

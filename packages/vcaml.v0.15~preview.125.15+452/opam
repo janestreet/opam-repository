@@ -16,6 +16,7 @@ depends: [
   "base"                      {= "v0.15~preview.125.15+452"}
   "core"                      {= "v0.15~preview.125.15+452"}
   "core_kernel"               {= "v0.15~preview.125.15+452"}
+  "core_unix"                 {= "v0.15~preview.125.15+452"}
   "expect_test_helpers_async" {= "v0.15~preview.125.15+452"}
   "ppx_jane"                  {= "v0.15~preview.125.15+452"}
   "textutils"                 {= "v0.15~preview.125.15+452"}
@@ -32,5 +33,5 @@ an OCaml interface to those APIs, for the purpose of permitting neovim
 plugins to be written in OCaml.
 "
 url {
-src: "git+https://github.com/janestreet/vcaml#903e4be6cd7294a664b44d05755073819d42e602"
+src: "git+https://github.com/janestreet/vcaml#7f5178e6352270d99eed510cbd9d2d8eb1837133"
 }

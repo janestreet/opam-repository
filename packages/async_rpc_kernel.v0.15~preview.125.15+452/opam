@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"                   {>= "4.08.0"}
   "async_kernel"            {= "v0.15~preview.125.15+452"}
-  "core_kernel"             {= "v0.15~preview.125.15+452"}
+  "core"                    {= "v0.15~preview.125.15+452"}
   "ppx_jane"                {= "v0.15~preview.125.15+452"}
   "protocol_version_header" {= "v0.15~preview.125.15+452"}
   "dune"                    {>= "2.0.0"}
@@ -25,5 +25,5 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "git+https://github.com/janestreet/async_rpc_kernel#0110f1c0030479cc6fbf24d5b184b2da8bac95bc"
+src: "git+https://github.com/janestreet/async_rpc_kernel#d511924401b7b2e263693dd18e4716012f889848"
 }

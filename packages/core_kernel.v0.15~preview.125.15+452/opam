@@ -10,30 +10,13 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"               {>= "4.11.0"}
-  "base"                {= "v0.15~preview.125.15+452"}
-  "base_bigstring"      {= "v0.15~preview.125.15+452"}
-  "base_quickcheck"     {= "v0.15~preview.125.15+452"}
-  "bin_prot"            {= "v0.15~preview.125.15+452"}
-  "fieldslib"           {= "v0.15~preview.125.15+452"}
-  "int_repr"            {= "v0.15~preview.125.15+452"}
-  "jane-street-headers" {= "v0.15~preview.125.15+452"}
-  "jst-config"          {= "v0.15~preview.125.15+452"}
-  "ppx_assert"          {= "v0.15~preview.125.15+452"}
-  "ppx_base"            {= "v0.15~preview.125.15+452"}
-  "ppx_hash"            {= "v0.15~preview.125.15+452"}
-  "ppx_inline_test"     {= "v0.15~preview.125.15+452"}
-  "ppx_jane"            {= "v0.15~preview.125.15+452"}
-  "ppx_sexp_conv"       {= "v0.15~preview.125.15+452"}
-  "ppx_sexp_message"    {= "v0.15~preview.125.15+452"}
-  "sexplib"             {= "v0.15~preview.125.15+452"}
-  "splittable_random"   {= "v0.15~preview.125.15+452"}
-  "stdio"               {= "v0.15~preview.125.15+452"}
-  "time_now"            {= "v0.15~preview.125.15+452"}
-  "typerep"             {= "v0.15~preview.125.15+452"}
-  "variantslib"         {= "v0.15~preview.125.15+452"}
+  "ocaml"        {>= "4.11.0"}
+  "base"         {= "v0.15~preview.125.15+452"}
+  "core"         {= "v0.15~preview.125.15+452"}
+  "int_repr"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane"     {= "v0.15~preview.125.15+452"}
   "base-threads"
-  "dune"                {>= "2.0.0"}
+  "dune"         {>= "2.0.0"}
 ]
 synopsis: "Industrial strength alternative to OCaml's standard library"
 description: "
@@ -44,5 +27,5 @@ largest industrial user of OCaml.
 Core_kernel is the system-independent part of Core.
 "
 url {
-src: "git+https://github.com/janestreet/core_kernel#b61f11a1c168845ee0b62b57591d6c809c7cdc71"
+src: "git+https://github.com/janestreet/core_kernel#5a12e0cb72817da02871f2591e65cd44ace03197"
 }

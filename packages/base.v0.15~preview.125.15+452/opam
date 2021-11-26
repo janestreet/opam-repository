@@ -31,5 +31,5 @@ provided by companion libraries such as stdio:
   https://github.com/janestreet/stdio
 "
 url {
-src: "git+https://github.com/janestreet/base#7df4055a9ca27b54aa42a98b4b904f157d463292"
+src: "git+https://github.com/janestreet/base#631346fa64fa91810692dda71c56fddf7ba96939"
 }

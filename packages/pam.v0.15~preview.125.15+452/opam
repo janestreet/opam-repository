@@ -10,11 +10,11 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane" {= "v0.15~preview.125.15+452"}
   "conf-pam"
-  "dune"        {>= "2.0.0"}
+  "dune"     {>= "2.0.0"}
 ]
 synopsis: "OCaml bindings for the Linux-PAM library"
 description: "
@@ -23,5 +23,5 @@ Modules for Linux) library. It allows OCaml programs to delegate
 authentication tasks to the Linux-PAM framework.
 "
 url {
-src: "git+https://github.com/janestreet/pam#85c2c259ea569bed6d5355ff29205a0924daa4c3"
+src: "git+https://github.com/janestreet/pam#525800b153b0001164a40b0187477d32387b2b6d"
 }

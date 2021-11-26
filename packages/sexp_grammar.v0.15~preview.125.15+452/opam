@@ -18,5 +18,5 @@ description: "
 Helpers for manipulating [Sexplib.Sexp_grammar] values.
 "
 url {
-src: "git+https://github.com/janestreet/sexp_grammar#4c7e876a44c7da21d06a9726aceccc013b1d5ef8"
+src: "git+https://github.com/janestreet/sexp_grammar#46be6e116ffbca22698c6447c9bab717088add92"
 }

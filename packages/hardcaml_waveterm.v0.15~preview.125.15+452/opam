@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"                    {>= "4.08.0"}
   "base"                     {= "v0.15~preview.125.15+452"}
-  "core"                     {= "v0.15~preview.125.15+452"}
+  "core_unix"                {= "v0.15~preview.125.15+452"}
   "expect_test_helpers_core" {= "v0.15~preview.125.15+452"}
   "hardcaml"                 {= "v0.15~preview.125.15+452"}
   "notty_async"              {= "v0.15~preview.125.15+452"}
@@ -35,5 +35,5 @@ to simulations.
 "
 conflicts: ["hardcaml-waveterm"] 
 url {
-src: "git+https://github.com/janestreet/hardcaml_waveterm#49954ad2f9d5309a3dbdd57d5d6ab90ad0bf4fa5"
+src: "git+https://github.com/janestreet/hardcaml_waveterm#334da1cdbda4f6851b0fd95f557e890cc1fa7677"
 }

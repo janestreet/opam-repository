@@ -22,5 +22,5 @@ description: "
 Parsexp_io provides functions for loading s-expressions from files.
 "
 url {
-src: "git+https://github.com/janestreet/parsexp_io#cb64da7e38778cdd1bb0f48e868a5e3ae6fa561f"
+src: "git+https://github.com/janestreet/parsexp_io#01640b6f4e6cb0c7743291e91e67650e2c2a985c"
 }

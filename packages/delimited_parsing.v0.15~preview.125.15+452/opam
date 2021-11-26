@@ -12,8 +12,8 @@ build: [
 depends: [
   "ocaml"         {>= "4.08.0"}
   "async"         {= "v0.15~preview.125.15+452"}
+  "core"          {= "v0.15~preview.125.15+452"}
   "core_extended" {= "v0.15~preview.125.15+452"}
-  "core_kernel"   {= "v0.15~preview.125.15+452"}
   "ppx_jane"      {= "v0.15~preview.125.15+452"}
   "dune"          {>= "2.0.0"}
 ]
@@ -23,5 +23,5 @@ Delimited_parsing parses character-separated values (such as CSV files) and fixe
 records.
 "
 url {
-src: "git+https://github.com/janestreet/delimited_parsing#8eeeb8637019c97ec1f8b3bd116d76883a42f779"
+src: "git+https://github.com/janestreet/delimited_parsing#85449e558da651aaee7fb36bf28c05ddc56e0f50"
 }

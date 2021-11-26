@@ -10,15 +10,15 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "async"       {= "v0.15~preview.125.15+452"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
+  "ocaml"    {>= "4.08.0"}
+  "async"    {= "v0.15~preview.125.15+452"}
+  "core"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane" {= "v0.15~preview.125.15+452"}
+  "dune"     {>= "2.0.0"}
 ]
 synopsis: "Directory traversal with Async"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/async_find#100706cb1a8808a747d1ed7da9b8d311e0fcbabf"
+src: "git+https://github.com/janestreet/async_find#ec53a6effd98c10e563def73914bf0626e57eee4"
 }

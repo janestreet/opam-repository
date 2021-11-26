@@ -10,14 +10,14 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core"        {= "v0.15~preview.125.15+452"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "jst-config"  {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "textutils"   {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
-  "spawn"       {>= "v0.12"}
+  "ocaml"      {>= "4.08.0"}
+  "core"       {= "v0.15~preview.125.15+452"}
+  "core_unix"  {= "v0.15~preview.125.15+452"}
+  "jst-config" {= "v0.15~preview.125.15+452"}
+  "ppx_jane"   {= "v0.15~preview.125.15+452"}
+  "textutils"  {= "v0.15~preview.125.15+452"}
+  "dune"       {>= "2.0.0"}
+  "spawn"      {>= "v0.12"}
 ]
 synopsis: "Yet another implementation of fork&exec and related functionality"
 description: "
@@ -25,5 +25,5 @@ This library is a relatively featureful and flexible implementation of fork&exec
 "
 depexts: ["linux-headers"] {os-distribution = "alpine"}
 url {
-src: "git+https://github.com/janestreet/shell#1504d76cf8a8e8d96d381e4ba4bb6198c9f36a98"
+src: "git+https://github.com/janestreet/shell#236455f4b9e8e60ec5e9724a9783aadf8a8e1e0b"
 }

@@ -10,18 +10,18 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "async"       {= "v0.15~preview.125.15+452"}
-  "async_find"  {= "v0.15~preview.125.15+452"}
-  "core"        {= "v0.15~preview.125.15+452"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
-  "inotify"     {>= "0.2.0"}
+  "ocaml"      {>= "4.08.0"}
+  "async"      {= "v0.15~preview.125.15+452"}
+  "async_find" {= "v0.15~preview.125.15+452"}
+  "core"       {= "v0.15~preview.125.15+452"}
+  "core_unix"  {= "v0.15~preview.125.15+452"}
+  "ppx_jane"   {= "v0.15~preview.125.15+452"}
+  "dune"       {>= "2.0.0"}
+  "inotify"    {>= "0.2.0"}
 ]
 synopsis: "Async wrapper for inotify"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/async_inotify#f4c8aebb7956001f7d468cb2fc0ac10561f0ab3e"
+src: "git+https://github.com/janestreet/async_inotify#b762536087622fa7a706ddfbdc41b8718301a455"
 }

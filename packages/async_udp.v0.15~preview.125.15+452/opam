@@ -10,11 +10,11 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
-  "async"    {= "v0.15~preview.125.15+452"}
-  "core"     {= "v0.15~preview.125.15+452"}
-  "ppx_jane" {= "v0.15~preview.125.15+452"}
-  "dune"     {>= "2.0.0"}
+  "ocaml"     {>= "4.08.0"}
+  "async"     {= "v0.15~preview.125.15+452"}
+  "core_unix" {= "v0.15~preview.125.15+452"}
+  "ppx_jane"  {= "v0.15~preview.125.15+452"}
+  "dune"      {>= "2.0.0"}
 ]
 synopsis: "Monadic concurrency library"
 description: "
@@ -24,5 +24,5 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "git+https://github.com/janestreet/async_udp#3936e591817adfe491c0876bba1a44e55f03b218"
+src: "git+https://github.com/janestreet/async_udp#037df77ad551ab7e4eb10072bf8498328b7140b4"
 }

@@ -21,5 +21,5 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "git+https://github.com/janestreet/ppx_inline_test#1f2b0fee2aa5bd841082acc656a44e08cf553cd5"
+src: "git+https://github.com/janestreet/ppx_inline_test#e38199fe0875171597f2baedb751579282e49d50"
 }

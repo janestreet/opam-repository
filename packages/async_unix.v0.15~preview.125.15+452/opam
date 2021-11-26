@@ -14,6 +14,7 @@ depends: [
   "async_kernel" {= "v0.15~preview.125.15+452"}
   "core"         {= "v0.15~preview.125.15+452"}
   "core_kernel"  {= "v0.15~preview.125.15+452"}
+  "core_unix"    {= "v0.15~preview.125.15+452"}
   "ppx_jane"     {= "v0.15~preview.125.15+452"}
   "dune"         {>= "2.0.0"}
 ]
@@ -25,5 +26,5 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "git+https://github.com/janestreet/async_unix#6357777b2f08bc201f1b42867da558515ffd42fe"
+src: "git+https://github.com/janestreet/async_unix#1abb33ca6649b90cfb984d4b01558344f75d088a"
 }

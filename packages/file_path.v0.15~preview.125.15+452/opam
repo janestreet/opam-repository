@@ -14,6 +14,7 @@ depends: [
   "async"                     {= "v0.15~preview.125.15+452"}
   "core"                      {= "v0.15~preview.125.15+452"}
   "core_kernel"               {= "v0.15~preview.125.15+452"}
+  "core_unix"                 {= "v0.15~preview.125.15+452"}
   "expect_test_helpers_async" {= "v0.15~preview.125.15+452"}
   "expect_test_helpers_core"  {= "v0.15~preview.125.15+452"}
   "ppx_jane"                  {= "v0.15~preview.125.15+452"}
@@ -24,5 +25,5 @@ description: "
 A library for typed manipulation of UNIX-style file paths.
 "
 url {
-src: "git+https://github.com/janestreet/file_path#a37e3dcf719c078b80c706bc765ea376fef44378"
+src: "git+https://github.com/janestreet/file_path#5483e74204c8dc0e1445b84d642d14e5e5d24d85"
 }

@@ -13,6 +13,7 @@ depends: [
   "ocaml"            {>= "4.08.0"}
   "core"             {= "v0.15~preview.125.15+452"}
   "core_kernel"      {= "v0.15~preview.125.15+452"}
+  "core_unix"        {= "v0.15~preview.125.15+452"}
   "ppx_jane"         {= "v0.15~preview.125.15+452"}
   "re2"              {= "v0.15~preview.125.15+452"}
   "shell"            {= "v0.15~preview.125.15+452"}
@@ -26,5 +27,5 @@ Core_profiler is a library that helps you profile programs and
 estimate various costs.
 "
 url {
-src: "git+https://github.com/janestreet/core_profiler#f9351c5aaed314b576a79ff4cc4e76eba8a5b363"
+src: "git+https://github.com/janestreet/core_profiler#4c876761ab2441415016957d095980241e2db6ad"
 }

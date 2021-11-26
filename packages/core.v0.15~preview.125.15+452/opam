@@ -10,28 +10,37 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.08.0"}
-  "base"                     {= "v0.15~preview.125.15+452"}
-  "core_kernel"              {= "v0.15~preview.125.15+452"}
-  "expect_test_helpers_core" {= "v0.15~preview.125.15+452"}
-  "jane-street-headers"      {= "v0.15~preview.125.15+452"}
-  "jst-config"               {= "v0.15~preview.125.15+452"}
-  "ocaml_intrinsics"         {= "v0.15~preview.125.15+452"}
-  "ppx_jane"                 {= "v0.15~preview.125.15+452"}
-  "record_builder"           {= "v0.15~preview.125.15+452"}
-  "sexplib"                  {= "v0.15~preview.125.15+452"}
-  "timezone"                 {= "v0.15~preview.125.15+452"}
-  "base-threads"
-  "dune"                     {>= "2.0.0"}
-  "spawn"                    {>= "v0.12"}
+  "ocaml"               {>= "4.11.0"}
+  "base"                {= "v0.15~preview.125.15+452"}
+  "base_bigstring"      {= "v0.15~preview.125.15+452"}
+  "base_quickcheck"     {= "v0.15~preview.125.15+452"}
+  "bin_prot"            {= "v0.15~preview.125.15+452"}
+  "fieldslib"           {= "v0.15~preview.125.15+452"}
+  "jane-street-headers" {= "v0.15~preview.125.15+452"}
+  "jst-config"          {= "v0.15~preview.125.15+452"}
+  "ppx_assert"          {= "v0.15~preview.125.15+452"}
+  "ppx_base"            {= "v0.15~preview.125.15+452"}
+  "ppx_hash"            {= "v0.15~preview.125.15+452"}
+  "ppx_inline_test"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane"            {= "v0.15~preview.125.15+452"}
+  "ppx_sexp_conv"       {= "v0.15~preview.125.15+452"}
+  "ppx_sexp_message"    {= "v0.15~preview.125.15+452"}
+  "sexplib"             {= "v0.15~preview.125.15+452"}
+  "splittable_random"   {= "v0.15~preview.125.15+452"}
+  "stdio"               {= "v0.15~preview.125.15+452"}
+  "time_now"            {= "v0.15~preview.125.15+452"}
+  "typerep"             {= "v0.15~preview.125.15+452"}
+  "variantslib"         {= "v0.15~preview.125.15+452"}
+  "dune"                {>= "2.0.0"}
 ]
 synopsis: "Industrial strength alternative to OCaml's standard library"
 description: "
 The Core suite of libraries is an industrial strength alternative to
 OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
+
+This is the system-independent part of Core. Unix-specific parts were moved to [core-unix].
 "
-depexts: ["linux-headers"] {os-distribution = "alpine"}
 url {
-src: "git+https://github.com/janestreet/core#921cd1d03fac55b65bb5eef247e8f7feeba1bbbc"
+src: "git+https://github.com/janestreet/core#e70dc9377babf99e00f12d24af1966a4bf80cf86"
 }

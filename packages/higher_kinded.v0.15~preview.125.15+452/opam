@@ -23,5 +23,5 @@ makes it possible to parameterize a type with a witness that represents a type
 constructor.
 "
 url {
-src: "git+https://github.com/janestreet/higher_kinded#2eda850e1f6a8cf84ec26db69966969a087c99d1"
+src: "git+https://github.com/janestreet/higher_kinded#f1c92a3566bc0913cc54ea5d38f02b23a9b0e656"
 }

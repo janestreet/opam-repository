@@ -10,15 +10,15 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane" {= "v0.15~preview.125.15+452"}
+  "dune"     {>= "2.0.0"}
 ]
 synopsis: "Hexadecimal encoding library"
 description: "
 This library implements hexadecimal encoding and decoding
 "
 url {
-src: "git+https://github.com/janestreet/hex_encode#8ba5cc61360df77fd496318b6f3e2d7c2594b49f"
+src: "git+https://github.com/janestreet/hex_encode#0b31ec4b9c15c2c8256c666ff466a894fe0d3ea6"
 }

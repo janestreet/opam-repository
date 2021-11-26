@@ -13,6 +13,7 @@ depends: [
   "ocaml"       {>= "4.08.0"}
   "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
+  "core_unix"   {= "v0.15~preview.125.15+452"}
   "dune"        {>= "2.0.0"}
 ]
 synopsis: "Compatibility for core 0.14"
@@ -20,5 +21,5 @@ description: "
 Compatibility wrapper to make it possible to have code compatible with both Core 0.14 and 0.15.
 "
 url {
-src: "git+https://github.com/janestreet/core_compat#80d278b43edd1fada4fbeff0c16dad8cfd9a12a3"
+src: "git+https://github.com/janestreet/core_compat#4349539c35d4746d6ac49b5739cd034013537f78"
 }

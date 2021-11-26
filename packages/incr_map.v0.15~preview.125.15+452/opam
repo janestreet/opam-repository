@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"            {>= "4.08.0"}
   "abstract_algebra" {= "v0.15~preview.125.15+452"}
-  "core_kernel"      {= "v0.15~preview.125.15+452"}
+  "core"             {= "v0.15~preview.125.15+452"}
   "incremental"      {= "v0.15~preview.125.15+452"}
   "ppx_jane"         {= "v0.15~preview.125.15+452"}
   "ppx_pattern_bind" {= "v0.15~preview.125.15+452"}
@@ -26,5 +26,5 @@ along with the ability to efficiently diff map data structures using
 =Map.symmetric_diff=.
 "
 url {
-src: "git+https://github.com/janestreet/incr_map#63965df355350f9a6be43eef39e907bb1b21433d"
+src: "git+https://github.com/janestreet/incr_map#6002e962ed5887c7e87c93a6d115dcbb23a31397"
 }

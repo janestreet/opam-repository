@@ -11,6 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"       {>= "4.08.0"}
+  "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
   "conf-zstd"
@@ -22,5 +23,5 @@ description: "
 Zstandard is a real-time compression algorithm which provides high compression ratios.
 "
 url {
-src: "git+https://github.com/janestreet/zstandard#d4fa515d3f5f4a9d2d79e7bc09e1c49b5e04826b"
+src: "git+https://github.com/janestreet/zstandard#83dc4c5cd0c322bc2e4a76790e12775d718a51c7"
 }

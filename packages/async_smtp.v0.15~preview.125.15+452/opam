@@ -18,7 +18,7 @@ depends: [
   "async_shell"    {= "v0.15~preview.125.15+452"}
   "async_ssl"      {= "v0.15~preview.125.15+452"}
   "core"           {= "v0.15~preview.125.15+452"}
-  "core_kernel"    {= "v0.15~preview.125.15+452"}
+  "core_unix"      {= "v0.15~preview.125.15+452"}
   "email_message"  {= "v0.15~preview.125.15+452"}
   "ppx_jane"       {= "v0.15~preview.125.15+452"}
   "re2"            {= "v0.15~preview.125.15+452"}
@@ -33,5 +33,5 @@ synopsis: "SMTP client and server"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/async_smtp#7fd1bf81da2d994ef5ff234d93dff2c3562c0c28"
+src: "git+https://github.com/janestreet/async_smtp#a83c2bdcb8bf7aebaa913cc91ce5d5b905db4b63"
 }
