@@ -10,10 +10,10 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane" {= "v0.15~preview.125.15+452"}
+  "dune"     {>= "2.0.0"}
 ]
 synopsis: "Code for computing the diff of two sexps"
 description: "
@@ -21,5 +21,6 @@ The code behind the [diff] subcommand of the Jane Street's [sexp]
 command line tool.
 "
 url {
-src: "git+https://github.com/janestreet/sexp_diff#d0c16e344dad7b7101fc647555465a8f260309a1"
+src: "https://github.com/janestreet/sexp_diff/archive/f97191895e155f25885eb91ceaecf81011723e9a.tar.gz"
+checksum: "sha256=65b55526fdd8e606d2bb1ca0c322ccb1156b22a66fe4cf02d12eb1071e4730ff"
 }

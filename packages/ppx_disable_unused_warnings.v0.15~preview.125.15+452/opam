@@ -20,5 +20,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "git+https://github.com/janestreet/ppx_disable_unused_warnings#1b34d06dd9d02aa0fb42076420887d132a87676d"
+src: "https://github.com/janestreet/ppx_disable_unused_warnings/archive/1b34d06dd9d02aa0fb42076420887d132a87676d.tar.gz"
+checksum: "sha256=9c1cfdeb7d31cc3c24e33c592b060c358e9babf9f4e5c0226b0b12ba81f63295"
 }

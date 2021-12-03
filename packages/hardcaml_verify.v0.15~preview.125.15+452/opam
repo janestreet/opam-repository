@@ -32,5 +32,6 @@ Circuits can also be converted to NuSMV format for advanced bounded and unbounde
 checking tasks.
 "
 url {
-src: "git+https://github.com/janestreet/hardcaml_verify#f3938a9fa97424670f3ee1a991a2f5bfbc357d94"
+src: "https://github.com/janestreet/hardcaml_verify/archive/f3938a9fa97424670f3ee1a991a2f5bfbc357d94.tar.gz"
+checksum: "sha256=2316ac7e73954ceb9e6c56a2bdca13b627c622619789e949eaf6360f5f5df4cd"
 }

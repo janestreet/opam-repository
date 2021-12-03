@@ -26,5 +26,6 @@ The `Synthesis` module implements various arithmetic and logical RTL components 
 Xilinx LUT primitives.
 "
 url {
-src: "git+https://github.com/janestreet/hardcaml_xilinx#5449702403b635da455e00fe04b7794824d01823"
+src: "https://github.com/janestreet/hardcaml_xilinx/archive/5449702403b635da455e00fe04b7794824d01823.tar.gz"
+checksum: "sha256=5d73661d9d75997a2477b1f2c89da73489276c05700094fab7c35f098ef0a38e"
 }

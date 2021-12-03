@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"         {>= "4.08.0"}
   "core"          {= "v0.15~preview.125.15+452"}
-  "core_kernel"   {= "v0.15~preview.125.15+452"}
+  "core_unix"     {= "v0.15~preview.125.15+452"}
   "patience_diff" {= "v0.15~preview.125.15+452"}
   "ppx_jane"      {= "v0.15~preview.125.15+452"}
   "re2"           {= "v0.15~preview.125.15+452"}
@@ -27,5 +27,6 @@ in a sequence of lines in an intelligent way.
 It comes as a binary and an emacs mode.
 "
 url {
-src: "git+https://github.com/janestreet/line-up-words#7f51793fa6c037a90a90e47b433cc8a773a3b552"
+src: "https://github.com/janestreet/line-up-words/archive/7f5f8d232a647e3966f84aaf35aca7cfb1ea15ca.tar.gz"
+checksum: "sha256=b4845dc9ff2db0288c3424b148270e7573c21f8abcdc9daad90559cae1b8ed24"
 }

@@ -11,6 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"           {>= "4.11.0"}
+  "core"            {= "v0.15~preview.125.15+452"}
   "core_kernel"     {= "v0.15~preview.125.15+452"}
   "ppx_here"        {= "v0.15~preview.125.15+452"}
   "ppx_jane"        {= "v0.15~preview.125.15+452"}
@@ -28,5 +29,6 @@ description: "
 A ppx that takes in css strings and produces a module for accessing the unique names defined within.
 "
 url {
-src: "git+https://github.com/janestreet/ppx_css#fe89c7f2a455a08c72562e94b03f6895cbbdd611"
+src: "https://github.com/janestreet/ppx_css/archive/02d8a7aded04dbc605a7f45ad6c833c25875ee60.tar.gz"
+checksum: "sha256=e627cda9c8fdc57d97c68accef01958fae2eaf5b46d1e05ccc9d794b548b5d78"
 }

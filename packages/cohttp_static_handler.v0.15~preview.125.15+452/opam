@@ -19,5 +19,6 @@ Single page handlers are handlers that serve user specified JavaScript and css
    files along with a generated index page that loads those files.
 "
 url {
-src: "git+https://github.com/janestreet/cohttp_static_handler#69277a43765b90f4b2bda47afdcc65e844c44a42"
+src: "https://github.com/janestreet/cohttp_static_handler/archive/2dc7919d4e82ba4f72e9c2810b13a6ca697427c5.tar.gz"
+checksum: "sha256=0f73a38c94729666e1648ffa72a5ee7c8586d69a20bdc47d0bb2dcba02a84a4e"
 }

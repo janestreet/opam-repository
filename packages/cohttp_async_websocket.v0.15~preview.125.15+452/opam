@@ -14,7 +14,7 @@ depends: [
   "async"           {= "v0.15~preview.125.15+452"}
   "async_ssl"       {= "v0.15~preview.125.15+452"}
   "async_websocket" {= "v0.15~preview.125.15+452"}
-  "core_kernel"     {= "v0.15~preview.125.15+452"}
+  "core"            {= "v0.15~preview.125.15+452"}
   "ppx_jane"        {= "v0.15~preview.125.15+452"}
   "base64"          {>= "3.4.0"}
   "cohttp"          {>= "2.5.4"}
@@ -35,5 +35,6 @@ hardened with many applications using it for several year, in
 conjunction with async-js and google-chrome.
 "
 url {
-src: "git+https://github.com/janestreet/cohttp_async_websocket#e42b35d25018bbf59aabe6e61b1d44620f3f0dce"
+src: "https://github.com/janestreet/cohttp_async_websocket/archive/af4bdd4e8bef932e8a51cfb1c9816e06e4e1d97f.tar.gz"
+checksum: "sha256=40bd6ed4352dbf8c78465bd935025aa2f884c1d08d2e872b178f8a3d645df49b"
 }

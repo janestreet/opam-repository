@@ -10,16 +10,17 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "sexplib"     {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane" {= "v0.15~preview.125.15+452"}
+  "sexplib"  {= "v0.15~preview.125.15+452"}
+  "dune"     {>= "2.0.0"}
   "num"
 ]
 synopsis: "Runtime support for ppx_xml_conv and ppx_csv_conv"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/csvfields#76604c3c180e5c5a37fd9327e52d06f621ca6dd4"
+src: "https://github.com/janestreet/csvfields/archive/81d1a8d04812d7de4f7a7b81f6c1339faabb2b99.tar.gz"
+checksum: "sha256=fd061926a2ad1e3d4620b657545d59d11eec887f2c66a00e0556fa31ab4abccb"
 }

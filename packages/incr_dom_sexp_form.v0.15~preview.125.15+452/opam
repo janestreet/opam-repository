@@ -28,5 +28,6 @@ description: "
 It relies on the fact that the type of the value being edited can be serialized via sexps.
 "
 url {
-src: "git+https://github.com/janestreet/incr_dom_sexp_form#4e3cef0bd45b72c35b64a82dfa7446a084dfb415"
+src: "https://github.com/janestreet/incr_dom_sexp_form/archive/4e3cef0bd45b72c35b64a82dfa7446a084dfb415.tar.gz"
+checksum: "sha256=141c29c4be27182d7f61b0aa5c8e7dd4be163aba5c9744a5a77a692fdc48de69"
 }

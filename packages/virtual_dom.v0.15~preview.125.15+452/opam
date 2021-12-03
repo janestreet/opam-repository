@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"           {>= "4.08.0"}
   "base"            {= "v0.15~preview.125.15+452"}
-  "core_kernel"     {= "v0.15~preview.125.15+452"}
+  "core"            {= "v0.15~preview.125.15+452"}
   "ppx_jane"        {= "v0.15~preview.125.15+452"}
   "dune"            {>= "2.0.0"}
   "gen_js_api"      {>= "1.0.8"}
@@ -27,5 +27,6 @@ The library itself may be found at
 https://github.com/Matt-Esch/virtual-dom.
 "
 url {
-src: "git+https://github.com/janestreet/virtual_dom#756eafc44873737352ff35d1c13d6dc1e0eb24fb"
+src: "https://github.com/janestreet/virtual_dom/archive/67395e9a80763321b08af795b85a4e5c9b6cdf7e.tar.gz"
+checksum: "sha256=f95dc83459bf53e87499b2069d40b52141c30c0c8d167b3199f07365fb2672a2"
 }

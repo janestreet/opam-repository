@@ -23,5 +23,6 @@ is an Async driver, which makes it easy to build terminal applications using
 Async for managing concurrency.
 "
 url {
-src: "git+https://github.com/janestreet/notty_async#59476a21fe3619e6173d6faea333cbf9d5dd8676"
+src: "https://github.com/janestreet/notty_async/archive/a2610f23298eded4f151d5ef95b9da8f72869c04.tar.gz"
+checksum: "sha256=26a4a2049dff183117407c11e73bd13672b052a34ff513dc450435d4bcfd2e1a"
 }

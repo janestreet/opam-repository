@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"                 {>= "4.08.0"}
   "core"                  {= "v0.15~preview.125.15+452"}
-  "core_kernel"           {= "v0.15~preview.125.15+452"}
+  "core_unix"             {= "v0.15~preview.125.15+452"}
   "hardcaml"              {= "v0.15~preview.125.15+452"}
   "ppx_deriving_hardcaml" {= "v0.15~preview.125.15+452"}
   "ppx_jane"              {= "v0.15~preview.125.15+452"}
@@ -28,5 +28,6 @@ This library transparently compiles a verilator-based shared library, and links 
 to the running executable to be used as a Cyclesim simulation.
 "
 url {
-src: "git+https://github.com/janestreet/hardcaml_verilator#9ea67dec5291b18f7a585f5a4404a3c30042971e"
+src: "https://github.com/janestreet/hardcaml_verilator/archive/b5b09bb3200f3d80a55670d34095581acc7b98fe.tar.gz"
+checksum: "sha256=a385a318a9c48ce0ee03fcf7d872b5428f6c4907f99fa282c106d6903e1f02b9"
 }

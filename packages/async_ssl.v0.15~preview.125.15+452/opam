@@ -13,7 +13,7 @@ depends: [
   "ocaml"             {>= "4.08.0"}
   "async"             {= "v0.15~preview.125.15+452"}
   "base"              {= "v0.15~preview.125.15+452"}
-  "core_kernel"       {= "v0.15~preview.125.15+452"}
+  "core"              {= "v0.15~preview.125.15+452"}
   "ppx_jane"          {= "v0.15~preview.125.15+452"}
   "stdio"             {= "v0.15~preview.125.15+452"}
   "conf-libssl"
@@ -28,5 +28,6 @@ This library allows you to create an SSL client and server, with
 encrypted communication between both.
 "
 url {
-src: "git+https://github.com/janestreet/async_ssl#3ac0327e098751f3b8339c283615f2e940634895"
+src: "https://github.com/janestreet/async_ssl/archive/8a6e368b37a1be038e66a6b81ef84b57e344714f.tar.gz"
+checksum: "sha256=22b815bdd94f2d6b22b732d0878f46b5012f53230698cae86064b163c4fa84c7"
 }

@@ -10,15 +10,16 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.15~preview.125.15+452"}
+  "ppx_jane" {= "v0.15~preview.125.15+452"}
+  "dune"     {>= "2.0.0"}
 ]
 synopsis: "A library for fuzzy string matching"
 description: "
 A library for fuzzy string matching
 "
 url {
-src: "git+https://github.com/janestreet/fuzzy_match#ac7d89c0dca009d19134484c09d37f573b8d781d"
+src: "https://github.com/janestreet/fuzzy_match/archive/56c198dba98ab3fb1065f5de72070c3132faf58d.tar.gz"
+checksum: "sha256=410a4bfb31677e0847bf9b477c7a8a00ee15c5b96bdc61728adf6b2623e3ef49"
 }

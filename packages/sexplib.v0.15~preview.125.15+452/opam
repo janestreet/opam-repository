@@ -24,5 +24,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "git+https://github.com/janestreet/sexplib#95908e3217c767761b0a519b242e0f22078547ca"
+src: "https://github.com/janestreet/sexplib/archive/95908e3217c767761b0a519b242e0f22078547ca.tar.gz"
+checksum: "sha256=14052808b1a739924aa8918d02a47a415421684d9ada0da6ed390724ebbde8d5"
 }

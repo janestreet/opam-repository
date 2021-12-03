@@ -14,6 +14,7 @@ depends: [
   "async"       {= "v0.15~preview.125.15+452"}
   "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
+  "core_unix"   {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
   "ppx_optcomp" {= "v0.15~preview.125.15+452"}
   "sexplib"     {= "v0.15~preview.125.15+452"}
@@ -23,5 +24,6 @@ synopsis: "Automatically build and dynlink OCaml source files"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/ocaml_plugin#ff15650b1ae1fa20c4485c480c08aae8a373ff68"
+src: "https://github.com/janestreet/ocaml_plugin/archive/3cefe968396fa80dc7165c3c4ac2af0cf0674ef9.tar.gz"
+checksum: "sha256=8bb4e8d887b1b215b57955f333cb5023ac8bf7454486ef2ba95318e837383969"
 }

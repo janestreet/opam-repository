@@ -11,7 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"       {>= "4.08.0"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
+  "core"        {= "v0.15~preview.125.15+452"}
   "incremental" {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
   "dune"        {>= "2.0.0"}
@@ -26,5 +26,6 @@ number of outputs that are changed, independent of the number of
 outputs that exist.
 "
 url {
-src: "git+https://github.com/janestreet/incr_select#ead7f41898509dbb2883561255d2ae8c24281ed4"
+src: "https://github.com/janestreet/incr_select/archive/4cd9a5d18851e31a46c9d0fc643fe83a60fe41f6.tar.gz"
+checksum: "sha256=67d7bc342ee7b5baa2c285c9838a81e7ef14f9668be8fc69c900cfe3d147f95a"
 }

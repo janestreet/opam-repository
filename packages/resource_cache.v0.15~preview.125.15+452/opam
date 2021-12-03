@@ -13,7 +13,7 @@ depends: [
   "ocaml"            {>= "4.08.0"}
   "async_kernel"     {= "v0.15~preview.125.15+452"}
   "async_rpc_kernel" {= "v0.15~preview.125.15+452"}
-  "core_kernel"      {= "v0.15~preview.125.15+452"}
+  "core"             {= "v0.15~preview.125.15+452"}
   "ppx_jane"         {= "v0.15~preview.125.15+452"}
   "dune"             {>= "2.0.0"}
 ]
@@ -24,5 +24,6 @@ abstract [Resource] type. The cache enables resource reuse while
 obeying various limits.
 "
 url {
-src: "git+https://github.com/janestreet/resource_cache#0e06b0b03824b546c20720b6e70600226c03c257"
+src: "https://github.com/janestreet/resource_cache/archive/b8a459820444e0499e68cfc79ea1004a1dc8a1aa.tar.gz"
+checksum: "sha256=a5fe4859ae856a571e7b44d266156a67d2d3e8a5a01f7bb98bfb337f2970b0ce"
 }

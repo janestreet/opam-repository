@@ -13,6 +13,7 @@ depends: [
   "ocaml"                    {>= "4.08.0"}
   "core"                     {= "v0.15~preview.125.15+452"}
   "core_kernel"              {= "v0.15~preview.125.15+452"}
+  "core_unix"                {= "v0.15~preview.125.15+452"}
   "expect_test_helpers_core" {= "v0.15~preview.125.15+452"}
   "patience_diff"            {= "v0.15~preview.125.15+452"}
   "ppx_jane"                 {= "v0.15~preview.125.15+452"}
@@ -24,5 +25,6 @@ synopsis: "File Diff using the Patience Diff algorithm"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/patdiff#b9abd4db7293e3ef5cf4f65692c6d857b75a5a43"
+src: "https://github.com/janestreet/patdiff/archive/16af35c57217acec536d95cc067198945fdfad21.tar.gz"
+checksum: "sha256=91725a63389cadff2326efd851024f100069046fa68c5e46bf60ce97ef052aeb"
 }

@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"         {>= "4.09.0"}
   "base"          {= "v0.15~preview.125.15+452"}
-  "core_kernel"   {= "v0.15~preview.125.15+452"}
+  "core"          {= "v0.15~preview.125.15+452"}
   "ppx_compare"   {= "v0.15~preview.125.15+452"}
   "ppx_enumerate" {= "v0.15~preview.125.15+452"}
   "ppx_jane"      {= "v0.15~preview.125.15+452"}
@@ -28,5 +28,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "git+https://github.com/janestreet/ppx_typed_fields#23630340ac2a41b429184a7047410fedcd59bdf0"
+src: "https://github.com/janestreet/ppx_typed_fields/archive/d9a109286d1a6e3aa981daf88e7561eec0558987.tar.gz"
+checksum: "sha256=35435e84af7839e819ad9e54b93331854f9940fc1589a4e65f6c25c4b9632b83"
 }

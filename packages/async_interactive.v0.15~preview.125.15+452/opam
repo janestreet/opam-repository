@@ -10,17 +10,18 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
-  "async"       {= "v0.15~preview.125.15+452"}
-  "core"        {= "v0.15~preview.125.15+452"}
-  "core_kernel" {= "v0.15~preview.125.15+452"}
-  "ppx_jane"    {= "v0.15~preview.125.15+452"}
-  "dune"        {>= "2.0.0"}
-  "spawn"       {>= "v0.12"}
+  "ocaml"     {>= "4.08.0"}
+  "async"     {= "v0.15~preview.125.15+452"}
+  "core"      {= "v0.15~preview.125.15+452"}
+  "core_unix" {= "v0.15~preview.125.15+452"}
+  "ppx_jane"  {= "v0.15~preview.125.15+452"}
+  "dune"      {>= "2.0.0"}
+  "spawn"     {>= "v0.12"}
 ]
 synopsis: "Utilities for building simple command-line based user interfaces"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/async_interactive#92ffe60bf448e085c67c5e39b6b77299177660ff"
+src: "https://github.com/janestreet/async_interactive/archive/2311eb931437a6f5beb1100f9249b99d93333ef3.tar.gz"
+checksum: "sha256=96e4e11c51f17a0bc4d8c08a3658fbebb8b6fe097927a7f94613913ef53b9384"
 }

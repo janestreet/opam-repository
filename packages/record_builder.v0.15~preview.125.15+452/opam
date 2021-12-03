@@ -24,5 +24,6 @@ automatically handles all of the mapping and combining of applicative terms
 needed to build the record from a single applicative term for each field.
 "
 url {
-src: "git+https://github.com/janestreet/record_builder#4ef36af8d89057fb042df3176bc164a90cd68dbd"
+src: "https://github.com/janestreet/record_builder/archive/735b93228cde2d22ac9c020be0d62b847279c1b2.tar.gz"
+checksum: "sha256=91886f165a81e9881627572ca7ef053e02ce1391527f29b3995ba4bece0ecfd9"
 }

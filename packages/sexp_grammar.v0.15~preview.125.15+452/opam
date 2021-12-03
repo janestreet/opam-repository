@@ -18,5 +18,6 @@ description: "
 Helpers for manipulating [Sexplib.Sexp_grammar] values.
 "
 url {
-src: "git+https://github.com/janestreet/sexp_grammar#4c7e876a44c7da21d06a9726aceccc013b1d5ef8"
+src: "https://github.com/janestreet/sexp_grammar/archive/842158024347c41da531aea9b723c05b0671d07d.tar.gz"
+checksum: "sha256=0e6841e02ae17a7f8d8ae9a00207d69b93f5835d975aa5b4f442a4f5b3976fdc"
 }

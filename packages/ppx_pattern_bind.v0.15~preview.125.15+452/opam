@@ -23,5 +23,6 @@ easier to write incremental computations using pattern-matching in a
 way that causes incremental nodes to fire as little as possible.
 "
 url {
-src: "git+https://github.com/janestreet/ppx_pattern_bind#2db550f951d5a96f4e6e0e10d0e80b656a5fb293"
+src: "https://github.com/janestreet/ppx_pattern_bind/archive/f67225fb706d2f18249d69c08062df205c0996fa.tar.gz"
+checksum: "sha256=baf43b23ae3fef4e1d1b127c5376a71ce607ded33f332b55c6d4c6615f47cb01"
 }

@@ -20,5 +20,6 @@ description: "
 Integers of various widths.
 "
 url {
-src: "git+https://github.com/janestreet/int_repr#439ac7d70be2fdd679eb4b1efcf551363dc9323b"
+src: "https://github.com/janestreet/int_repr/archive/439ac7d70be2fdd679eb4b1efcf551363dc9323b.tar.gz"
+checksum: "sha256=162abcc40516784962f9ae5d6e5640b9bee295774e61175c7bd700afc4c83c46"
 }

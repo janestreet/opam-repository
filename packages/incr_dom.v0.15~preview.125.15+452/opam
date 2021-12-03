@@ -13,7 +13,7 @@ depends: [
   "ocaml"           {>= "4.08.0"}
   "async_js"        {= "v0.15~preview.125.15+452"}
   "async_kernel"    {= "v0.15~preview.125.15+452"}
-  "core_kernel"     {= "v0.15~preview.125.15+452"}
+  "core"            {= "v0.15~preview.125.15+452"}
   "incr_map"        {= "v0.15~preview.125.15+452"}
   "incr_select"     {= "v0.15~preview.125.15+452"}
   "incremental"     {= "v0.15~preview.125.15+452"}
@@ -46,5 +46,6 @@ If you want a more concrete sense of how this works, look in the
 examples directory.
 "
 url {
-src: "git+https://github.com/janestreet/incr_dom#c82f711dedaa2dbf0eb0e6adea9815c92b1638a1"
+src: "https://github.com/janestreet/incr_dom/archive/e56324f1c805906706c4138aaa229e97c2b06577.tar.gz"
+checksum: "sha256=a3a41b800a1fc963a0a993147abba8c65061da59aa8f2aacb6067e125d0b66c9"
 }

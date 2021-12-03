@@ -11,7 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"             {>= "4.08.0"}
-  "core_kernel"       {= "v0.15~preview.125.15+452"}
+  "core"              {= "v0.15~preview.125.15+452"}
   "ppx_jane"          {= "v0.15~preview.125.15+452"}
   "splittable_random" {= "v0.15~preview.125.15+452"}
   "typerep"           {= "v0.15~preview.125.15+452"}
@@ -24,5 +24,6 @@ synopsis: "Core-flavoured wrapper around zarith's arbitrary-precision rationals"
 description: "
 "
 url {
-src: "git+https://github.com/janestreet/bignum#cae496fde6ced85a417bc793763bb3f94ce9416b"
+src: "https://github.com/janestreet/bignum/archive/7feb8629e9f95d396c70baa75cf81c74a6f8e1f1.tar.gz"
+checksum: "sha256=f9b001d37f91942a2bbd1799756a7c7e67f059c5f8b09dc6f712b8bc06188932"
 }

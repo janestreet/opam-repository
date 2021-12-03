@@ -22,5 +22,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "git+https://github.com/janestreet/ppx_sexp_value#7c9e1fc5eb17cb1af2679c0c9ba4e7afadda5410"
+src: "https://github.com/janestreet/ppx_sexp_value/archive/486d5940a579e33d0ac3cb30691da8c07cd60782.tar.gz"
+checksum: "sha256=e6d606d8e6786fa471fcc34ddc753eeeffe39f6842d6c801313553b9d7c47c6d"
 }

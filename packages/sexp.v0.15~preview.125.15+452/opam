@@ -14,6 +14,7 @@ depends: [
   "async"       {= "v0.15~preview.125.15+452"}
   "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
+  "core_unix"   {= "v0.15~preview.125.15+452"}
   "csvfields"   {= "v0.15~preview.125.15+452"}
   "jsonaf"      {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
@@ -32,5 +33,6 @@ It contains subcommands for pretty printing, querying, and modifying
 sexps, as well as some conversions to and from other formats.
 "
 url {
-src: "git+https://github.com/janestreet/sexp#07214db8c8567b7bcf9805acbcb0700059d995d6"
+src: "https://github.com/janestreet/sexp/archive/6127c1d8ce909ce49b8460ed2460dc23b7a0bd60.tar.gz"
+checksum: "sha256=d76672b90f85c617f202426f3a7746693039ac3691cda2ec2a2c053e43a36db9"
 }

@@ -34,5 +34,6 @@ This PPX currently supports deriving type-directed values for records, ordinary
 on record and variant fields.
 "
 url {
-src: "git+https://github.com/janestreet/ppx_type_directed_value#d4fae33bb389b438037c0a03009fa9f96f88a707"
+src: "https://github.com/janestreet/ppx_type_directed_value/archive/f0fc546070545891c0715ce88c6105d83f431412.tar.gz"
+checksum: "sha256=c539b0df5e8942dd4a549347c99b71e4270e1c05bba31cd96d8c5981fe6f5d92"
 }

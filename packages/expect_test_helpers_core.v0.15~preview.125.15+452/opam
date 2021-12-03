@@ -13,7 +13,7 @@ depends: [
   "ocaml"           {>= "4.08.0"}
   "base"            {= "v0.15~preview.125.15+452"}
   "base_quickcheck" {= "v0.15~preview.125.15+452"}
-  "core_kernel"     {= "v0.15~preview.125.15+452"}
+  "core"            {= "v0.15~preview.125.15+452"}
   "ppx_jane"        {= "v0.15~preview.125.15+452"}
   "sexp_pretty"     {= "v0.15~preview.125.15+452"}
   "stdio"           {= "v0.15~preview.125.15+452"}
@@ -28,5 +28,6 @@ If you want helpers for writing expect tests using the Async library,
 look at expect_test_helpers_async.
 "
 url {
-src: "git+https://github.com/janestreet/expect_test_helpers_core#ab32de5456788f55542ad0a472820b6a486f4af9"
+src: "https://github.com/janestreet/expect_test_helpers_core/archive/e8469bcdb6792e97f718017f15e22f1113ad011d.tar.gz"
+checksum: "sha256=c8403d754fd85ba2895579fa10aad9fa126d501771bf638f54ea821fb8fc6ac7"
 }

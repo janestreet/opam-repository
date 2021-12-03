@@ -13,7 +13,7 @@ depends: [
   "ocaml"                   {>= "4.08.0"}
   "async"                   {= "v0.15~preview.125.15+452"}
   "base"                    {= "v0.15~preview.125.15+452"}
-  "core_kernel"             {= "v0.15~preview.125.15+452"}
+  "core"                    {= "v0.15~preview.125.15+452"}
   "env_config"              {= "v0.15~preview.125.15+452"}
   "hex_encode"              {= "v0.15~preview.125.15+452"}
   "ppx_jane"                {= "v0.15~preview.125.15+452"}
@@ -31,5 +31,6 @@ Jane Street's library for Kerberizing RPC connections so that
   - RPC communication may be encrypted, if necessary.
 "
 url {
-src: "git+https://github.com/janestreet/krb#50993f4d8a5d42974a72e160b7b54613568184c1"
+src: "https://github.com/janestreet/krb/archive/bcdf7445598dfd530b5c38a32b9d15b3b5556f06.tar.gz"
+checksum: "sha256=ded85a601de0507b0f01d1a9fdb6de8f851ef3ba52b832041ef8f701a0680ff9"
 }

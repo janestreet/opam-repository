@@ -13,6 +13,7 @@ depends: [
   "ocaml"       {>= "4.08.0"}
   "async"       {= "v0.15~preview.125.15+452"}
   "bignum"      {= "v0.15~preview.125.15+452"}
+  "core"        {= "v0.15~preview.125.15+452"}
   "core_kernel" {= "v0.15~preview.125.15+452"}
   "ppx_jane"    {= "v0.15~preview.125.15+452"}
   "dune"        {>= "2.0.0"}
@@ -27,5 +28,6 @@ types.
 Supports client tracking and internally uses the RESP3 protocol. 
 "
 url {
-src: "git+https://github.com/janestreet/redis-async#c3e519ef622fb49fdf1c4fe28ab389151367686f"
+src: "https://github.com/janestreet/redis-async/archive/b12914d83e4f06edcfdc3e54ececb216809e0f07.tar.gz"
+checksum: "sha256=ac1c50451475dcd802f0313d86a1cfa10975a1ec5ea7a76a4aabd021178e7b15"
 }

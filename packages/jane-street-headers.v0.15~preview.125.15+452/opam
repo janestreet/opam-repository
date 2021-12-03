@@ -18,5 +18,6 @@ description: "
 C header files shared between the various Jane Street packages
 "
 url {
-src: "git+https://github.com/janestreet/jane-street-headers#2601ed3b084493683ed0166e24f7939004a7c057"
+src: "https://github.com/janestreet/jane-street-headers/archive/2601ed3b084493683ed0166e24f7939004a7c057.tar.gz"
+checksum: "sha256=4c7a3aeb9fde8f5da1e13707ccf35f3527fe20d0516ead36c022051b02ed2c41"
 }
