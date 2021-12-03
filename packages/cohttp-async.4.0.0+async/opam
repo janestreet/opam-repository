@@ -53,6 +53,6 @@ url {
   src:
     "https://github.com/aalekseyev/ocaml-cohttp/archive/1413e3efd957682b9e61d4bf0081bdb8b74524ed.tar.gz"
   checksum: [
-    "sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256=c3fd3cc3edc769e4baaa5d1c162ca52aca74eb81597d8c3f41b0635618f33170"
   ]
 }
