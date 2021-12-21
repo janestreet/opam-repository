@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/core_compat"
+bug-reports: "https://github.com/janestreet/core_compat/issues"
+dev-repo: "git+https://github.com/janestreet/core_compat.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_compat/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.08.0"}
+  "core"        {= "v0.15~preview.126.02+18"}
+  "core_kernel" {= "v0.15~preview.126.02+18"}
+  "core_unix"   {= "v0.15~preview.126.02+18"}
+  "dune"        {>= "2.0.0"}
+]
+synopsis: "Compatibility for core 0.14"
+description: "
+Compatibility wrapper to make it possible to have code compatible with both Core 0.14 and 0.15.
+"
+url {
+src: "https://github.com/janestreet/core_compat/archive/65bbb0f13c5c61a27d46f38319af9762241553fe.tar.gz"
+checksum: "sha256=631a6e239dce65f7b5f0b6367cd3e3793ab5908c8a0ee79c0aaae4100a6e9610"
+}

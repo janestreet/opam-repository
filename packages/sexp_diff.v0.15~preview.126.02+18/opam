@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/sexp_diff"
+bug-reports: "https://github.com/janestreet/sexp_diff/issues"
+dev-repo: "git+https://github.com/janestreet/sexp_diff.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexp_diff/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.15~preview.126.02+18"}
+  "ppx_jane" {= "v0.15~preview.126.02+18"}
+  "dune"     {>= "2.0.0"}
+]
+synopsis: "Code for computing the diff of two sexps"
+description: "
+The code behind the [diff] subcommand of the Jane Street's [sexp]
+command line tool.
+"
+url {
+src: "https://github.com/janestreet/sexp_diff/archive/e5bf1724cd686e50d9ac7d6ef23a38d02e5f7f06.tar.gz"
+checksum: "sha256=177ba53b435192bb912e7a6994c83d59506e13c80d40b088760c1b211eb6ed69"
+}

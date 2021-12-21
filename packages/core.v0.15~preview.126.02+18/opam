@@ -1,0 +1,47 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/core"
+bug-reports: "https://github.com/janestreet/core/issues"
+dev-repo: "git+https://github.com/janestreet/core.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "4.11.0"}
+  "base"                {= "v0.15~preview.126.02+18"}
+  "base_bigstring"      {= "v0.15~preview.126.02+18"}
+  "base_quickcheck"     {= "v0.15~preview.126.02+18"}
+  "bin_prot"            {= "v0.15~preview.126.02+18"}
+  "fieldslib"           {= "v0.15~preview.126.02+18"}
+  "jane-street-headers" {= "v0.15~preview.126.02+18"}
+  "jst-config"          {= "v0.15~preview.126.02+18"}
+  "ppx_assert"          {= "v0.15~preview.126.02+18"}
+  "ppx_base"            {= "v0.15~preview.126.02+18"}
+  "ppx_hash"            {= "v0.15~preview.126.02+18"}
+  "ppx_inline_test"     {= "v0.15~preview.126.02+18"}
+  "ppx_jane"            {= "v0.15~preview.126.02+18"}
+  "ppx_sexp_conv"       {= "v0.15~preview.126.02+18"}
+  "ppx_sexp_message"    {= "v0.15~preview.126.02+18"}
+  "sexplib"             {= "v0.15~preview.126.02+18"}
+  "splittable_random"   {= "v0.15~preview.126.02+18"}
+  "stdio"               {= "v0.15~preview.126.02+18"}
+  "time_now"            {= "v0.15~preview.126.02+18"}
+  "typerep"             {= "v0.15~preview.126.02+18"}
+  "variantslib"         {= "v0.15~preview.126.02+18"}
+  "dune"                {>= "2.0.0"}
+]
+synopsis: "Industrial strength alternative to OCaml's standard library"
+description: "
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+
+This is the system-independent part of Core. Unix-specific parts were moved to [core-unix].
+"
+url {
+src: "https://github.com/janestreet/core/archive/c419954442018bf6db9ead51f49d4be3669ffb91.tar.gz"
+checksum: "sha256=48dab4c7c0bcb359c8c3906b0b7380bb3850809ed2d99890ddb940910efe2365"
+}
