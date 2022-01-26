@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ocaml_plugin"
+bug-reports: "https://github.com/janestreet/ocaml_plugin/issues"
+dev-repo: "git+https://github.com/janestreet/ocaml_plugin.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ocaml_plugin/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.08.0"}
+  "async"       {= "v0.15~preview.126.09+236"}
+  "core"        {= "v0.15~preview.126.09+236"}
+  "core_kernel" {= "v0.15~preview.126.09+236"}
+  "core_unix"   {= "v0.15~preview.126.09+236"}
+  "ppx_jane"    {= "v0.15~preview.126.09+236"}
+  "ppx_optcomp" {= "v0.15~preview.126.09+236"}
+  "sexplib"     {= "v0.15~preview.126.09+236"}
+  "dune"        {>= "2.0.0"}
+]
+synopsis: "Automatically build and dynlink OCaml source files"
+description: "
+"
+url {
+src: "https://github.com/janestreet/ocaml_plugin/archive/d4f316efb667bd646faf598af5d363d0e1c6160e.tar.gz"
+checksum: "sha256=0c1ca7b9b8ce6dce875e421ad73dc8ebf03df5c1990562d8dd4be92d6864b2df"
+}

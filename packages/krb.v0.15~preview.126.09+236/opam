@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/krb"
+bug-reports: "https://github.com/janestreet/krb/issues"
+dev-repo: "git+https://github.com/janestreet/krb.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/krb/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                   {>= "4.08.0"}
+  "async"                   {= "v0.15~preview.126.09+236"}
+  "base"                    {= "v0.15~preview.126.09+236"}
+  "core"                    {= "v0.15~preview.126.09+236"}
+  "env_config"              {= "v0.15~preview.126.09+236"}
+  "hex_encode"              {= "v0.15~preview.126.09+236"}
+  "ppx_jane"                {= "v0.15~preview.126.09+236"}
+  "protocol_version_header" {= "v0.15~preview.126.09+236"}
+  "stdio"                   {= "v0.15~preview.126.09+236"}
+  "username_kernel"         {= "v0.15~preview.126.09+236"}
+  "dune"                    {>= "2.0.0"}
+  "dune-configurator"
+]
+synopsis: "A library for using Kerberos for both Rpc and Tcp communication"
+description: "
+Jane Street's library for Kerberizing RPC connections so that
+  - the server gets an authenticated principal (i.e. username) with
+    every incoming connection, and
+  - RPC communication may be encrypted, if necessary.
+"
+url {
+src: "https://github.com/janestreet/krb/archive/c9dbe0ec0ca646753873283dae509d07757ba546.tar.gz"
+checksum: "sha256=e9e6cd667b130249a9a3f747aa1a21d4c8a303d7ada1c9cfb9d8e0d0ecb41824"
+}

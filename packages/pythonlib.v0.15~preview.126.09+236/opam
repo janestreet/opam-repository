@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/pythonlib"
+bug-reports: "https://github.com/janestreet/pythonlib/issues"
+dev-repo: "git+https://github.com/janestreet/pythonlib.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/pythonlib/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"      {>= "4.11.0" & < "4.13.0"}
+  "base"       {= "v0.15~preview.126.09+236"}
+  "ppx_expect" {= "v0.15~preview.126.09+236"}
+  "ppx_let"    {= "v0.15~preview.126.09+236"}
+  "ppx_python" {= "v0.15~preview.126.09+236"}
+  "stdio"      {= "v0.15~preview.126.09+236"}
+  "typerep"    {= "v0.15~preview.126.09+236"}
+  "dune"       {>= "2.0.0"}
+  "pyml"       {>= "20200115"}
+]
+synopsis: "A library to help writing wrappers around ocaml code for python"
+description: "
+This library helps exposing ocaml functions to python. The python runtime interaction is handled by pyml.
+"
+url {
+src: "https://github.com/janestreet/pythonlib/archive/99d4deda48ac2cfc74d3ebc98fdb402bd1ebaefe.tar.gz"
+checksum: "sha256=c7095f927ecf06e4dbf3e817931ea805a0db0b521ff0ac54e7619284f0730a21"
+}
