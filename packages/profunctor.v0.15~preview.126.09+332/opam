@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/profunctor"
+bug-reports: "https://github.com/janestreet/profunctor/issues"
+dev-repo: "git+https://github.com/janestreet/profunctor.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/profunctor/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"          {>= "4.11.0"}
+  "base"           {= "v0.15~preview.126.09+332"}
+  "ppx_jane"       {= "v0.15~preview.126.09+332"}
+  "record_builder" {= "v0.15~preview.126.09+332"}
+  "dune"           {>= "2.0.0"}
+]
+synopsis: "A library providing a signature for simple profunctors and traversal of a record"
+description: "
+This is a very small library which provides a signature for profunctor types
+and operations which can be used to traverse a record with them based on
+record_builder and the =ppx_fields= syntax extension.
+"
+url {
+src: "https://github.com/janestreet/profunctor/archive/db66c0351a111946bbbc668a59ec001cca84def5.tar.gz"
+checksum: "sha256=4fe439b4c79ba74673c6695ced3d3a7b656136b1be9d2f8addfb9da81a37ff72"
+}
