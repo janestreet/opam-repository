@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sexp_pretty"
+bug-reports: "https://github.com/janestreet/sexp_pretty/issues"
+dev-repo: "git+https://github.com/janestreet/sexp_pretty.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexp_pretty/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.08.0"}
+  "base"     {= "v0.16~preview.126.09+332"}
+  "ppx_base" {= "v0.16~preview.126.09+332"}
+  "sexplib"  {= "v0.16~preview.126.09+332"}
+  "dune"     {>= "2.0.0"}
+  "re"       {>= "1.8.0"}
+]
+synopsis: "S-expression pretty-printer"
+description: "
+A library for pretty-printing s-expressions, using better indentation rules than
+the default pretty printer in Sexplib.
+"
+url {
+src: "https://github.com/janestreet/sexp_pretty/archive/7a0796eff18d6c1702bc8507492abd990c6a7efb.tar.gz"
+checksum: "sha256=c3b3dbfe80e2c2c24eba7ef10e0911b22ca3eaed5c6324838bcc5e092cd781c5"
+}

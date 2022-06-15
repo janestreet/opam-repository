@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_extended"
+bug-reports: "https://github.com/janestreet/core_extended/issues"
+dev-repo: "git+https://github.com/janestreet/core_extended.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_extended/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"          {>= "4.08.0"}
+  "core"           {= "v0.16~preview.126.09+332"}
+  "core_unix"      {= "v0.16~preview.126.09+332"}
+  "ppx_jane"       {= "v0.16~preview.126.09+332"}
+  "record_builder" {= "v0.16~preview.126.09+332"}
+  "dune"           {>= "2.0.0"}
+  "re"             {>= "1.8.0"}
+]
+synopsis: "Extra components that are not as closely vetted or as stable as Core"
+description: "
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"
+url {
+src: "https://github.com/janestreet/core_extended/archive/635ec19639c64b9eb5e8ee539815b58825b2b95d.tar.gz"
+checksum: "sha256=1795d514658858f4140513cc1c8f075519e9b704f05c5c8ce329df4220320871"
+}

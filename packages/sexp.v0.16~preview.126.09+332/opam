@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sexp"
+bug-reports: "https://github.com/janestreet/sexp/issues"
+dev-repo: "git+https://github.com/janestreet/sexp.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexp/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.08.0"}
+  "async"       {= "v0.16~preview.126.09+332"}
+  "core"        {= "v0.16~preview.126.09+332"}
+  "core_kernel" {= "v0.16~preview.126.09+332"}
+  "core_unix"   {= "v0.16~preview.126.09+332"}
+  "csvfields"   {= "v0.16~preview.126.09+332"}
+  "jsonaf"      {= "v0.16~preview.126.09+332"}
+  "ppx_jane"    {= "v0.16~preview.126.09+332"}
+  "re2"         {= "v0.16~preview.126.09+332"}
+  "sexp_diff"   {= "v0.16~preview.126.09+332"}
+  "sexp_macro"  {= "v0.16~preview.126.09+332"}
+  "sexp_pretty" {= "v0.16~preview.126.09+332"}
+  "sexp_select" {= "v0.16~preview.126.09+332"}
+  "sexplib"     {= "v0.16~preview.126.09+332"}
+  "dune"        {>= "2.0.0"}
+]
+synopsis: "S-expression swiss knife"
+description: "
+A suite of tools for working with s-expressions from the command line.
+It contains subcommands for pretty printing, querying, and modifying
+sexps, as well as some conversions to and from other formats.
+"
+url {
+src: "https://github.com/janestreet/sexp/archive/8d139c090d2de1b811108eab29828bd599bba53f.tar.gz"
+checksum: "sha256=c0edd58c60029844ac4635509dba45afddc4a7b8dcf3a9f055b69f6b7762c9d5"
+}

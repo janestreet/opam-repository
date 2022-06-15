@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/fuzzy_match"
+bug-reports: "https://github.com/janestreet/fuzzy_match/issues"
+dev-repo: "git+https://github.com/janestreet/fuzzy_match.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/fuzzy_match/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.08.0"}
+  "core"     {= "v0.16~preview.126.09+332"}
+  "ppx_jane" {= "v0.16~preview.126.09+332"}
+  "dune"     {>= "2.0.0"}
+]
+synopsis: "A library for fuzzy string matching"
+description: "
+A library for fuzzy string matching
+"
+url {
+src: "https://github.com/janestreet/fuzzy_match/archive/c2c1c12d8d6d8a713fa97ece9711be4acdcf2b32.tar.gz"
+checksum: "sha256=b650667ae4a9c50b979cdcf4ffc9d1b479b047d0caae5e68cc05458d94149235"
+}

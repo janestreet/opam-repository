@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_waveterm"
+bug-reports: "https://github.com/janestreet/hardcaml_waveterm/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_waveterm.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_waveterm/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.08.0"}
+  "base"                     {= "v0.16~preview.126.09+332"}
+  "core_unix"                {= "v0.16~preview.126.09+332"}
+  "expect_test_helpers_core" {= "v0.16~preview.126.09+332"}
+  "hardcaml"                 {= "v0.16~preview.126.09+332"}
+  "notty_async"              {= "v0.16~preview.126.09+332"}
+  "ppx_deriving_hardcaml"    {= "v0.16~preview.126.09+332"}
+  "ppx_jane"                 {= "v0.16~preview.126.09+332"}
+  "stdio"                    {= "v0.16~preview.126.09+332"}
+  "dune"                     {>= "2.0.0"}
+  "notty"                    {>= "0.2.1"}
+  "num"
+  "re"                       {>= "1.8.0"}
+]
+synopsis: "A terminal based digital waveform viewer for Hardcaml"
+description: "
+The hardcaml_waveterm library renders digital waveforms to unicode. Such
+waveforms can be used in expect tests or for debugging using the supplied
+interactive terminal application.
+
+The library is closely integrated with Hardcaml and can be easily attached
+to simulations.
+"
+conflicts: ["hardcaml-waveterm"] 
+url {
+src: "https://github.com/janestreet/hardcaml_waveterm/archive/7ec6fd9bb4faa29e55fafac99f4eae37378e4e0f.tar.gz"
+checksum: "sha256=db61cb7f2cd0fddb3a71871687c8beda072a93ae106bafe92cc1a3bbeb03a305"
+}

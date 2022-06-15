@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async"
+bug-reports: "https://github.com/janestreet/async/issues"
+dev-repo: "git+https://github.com/janestreet/async.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "4.08.0"}
+  "async_kernel"     {= "v0.16~preview.126.09+332"}
+  "async_rpc_kernel" {= "v0.16~preview.126.09+332"}
+  "async_unix"       {= "v0.16~preview.126.09+332"}
+  "core"             {= "v0.16~preview.126.09+332"}
+  "core_kernel"      {= "v0.16~preview.126.09+332"}
+  "core_unix"        {= "v0.16~preview.126.09+332"}
+  "ppx_jane"         {= "v0.16~preview.126.09+332"}
+  "ppx_log"          {= "v0.16~preview.126.09+332"}
+  "textutils"        {= "v0.16~preview.126.09+332"}
+  "dune"             {>= "2.0.0"}
+]
+synopsis: "Monadic concurrency library"
+description: "
+Part of Jane Street's Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"
+url {
+src: "https://github.com/janestreet/async/archive/e86825b15739e8aff7a9d71839185ccbb69d8d39.tar.gz"
+checksum: "sha256=d72ffedfc9054bfae019b676e69c6dbfc8f786e75a0ae467945e2a8f78210646"
+}

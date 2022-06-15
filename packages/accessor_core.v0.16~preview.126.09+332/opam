@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/accessor_core"
+bug-reports: "https://github.com/janestreet/accessor_core/issues"
+dev-repo: "git+https://github.com/janestreet/accessor_core.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/accessor_core/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.09.0"}
+  "accessor_base" {= "v0.16~preview.126.09+332"}
+  "core"          {= "v0.16~preview.126.09+332"}
+  "ppx_accessor"  {= "v0.16~preview.126.09+332"}
+  "ppx_jane"      {= "v0.16~preview.126.09+332"}
+  "dune"          {>= "2.0.0"}
+]
+synopsis: "Accessors for Core types, for use with the Accessor library"
+description: "
+This library provides accessors for numerous types in Core.
+"
+url {
+src: "https://github.com/janestreet/accessor_core/archive/8d685d3862f390d3c17279ac887010763dfe4420.tar.gz"
+checksum: "sha256=029c19f66c9ffb2db6d6ed0022852050454d27bc56c996a05a168f3e3e189ad4"
+}
