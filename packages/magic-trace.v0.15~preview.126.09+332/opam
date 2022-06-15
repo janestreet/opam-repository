@@ -29,6 +29,6 @@ Magic-trace makes it easy to record and visualize Intel Processor Trace data for
     debugging tricky performance issues.
 "
 url {
-src: "https://github.com/janestreet/magic-trace/archive/2b5c4acca3d0ddafc244c1be687ca2f5469d6653.tar.gz"
-checksum: "sha256=2efe1b22c6d4a5631604c278e07e16bc6eb6d43974da03c54581ee839e987270"
+src: "https://github.com/janestreet/magic-trace/archive/d34cf96d1453687d726b5658c76c83c5716ba65c.tar.gz"
+checksum: "sha256=2b3d7fa539ccd5e203142e42fd0eee21bd8cf71fa85ede2dad7466755a3b528c"
 }
