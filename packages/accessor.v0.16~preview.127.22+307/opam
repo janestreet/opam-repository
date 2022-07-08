@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/accessor"
+bug-reports: "https://github.com/janestreet/accessor/issues"
+dev-repo: "git+https://github.com/janestreet/accessor.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/accessor/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.09.0"}
+  "base"          {= "v0.16~preview.127.22+307"}
+  "higher_kinded" {= "v0.16~preview.127.22+307"}
+  "ppx_jane"      {= "v0.16~preview.127.22+307"}
+  "dune"          {>= "2.0.0"}
+]
+synopsis: "A library that makes it nicer to work with nested functional data structures"
+description: "
+An accessor is a value that understands how to reach data within a larger data structure,
+independently from what you intend to do with it. Accessors allow you to read and write
+data and perform possibly-monadic traversals. By composing accessors, you can work with
+increasingly complex data structures.
+
+In case you have ever heard of \"lenses\", this is an OCaml implementation of that idea.
+"
+url {
+src: "https://github.com/janestreet/accessor/archive/fb5b9b88dd5c229efbd77a6ea66ade4e0c51a1fb.tar.gz"
+checksum: "sha256=e9829ce9f8cc53a83a42796993700b41e4f495fb4a054eed76e67dda52e06d1e"
+}

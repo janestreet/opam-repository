@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_enumerate"
+bug-reports: "https://github.com/janestreet/ppx_enumerate/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_enumerate.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_enumerate/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "4.08.0"}
+  "base"   {= "v0.16~preview.127.22+307"}
+  "dune"   {>= "2.0.0"}
+  "ppxlib" {>= "0.26.0"}
+]
+synopsis: "Generate a list containing all values of a finite type"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_enumerate/archive/7db57a5d3c6b0b6805144538d82f2c32890fa5b3.tar.gz"
+checksum: "sha256=b0edb4a58e288c2e2c3b839735fb213de74c86e23756aaf7ad92079337666008"
+}

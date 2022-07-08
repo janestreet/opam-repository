@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/fsharp_core_kernel"
+bug-reports: "https://github.com/janestreet/fsharp_core_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/fsharp_core_kernel.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/fsharp_core_kernel/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.08.0"}
+  "dune"  {>= "2.0.0"}
+]
+synopsis: "Extensions of the dotnet standard library"
+description: "
+Core_kernel contains F# libraries that are shared across all of our F# projects. It is meant to mirror the use-case of our OCaml Core library. Many libraries just alias dotnet standard library tools to be consistent with Jane Street's naming style.
+
+Our F# projects use relative paths for project references. It is likely that these will
+need to be modified depending on your directory structure. [fsharp_core_kernel] has a
+dependency on another one of our open source projects [fsharp_bin_prot].
+"
+url {
+src: "https://github.com/janestreet/fsharp_core_kernel/archive/b60e6c4c84bf58661b56a7f9963bbf4d82de02e7.tar.gz"
+checksum: "sha256=264ea2a97c0a74e04477310c1e06ac4589b0c679595c4c738c218faf1c4ae368"
+}

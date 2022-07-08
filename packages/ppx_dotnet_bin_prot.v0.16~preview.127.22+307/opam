@@ -1,0 +1,24 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_dotnet_bin_prot"
+bug-reports: "https://github.com/janestreet/ppx_dotnet_bin_prot/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_dotnet_bin_prot.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_dotnet_bin_prot/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.08.0"}
+  "dune"  {>= "2.0.0"}
+]
+synopsis: "Generation of F# bin_prot readers and writers from OCaml types"
+description: "
+This library is used to generate F# bin_prot code from OCaml types to allow interop
+between OCaml and F#. The serialization is identical to that of [ppx_bin_prot].
+"
+url {
+src: "https://github.com/janestreet/ppx_dotnet_bin_prot/archive/f93a43b81d6b15e3d41ccdc19f4dcba8a5b906f8.tar.gz"
+checksum: "sha256=2a4a2326e063894c9507a3fe07c25023a6ea6b938c0c878b38401f9699435b57"
+}

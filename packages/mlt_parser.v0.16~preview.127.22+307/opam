@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/mlt_parser"
+bug-reports: "https://github.com/janestreet/mlt_parser/issues"
+dev-repo: "git+https://github.com/janestreet/mlt_parser.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/mlt_parser/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"      {>= "4.08.0"}
+  "core"       {= "v0.16~preview.127.22+307"}
+  "ppx_expect" {= "v0.16~preview.127.22+307"}
+  "ppx_jane"   {= "v0.16~preview.127.22+307"}
+  "dune"       {>= "2.0.0"}
+  "ppxlib"     {>= "0.26.0"}
+]
+synopsis: "Parsing of top-expect files"
+description: "
+Mlt_parser contains functions for parsing .mlt files (which contain OCaml toplevel
+sessions) both to power toplevel expect tests and to support a tool that converts
+.mlt files into .org files, for literate-style documentation.
+"
+url {
+src: "https://github.com/janestreet/mlt_parser/archive/18701b649409c619dbe55934b6329b8d3151c341.tar.gz"
+checksum: "sha256=bdfd04fe0a0419f7ce244921e33f7d48ff93ee0586fa7d356da8b327efc7a45d"
+}

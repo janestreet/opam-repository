@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_disable_unused_warnings"
+bug-reports: "https://github.com/janestreet/ppx_disable_unused_warnings/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_disable_unused_warnings.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_disable_unused_warnings/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "4.08.0"}
+  "base"   {= "v0.16~preview.127.22+307"}
+  "dune"   {>= "2.0.0"}
+  "ppxlib" {>= "0.26.0"}
+]
+synopsis: "Expands [@disable_unused_warnings] into [@warning \"-20-26-32-33-34-35-36-37-38-39-60-66-67\"]"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_disable_unused_warnings/archive/2205b6bbffb9ec4d93ce905d318969e353b34f16.tar.gz"
+checksum: "sha256=b6e8bd61fcd35971fdc8d855d3e52f3bb7ff5fa1ca14c9b64a3c357274ac92f7"
+}

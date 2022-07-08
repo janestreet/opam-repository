@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_custom_printf"
+bug-reports: "https://github.com/janestreet/ppx_custom_printf/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_custom_printf.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_custom_printf/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.08.0"}
+  "base"          {= "v0.16~preview.127.22+307"}
+  "ppx_sexp_conv" {= "v0.16~preview.127.22+307"}
+  "dune"          {>= "2.0.0"}
+  "ppxlib"        {>= "0.26.0"}
+]
+synopsis: "Printf-style format-strings for user-defined string conversion"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_custom_printf/archive/b3d9eeb30d9a47111995641c105ee80ebb208ef9.tar.gz"
+checksum: "sha256=9b9bd5f6ed0a26cf747abd6f08d2f5d2700c1491043c46f8180a8c21956620d5"
+}

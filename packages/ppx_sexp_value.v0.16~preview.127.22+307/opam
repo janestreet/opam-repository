@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_sexp_value"
+bug-reports: "https://github.com/janestreet/ppx_sexp_value/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_sexp_value.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_sexp_value/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.08.0"}
+  "base"          {= "v0.16~preview.127.22+307"}
+  "ppx_here"      {= "v0.16~preview.127.22+307"}
+  "ppx_sexp_conv" {= "v0.16~preview.127.22+307"}
+  "dune"          {>= "2.0.0"}
+  "ppxlib"        {>= "0.26.0"}
+]
+synopsis: "A ppx rewriter that simplifies building s-expressions from ocaml values"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_sexp_value/archive/382ead40c7f099efb35c9fe3bb84c6375c8644ec.tar.gz"
+checksum: "sha256=083acc92086568f2c4faccef5c849d66fe06451d32a75eece47084f9fa4300b2"
+}

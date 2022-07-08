@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/patdiff"
+bug-reports: "https://github.com/janestreet/patdiff/issues"
+dev-repo: "git+https://github.com/janestreet/patdiff.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/patdiff/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.08.0"}
+  "core"                     {= "v0.16~preview.127.22+307"}
+  "core_kernel"              {= "v0.16~preview.127.22+307"}
+  "core_unix"                {= "v0.16~preview.127.22+307"}
+  "expect_test_helpers_core" {= "v0.16~preview.127.22+307"}
+  "patience_diff"            {= "v0.16~preview.127.22+307"}
+  "ppx_jane"                 {= "v0.16~preview.127.22+307"}
+  "dune"                     {>= "2.0.0"}
+  "pcre"
+  "re"                       {>= "1.8.0"}
+]
+synopsis: "File Diff using the Patience Diff algorithm"
+description: "
+"
+url {
+src: "https://github.com/janestreet/patdiff/archive/dacbc346259fc00ee45e67c1f003aeefe0678ab9.tar.gz"
+checksum: "sha256=fba81f6a4dd6b7f2b666d0a6f4079112dd4c1d54f61a8c2e5a693f1929875a27"
+}

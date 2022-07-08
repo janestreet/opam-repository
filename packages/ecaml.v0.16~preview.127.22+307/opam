@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ecaml"
+bug-reports: "https://github.com/janestreet/ecaml/issues"
+dev-repo: "git+https://github.com/janestreet/ecaml.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ecaml/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.08.0"}
+  "async"                    {= "v0.16~preview.127.22+307"}
+  "async_kernel"             {= "v0.16~preview.127.22+307"}
+  "async_unix"               {= "v0.16~preview.127.22+307"}
+  "core"                     {= "v0.16~preview.127.22+307"}
+  "core_kernel"              {= "v0.16~preview.127.22+307"}
+  "core_unix"                {= "v0.16~preview.127.22+307"}
+  "expect_test_helpers_core" {= "v0.16~preview.127.22+307"}
+  "ppx_jane"                 {= "v0.16~preview.127.22+307"}
+  "dune"                     {>= "2.0.0"}
+]
+synopsis: "Library for writing Emacs plugin in OCaml"
+description: "
+Ecaml is a library for writing Emacs plugins in OCaml. It uses Emacs
+25 support for plugins to load native OCaml compiled code.
+"
+url {
+src: "https://github.com/janestreet/ecaml/archive/6349b806cd05074dae58096dfd83d36fa267cf65.tar.gz"
+checksum: "sha256=93c078fc8718c98cc8ee6d8ec994d52d807addf0c32cad4d492f78375fc4f135"
+}

@@ -1,0 +1,23 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/fsharp_bin_prot"
+bug-reports: "https://github.com/janestreet/fsharp_bin_prot/issues"
+dev-repo: "git+https://github.com/janestreet/fsharp_bin_prot.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/fsharp_bin_prot/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.08.0"}
+  "dune"  {>= "2.0.0"}
+]
+synopsis: "Reimplementation of our bin_prot library in F#"
+description: "
+This library reimplements bin_prot, and is used in our F# reimplementation of async_rpc to allow for rpcs between OCaml and F#.
+"
+url {
+src: "https://github.com/janestreet/fsharp_bin_prot/archive/10fa6d5f4c8b3df3353b8392334b753499863db1.tar.gz"
+checksum: "sha256=db20005df3127d44f7f5cadf765b1b2ee73ac573ab75518f1d6ea4dcc29e4cf6"
+}

@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_derive_at_runtime"
+bug-reports: "https://github.com/janestreet/ppx_derive_at_runtime/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_derive_at_runtime.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_derive_at_runtime/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.08.0"}
+  "base"                     {= "v0.16~preview.127.22+307"}
+  "expect_test_helpers_core" {= "v0.16~preview.127.22+307"}
+  "ppx_jane"                 {= "v0.16~preview.127.22+307"}
+  "dune"                     {>= "2.0.0"}
+  "ppxlib"                   {>= "0.26.0"}
+]
+synopsis: "Define a new ppx deriver by naming a runtime module."
+description: "
+
+Allows specifying new ppx derivers much more easily than writing
+a ppx by hand. For example, to get `[@@deriving foo]`, you only have to
+specify a module path such as `My_library.Foo`.
+"
+url {
+src: "https://github.com/janestreet/ppx_derive_at_runtime/archive/f08b102882bd40e8d27933dfd399753590131e43.tar.gz"
+checksum: "sha256=73853883aae67513348c1b4e4193601c4582495732b67d46149a08f7eaaa39f1"
+}
