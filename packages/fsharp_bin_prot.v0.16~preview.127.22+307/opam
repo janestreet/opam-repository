@@ -18,6 +18,6 @@ description: "
 This library reimplements bin_prot, and is used in our F# reimplementation of async_rpc to allow for rpcs between OCaml and F#.
 "
 url {
-src: "https://github.com/janestreet/fsharp_bin_prot/archive/10fa6d5f4c8b3df3353b8392334b753499863db1.tar.gz"
-checksum: "sha256=db20005df3127d44f7f5cadf765b1b2ee73ac573ab75518f1d6ea4dcc29e4cf6"
+src: "https://github.com/janestreet/fsharp_bin_prot/archive/4ea62c59ad89f1e22ed7c5b9a591bfe4dde2d332.tar.gz"
+checksum: "sha256=fc4b100cf77a2bc5a3500700723975563bdefbf539a9d24b1cc6bd599307413b"
 }

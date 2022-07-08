@@ -22,6 +22,6 @@ description: "
 "
 available: arch != "arm32"
 url {
-src: "https://github.com/janestreet/re2/archive/8db400db0075b5bfa8b32f8ae846713257b9932b.tar.gz"
-checksum: "sha256=795a9fb2e2d398cb22674d3db30256efdb2b212d6056a5873812b7b34f40e4ee"
+src: "https://github.com/janestreet/re2/archive/ee2d4850882fa4f82f3c3e2cc2982f7d6c8fcb40.tar.gz"
+checksum: "sha256=52032cb3a7c44d72a18483e653997a29a11cd682fc2aa30c36137648f0c8fdf0"
 }

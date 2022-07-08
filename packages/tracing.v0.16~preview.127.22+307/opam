@@ -24,6 +24,6 @@ Utilities for creating and parsing traces in Fuchsia Trace Format.
 "
 available: arch != "arm32" & arch != "x86_32"
 url {
-src: "https://github.com/janestreet/tracing/archive/bb363c5bc8ecf8d97cec94c5de3dd17c4b515a1f.tar.gz"
-checksum: "sha256=2c77f359631831c4a4ecf179e8989db5ff5e076edf45ea3011f1970183b5233f"
+src: "https://github.com/janestreet/tracing/archive/fdbe1c9796884735c7c4dd1dc5a2e04f1e94d8bf.tar.gz"
+checksum: "sha256=473dc6ed4ef6cc5361d96e50616003f93f513ddd7e50eb8acb9ee630e4b59e53"
 }

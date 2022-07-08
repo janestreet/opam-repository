@@ -22,6 +22,6 @@ description: "
 This library provides an applicative interface for extracting values from JSON objects with an emphasis on readability and error handling, particularly with nested values.
 "
 url {
-src: "https://github.com/janestreet/of_json/archive/d31457aac0a7529b8adecddb0acba29cb6194e8d.tar.gz"
-checksum: "sha256=701b117790a47dae67e747fd99482a8ae4756ee261aba402b50d9dc63425b002"
+src: "https://github.com/janestreet/of_json/archive/cada11b1b1d0492267aa154588ff4fd6ca2959a3.tar.gz"
+checksum: "sha256=5879ef5d28a0ce87d92297b2b79d6e0c63164792cb0dc6d0ab4c4ef543ee581d"
 }

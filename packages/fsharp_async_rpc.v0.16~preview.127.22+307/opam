@@ -21,6 +21,6 @@ Our F# projects use relative paths for project references. It is likely that the
 need to be modified depending on your directory structure. [fsharp_async_rpc] has dependencies to two of our open source projects, [fsharp_core_kernel] and [fsharp_bin_prot].
 "
 url {
-src: "https://github.com/janestreet/fsharp_async_rpc/archive/e83f0a93af658b97cd5e7213e6e0ffa909709f25.tar.gz"
-checksum: "sha256=9cdf284277f1053f227a362049940a1907ec5e5a93436875795dd82d513eff89"
+src: "https://github.com/janestreet/fsharp_async_rpc/archive/5b0f2b94e5197e0aa762fb561d97fe474c29be36.tar.gz"
+checksum: "sha256=1c94277a5fbd95e16209b85a1d2d270b030a378dd95a5c5345eca6ecc0c97b5f"
 }

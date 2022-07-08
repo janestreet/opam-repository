@@ -28,6 +28,6 @@ If you want helpers for writing expect tests using the Async library,
 look at expect_test_helpers_async.
 "
 url {
-src: "https://github.com/janestreet/expect_test_helpers_core/archive/636ed4d7ae841cca771482f3918bdc6777a8f861.tar.gz"
-checksum: "sha256=28f45d51da4ac5fe7945a008fdae8969cd921bd290be82869e8e8fabc3289038"
+src: "https://github.com/janestreet/expect_test_helpers_core/archive/a560774ecc52d1fcaafecb8914c6c96df6c77e87.tar.gz"
+checksum: "sha256=26e673da21b2efe52be892f266426373a72c9fe14faae4258669ff13faa27750"
 }

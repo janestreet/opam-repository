@@ -24,6 +24,6 @@ sessions) both to power toplevel expect tests and to support a tool that convert
 .mlt files into .org files, for literate-style documentation.
 "
 url {
-src: "https://github.com/janestreet/mlt_parser/archive/18701b649409c619dbe55934b6329b8d3151c341.tar.gz"
-checksum: "sha256=bdfd04fe0a0419f7ce244921e33f7d48ff93ee0586fa7d356da8b327efc7a45d"
+src: "https://github.com/janestreet/mlt_parser/archive/66ec7a649dd92e641e1f3a754837efc07ec73adb.tar.gz"
+checksum: "sha256=db416a97c76625036dea7fbdb75f13f6c9d31f5eb70a7243554093f8cbaa9f3b"
 }

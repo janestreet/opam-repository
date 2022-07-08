@@ -21,6 +21,6 @@ Experimental.
 "
 depexts: ["linux-headers"] {os-family = "alpine"}
 url {
-src: "https://github.com/janestreet/ocaml-probes/archive/5f1daade7f3f62abf25831ea2cb7ddce70b2aa01.tar.gz"
-checksum: "sha256=98b5d1c3cc5783342bb91275b5e4c47c4cbfceff266f6cb1246ef5860344fb99"
+src: "https://github.com/janestreet/ocaml-probes/archive/05be32f9f8cb274ebba833a80ce8f843ab403a0a.tar.gz"
+checksum: "sha256=127c368693ccdb99b19f25964c80adc4e9cbce70df08176cfccb531f1c254c68"
 }

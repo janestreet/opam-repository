@@ -25,6 +25,6 @@ description: "
 A library for typed manipulation of UNIX-style file paths.
 "
 url {
-src: "https://github.com/janestreet/file_path/archive/c72fcec57ee124412fe2ed198cc5bbae0a153b95.tar.gz"
-checksum: "sha256=7bd41687a4744da9d1ebb1f52943b7cc6f042ee8d54d8842d1f5187cea4819ff"
+src: "https://github.com/janestreet/file_path/archive/df0ffb5282adfc63831b4f754f129c5c4a7ed9a1.tar.gz"
+checksum: "sha256=61f5952aa762451caf69ef0b4b86061bbcdc2af5db2257e4aebf66efd851abee"
 }

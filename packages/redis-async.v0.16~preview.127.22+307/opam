@@ -28,6 +28,6 @@ types.
 Supports client tracking and internally uses the RESP3 protocol. 
 "
 url {
-src: "https://github.com/janestreet/redis-async/archive/066d78e14cb9ce5218d771076f3ab3bd11cf3165.tar.gz"
-checksum: "sha256=9b4ce2f4a9144b16fa47d06d64df423e6e6ced049d880a3f302bda447106a25a"
+src: "https://github.com/janestreet/redis-async/archive/38bfabc1110030673ce223e5e5d3011f691a5338.tar.gz"
+checksum: "sha256=182639f202ee0e58ac5e1d322ab10a00542f6d4aeb145a9eb6d378b33365189c"
 }

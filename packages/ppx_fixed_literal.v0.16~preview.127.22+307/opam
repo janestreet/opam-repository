@@ -21,6 +21,6 @@ A ppx rewriter that rewrites fixed point literal of the
 form 1.0v to conversion functions currently in scope.
 "
 url {
-src: "https://github.com/janestreet/ppx_fixed_literal/archive/0f1c25c52b0dc2566728af662062b8d42544f6dd.tar.gz"
-checksum: "sha256=d8af85def37e8185405389f86819f32ee53d32da53e445f4694d674acbabe662"
+src: "https://github.com/janestreet/ppx_fixed_literal/archive/a9553ff625221202ae2142a697c35113ec91ca92.tar.gz"
+checksum: "sha256=6c0aa1eca10f7bdbc8b2ce67dadc6edcf508f329a4d20f70d1efe9c29fac3de5"
 }

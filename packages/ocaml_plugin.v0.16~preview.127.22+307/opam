@@ -24,6 +24,6 @@ synopsis: "Automatically build and dynlink OCaml source files"
 description: "
 "
 url {
-src: "https://github.com/janestreet/ocaml_plugin/archive/761c88daa956d3aac31a02355257919dee3ee8d3.tar.gz"
-checksum: "sha256=b7c8f45da38ae9ae40b01762eefdb78208270a00b1137a7b09ab4bda3f0756e2"
+src: "https://github.com/janestreet/ocaml_plugin/archive/5def05cea119dbe6f7cab3e56ed3ba81a797e32c.tar.gz"
+checksum: "sha256=9337dad615c2f5db872ed188d6d6faf468eed8c0c64478e8b4a49e2edd960b98"
 }

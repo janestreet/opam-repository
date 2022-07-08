@@ -30,6 +30,6 @@ description: "
 A ppx that takes in css strings and produces a module for accessing the unique names defined within.
 "
 url {
-src: "https://github.com/janestreet/ppx_css/archive/a1ab9e36f143e270eb35bf4b0749d8079adceff2.tar.gz"
-checksum: "sha256=d09d89bc040b33f146801378b07e4f5df3fd4488dc57b30b48a4e7a457af1148"
+src: "https://github.com/janestreet/ppx_css/archive/55296423f273d6d475a273c33c0d8d4cfa304660.tar.gz"
+checksum: "sha256=89affa71fd3667c34a8a13ec4ec816f49e30e25c6a5f285f5396ce457b76b8d2"
 }

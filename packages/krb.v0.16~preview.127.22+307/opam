@@ -35,6 +35,6 @@ depexts: [
   ["krb5-devel"] {os-family = "fedora" | os-family = "suse"}
 ]
 url {
-src: "https://github.com/janestreet/krb/archive/a70122c4d395e576b6aaa2d57efb2b71f1519de4.tar.gz"
-checksum: "sha256=7092411e9b661e0e50ddabaa3e06c571a2b2819e00d0779f0236ceac8be97ed6"
+src: "https://github.com/janestreet/krb/archive/e3f1bfde3610a742e4f5421321e5bd27f6987fc5.tar.gz"
+checksum: "sha256=7828195269802878b4db2e475a18a0ef69a987aa6b2cc0081a808e7bfc004ba9"
 }

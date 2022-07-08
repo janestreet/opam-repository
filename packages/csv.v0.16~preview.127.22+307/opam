@@ -33,6 +33,6 @@ contains subcommands for pretty printing, selecting, and combining
 CSVs, as well as some conversions to other formats.
 "
 url {
-src: "https://github.com/janestreet/csv/archive/d00bf4452ca649b6701956fd0dc8c202b2bd4081.tar.gz"
-checksum: "sha256=47eb760ee30b96e411543bc6985492b1dea9dc85d98a48dfa13639c14a268b88"
+src: "https://github.com/janestreet/csv/archive/489557b226335c5e121b3a38cda97c290a5308a6.tar.gz"
+checksum: "sha256=ef575e433adc906fcfe5ced15bbdbed9d5a3d25e8bff7cd178fe5a767fa13650"
 }

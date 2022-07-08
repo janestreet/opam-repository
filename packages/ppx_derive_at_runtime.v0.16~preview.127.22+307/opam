@@ -25,6 +25,6 @@ a ppx by hand. For example, to get `[@@deriving foo]`, you only have to
 specify a module path such as `My_library.Foo`.
 "
 url {
-src: "https://github.com/janestreet/ppx_derive_at_runtime/archive/f08b102882bd40e8d27933dfd399753590131e43.tar.gz"
-checksum: "sha256=73853883aae67513348c1b4e4193601c4582495732b67d46149a08f7eaaa39f1"
+src: "https://github.com/janestreet/ppx_derive_at_runtime/archive/580612eb08d93ce7a16855d824eefffe129b3d05.tar.gz"
+checksum: "sha256=ee7d249e882ef7cd44050b590ee9bb64ef4265ff40a804dd73a73f5006805b1a"
 }

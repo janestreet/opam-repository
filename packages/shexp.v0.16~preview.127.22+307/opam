@@ -24,6 +24,6 @@ for shell scripting in OCaml as well as a simple s-expression based
 shell interpreter. Shexp works on both Unix and Windows.
 "
 url {
-src: "https://github.com/janestreet/shexp/archive/11e53c4ff82997da40811c8927f2f0ba7880bf72.tar.gz"
-checksum: "sha256=65170589a3df4942e99929b54fffa1fb87e2833ecc2dd633d370b2f57f1bf596"
+src: "https://github.com/janestreet/shexp/archive/e314fe97448300724bbc29e55edbe2573f3be3e5.tar.gz"
+checksum: "sha256=6da5dcad2a4bf8e6d84f214d67fdf633b3484b6d94c8c481ff09576f4a8788d6"
 }

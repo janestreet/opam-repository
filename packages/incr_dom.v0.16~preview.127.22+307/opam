@@ -46,6 +46,6 @@ If you want a more concrete sense of how this works, look in the
 examples directory.
 "
 url {
-src: "https://github.com/janestreet/incr_dom/archive/69eda6b81f5aad5239c4bc3ddbdcc19131b3963f.tar.gz"
-checksum: "sha256=ce898aca53a9ba775f97ccc3a48d8a3884b7835238be05224a82ff4458573626"
+src: "https://github.com/janestreet/incr_dom/archive/7aaba451cf76dc493e218d738c6391882b55ef1b.tar.gz"
+checksum: "sha256=c4a0238344d7a9c7da88562978454852e54bfdd816a34e225b5a35ed15201a11"
 }

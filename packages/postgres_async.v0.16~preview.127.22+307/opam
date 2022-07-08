@@ -27,6 +27,6 @@ and COPY IN mode. The interface presented is minimal to keep the library simple
 for now, though in the future a layer on top may add convenience functions.
 "
 url {
-src: "https://github.com/janestreet/postgres_async/archive/4a8d2ee70a5c1209e57867e533f35ca562b1b332.tar.gz"
-checksum: "sha256=f06c401265cbba1250b851fcf077435f1a8a3971144caab0afdeec475270c040"
+src: "https://github.com/janestreet/postgres_async/archive/c2502fc6509c981604128e2487c8fd0d4eab836b.tar.gz"
+checksum: "sha256=4bbec358ac821eb2f34d81d970a4fa3cec3cebe77dbceac82a107554d843fffd"
 }

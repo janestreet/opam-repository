@@ -31,6 +31,6 @@ VHDL to interact with standard back end tooling.
 "
 available: arch != "arm32" & arch != "x86_32"
 url {
-src: "https://github.com/janestreet/hardcaml/archive/5ca9dd487c6e835dc61bdce2f4aa7ba5d5d07306.tar.gz"
-checksum: "sha256=86fcff0b99cb38244509ceb648c31318b96f358d5b0f5262a88a4246aba223fb"
+src: "https://github.com/janestreet/hardcaml/archive/a9b1880ca2fb1a566eac66d935cacf344ec76b13.tar.gz"
+checksum: "sha256=4d49d55f6032c5a7b0b06db32a77eae40a8b9098d6b89d174e3a648d70ded7a0"
 }

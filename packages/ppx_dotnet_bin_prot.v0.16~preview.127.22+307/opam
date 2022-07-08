@@ -19,6 +19,6 @@ This library is used to generate F# bin_prot code from OCaml types to allow inte
 between OCaml and F#. The serialization is identical to that of [ppx_bin_prot].
 "
 url {
-src: "https://github.com/janestreet/ppx_dotnet_bin_prot/archive/f93a43b81d6b15e3d41ccdc19f4dcba8a5b906f8.tar.gz"
-checksum: "sha256=2a4a2326e063894c9507a3fe07c25023a6ea6b938c0c878b38401f9699435b57"
+src: "https://github.com/janestreet/ppx_dotnet_bin_prot/archive/a947663cb3422fd3deb0059d277b57a864a68f1c.tar.gz"
+checksum: "sha256=49de6cda23e837f4fce8c490a7e0c61f145629e80e4e2e38786b5eb0bbcd93e7"
 }

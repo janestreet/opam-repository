@@ -27,6 +27,6 @@ Core_profiler is a library that helps you profile programs and
 estimate various costs.
 "
 url {
-src: "https://github.com/janestreet/core_profiler/archive/4318520e547f8b69eef6381cb0d1ad04f88b91b2.tar.gz"
-checksum: "sha256=3a496ecef091f2eeb11e8c4632503abb7fabf520c911798ab9798eb522129cb7"
+src: "https://github.com/janestreet/core_profiler/archive/fb8a49ffa4663e7cb5ea7870d3d96c369f52a26c.tar.gz"
+checksum: "sha256=bd6422cf8ac4883d5ba0e7c3e54c798a799c96487722023b532fa5d8a3bfa0b6"
 }

@@ -33,6 +33,6 @@ include a different treatment of case, special handling of whitespace
 or punctuation, etc.)
 "
 url {
-src: "https://github.com/janestreet/numeric_string/archive/61ae916d3336685aa0d590066473ed2647c9f480.tar.gz"
-checksum: "sha256=43b30cfe343ce95a61f45b233ea8c3568f1a5b66e6a7f505afb0be4e7329492e"
+src: "https://github.com/janestreet/numeric_string/archive/bf92796d9b7357e7cce4f0a7da23b8c537c6b246.tar.gz"
+checksum: "sha256=bee9e3c7eadc35fdeeb96056ed999761b1134aeadce6c666a09de02e02fe7a22"
 }

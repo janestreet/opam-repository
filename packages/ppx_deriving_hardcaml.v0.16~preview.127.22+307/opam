@@ -26,6 +26,6 @@ of bundles of ports when working with the Simulator, Netlist generation or
 hierarchical designs.
 "
 url {
-src: "https://github.com/janestreet/ppx_deriving_hardcaml/archive/753bea6955fada36c4f8b14d116975940da5d4a5.tar.gz"
-checksum: "sha256=b661833714bd7cc54b960b23734f99c8c437091879878c14dc10be5c02433f46"
+src: "https://github.com/janestreet/ppx_deriving_hardcaml/archive/2a9b69ad7b170d4ea403fb58ad84102c9893ef39.tar.gz"
+checksum: "sha256=9da0619662c7a4f32a7bb261894aef23e155e4a03c17e54964d779304a1c9443"
 }

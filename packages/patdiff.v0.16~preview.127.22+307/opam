@@ -25,6 +25,6 @@ synopsis: "File Diff using the Patience Diff algorithm"
 description: "
 "
 url {
-src: "https://github.com/janestreet/patdiff/archive/dacbc346259fc00ee45e67c1f003aeefe0678ab9.tar.gz"
-checksum: "sha256=fba81f6a4dd6b7f2b666d0a6f4079112dd4c1d54f61a8c2e5a693f1929875a27"
+src: "https://github.com/janestreet/patdiff/archive/c26abb19cbde420edcae7fd1ac0afad03a127500.tar.gz"
+checksum: "sha256=6ae67dbddcd9e6ae195220663e56740e21b7d3d257d7e2a8857dd4992cd42100"
 }
