@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/csv"
+bug-reports: "https://github.com/janestreet/csv/issues"
+dev-repo: "git+https://github.com/janestreet/csv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/csv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "4.08.0"}
+  "async"             {= "v0.16~preview.127.23+112"}
+  "bignum"            {= "v0.16~preview.127.23+112"}
+  "core_kernel"       {= "v0.16~preview.127.23+112"}
+  "core_unix"         {= "v0.16~preview.127.23+112"}
+  "csvfields"         {= "v0.16~preview.127.23+112"}
+  "delimited_parsing" {= "v0.16~preview.127.23+112"}
+  "fieldslib"         {= "v0.16~preview.127.23+112"}
+  "numeric_string"    {= "v0.16~preview.127.23+112"}
+  "ppx_jane"          {= "v0.16~preview.127.23+112"}
+  "re2"               {= "v0.16~preview.127.23+112"}
+  "textutils"         {= "v0.16~preview.127.23+112"}
+  "dune"              {>= "2.0.0"}
+  "pcre"
+  "tyxml"             {>= "4.3.0"}
+]
+synopsis: "Tools for working with CSVs on the command line"
+description: "
+A suite of tools for working with CSVs from the command line.  It
+contains subcommands for pretty printing, selecting, and combining
+CSVs, as well as some conversions to other formats.
+"
+url {
+src: "https://github.com/janestreet/csv/archive/489557b226335c5e121b3a38cda97c290a5308a6.tar.gz"
+checksum: "sha256=ef575e433adc906fcfe5ced15bbdbed9d5a3d25e8bff7cd178fe5a767fa13650"
+}
