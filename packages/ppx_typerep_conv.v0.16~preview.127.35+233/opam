@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_typerep_conv"
+bug-reports: "https://github.com/janestreet/ppx_typerep_conv/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_typerep_conv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_typerep_conv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"   {>= "4.08.0"}
+  "base"    {= "v0.16~preview.127.35+233"}
+  "typerep" {= "v0.16~preview.127.35+233"}
+  "dune"    {>= "2.0.0"}
+  "ppxlib"  {>= "0.28.0"}
+]
+synopsis: "Generation of runtime types from type declarations"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_typerep_conv/archive/c632cd590beaaf87e9395a5224790ac4ecba7c9a.tar.gz"
+checksum: "sha256=4f789db7ce63a357c767c1f6b79e8292fe589f4b478d8046c46ef265a6c46b09"
+}

@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/vcaml"
+bug-reports: "https://github.com/janestreet/vcaml/issues"
+dev-repo: "git+https://github.com/janestreet/vcaml.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/vcaml/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                     {>= "4.08.0"}
+  "async"                     {= "v0.16~preview.127.35+233"}
+  "base"                      {= "v0.16~preview.127.35+233"}
+  "core"                      {= "v0.16~preview.127.35+233"}
+  "core_kernel"               {= "v0.16~preview.127.35+233"}
+  "core_unix"                 {= "v0.16~preview.127.35+233"}
+  "expect_test_helpers_async" {= "v0.16~preview.127.35+233"}
+  "ppx_jane"                  {= "v0.16~preview.127.35+233"}
+  "textutils"                 {= "v0.16~preview.127.35+233"}
+  "angstrom"                  {>= "0.15.0"}
+  "angstrom-async"            {>= "0.15.0"}
+  "dune"                      {>= "2.0.0"}
+  "faraday"
+]
+synopsis: "OCaml bindings for the Neovim API"
+description: "
+The Neovim text editor comes with an RPC-based public API
+which can be used to control the editor.  This set of libraries implements
+an OCaml interface to those APIs, for the purpose of permitting neovim
+plugins to be written in OCaml.
+"
+url {
+src: "https://github.com/janestreet/vcaml/archive/9e6fa63df8c91d73b2d2e92534badc1475d6518a.tar.gz"
+checksum: "sha256=5ce27721538ea9b60435db95f3df65e97c2da987665fd113f5ece9e9aedf37cd"
+}

@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_udp"
+bug-reports: "https://github.com/janestreet/async_udp/issues"
+dev-repo: "git+https://github.com/janestreet/async_udp.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_udp/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"     {>= "4.08.0"}
+  "async"     {= "v0.16~preview.127.35+233"}
+  "core_unix" {= "v0.16~preview.127.35+233"}
+  "ppx_jane"  {= "v0.16~preview.127.35+233"}
+  "dune"      {>= "2.0.0"}
+]
+synopsis: "Monadic concurrency library"
+description: "
+Part of Jane Street's Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"
+url {
+src: "https://github.com/janestreet/async_udp/archive/07c390ee992d36dbf31c4970bc307eb316bb22ef.tar.gz"
+checksum: "sha256=20df966ebc3f53680af8eb7a6358972bcfc73845f98cb301dab474c9e9942a2a"
+}
