@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_css"
+bug-reports: "https://github.com/janestreet/ppx_css/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_css.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_css/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "4.11.0"}
+  "core"            {= "v0.16~preview.127.38+45"}
+  "core_kernel"     {= "v0.16~preview.127.38+45"}
+  "ppx_here"        {= "v0.16~preview.127.38+45"}
+  "ppx_jane"        {= "v0.16~preview.127.38+45"}
+  "ppx_let"         {= "v0.16~preview.127.38+45"}
+  "ppx_sexp_conv"   {= "v0.16~preview.127.38+45"}
+  "stdio"           {= "v0.16~preview.127.38+45"}
+  "virtual_dom"     {= "v0.16~preview.127.38+45"}
+  "dune"            {>= "2.0.0"}
+  "js_of_ocaml"     {>= "4.0"}
+  "js_of_ocaml-ppx" {>= "4.0"}
+  "menhirLib"
+  "ppxlib"          {>= "0.28.0"}
+  "re"              {>= "1.8.0"}
+  "sedlex"          {>= "2.6"}
+]
+synopsis: "A ppx that takes in css strings and produces a module for accessing the unique names defined within"
+description: "
+A ppx that takes in css strings and produces a module for accessing the unique names defined within.
+"
+url {
+src: "https://github.com/janestreet/ppx_css/archive/3baeb2a2d9787bec88942a2cefbead6a257ef5a1.tar.gz"
+checksum: "sha256=32ab77a38b632849bca62e90c10e6dbd8e3e6c0f646d1dd231d142851a4283bc"
+}

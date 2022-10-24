@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_verilator"
+bug-reports: "https://github.com/janestreet/hardcaml_verilator/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_verilator.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_verilator/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                 {>= "4.08.0"}
+  "core"                  {= "v0.16~preview.127.38+45"}
+  "core_unix"             {= "v0.16~preview.127.38+45"}
+  "hardcaml"              {= "v0.16~preview.127.38+45"}
+  "ppx_deriving_hardcaml" {= "v0.16~preview.127.38+45"}
+  "ppx_jane"              {= "v0.16~preview.127.38+45"}
+  "ctypes"                {>= "0.18.0"}
+  "ctypes-foreign"
+  "dune"                  {>= "2.0.0"}
+]
+synopsis: "Hardcaml Verilator Simulation Backend"
+description: "
+Very fast verilator-based simulations of Hardcaml circuits.
+
+This library transparently compiles a verilator-based shared library, and links it back
+to the running executable to be used as a Cyclesim simulation.
+"
+url {
+src: "https://github.com/janestreet/hardcaml_verilator/archive/f774c51427658953174638739a1495a7c5d72983.tar.gz"
+checksum: "sha256=7c645e6f41ebeffc077e9630e2618a1c57b360843a9e9ba40b47b7f22bb22341"
+}

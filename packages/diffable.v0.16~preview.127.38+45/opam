@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/diffable"
+bug-reports: "https://github.com/janestreet/diffable/issues"
+dev-repo: "git+https://github.com/janestreet/diffable.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/diffable/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "4.10.0"}
+  "core"            {= "v0.16~preview.127.38+45"}
+  "ppx_jane"        {= "v0.16~preview.127.38+45"}
+  "stored_reversed" {= "v0.16~preview.127.38+45"}
+  "streamable"      {= "v0.16~preview.127.38+45"}
+  "dune"            {>= "2.0.0"}
+]
+synopsis: "An interface for diffs."
+description: "
+Diffable interface.
+"
+url {
+src: "https://github.com/janestreet/diffable/archive/922bdb798be1b340634b43d2d6cef64e8d358ddb.tar.gz"
+checksum: "sha256=18b1b726372ac2fcff32c950a3f0c9e5c129aaa06c3a5f70ed5a8442a0faf834"
+}
