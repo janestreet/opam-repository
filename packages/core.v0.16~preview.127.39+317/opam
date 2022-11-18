@@ -1,0 +1,48 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core"
+bug-reports: "https://github.com/janestreet/core/issues"
+dev-repo: "git+https://github.com/janestreet/core.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "4.11.0"}
+  "base"                {= "v0.16~preview.127.39+317"}
+  "base_bigstring"      {= "v0.16~preview.127.39+317"}
+  "base_quickcheck"     {= "v0.16~preview.127.39+317"}
+  "bin_prot"            {= "v0.16~preview.127.39+317"}
+  "fieldslib"           {= "v0.16~preview.127.39+317"}
+  "jane-street-headers" {= "v0.16~preview.127.39+317"}
+  "jst-config"          {= "v0.16~preview.127.39+317"}
+  "ppx_assert"          {= "v0.16~preview.127.39+317"}
+  "ppx_base"            {= "v0.16~preview.127.39+317"}
+  "ppx_hash"            {= "v0.16~preview.127.39+317"}
+  "ppx_inline_test"     {= "v0.16~preview.127.39+317"}
+  "ppx_jane"            {= "v0.16~preview.127.39+317"}
+  "ppx_sexp_conv"       {= "v0.16~preview.127.39+317"}
+  "ppx_sexp_message"    {= "v0.16~preview.127.39+317"}
+  "sexplib"             {= "v0.16~preview.127.39+317"}
+  "splittable_random"   {= "v0.16~preview.127.39+317"}
+  "stdio"               {= "v0.16~preview.127.39+317"}
+  "time_now"            {= "v0.16~preview.127.39+317"}
+  "typerep"             {= "v0.16~preview.127.39+317"}
+  "variantslib"         {= "v0.16~preview.127.39+317"}
+  "dune"                {>= "2.0.0"}
+]
+synopsis: "Industrial strength alternative to OCaml's standard library"
+description: "
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+
+This is the system-independent part of Core. Unix-specific parts were moved to [core-unix].
+"
+conflicts: ["base-domains"]
+url {
+src: "https://github.com/janestreet/core/archive/36053c38f9cfb7391b1f7dd37231861700e3599e.tar.gz"
+checksum: "sha256=8e029c5aff593b53b2893fa0cfd223dd1b6da6ab91eab034fc44d98976a68c57"
+}

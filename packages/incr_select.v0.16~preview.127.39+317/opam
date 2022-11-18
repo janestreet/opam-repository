@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/incr_select"
+bug-reports: "https://github.com/janestreet/incr_select/issues"
+dev-repo: "git+https://github.com/janestreet/incr_select.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/incr_select/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.08.0"}
+  "core"        {= "v0.16~preview.127.39+317"}
+  "incremental" {= "v0.16~preview.127.39+317"}
+  "ppx_jane"    {= "v0.16~preview.127.39+317"}
+  "dune"        {>= "2.0.0"}
+]
+synopsis: "Handling of large set of incremental outputs from a single input"
+description: "
+Ability to create a large set of incremental outputs based on a single
+incremental input, where some subset of the outputs are selected to
+have specific values, and the remainder are left with a specified
+default value. The outputs are updated in time proportional to the
+number of outputs that are changed, independent of the number of
+outputs that exist.
+"
+url {
+src: "https://github.com/janestreet/incr_select/archive/f52366ac225e01985dd7c6911371982c94e7a8a0.tar.gz"
+checksum: "sha256=d81eccf3d85edbffc08fdbb7e5c0a07f3217011874aa67348fe893045f9c93a9"
+}
