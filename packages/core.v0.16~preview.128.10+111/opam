@@ -1,0 +1,50 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core"
+bug-reports: "https://github.com/janestreet/core/issues"
+dev-repo: "git+https://github.com/janestreet/core.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "4.11.0"}
+  "base"                {= "v0.16~preview.128.10+111"}
+  "base_bigstring"      {= "v0.16~preview.128.10+111"}
+  "base_quickcheck"     {= "v0.16~preview.128.10+111"}
+  "bin_prot"            {= "v0.16~preview.128.10+111"}
+  "fieldslib"           {= "v0.16~preview.128.10+111"}
+  "jane-street-headers" {= "v0.16~preview.128.10+111"}
+  "jst-config"          {= "v0.16~preview.128.10+111"}
+  "ppx_assert"          {= "v0.16~preview.128.10+111"}
+  "ppx_base"            {= "v0.16~preview.128.10+111"}
+  "ppx_hash"            {= "v0.16~preview.128.10+111"}
+  "ppx_inline_test"     {= "v0.16~preview.128.10+111"}
+  "ppx_jane"            {= "v0.16~preview.128.10+111"}
+  "ppx_optcomp"         {= "v0.16~preview.128.10+111"}
+  "ppx_sexp_conv"       {= "v0.16~preview.128.10+111"}
+  "ppx_sexp_message"    {= "v0.16~preview.128.10+111"}
+  "sexplib"             {= "v0.16~preview.128.10+111"}
+  "splittable_random"   {= "v0.16~preview.128.10+111"}
+  "stdio"               {= "v0.16~preview.128.10+111"}
+  "time_now"            {= "v0.16~preview.128.10+111"}
+  "typerep"             {= "v0.16~preview.128.10+111"}
+  "variantslib"         {= "v0.16~preview.128.10+111"}
+  "dune"                {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Industrial strength alternative to OCaml's standard library"
+description: "
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+
+This is the system-independent part of Core. Unix-specific parts were moved to [core-unix].
+"
+conflicts: ["base-domains"]
+url {
+src: "https://github.com/janestreet/core/archive/f382131ccdcb4a8cd21ebf9a49fa42dcf8183de6.tar.gz"
+checksum: "sha256=be61ed3663b9f2c46ce96ca1663b7183a71ed89eb7b344dc2c38ed55149bab95"
+}
