@@ -11,10 +11,11 @@ build: [
 ]
 depends: [
   "ocaml"             {>= "4.10.0"}
-  "sexplib0"          {= "v0.16~preview.127.44+54"}
+  "sexplib0"          {= "v0.16~preview.128.10+111"}
   "dune"              {>= "2.0.0"}
   "dune-configurator"
 ]
+available: arch != "arm32" & arch != "x86_32"
 synopsis: "Full standard library replacement for OCaml"
 description: "
 Full standard library replacement for OCaml
@@ -31,6 +32,6 @@ provided by companion libraries such as stdio:
   https://github.com/janestreet/stdio
 "
 url {
-src: "https://github.com/janestreet/base/archive/2f24978c4282695e56fba8f27eb4480113481d01.tar.gz"
-checksum: "sha256=23dff12c54fc36b90b273a07502403450f87cae6775c69607175cc1a5fd11bb6"
+src: "https://github.com/janestreet/base/archive/1462b7d5458e96569275a1c673df968ecbf3342f.tar.gz"
+checksum: "sha256=88f3f16eb81e53bb06bab75df0d973c6532d3c34057925d294f6f42d96c83a0e"
 }
