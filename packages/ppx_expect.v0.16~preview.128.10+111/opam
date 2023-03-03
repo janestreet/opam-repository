@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_expect"
+bug-reports: "https://github.com/janestreet/ppx_expect/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_expect.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_expect/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "4.08.0"}
+  "base"            {= "v0.16~preview.128.10+111"}
+  "ppx_here"        {= "v0.16~preview.128.10+111"}
+  "ppx_inline_test" {= "v0.16~preview.128.10+111"}
+  "stdio"           {= "v0.16~preview.128.10+111"}
+  "dune"            {>= "2.0.0"}
+  "ppxlib"          {>= "0.28.0"}
+  "re"              {>= "1.8.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Cram like framework for OCaml"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_expect/archive/0b69e7469f38c91979f3a78aa894b0a1768cdaaf.tar.gz"
+checksum: "sha256=b1e92283b5d45585dd775476e2a81104fbf3f11f05a6201fd08ac0861603112f"
+}

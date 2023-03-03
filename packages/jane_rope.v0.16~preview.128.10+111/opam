@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/jane_rope"
+bug-reports: "https://github.com/janestreet/jane_rope/issues"
+dev-repo: "git+https://github.com/janestreet/jane_rope.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/jane_rope/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.11.0"}
+  "base"     {= "v0.16~preview.128.10+111"}
+  "ppx_jane" {= "v0.16~preview.128.10+111"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "String representation with cheap concatenation."
+description: "
+"
+url {
+src: "https://github.com/janestreet/jane_rope/archive/d85aaad6331d8dbb2a69a804d4c93ad4d0f2fc7e.tar.gz"
+checksum: "sha256=453410dab00ed4c19518a19da81c8e5b902e8aa1aee8e71d6ecdf9af06d366ac"
+}

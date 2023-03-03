@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/vcaml"
+bug-reports: "https://github.com/janestreet/vcaml/issues"
+dev-repo: "git+https://github.com/janestreet/vcaml.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/vcaml/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                      {>= "4.08.0"}
+  "async"                      {= "v0.16~preview.128.10+111"}
+  "core"                       {= "v0.16~preview.128.10+111"}
+  "core_kernel"                {= "v0.16~preview.128.10+111"}
+  "core_unix"                  {= "v0.16~preview.128.10+111"}
+  "expect_test_helpers_async"  {= "v0.16~preview.128.10+111"}
+  "jsonaf"                     {= "v0.16~preview.128.10+111"}
+  "man_in_the_middle_debugger" {= "v0.16~preview.128.10+111"}
+  "ppx_jane"                   {= "v0.16~preview.128.10+111"}
+  "ppx_optcomp"                {= "v0.16~preview.128.10+111"}
+  "semantic_version"           {= "v0.16~preview.128.10+111"}
+  "textutils"                  {= "v0.16~preview.128.10+111"}
+  "angstrom"                   {>= "0.15.0"}
+  "angstrom-async"             {>= "0.15.0"}
+  "dune"                       {>= "2.0.0"}
+  "faraday"
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "OCaml bindings for the Neovim API"
+description: "
+VCaml provides OCaml bindings for Neovim's and models some of Neovim's
+more tricky semantics so plugin authors do not need to consider them when writing plugins.
+Plugins communicate with Neovim remotely over Msgpack RPC (see `:h api` for details).
+"
+url {
+src: "https://github.com/janestreet/vcaml/archive/b02fc56c48746fa18a6bc9a0f8fb85776db76977.tar.gz"
+checksum: "sha256=be973c24c971ce5a0d8e6a0db7acb40e5e9b7d4dcf2fe50770b523dcf06d60f8"
+}

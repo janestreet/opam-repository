@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/tracing"
+bug-reports: "https://github.com/janestreet/tracing/issues"
+dev-repo: "git+https://github.com/janestreet/tracing.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/tracing/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.08.0"}
+  "async"       {= "v0.16~preview.128.10+111"}
+  "core"        {= "v0.16~preview.128.10+111"}
+  "core_kernel" {= "v0.16~preview.128.10+111"}
+  "core_unix"   {= "v0.16~preview.128.10+111"}
+  "ppx_jane"    {= "v0.16~preview.128.10+111"}
+  "dune"        {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Tracing library"
+description: "
+Utilities for creating and parsing traces in Fuchsia Trace Format.
+"
+url {
+src: "https://github.com/janestreet/tracing/archive/11ae07c7a8c447b587c8275dc6bb6c8d71d2f599.tar.gz"
+checksum: "sha256=3570fd8b7f07ad8e4252bc33e0b0b4cd2447560c4779e24653bb139f3c1ba1a9"
+}

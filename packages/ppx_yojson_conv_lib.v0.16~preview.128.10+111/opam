@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_yojson_conv_lib"
+bug-reports: "https://github.com/janestreet/ppx_yojson_conv_lib/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_yojson_conv_lib.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_yojson_conv_lib/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "4.02.3"}
+  "dune"   {>= "2.0.0"}
+  "yojson" {>= "1.7.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Runtime lib for ppx_yojson_conv"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_yojson_conv_lib/archive/369f870b80ece74d98eaac862d87b1febef9c8b5.tar.gz"
+checksum: "sha256=bb07be27546d2fd6a3340f6c1aaa19af8c9d072df4bba17e3d38fb0ceaa8ae3a"
+}
