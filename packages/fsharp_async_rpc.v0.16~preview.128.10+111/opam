@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/fsharp_async_rpc"
+bug-reports: "https://github.com/janestreet/fsharp_async_rpc/issues"
+dev-repo: "git+https://github.com/janestreet/fsharp_async_rpc.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/fsharp_async_rpc/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.08.0"}
+  "dune"  {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Reimplementation of our async_rpc library in F#"
+description: "
+This library reimplements async_rpc and is used for building RPC-style protocols which can communicate with OCaml RPC servers.
+
+Our F# projects use relative paths for project references. It is likely that these will
+need to be modified depending on your directory structure. [fsharp_async_rpc] has dependencies to two of our open source projects, [fsharp_core_kernel] and [fsharp_bin_prot].
+"
+url {
+src: "https://github.com/janestreet/fsharp_async_rpc/archive/7d9f2f17699a507ebedd29d3388c255a582164cd.tar.gz"
+checksum: "sha256=3b3ef5ff4cb81af53e5fdd6b68db51a7ee23a2bdd6d56e49ec3fa79fb1698719"
+}
