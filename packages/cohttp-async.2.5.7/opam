@@ -31,7 +31,7 @@ depends: [
   "async" {>= "v0.14.0"}
   "base" {>= "v0.11.0"}
   "core" {with-test}
-  "cohttp" {= 2.5.6}
+  "cohttp" {>= 2.5.6 & < "3.0.0"}
   "conduit-async" {>="1.2.0" & < "3.0.0"}
   "core_unix" {>= "v0.14.0"}
   "magic-mime"
@@ -52,8 +52,8 @@ build: [
 dev-repo: "git+https://github.com/mirage/ocaml-cohttp.git"
 url {
   src:
-    "https://github.com/dkalinichenko-js/ocaml-cohttp/archive/1db68be8af54fd86c6dcdc54b3413e9d41350d7b.tar.gz"
+    "https://github.com/dkalinichenko-js/ocaml-cohttp/archive/7ce00ed5c0361e46b28c3ac37d9f76553dee1717.tar.gz"
   checksum: [
-    "sha256=845a005226ac6adc165f63f6f741bd97e9ffabdb38563fff1bd0f333bc52c61d"
+    "sha256=206c417411d920111439e4c188ae67947070ecd68ef61d3b6369b5b23e3cff83"
   ]
 }
