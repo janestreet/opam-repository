@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_csv_conv"
+bug-reports: "https://github.com/janestreet/ppx_csv_conv/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_csv_conv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_csv_conv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "4.08.0"}
+  "base"            {= "v0.16~preview.128.12+239"}
+  "csvfields"       {= "v0.16~preview.128.12+239"}
+  "ppx_conv_func"   {= "v0.16~preview.128.12+239"}
+  "ppx_fields_conv" {= "v0.16~preview.128.12+239"}
+  "dune"            {>= "2.0.0"}
+  "ppxlib"          {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Generate functions to read/write records in csv format"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_csv_conv/archive/57ebaa78e42fe337ff6b3a26a7f669b1f3869b07.tar.gz"
+checksum: "sha256=e397c870516034e26acdee6ee590ece8cc73c0ed67045a5c252dc59a139803a7"
+}

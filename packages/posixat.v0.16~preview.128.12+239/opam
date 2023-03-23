@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/posixat"
+bug-reports: "https://github.com/janestreet/posixat/issues"
+dev-repo: "git+https://github.com/janestreet/posixat.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/posixat/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.08.0"}
+  "base"          {= "v0.16~preview.128.12+239"}
+  "ppx_optcomp"   {= "v0.16~preview.128.12+239"}
+  "ppx_sexp_conv" {= "v0.16~preview.128.12+239"}
+  "dune"          {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Bindings to the posix *at functions"
+description: "
+Posixat is a small library that just binds the various *at posix
+functions.
+
+The posix *at functions takes the current working directory as a file
+descriptor. For instance this allows to reliably maintain several
+working directories inside the same process.
+"
+url {
+src: "https://github.com/janestreet/posixat/archive/d1d262041c576dee9edeed0b99fbe332a2edf508.tar.gz"
+checksum: "sha256=b50f92455a2275b6524ed7fed9d800fde892f7a011fc69fbe2529ba44a8032e5"
+}
