@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/incr_dom_sexp_form"
+bug-reports: "https://github.com/janestreet/incr_dom_sexp_form/issues"
+dev-repo: "git+https://github.com/janestreet/incr_dom_sexp_form.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/incr_dom_sexp_form/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                {>= "4.08.0"}
+  "incr_dom"             {= "v0.16~preview.128.14+51"}
+  "incr_dom_interactive" {= "v0.16~preview.128.14+51"}
+  "incr_map"             {= "v0.16~preview.128.14+51"}
+  "incr_select"          {= "v0.16~preview.128.14+51"}
+  "incremental"          {= "v0.16~preview.128.14+51"}
+  "ppx_jane"             {= "v0.16~preview.128.14+51"}
+  "splay_tree"           {= "v0.16~preview.128.14+51"}
+  "virtual_dom"          {= "v0.16~preview.128.14+51"}
+  "dune"                 {>= "2.0.0"}
+  "js_of_ocaml"          {>= "4.0"}
+  "js_of_ocaml-ppx"      {>= "4.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for building forms that allow the user to edit complicated types"
+description: "
+It relies on the fact that the type of the value being edited can be serialized via sexps.
+"
+url {
+src: "https://github.com/janestreet/incr_dom_sexp_form/archive/7231cbae13c8591ee49227c98a16e3f9e1ef4941.tar.gz"
+checksum: "sha256=0ce1d3c5ae0afcd3107989e047449678e3f173438907833e10a45733342a25cc"
+}

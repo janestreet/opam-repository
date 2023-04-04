@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/file_path"
+bug-reports: "https://github.com/janestreet/file_path/issues"
+dev-repo: "git+https://github.com/janestreet/file_path.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/file_path/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                     {>= "4.11.0"}
+  "async"                     {= "v0.16~preview.128.14+51"}
+  "core"                      {= "v0.16~preview.128.14+51"}
+  "core_kernel"               {= "v0.16~preview.128.14+51"}
+  "core_unix"                 {= "v0.16~preview.128.14+51"}
+  "expect_test_helpers_async" {= "v0.16~preview.128.14+51"}
+  "expect_test_helpers_core"  {= "v0.16~preview.128.14+51"}
+  "ppx_jane"                  {= "v0.16~preview.128.14+51"}
+  "dune"                      {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for typed manipulation of UNIX-style file paths"
+description: "
+A library for typed manipulation of UNIX-style file paths.
+"
+url {
+src: "https://github.com/janestreet/file_path/archive/cfb4f4fc8bee0b167a8ef27e1197d6b0e6ddfb10.tar.gz"
+checksum: "sha256=da399a8d130180472dc6555984ee9f6a24885fdfb3e4c67da83258fb8b622cbd"
+}
