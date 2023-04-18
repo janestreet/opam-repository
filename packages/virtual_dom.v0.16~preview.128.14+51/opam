@@ -20,8 +20,8 @@ depends: [
   "base64"              {>= "3.4.0"}
   "dune"                {>= "2.0.0"}
   "gen_js_api"          {>= "1.0.8"}
-  "js_of_ocaml"         {>= "4.0"}
-  "js_of_ocaml-ppx"     {>= "4.0"}
+  "js_of_ocaml"         {>= "5.1.1"}
+  "js_of_ocaml-ppx"     {>= "5.1.1"}
   "lambdasoup"          {>= "0.6.3"}
   "tyxml"               {>= "4.3.0"}
   "uri"                 {>= "3.0.0"}
@@ -33,6 +33,6 @@ The library itself may be found at
 https://github.com/Matt-Esch/virtual-dom.
 "
 url {
-src: "https://github.com/janestreet/virtual_dom/archive/1ee7e5b1ccd7132312abe469092b437f5eb95b86.tar.gz"
-checksum: "sha256=797620431d68e5eff7fb8626f7ff0cf3e123fccaef4c8dcefa6957479373e450"
+src: "https://github.com/janestreet/virtual_dom/archive/a9b6152ba51c54622bfc1ee03424eb764da1fdf8.tar.gz"
+checksum: "sha256=84c4be1673d9bbdb4dd72232894477461351d8c49cf284b3b13839d08d308d5e"
 }

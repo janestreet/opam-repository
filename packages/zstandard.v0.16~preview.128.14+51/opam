@@ -18,12 +18,12 @@ depends: [
   "ctypes"      {>= "0.18.0"}
   "dune"        {>= "2.0.0"}
 ]
-available: arch != "arm32" & arch != "x86_32"
 synopsis: "OCaml bindings to Zstandard"
 description: "
 Zstandard is a real-time compression algorithm which provides high compression ratios.
 "
+available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/zstandard/archive/96e405ba866fd79af213a7d4832332c69a27a08c.tar.gz"
-checksum: "sha256=0a22e57ee92c9a68db6982290f38b36a16a97543d9f9062021fb563fc790cf96"
+src: "https://github.com/janestreet/zstandard/archive/7deb65a81c20631991cd3b4eddff6c14a02164a1.tar.gz"
+checksum: "sha256=d7af2fe59c2eed082817dbd3b0e205a37e4fd2e3e98b660ee0a148b00f79f4f6"
 }

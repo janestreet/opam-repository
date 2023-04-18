@@ -12,8 +12,8 @@ build: [
 depends: [
   "ocaml"           {>= "4.08.0"}
   "dune"            {>= "2.0.0"}
-  "js_of_ocaml"     {>= "4.0"}
-  "js_of_ocaml-ppx" {>= "4.0"}
+  "js_of_ocaml"     {>= "5.1.1"}
+  "js_of_ocaml-ppx" {>= "5.1.1"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Additions to js_of_ocaml's standard library that are required by Jane Street libraries."
@@ -21,6 +21,6 @@ description: "
 Additions to js_of_ocaml's standard library that are required by Jane Street libraries. Most, if not everything in this library is intended to be upstreamed.
 "
 url {
-src: "https://github.com/janestreet/js_of_ocaml_patches/archive/247a7dd45b610907d2dc00eb0db03f0f60920efa.tar.gz"
-checksum: "sha256=01e4791272b9fe01857c5e77af8e04a8d59cbd340d577c551ae14235cc74b5cf"
+src: "https://github.com/janestreet/js_of_ocaml_patches/archive/ed785caa5ab4b856ad31f02d509186b71b245e46.tar.gz"
+checksum: "sha256=5cdc59b60e90e8d8b85a94e4387aa542f5559145b50750c6cbffd04ff33ce5ac"
 }

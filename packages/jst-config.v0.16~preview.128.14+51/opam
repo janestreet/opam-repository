@@ -27,6 +27,6 @@ different packages from Jane Street. Future updates may not be backward-compatib
 do not recommend using this package directly.
 "
 url {
-src: "https://github.com/janestreet/jst-config/archive/a2da0d851fafabd17d4b2144a10afdf7ee6ef827.tar.gz"
-checksum: "sha256=c5011c164d8040b7036bd7bdfbc3d380fae7e185b56307bb80e8e606b4487b15"
+src: "https://github.com/janestreet/jst-config/archive/1529ddf51dfc2ebe58b1f170b897027ef0817b0b.tar.gz"
+checksum: "sha256=523adab5d4f4fad12f3f496b3cf194c2bd96a92285004746034366c1d709881d"
 }

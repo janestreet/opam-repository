@@ -23,7 +23,6 @@ depends: [
   "dune"                    {>= "2.0.0"}
   "dune-configurator"
 ]
-available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for using Kerberos for both Rpc and Tcp communication"
 description: "
 Jane Street's library for Kerberizing RPC connections so that
@@ -35,7 +34,8 @@ depexts: [
   ["libkrb5-dev"] {os-family = "debian"}
   ["krb5-devel"] {os-family = "fedora" | os-family = "suse"}
 ]
+available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/krb/archive/0109aacfec72c6b4b440457078fc9fbf03cf8644.tar.gz"
-checksum: "sha256=c3426563a9d52ad4d7c3e9e88cbcb20a317087c64946a1626d439d7763f959db"
+src: "https://github.com/janestreet/krb/archive/a29de270ac8923180512e930a5ec4c12b05486c3.tar.gz"
+checksum: "sha256=c30235ec6e7e17bab27732d9712ee1b80c1f7e325cf8f1aba2f31fe266701344"
 }

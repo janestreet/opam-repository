@@ -21,8 +21,8 @@ depends: [
   "splay_tree"      {= "v0.16~preview.128.14+51"}
   "virtual_dom"     {= "v0.16~preview.128.14+51"}
   "dune"            {>= "2.0.0"}
-  "js_of_ocaml"     {>= "4.0"}
-  "js_of_ocaml-ppx" {>= "4.0"}
+  "js_of_ocaml"     {>= "5.1.1"}
+  "js_of_ocaml-ppx" {>= "5.1.1"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A monad for composing chains of interactive UI elements"
@@ -30,6 +30,6 @@ description: "
 This library allows your program to receive input from the user using DOM elements such as checkboxes, text fields, and buttons. It allows you to inspect the user's input and decide afterwards what the rest of the [Interactive.t] should be. This library is intended to be used in conjunction with Incr_dom.
 "
 url {
-src: "https://github.com/janestreet/incr_dom_interactive/archive/055bb630463b421b54d52fb1b0d49ef82705c217.tar.gz"
-checksum: "sha256=cd801d31f0c3992d259d0150fc4d458fc71d79b13537706b7d0747dc7e835c36"
+src: "https://github.com/janestreet/incr_dom_interactive/archive/7f210840589e1441ba27d6ec41cf5b626361edaa.tar.gz"
+checksum: "sha256=6e576ed5fefc48bef10890155343f47e5e5bcba3fc06b83c686b62abda0ac510"
 }

@@ -1,10 +1,10 @@
 opam-version: "2.0"
 maintainer: "Jane Street developers"
 authors: ["Jane Street Group, LLC"]
-homepage: "https://github.com/janestreet/trie"
-bug-reports: "https://github.com/janestreet/trie/issues"
-dev-repo: "git+https://github.com/janestreet/trie.git"
-doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/trie/index.html"
+homepage: "https://github.com/janestreet/base_trie"
+bug-reports: "https://github.com/janestreet/base_trie/issues"
+dev-repo: "git+https://github.com/janestreet/base_trie.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/base_trie/index.html"
 license: "MIT"
 build: [
   ["dune" "build" "-p" name "-j" jobs]
@@ -26,6 +26,6 @@ Lookup is based on \"chains\" of keys; each node of the trie has children repres
 each potential next key in the chain.
 "
 url {
-src: "https://github.com/janestreet/trie/archive/5fa9a45dcd2ca4f3c2f1567a16aad619021b6c2f.tar.gz"
-checksum: "sha256=feb6f1727618169e23c93ba2307e8bd850efeb2a0b6d8bf82d00e61fb7d9e81b"
+src: "https://github.com/janestreet/base_trie/archive/47c871dd5d3bf358ade328ce97ccd4ed366dbcda.tar.gz"
+checksum: "sha256=ce0071222604860d9ba022c73bd48819a1880657c439781c57626700e996b7c4"
 }

@@ -16,13 +16,13 @@ depends: [
   "ppx_jane"    {= "v0.16~preview.128.14+51"}
   "dune"        {>= "2.0.0"}
 ]
-available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for parsing CPU capabilities out of the `cpuid` instruction."
 description: "
 Supports a broad swath of Intel CPU capabilities and a more limited subset of AMD CPU
 capabilities.
 "
+available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/cpuid/archive/b6b74c800cbe8afb5025a2f4b46d5ffef2e2489d.tar.gz"
-checksum: "sha256=ae0b422f664cc3c7ed8402c96e05a9cdf349887a5332ea27c13f6fe2486fcaf9"
+src: "https://github.com/janestreet/cpuid/archive/03828c6bdc6f4de32fadcb37a67e43d33871f0bc.tar.gz"
+checksum: "sha256=226fdbdfada8554e280378301dae431b60009719433d1bb622172b767871280b"
 }

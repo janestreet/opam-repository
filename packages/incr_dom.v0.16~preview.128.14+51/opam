@@ -20,8 +20,8 @@ depends: [
   "ppx_jane"        {= "v0.16~preview.128.14+51"}
   "virtual_dom"     {= "v0.16~preview.128.14+51"}
   "dune"            {>= "2.0.0"}
-  "js_of_ocaml"     {>= "4.0"}
-  "js_of_ocaml-ppx" {>= "4.0"}
+  "js_of_ocaml"     {>= "5.1.1"}
+  "js_of_ocaml-ppx" {>= "5.1.1"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for building dynamic webapps, using Js_of_ocaml"
@@ -47,6 +47,6 @@ If you want a more concrete sense of how this works, look in the
 examples directory.
 "
 url {
-src: "https://github.com/janestreet/incr_dom/archive/ceeaefb04a38ad06a6ce65b7a99fc7ff21798f80.tar.gz"
-checksum: "sha256=95f8e75bf09b7b1dc8751a82f0c7ba063762192a6e80d5200f30cde36ab03919"
+src: "https://github.com/janestreet/incr_dom/archive/8456a4ec0b0e062d586edd7d2a706e36a2000213.tar.gz"
+checksum: "sha256=f4efbdf95aa0f0c1001222ea20274c6aaa0826c9d792f10ff259e3dd1a71858a"
 }

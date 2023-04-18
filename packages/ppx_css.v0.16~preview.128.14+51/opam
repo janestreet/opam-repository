@@ -23,8 +23,8 @@ depends: [
   "stdio"           {= "v0.16~preview.128.14+51"}
   "virtual_dom"     {= "v0.16~preview.128.14+51"}
   "dune"            {>= "2.0.0"}
-  "js_of_ocaml"     {>= "4.0"}
-  "js_of_ocaml-ppx" {>= "4.0"}
+  "js_of_ocaml"     {>= "5.1.1"}
+  "js_of_ocaml-ppx" {>= "5.1.1"}
   "menhirLib"
   "ppxlib"          {>= "0.28.0"}
   "re"              {>= "1.8.0"}
@@ -36,6 +36,6 @@ description: "
 A ppx that takes in css strings and produces a module for accessing the unique names defined within.
 "
 url {
-src: "https://github.com/janestreet/ppx_css/archive/f1a3f6033d3bed615431fc686b70e0a05f320391.tar.gz"
-checksum: "sha256=61f780875a33b3f5bde201c02dff74071dd05d0a29d534b50c665871a253f156"
+src: "https://github.com/janestreet/ppx_css/archive/f3e684c499caa71430badc2c760040ea7a64ab3e.tar.gz"
+checksum: "sha256=fe4332978ec139f52f44be6a6623a73579a6ab6de73a4a35ce5d46a8fb9b149b"
 }

@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"        {>= "4.08.0"}
   "ppx_jane"     {= "v0.16~preview.128.14+51"}
-  "cohttp-async" {>= "2.5.7" & < "3.0.0" | >= "5.0.1" & < "6.0.0"}
+  "cohttp-async" {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
   "dune"         {>= "2.0.0"}
   "uri-sexp"     {>= "3.0.0"}
 ]
@@ -23,6 +23,6 @@ Single page handlers are handlers that serve user specified JavaScript and css
    files along with a generated index page that loads those files.
 "
 url {
-src: "https://github.com/janestreet/cohttp_static_handler/archive/91119e3846228369a86ca00748db5b97c18ea833.tar.gz"
-checksum: "sha256=95a0d40bf9e299880761d59225e4e442317743353a3a7129678c679fb4c4999c"
+src: "https://github.com/janestreet/cohttp_static_handler/archive/b76233faa61aab82076c827c22ebe0eb0712981b.tar.gz"
+checksum: "sha256=94041d64b9d262b94a019d0356a7f3d05be151f1ffba1ed9861bc2809a476a1d"
 }

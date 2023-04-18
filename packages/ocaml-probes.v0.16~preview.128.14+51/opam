@@ -14,14 +14,14 @@ depends: [
   "dune"  {>= "2.0.0"}
   "owee"  {>= "0.4"}
 ]
-available: arch != "arm32" & arch != "x86_32"
 synopsis: "USDT probes for OCaml: command line tool"
 description: "
 A tool for controlling user-space statically-defined tracing probes for OCaml.
 Experimental.
 "
 depexts: ["linux-headers"] {os-family = "alpine"}
+available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/ocaml-probes/archive/f07f0cd1bac61b46724155f6514f4449b428c250.tar.gz"
-checksum: "sha256=cd7993437c1f6c07b2c970d5038fbde69e95abe76608d29485b07d0c38dcdadc"
+src: "https://github.com/janestreet/ocaml-probes/archive/bbe6edda0fcf4897b89f4fe295398e568b752fc2.tar.gz"
+checksum: "sha256=d8ee3421eb43efa98290086b3b7ec69c0950257575a62832e59ef4951d0a2c92"
 }
