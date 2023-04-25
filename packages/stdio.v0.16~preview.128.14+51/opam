@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.08.0"}
+  "ocaml" {>= "4.14.0"}
   "base"  {= "v0.16~preview.128.14+51"}
   "dune"  {>= "2.0.0"}
 ]
@@ -23,6 +23,6 @@ It re-exports the input/output functions of the OCaml standard
 libraries using a more consistent API.
 "
 url {
-src: "https://github.com/janestreet/stdio/archive/89e153e382457427cf4e5550842f538dec25d661.tar.gz"
-checksum: "sha256=3695c78afd7cae9e32a6884e7df1dd2bdb715f3eaab5d8b95c5d036b46919cf4"
+src: "https://github.com/janestreet/stdio/archive/24f8d6b1de43333070b974f55aa5988700466dc9.tar.gz"
+checksum: "sha256=9c0de37be939cb8f92797d8f5dbd7174ee45616a89b43bca14631da5b3d4929d"
 }

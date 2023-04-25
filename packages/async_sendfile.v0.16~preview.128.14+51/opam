@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.08.0"}
+  "ocaml"        {>= "4.14.0"}
   "async_kernel" {= "v0.16~preview.128.14+51"}
   "async_unix"   {= "v0.16~preview.128.14+51"}
   "core"         {= "v0.16~preview.128.14+51"}
@@ -22,6 +22,6 @@ synopsis: "Thin wrapper around [Linux_ext.sendfile] to send full files"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_sendfile/archive/4c85460ba1f48d3171de74cc6118e3140201057d.tar.gz"
-checksum: "sha256=8234146d5c0f9d993f0e79216413978cec83185adf8a8a732a4894472aeba80e"
+src: "https://github.com/janestreet/async_sendfile/archive/88be6d887ab87cb0449b39d80ff6ab52a6a4ec42.tar.gz"
+checksum: "sha256=b2c7340e429ddc67c501b4af6fb7d1ad87e54a01b65677aa4b49e4926a541bf1"
 }

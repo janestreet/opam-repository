@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"  {>= "4.08.0"}
+  "ocaml"  {>= "4.14.0"}
   "base"   {= "v0.16~preview.128.14+51"}
   "dune"   {>= "2.0.0"}
   "ppxlib" {>= "0.28.0"}
@@ -21,6 +21,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_conv_func/archive/8e2339b2b961b6daa699258fb75a0fe3501a7fe3.tar.gz"
-checksum: "sha256=a7f46bb59a821dd42e80895fd0640a9e985dd94b246f8b8c48769e1c1d975c93"
+src: "https://github.com/janestreet/ppx_conv_func/archive/b1c037e2414178360dd3ff6ec02ec71837e092c6.tar.gz"
+checksum: "sha256=aa08f836153b9d7b7156434f3d33c1067b00cfe00d18e298e8a44a88ffec8b06"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "async"    {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -24,6 +24,6 @@ is an Async driver, which makes it easy to build terminal applications using
 Async for managing concurrency.
 "
 url {
-src: "https://github.com/janestreet/notty_async/archive/7f3e54ec5e65200d953cd027764e0b836356528a.tar.gz"
-checksum: "sha256=51f64f12decbdd8f5634470e34af239d08c0ca46431f4994aa72f758eb8af7bb"
+src: "https://github.com/janestreet/notty_async/archive/dd0a4bbbbe40e0bb48727f82f53c8de551e1e725.tar.gz"
+checksum: "sha256=f899fb70866e911651aced2cc6a4982ebf816227d49f005a0c172500962d6950"
 }

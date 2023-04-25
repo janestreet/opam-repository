@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"               {>= "4.11.0"}
+  "ocaml"               {>= "4.14.0"}
   "base"                {= "v0.16~preview.128.14+51"}
   "base_bigstring"      {= "v0.16~preview.128.14+51"}
   "base_quickcheck"     {= "v0.16~preview.128.14+51"}
@@ -44,6 +44,6 @@ largest industrial user of OCaml.
 This is the system-independent part of Core. Unix-specific parts were moved to [core-unix].
 "
 url {
-src: "https://github.com/janestreet/core/archive/a60df3aab038dc47a32f9aa75d02d8e3d9dae87a.tar.gz"
-checksum: "sha256=dc51708e35b0b369a158985c7e15394f5888373816c7006f2ee35cf0b5bd187d"
+src: "https://github.com/janestreet/core/archive/b6a398d83484f7e3c18f209374be48e6a1262464.tar.gz"
+checksum: "sha256=d1685d6e19e8b2014476793e7cd71af003e1696a08340457485a365eff37afe9"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.08.0"}
+  "ocaml"        {>= "4.14.0"}
   "base"         {= "v0.16~preview.128.14+51"}
   "parsexp"      {= "v0.16~preview.128.14+51"}
   "ppx_js_style" {= "v0.16~preview.128.14+51"}
@@ -23,6 +23,6 @@ description: "
 Parsexp_io provides functions for loading s-expressions from files.
 "
 url {
-src: "https://github.com/janestreet/parsexp_io/archive/83ab3fa84e28febd5cc36951212a8c16a54e8f62.tar.gz"
-checksum: "sha256=ea34511b05c1a85f09854ddc80d7aa503d87f4c86b2e5f7559144b888ee7620f"
+src: "https://github.com/janestreet/parsexp_io/archive/138dd54b523cc075ea204bf53839de5c982c8120.tar.gz"
+checksum: "sha256=1cab556bd4ecd6aed2361564d5a8c60755d1a15779bd5278503a5ffaeedd3929"
 }

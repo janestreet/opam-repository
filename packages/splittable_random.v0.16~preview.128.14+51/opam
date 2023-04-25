@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.08.0"}
+  "ocaml"            {>= "4.14.0"}
   "base"             {= "v0.16~preview.128.14+51"}
   "ppx_assert"       {= "v0.16~preview.128.14+51"}
   "ppx_bench"        {= "v0.16~preview.128.14+51"}
@@ -31,6 +31,6 @@ This library implements a splittable pseudo-random number generator that sacrifi
 cryptographic-quality randomness in favor of performance.
 "
 url {
-src: "https://github.com/janestreet/splittable_random/archive/e26146952d3ecc1a1db0d01658d5cebce071f5f5.tar.gz"
-checksum: "sha256=15db7c3f38d55cfc1665a7da973fd91440110b57072434bfee400d871ec01e96"
+src: "https://github.com/janestreet/splittable_random/archive/8cfd48aff6dc9b54bf5e877d982b40c9968c2bef.tar.gz"
+checksum: "sha256=6ed83b49c9b95c851979db46316196ad4728a7110165c891c74e32fd83211f4d"
 }

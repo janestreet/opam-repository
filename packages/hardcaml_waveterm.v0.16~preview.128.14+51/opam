@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.08.0"}
+  "ocaml"                    {>= "4.14.0"}
   "base"                     {= "v0.16~preview.128.14+51"}
   "core_unix"                {= "v0.16~preview.128.14+51"}
   "expect_test_helpers_core" {= "v0.16~preview.128.14+51"}
@@ -36,6 +36,6 @@ to simulations.
 "
 conflicts: ["hardcaml-waveterm"] 
 url {
-src: "https://github.com/janestreet/hardcaml_waveterm/archive/7f762d5a25b4e00ad94261c28b0746ba6f1eb6a0.tar.gz"
-checksum: "sha256=ad1fa8b2423011ecff3d954f8fe7614d24fd7bb76af619cc5b85f5c66b8ed4ef"
+src: "https://github.com/janestreet/hardcaml_waveterm/archive/8cfd4e59a4d111c50da79f472b0f42897fdc6f5e.tar.gz"
+checksum: "sha256=6156dce94469dade91e57821abe30216bc9decb15bc6aba8fc27bafcf57cda81"
 }

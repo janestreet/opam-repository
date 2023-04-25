@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.08.0"}
+  "ocaml"                    {>= "4.14.0"}
   "async"                    {= "v0.16~preview.128.14+51"}
   "async_durable"            {= "v0.16~preview.128.14+51"}
   "async_extra"              {= "v0.16~preview.128.14+51"}
@@ -61,6 +61,6 @@ Bonsai is a library for building reusable UI components inside an
      Incremental-style UI framework such as Incr_dom or React.
 "
 url {
-src: "https://github.com/janestreet/bonsai/archive/67fee81821ce342d463c9a1217f78a6ebab8cb62.tar.gz"
-checksum: "sha256=a8bf7b5b5576813fb105fc785ccf18c585ef841184f59f42f12212bed883f474"
+src: "https://github.com/janestreet/bonsai/archive/e6c6bc9f3fdcb51c3ad65e0239be3b3f4319ae46.tar.gz"
+checksum: "sha256=19207d5f1a2d6b259303c9f913c73290d556fc2f02b5b28275d843abbb9bfcf0"
 }

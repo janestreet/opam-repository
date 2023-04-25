@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.09.0"}
+  "ocaml"         {>= "4.14.0"}
   "base"          {= "v0.16~preview.128.14+51"}
   "higher_kinded" {= "v0.16~preview.128.14+51"}
   "ppx_jane"      {= "v0.16~preview.128.14+51"}
@@ -27,6 +27,6 @@ increasingly complex data structures.
 In case you have ever heard of \"lenses\", this is an OCaml implementation of that idea.
 "
 url {
-src: "https://github.com/janestreet/accessor/archive/956d0790587cfdcc0918947cd81ed073852b5d1d.tar.gz"
-checksum: "sha256=bf9f2fdaa1150d65b387ef2d01cfd9c81b5bae53461e4023adb7ce7bd380d641"
+src: "https://github.com/janestreet/accessor/archive/fa62c9153eff8230188857f3486780951b49d6d8.tar.gz"
+checksum: "sha256=d74218abe0fb4048fd596f54e54cf78d3546aff4cdf0f33a08e73395f00ba4e3"
 }

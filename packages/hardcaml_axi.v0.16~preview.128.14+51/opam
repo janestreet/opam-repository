@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                 {>= "4.08.0"}
+  "ocaml"                 {>= "4.14.0"}
   "base"                  {= "v0.16~preview.128.14+51"}
   "hardcaml"              {= "v0.16~preview.128.14+51"}
   "hardcaml_circuits"     {= "v0.16~preview.128.14+51"}
@@ -25,6 +25,6 @@ description: "
 AXI Lite, Full and Stream Interfaces for Hardcaml
 "
 url {
-src: "https://github.com/janestreet/hardcaml_axi/archive/3910d304875306b66a9deb78487563b3138621b3.tar.gz"
-checksum: "sha256=bbf6272e3247b3e95930d3590ce26dea2e3eda1275aa7b69dc5cb64c7dd5e194"
+src: "https://github.com/janestreet/hardcaml_axi/archive/90337a66692c89484b3a3e8fb265b71d706323c1.tar.gz"
+checksum: "sha256=f3f0a360d67a4a84cac232ec403a4e1897300384c17e6a61ed4167186b74fb9f"
 }

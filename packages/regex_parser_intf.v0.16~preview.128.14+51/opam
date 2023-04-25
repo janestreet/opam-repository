@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.08.0"}
+  "ocaml" {>= "4.14.0"}
   "base"  {= "v0.16~preview.128.14+51"}
   "dune"  {>= "2.0.0"}
 ]
@@ -19,6 +19,6 @@ synopsis: "Interface shared by Re_parser and Re2.Parser"
 description: "
 "
 url {
-src: "https://github.com/janestreet/regex_parser_intf/archive/0e8b83a2bde523871147859ac59969aba57453fa.tar.gz"
-checksum: "sha256=93a1cb9e2d7173010dc00bcae6eb40c4c7b69388436e95b09e5d6465b06fa8e2"
+src: "https://github.com/janestreet/regex_parser_intf/archive/b91dfd46404be235ef7547d9284301a38a58b082.tar.gz"
+checksum: "sha256=60e1e3445e1f6fac56ff231d42f2921851ba2255eb44001cd76bd4787f40fa92"
 }

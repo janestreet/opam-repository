@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
+  "ocaml"       {>= "4.14.0"}
   "async"       {= "v0.16~preview.128.14+51"}
   "core_kernel" {= "v0.16~preview.128.14+51"}
   "ppx_jane"    {= "v0.16~preview.128.14+51"}
@@ -22,6 +22,6 @@ description: "
 A library for running the fzf command line fuzzy matcher
 "
 url {
-src: "https://github.com/janestreet/fzf/archive/e86178d986a3615a736817450d158840c6e329a4.tar.gz"
-checksum: "sha256=38cedd92519ac8611c6dcab3de0113907f38c94a6e7a7060f6cd8b840d47f41c"
+src: "https://github.com/janestreet/fzf/archive/b99cb551b1ad112dcb4b8cfb486b5640cef52f3d.tar.gz"
+checksum: "sha256=9682e284d219d5672fdfa72b9477792da8b3d76705b1c77eb3b338c99176154c"
 }

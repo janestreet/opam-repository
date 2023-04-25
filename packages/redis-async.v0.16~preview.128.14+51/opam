@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
+  "ocaml"       {>= "4.14.0"}
   "async"       {= "v0.16~preview.128.14+51"}
   "bignum"      {= "v0.16~preview.128.14+51"}
   "core"        {= "v0.16~preview.128.14+51"}
@@ -29,6 +29,6 @@ types.
 Supports client tracking and internally uses the RESP3 protocol. 
 "
 url {
-src: "https://github.com/janestreet/redis-async/archive/06a1c78945ec91519349103937eb42b7c68de7bb.tar.gz"
-checksum: "sha256=4930c95a1fb69444b7f80b46eaf19278e6b3f02965f6f2392a1dd2053fa40bd5"
+src: "https://github.com/janestreet/redis-async/archive/173b311dd6d168fd3af43857f4ba65d1d9587899.tar.gz"
+checksum: "sha256=d15e3d4674a2c827230c1864bda263176c96e843ca5d9dd9a64fd92e6f74b690"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                   {>= "4.08.0"}
+  "ocaml"                   {>= "4.14.0"}
   "async"                   {= "v0.16~preview.128.14+51"}
   "base"                    {= "v0.16~preview.128.14+51"}
   "core"                    {= "v0.16~preview.128.14+51"}
@@ -36,6 +36,6 @@ depexts: [
 ]
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/krb/archive/a29de270ac8923180512e930a5ec4c12b05486c3.tar.gz"
-checksum: "sha256=c30235ec6e7e17bab27732d9712ee1b80c1f7e325cf8f1aba2f31fe266701344"
+src: "https://github.com/janestreet/krb/archive/0f8b8d7e0718841b9e91169b13132b93518d9472.tar.gz"
+checksum: "sha256=d7737e45bd5ed2b12f241f4690a8519308c25a6555995110ad78bb235f70ff9c"
 }

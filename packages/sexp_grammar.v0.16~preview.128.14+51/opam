@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.08.0"}
+  "ocaml"            {>= "4.14.0"}
   "core"             {= "v0.16~preview.128.14+51"}
   "ppx_bin_prot"     {= "v0.16~preview.128.14+51"}
   "ppx_compare"      {= "v0.16~preview.128.14+51"}
@@ -27,6 +27,6 @@ description: "
 Helpers for manipulating [Sexplib.Sexp_grammar] values.
 "
 url {
-src: "https://github.com/janestreet/sexp_grammar/archive/8c18ec51201cd4a011dc3e018344306d728d1ee1.tar.gz"
-checksum: "sha256=10aaba530ab9dfae3685971f353ebd364ac029d8b097b89c9845c412a9f874c8"
+src: "https://github.com/janestreet/sexp_grammar/archive/be7dfe61e0bf1f6dcce2592a16a74ce95e1eed19.tar.gz"
+checksum: "sha256=7ae7bc1489e8ccf3ffce5b11e77d40e91933325a4e4fd95cea1e4e60b978c118"
 }

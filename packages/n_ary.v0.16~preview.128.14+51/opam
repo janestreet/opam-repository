@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.11.0"}
+  "ocaml"                    {>= "4.14.0"}
   "base"                     {= "v0.16~preview.128.14+51"}
   "expect_test_helpers_core" {= "v0.16~preview.128.14+51"}
   "ppx_compare"              {= "v0.16~preview.128.14+51"}
@@ -31,6 +31,6 @@ Provides tuples, enumerations, variants, and list operations
 implemented for N from 2 to 16, inclusive.
 "
 url {
-src: "https://github.com/janestreet/n_ary/archive/7f1ef2dc8d13ac408f65c1bdcace795dc2ba6121.tar.gz"
-checksum: "sha256=d4f4fe0bf696096e6ad7db2c472361ae720833d67a3814afa985d8ab5f2a47cf"
+src: "https://github.com/janestreet/n_ary/archive/bb0573c96649065c6100f70489932a74037cc2fb.tar.gz"
+checksum: "sha256=b7634722681c67a7e5b37ea03b43816bd37142a1ca360e0e0b79e0cf9b0e6d20"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"  {>= "4.08.0"}
+  "ocaml"  {>= "4.14.0"}
   "base"   {= "v0.16~preview.128.14+51"}
   "dune"   {>= "2.0.0"}
   "ppxlib" {>= "0.28.0"}
@@ -21,6 +21,6 @@ description: "
 Provides a ppx for [let%tydi]: type-directed [let] bindings. In [let%tydi a = b in ...], [a]'s type is inferred from [b] rather than the other way around. This is convenient for record patterns whose fields are not in scope.
 "
 url {
-src: "https://github.com/janestreet/ppx_tydi/archive/5bf1fcba29d99f2385429c9d07b0e0f7dff1ec36.tar.gz"
-checksum: "sha256=975faf2e96c4c3623a300be42a0b0faaec2bb68fd127df09d1f8fcd2285db4b1"
+src: "https://github.com/janestreet/ppx_tydi/archive/a2a1bc77e7623dced6e9dd74502ded02fcdcc452.tar.gz"
+checksum: "sha256=6c84e477867ef63caede1b3be318a10f6eaee1ed2d5fbf560ced5b822cd1f024"
 }

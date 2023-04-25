@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
+  "ocaml"       {>= "4.14.0"}
   "async"       {= "v0.16~preview.128.14+51"}
   "core"        {= "v0.16~preview.128.14+51"}
   "core_kernel" {= "v0.16~preview.128.14+51"}
@@ -24,6 +24,6 @@ description: "
 Utilities for creating and parsing traces in Fuchsia Trace Format.
 "
 url {
-src: "https://github.com/janestreet/tracing/archive/106be8c4de8117eb6408c9ec8eb2fae795c5f211.tar.gz"
-checksum: "sha256=999ba5728e71bff5b52ac28a82a4a62e7c1ec1acc1a0a19c562c5bb28cd6eaa0"
+src: "https://github.com/janestreet/tracing/archive/77dc6150899fe87689ff4abf7e2cfe8d3694ecf5.tar.gz"
+checksum: "sha256=df1ac4860cc5540b016bc13825609f35428313288ecf0cbbe63f2db411112ce1"
 }

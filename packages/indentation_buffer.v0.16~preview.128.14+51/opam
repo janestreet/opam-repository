@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "core"     {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 A library for building strings with indentation
 "
 url {
-src: "https://github.com/janestreet/indentation_buffer/archive/f4e9d8a5b68ab47645e577da675cbe5efe3ec76c.tar.gz"
-checksum: "sha256=49910f814757b4d4273abe4acae93e59c0d0c61ba0824a71c37f65529d9f289c"
+src: "https://github.com/janestreet/indentation_buffer/archive/7936b23469b5927d464f75b02eee5c56f9977b01.tar.gz"
+checksum: "sha256=dbb55739c6324c372f3999e539110320367eaeef3af74b1aee890e550b15da71"
 }

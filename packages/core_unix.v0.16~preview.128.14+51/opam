@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.08.0"}
+  "ocaml"                    {>= "4.14.0"}
   "core"                     {= "v0.16~preview.128.14+51"}
   "core_kernel"              {= "v0.16~preview.128.14+51"}
   "expect_test_helpers_core" {= "v0.16~preview.128.14+51"}
@@ -32,6 +32,6 @@ Unix-specific extensions to some of the modules defined in [core] and [core_kern
 "
 depexts: ["linux-headers"] {os-family = "alpine"}
 url {
-src: "https://github.com/janestreet/core_unix/archive/b0186b88c6028bea456f9d1bb19cbf0c34af5b05.tar.gz"
-checksum: "sha256=d988f2d094284bfc59f3799c1f112e0f8e537bfaa4b72569080d8fddd488c816"
+src: "https://github.com/janestreet/core_unix/archive/8cd55fee91aad579f5940fc3e9943e62b335b6cd.tar.gz"
+checksum: "sha256=68a67a717abc572c7351ed2370cc919e6fe4de8f3ca4b5bc93db2cb1c8a28c52"
 }

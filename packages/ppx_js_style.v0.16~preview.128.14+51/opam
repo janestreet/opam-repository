@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "base"     {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
   "octavius"
@@ -25,6 +25,6 @@ This packages is a no-op ppx rewriter. It is used as a 'lint' tool to
 enforce some coding conventions across all Jane Street packages.
 "
 url {
-src: "https://github.com/janestreet/ppx_js_style/archive/403ba4dfd7e8f58345d0073599b65381e40fcc06.tar.gz"
-checksum: "sha256=618e3b58c6d060bf620bcec7da364a5e86db1fff4fdd0166ae44be2c62c54605"
+src: "https://github.com/janestreet/ppx_js_style/archive/591cf69a91efff9552cd18075db13d197083a341.tar.gz"
+checksum: "sha256=718032ea5b8d5bedd7a1083a2d7191ada930d2173c20f1f60c7d9ff0abc1e2a5"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
+  "ocaml"       {>= "4.14.0"}
   "core"        {= "v0.16~preview.128.14+51"}
   "ppx_here"    {= "v0.16~preview.128.14+51"}
   "ppx_jane"    {= "v0.16~preview.128.14+51"}
@@ -24,6 +24,6 @@ description: "
 Module for setting up dependencies (like printers and liblinks) for toplevels.
 "
 url {
-src: "https://github.com/janestreet/toplevel_backend/archive/8a3025e2f4e2829cf9797f28e992d22ffddb0410.tar.gz"
-checksum: "sha256=7aabd7e7a84bc1f57b778a7de16a6639596803db33d914d9f7d8a161edc00667"
+src: "https://github.com/janestreet/toplevel_backend/archive/7af71c7900df30d69999edff167ae35e691ae4f2.tar.gz"
+checksum: "sha256=0d7ac469dbf1fa612417cc8aa4a327a4d43d7e1dd2a98b4df5500fff95c618e3"
 }

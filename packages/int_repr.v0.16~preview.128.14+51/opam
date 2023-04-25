@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.10.0"}
+  "ocaml"    {>= "4.14.0"}
   "base"     {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 Integers of various widths.
 "
 url {
-src: "https://github.com/janestreet/int_repr/archive/273ff58b7d00650464323e86987c39fdf3ab5767.tar.gz"
-checksum: "sha256=ed89459a8685b9c4bad678b06442b3dc008790d1d1743fec8e68da8a23cbffdd"
+src: "https://github.com/janestreet/int_repr/archive/678cf0a2bb921650aa0b76e8d36d8ab3e234bd15.tar.gz"
+checksum: "sha256=1f9032617fbc28efca6283edafb0ac94a2a4d80d5f74091e862588c6e1894c6e"
 }

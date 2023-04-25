@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "core"     {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -22,6 +22,6 @@ The code behind the [diff] subcommand of the Jane Street's [sexp]
 command line tool.
 "
 url {
-src: "https://github.com/janestreet/sexp_diff/archive/c97659f36dd7ea9e7699e186c29d08b0f884e8dd.tar.gz"
-checksum: "sha256=22853752bdd864b61c589a488144a04b8522bfbd4c8c71337bd62f87ccd83010"
+src: "https://github.com/janestreet/sexp_diff/archive/92dd28791175924333190db42ae1bab54261d174.tar.gz"
+checksum: "sha256=29f8d7f86eb501154f7aff38be3285c1d163623279863165d1cbd5e15f255945"
 }

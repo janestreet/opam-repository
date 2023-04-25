@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "core"     {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "sexplib"  {= "v0.16~preview.128.14+51"}
@@ -22,6 +22,6 @@ synopsis: "Runtime support for ppx_xml_conv and ppx_csv_conv_deprecated"
 description: "
 "
 url {
-src: "https://github.com/janestreet/csvfields/archive/b57b0759f536cdb2cdc287259ec20b855d38edbd.tar.gz"
-checksum: "sha256=8d80882fa7ea4f13ed2c0f22f10d3cb62468547179069ab618a796f373739c6e"
+src: "https://github.com/janestreet/csvfields/archive/1af9b2f3065a7a83be600d6e3346c97062639702.tar.gz"
+checksum: "sha256=7b4b080447588c640a49e1f23f45b965a6449590e922e87feb1c3998fc0cbabf"
 }

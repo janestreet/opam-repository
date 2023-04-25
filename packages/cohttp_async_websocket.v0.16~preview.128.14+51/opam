@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"           {>= "4.08.0"}
+  "ocaml"           {>= "4.14.0"}
   "async"           {= "v0.16~preview.128.14+51"}
   "async_ssl"       {= "v0.16~preview.128.14+51"}
   "async_websocket" {= "v0.16~preview.128.14+51"}
@@ -36,6 +36,6 @@ hardened with many applications using it for several year, in
 conjunction with async-js and google-chrome.
 "
 url {
-src: "https://github.com/janestreet/cohttp_async_websocket/archive/8626a0e822555d96ef2a666fbb700596587443de.tar.gz"
-checksum: "sha256=150aed0b921eb7d9869e391e0f88e26d507088ce552b82060dde0d9157b9ab3d"
+src: "https://github.com/janestreet/cohttp_async_websocket/archive/7f3f16b90478d7bdeeedd12105920f8f95b487fd.tar.gz"
+checksum: "sha256=fb9f7d6352fbe568289734c5140d8713f2f4e67d796131a1000ccfb4e656fa58"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                 {>= "4.08.0"}
+  "ocaml"                 {>= "4.14.0"}
   "base"                  {= "v0.16~preview.128.14+51"}
   "hardcaml"              {= "v0.16~preview.128.14+51"}
   "hardcaml_waveterm"     {= "v0.16~preview.128.14+51"}
@@ -33,6 +33,6 @@ Circuits can also be converted to NuSMV format for advanced bounded and unbounde
 checking tasks.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_verify/archive/90731c8052efbfb033ab89029778dd0573441f23.tar.gz"
-checksum: "sha256=bff196ede53883657e4a3b452f475e2bc0e1c59dfde9e877bfa048e049b26fe3"
+src: "https://github.com/janestreet/hardcaml_verify/archive/89bdade5a038b62f5d9c5e80bc37e39f442c47a5.tar.gz"
+checksum: "sha256=388307c396b1b45d9ffd80f510a6e92fefdd4bafacec6d97c5eb40840fd3e65e"
 }

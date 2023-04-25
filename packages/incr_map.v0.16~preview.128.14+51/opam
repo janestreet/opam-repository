@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.08.0"}
+  "ocaml"            {>= "4.14.0"}
   "abstract_algebra" {= "v0.16~preview.128.14+51"}
   "bignum"           {= "v0.16~preview.128.14+51"}
   "core"             {= "v0.16~preview.128.14+51"}
@@ -30,6 +30,6 @@ along with the ability to efficiently diff map data structures using
 =Map.symmetric_diff=.
 "
 url {
-src: "https://github.com/janestreet/incr_map/archive/dd30c12051dd957f1b3e3802bbf5e5127d1a8cf8.tar.gz"
-checksum: "sha256=8c69d9dd4734926f766f621e0d5fb35d61c8bfabd7cad1cc71d561387fe148cc"
+src: "https://github.com/janestreet/incr_map/archive/6fb03f4f8dfc014eee71b7e608097f6e6b6e0d7d.tar.gz"
+checksum: "sha256=7b98e7a0f90fa487cbf9a1aee55284ce874f96dde541a39bfa43a8dd35f2d74a"
 }

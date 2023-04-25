@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
+  "ocaml"       {>= "4.14.0"}
   "async"       {= "v0.16~preview.128.14+51"}
   "core"        {= "v0.16~preview.128.14+51"}
   "core_kernel" {= "v0.16~preview.128.14+51"}
@@ -28,6 +28,6 @@ synopsis: "E-mail message parser"
 description: "
 "
 url {
-src: "https://github.com/janestreet/email_message/archive/e9c15dddfc2cb0dd021b613e08ef82b9a7bf3126.tar.gz"
-checksum: "sha256=5d3d4e157276d4dea0c9d1a01d8155597b92f4b1401ba27a48d1092b85395e55"
+src: "https://github.com/janestreet/email_message/archive/94523dc4f898a85bcdb6d41ac882aa72cbdf80ed.tar.gz"
+checksum: "sha256=f235d1cb64bfa990bb7002d442256a0c9fc199b4a260fb8b7b79b12ca22f356f"
 }

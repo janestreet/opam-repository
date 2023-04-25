@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"           {>= "4.08.0"}
+  "ocaml"           {>= "4.14.0"}
   "base"            {= "v0.16~preview.128.14+51"}
   "csvfields"       {= "v0.16~preview.128.14+51"}
   "ppx_conv_func"   {= "v0.16~preview.128.14+51"}
@@ -24,6 +24,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_csv_conv/archive/57ebaa78e42fe337ff6b3a26a7f669b1f3869b07.tar.gz"
-checksum: "sha256=e397c870516034e26acdee6ee590ece8cc73c0ed67045a5c252dc59a139803a7"
+src: "https://github.com/janestreet/ppx_csv_conv/archive/eaff960dcdde1c1fac554b5886f5392aac4850e9.tar.gz"
+checksum: "sha256=e02df70ce0da51e03050e022f3547bc9a6d1ccb7ed9899c862873f4d972fd27d"
 }

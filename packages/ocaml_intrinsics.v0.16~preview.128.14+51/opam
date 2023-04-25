@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.08.0"}
+  "ocaml"             {>= "4.14.0"}
   "dune"              {>= "2.0.0"}
   "dune-configurator"
 ]
@@ -21,6 +21,6 @@ Provides functions to invoke amd64 instructions (such as clz,popcnt,rdtsc,rdpmc)
 "
 available: (arch = "x86_64" | arch = "arm64") & os != "win32"
 url {
-src: "https://github.com/janestreet/ocaml_intrinsics/archive/2ce497f4eafaae0519fcffc2b088ad0f37346643.tar.gz"
-checksum: "sha256=1640baa50b65db89b17892f984d2e9c9aa32184840c523f4cbc7c6c7f002c735"
+src: "https://github.com/janestreet/ocaml_intrinsics/archive/cddd1a80f2e5015949422b5573395161f3895adb.tar.gz"
+checksum: "sha256=0e33cbdeb7fb03d88015aaf5b6bdeb5beb3e76e3f5640377da9dd89b9b5b5af4"
 }

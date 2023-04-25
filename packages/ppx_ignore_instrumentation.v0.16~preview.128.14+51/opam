@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"  {>= "4.08.0"}
+  "ocaml"  {>= "4.14.0"}
   "dune"   {>= "2.0.0"}
   "ppxlib" {>= "0.28.0"}
 ]
@@ -21,6 +21,6 @@ Ignore Jane Street specific instrumentation extensions from internal PPXs or com
    features not yet upstreamed.
 "
 url {
-src: "https://github.com/janestreet/ppx_ignore_instrumentation/archive/00a1b38ad8eb8d2612d6a5a01be05b7e9ed41cd8.tar.gz"
-checksum: "sha256=4e8e19e626c701f50ecca27a21bc21c832be6e080b525070fe7be6264d4bdb32"
+src: "https://github.com/janestreet/ppx_ignore_instrumentation/archive/b5e3d33f7f63c45c50f1327c049cacd2b7bb89fc.tar.gz"
+checksum: "sha256=3f7f51b6fdfeedf736f03e349a5cb5fa4356dd5923c06a7e7902666f3a939139"
 }

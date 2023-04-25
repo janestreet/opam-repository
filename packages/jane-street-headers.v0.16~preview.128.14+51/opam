@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.04.2"}
+  "ocaml" {>= "4.14.0"}
   "dune"  {>= "2.0.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -19,6 +19,6 @@ description: "
 C header files shared between the various Jane Street packages
 "
 url {
-src: "https://github.com/janestreet/jane-street-headers/archive/9b1a4194f4c1f75e50cc3e1455c92a41e0d95e9c.tar.gz"
-checksum: "sha256=802e9bfd786015b8c88515eccbe41352c0ba7957ec8ae477dbecbb6fb2c29063"
+src: "https://github.com/janestreet/jane-street-headers/archive/d6b28dc81d5bb7c059a08c31967ab988fda10f8e.tar.gz"
+checksum: "sha256=06b7769785855d160204e92ad0c9b634d0d0d99a312b18b6df850c4dcb1593fb"
 }

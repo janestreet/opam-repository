@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "core"     {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -22,6 +22,6 @@ Timezone handles parsing timezone data and create [Timezone.t] that
 can later be used to manipulate time in core_kernel or core.
 "
 url {
-src: "https://github.com/janestreet/timezone/archive/1bda2ed4da9f7028950d38963d5ed79622fd3b14.tar.gz"
-checksum: "sha256=2e065f8933bc209025f91969226dbdc2fbe219010a04662778f91d5ddef9e48f"
+src: "https://github.com/janestreet/timezone/archive/961afcb472f97c31693d099974bd7a57c0a396fa.tar.gz"
+checksum: "sha256=a8898943905100bd98166da58fea2746f009cb6460678fa10a76659ab0e1e7cc"
 }

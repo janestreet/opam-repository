@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.08.0"}
+  "ocaml"                    {>= "4.14.0"}
   "async"                    {= "v0.16~preview.128.14+51"}
   "core"                     {= "v0.16~preview.128.14+51"}
   "core_unix"                {= "v0.16~preview.128.14+51"}
@@ -28,6 +28,6 @@ Note that this library uses Async, for helpers that don't use Async,
 look at expect_test_helpers_core.
 "
 url {
-src: "https://github.com/janestreet/expect_test_helpers_async/archive/bc6c096a6bb019496d69e5617356e7e0cd79b2e3.tar.gz"
-checksum: "sha256=5a4c44e5076f26def70884ebac8a1bec79392743a2c09417171385a97ac8d3ce"
+src: "https://github.com/janestreet/expect_test_helpers_async/archive/6d0db0c318e11699622852c350aa935ef85619a7.tar.gz"
+checksum: "sha256=6f1393fef0d132146a4032e8bc787d6a948addcf525d9ec9afd04b3641a00eda"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.08.0"}
+  "ocaml"            {>= "4.14.0"}
   "core"             {= "v0.16~preview.128.14+51"}
   "core_kernel"      {= "v0.16~preview.128.14+51"}
   "core_unix"        {= "v0.16~preview.128.14+51"}
@@ -24,6 +24,6 @@ synopsis: "Text output utilities"
 description: "
 "
 url {
-src: "https://github.com/janestreet/textutils/archive/e2938f82dc45249eee3a86f1b916c77ece48e56d.tar.gz"
-checksum: "sha256=e1dbadb6e86fbc3fdc90404a82008d162ad664a66bd9a97d070c29329fdbf22c"
+src: "https://github.com/janestreet/textutils/archive/6c135102ce8b6deb61f1b58d3ff002e321ab7c29.tar.gz"
+checksum: "sha256=d222a99ec9b8afd70b400a1fd09399f2b6b8af15cdcdea9e8ae360e8785cf2fa"
 }

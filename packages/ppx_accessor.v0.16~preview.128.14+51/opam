@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.09.0"}
+  "ocaml"    {>= "4.14.0"}
   "accessor" {= "v0.16~preview.128.14+51"}
   "base"     {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -22,6 +22,6 @@ description: "
 Automatically generate accessors given a type definition.
 "
 url {
-src: "https://github.com/janestreet/ppx_accessor/archive/1d7b7d68c717d802aa3e494a62e92bc59c5e7586.tar.gz"
-checksum: "sha256=b5ecba873d9f8a67b08784d8b7671db8eeb0db26046a0314ddf84334e78a76e4"
+src: "https://github.com/janestreet/ppx_accessor/archive/207605c1f44f0440c5281d9b0b0e20e7a1762f18.tar.gz"
+checksum: "sha256=91702941f36de05ae784eb645a0b8b506db7bbad7eebbd270634ecfea7e5b54a"
 }

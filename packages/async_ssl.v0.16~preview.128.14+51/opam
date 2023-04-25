@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.08.0"}
+  "ocaml"             {>= "4.14.0"}
   "async"             {= "v0.16~preview.128.14+51"}
   "base"              {= "v0.16~preview.128.14+51"}
   "core"              {= "v0.16~preview.128.14+51"}
@@ -30,6 +30,6 @@ This library allows you to create an SSL client and server, with
 encrypted communication between both.
 "
 url {
-src: "https://github.com/janestreet/async_ssl/archive/160e8f4e35ec8c6091628844c6fa590ce959f410.tar.gz"
-checksum: "sha256=b80db2c95596bcfe148aad97fe728e8cfd8e45bf39673c566c07e37021a92178"
+src: "https://github.com/janestreet/async_ssl/archive/dfd51a13f7b6daf3179fcc049b6d3c5a20545382.tar.gz"
+checksum: "sha256=e7decb3074059ed6027ee1499276b6dffa3a644fbc7b9036b1dffaee81f8ac97"
 }

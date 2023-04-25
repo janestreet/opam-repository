@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"   {>= "4.08.0"}
+  "ocaml"   {>= "4.14.0"}
   "base"    {= "v0.16~preview.128.14+51"}
   "ppx_let" {= "v0.16~preview.128.14+51"}
   "dune"    {>= "2.0.0"}
@@ -24,6 +24,6 @@ easier to write incremental computations using pattern-matching in a
 way that causes incremental nodes to fire as little as possible.
 "
 url {
-src: "https://github.com/janestreet/ppx_pattern_bind/archive/4fce0f9a916b066a80789023704e0cc688281eb5.tar.gz"
-checksum: "sha256=60a82934f1ca1edbb648342f19d59a68371ebdb12d95ec8ba8e8f765846ea3f7"
+src: "https://github.com/janestreet/ppx_pattern_bind/archive/513ff04756831aa9a51f9315a9913b4dcbeee0a5.tar.gz"
+checksum: "sha256=b8fe739a01d5282576b90b1c72eb68a956cc113681cee4998768e56a6d98873f"
 }

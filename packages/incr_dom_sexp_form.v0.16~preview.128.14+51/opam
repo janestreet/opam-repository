@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                {>= "4.08.0"}
+  "ocaml"                {>= "4.14.0"}
   "incr_dom"             {= "v0.16~preview.128.14+51"}
   "incr_dom_interactive" {= "v0.16~preview.128.14+51"}
   "incr_map"             {= "v0.16~preview.128.14+51"}
@@ -29,6 +29,6 @@ description: "
 It relies on the fact that the type of the value being edited can be serialized via sexps.
 "
 url {
-src: "https://github.com/janestreet/incr_dom_sexp_form/archive/9ed0480c85173729273634517f8577e21696859d.tar.gz"
-checksum: "sha256=fe9923318aaddc4a80a7477efd5629eb191d784668e84d0ad7007f225f530596"
+src: "https://github.com/janestreet/incr_dom_sexp_form/archive/24847784199e25f6bf7c64c3028af133828c3a83.tar.gz"
+checksum: "sha256=78c1246c182dc011aa30c3f1b431add8d4f055c354d1bf73e34d88208c94136a"
 }

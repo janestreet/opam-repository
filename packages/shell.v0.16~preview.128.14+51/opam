@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"      {>= "4.08.0"}
+  "ocaml"      {>= "4.14.0"}
   "core"       {= "v0.16~preview.128.14+51"}
   "core_unix"  {= "v0.16~preview.128.14+51"}
   "jst-config" {= "v0.16~preview.128.14+51"}
@@ -26,6 +26,6 @@ This library is a relatively featureful and flexible implementation of fork&exec
 "
 depexts: ["linux-headers"] {os-family = "alpine"}
 url {
-src: "https://github.com/janestreet/shell/archive/50f2df90d82a36340a6217a76098bb027987521e.tar.gz"
-checksum: "sha256=d6b2fa8e18a40eb63c65f4ae13d1be7973ed9e0f1a4e88d3c3e5f183b70fbcf4"
+src: "https://github.com/janestreet/shell/archive/7a5b5966d3a9f1713d1b39adffd041ca218da3cc.tar.gz"
+checksum: "sha256=83106301c142521cbc1783c67a953872951fcf17fd31279a7501d2be12cb7574"
 }

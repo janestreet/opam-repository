@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"               {>= "4.08.0"}
+  "ocaml"               {>= "4.14.0"}
   "base"                {= "v0.16~preview.128.14+51"}
   "ppx_js_style"        {= "v0.16~preview.128.14+51"}
   "ppx_yojson_conv_lib" {= "v0.16~preview.128.14+51"}
@@ -23,6 +23,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_yojson_conv/archive/753c9a08efebb690883d182f7002015b337c1007.tar.gz"
-checksum: "sha256=7bd655b7a3bf5019f679f6bf61cbc167392c3ee700927ce5b8489907c903bbbf"
+src: "https://github.com/janestreet/ppx_yojson_conv/archive/a1f56dad4f5ac46f69be3790fc53b067ef12629d.tar.gz"
+checksum: "sha256=e343f75aead2a40f83bf4fdc3a39d683d76e81dbf0b9a2ff9c9e116855569b91"
 }

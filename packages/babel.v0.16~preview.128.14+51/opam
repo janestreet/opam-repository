@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.08.0"}
+  "ocaml"            {>= "4.14.0"}
   "async_rpc_kernel" {= "v0.16~preview.128.14+51"}
   "core"             {= "v0.16~preview.128.14+51"}
   "ppx_jane"         {= "v0.16~preview.128.14+51"}
@@ -24,6 +24,6 @@ description: "
 A library for defining Rpcs that can evolve over time without breaking backward compatibility.
 "
 url {
-src: "https://github.com/janestreet/babel/archive/7dc60c10e3fbdd194221406bd77af5ea04305c57.tar.gz"
-checksum: "sha256=3b50b55452d38af343223652d0d66db5a981fe0239cfed6c5c6ee85aa6b529e7"
+src: "https://github.com/janestreet/babel/archive/401ce2b18b1899fa166d87022988b759a2a84934.tar.gz"
+checksum: "sha256=aa53182cee9529a18a974d20bc25adb91cb4b8cdd2b990a4e3d5a7ee2d0fed61"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.11.0"}
+  "ocaml" {>= "4.14.0"}
   "dune"  {>= "2.0.0"}
   "owee"  {>= "0.4"}
 ]
@@ -22,6 +22,6 @@ Experimental.
 depexts: ["linux-headers"] {os-family = "alpine"}
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/ocaml-probes/archive/bbe6edda0fcf4897b89f4fe295398e568b752fc2.tar.gz"
-checksum: "sha256=d8ee3421eb43efa98290086b3b7ec69c0950257575a62832e59ef4951d0a2c92"
+src: "https://github.com/janestreet/ocaml-probes/archive/3cc54e9a0fe53f5c0d2fea4404eae0f0e2387574.tar.gz"
+checksum: "sha256=ecc5e310c581c8f3fb65ac10a6e17dcbf0e3f196862ffe6b9b138aa65001c322"
 }

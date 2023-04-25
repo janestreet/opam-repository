@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.09.0"}
+  "ocaml"    {>= "4.14.0"}
   "core"     {= "v0.16~preview.128.14+51"}
   "dedent"   {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
@@ -23,6 +23,6 @@ description: "
 PPX that exposes the source code string of an expression/module structure.
 "
 url {
-src: "https://github.com/janestreet/ppx_demo/archive/135e1a6c5488a1b0bf20d50cbfea669bcdf3b8e0.tar.gz"
-checksum: "sha256=7edd39d659c71f6998c98bcfc74fc779e4bd959b66ba03f8b93dad3341d38bfb"
+src: "https://github.com/janestreet/ppx_demo/archive/417f790bb4930d2cadcd017f562dc7d95f759670.tar.gz"
+checksum: "sha256=360970ffc74ddf552e515cefe44ecfa3fccf2f1a189924edeaccbd81943004d3"
 }

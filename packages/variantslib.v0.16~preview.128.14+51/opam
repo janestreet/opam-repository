@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.08.0"}
+  "ocaml" {>= "4.14.0"}
   "base"  {= "v0.16~preview.128.14+51"}
   "dune"  {>= "2.0.0"}
 ]
@@ -22,6 +22,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/variantslib/archive/36ba22cd45b47fa38e4599f1fcb1c84f71c03223.tar.gz"
-checksum: "sha256=4feb4a584b86f80bdb4a860799c81f60f0689235fd63f3ba1eee6c30f1741b29"
+src: "https://github.com/janestreet/variantslib/archive/492c8a5e53f6b30c14aedc0bdfe2aba2396074f6.tar.gz"
+checksum: "sha256=b44d8ec27a7a031024b10f20e65702cbb7f38e0416b97d27e74a6a902251269e"
 }

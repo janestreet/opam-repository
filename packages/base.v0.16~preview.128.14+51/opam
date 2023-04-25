@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.10.0"}
+  "ocaml"             {>= "4.14.0"}
   "sexplib0"          {= "v0.16~preview.128.14+51"}
   "dune"              {>= "2.0.0"}
   "dune-configurator"
@@ -32,6 +32,6 @@ provided by companion libraries such as stdio:
   https://github.com/janestreet/stdio
 "
 url {
-src: "https://github.com/janestreet/base/archive/874278a5b6bc7de8b859fffc0af79213be353c6b.tar.gz"
-checksum: "sha256=172bb114dcde8800e18ecf084eee8b66e47707872d50cb8d8be425bd0eb194c7"
+src: "https://github.com/janestreet/base/archive/763339d773de4a2f2b101f0946b0054f2a997d2b.tar.gz"
+checksum: "sha256=bc69d8c0c46c1793a9feb1e095d81e0af32ba8600c7ea63a0f974441c057429a"
 }

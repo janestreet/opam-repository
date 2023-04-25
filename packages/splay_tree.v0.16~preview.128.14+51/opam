@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "core"     {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -31,6 +31,6 @@ reduction operation which lets you specify an extra accumulator value,
 which can then be searched by efficiently.
 "
 url {
-src: "https://github.com/janestreet/splay_tree/archive/28628528b4ce6e5de56efe568dcb2b4ec918d7f5.tar.gz"
-checksum: "sha256=8c382daea446ec50f8bbe4ff1d88f8f93d237fd726145efbe42842a824acfbb1"
+src: "https://github.com/janestreet/splay_tree/archive/d1f01e58778a40fb81b1699542ab34e57ab89694.tar.gz"
+checksum: "sha256=6daddfd0e48da0176ce9341525549c96cf071e842719670de057395ba917544a"
 }

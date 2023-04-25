@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                  {>= "4.08.0"}
+  "ocaml"                  {>= "4.14.0"}
   "async_rpc_kernel"       {= "v0.16~preview.128.14+51"}
   "cohttp_async_websocket" {= "v0.16~preview.128.14+51"}
   "ppx_jane"               {= "v0.16~preview.128.14+51"}
@@ -31,6 +31,6 @@ is established, and routes to an optionally provided vanilla HTTP handler
 when non-websocket traffic occurs.
 "
 url {
-src: "https://github.com/janestreet/async_rpc_websocket/archive/2351173cd6f157e5d366b5efe6d28a48d0176bae.tar.gz"
-checksum: "sha256=7627fba6b87fe32b4a52f85e9c9511e34704a5f93a4464992a3f85aa921ac8a5"
+src: "https://github.com/janestreet/async_rpc_websocket/archive/15d7b79d9329b5eee6a23d5ba00ffc555f8db7f4.tar.gz"
+checksum: "sha256=85e2e226f7f992a3ce8c7a1143e3dee8c30775853f96421f834e4a8e0971d82c"
 }

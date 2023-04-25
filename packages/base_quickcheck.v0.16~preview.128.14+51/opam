@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.08.0"}
+  "ocaml"             {>= "4.14.0"}
   "base"              {= "v0.16~preview.128.14+51"}
   "ppx_base"          {= "v0.16~preview.128.14+51"}
   "ppx_fields_conv"   {= "v0.16~preview.128.14+51"}
@@ -28,6 +28,6 @@ Base_quickcheck provides randomized testing in the style of Haskell's Quickcheck
 with support for built-in types as well as types provided by Base.
 "
 url {
-src: "https://github.com/janestreet/base_quickcheck/archive/068b245a7e98e34663b68343fa2bf171ed1ff56f.tar.gz"
-checksum: "sha256=49b89611fb0f00fdc3bce6decede5caf774c6a138c815d93937aec8ce42ac44b"
+src: "https://github.com/janestreet/base_quickcheck/archive/04b8486e66af417b43664de8cef69f11c0a9caaf.tar.gz"
+checksum: "sha256=205f773ec1406ee5f73823a56b6fb9d1e9da5c1555e97f520d6a0e2667a193f4"
 }

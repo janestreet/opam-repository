@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.08.0"}
+  "ocaml"       {>= "4.14.0"}
   "async"       {= "v0.16~preview.128.14+51"}
   "async_ssl"   {= "v0.16~preview.128.14+51"}
   "core"        {= "v0.16~preview.128.14+51"}
@@ -28,6 +28,6 @@ and COPY IN mode. The interface presented is minimal to keep the library simple
 for now, though in the future a layer on top may add convenience functions.
 "
 url {
-src: "https://github.com/janestreet/postgres_async/archive/28522d4a4514e7d6208e1667a3a5f1425214da9a.tar.gz"
-checksum: "sha256=fcdf92808004e071ad4608b215e81a380b1fca0488e72eabd222dc985ba7acf0"
+src: "https://github.com/janestreet/postgres_async/archive/1d9ba034fc6891eb60b3db92fbac1e3abd86213f.tar.gz"
+checksum: "sha256=0a54d98a3fc093ffca8ded08664a2576628b9939eced58175b3e208db68ce718"
 }

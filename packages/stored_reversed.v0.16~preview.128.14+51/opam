@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.10.0"}
+  "ocaml"    {>= "4.14.0"}
   "core"     {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 A ['a list t] represents a list temporarily stored in the reverse of its logical order.
 "
 url {
-src: "https://github.com/janestreet/stored_reversed/archive/46b93ca0ae1d714966793ebe416e922ff3429905.tar.gz"
-checksum: "sha256=18f6669f12a116aa250ce0418f7812d1fe9272c77d3aea980e0d0885577c9d0f"
+src: "https://github.com/janestreet/stored_reversed/archive/cb85746dd1e998629055e34964ddfb4d536881c5.tar.gz"
+checksum: "sha256=7a2a3f1a6bd1f5e3cb3cf7b2d9204d5b903d2db5f56ec59fe6fb46c87f8416f4"
 }

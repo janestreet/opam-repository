@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"      {>= "4.08.0"}
+  "ocaml"      {>= "4.14.0"}
   "core"       {= "v0.16~preview.128.14+51"}
   "ppx_expect" {= "v0.16~preview.128.14+51"}
   "ppx_jane"   {= "v0.16~preview.128.14+51"}
@@ -25,6 +25,6 @@ sessions) both to power toplevel expect tests and to support a tool that convert
 .mlt files into .org files, for literate-style documentation.
 "
 url {
-src: "https://github.com/janestreet/mlt_parser/archive/7f4036f48ff887a2d57cb0f3da03a1660316fee1.tar.gz"
-checksum: "sha256=7206ba46050fa685b3e504503b7d54cde40b044a779ce8e79ae42b1aaac00ce2"
+src: "https://github.com/janestreet/mlt_parser/archive/8e340c653c5a658938a67ac7fe51b894f0e3a01b.tar.gz"
+checksum: "sha256=5fb0b22257f7ce7a27a2107fe6c9bb8b0d0cd488ca5f14a7c04c0a283f7f71ff"
 }

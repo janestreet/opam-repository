@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"      {>= "4.08.0"}
+  "ocaml"      {>= "4.14.0"}
   "async"      {= "v0.16~preview.128.14+51"}
   "async_find" {= "v0.16~preview.128.14+51"}
   "core"       {= "v0.16~preview.128.14+51"}
@@ -24,6 +24,6 @@ synopsis: "Async wrapper for inotify"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_inotify/archive/9728dd87b8d55a369f7ec79016a6047c7360499c.tar.gz"
-checksum: "sha256=4b51429457f19a715dbb70fc7b0bf37fc2cf036a0d5bdc5613d70a3776b08229"
+src: "https://github.com/janestreet/async_inotify/archive/a7331739ba916f1b39663b88d39f1e0d6c8c8679.tar.gz"
+checksum: "sha256=82353b7cb616ee7b19c823f59393e1d9420c664f68f30d90ec20eb108163a382"
 }

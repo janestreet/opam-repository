@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.08.0"}
+  "ocaml"    {>= "4.14.0"}
   "async"    {= "v0.16~preview.128.14+51"}
   "ppx_jane" {= "v0.16~preview.128.14+51"}
   "sexplib"  {= "v0.16~preview.128.14+51"}
@@ -23,6 +23,6 @@ Sexp macros allow the user to define and use constants and simple functions in s
 include one sexp file in another.
 "
 url {
-src: "https://github.com/janestreet/sexp_macro/archive/3a1eb1c28c04583146359029c587925f7c7b84a1.tar.gz"
-checksum: "sha256=5a0cf78f4219266f4864a5fafea754d4833feb96723f2d6dd46a55f210d62c27"
+src: "https://github.com/janestreet/sexp_macro/archive/501ae659767299395c2d6821ab83a684e8990bc9.tar.gz"
+checksum: "sha256=378bb56d3390aaf8b7582179b905220743c353cd590fdc70d7d40a08ecde4af2"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.08.0"}
+  "ocaml"         {>= "4.14.0"}
   "async"         {= "v0.16~preview.128.14+51"}
   "core"          {= "v0.16~preview.128.14+51"}
   "core_extended" {= "v0.16~preview.128.14+51"}
@@ -24,6 +24,6 @@ Delimited_parsing parses character-separated values (such as CSV files) and fixe
 records.
 "
 url {
-src: "https://github.com/janestreet/delimited_parsing/archive/9cb1f6530586fba88b64560f6cbfca0576728166.tar.gz"
-checksum: "sha256=2513c212dd1a43c5002c634c255340e71ff711c3d5506c1fe2138410a6b8c290"
+src: "https://github.com/janestreet/delimited_parsing/archive/1fe4e89720101279d72322bc8f7e70dd61695aef.tar.gz"
+checksum: "sha256=1dfa45845b7e538649a470a3f4c79f8453bcd77d87584a72c4d064c0b6bb3c54"
 }

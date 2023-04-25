@@ -1,6 +1,6 @@
 opam-version: "2.0"
-maintainer: "opensource@janestreet.com"
-authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+maintainer: "opensource-contacts@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource-contacts@janestreet.com>"]
 homepage: "https://github.com/janestreet/memtrace_viewer"
 bug-reports: "https://github.com/janestreet/memtrace_viewer/issues"
 dev-repo: "git+https://github.com/janestreet/memtrace_viewer.git"
@@ -32,6 +32,6 @@ events can be filtered by lifetime, showing only allocations of
 objects that are still live at peak memory usage.
 "
 url {
-src: "https://github.com/janestreet/memtrace_viewer/archive/43fca871c50cde9343cf307e56f9a9e2ed80d3c6.tar.gz"
-checksum: "sha256=47dab01b9dbd1c1671ef40d2a80b8ab4ed1e9d2478ec671edd9e09e1847b66bb"
+src: "https://github.com/janestreet/memtrace_viewer/archive/7f2f0612085b9cdd389b9911d086dcb33413add0.tar.gz"
+checksum: "sha256=e2e1af12f618b16dadc41d56e8c4a93f3707f309f41b2ccdc31089903fc99918"
 }

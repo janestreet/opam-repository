@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.08.0"}
+  "ocaml"                    {>= "4.14.0"}
   "base"                     {= "v0.16~preview.128.14+51"}
   "core"                     {= "v0.16~preview.128.14+51"}
   "expect_test_helpers_core" {= "v0.16~preview.128.14+51"}
@@ -26,6 +26,6 @@ Lookup is based on \"chains\" of keys; each node of the trie has children repres
 each potential next key in the chain.
 "
 url {
-src: "https://github.com/janestreet/base_trie/archive/47c871dd5d3bf358ade328ce97ccd4ed366dbcda.tar.gz"
-checksum: "sha256=ce0071222604860d9ba022c73bd48819a1880657c439781c57626700e996b7c4"
+src: "https://github.com/janestreet/base_trie/archive/bb20b8720a7637fb508e0e286d18fba0ab9d5bfa.tar.gz"
+checksum: "sha256=c7ee42cfba77b7233348cc466e54792c0bcc095f9bc30ef1720814de9f2bd0ae"
 }
