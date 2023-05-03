@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sequencer_table"
+bug-reports: "https://github.com/janestreet/sequencer_table/issues"
+dev-repo: "git+https://github.com/janestreet/sequencer_table.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/sequencer_table/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "4.14.0"}
+  "async_kernel" {= "v0.16~preview.128.14+51"}
+  "core"         {= "v0.16~preview.128.14+51"}
+  "ppx_jane"     {= "v0.16~preview.128.14+51"}
+  "dune"         {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A table of [Async.Sequencer]'s, indexed by key"
+description: "
+A single-module library for a data structure.
+"
+url {
+src: "https://github.com/janestreet/sequencer_table/archive/779b0f507dc43f6465920a19ba0e0173928da219.tar.gz"
+checksum: "sha256=e47a5ce79e12102e0021e209f11873f62c996da5af6377cc2f08c8928fa0fed1"
+}

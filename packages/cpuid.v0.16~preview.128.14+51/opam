@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/cpuid"
+bug-reports: "https://github.com/janestreet/cpuid/issues"
+dev-repo: "git+https://github.com/janestreet/cpuid.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/cpuid/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.14.0"}
+  "core"        {= "v0.16~preview.128.14+51"}
+  "core_kernel" {= "v0.16~preview.128.14+51"}
+  "ppx_jane"    {= "v0.16~preview.128.14+51"}
+  "dune"        {>= "2.0.0"}
+]
+synopsis: "A library for parsing CPU capabilities out of the `cpuid` instruction."
+description: "
+Supports a broad swath of Intel CPU capabilities and a more limited subset of AMD CPU
+capabilities.
+"
+available: (arch = "x86_64" | arch = "arm64") & os = "linux"
+url {
+src: "https://github.com/janestreet/cpuid/archive/65135fe920c1166e6b3e6230b408e8b36bec0a17.tar.gz"
+checksum: "sha256=a271900ca6fe1b48701fecd42a519fd8570fe28891c562082aa68e5ecdd2c018"
+}
