@@ -1,0 +1,24 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/typerep"
+bug-reports: "https://github.com/janestreet/typerep/issues"
+dev-repo: "git+https://github.com/janestreet/typerep.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/typerep/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.14.0"}
+  "base"  {= "v0.16~preview.128.20+135"}
+  "dune"  {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Typerep is a library for runtime types"
+description: "
+"
+url {
+src: "https://github.com/janestreet/typerep/archive/bcf221d831e0b83fc27ce4857839ce3416158079.tar.gz"
+checksum: "sha256=4744c8b2d206638344da5beed72dd8bc2b6658bd979d08363b5c316aa144b11e"
+}

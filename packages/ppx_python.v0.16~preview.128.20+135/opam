@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_python"
+bug-reports: "https://github.com/janestreet/ppx_python/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_python.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_python/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "base"     {= "v0.16~preview.128.20+135"}
+  "ppx_base" {= "v0.16~preview.128.20+135"}
+  "dune"     {>= "2.0.0"}
+  "ppxlib"   {>= "0.28.0"}
+  "pyml"     {>= "20211015"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "[@@deriving] plugin to generate Python conversion functions"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_python/archive/d6f6df14206bf3868f4a782aeda6c043d16dec12.tar.gz"
+checksum: "sha256=f04ca1966df7d518b815c1d1380ac43eb98068d5eeb18a106d5bdc4b23521c3f"
+}

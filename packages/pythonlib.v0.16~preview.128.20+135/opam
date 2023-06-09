@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/pythonlib"
+bug-reports: "https://github.com/janestreet/pythonlib/issues"
+dev-repo: "git+https://github.com/janestreet/pythonlib.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/pythonlib/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.11.0" & < "4.13.0"}
+  "base"                     {= "v0.16~preview.128.20+135"}
+  "core"                     {= "v0.16~preview.128.20+135"}
+  "expect_test_helpers_core" {= "v0.16~preview.128.20+135"}
+  "ppx_compare"              {= "v0.16~preview.128.20+135"}
+  "ppx_expect"               {= "v0.16~preview.128.20+135"}
+  "ppx_here"                 {= "v0.16~preview.128.20+135"}
+  "ppx_let"                  {= "v0.16~preview.128.20+135"}
+  "ppx_python"               {= "v0.16~preview.128.20+135"}
+  "ppx_string"               {= "v0.16~preview.128.20+135"}
+  "stdio"                    {= "v0.16~preview.128.20+135"}
+  "typerep"                  {= "v0.16~preview.128.20+135"}
+  "dune"                     {>= "2.0.0"}
+  "pyml"                     {>= "20211015"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library to help writing wrappers around ocaml code for python"
+description: "
+This library helps exposing ocaml functions to python. The python runtime interaction is handled by pyml.
+"
+url {
+src: "https://github.com/janestreet/pythonlib/archive/327522ac0387c2cc3fd16e2347c217246bb17e08.tar.gz"
+checksum: "sha256=011be14fbf84bbfb9aafb509de77c2b6c85a21b83b43586f393f75afd5db31d5"
+}
