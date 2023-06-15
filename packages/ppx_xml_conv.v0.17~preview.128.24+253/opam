@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_xml_conv"
+bug-reports: "https://github.com/janestreet/ppx_xml_conv/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_xml_conv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_xml_conv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "4.14.0"}
+  "base"            {= "v0.17~preview.128.24+253"}
+  "csvfields"       {= "v0.17~preview.128.24+253"}
+  "ppx_conv_func"   {= "v0.17~preview.128.24+253"}
+  "ppx_fields_conv" {= "v0.17~preview.128.24+253"}
+  "dune"            {>= "2.0.0"}
+  "ppxlib"          {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Generate XML conversion functions from records"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_xml_conv/archive/eaad059703d4b3960f9e6bbc2cc31de6af58f742.tar.gz"
+checksum: "sha256=ffa7c7b7a7e0eb1ed302199a87d1d4f59dd9638d38ef34b5242f18efd1a2c347"
+}
