@@ -24,5 +24,5 @@ Single page handlers are handlers that serve user specified JavaScript and css
 "
 url {
 src: "https://github.com/janestreet/cohttp_static_handler/archive/765bf27e0f645dbb7874ca2d5075780ee82bbaca.tar.gz"
-checksum: "sha256=9b007ea9bc3e50c843d57303be5931db775569055a9374c75769736f6aafe4e1"
+checksum: "sha256=af0109ed8d89f70d4946f935a860e9a50d7686936c09f7d78cdf8c8a63b4c051"
 }

@@ -31,5 +31,5 @@ encrypted communication between both.
 "
 url {
 src: "https://github.com/janestreet/async_ssl/archive/ea27dd89c927a489b9b8dceda071bce8afae3b55.tar.gz"
-checksum: "sha256=2f646a3b73b985e279f1cb85acc4606b28e5b9d9ef1ce47b0aeda802fefa4855"
+checksum: "sha256=faf9f455e5e27adb70b67339cadeb5d43885748e168245fdcb40c7f997acb964"
 }

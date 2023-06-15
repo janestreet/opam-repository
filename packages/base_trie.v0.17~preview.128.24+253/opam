@@ -27,5 +27,5 @@ each potential next key in the chain.
 "
 url {
 src: "https://github.com/janestreet/base_trie/archive/bb20b8720a7637fb508e0e286d18fba0ab9d5bfa.tar.gz"
-checksum: "sha256=60b0f02646c3b911c3bc26269fe04b96000db3966b66efa51d07560ce754c925"
+checksum: "sha256=c7ee42cfba77b7233348cc466e54792c0bcc095f9bc30ef1720814de9f2bd0ae"
 }

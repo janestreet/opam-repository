@@ -29,5 +29,5 @@ look at expect_test_helpers_core.
 "
 url {
 src: "https://github.com/janestreet/expect_test_helpers_async/archive/9231488d17c7b2711c921d1784a374d833f018b5.tar.gz"
-checksum: "sha256=657e05a2124c409dec76ad2d8cf8471e6ed3a6cd8f06f2e5d3e12a3fb3305369"
+checksum: "sha256=483f181eb7787d7793d33b29d47fc7b6431c9b39bc8cda512194585530cf120d"
 }

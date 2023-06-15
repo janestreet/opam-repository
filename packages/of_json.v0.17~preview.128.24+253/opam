@@ -24,5 +24,5 @@ This library provides an applicative interface for extracting values from JSON o
 "
 url {
 src: "https://github.com/janestreet/of_json/archive/7176f8da8e5dde88bae058a9626e8bea0ac41d01.tar.gz"
-checksum: "sha256=868bbf9529a6e96abe070aa7888b289bf3bc66e9067b78deaf0019f1134de9e9"
+checksum: "sha256=5488d3c01d5ca7ce71fc02cdaa7efcbed611001e42dd9f312f0cdb891dd6016a"
 }

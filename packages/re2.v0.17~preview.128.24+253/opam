@@ -24,5 +24,5 @@ description: "
 "
 url {
 src: "https://github.com/janestreet/re2/archive/00c51c8b639a2a5272572b8fb8db89ac93c50cd0.tar.gz"
-checksum: "sha256=241b63d2e98f397d29f7644a676375a7ed40b68964007b8fbc23ccfa0383c001"
+checksum: "sha256=237ac44c01f160065fc59814c7f79b1e319bab31d407ae7efe262f8d4a34fbdc"
 }

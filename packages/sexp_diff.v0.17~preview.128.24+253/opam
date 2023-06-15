@@ -23,5 +23,5 @@ command line tool.
 "
 url {
 src: "https://github.com/janestreet/sexp_diff/archive/92dd28791175924333190db42ae1bab54261d174.tar.gz"
-checksum: "sha256=365266b7002756358c41cf18d353748ee2eb11c85feb0218f987f927ce35c55a"
+checksum: "sha256=29f8d7f86eb501154f7aff38be3285c1d163623279863165d1cbd5e15f255945"
 }

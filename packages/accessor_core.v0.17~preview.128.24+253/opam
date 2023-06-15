@@ -25,5 +25,5 @@ This library provides accessors for numerous types in Core.
 "
 url {
 src: "https://github.com/janestreet/accessor_core/archive/e3e8bffd5e20b68fcf647e044bf3e8e21f6ca43c.tar.gz"
-checksum: "sha256=006717bf9403986862e73699baeadc601eaad8a060e6d2cd991d638d5e772001"
+checksum: "sha256=10bae1bf5269935efab27f329f335032f95e5b843c53e49e3a1e2dfc9bbd505f"
 }

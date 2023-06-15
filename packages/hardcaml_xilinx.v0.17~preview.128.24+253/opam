@@ -28,5 +28,5 @@ Xilinx LUT primitives.
 "
 url {
 src: "https://github.com/janestreet/hardcaml_xilinx/archive/e03d92979bad7259e9bb9165885b0bfa32126924.tar.gz"
-checksum: "sha256=612f75e4f197188d79e4d084ba5f1b366a368992145c3497a315d22e17355b3a"
+checksum: "sha256=51fa839aecd1f30766ad521253fa3d0543b1a3a3a4f538eaf7efeeda054664b1"
 }

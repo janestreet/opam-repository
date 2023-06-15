@@ -28,5 +28,5 @@ hierarchical designs.
 "
 url {
 src: "https://github.com/janestreet/ppx_deriving_hardcaml/archive/b7630002239347033ad3aa9421022bc4c7d6645c.tar.gz"
-checksum: "sha256=75f2ff7cf619833ef3d27999c002ae2d5f9e14a386612d5335446e991372e094"
+checksum: "sha256=184a787313c19d35c4d09a3ba37fb973e3a83c6dd58d25544c6d9e9018540b2b"
 }

@@ -22,5 +22,5 @@ Part of the Jane Street's PPX rewriters collection.
 "
 url {
 src: "https://github.com/janestreet/ppx_stable_witness/archive/7f53b6981836b51156dd2e7be9624c2e99336ca7.tar.gz"
-checksum: "sha256=c17394cf7b9cfe4250d2cb9b4842a12fe0f108c2c2091e6420a72bb4fdf8f9ff"
+checksum: "sha256=6a334301e40cbca2e84489b125020d454a15212f810e90d6185a0f453e4ed5f9"
 }

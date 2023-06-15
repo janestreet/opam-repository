@@ -25,5 +25,5 @@ Async for managing concurrency.
 "
 url {
 src: "https://github.com/janestreet/notty_async/archive/f0637a0e36bc7c1b171dd290bca6ac18a803190e.tar.gz"
-checksum: "sha256=e04577e52dff5eba949a20e1e51b09cccb60b51d67eb08bbdefd690a8051a1b8"
+checksum: "sha256=f2e04cc6e9cb4e7ac42ae12169163047ea6194d781e9c59bbe203e99ab6e5a53"
 }

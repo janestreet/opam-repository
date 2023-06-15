@@ -22,5 +22,5 @@ Part of the Jane Street's PPX rewriters collection.
 "
 url {
 src: "https://github.com/janestreet/ppx_bench/archive/6b14241c03bbab1a580cd9133de93cab325552d0.tar.gz"
-checksum: "sha256=7198c0190d32c21da144d3ef88529c93bf2a356c1aabdfb8f5685728696e503d"
+checksum: "sha256=e8c669b5f1df5936092cd9f651ba987d6a1e10829d97376e7763b41ec8bc7f89"
 }

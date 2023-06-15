@@ -26,5 +26,5 @@ largest industrial user of OCaml.
 "
 url {
 src: "https://github.com/janestreet/sexplib/archive/49c193c989dc56c03efb570727e41f2e86ff80ac.tar.gz"
-checksum: "sha256=45f7ccb5fa18c58de4baef98d809d170c56eec1b26d66c8063147f34099fae86"
+checksum: "sha256=b04238cbe287cd61ee52e1feb6ee2dc777845a5877183a7d5e5f86081da301f7"
 }

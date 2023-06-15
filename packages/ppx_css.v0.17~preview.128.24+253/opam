@@ -37,5 +37,5 @@ A ppx that takes in css strings and produces a module for accessing the unique n
 "
 url {
 src: "https://github.com/janestreet/ppx_css/archive/0296448c21a31c1e6c7a01c07da09a09873d59be.tar.gz"
-checksum: "sha256=98887fa73c297644211d4f9e9a3f42e7b8cbf1e4cb7757a0ccc0c3ed11c30859"
+checksum: "sha256=8f6356f646a402c23e3e359cef3bbe58367ad728cb046077133d198294add363"
 }

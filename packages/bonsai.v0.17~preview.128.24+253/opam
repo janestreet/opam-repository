@@ -63,5 +63,5 @@ Bonsai is a library for building reusable UI components inside an
 "
 url {
 src: "https://github.com/janestreet/bonsai/archive/3b0e9e24d5a8ce7a655e62cada1e1f059605c823.tar.gz"
-checksum: "sha256=e6c998d6307459478534d581a05d7497061e493adf9cb36c392db0c0cd5b47f8"
+checksum: "sha256=5816be0c7c41a03ffe9521b9beed6bacfcfc19968a1b77b843253fed4dd55c5d"
 }

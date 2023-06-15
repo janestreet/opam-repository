@@ -34,5 +34,5 @@ tape-based automatic differentiation.
 "
 url {
 src: "https://github.com/janestreet/torch/archive/31d230099389837ebacb7ed7a5ed59531f9e7475.tar.gz"
-checksum: "sha256=fde740c1aa5e0b5cca914df362f9c312b2197a0a59089b73b994d0202e67ef94"
+checksum: "sha256=97fe7e8bd06039f5f933d031b77a6eb65c4f65a39797a880aab0e8717aa19fcb"
 }

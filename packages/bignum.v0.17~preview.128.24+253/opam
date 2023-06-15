@@ -26,5 +26,5 @@ description: "
 "
 url {
 src: "https://github.com/janestreet/bignum/archive/553b62e706f87a419fc1c884966b77afa6dbd566.tar.gz"
-checksum: "sha256=485012679d45347b62b0bda9929144c1af0f8d5628e5db2a1f22ab1458258fb0"
+checksum: "sha256=07b9fcee083991c3c6bacd5fd35f97251913d609ed5155e75b6a4868bdbf2a3d"
 }

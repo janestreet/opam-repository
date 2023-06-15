@@ -23,5 +23,5 @@ description: "
 "
 url {
 src: "https://github.com/janestreet/csvfields/archive/32c72abd765540c9808e20ca803adc72ef9f8c06.tar.gz"
-checksum: "sha256=a84ed0b1650beffadf3acb41cec2a6aac4fb7e9e373de7914b1d43c64a335528"
+checksum: "sha256=9becb2fda48054a272cf66e915cae49e08110290d2e3e51cb5a55037979229e7"
 }

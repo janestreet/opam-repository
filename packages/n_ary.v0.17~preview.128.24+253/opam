@@ -32,5 +32,5 @@ implemented for N from 2 to 16, inclusive.
 "
 url {
 src: "https://github.com/janestreet/n_ary/archive/bb0573c96649065c6100f70489932a74037cc2fb.tar.gz"
-checksum: "sha256=1de5fa7d345ec0df63508b470b25b7d766787d16870742e02e7b1ee2ee3428dc"
+checksum: "sha256=b7634722681c67a7e5b37ea03b43816bd37142a1ca360e0e0b79e0cf9b0e6d20"
 }

@@ -30,5 +30,5 @@ look at expect_test_helpers_async.
 "
 url {
 src: "https://github.com/janestreet/expect_test_helpers_core/archive/972253c00c8fbdaa619918ce990c5c77770a5e3d.tar.gz"
-checksum: "sha256=ad710c852a062b53b0f693e74480a7c064f56627bd6cb9cd52d2ff292d33a2f2"
+checksum: "sha256=5056e2f9f297bc20ecec7dd9c475b20dfb711d872b38f856a199d43436b5de6a"
 }

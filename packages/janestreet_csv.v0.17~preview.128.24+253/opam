@@ -35,5 +35,5 @@ CSVs, as well as some conversions to other formats.
 "
 url {
 src: "https://github.com/janestreet/janestreet_csv/archive/37568f97d5f3c8d6a77378936c9ceb4662dec117.tar.gz"
-checksum: "sha256=37625609d2f078b567aed2cbef9430022ec8e274c0bc991faeeb98c10dd7988c"
+checksum: "sha256=224f68c70d099f77d0f0227c21f9aafe6a214eeb4f29da50bca7a7796a8c4028"
 }

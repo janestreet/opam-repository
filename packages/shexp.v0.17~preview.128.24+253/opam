@@ -26,5 +26,5 @@ shell interpreter. Shexp works on both Unix and Windows.
 "
 url {
 src: "https://github.com/janestreet/shexp/archive/ad3e17fd36cc6dfd860dc80bfa36ff6014cea54e.tar.gz"
-checksum: "sha256=1f75ab53d1e7fc4bd2fcc0eb80aa888bb4cb7dbf3369cf7763387e3be18c8ccc"
+checksum: "sha256=e5d29d858591846d83ec1cafee70bf7b028ad33d8af408ed6999a57ccc52e670"
 }

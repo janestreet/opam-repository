@@ -34,5 +34,5 @@ Code can also be generated to wrap the conversion process using Hardcaml interfa
 "
 url {
 src: "https://github.com/janestreet/hardcaml_of_verilog/archive/39c6f66a8428696a10bd69ff4e3cda2c06c80223.tar.gz"
-checksum: "sha256=17a2db8ae4cc1e96fcd7df4f656f68163144cf656fe1602dc230bb21ec4894e4"
+checksum: "sha256=e77df5ba60b19c17948dbc2f9fe7864be4320bd513c7845eaf191fa6de4bddd7"
 }

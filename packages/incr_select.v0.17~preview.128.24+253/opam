@@ -28,5 +28,5 @@ outputs that exist.
 "
 url {
 src: "https://github.com/janestreet/incr_select/archive/50563a81c50c17e6948935804af45f4a3082e2c3.tar.gz"
-checksum: "sha256=53afbb4d5708bbd1bf6be29e514539679a5ca41a2100d7d8743754e5a34ae5b1"
+checksum: "sha256=1e58f7f10202ac57985d2b96103bec1be2a9dc60c55422ce8657cc642fd22020"
 }

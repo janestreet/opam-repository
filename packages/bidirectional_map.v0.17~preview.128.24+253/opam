@@ -22,5 +22,5 @@ and bidirectional multimaps with many-to-many key relationships.
 "
 url {
 src: "https://github.com/janestreet/bidirectional_map/archive/0af2227306a7f9dc01163d4b784e8fe5335895f2.tar.gz"
-checksum: "sha256=93ce3933b435b0339ba8b2369588236877f56f9b350cc5e9275bc1f685c32d83"
+checksum: "sha256=261d847aa8886423191d4211fb708cfb32623e268fe9169ac9403a9923e131ea"
 }

@@ -29,5 +29,5 @@ depexts: [
 ]
 url {
 src: "https://github.com/janestreet/netsnmp/archive/4e5c28eca4223e9f7510b9aaa98d69c9b5968973.tar.gz"
-checksum: "sha256=03ce972ec3e1f3e002d296104f21c32ab05e90bd480c7afea72da0649860ce1a"
+checksum: "sha256=aafb64cc41bbebe6108a6d6d3f12a48879b37751e40f54b36bccb6263dc7430f"
 }

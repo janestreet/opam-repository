@@ -25,5 +25,5 @@ way that causes incremental nodes to fire as little as possible.
 "
 url {
 src: "https://github.com/janestreet/ppx_pattern_bind/archive/513ff04756831aa9a51f9315a9913b4dcbeee0a5.tar.gz"
-checksum: "sha256=b5917a3f03b0b40e6400bf5732dbf8df0b8f72deb0109595eaf7adab488467a7"
+checksum: "sha256=b8fe739a01d5282576b90b1c72eb68a956cc113681cee4998768e56a6d98873f"
 }

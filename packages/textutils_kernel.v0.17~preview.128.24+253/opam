@@ -22,5 +22,5 @@ description: "
 "
 url {
 src: "https://github.com/janestreet/textutils_kernel/archive/2e4ef77d5f7c2af437fe463bcd740168f71c7ade.tar.gz"
-checksum: "sha256=2c78ff3b4e7a29769278e1a4e1b172aa19c4686794b9053f3662669511ce042c"
+checksum: "sha256=bccac33518fb8e0240201e97382f0a62968f2dedab30a831883ff7ed74fb18a2"
 }

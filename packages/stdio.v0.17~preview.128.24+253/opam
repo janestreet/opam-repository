@@ -24,5 +24,5 @@ libraries using a more consistent API.
 "
 url {
 src: "https://github.com/janestreet/stdio/archive/24f8d6b1de43333070b974f55aa5988700466dc9.tar.gz"
-checksum: "sha256=4a23774ebbc29195f09ce15ad73f2f1ae0e05617b5184a3a62984698d7733dcd"
+checksum: "sha256=9c0de37be939cb8f92797d8f5dbd7174ee45616a89b43bca14631da5b3d4929d"
 }

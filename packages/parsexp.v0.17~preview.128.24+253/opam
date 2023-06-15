@@ -39,5 +39,5 @@ parsexp_io.
 "
 url {
 src: "https://github.com/janestreet/parsexp/archive/d33215c9813fe055ecee9ca8c217578cbbcec1c4.tar.gz"
-checksum: "sha256=9c02c7ae7783800b8fac48d113f6de7834fb7a27e9979cad3b3374a720a8e2ef"
+checksum: "sha256=8853e13dcaf92a0a5f6125c3df23aeaac56b22b80782ab1008f4124dd2ce39bb"
 }

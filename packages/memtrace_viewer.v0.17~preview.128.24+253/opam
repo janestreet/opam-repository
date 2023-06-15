@@ -33,5 +33,5 @@ objects that are still live at peak memory usage.
 "
 url {
 src: "https://github.com/janestreet/memtrace_viewer/archive/e61e2a5faff9d743dadfdd4e41b831b5f24943ee.tar.gz"
-checksum: "sha256=8f6243bbf08ced966060f09d4422fc5e8a134cbc8d0c0499a871fa53720e8d30"
+checksum: "sha256=5dbb143b25628b963d59125e5256efcb3b6400cc94aa52afbdcf2f5feb1aedb1"
 }

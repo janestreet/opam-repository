@@ -31,5 +31,5 @@ along with the ability to efficiently diff map data structures using
 "
 url {
 src: "https://github.com/janestreet/incr_map/archive/027320472ef58e2779e224c045f6e70b78a57282.tar.gz"
-checksum: "sha256=b3d07ce0f4d908f9370a121278fadea57a24905d45e3d9cbb98a19092962f8ef"
+checksum: "sha256=bdc4d2e5f115b7ca56f0c718cdac825cf22a7f8ec6d92a3bb74517bdff171115"
 }

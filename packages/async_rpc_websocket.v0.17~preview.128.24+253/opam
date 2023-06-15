@@ -32,5 +32,5 @@ when non-websocket traffic occurs.
 "
 url {
 src: "https://github.com/janestreet/async_rpc_websocket/archive/3e60b0acd4eeaa3e1bea73ffe9f2f289d6621351.tar.gz"
-checksum: "sha256=729bd7b972954810a2d33e71c0f268b3d6e52a6b908c7ed91a4423cf60ff0ab0"
+checksum: "sha256=89e5de41f1adf7409ff7da94bd5403385254c95e6cf79573eb82bba95a77644b"
 }

@@ -23,5 +23,5 @@ String type based on [Bigarray], for use in I/O and C-bindings.
 "
 url {
 src: "https://github.com/janestreet/base_bigstring/archive/93fa6b8aa1f328a889c959f3ef51cfc013023b53.tar.gz"
-checksum: "sha256=7cbd86055e4a9b61eeeeaf0c1be73ff260cf5022cfd56467172cc0d587807562"
+checksum: "sha256=3d5a5b5d1730e5b9d165187cfc67729ec5354e6509bdda810a2de9840e479ab9"
 }

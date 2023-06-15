@@ -31,5 +31,5 @@ Core_kernel is the system-independent part of Core.
 "
 url {
 src: "https://github.com/janestreet/core_kernel/archive/9ba649fbd64370bcd33935b5fa4b14a9fb3c9aef.tar.gz"
-checksum: "sha256=4bf789b1ee1f6c2039310511a68303d6a636baa4e509c1692126e54f1b7bb46e"
+checksum: "sha256=986590b61c131164cac1e42a6c0ada75babe169c305fdd18c5ee3833668058be"
 }

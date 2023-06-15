@@ -27,5 +27,5 @@ largest industrial user of OCaml.
 "
 url {
 src: "https://github.com/janestreet/async_rpc_kernel/archive/9da080bac92e871696aeed29218fba19858f9406.tar.gz"
-checksum: "sha256=d414848a53c3d99f387ea670f1cad8458d8d7814a333c419cd5997f45b4a7b6f"
+checksum: "sha256=e3fec9f36c7c33031980c3bbbed03026bb7dd8232678256749cad6c5c241d0f0"
 }

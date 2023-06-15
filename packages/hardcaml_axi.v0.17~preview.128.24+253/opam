@@ -26,5 +26,5 @@ AXI Lite, Full and Stream Interfaces for Hardcaml
 "
 url {
 src: "https://github.com/janestreet/hardcaml_axi/archive/fce1191266502e1bde4595d5e984adfe5c700861.tar.gz"
-checksum: "sha256=05e1f7e6490e3573d950b94ac9b86f9954ece3d8a2e24823714264756ca3cdee"
+checksum: "sha256=7401511fdfb349b1df54aace514936ef9e911deabc5164c197f22046049dd05c"
 }

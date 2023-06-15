@@ -27,5 +27,5 @@ This library provides tools for rendering of tabular data efficiently, in partic
 "
 url {
 src: "https://github.com/janestreet/incr_dom_partial_render/archive/aa121442503052c370e423720d3e624dec645343.tar.gz"
-checksum: "sha256=4994a5333199f11f8ccb5798b0a7ded08cfbe7151148812b4a6a4b547c026e83"
+checksum: "sha256=5ec10def59e3d81d2dd64ecb4693e27e523094fb9e6f8a33b250cd68ab73cfdc"
 }

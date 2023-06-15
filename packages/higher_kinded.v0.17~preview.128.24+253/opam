@@ -25,5 +25,5 @@ constructor.
 "
 url {
 src: "https://github.com/janestreet/higher_kinded/archive/f3c7a9c3db26b3b7c6389a788e54e3adc0b7d383.tar.gz"
-checksum: "sha256=7cb6be4f2d917e6921e2ad38fae5cf3b4bbf1f09f08e2c07c86256ee8c6e4ab3"
+checksum: "sha256=41253edfae7ad17ba77e7bd01031295e7d16f9b0fe03e3931b6176a8ad9815aa"
 }

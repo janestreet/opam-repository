@@ -29,5 +29,5 @@ It comes as a binary and an emacs mode.
 "
 url {
 src: "https://github.com/janestreet/line-up-words/archive/b380fc35fc61fa19592f3bc0ce38162ea8647e99.tar.gz"
-checksum: "sha256=6dc61552ae2975a4a81c8fe8274f765ebfffa5db773093186ba471ff2d16e887"
+checksum: "sha256=45dd3d6938d90bb1f585a5588ad7858209e5e7189fd7a718f220ba5794b74e05"
 }

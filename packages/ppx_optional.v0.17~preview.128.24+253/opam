@@ -23,5 +23,5 @@ else expression.
 "
 url {
 src: "https://github.com/janestreet/ppx_optional/archive/73d286a140160f9b353a0265c38afaff5d4560d3.tar.gz"
-checksum: "sha256=a7c78f6c41614a6035b02bbbbb2c4d23f249f2f189a0be8e25c3fff621bbd2aa"
+checksum: "sha256=3f476e6d6a8a93dcd92c7bc9164a386ab6dcea91adcb37ebb042d74d464bb177"
 }

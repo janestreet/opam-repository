@@ -26,5 +26,5 @@ enforce some coding conventions across all Jane Street packages.
 "
 url {
 src: "https://github.com/janestreet/ppx_js_style/archive/591cf69a91efff9552cd18075db13d197083a341.tar.gz"
-checksum: "sha256=5817e7b86a5a1b9283af0afdf01e5361bc10cee327192f0fe7f736edb73c15fe"
+checksum: "sha256=718032ea5b8d5bedd7a1083a2d7191ada930d2173c20f1f60c7d9ff0abc1e2a5"
 }

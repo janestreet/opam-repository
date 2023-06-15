@@ -22,5 +22,5 @@ Libraries for fuzzy string matching
 "
 url {
 src: "https://github.com/janestreet/fuzzy_match/archive/eea86ee1c9480d117e0423a9633c410040c3ea17.tar.gz"
-checksum: "sha256=7e58152d18709e546b4ba03f4966aa14826753721c26941480ed44b03bc8400c"
+checksum: "sha256=bb7b3120402430ce3f32fb3b4a69a8be159049a2527b4abca68975a0b3b2c609"
 }

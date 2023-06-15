@@ -28,5 +28,5 @@ depexts: [
 ]
 url {
 src: "https://github.com/janestreet/pam/archive/3c0042c1bedcc049ef4d6df2ae7440bfe065b597.tar.gz"
-checksum: "sha256=067c74ebbe3a115701213a142c31bceb125841e302a5f85d427c33f073ea80d0"
+checksum: "sha256=9bcab8a236253ac6ad450a2cf0aa8b287afeca5d7131337e4e5ac653a2b65b56"
 }

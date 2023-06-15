@@ -37,5 +37,5 @@ depexts: [
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
 src: "https://github.com/janestreet/krb/archive/2d91457eac710beade39ff09ed071203920ecbe0.tar.gz"
-checksum: "sha256=575f7a99338ce0db232be2d944f14c47c8b6eac19e9594f1ab5afc9553aca736"
+checksum: "sha256=6ad6aea94bfcc916d29f26a9331b722eddd39f2c32e036af18b49cfea95a12c6"
 }

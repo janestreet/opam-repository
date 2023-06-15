@@ -24,5 +24,5 @@ capabilities.
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
 src: "https://github.com/janestreet/janestreet_cpuid/archive/2df426bd3c058c81ddd83cf947f0d39c189247ea.tar.gz"
-checksum: "sha256=1ce984b97165106e6c71778f19a00ab8a4eaa7a43bcaaa765717ce3aa1502f03"
+checksum: "sha256=73dd3a1a9b5062589c5d81245f4334da24cf6afd0c010e2fb14a50e1ae896167"
 }

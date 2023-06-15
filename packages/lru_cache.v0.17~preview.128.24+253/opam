@@ -22,5 +22,5 @@ Implementation of a Least Recently Used Cache.
 "
 url {
 src: "https://github.com/janestreet/lru_cache/archive/841cf555fd84c586fb622b4124f88aecedcda88b.tar.gz"
-checksum: "sha256=96e135bc7a803345917c5b72a9a6fed3fc0295c2e4f4a964dde1ad2adaf88cec"
+checksum: "sha256=8670b07948be53ac61bd8fa2cf859a3ef9601dd0be372184b2133d662553bf40"
 }

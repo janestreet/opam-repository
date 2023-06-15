@@ -25,5 +25,5 @@ the mantissa is internally a [Bigint.t] and the exponent is an [int].
 "
 url {
 src: "https://github.com/janestreet/bigdecimal/archive/2d54d63036333af1b72b103436dbb267f9739d6a.tar.gz"
-checksum: "sha256=cfb6ee8083c08f9e7e21bc1cf61f56948a18c4e823f67d0aeecd9bfe9d2bc604"
+checksum: "sha256=34f61cae7d795ae68115b047c1e07930119f8fa5246139dc7a1462d130fc5d12"
 }

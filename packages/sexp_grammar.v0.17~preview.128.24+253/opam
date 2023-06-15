@@ -28,5 +28,5 @@ Helpers for manipulating [Sexplib.Sexp_grammar] values.
 "
 url {
 src: "https://github.com/janestreet/sexp_grammar/archive/be7dfe61e0bf1f6dcce2592a16a74ce95e1eed19.tar.gz"
-checksum: "sha256=34ba4f2ef9f07dbff36ca81b43c4796240c5aec1134787eb4addee661d511b16"
+checksum: "sha256=7ae7bc1489e8ccf3ffce5b11e77d40e91933325a4e4fd95cea1e4e60b978c118"
 }

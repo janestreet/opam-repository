@@ -33,5 +33,5 @@ provided by companion libraries such as stdio:
 "
 url {
 src: "https://github.com/janestreet/base/archive/041bbbba50cf25a35c14e7c042ba4fe33521851e.tar.gz"
-checksum: "sha256=64779c3418af9c7729e89bebb00628a6492c5fae620a5b98bfea8389ea6a24da"
+checksum: "sha256=bd3e845d1e4befb3c41e660b09fd84b913baade4d8a7718517224cf8912bb611"
 }

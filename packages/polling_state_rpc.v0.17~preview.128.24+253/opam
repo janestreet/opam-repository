@@ -26,5 +26,5 @@ An RPC which tracks state on the client and server so it only needs to send diff
 "
 url {
 src: "https://github.com/janestreet/polling_state_rpc/archive/42902b7d2a00c5c022fe6f77848b447c16042056.tar.gz"
-checksum: "sha256=f65b8be22e5da37d064aa372b83542bf78b26acd1411bd6cc8d98fbe620b00d2"
+checksum: "sha256=47d18f230257f8acf298ddcac7ee11b8254f18895938f1724c87262512ce8b15"
 }

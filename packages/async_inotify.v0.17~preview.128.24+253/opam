@@ -25,5 +25,5 @@ description: "
 "
 url {
 src: "https://github.com/janestreet/async_inotify/archive/a7331739ba916f1b39663b88d39f1e0d6c8c8679.tar.gz"
-checksum: "sha256=cb38210bd753d4b1d5d169035137a50c465bb16b2864b415590d4ac611b653ac"
+checksum: "sha256=82353b7cb616ee7b19c823f59393e1d9420c664f68f30d90ec20eb108163a382"
 }

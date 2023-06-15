@@ -23,5 +23,5 @@ can later be used to manipulate time in core_kernel or core.
 "
 url {
 src: "https://github.com/janestreet/timezone/archive/87ea59af501b8826d1d8fd9210c8ab2634a157b7.tar.gz"
-checksum: "sha256=f4648da510f64094c954f08a66aad8f4d4cc6b8cf36054e58113e4b633ce9fcf"
+checksum: "sha256=7f806d61ccc94afd1139e96e93e899e3e01436639333815059602609ba722f9b"
 }

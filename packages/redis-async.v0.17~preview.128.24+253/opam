@@ -30,5 +30,5 @@ Supports client tracking and internally uses the RESP3 protocol.
 "
 url {
 src: "https://github.com/janestreet/redis-async/archive/a926b6ccc91b9dc68be05e91f6385df3a6445db7.tar.gz"
-checksum: "sha256=dc2f4057efbbdbf0561ca24fa934bc16bd4c5fc643afbf7048add366193745cf"
+checksum: "sha256=ba4280bb4c54d196300bbaad2c8cff03ebe2b5b53c6243fb0bb42b6ceac5e449"
 }

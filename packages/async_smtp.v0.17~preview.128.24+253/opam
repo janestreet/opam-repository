@@ -35,5 +35,5 @@ description: "
 "
 url {
 src: "https://github.com/janestreet/async_smtp/archive/925239f06e065643ea6f728526d9364ab5481cde.tar.gz"
-checksum: "sha256=9200b39f66b244e80d79f7e5444832b25a0107ccae34b87b5a11ae9e0fbb4804"
+checksum: "sha256=7a334c069a069ece45bb4033e2fb4675e13e81397a90405afd7c2d01609c25cb"
 }

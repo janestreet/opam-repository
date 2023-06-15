@@ -28,5 +28,5 @@ largest industrial user of OCaml.
 "
 url {
 src: "https://github.com/janestreet/async_unix/archive/d06d51e3a464502897b5be07b3ddccec6a5953fc.tar.gz"
-checksum: "sha256=c44ea2fb1074332724ab3f62156c83643a979357986f66ecfb926654e8efd8c5"
+checksum: "sha256=4fd7e3c7b80810cafb2baa7d8326b6e816e1fed30ea1a89cbd9655327a47e180"
 }

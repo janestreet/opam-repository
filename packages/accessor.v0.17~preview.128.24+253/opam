@@ -28,5 +28,5 @@ In case you have ever heard of \"lenses\", this is an OCaml implementation of th
 "
 url {
 src: "https://github.com/janestreet/accessor/archive/677e016df61732f358eba3904747b275938d8f46.tar.gz"
-checksum: "sha256=e9245e17d15ef95f3d5b36241e4bbce60e05e57381b8546e26544641a91e051b"
+checksum: "sha256=3cb7424f9476ae3fca225a700405a3ca1b9c1daf8a3d6ed08522437e3b5ebea5"
 }

@@ -27,5 +27,5 @@ in a library.
 "
 url {
 src: "https://github.com/janestreet/env_config/archive/1cd8764f15032af7358c060fd606efa2ab58f39e.tar.gz"
-checksum: "sha256=037a4a823307a6c7355abc96bbbe803107f3f8c75deedf9c156857a9bd61c9cc"
+checksum: "sha256=04a28ecf499a4390ae500f497299c0bc9ddfd904c4373e305df9af2643655b51"
 }

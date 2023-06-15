@@ -37,5 +37,5 @@ conjunction with async-js and google-chrome.
 "
 url {
 src: "https://github.com/janestreet/cohttp_async_websocket/archive/7f3f16b90478d7bdeeedd12105920f8f95b487fd.tar.gz"
-checksum: "sha256=f681561ef8e375ef99ff5849d9cf664342adb12b59f0aabe9793a8994a526fb1"
+checksum: "sha256=fb9f7d6352fbe568289734c5140d8713f2f4e67d796131a1000ccfb4e656fa58"
 }

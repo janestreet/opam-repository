@@ -45,5 +45,5 @@ This is the system-independent part of Core. Unix-specific parts were moved to [
 "
 url {
 src: "https://github.com/janestreet/core/archive/d3033ca1d9b18382ce724c78ca50db9274559343.tar.gz"
-checksum: "sha256=4b66122e70efd6effbf0f89d1d83b86ba4f10d6e7f80da37646fb835297edb26"
+checksum: "sha256=cc4e44aa48987070c7b825ed46110501f39809f5bff3a9eff5bfc3fbe0300c95"
 }

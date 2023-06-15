@@ -49,5 +49,5 @@ examples directory.
 "
 url {
 src: "https://github.com/janestreet/incr_dom/archive/84a2bb9935d94c270b8cc869afdaca0191455783.tar.gz"
-checksum: "sha256=b590bb565b6ac819c41f54eb2b7ef39f3477eee3ee1b8a2ad78d2828df37add2"
+checksum: "sha256=3cf3a62309302af86715ab37e083f236e69f408815a1dc3888d2770c8c168b3c"
 }

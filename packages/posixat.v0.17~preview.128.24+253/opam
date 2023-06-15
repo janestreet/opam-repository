@@ -28,5 +28,5 @@ working directories inside the same process.
 "
 url {
 src: "https://github.com/janestreet/posixat/archive/89e42a313f45c9fe804c0e3087ee5a78741ee3e4.tar.gz"
-checksum: "sha256=2356740e191cfc6f5cac629b7db1f905dd23e12041d8b1a54a36c212c7dbca2e"
+checksum: "sha256=aae28b449a9118a4b7728df537d74442f700b8b5ac056e4d4893b1a95cfe0551"
 }

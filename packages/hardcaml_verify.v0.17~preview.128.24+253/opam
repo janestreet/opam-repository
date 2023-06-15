@@ -34,5 +34,5 @@ checking tasks.
 "
 url {
 src: "https://github.com/janestreet/hardcaml_verify/archive/89bdade5a038b62f5d9c5e80bc37e39f442c47a5.tar.gz"
-checksum: "sha256=d90c293df3ee3a2f3c205a629211088743516575f2bf85c551ae8cbb3ac94234"
+checksum: "sha256=388307c396b1b45d9ffd80f510a6e92fefdd4bafacec6d97c5eb40840fd3e65e"
 }

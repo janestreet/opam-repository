@@ -22,5 +22,5 @@ description: "
 "
 url {
 src: "https://github.com/janestreet/command_rpc/archive/eab651ac4695939b35f24eacd3cddbad12ce45b9.tar.gz"
-checksum: "sha256=b81082f3c1bd15c734cd91ecc984e300b57ae3278782c6330aee1319c3cca054"
+checksum: "sha256=fd392a344da0c729b360989c55dddc45031a00ddd086122d19b3334fe1798e64"
 }

@@ -34,5 +34,5 @@ largest industrial user of OCaml.
 "
 url {
 src: "https://github.com/janestreet/bin_prot/archive/a85278256c81de67eb95d325cb82ee0e666edb10.tar.gz"
-checksum: "sha256=550970fe4f77c4c4f6fb4ab0db462a875d711586fab4981b27e4b0da88e0de11"
+checksum: "sha256=f93f3882aa65411376c500ecf5a91e8f31bf6fb602dfa9ee81770980b7404200"
 }

@@ -25,5 +25,5 @@ defining string constants containing the contents of those files.
 "
 url {
 src: "https://github.com/janestreet/ocaml-embed-file/archive/a82d42ad34c54607b1d8d6cafaf5727c95e89be1.tar.gz"
-checksum: "sha256=2299b23c825584543be1856fccf28e7392417bc6d42dc3a76af795bc4602090b"
+checksum: "sha256=ba235611173a4169d3c7b4f217a57dcb00449d56e3e70a74bc1f2a091f8bc3e4"
 }

@@ -25,5 +25,5 @@ This library implements both the server and client side of
 "
 url {
 src: "https://github.com/janestreet/async_websocket/archive/450e7affa608689f6a14d0cf47cc7cd37e7bae4b.tar.gz"
-checksum: "sha256=2f194d40936fa4d7741724f5982213054340a4327207ca22a35070d105921ba2"
+checksum: "sha256=486e72c0dafa20566d507e84c0f291ddce337d638d5ee53460bb31eb349fe872"
 }

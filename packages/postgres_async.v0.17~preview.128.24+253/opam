@@ -29,5 +29,5 @@ for now, though in the future a layer on top may add convenience functions.
 "
 url {
 src: "https://github.com/janestreet/postgres_async/archive/6ab03481ffc3e11437327ada5380646321538f5b.tar.gz"
-checksum: "sha256=bf4eb270de76ae9bbee7bf874b5f5955ce09ea1ca4ceebe7a8b3d7776ccaf9a1"
+checksum: "sha256=4f52995c6f01cec5047273c7fa772ffdd9d87f95e8cdbdc82f8aef8a12337d42"
 }

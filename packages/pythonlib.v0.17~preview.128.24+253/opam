@@ -34,5 +34,5 @@ This library helps exposing ocaml functions to python. The python runtime intera
 "
 url {
 src: "https://github.com/janestreet/pythonlib/archive/2bf32897306cead91ae7360b726fd816a814814b.tar.gz"
-checksum: "sha256=20020df4da0b58e23af21ffad47ec2c649c4d55808b0e6a8f6756c8f663cddae"
+checksum: "sha256=efb63fd4a8021383282080957399e3d9856f75ff896b32f9b871b0205a88ad84"
 }
