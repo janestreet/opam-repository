@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_kernel"
+bug-reports: "https://github.com/janestreet/core_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/core_kernel.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_kernel/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "4.14.0"}
+  "base"         {= "v0.17~preview.128.26+219"}
+  "core"         {= "v0.17~preview.128.26+219"}
+  "int_repr"     {= "v0.17~preview.128.26+219"}
+  "ppx_jane"     {= "v0.17~preview.128.26+219"}
+  "ppx_optcomp"  {= "v0.17~preview.128.26+219"}
+  "uopt"         {= "v0.17~preview.128.26+219"}
+  "base-threads"
+  "dune"         {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Industrial strength alternative to OCaml's standard library"
+description: "
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+
+Core_kernel is the system-independent part of Core.
+"
+url {
+src: "https://github.com/janestreet/core_kernel/archive/c3fad3950a448cb5bc86bb067d3e64f6dd1d6620.tar.gz"
+checksum: "sha256=70bb4797f7eabeed6bc3cc614fcc4d06e47aa8517aba1fec76eb9127cef055d5"
+}

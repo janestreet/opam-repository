@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_module_timer"
+bug-reports: "https://github.com/janestreet/ppx_module_timer/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_module_timer.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_module_timer/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "base"     {= "v0.17~preview.128.26+219"}
+  "ppx_base" {= "v0.17~preview.128.26+219"}
+  "stdio"    {= "v0.17~preview.128.26+219"}
+  "time_now" {= "v0.17~preview.128.26+219"}
+  "dune"     {>= "2.0.0"}
+  "ppxlib"   {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Ppx rewriter that records top-level module startup times"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_module_timer/archive/d11195eb7ebdede0799951672a4a87f9a76883f2.tar.gz"
+checksum: "sha256=e550eaa2ad35467e0cc727ca07a24e846b2f57b8b2fd793f55f0bac9ab6d536d"
+}

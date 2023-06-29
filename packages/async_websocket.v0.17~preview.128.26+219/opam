@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_websocket"
+bug-reports: "https://github.com/janestreet/async_websocket/issues"
+dev-repo: "git+https://github.com/janestreet/async_websocket.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_websocket/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.14.0"}
+  "async"       {= "v0.17~preview.128.26+219"}
+  "core_kernel" {= "v0.17~preview.128.26+219"}
+  "ppx_jane"    {= "v0.17~preview.128.26+219"}
+  "cryptokit"   {>= "1.16" & < "1.17"}
+  "dune"        {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library that implements the websocket protocol on top of Async"
+description: "
+This library implements both the server and client side of 
+                the websocket protocol.
+"
+url {
+src: "https://github.com/janestreet/async_websocket/archive/450e7affa608689f6a14d0cf47cc7cd37e7bae4b.tar.gz"
+checksum: "sha256=486e72c0dafa20566d507e84c0f291ddce337d638d5ee53460bb31eb349fe872"
+}
