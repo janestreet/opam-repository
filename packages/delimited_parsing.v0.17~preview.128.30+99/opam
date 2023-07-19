@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/delimited_parsing"
+bug-reports: "https://github.com/janestreet/delimited_parsing/issues"
+dev-repo: "git+https://github.com/janestreet/delimited_parsing.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/delimited_parsing/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.14.0"}
+  "async"         {= "v0.17~preview.128.30+99"}
+  "core"          {= "v0.17~preview.128.30+99"}
+  "core_extended" {= "v0.17~preview.128.30+99"}
+  "ppx_jane"      {= "v0.17~preview.128.30+99"}
+  "dune"          {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Parsing of character (e.g., comma) separated and fixed-width values"
+description: "
+Delimited_parsing parses character-separated values (such as CSV files) and fixed-width
+records.
+"
+url {
+src: "https://github.com/janestreet/delimited_parsing/archive/33e18353c35f5b66984efd27921152ce0087cfa2.tar.gz"
+checksum: "sha256=227ca95231d78339635c61fc9278f2b17ab6b0575e7447dc4f1565d04eadc4b3"
+}

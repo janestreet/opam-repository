@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/email_message"
+bug-reports: "https://github.com/janestreet/email_message/issues"
+dev-repo: "git+https://github.com/janestreet/email_message.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/email_message/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "4.14.0"}
+  "async"       {= "v0.17~preview.128.30+99"}
+  "core"        {= "v0.17~preview.128.30+99"}
+  "core_kernel" {= "v0.17~preview.128.30+99"}
+  "core_unix"   {= "v0.17~preview.128.30+99"}
+  "ppx_jane"    {= "v0.17~preview.128.30+99"}
+  "re2"         {= "v0.17~preview.128.30+99"}
+  "angstrom"    {>= "0.15.0"}
+  "base64"      {>= "3.4.0"}
+  "cryptokit"   {>= "1.16" & < "1.17"}
+  "dune"        {>= "2.0.0"}
+  "magic-mime"
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "E-mail message parser"
+description: "
+"
+url {
+src: "https://github.com/janestreet/email_message/archive/1ba47f3d634644b3dc893e16fce9ef43f3f49ddb.tar.gz"
+checksum: "sha256=ad147e1659ea36403872a32b4db30879b39954fe4f02e897290c2dddab641509"
+}

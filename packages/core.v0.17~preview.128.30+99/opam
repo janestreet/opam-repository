@@ -1,0 +1,49 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core"
+bug-reports: "https://github.com/janestreet/core/issues"
+dev-repo: "git+https://github.com/janestreet/core.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "4.14.0"}
+  "base"                {= "v0.17~preview.128.30+99"}
+  "base_bigstring"      {= "v0.17~preview.128.30+99"}
+  "base_quickcheck"     {= "v0.17~preview.128.30+99"}
+  "bin_prot"            {= "v0.17~preview.128.30+99"}
+  "fieldslib"           {= "v0.17~preview.128.30+99"}
+  "jane-street-headers" {= "v0.17~preview.128.30+99"}
+  "jst-config"          {= "v0.17~preview.128.30+99"}
+  "ppx_assert"          {= "v0.17~preview.128.30+99"}
+  "ppx_base"            {= "v0.17~preview.128.30+99"}
+  "ppx_hash"            {= "v0.17~preview.128.30+99"}
+  "ppx_inline_test"     {= "v0.17~preview.128.30+99"}
+  "ppx_jane"            {= "v0.17~preview.128.30+99"}
+  "ppx_optcomp"         {= "v0.17~preview.128.30+99"}
+  "ppx_sexp_conv"       {= "v0.17~preview.128.30+99"}
+  "ppx_sexp_message"    {= "v0.17~preview.128.30+99"}
+  "sexplib"             {= "v0.17~preview.128.30+99"}
+  "splittable_random"   {= "v0.17~preview.128.30+99"}
+  "stdio"               {= "v0.17~preview.128.30+99"}
+  "time_now"            {= "v0.17~preview.128.30+99"}
+  "typerep"             {= "v0.17~preview.128.30+99"}
+  "variantslib"         {= "v0.17~preview.128.30+99"}
+  "dune"                {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Industrial strength alternative to OCaml's standard library"
+description: "
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+
+This is the system-independent part of Core. Unix-specific parts were moved to [core_unix].
+"
+url {
+src: "https://github.com/janestreet/core/archive/6d1f19342a98cd718c0f9a59e2e82bc1449a0c2d.tar.gz"
+checksum: "sha256=e5cba7be54f0853ced47f8b0daa98fe2f46020e4a86b59704647ce97b92effab"
+}

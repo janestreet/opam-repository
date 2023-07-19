@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_here"
+bug-reports: "https://github.com/janestreet/ppx_here/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_here.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_here/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "4.14.0"}
+  "base"   {= "v0.17~preview.128.30+99"}
+  "dune"   {>= "2.0.0"}
+  "ppxlib" {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Expands [%here] into its location"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_here/archive/a1dfcbc96ce50a0b42774dfc372fb8f831d656e3.tar.gz"
+checksum: "sha256=7b80d2c35d19c3dc54a75b9a19d44598c3f1e42c4f1be208542b4aa18f55a630"
+}

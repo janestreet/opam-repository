@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/stdio"
+bug-reports: "https://github.com/janestreet/stdio/issues"
+dev-repo: "git+https://github.com/janestreet/stdio.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/stdio/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.14.0"}
+  "base"  {= "v0.17~preview.128.30+99"}
+  "dune"  {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Standard IO library for OCaml"
+description: "
+Stdio implements simple input/output functionalities for OCaml.
+
+It re-exports the input/output functions of the OCaml standard
+libraries using a more consistent API.
+"
+url {
+src: "https://github.com/janestreet/stdio/archive/ae32f9309ce95486349cb06e1888117786e4c34a.tar.gz"
+checksum: "sha256=c98bd04e559e5cf5d1dc9f7af6a548fb5406fb3c8cb7f1c23b13266c7c1f642a"
+}
