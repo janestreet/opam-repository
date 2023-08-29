@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/content_security_policy"
+bug-reports: "https://github.com/janestreet/content_security_policy/issues"
+dev-repo: "git+https://github.com/janestreet/content_security_policy.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/content_security_policy/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"     {>= "4.14.0"}
+  "core"      {= "v0.17~preview.128.37+01"}
+  "ppx_jane"  {= "v0.17~preview.128.37+01"}
+  "base64"    {>= "3.4.0"}
+  "cryptokit" {>= "1.16" & < "1.17"}
+  "dune"      {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for building content-security policies"
+description: "
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+"
+url {
+src: "https://github.com/janestreet/content_security_policy/archive/4f944c6e5f6c10722c2842defbd4cd41f2f4430b.tar.gz"
+checksum: "sha256=0916ede706e7de22845cde88518ee3f1ad7da46dac01b56689252c3826b4644b"
+}

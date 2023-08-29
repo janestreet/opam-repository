@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_compare"
+bug-reports: "https://github.com/janestreet/ppx_compare/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_compare.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_compare/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "4.14.0"}
+  "base"   {= "v0.17~preview.128.37+01"}
+  "dune"   {>= "2.0.0"}
+  "ppxlib" {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Generation of comparison functions from types"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_compare/archive/e2936cac98006053331c2ff53ca84f1e991eb111.tar.gz"
+checksum: "sha256=ae2db2826b0e78b63e1131d1d0b2c7fcde902166940bb050ed2695257884b841"
+}

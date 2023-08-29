@@ -1,0 +1,24 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_quick_test"
+bug-reports: "https://github.com/janestreet/ppx_quick_test/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_quick_test.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_quick_test/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.14.0"}
+  "dune"  {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Spiritual equivalent of let%expect_test, but for property based tests as an ergonomic wrapper to write quickcheck tests."
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_quick_test/archive/fd0bff41badd5843262652d7b28014df8a3690e9.tar.gz"
+checksum: "sha256=a7f4d413839236ea5a3fc9ca22b11760333fd241f1f34f81396e69a4d69746f2"
+}

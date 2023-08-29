@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/line-up-words"
+bug-reports: "https://github.com/janestreet/line-up-words/issues"
+dev-repo: "git+https://github.com/janestreet/line-up-words.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/line-up-words/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.14.0"}
+  "core"          {= "v0.17~preview.128.37+01"}
+  "core_unix"     {= "v0.17~preview.128.37+01"}
+  "patience_diff" {= "v0.17~preview.128.37+01"}
+  "ppx_jane"      {= "v0.17~preview.128.37+01"}
+  "re2"           {= "v0.17~preview.128.37+01"}
+  "dune"          {>= "2.0.0"}
+  "pcre"
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Align words in an intelligent way"
+description: "
+line-up-words is a small command line tool that tries to align words
+in a sequence of lines in an intelligent way.
+
+It comes as a binary and an emacs mode.
+"
+url {
+src: "https://github.com/janestreet/line-up-words/archive/fe8876be245343e1d8646efa2a74e6c80869aa2c.tar.gz"
+checksum: "sha256=3dc83fe367774af82517d315fd004e70e1a0c5e42dd9d3801883ec0a31ea680e"
+}

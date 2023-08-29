@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_globalize"
+bug-reports: "https://github.com/janestreet/ppx_globalize/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_globalize.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_globalize/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "4.14.0"}
+  "base"   {= "v0.17~preview.128.37+01"}
+  "dune"   {>= "2.0.0"}
+  "ppxlib" {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A ppx rewriter that generates functions to copy local values to the global heap"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_globalize/archive/90e51ccab6e16cf5f4079a7ea3c9aff58d1d5781.tar.gz"
+checksum: "sha256=61ea87129d7248d44b802754a505462a7b9e5400dc154d7625441e069d23a8a1"
+}

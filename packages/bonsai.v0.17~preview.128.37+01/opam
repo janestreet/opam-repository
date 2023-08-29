@@ -1,0 +1,67 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai"
+bug-reports: "https://github.com/janestreet/bonsai/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.14.0"}
+  "async"                    {= "v0.17~preview.128.37+01"}
+  "async_durable"            {= "v0.17~preview.128.37+01"}
+  "async_extra"              {= "v0.17~preview.128.37+01"}
+  "async_js"                 {= "v0.17~preview.128.37+01"}
+  "async_kernel"             {= "v0.17~preview.128.37+01"}
+  "async_rpc_kernel"         {= "v0.17~preview.128.37+01"}
+  "async_rpc_websocket"      {= "v0.17~preview.128.37+01"}
+  "babel"                    {= "v0.17~preview.128.37+01"}
+  "base"                     {= "v0.17~preview.128.37+01"}
+  "core"                     {= "v0.17~preview.128.37+01"}
+  "core_bench"               {= "v0.17~preview.128.37+01"}
+  "core_kernel"              {= "v0.17~preview.128.37+01"}
+  "core_unix"                {= "v0.17~preview.128.37+01"}
+  "diffable"                 {= "v0.17~preview.128.37+01"}
+  "expect_test_helpers_core" {= "v0.17~preview.128.37+01"}
+  "fuzzy_match"              {= "v0.17~preview.128.37+01"}
+  "incr_dom"                 {= "v0.17~preview.128.37+01"}
+  "incr_map"                 {= "v0.17~preview.128.37+01"}
+  "ordinal_abbreviation"     {= "v0.17~preview.128.37+01"}
+  "patdiff"                  {= "v0.17~preview.128.37+01"}
+  "polling_state_rpc"        {= "v0.17~preview.128.37+01"}
+  "ppx_css"                  {= "v0.17~preview.128.37+01"}
+  "ppx_here"                 {= "v0.17~preview.128.37+01"}
+  "ppx_jane"                 {= "v0.17~preview.128.37+01"}
+  "ppx_let"                  {= "v0.17~preview.128.37+01"}
+  "ppx_pattern_bind"         {= "v0.17~preview.128.37+01"}
+  "ppx_typed_fields"         {= "v0.17~preview.128.37+01"}
+  "profunctor"               {= "v0.17~preview.128.37+01"}
+  "sexp_grammar"             {= "v0.17~preview.128.37+01"}
+  "sexplib0"                 {= "v0.17~preview.128.37+01"}
+  "streamable"               {= "v0.17~preview.128.37+01"}
+  "textutils"                {= "v0.17~preview.128.37+01"}
+  "virtual_dom"              {= "v0.17~preview.128.37+01"}
+  "base64"                   {>= "3.4.0"}
+  "cohttp-async"             {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
+  "dune"                     {>= "2.0.0"}
+  "gen_js_api"               {>= "1.0.8"}
+  "js_of_ocaml"              {>= "5.1.1"}
+  "js_of_ocaml-ppx"          {>= "5.1.1"}
+  "ocaml-embed-file"         {= "v0.17~preview.128.37+01"}
+  "ppxlib"                   {>= "0.28.0"}
+  "re"                       {>= "1.8.0"}
+  "uri"                      {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for building dynamic webapps, using Js_of_ocaml"
+description: "
+Bonsai is a library for building reusable UI components inside an
+     Incremental-style UI framework such as Incr_dom or React.
+"
+url {
+src: "https://github.com/janestreet/bonsai/archive/d1538718309bb750d1a087f730de739b176df8ff.tar.gz"
+checksum: "sha256=4c956a7b915b9113f426f1c5c463bea74bebf6dcaa4936c5c04559def0c0f174"
+}

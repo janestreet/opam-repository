@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/uopt"
+bug-reports: "https://github.com/janestreet/uopt/issues"
+dev-repo: "git+https://github.com/janestreet/uopt.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/uopt/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "base"     {= "v0.17~preview.128.37+01"}
+  "ppx_jane" {= "v0.17~preview.128.37+01"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "An [option]-like type that incurs no allocation, without requiring a reserved value in the underlying type"
+description: "
+Uopt_base provides an unboxed option type, for use in high-performance systems which avoid allocation. It has several downsides as compared to [option], and is not recommended for use in general-purpose software.
+"
+url {
+src: "https://github.com/janestreet/uopt/archive/35930cb960a4ea7fb970f28264d9bc8716a3c013.tar.gz"
+checksum: "sha256=0e7ba28b33d282f9b466671c98e46e425c41c21ea2a86ef384493245d6a2845d"
+}

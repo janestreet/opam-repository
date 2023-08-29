@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/babel"
+bug-reports: "https://github.com/janestreet/babel/issues"
+dev-repo: "git+https://github.com/janestreet/babel.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/babel/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "4.14.0"}
+  "async_rpc_kernel" {= "v0.17~preview.128.37+01"}
+  "core"             {= "v0.17~preview.128.37+01"}
+  "core_kernel"      {= "v0.17~preview.128.37+01"}
+  "ppx_jane"         {= "v0.17~preview.128.37+01"}
+  "streamable"       {= "v0.17~preview.128.37+01"}
+  "tilde_f"          {= "v0.17~preview.128.37+01"}
+  "dune"             {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for defining Rpcs that can evolve over time without breaking backward compatibility."
+description: "
+A library for defining Rpcs that can evolve over time without breaking backward compatibility.
+"
+url {
+src: "https://github.com/janestreet/babel/archive/3d982dece1adf9a0df62426310118a6b4b8d7cc1.tar.gz"
+checksum: "sha256=760b208f21d669411a42e2eaeff6715d0c045a3c3e393a112e529ea8a52b4f58"
+}
