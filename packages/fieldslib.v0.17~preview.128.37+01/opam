@@ -23,6 +23,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/fieldslib/archive/dafeca4c50b3d453ef72121055fc0083459a1abc.tar.gz"
-checksum: "sha256=0d0c38b7254fe2d4e42e05a23d3832bd6d0fe79be73270c23b6fd924d431380c"
+src: "https://github.com/janestreet/fieldslib/archive/7b0bd9d11b9748cd2f3e7682a6f21c934935640b.tar.gz"
+checksum: "sha256=87bc332c37d0d10f1d549bd1690d7edaa1e9478414c31c5298471f31e7778c17"
 }

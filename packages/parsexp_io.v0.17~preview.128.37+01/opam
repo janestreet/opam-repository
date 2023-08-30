@@ -23,6 +23,6 @@ description: "
 Parsexp_io provides functions for loading s-expressions from files.
 "
 url {
-src: "https://github.com/janestreet/parsexp_io/archive/c81c1c755cb25458aca27cbdc4d447da3d80e466.tar.gz"
-checksum: "sha256=2f8c84911c2d7a8fc13e46033be206990adfbfbe012ba913c025895e7de38494"
+src: "https://github.com/janestreet/parsexp_io/archive/8cd3f032fa6f1f9e491d90f4dc323458835f7b59.tar.gz"
+checksum: "sha256=9740cab8896cd759e67f043da93f239b8cb161cef84cb613cd8dc5ac3c6d73fe"
 }

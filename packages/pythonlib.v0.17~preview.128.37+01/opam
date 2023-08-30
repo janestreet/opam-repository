@@ -33,6 +33,6 @@ description: "
 This library helps exposing ocaml functions to python. The python runtime interaction is handled by pyml.
 "
 url {
-src: "https://github.com/janestreet/pythonlib/archive/8613a84578bebe601621b8d457299e2f86d231db.tar.gz"
-checksum: "sha256=9a2d9784f724a7d1787f8abd4510dd04ec3b60f302cb9724139a1546d5792810"
+src: "https://github.com/janestreet/pythonlib/archive/e4773741fd1d2778cf5bc2229c18ea61f7ec31ce.tar.gz"
+checksum: "sha256=a6ec31f8040b0179eb5dd4fceecddd7560ce4f6aaebb7954db182a2cb7e0c3a1"
 }

@@ -21,6 +21,6 @@ Provides functions to invoke amd64 instructions (such as clz,popcnt,rdtsc,rdpmc)
 "
 available: (arch = "x86_64" | arch = "arm64") & os != "win32"
 url {
-src: "https://github.com/janestreet/ocaml_intrinsics/archive/517e8c5950bf1b5e10888ac9ec16536b2e35d0d2.tar.gz"
-checksum: "sha256=3a61c5a487e1f590252908bb2ffe7bf57535de4977b2aa12712495a14799db70"
+src: "https://github.com/janestreet/ocaml_intrinsics/archive/81ea20433cbc16d6f954e733cddf45c1dd71db6a.tar.gz"
+checksum: "sha256=aa05a1a88a93c08572c01d11fb7dbd250b1aa8175badecd45b5a6ac41d340769"
 }

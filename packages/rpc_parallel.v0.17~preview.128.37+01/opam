@@ -29,6 +29,6 @@ Async Rpc.
 
 "
 url {
-src: "https://github.com/janestreet/rpc_parallel/archive/dfdd1f2d402cc9f944e5c836913740f8daf24677.tar.gz"
-checksum: "sha256=7e463317364bb083c6a23dc5c92b24d0d70b65becaa42390226fe5ae6bb51262"
+src: "https://github.com/janestreet/rpc_parallel/archive/d1321a36c39731499f1a06cbd4de98b377aee7f5.tar.gz"
+checksum: "sha256=6ddff4c8062cdcd16f7f600c5669cd3dec613b7408f907fab906cb9496fc2baf"
 }

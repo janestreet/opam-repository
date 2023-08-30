@@ -23,6 +23,6 @@ description: "
 Library for constructing circuits with a pair of valid and ready handshake signals.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_handshake/archive/e54a3a366ece5f6cf70464625a337f34e57cb7db.tar.gz"
-checksum: "sha256=d6d88e6b50cef377a05d35ab0ce6edd5f553af870db73de34186c90ad335d960"
+src: "https://github.com/janestreet/hardcaml_handshake/archive/1432d965e2cc335c9068e2c043c6ac89f27f60b1.tar.gz"
+checksum: "sha256=d50baca2efb2bf4b0286eafa7030404549cc56626145de97552a05202196a9bd"
 }

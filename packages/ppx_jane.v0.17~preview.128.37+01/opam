@@ -47,6 +47,6 @@ This package installs a ppx-jane executable, which is a ppx driver
 including all standard Jane Street ppx rewriters.
 "
 url {
-src: "https://github.com/janestreet/ppx_jane/archive/ed2f0ae1842c9fe7b67267eb26ab9608acc5e8b1.tar.gz"
-checksum: "sha256=98d67cdc70775a42f9a6812eae03e4e2b15cb197197faf6d23bbeb3f40500d19"
+src: "https://github.com/janestreet/ppx_jane/archive/4628d8cae20a632076325a51bfc3d94684247557.tar.gz"
+checksum: "sha256=73c11e9fc2119b83fba2aa9665f4a29425f3f6532e3630f2fe2d2016bb79add4"
 }

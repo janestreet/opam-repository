@@ -20,6 +20,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_yojson_conv_lib/archive/5c71cfbf40a65514b51fa2ca89d72d0933a594cd.tar.gz"
-checksum: "sha256=cd1306b4f24b3e213cb401be60eaf4636b0c2335a489515989c41257ebae5aa3"
+src: "https://github.com/janestreet/ppx_yojson_conv_lib/archive/ea771f23fd2960cc9d64864b72932a3c5b7de1fb.tar.gz"
+checksum: "sha256=0f3be64ae2f24506c74349e9d6f02252374fbca584af26aa066d485d21ce5bbb"
 }

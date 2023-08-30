@@ -25,6 +25,6 @@ synopsis: "Core-flavoured wrapper around zarith's arbitrary-precision rationals"
 description: "
 "
 url {
-src: "https://github.com/janestreet/bignum/archive/78d838fedd1180761a82f30372ee637dc2c3644f.tar.gz"
-checksum: "sha256=f1fbbb146df3e9592a0e1a23c55d789643f53f34f5afe5a343c180133be62078"
+src: "https://github.com/janestreet/bignum/archive/b4da58f2773b82dba2ab342998456a3ebcc08cab.tar.gz"
+checksum: "sha256=083dbeee78047a916808c248a16a9fcb2f0518149f10b72771237d0254384b18"
 }

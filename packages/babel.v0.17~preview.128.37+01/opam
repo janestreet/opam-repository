@@ -25,6 +25,6 @@ description: "
 A library for defining Rpcs that can evolve over time without breaking backward compatibility.
 "
 url {
-src: "https://github.com/janestreet/babel/archive/3d982dece1adf9a0df62426310118a6b4b8d7cc1.tar.gz"
-checksum: "sha256=760b208f21d669411a42e2eaeff6715d0c045a3c3e393a112e529ea8a52b4f58"
+src: "https://github.com/janestreet/babel/archive/e2c0eb729e21b65ea0bc9fb5b2abd2eaa1f0145f.tar.gz"
+checksum: "sha256=c9d4c95fdcf5d8f5a6b29643325b9113e7d43f1628bc454323b42af0a56ad635"
 }

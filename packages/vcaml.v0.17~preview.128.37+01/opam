@@ -51,6 +51,6 @@ break unexpectedly for versions of Neovim you wish to support is to write tests
 for your plugin.
 "
 url {
-src: "https://github.com/janestreet/vcaml/archive/5921f4d716b7c5494f7492519b33a885535b4c18.tar.gz"
-checksum: "sha256=a42d828d0db146fc438b08f3676de09335c75779701368a2ffb541aef9ac61f4"
+src: "https://github.com/janestreet/vcaml/archive/91b73eb2f63a8522659f13026caf5ef674dd31c5.tar.gz"
+checksum: "sha256=03b4fbf9c90b9d64ca2745c4ac72213ede3068db2c8be7de26ec338647cb03dd"
 }

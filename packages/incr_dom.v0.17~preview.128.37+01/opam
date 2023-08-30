@@ -48,6 +48,6 @@ If you want a more concrete sense of how this works, look in the
 examples directory.
 "
 url {
-src: "https://github.com/janestreet/incr_dom/archive/7ae8289131b4da6e6a5708f6f12a20edd1245f1a.tar.gz"
-checksum: "sha256=05c46bb0effdbcd9780aef756aa9101bcd20fac4ae78e98a498b0251726daa24"
+src: "https://github.com/janestreet/incr_dom/archive/58117d5d1d5817c886032512744cf982254bba6a.tar.gz"
+checksum: "sha256=2d9c7661c353a9e47d0c9ba72ac89bbc342597e22ace4d8c2324af75df372383"
 }

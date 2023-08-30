@@ -21,6 +21,6 @@ description: "
 Provides a ppx for [let%tydi]: type-directed [let] bindings. In [let%tydi a = b in ...], [a]'s type is inferred from [b] rather than the other way around. This is convenient for record patterns whose fields are not in scope.
 "
 url {
-src: "https://github.com/janestreet/ppx_tydi/archive/b0d7e081095723b04a287d4fbf2da472d3d4651a.tar.gz"
-checksum: "sha256=a10f49666f509767c1c6845a3fe29d323fbf428754917d27898ab77fd08dfc65"
+src: "https://github.com/janestreet/ppx_tydi/archive/84191540407f9af3a015c4771788980d3f53a3ef.tar.gz"
+checksum: "sha256=01dc6f965ec3fcd412a57324320a2b6daa90d380efdb41c0b25f9e804fdb1560"
 }

@@ -34,6 +34,6 @@ synopsis: "SMTP client and server"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_smtp/archive/68f838ca4a32a1abcfc33c37b10b2b419d5373a3.tar.gz"
-checksum: "sha256=56a02e55d9ab428297822d528be9d54e3c98ca50b252549880d54416bb5785e3"
+src: "https://github.com/janestreet/async_smtp/archive/15a299b774c6d553f74192245bde68bc05b626c5.tar.gz"
+checksum: "sha256=f1549df423e791c80db0a47426d52789b6ca1f1b2e2c3ce31192daeef85ea022"
 }

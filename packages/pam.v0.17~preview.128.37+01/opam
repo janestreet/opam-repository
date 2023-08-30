@@ -27,6 +27,6 @@ depexts: [
   ["pam-devel"] {os-family = "fedora"}
 ]
 url {
-src: "https://github.com/janestreet/pam/archive/3c32e3ba5b6a971e3d05ce65c518d0b7764b96b8.tar.gz"
-checksum: "sha256=4eefa997c65c5939813ed405fa941f2c7bca7f307245821125f62e0ab902d167"
+src: "https://github.com/janestreet/pam/archive/8846c60cc02cbd2bed3ca5ced9816291ccaae4b7.tar.gz"
+checksum: "sha256=ebaeaa44f1053e076a17f8b8672c7f7739845a1d28bd975b32dc9083c589deb7"
 }

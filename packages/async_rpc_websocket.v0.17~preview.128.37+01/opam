@@ -31,6 +31,6 @@ is established, and routes to an optionally provided vanilla HTTP handler
 when non-websocket traffic occurs.
 "
 url {
-src: "https://github.com/janestreet/async_rpc_websocket/archive/73fc212f33e01eb3c8a33eaf85473577dbe0f204.tar.gz"
-checksum: "sha256=d4a48316aca47df528d6c6bd6965247ef56b8745edf1ecd2f86d645dc7a7ddf8"
+src: "https://github.com/janestreet/async_rpc_websocket/archive/fc4a3f3cad13c2503e4df4ab2c54d2b7c638a141.tar.gz"
+checksum: "sha256=3b449c0258770304f2a1de0196fe133435c6ec914344d8532e5034ffbadd50be"
 }

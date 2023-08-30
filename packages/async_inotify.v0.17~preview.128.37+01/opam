@@ -24,6 +24,6 @@ synopsis: "Async wrapper for inotify"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_inotify/archive/4c4dce24d1bc136c75eba8bf15032d93e488079b.tar.gz"
-checksum: "sha256=6cc4b225f4f188580250054e1762adf375440dfa2aa797752aff0dc1a918c244"
+src: "https://github.com/janestreet/async_inotify/archive/2aa0299d8a9f06fa65758b7931248bd8aa0c030d.tar.gz"
+checksum: "sha256=06a7456709588758b05d975b70e1e28f18ca6ce3e33746cd0a97785500a3b4c4"
 }

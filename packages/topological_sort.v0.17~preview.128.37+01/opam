@@ -23,6 +23,6 @@ Topological_sort is a single-module library that implements a simple
 topological-sort algorithm.
 "
 url {
-src: "https://github.com/janestreet/topological_sort/archive/56b0ebad25d6a073f49f4d6ab51578729f3fd072.tar.gz"
-checksum: "sha256=c02771fbd9aa2c4dfe9ae79f5c6c7cb9cfd83782dfe77887557f4e1528c0b4c2"
+src: "https://github.com/janestreet/topological_sort/archive/07f0054b89ed1e5ba44f9f76d2824995688c536c.tar.gz"
+checksum: "sha256=101d17080eb0ac27446cb306d1aabd97ff979c70defb87314b455b6fa47e5757"
 }

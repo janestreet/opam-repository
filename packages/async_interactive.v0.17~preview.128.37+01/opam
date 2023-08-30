@@ -23,6 +23,6 @@ synopsis: "Utilities for building simple command-line based user interfaces"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_interactive/archive/1906b3ab8f9b6c40060b7e34a5a003d0b36d2177.tar.gz"
-checksum: "sha256=cb412e4b151bfa766f46364d52acfa7afd669c8aca29c4894f295570bcec9f8d"
+src: "https://github.com/janestreet/async_interactive/archive/68fe74c4874a658394b8da01f67c1074a94ebe46.tar.gz"
+checksum: "sha256=3ad8e17fcc121d44ca066e0799c2f03d668d3151eeef803c5df6636a474d16f3"
 }

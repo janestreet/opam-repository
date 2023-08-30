@@ -24,6 +24,6 @@ quickcheck-based tests that wish to exercise the concrete syntax of sexps,
 including escape sequences and comments.
 "
 url {
-src: "https://github.com/janestreet/sexp_string_quickcheck/archive/ea010586dc0658a96af7433806e5a13787b1e181.tar.gz"
-checksum: "sha256=ef847cb902dc11b01313fa80bcf586762a31367dfe5e14e849c08af3cf6313d3"
+src: "https://github.com/janestreet/sexp_string_quickcheck/archive/852db44f52c32f12cbb875dff250728a3acfa5fb.tar.gz"
+checksum: "sha256=71ef6284216c6f28c4b122bdaa68caaecc21ce2115a032f6ea7a71ef960ecd01"
 }

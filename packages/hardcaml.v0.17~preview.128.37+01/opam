@@ -32,6 +32,6 @@ be simulated within Hardcaml.  Designs are converted to either Verilog or
 VHDL to interact with standard back end tooling.
 "
 url {
-src: "https://github.com/janestreet/hardcaml/archive/d62aaf6d7db7a5318bfa7f34ede23b39fd541f60.tar.gz"
-checksum: "sha256=c9da960c0a701daaea2b389f32e4f00b8826848a559e06ae643f67f8b44f154a"
+src: "https://github.com/janestreet/hardcaml/archive/cb8aacbcd4dbb0ad92f7db01f9ef12b3e161b5bf.tar.gz"
+checksum: "sha256=1d347c2bb05bede0b6af13fdda90b9db118d977bcffc21bc8b97d5045bc02843"
 }

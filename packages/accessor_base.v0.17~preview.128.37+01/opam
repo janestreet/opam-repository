@@ -24,6 +24,6 @@ description: "
 This library provides accessors for numerous types in Base.
 "
 url {
-src: "https://github.com/janestreet/accessor_base/archive/564d8b61d850ef8a579532cb04c4e4217a628986.tar.gz"
-checksum: "sha256=0c5945a4d3c8673de47032418bd8d943781d129e7a2533d94693e4c0615605e1"
+src: "https://github.com/janestreet/accessor_base/archive/04e94b1d03537d2f21bd4e342b4f87b566d834db.tar.gz"
+checksum: "sha256=61e8f0db82f0534ae0e4643f349f0dcf50df8da1c104d749510a7da6dd89cf1f"
 }

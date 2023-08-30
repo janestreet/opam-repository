@@ -31,6 +31,6 @@ reduction operation which lets you specify an extra accumulator value,
 which can then be searched by efficiently.
 "
 url {
-src: "https://github.com/janestreet/splay_tree/archive/9923fe10e4bd5534fcb2bec965a86e73f65e97ff.tar.gz"
-checksum: "sha256=c310210f82691afbe1304bf8109e284976cf4288f4dca0958a2f53fea3026e95"
+src: "https://github.com/janestreet/splay_tree/archive/3473bcfe11d10b409a78648786a992d7347cc1c5.tar.gz"
+checksum: "sha256=ff77d5290622c802eb2d72fbb225b4de0881d2acfb57fc1cd1612603e623d1b2"
 }

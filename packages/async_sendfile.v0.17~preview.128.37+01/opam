@@ -22,6 +22,6 @@ synopsis: "Thin wrapper around [Linux_ext.sendfile] to send full files"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_sendfile/archive/9cf8812380513f622efe32bec1f9958f3bdb8ccb.tar.gz"
-checksum: "sha256=e2abff742c21bdd47d23f5283dd6069ac93e41696a1aaa679c361ea6b7b34ffc"
+src: "https://github.com/janestreet/async_sendfile/archive/ae3d63b337ab6061d09153c34614839edf6e9cd3.tar.gz"
+checksum: "sha256=358b3729950d04cadd4fd5b60b3830d63bbec55efa736e1bacae50f3dbe1ec58"
 }

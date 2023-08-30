@@ -28,6 +28,6 @@ Ecaml is a library for writing Emacs plugins in OCaml. It uses Emacs
 25 support for plugins to load native OCaml compiled code.
 "
 url {
-src: "https://github.com/janestreet/ecaml/archive/b8b280964cf45105cb695791a65d75e9a29e2b97.tar.gz"
-checksum: "sha256=0a4ca3538fbf43b26e8e92b7010736a901052022ba976838f94eb4ed8c708876"
+src: "https://github.com/janestreet/ecaml/archive/4333e6e40b61ac266b9701c099a5c35256600b0f.tar.gz"
+checksum: "sha256=19cc66938aba69d29ac0107c88cf6ea2d733844afafaa7b422dfdec54c0b5f63"
 }

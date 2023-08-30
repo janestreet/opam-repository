@@ -22,6 +22,6 @@ description: "
 A library for running the fzf command line fuzzy matcher
 "
 url {
-src: "https://github.com/janestreet/fzf/archive/b41ce719ce6654e8960826453b1fcb39ada386db.tar.gz"
-checksum: "sha256=7e03a5f3accc659bbd68f2c2c4bf8944ccfa2d602503fc30fedb350247eaaa2c"
+src: "https://github.com/janestreet/fzf/archive/4e0adea93283f274db40480ee6c7a97157132d01.tar.gz"
+checksum: "sha256=42a4a76d78c48481af3cb475a8b3b07762279a4e69be360950d399c6f981fd50"
 }

@@ -24,6 +24,6 @@ description: "
 A library that wraps the Mercurial command line interface.
 "
 url {
-src: "https://github.com/janestreet/hg_lib/archive/38ca997b0eb530779d02b895cccbf363bbd5cb73.tar.gz"
-checksum: "sha256=7d16292923bc67b2f6701a0c25bf464fa9ae05ffc9c200fc37632f985818bde3"
+src: "https://github.com/janestreet/hg_lib/archive/add87406cda6c0ad3b8d7fbf32828ce28db3b61a.tar.gz"
+checksum: "sha256=b8ee58e5770cf678378d48afe9d6c0596959a16f45732e920a5bae75882708f3"
 }

@@ -24,6 +24,6 @@ description: "
 Module for setting up dependencies (like printers and liblinks) for toplevels.
 "
 url {
-src: "https://github.com/janestreet/toplevel_backend/archive/9b4a4b979bff1dfbe1ba9dc77597f3d4512635ac.tar.gz"
-checksum: "sha256=1936e749e75fed643263079f0c1d72b128129c1b7a16246fd4e13481ab0404a3"
+src: "https://github.com/janestreet/toplevel_backend/archive/cd317742cc4981fe5870f56f5524498f5fe7964a.tar.gz"
+checksum: "sha256=f7e127f4b03af193d34bed08be51b962676cea9c9b5939da9f52040a0c2a6af3"
 }

@@ -21,6 +21,6 @@ description: "
 This library implements hexadecimal encoding and decoding
 "
 url {
-src: "https://github.com/janestreet/hex_encode/archive/3fb0280e78be8c64d48cc22994d56a071cf7c916.tar.gz"
-checksum: "sha256=e9753cc4bca7e53b8a8f2368a2092ca514abb01427136636fe471f4ef35938f4"
+src: "https://github.com/janestreet/hex_encode/archive/cfb232092736d2959ecd0f6b31320a0ce8d0f3e3.tar.gz"
+checksum: "sha256=af2aa39ed546216a9f9d625cc70b5f9f62e4e2ad3e167c0db1e134b8fdcad715"
 }

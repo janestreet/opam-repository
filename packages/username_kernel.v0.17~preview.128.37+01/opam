@@ -21,6 +21,6 @@ description: "
 A string representation for a user, typically a UNIX username
 "
 url {
-src: "https://github.com/janestreet/username_kernel/archive/468f36964862dfa7aa614f710c5868667787935d.tar.gz"
-checksum: "sha256=b5b044af249864d20b2fab5f05a4df0243201cf8e4b88a63564e93cd626037d4"
+src: "https://github.com/janestreet/username_kernel/archive/796c41799c040d8a0e9e45db650a7a388ff92b92.tar.gz"
+checksum: "sha256=3434936e80c1b0bd6eb241669afa626f675a191d2d85e0de45a48df78b603020"
 }

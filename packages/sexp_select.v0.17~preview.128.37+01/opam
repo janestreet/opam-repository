@@ -22,6 +22,6 @@ This library provides a convenient method to traverse sexp trees
 and return subtrees that match the given program.
 "
 url {
-src: "https://github.com/janestreet/sexp_select/archive/4c6c7c475b8e1327a65838869a8a53751a95b8a3.tar.gz"
-checksum: "sha256=87d9efd52dee167d2537a73a6c327caf658ce4ed72c19a1a755e3cc0b6959336"
+src: "https://github.com/janestreet/sexp_select/archive/4b3400022f1481e8b764372d7035d790ed1d93e4.tar.gz"
+checksum: "sha256=02546ac1bfab16427b26a06542f32be7089cf04892ed70cd78436917a396584f"
 }

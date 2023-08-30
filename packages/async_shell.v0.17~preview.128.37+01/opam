@@ -22,6 +22,6 @@ synopsis: "Shell helpers for Async"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_shell/archive/887c0293d5e3d20891249afe258c26e65e181716.tar.gz"
-checksum: "sha256=a292ea7a8f97dd8882cee70e5ccfe845cb9131c535e4e8a74f8e9c4be5d256e3"
+src: "https://github.com/janestreet/async_shell/archive/694f2c20aecb1e7c1d612585ae6db33a6bb9c6d0.tar.gz"
+checksum: "sha256=4fb172535bc47fd8cc093251187d5f74569693502504ad00c63642509e1d8333"
 }

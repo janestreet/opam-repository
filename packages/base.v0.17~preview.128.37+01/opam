@@ -32,6 +32,6 @@ provided by companion libraries such as stdio:
   https://github.com/janestreet/stdio
 "
 url {
-src: "https://github.com/janestreet/base/archive/e3c05d344d56a5a5cd178a9e8e5995f20bac5e7c.tar.gz"
-checksum: "sha256=c3f653f3d8e12dc223e30a336ae80b7edeea325642a0a3d960ebc1937944ff5b"
+src: "https://github.com/janestreet/base/archive/842bb24a7543929282c1233fa0dc07a0bf66c2ad.tar.gz"
+checksum: "sha256=bb5f2767275d303b4415d55a39518eaaf9da5cccd84dae89de63cdcedad4b8bb"
 }

@@ -24,6 +24,6 @@ This library implements both the server and client side of
                 the websocket protocol.
 "
 url {
-src: "https://github.com/janestreet/async_websocket/archive/68f360509cf6bab931596dbe4aded77b0d451b9f.tar.gz"
-checksum: "sha256=0a0dfdff5aca73aa7d2d3a3e51fa36281a21aed29382ce4ade052db7f5f96899"
+src: "https://github.com/janestreet/async_websocket/archive/8f9ce75df3c0888cd7ecd92b33db43dbc48b080f.tar.gz"
+checksum: "sha256=3eb1fe3839e7a858dbed1d18700771925d32405b511b2844d0abcbb7eb4f4951"
 }

@@ -21,6 +21,6 @@ description: "
 A library for building strings with indentation
 "
 url {
-src: "https://github.com/janestreet/indentation_buffer/archive/e15fa1fb0796de9aa595b6f3cf8c0d27351b6186.tar.gz"
-checksum: "sha256=7f69b7a47a9bab974f397834466888c866642631c14c812c5deb2c61a3929715"
+src: "https://github.com/janestreet/indentation_buffer/archive/d01aadd47662f36fc6c8bc17c2f1f375aa65abb2.tar.gz"
+checksum: "sha256=da66a9765bfc4f77e68b013dbd2cb5788011fe98edeb5d83090a33d655418de5"
 }

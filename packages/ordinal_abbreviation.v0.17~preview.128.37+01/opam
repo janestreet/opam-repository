@@ -21,6 +21,6 @@ description: "
 A minimal library for generating ordinal names of integers.
 "
 url {
-src: "https://github.com/janestreet/ordinal_abbreviation/archive/909fba5c0e3477a2d898228b8021eda8c2e77b59.tar.gz"
-checksum: "sha256=889aab1814fc4caa4494e04427fa8791bd604bd6224c764152998915148c6a1f"
+src: "https://github.com/janestreet/ordinal_abbreviation/archive/3435d264eedf98f7da8ec7b2e8ed4a5786333d75.tar.gz"
+checksum: "sha256=c23cac8a48ec874d19865d9e82b587ae7c3482b46958fc88c16a43379457f959"
 }

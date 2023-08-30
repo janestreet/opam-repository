@@ -21,6 +21,6 @@ description: "
 Libraries for fuzzy string matching
 "
 url {
-src: "https://github.com/janestreet/fuzzy_match/archive/79679d19add68a98541352bef5af452f2af57a20.tar.gz"
-checksum: "sha256=9090e66f9cc94a504f9ddd6dc19a5595a785dc5588e6adc626a15876fa288ad1"
+src: "https://github.com/janestreet/fuzzy_match/archive/e5b60d9e2f20a49c7c9b2f654e9cda34f4ada9a0.tar.gz"
+checksum: "sha256=6d586a13345e3ea5dbba90b177053cf6de673062ba608f027e8e2836eeb91a12"
 }

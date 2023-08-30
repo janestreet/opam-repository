@@ -23,6 +23,6 @@ It re-exports the input/output functions of the OCaml standard
 libraries using a more consistent API.
 "
 url {
-src: "https://github.com/janestreet/stdio/archive/ae32f9309ce95486349cb06e1888117786e4c34a.tar.gz"
-checksum: "sha256=c98bd04e559e5cf5d1dc9f7af6a548fb5406fb3c8cb7f1c23b13266c7c1f642a"
+src: "https://github.com/janestreet/stdio/archive/22010c59f178bac93059da37a082959825a7f610.tar.gz"
+checksum: "sha256=a043180378487af8abedeebd4793bc3382e0472d7cbec0910a0aad7260ab63a2"
 }

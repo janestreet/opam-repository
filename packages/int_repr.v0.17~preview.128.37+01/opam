@@ -21,6 +21,6 @@ description: "
 Integers of various widths.
 "
 url {
-src: "https://github.com/janestreet/int_repr/archive/e6c09aeabbfa770285d47b97765c8f3c7c386f76.tar.gz"
-checksum: "sha256=9ed9f35f931308b4e71bc3dc78d803531c067b37c79258f9f284a19fd07cb121"
+src: "https://github.com/janestreet/int_repr/archive/72698b7ecfca4f2fe36eb51930938dbb0faa8919.tar.gz"
+checksum: "sha256=ae2aa9a5836a5697625699001d114b86f7950c46e9d4096ff6ae6e0eb3b359fd"
 }

@@ -21,6 +21,6 @@ description: "
 Provides a let-syntax for continuation-passing style.
 "
 url {
-src: "https://github.com/janestreet/tilde_f/archive/f7e5642005345eb37dbbf332e437519942dd5fae.tar.gz"
-checksum: "sha256=302e4059424d0c86ba3a039d8267645cfd7104b215f203601a474393a0fd6d9a"
+src: "https://github.com/janestreet/tilde_f/archive/621cd2ae7e48246f16810e160896ca155a4c1a7a.tar.gz"
+checksum: "sha256=cda9edd8d5ebfd802619e03637fee4fc41bcb1274789ebc8d8d924538d84c4f0"
 }

@@ -28,6 +28,6 @@ synopsis: "Benchmarking library"
 description: "
 "
 url {
-src: "https://github.com/janestreet/core_bench/archive/9a499aa01e443923d81c1e8de673a951faf6abd9.tar.gz"
-checksum: "sha256=abffb61fa5100572a38ba43c6a2a9ecdfd0651433ef75103057f77fba3967a99"
+src: "https://github.com/janestreet/core_bench/archive/f7a61c1866ea88f80d2c1a44a145184afb2e543b.tar.gz"
+checksum: "sha256=16623dcdc13e8a84dbd509b26827f14a1d06ddb8e39f72d5d0a56d2cad648057"
 }

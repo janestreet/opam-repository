@@ -19,6 +19,6 @@ synopsis: "Interface shared by Re_parser and Re2.Parser"
 description: "
 "
 url {
-src: "https://github.com/janestreet/regex_parser_intf/archive/f4e01990e1eff17796bc67f126cc5ec90a9a509e.tar.gz"
-checksum: "sha256=a4d2ea6a4c0a5285b940e7b5ab67c21e59c35122b9b87102405ee84a9f8e178b"
+src: "https://github.com/janestreet/regex_parser_intf/archive/7897ea63e107927e7b3a688d9452e47d6f21064f.tar.gz"
+checksum: "sha256=b59cd85d2ab968204b773bc0fd66a199b83579afc286e4d838ce7aaa1fceb6dc"
 }

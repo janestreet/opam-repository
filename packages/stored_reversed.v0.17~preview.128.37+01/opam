@@ -21,6 +21,6 @@ description: "
 A ['a list t] represents a list temporarily stored in the reverse of its logical order.
 "
 url {
-src: "https://github.com/janestreet/stored_reversed/archive/e013bb367784f9dcdfc0c92e3d4317c6c65b1da8.tar.gz"
-checksum: "sha256=6e2ac3eb5b73f51f5d118262ca83ea9dbe42cf9e78b457ecaf877bf736385704"
+src: "https://github.com/janestreet/stored_reversed/archive/1cf823c2ea45df83257c7b393f208bc00e004068.tar.gz"
+checksum: "sha256=79fbe0bb20941317d2eda2ac571a855c28ca524eed80c150d391ad984b9f40de"
 }

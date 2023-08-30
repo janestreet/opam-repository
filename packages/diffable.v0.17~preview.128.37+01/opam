@@ -23,6 +23,6 @@ description: "
 Diffable interface.
 "
 url {
-src: "https://github.com/janestreet/diffable/archive/b9a145186dfafa58455b6f24989563abddc6a52c.tar.gz"
-checksum: "sha256=26bfe6e61d5ed87dff53b54830270465bd2a1925ea84b5a464202bfb2572c037"
+src: "https://github.com/janestreet/diffable/archive/8bb75f2c410bffa42470ce48bf83b9473c6b558a.tar.gz"
+checksum: "sha256=ea9c196d07a03cf976b6f01e9d95f2476e3c9f65f0573fe39223470796f199a0"
 }
