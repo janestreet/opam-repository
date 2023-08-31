@@ -49,5 +49,5 @@ url {
     "sha256=9a44b0776d62febb562f488b49e7bf3eb034c9b48d05081eeb8be84ec223c5b1"
 }
 extra-files: [
-  "ocaml-base-compiler.install" "sha256=79f2a1a5044a91350a0eb6ce12e261a72a2855c094c425cddf3860e58c486678"
+  "ocaml-base-compiler.install" "sha256=3b571b87fffd9bf430b110a732728dcbf6847759f7058291fc81e1ea813cd18d"
 ]
