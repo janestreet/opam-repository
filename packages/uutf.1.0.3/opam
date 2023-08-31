@@ -35,4 +35,4 @@ Uutf has no dependency and is distributed under the ISC license.
 Home page: http://erratique.ch/software/uutf  
 Contact: Daniel Bünzli `<daniel.buenzl i@erratique.ch>`"""
 patches: ["uutf-locals.patch"]
-extra-files [["uutf-locals.patch" "sha256=f9040567cf487a699bfa7a597f58d5a8a1494c06b2f89e02d34b8995ede6436f"]]
+extra-files: [["uutf-locals.patch" "sha256=f9040567cf487a699bfa7a597f58d5a8a1494c06b2f89e02d34b8995ede6436f"]]
