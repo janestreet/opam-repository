@@ -1,0 +1,48 @@
+diff --git a/Makefile b/Makefile
+index 12a2201..2f78414 100644
+--- a/Makefile
++++ b/Makefile
+@@ -418,10 +418,22 @@ endif
+ 
+ # The generic rules
+ 
+-%.cmo: %.ml
++src/%.cmo: src/%.ml
++	$(OCAMLC) -for-pack Ocamlbuild_pack $(COMPFLAGS) -c $<
++
++bin/%.cmo: bin/%.ml
++	$(OCAMLC) $(COMPFLAGS) -c $<
++
++plugin-lib/%.cmo: plugin-lib/%.ml
++	$(OCAMLC) $(COMPFLAGS) -c $<
++
++src/%.cmi: src/%.mli
++	$(OCAMLC) -for-pack Ocamlbuild_pack $(COMPFLAGS) -c $<
++
++bin/%.cmi: bin/%.mli
+ 	$(OCAMLC) $(COMPFLAGS) -c $<
+ 
+-%.cmi: %.mli
++plugin-lib/%.cmi: plugin-lib/%.mli
+ 	$(OCAMLC) $(COMPFLAGS) -c $<
+ 
+ src/%.cmx: src/%.ml
+diff --git a/src/configuration.ml b/src/configuration.ml
+index a209df5..ec620d0 100644
+--- a/src/configuration.ml
++++ b/src/configuration.ml
+@@ -58,6 +58,14 @@ let apply_config s (config : t) init =
+   List.fold_left begin fun tags (key, v) ->
+     if key_match key s then
+       List.fold_right add v.plus_tags (List.fold_right remove v.minus_tags tags)
++    else if
++         List.mem (Filename.extension s) [".ml"; ".mli"]
++      && key_match key (Filename.remove_extension s ^ ".cmx")
++    then
++      let only_for_pack l =
++        List.filter (fun (tag, _) -> String.length tag >= 9 && String.sub tag 0 9 = "for-pack(") l
++      in
++      List.fold_right add (only_for_pack v.plus_tags) (List.fold_right remove (only_for_pack v.minus_tags) tags)
+     else tags
+   end init config
+ 

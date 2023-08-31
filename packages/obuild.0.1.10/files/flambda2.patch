@@ -1,0 +1,22 @@
+diff --git a/obuild/buildprogs.ml b/obuild/buildprogs.ml
+index 251c4da..06c22b6 100644
+--- a/obuild/buildprogs.ml
++++ b/obuild/buildprogs.ml
+@@ -56,7 +56,7 @@ let runOcamlCompile dirSpec useThread annotMode buildMode compileOpt packopt pp
+              @ oflags
+              @ gconf.ocaml_extra_args
+              @ Pp.to_params pp
+-             @ maybe [] (fun x -> if buildMode = Compiled Native then [ "-for-pack"; Hier.to_string x ] else []) packopt
++             @ maybe [] (fun x -> [ "-for-pack"; Hier.to_string x ]) packopt
+              @ (if gconf.short_path then [ "-short-paths" ] else [])
+              @ ["-o"; fp_to_string dstFile ]
+              @ ["-c"; fp_to_string srcFile ]
+@@ -74,7 +74,7 @@ let runOcamlPack srcDir dstDir annotMode buildMode packOpt dest modules =
+   in
+   Filesystem.mkdirSafeRecursive dstDir 0o755;
+   let args = [prog]
+-             @ maybe [] (fun x -> if buildMode = Native then [ "-for-pack"; Hier.to_string x ] else []) packOpt
++             @ maybe [] (fun x -> [ "-for-pack"; Hier.to_string x ]) packOpt
+              @ annotToOpts annotMode
+              @ [ "-pack"; "-o"; fp_to_string (Hier.get_dest_file dstDir ext dest); ]
+              @ List.map (fun m -> fp_to_string (Hier.get_dest_file_ext dstDir m ext_f)) modules
