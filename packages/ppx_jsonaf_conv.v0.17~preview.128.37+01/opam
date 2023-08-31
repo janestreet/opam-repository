@@ -23,6 +23,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: https://github.com/janestreet/ppx_jsonaf_conv/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/ppx_jsonaf_conv/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=9e01a68923dfcbdab38c32d7dad33ca868cc80fba54a328a2b7acfc470470ed4"
 }

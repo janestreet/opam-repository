@@ -24,6 +24,6 @@ Delimited_parsing parses character-separated values (such as CSV files) and fixe
 records.
 "
 url {
-src: https://github.com/janestreet/delimited_parsing/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/delimited_parsing/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=7e9abd29c7945b5f3488542b95d2a51e7cc9bf007ca3f725113865e3cee9ab05"
 }

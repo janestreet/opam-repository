@@ -23,6 +23,6 @@ capabilities.
 "
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: https://github.com/janestreet/janestreet_cpuid/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/janestreet_cpuid/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=518150d7b0ba4c45faa10a8cfbd558e67049732aade1e9f8874df766a38a246d"
 }

@@ -25,6 +25,6 @@ This library helps debug a connection between two parties speaking a
 protocol by capturing the traffic that passes between them.
 "
 url {
-src: https://github.com/janestreet/man_in_the_middle_debugger/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/man_in_the_middle_debugger/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=a4e83a8a4c412a430c0c80e713586cd697dc7a689c3dd065db22f671f63ef7eb"
 }

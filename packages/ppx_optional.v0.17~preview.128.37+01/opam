@@ -22,6 +22,6 @@ A ppx rewriter that rewrites simple match statements with an if then
 else expression.
 "
 url {
-src: https://github.com/janestreet/ppx_optional/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/ppx_optional/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=4368e6e92a2fd47b2b8cde3ddc6cc0db471a6bf431f92ba61135515f1f666bbf"
 }

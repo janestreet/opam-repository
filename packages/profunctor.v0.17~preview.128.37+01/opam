@@ -24,6 +24,6 @@ and operations which can be used to traverse a record with them based on
 record_builder and the =ppx_fields= syntax extension.
 "
 url {
-src: https://github.com/janestreet/profunctor/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/profunctor/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=3347d4aebee460768bd144c3f7e211fb9967621db7dbebb2bb5a599dfc06dbc9"
 }

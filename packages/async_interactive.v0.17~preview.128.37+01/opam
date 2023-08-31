@@ -23,6 +23,6 @@ synopsis: "Utilities for building simple command-line based user interfaces"
 description: "
 "
 url {
-src: https://github.com/janestreet/async_interactive/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/async_interactive/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=1f66eb10f5ce23b2bd0630f1aa60ff35b7d4ae22f7e4b5d6fb64b066259048d7"
 }

@@ -25,6 +25,6 @@ Provides a single function to report the current time in nanoseconds
 since the start of the Unix epoch.
 "
 url {
-src: https://github.com/janestreet/time_now/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/time_now/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=e8759ec22f75edef17314d367741c437bd921f623b56162991a84b134d984f78"
 }

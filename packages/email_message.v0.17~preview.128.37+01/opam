@@ -28,6 +28,6 @@ synopsis: "E-mail message parser"
 description: "
 "
 url {
-src: https://github.com/janestreet/email_message/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/email_message/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=ad9ece61969ff30ff4fd791617d3cc4f29b2dab0aef27e2e156436395c34192f"
 }

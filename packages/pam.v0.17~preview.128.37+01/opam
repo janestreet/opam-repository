@@ -27,6 +27,6 @@ depexts: [
   ["pam-devel"] {os-family = "fedora"}
 ]
 url {
-src: https://github.com/janestreet/pam/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/pam/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=613439909ae97023c4bc033c0d8aeed7b5ac05135fecc3b376ca58638d66e087"
 }

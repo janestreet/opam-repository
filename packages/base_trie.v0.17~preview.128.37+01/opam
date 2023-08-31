@@ -26,6 +26,6 @@ Lookup is based on \"chains\" of keys; each node of the trie has children repres
 each potential next key in the chain.
 "
 url {
-src: https://github.com/janestreet/base_trie/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/base_trie/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=debdb6186c7aabde5656cb04e6c35f49e35e4c9774229fb1b4b8aa86f43fed88"
 }

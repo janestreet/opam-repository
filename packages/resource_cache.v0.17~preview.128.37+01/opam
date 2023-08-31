@@ -25,6 +25,6 @@ abstract [Resource] type. The cache enables resource reuse while
 obeying various limits.
 "
 url {
-src: https://github.com/janestreet/resource_cache/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/resource_cache/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=ff90f26df73d58dcdd047e7103c677351b76cbdd9784bd0ca39dcf2b85249d43"
 }

@@ -24,6 +24,6 @@ version themselves. The more protocols that add themselves to
 to a service while using the wrong protocol.
 "
 url {
-src: https://github.com/janestreet/protocol_version_header/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/protocol_version_header/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=34452ecddb535d05ddcacb606d86c86731a522c941e5e7e9bd6ff8faf1ba6bcd"
 }

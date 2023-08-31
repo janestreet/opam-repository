@@ -48,6 +48,6 @@ If you want a more concrete sense of how this works, look in the
 examples directory.
 "
 url {
-src: https://github.com/janestreet/incr_dom/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/incr_dom/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=5ee6bdfdc10b0e985e0c66f23913ac41081a3987dc158aa538d4a1ec49ddb229"
 }

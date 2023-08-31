@@ -21,6 +21,6 @@ synopsis: "Directory traversal with Async"
 description: "
 "
 url {
-src: https://github.com/janestreet/async_find/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/async_find/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=6b6d94bbc1e2d032a528d01a1486616622f85f88734842ea59f16f679c6455b7"
 }

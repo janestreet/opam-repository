@@ -23,6 +23,6 @@ Signed and Unsigned fixed point operations, with a full complement of rounding a
 overflow functionality.
 "
 url {
-src: https://github.com/janestreet/hardcaml_fixed_point/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/hardcaml_fixed_point/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=41101a949c9d8f793b87f13e65cfd34a9065acd76563f5d11f01fde38749ec27"
 }

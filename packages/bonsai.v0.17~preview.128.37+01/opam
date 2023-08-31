@@ -62,6 +62,6 @@ Bonsai is a library for building reusable UI components inside an
      Incremental-style UI framework such as Incr_dom or React.
 "
 url {
-src: https://github.com/janestreet/bonsai/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/bonsai/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=b24a5823965761764a3ad51ce27e890ce0a494326d693f51b2ee2e0fe8e6ee15"
 }

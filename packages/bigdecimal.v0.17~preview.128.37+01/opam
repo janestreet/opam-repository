@@ -24,6 +24,6 @@ A high-precision representation of decimal numbers as [mantissa * 10^exponent], 
 the mantissa is internally a [Bigint.t] and the exponent is an [int].
 "
 url {
-src: https://github.com/janestreet/bigdecimal/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/bigdecimal/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=86688a2baff3b9f3113d071ba57f743b252ad34d8e924349b91fb2f46ecaf347"
 }

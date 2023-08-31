@@ -22,6 +22,6 @@ The code behind the [diff] subcommand of the Jane Street's [sexp]
 command line tool.
 "
 url {
-src: https://github.com/janestreet/sexp_diff/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/sexp_diff/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=a12a3e766ea0ec4147e5a402f54d642b480c5528adf89caeeae975c5ac473fba"
 }

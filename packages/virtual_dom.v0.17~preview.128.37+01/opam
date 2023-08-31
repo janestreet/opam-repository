@@ -33,6 +33,6 @@ The library itself may be found at
 https://github.com/Matt-Esch/virtual-dom.
 "
 url {
-src: https://github.com/janestreet/virtual_dom/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/virtual_dom/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=50fbf5fe86fa5149879bf1bb824b6b5ed2ff3cb246e313a615c9c754be3ae8c9"
 }

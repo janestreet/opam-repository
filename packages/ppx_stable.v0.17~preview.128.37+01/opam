@@ -22,6 +22,6 @@ A ppx extension for easier implementation of conversion functions between almost
 identical types.
 "
 url {
-src: https://github.com/janestreet/ppx_stable/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/ppx_stable/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=0ed5649fef063709b5e11da69237a5cd35ed5af9c3d48ef3f08174a6205897be"
 }

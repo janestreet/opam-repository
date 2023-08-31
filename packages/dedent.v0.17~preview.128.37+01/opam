@@ -22,6 +22,6 @@ description: "
 A library for improving redability of multi-line string constants in code.
 "
 url {
-src: https://github.com/janestreet/dedent/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/dedent/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=76f8beac576eab1aabbbc5737d1643701526da1fe5c8584076850c50f98d3a7e"
 }

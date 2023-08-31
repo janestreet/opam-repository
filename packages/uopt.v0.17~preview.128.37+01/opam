@@ -21,6 +21,6 @@ description: "
 Uopt_base provides an unboxed option type, for use in high-performance systems which avoid allocation. It has several downsides as compared to [option], and is not recommended for use in general-purpose software.
 "
 url {
-src: https://github.com/janestreet/uopt/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/uopt/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=9e3164138390c6f7c755c1fbb1d0f58b0c8b782a699af0569e0db445d3c7bda6"
 }

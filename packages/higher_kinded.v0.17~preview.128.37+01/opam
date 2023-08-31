@@ -24,6 +24,6 @@ makes it possible to parameterize a type with a witness that represents a type
 constructor.
 "
 url {
-src: https://github.com/janestreet/higher_kinded/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/higher_kinded/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=872fa754c6023777539e5cc051306298f7aa48ff0e0e43f097257be2c8633e2f"
 }

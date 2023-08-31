@@ -31,6 +31,6 @@ This library implements a splittable pseudo-random number generator that sacrifi
 cryptographic-quality randomness in favor of performance.
 "
 url {
-src: https://github.com/janestreet/splittable_random/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/splittable_random/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=92794f2de96d81b081ddd816a802436e33cfd9ecda74a2565594ea08206ec401"
 }

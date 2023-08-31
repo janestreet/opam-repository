@@ -28,6 +28,6 @@ and COPY IN mode. The interface presented is minimal to keep the library simple
 for now, though in the future a layer on top may add convenience functions.
 "
 url {
-src: https://github.com/janestreet/postgres_async/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/postgres_async/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=baf73adc272df115ecd4e376086df72ac97d7a4782a273cfb532e2e8c5e4de9b"
 }

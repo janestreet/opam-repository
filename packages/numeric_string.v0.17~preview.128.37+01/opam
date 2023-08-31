@@ -34,6 +34,6 @@ include a different treatment of case, special handling of whitespace
 or punctuation, etc.)
 "
 url {
-src: https://github.com/janestreet/numeric_string/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/numeric_string/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=04b2be5babb72985cf01d90444d0b1872d9d9a94583366b4259e30e392d06f65"
 }

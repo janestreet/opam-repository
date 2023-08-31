@@ -24,6 +24,6 @@ description: "
 This library provides accessors for numerous types in Async.
 "
 url {
-src: https://github.com/janestreet/accessor_async/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+src: "https://github.com/janestreet/accessor_async/archive/refs/tags/v0.17-preview-with-extensions.tar.gz"
 checksum: "sha256=5b01c23b2080272cf09e0211852f095213e3e8e3e780d223ef8c24b285db53f0"
 }
