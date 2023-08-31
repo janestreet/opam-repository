@@ -1,6 +1,6 @@
-diff --git a/external/uutf/src/uutf.ml b/external/uutf/src/uutf.ml
---- a/external/uutf/src/uutf.ml
-+++ b/external/uutf/src/uutf.ml
+diff --git a/src/uutf.ml b/src/uutf.ml
+--- a/src/uutf.ml
++++ b/src/uutf.ml
 @@ -719,7 +719,7 @@ module String = struct
      | `UTF_16LE d -> `UTF_16LE, (d = `BOM)
  
@@ -10,9 +10,9 @@ diff --git a/external/uutf/src/uutf.ml b/external/uutf/src/uutf.ml
  
    let fold_utf_8 ?(pos = 0) ?len f acc s =
      let rec loop acc f s i last =
-diff --git a/external/uutf/src/uutf.mli b/external/uutf/src/uutf.mli
---- a/external/uutf/src/uutf.mli
-+++ b/external/uutf/src/uutf.mli
+diff --git a/src/uutf.mli b/src/uutf.mli
+--- a/src/uutf.mli
++++ b/src/uutf.mli
 @@ -325,12 +325,12 @@ module String : sig
      {b Note.} Initial {{:http://unicode.org/glossary/#byte_order_mark}BOM}s
      are also folded over. *)
