@@ -1,0 +1,11 @@
+diff --git a/src/read_cma/read_cma.ml b/src/read_cma/read_cma.ml
+--- a/src/read_cma/read_cma.ml
++++ b/src/read_cma/read_cma.ml
+@@ -11,5 +11,6 @@ let units fn =
+   let toc = (input_value ic : Cmo_format.library) in
+   close_in ic;
+ 
+-  List.map toc.lib_units ~f:(fun cu -> cu.Cmo_format.cu_name)
++  List.map toc.lib_units
++    ~f:(fun cu -> cu.Cmo_format.cu_name |> Compilation_unit.name |> Compilation_unit.Name.to_string)
+   |> List.sort ~cmp:String.compare
