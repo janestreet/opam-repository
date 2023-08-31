@@ -21,6 +21,6 @@ description: "
 Implementation of a Least Recently Used Cache.
 "
 url {
-src: "https://github.com/janestreet/lru_cache/archive/7785d78727b3afb9031ef445bead03d9ca388d5a.tar.gz"
-checksum: "sha256=dc1b90d79532a408106db4c4b93a4d98158df5d928d6788fa6199b48b4a7d1d1"
+src: https://github.com/janestreet/lru_cache/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=be4e62815143510dc6140e7f8aefdd1a72dfaf1f2dd5a3ee9feb1f5473d2ade0"
 }

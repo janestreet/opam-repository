@@ -25,6 +25,6 @@ This packages is a no-op ppx rewriter. It is used as a 'lint' tool to
 enforce some coding conventions across all Jane Street packages.
 "
 url {
-src: "https://github.com/janestreet/ppx_js_style/archive/783dc12e62dad4e4ca71925ee2cb8eed78562706.tar.gz"
-checksum: "sha256=bd2af42188b866537cc04acc641f1e42ab95eb650012961dfec79a3f285b1b86"
+src: https://github.com/janestreet/ppx_js_style/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=5eca6e324d9db886bc7a9c437513053803bc6a46969ac5ed587015edacb7484c"
 }

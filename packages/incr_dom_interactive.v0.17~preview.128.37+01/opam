@@ -30,6 +30,6 @@ description: "
 This library allows your program to receive input from the user using DOM elements such as checkboxes, text fields, and buttons. It allows you to inspect the user's input and decide afterwards what the rest of the [Interactive.t] should be. This library is intended to be used in conjunction with Incr_dom.
 "
 url {
-src: "https://github.com/janestreet/incr_dom_interactive/archive/98bb85845d4677cc5643b9eb62ff04f8d4667ac3.tar.gz"
-checksum: "sha256=35fbbf193cfec1a645782fa53fafdfaec2c5e37538097c270a69c44310888177"
+src: https://github.com/janestreet/incr_dom_interactive/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=2e89399be93f3802f67e5e36295b0cdb5a2d66c7cef3ba0d5673b24068181c94"
 }

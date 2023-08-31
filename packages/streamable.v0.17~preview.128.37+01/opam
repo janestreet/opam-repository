@@ -26,6 +26,6 @@ description: "
 A collection of types suitable for incremental serialization.
 "
 url {
-src: "https://github.com/janestreet/streamable/archive/3e451e14c2a00a02d9efa12363878777845a30b6.tar.gz"
-checksum: "sha256=5a6b18a5afcd83842d5829a16e3a7a57b220676b7634b4484b0ad32f010fdeaa"
+src: https://github.com/janestreet/streamable/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=9b68edcb3987a64d710a6f91d9ea7e50a2fc8c3abc2f6477d2b6cc488ef01586"
 }

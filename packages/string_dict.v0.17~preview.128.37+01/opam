@@ -27,6 +27,6 @@ This uses the algorithm the OCaml compiler uses for pattern matching
 on strings.
 "
 url {
-src: "https://github.com/janestreet/string_dict/archive/b6ca73eb576d12f982fd65559b2b745f356bf123.tar.gz"
-checksum: "sha256=11db3bf016bfcba537bfc984dcd9917e2914ad86326287d75ef4209165b26518"
+src: https://github.com/janestreet/string_dict/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=960f506b8b93dbc6d363f5f896d94a9ddf37f8a7b882fd48caa03d22c681bad8"
 }

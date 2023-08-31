@@ -33,6 +33,6 @@ circuit.
 Code can also be generated to wrap the conversion process using Hardcaml interfaces.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_of_verilog/archive/e2ed167ce7aa4e08ca733ea829476bab2598876c.tar.gz"
-checksum: "sha256=e01d0e4e2ec9a49296172a4c39b21fbbe582d8d16316d8de90264295661999ff"
+src: https://github.com/janestreet/hardcaml_of_verilog/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=5e0935821ff0eed66fc48e863d6f2dd42cef8cd5924c5fedd1dab747d6f4893e"
 }

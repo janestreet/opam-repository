@@ -19,6 +19,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_quick_test/archive/54e5ca244bab8fca76925f57e7c04fc8a02ab05d.tar.gz"
-checksum: "sha256=b9d5750070c024a78c76e6034fd79571538585001af9e32b735411e8756af3ef"
+src: https://github.com/janestreet/ppx_quick_test/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=3c451fe323cffef3ecf15abf7c92f28775d9f43ad1082e9084971d75b747994f"
 }

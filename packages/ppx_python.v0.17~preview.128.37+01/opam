@@ -23,6 +23,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_python/archive/dc1d9b9597ca603808a2a9981c6b851df5878934.tar.gz"
-checksum: "sha256=08c7420f2127741bdf750abfb08cd85b77aa985e1a1eba1e3336fd958694ac5c"
+src: https://github.com/janestreet/ppx_python/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=adecd24504cf48db0c7c41516baf296da288a3de418f4f79f096eb475f7dcbce"
 }

@@ -19,6 +19,6 @@ description: "
 A library to mark non-record fields global. GEL stands for Global Even if inside a Local.
 "
 url {
-src: "https://github.com/janestreet/gel/archive/07af6a495c4cc72bb4506d23696fc2dc16db12cd.tar.gz"
-checksum: "sha256=29e0980dcbd30375cdaf52f1b89a7f75506ada92a117fca9c5ac02450fb82122"
+src: https://github.com/janestreet/gel/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=022fa62207be947069dd0b45d7e4b0789d960b0854dd16d6dd2fdaa8b3122ce9"
 }

@@ -28,6 +28,6 @@ The main library provides means to convert a Hardcaml design into an event drive
 simulation model and write testbenches against it.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_event_driven_sim/archive/c259faf8d2a0f84c387c52cb6fe6330db08343bc.tar.gz"
-checksum: "sha256=ce0a5ab19479bc2800cf5ce5a16ef686f5aa7a95416258756c4720a5692e51c0"
+src: https://github.com/janestreet/hardcaml_event_driven_sim/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=812aa56b130e1c5787e6d402c7e52488c2ccf859c3661bd6f4a863b4c6d8a4de"
 }

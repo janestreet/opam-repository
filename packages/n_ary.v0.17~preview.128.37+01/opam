@@ -31,6 +31,6 @@ Provides tuples, enumerations, variants, and list operations
 implemented for N from 2 to 16, inclusive.
 "
 url {
-src: "https://github.com/janestreet/n_ary/archive/b44c73f359c05e2b2fe6ec4d148ccabe455b30d8.tar.gz"
-checksum: "sha256=b804a2f81085da561629bd50f0d1306dd6efe1a148bf47f68a31ce5c4b063d04"
+src: https://github.com/janestreet/n_ary/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=ce303c013fe417d994f41f505ce739c03f220c7e00bb9ba3337c6d3c7d523be8"
 }

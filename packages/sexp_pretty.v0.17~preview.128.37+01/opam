@@ -24,6 +24,6 @@ A library for pretty-printing s-expressions, using better indentation rules than
 the default pretty printer in Sexplib.
 "
 url {
-src: "https://github.com/janestreet/sexp_pretty/archive/4d9f65f25bf6994d8be385671b0b8e1061ba4dcf.tar.gz"
-checksum: "sha256=91db8f8315e0085d7358bc4c87c746d2662643f091e953b26fe67cef7ce581c2"
+src: https://github.com/janestreet/sexp_pretty/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=847dd16ecdfcc511952c01d52aeecac1e1c63946917b38dafc9cf85b7902572e"
 }

@@ -24,6 +24,6 @@ description: "
 Async_durable helps recover from errors when connections can be easily be recreated.
 "
 url {
-src: "https://github.com/janestreet/async_durable/archive/5e651afd525c0bc9a70dace4c6802216d928ef4d.tar.gz"
-checksum: "sha256=b5781e6a23406ebf4f8cb72e3f8364942808421c3bec57588d02921ee660f152"
+src: https://github.com/janestreet/async_durable/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=c4650a7f13f70c3f4ec6e9b36e991bb8b7c390250111cecf4650f066cc611eb5"
 }

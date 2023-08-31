@@ -22,6 +22,6 @@ description: "
 A single-module library for a data structure.
 "
 url {
-src: "https://github.com/janestreet/sequencer_table/archive/309b9fc9235650ca1906916b095197bc0d491ce3.tar.gz"
-checksum: "sha256=3c037d142a603603d717b14b76a7204bd6cdf3ac2b28ee1df7e2f3a18fabd9b0"
+src: https://github.com/janestreet/sequencer_table/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=07ed8d8f6be84e1a516ae48172f40dacb8acbb7c58b4f217eae20294297832b4"
 }

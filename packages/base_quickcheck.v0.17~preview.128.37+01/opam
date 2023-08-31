@@ -28,6 +28,6 @@ Base_quickcheck provides randomized testing in the style of Haskell's Quickcheck
 with support for built-in types as well as types provided by Base.
 "
 url {
-src: "https://github.com/janestreet/base_quickcheck/archive/ba0dc8b3e762fa1b40364d3ceb2480862dc1d0e8.tar.gz"
-checksum: "sha256=11d067d82f7a15114fd87fca939f7a246f9f698ef5353d8c204082ceabeb5ddd"
+src: https://github.com/janestreet/base_quickcheck/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=06deaaeeb72f26c87e499769572060e64d432e8afc883ff66f6acd76ccb64bfe"
 }

@@ -24,6 +24,6 @@ Embed-file takes some files and generates code for an OCaml module
 defining string constants containing the contents of those files.
 "
 url {
-src: "https://github.com/janestreet/ocaml-embed-file/archive/85ee3d43d63694c939815444088c21e030d4f73f.tar.gz"
-checksum: "sha256=fad7229d2967d474446e31a07680d1f68e55bdc7db03c6cb89436112b2de1375"
+src: https://github.com/janestreet/ocaml-embed-file/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=f28ce7e6071aff052cd66b9fe86d0157b0be79ee60f147cd710422ca38a1c752"
 }

@@ -28,6 +28,6 @@ Note that this library uses Async, for helpers that don't use Async,
 look at expect_test_helpers_core.
 "
 url {
-src: "https://github.com/janestreet/expect_test_helpers_async/archive/8b13f6dce911adc46bdce8c5c910de5051e46574.tar.gz"
-checksum: "sha256=e262acdab2ba17fa85d239908208eb40d25604f81dde8d55c7fb4f331505438e"
+src: https://github.com/janestreet/expect_test_helpers_async/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=70d6a0b50674e36de3c47184752ecf260d1a2227114634b869b512c3ca7783c1"
 }

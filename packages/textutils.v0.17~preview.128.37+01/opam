@@ -24,6 +24,6 @@ synopsis: "Text output utilities"
 description: "
 "
 url {
-src: "https://github.com/janestreet/textutils/archive/430d66287a98f8d10eabc5d2dde1ce3e7db96526.tar.gz"
-checksum: "sha256=55d054b17cadaf56bed843c99a42a976114e1c0b39acd97cd296f2e0e95fa72b"
+src: https://github.com/janestreet/textutils/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=977239bd607ce1bd2480c246d1e643a92c69554e8d2e680228e4b453391c5950"
 }

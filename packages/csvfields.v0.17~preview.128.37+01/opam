@@ -22,6 +22,6 @@ synopsis: "Runtime support for ppx_xml_conv and ppx_csv_conv_deprecated"
 description: "
 "
 url {
-src: "https://github.com/janestreet/csvfields/archive/0640c1d3fc6c2454bfd1279015c8de2afc0708e8.tar.gz"
-checksum: "sha256=ce93db5ac9aa80aac75c649f89e5e0238cc1865e1a0d69f3a6190c17d8a3465f"
+src: https://github.com/janestreet/csvfields/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=a2c5148bff166826f48208c552126d6723fae60b8dc174a6db3a591af877b71f"
 }

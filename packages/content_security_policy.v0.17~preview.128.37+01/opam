@@ -23,6 +23,6 @@ description: "
 https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 "
 url {
-src: "https://github.com/janestreet/content_security_policy/archive/e5d8d0c8dfc51f1df11f9c93377cc4cf7d697c92.tar.gz"
-checksum: "sha256=1737111fe761b38eadee00c48c13422eac3217d9844b7f55133e968e08ed7922"
+src: https://github.com/janestreet/content_security_policy/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=a241866b1f7f6cac576b98dd0666c652daf986bb098279c0debbf99813b284f7"
 }

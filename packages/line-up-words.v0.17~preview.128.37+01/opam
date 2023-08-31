@@ -28,6 +28,6 @@ in a sequence of lines in an intelligent way.
 It comes as a binary and an emacs mode.
 "
 url {
-src: "https://github.com/janestreet/line-up-words/archive/79e10aea318543d034945eaf9a380d53ecc811ba.tar.gz"
-checksum: "sha256=11672910de195bdb4e77f0f0bfae4ebce24ad655f785b802559298883dbca6cc"
+src: https://github.com/janestreet/line-up-words/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=a9309946d458c1749a1a48eaf175d2be2319f0f0948fe7fd44fd5da3a0e2ca23"
 }

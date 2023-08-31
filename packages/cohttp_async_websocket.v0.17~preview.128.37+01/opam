@@ -36,6 +36,6 @@ hardened with many applications using it for several year, in
 conjunction with async-js and google-chrome.
 "
 url {
-src: "https://github.com/janestreet/cohttp_async_websocket/archive/8b1be45736fc886389eedf984afbdf59aea01c9a.tar.gz"
-checksum: "sha256=a110baa6617a8df0a800a90f243ae57c0cfa50c066473ab4ce9c3b3c699da6b6"
+src: https://github.com/janestreet/cohttp_async_websocket/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=70fd3fea6cee275f6815871066345be8094b93c7fe9f690b71e66fc5f644ae3d"
 }

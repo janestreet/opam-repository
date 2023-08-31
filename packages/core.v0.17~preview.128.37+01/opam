@@ -44,6 +44,6 @@ largest industrial user of OCaml.
 This is the system-independent part of Core. Unix-specific parts were moved to [core_unix].
 "
 url {
-src: "https://github.com/janestreet/core/archive/3aa20d4950b7e24087b7be7191850630b75165bb.tar.gz"
-checksum: "sha256=026636b026d44b455ba81233d8860f2804305acf1a3cce9977a127259558f6d3"
+src: https://github.com/janestreet/core/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=5a3c03d90bfe825e87713b00c7534266c6628b77d60ec9d683353962bf3c5ac5"
 }

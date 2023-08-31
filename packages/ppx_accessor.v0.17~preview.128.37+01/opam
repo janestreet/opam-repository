@@ -22,6 +22,6 @@ description: "
 Automatically generate accessors given a type definition.
 "
 url {
-src: "https://github.com/janestreet/ppx_accessor/archive/3dc4dd085bdad63d2b108c98a7ac488508a8b4c3.tar.gz"
-checksum: "sha256=89749b3cfd2d8fb2ffc63f96e37dcc7602243c11258dee403800b837f9546c5a"
+src: https://github.com/janestreet/ppx_accessor/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=8863a6abc69447902d412c7c9f2696b17eb0b99c81dc7dca4b5b82b437da2d0a"
 }

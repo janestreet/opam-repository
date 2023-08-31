@@ -36,6 +36,6 @@ depexts: [
 ]
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/krb/archive/8cbd71ac7007a048e7627c367c960c5e619e222b.tar.gz"
-checksum: "sha256=7a8e11b80dfd7040ab61fedfd59342b97e745db8d73bd021092b7b6c729fdae1"
+src: https://github.com/janestreet/krb/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=95067d4bcdb6c65a364cd550a958b9565e0ecedadf847810f4ba651cd5df915d"
 }

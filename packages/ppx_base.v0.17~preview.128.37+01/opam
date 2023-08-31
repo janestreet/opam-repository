@@ -29,6 +29,6 @@ Note that Base doesn't need ppx to build, it is only used as a
 verification tool.
 "
 url {
-src: "https://github.com/janestreet/ppx_base/archive/888c13e395e64ceb0508d73060519b0bacbe28f2.tar.gz"
-checksum: "sha256=8b205013282bc74440a4b5002a55502e9091ddf3bbaf48e8f8d42649b23ec071"
+src: https://github.com/janestreet/ppx_base/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=865fffd6c5aaede2b394e5dcc977683abffb21636583678fc7792f6ed074a40e"
 }

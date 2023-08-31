@@ -38,6 +38,6 @@ This brings to OCaml NumPy-like tensor computations with GPU acceleration and
 tape-based automatic differentiation.
 "
 url {
-src: "https://github.com/janestreet/torch/archive/a36e6d790f3ca389307cbd0c84f5260d9402a8f3.tar.gz"
-checksum: "sha256=1908c8922b3bb9b2a988d3c4af3fc56625fa7187e515f9519089f967bf46edb5"
+src: https://github.com/janestreet/torch/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=0ac8891d983b144ac8c82ac78a6685eb1174976917d355b9da6e416a5f030baa"
 }

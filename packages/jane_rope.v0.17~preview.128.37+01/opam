@@ -20,6 +20,6 @@ synopsis: "String representation with cheap concatenation."
 description: "
 "
 url {
-src: "https://github.com/janestreet/jane_rope/archive/d4c16c10b7a82cca931d681c43a3521a60dbb69f.tar.gz"
-checksum: "sha256=dfbb18e0a1c0fe9bb613360c2d5a55d37af6714fa6aac93a2b77fbc156e870ff"
+src: https://github.com/janestreet/jane_rope/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=deef9b6552c9df43d3c01917f0e2d1f5f0abe7cd413ba0782daeb9fe7d130263"
 }

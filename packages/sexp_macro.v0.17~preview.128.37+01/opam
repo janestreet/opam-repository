@@ -24,6 +24,6 @@ Sexp macros allow the user to define and use constants and simple functions in s
 include one sexp file in another.
 "
 url {
-src: "https://github.com/janestreet/sexp_macro/archive/72087e5a1d74b1a045cf64bdd8527cab2ff46052.tar.gz"
-checksum: "sha256=10a960cf7ef1a35d82b9bcc9d231a0207fb303bd2fdd37915640827761c0eac1"
+src: https://github.com/janestreet/sexp_macro/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=cb30230f26899eb0896e9ca87be7069d3280922675bf51717199967047870536"
 }

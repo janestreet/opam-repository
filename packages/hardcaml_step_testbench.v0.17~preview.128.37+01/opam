@@ -26,6 +26,6 @@ Allows multiple control threads to interact with a simulation module, all of whi
 synchronised to the system clock.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_step_testbench/archive/b67cc42c1eebb15078fe7040d5ae335bfe33257a.tar.gz"
-checksum: "sha256=f72c1c50407f200041bc47010d27546e776d627086459d10e6b6bcc4573251e0"
+src: https://github.com/janestreet/hardcaml_step_testbench/archive/refs/tags/v0.17-preview-with-extensions.tar.gz
+checksum: "sha256=6899b5a1a8d23f20fbc5767b3201b744b8872e6ab0df1bcca02d13e964e42cd9"
 }
