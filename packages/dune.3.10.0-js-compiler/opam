@@ -50,5 +50,5 @@ depends: [
 ]
 url {
 src: "https://github.com/janestreet/dune/archive/refs/tags/3.10.0-js-compiler.tar.gz"
-checksum: "sha256=3808d292ce5f8a906d6d8281c65406fad1655b1a8e48bfb6f0b991926039c13a"
+checksum: "sha256=431ef4047a582d60d506b0862d78dcde936764e60eee45acccaae1e36d3a8980"
 }
