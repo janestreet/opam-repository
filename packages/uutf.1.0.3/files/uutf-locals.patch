@@ -1,0 +1,49 @@
+diff --git a/external/uutf/src/uutf.ml b/external/uutf/src/uutf.ml
+--- a/external/uutf/src/uutf.ml
++++ b/external/uutf/src/uutf.ml
+@@ -719,7 +719,7 @@ module String = struct
+     | `UTF_16LE d -> `UTF_16LE, (d = `BOM)
+ 
+   type 'a folder =
+-    'a -> int -> [ `Uchar of Uchar.t | `Malformed of string ] -> 'a
++    'a -> (int -> [ `Uchar of Uchar.t | `Malformed of string ] -> 'a[@local])
+ 
+   let fold_utf_8 ?(pos = 0) ?len f acc s =
+     let rec loop acc f s i last =
+diff --git a/external/uutf/src/uutf.mli b/external/uutf/src/uutf.mli
+--- a/external/uutf/src/uutf.mli
++++ b/external/uutf/src/uutf.mli
+@@ -325,12 +325,12 @@ module String : sig
+     {b Note.} Initial {{:http://unicode.org/glossary/#byte_order_mark}BOM}s
+     are also folded over. *)
+ 
+-  type 'a folder = 'a -> int -> [ `Uchar of Uchar.t | `Malformed of string ] ->
+-    'a
++  type 'a folder = 'a -> (int -> [ `Uchar of Uchar.t | `Malformed of string ] ->
++    'a[@local])
+   (** The type for character folders. The integer is the index in the
+       string where the [`Uchar] or [`Malformed] starts. *)
+ 
+-  val fold_utf_8 : ?pos:int -> ?len:int -> 'a folder -> 'a -> string -> 'a
++  val fold_utf_8 : ?pos:int -> ?len:int -> ('a folder [@local]) -> 'a -> string -> 'a
+   (** [fold_utf_8 f a s ?pos ?len ()] is
+       [f (] ... [(f (f a pos u]{_0}[) j]{_1}[ u]{_1}[)] ... [)] ... [)
+       j]{_n}[ u]{_n}
+@@ -339,7 +339,7 @@ module String : sig
+       long. The default value for [pos] is [0] and [len] is
+       [String.length s - pos]. *)
+ 
+-  val fold_utf_16be : ?pos:int -> ?len:int -> 'a folder -> 'a -> string -> 'a
++  val fold_utf_16be : ?pos:int -> ?len:int -> ('a folder [@local]) -> 'a -> string -> 'a
+   (** [fold_utf_16be f a s ?pos ?len ()] is
+       [f (] ... [(f (f a pos u]{_0}[) j]{_1}[ u]{_1}[)] ... [)] ... [)
+       j]{_n}[ u]{_n}
+@@ -348,7 +348,7 @@ module String : sig
+       long. The default value for [pos] is [0] and [len] is
+       [String.length s - pos]. *)
+ 
+-  val fold_utf_16le : ?pos:int -> ?len:int -> 'a folder -> 'a -> string -> 'a
++  val fold_utf_16le : ?pos:int -> ?len:int -> ('a folder [@local]) -> 'a -> string -> 'a
+   (** [fold_utf_16le f a s ?pos ?len ()] is
+       [f (] ... [(f (f a pos u]{_0}[) j]{_1}[ u]{_1}[)] ... [)] ... [)
+       j]{_n}[ u]{_n}
