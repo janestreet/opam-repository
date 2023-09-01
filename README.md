@@ -7,6 +7,8 @@ extensions, including all Jane Street packages and necessary patches to external
 
 **WARNING**: this repository is experimental and is not officially supported by Jane Street. Use at your own risk.
 
+If you are using MacOS on Apple Silicon or Windows, please read **Known Issues** first.
+
 Start by adding the repository to OPAM:
 
 ```sh
