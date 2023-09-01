@@ -27,6 +27,7 @@ build: [
   ]
   [make "-C" "ocaml" "-j%{jobs}%"]
 ]
+available: arch = "x86_64" & os != "windows"
 install: [make "-C" "ocaml" "install"]
 dev-repo: "git+https://github.com/ocaml-flambda/flambda-backend"
 extra-files: [
