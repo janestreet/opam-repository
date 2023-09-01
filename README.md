@@ -1,7 +1,7 @@
 # OPAM repository for OCaml with Jane Street extensions
 
-This repository is a package repository for the [opam package manager](https://opam.ocaml.org). It contains OCaml with Jane Street extensions,
-including all Jane Street packages and necessary patches to external packages for building our libraries.
+This repository is a package repository for the [opam package manager](https://opam.ocaml.org). It contains OCaml with Jane Street language
+extensions, including all Jane Street packages and necessary patches to external packages for building our libraries.
 
 ## Installation
 
