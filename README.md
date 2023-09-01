@@ -10,7 +10,7 @@ including all Jane Street packages and necessary patches to external packages fo
 Start by adding the repository to OPAM:
 
 ```sh
-opam repo add janestreet-bleeding-with-extensions https://github.com/janestreet/opam-repository.git#with-extensions --dont-select
+opam repo add janestreet-bleeding-with-extensions https://github.com/janestreet/opam-repository.git#with-extensions
 ```
 
 Next, create a new switch with our compiler and a patched version of Dune:
