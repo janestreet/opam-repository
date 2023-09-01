@@ -18,7 +18,7 @@ flags: compiler
 setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
 build: [
   [
-    "./configure-legacy-install.sh"
+    "./configure-legacy-install"
     "--prefix=%{prefix}%"
     "--docdir=%{doc}%/ocaml"
     "-C"
