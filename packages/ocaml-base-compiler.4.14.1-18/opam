@@ -30,9 +30,10 @@ build: [
 install: [make "-C" "ocaml" "install"]
 dev-repo: "git+https://github.com/ocaml-flambda/flambda-backend"
 extra-files: [
-  "ocaml-base-compiler.install" "sha256=3b571b87fffd9bf430b110a732728dcbf6847759f7058291fc81e1ea813cd18d"
+  ["ocaml-base-compiler.install" "sha256=3b571b87fffd9bf430b110a732728dcbf6847759f7058291fc81e1ea813cd18d"]
+  ["configure-legacy-install.sh" "sha256=9ff8c4b058878d3d6c844348571ce700c0844a41317f7fbd5b575bae55c27115"]
 ]
 url {
-src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/4.14.1-18-opam.tar.gz"
-checksum: "sha256=91c102177ff3689aa54c89e5dba3bd57852db0500bf7387680a67903b8bb41af"
+src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/4.14.1-18.tar.gz"
+checksum: "sha256=e58d27feede740d61306ab07f236c38d14cb239706d28ec5f488e49816dce8b8"
 } 
