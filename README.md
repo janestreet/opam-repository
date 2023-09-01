@@ -19,3 +19,6 @@ can be made available with:
 ```sh
 opam repo add janestreet-bleeding-external https://github.com/janestreet/opam-repository.git#external-packages
 ```
+
+If you are looking to install the repository with our compiler extensions,
+please click [here](https://github.com/janestreet/opam-repository/tree/with-extensions).
