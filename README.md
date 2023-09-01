@@ -68,3 +68,9 @@ This compiler version does not yet support Windows. Windows users are recommende
 ### Js_of_ocaml
 
 Support for Js_of_ocaml requires patches to the JSOO compiler, which have not yet been published.
+
+### Flambda backend
+
+Please note that installing our compiler through this repository will only enable you to experiment with our language extensions.
+To use our compiler backend, Flambda, or configure other features of our compiler, follow the installation instructions
+provided [here](https://github.com/ocaml-flambda/flambda-backend).
