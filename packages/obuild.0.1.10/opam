@@ -20,7 +20,6 @@ build it.
 The design is based on Haskell's Cabal and borrows most of the layout
 and way of working, adapting parts where necessary to fully support OCaml."""
 depends: [
-  "base-flambda2"
   "ocaml" {< "5.0"}
 ]
 url {

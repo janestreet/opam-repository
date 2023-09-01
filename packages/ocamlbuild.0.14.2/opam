@@ -9,7 +9,6 @@ homepage: "https://github.com/ocaml/ocamlbuild/"
 doc: "https://github.com/ocaml/ocamlbuild/blob/master/manual/manual.adoc"
 bug-reports: "https://github.com/ocaml/ocamlbuild/issues"
 depends: [
-  "base-flambda2"
   "ocaml" {>= "4.03"}
 ]
 conflicts: [
