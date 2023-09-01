@@ -50,9 +50,10 @@ refer to [Real World OCaml](https://dev.realworldocaml.org/index.html).
 This compiler version does not yet support ARM64 and other architectures different from x86_64.
 Work on supporting ARM64 is being tracked [here](https://github.com/ocaml-flambda/flambda-backend/pull/1691).
 
-For Apple Silicon users, Rosetta 2 can be used to set up the x86_64 version of our compiler:
+For Apple Silicon users, [Rosetta 2](https://support.apple.com/en-gb/HT211861) can be used to set up the x86_64 version of our compiler:
 
 ```sh
+# Launch x86_64 shell through the Rosetta 2 emulator
 arch -x86_64 zsh
 # Install Homebrew for x86_64, skip if already present
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
