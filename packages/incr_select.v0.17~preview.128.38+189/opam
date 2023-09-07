@@ -27,6 +27,6 @@ number of outputs that are changed, independent of the number of
 outputs that exist.
 "
 url {
-src: "https://github.com/janestreet/incr_select/archive/cfefdcb5f519f292de341c1ef37ba48cf17694e7.tar.gz"
-checksum: "sha256=9e29dc3f09cc848e0b2e535fe6c3d27b9139dcdc5e4a18f5776484fcd2639bbe"
+src: "https://github.com/janestreet/incr_select/archive/d6aec824ccf0bc108d4ea431f50818ee804ece7f.tar.gz"
+checksum: "sha256=04653f0e010a93a28d98ff609b321389e5e811313cb882780c804d8b9037efb0"
 }
