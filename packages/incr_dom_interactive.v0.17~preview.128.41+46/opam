@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/incr_dom_interactive"
+bug-reports: "https://github.com/janestreet/incr_dom_interactive/issues"
+dev-repo: "git+https://github.com/janestreet/incr_dom_interactive.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/incr_dom_interactive/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "4.14.0"}
+  "async_js"        {= "v0.17~preview.128.41+46"}
+  "async_kernel"    {= "v0.17~preview.128.41+46"}
+  "incr_dom"        {= "v0.17~preview.128.41+46"}
+  "incr_map"        {= "v0.17~preview.128.41+46"}
+  "incr_select"     {= "v0.17~preview.128.41+46"}
+  "incremental"     {= "v0.17~preview.128.41+46"}
+  "ppx_jane"        {= "v0.17~preview.128.41+46"}
+  "splay_tree"      {= "v0.17~preview.128.41+46"}
+  "virtual_dom"     {= "v0.17~preview.128.41+46"}
+  "dune"            {>= "2.0.0"}
+  "js_of_ocaml"     {>= "5.1.1"}
+  "js_of_ocaml-ppx" {>= "5.1.1"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A monad for composing chains of interactive UI elements"
+description: "
+This library allows your program to receive input from the user using DOM elements such as checkboxes, text fields, and buttons. It allows you to inspect the user's input and decide afterwards what the rest of the [Interactive.t] should be. This library is intended to be used in conjunction with Incr_dom.
+"
+url {
+src: "https://github.com/janestreet/incr_dom_interactive/archive/98bb85845d4677cc5643b9eb62ff04f8d4667ac3.tar.gz"
+checksum: "sha256=35fbbf193cfec1a645782fa53fafdfaec2c5e37538097c270a69c44310888177"
+}
