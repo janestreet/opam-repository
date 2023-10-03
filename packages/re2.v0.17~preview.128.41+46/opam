@@ -23,6 +23,6 @@ synopsis: "OCaml bindings for RE2, Google's regular expression library"
 description: "
 "
 url {
-src: "https://github.com/janestreet/re2/archive/9f9c1caf8a4b6ceb4b7cef895aa31aa65a2b50b6.tar.gz"
-checksum: "sha256=80a16293231117d5b94fb3d0a923f8d0256e0dd1365040c6d49c652c8aace0e5"
+src: "https://github.com/janestreet/re2/archive/3eb25e24b0a7005043092cbf77b323e4d1a1f9fe.tar.gz"
+checksum: "sha256=40f1752423a89756fb0aecd11f4378bf0d189f9d0904245e3750525e6161be77"
 }
