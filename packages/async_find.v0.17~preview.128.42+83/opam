@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_find"
+bug-reports: "https://github.com/janestreet/async_find/issues"
+dev-repo: "git+https://github.com/janestreet/async_find.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_find/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "async"    {= "v0.17~preview.128.42+83"}
+  "core"     {= "v0.17~preview.128.42+83"}
+  "ppx_jane" {= "v0.17~preview.128.42+83"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Directory traversal with Async"
+description: "
+"
+url {
+src: "https://github.com/janestreet/async_find/archive/d931b74519589874dcd4e4370bb58b8fe254b5c9.tar.gz"
+checksum: "sha256=411e48f9237da167f264808650e046fe3d85862d6589fad40087d3bb8fd1322d"
+}
