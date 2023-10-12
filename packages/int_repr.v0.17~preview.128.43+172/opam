@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/int_repr"
+bug-reports: "https://github.com/janestreet/int_repr/issues"
+dev-repo: "git+https://github.com/janestreet/int_repr.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/int_repr/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "base"     {= "v0.17~preview.128.43+172"}
+  "ppx_jane" {= "v0.17~preview.128.43+172"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Integers of various widths"
+description: "
+Integers of various widths.
+"
+url {
+src: "https://github.com/janestreet/int_repr/archive/7e2ed7ad98c33eb974030bfed188b36772131eb7.tar.gz"
+checksum: "sha256=e8b46e1611f2efe9ce8dcd3e46455a88b9d923b0dd89695894570710a97e2531"
+}
