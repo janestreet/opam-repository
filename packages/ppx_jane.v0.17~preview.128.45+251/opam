@@ -1,0 +1,52 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_jane"
+bug-reports: "https://github.com/janestreet/ppx_jane/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_jane.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_jane/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                       {>= "4.14.0"}
+  "base_quickcheck"             {= "v0.17~preview.128.45+251"}
+  "ppx_assert"                  {= "v0.17~preview.128.45+251"}
+  "ppx_base"                    {= "v0.17~preview.128.45+251"}
+  "ppx_bench"                   {= "v0.17~preview.128.45+251"}
+  "ppx_bin_prot"                {= "v0.17~preview.128.45+251"}
+  "ppx_custom_printf"           {= "v0.17~preview.128.45+251"}
+  "ppx_disable_unused_warnings" {= "v0.17~preview.128.45+251"}
+  "ppx_expect"                  {= "v0.17~preview.128.45+251"}
+  "ppx_fields_conv"             {= "v0.17~preview.128.45+251"}
+  "ppx_fixed_literal"           {= "v0.17~preview.128.45+251"}
+  "ppx_here"                    {= "v0.17~preview.128.45+251"}
+  "ppx_ignore_instrumentation"  {= "v0.17~preview.128.45+251"}
+  "ppx_inline_test"             {= "v0.17~preview.128.45+251"}
+  "ppx_let"                     {= "v0.17~preview.128.45+251"}
+  "ppx_log"                     {= "v0.17~preview.128.45+251"}
+  "ppx_module_timer"            {= "v0.17~preview.128.45+251"}
+  "ppx_optional"                {= "v0.17~preview.128.45+251"}
+  "ppx_pipebang"                {= "v0.17~preview.128.45+251"}
+  "ppx_sexp_message"            {= "v0.17~preview.128.45+251"}
+  "ppx_sexp_value"              {= "v0.17~preview.128.45+251"}
+  "ppx_stable"                  {= "v0.17~preview.128.45+251"}
+  "ppx_stable_witness"          {= "v0.17~preview.128.45+251"}
+  "ppx_string"                  {= "v0.17~preview.128.45+251"}
+  "ppx_tydi"                    {= "v0.17~preview.128.45+251"}
+  "ppx_typerep_conv"            {= "v0.17~preview.128.45+251"}
+  "ppx_variants_conv"           {= "v0.17~preview.128.45+251"}
+  "dune"                        {>= "2.0.0"}
+  "ppxlib"                      {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Standard Jane Street ppx rewriters"
+description: "
+This package installs a ppx-jane executable, which is a ppx driver
+including all standard Jane Street ppx rewriters.
+"
+url {
+src: "https://github.com/janestreet/ppx_jane/archive/e92200750a05e44a0e9d3e5ee1086f2b68ea89a7.tar.gz"
+checksum: "sha256=2bc6276a6f2158a524606296bb0e37c887847956cbc33e22a4ee2805dec10000"
+}
