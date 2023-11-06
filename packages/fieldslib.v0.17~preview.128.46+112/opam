@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/fieldslib"
+bug-reports: "https://github.com/janestreet/fieldslib/issues"
+dev-repo: "git+https://github.com/janestreet/fieldslib.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/fieldslib/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.14.0"}
+  "base"  {= "v0.17~preview.128.46+112"}
+  "dune"  {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Syntax extension to define first class values representing record fields, to get and set record fields, iterate and fold over all fields of a record and create new record values"
+description: "
+Part of Jane Street's Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"
+url {
+src: "https://github.com/janestreet/fieldslib/archive/7b0bd9d11b9748cd2f3e7682a6f21c934935640b.tar.gz"
+checksum: "sha256=87bc332c37d0d10f1d549bd1690d7edaa1e9478414c31c5298471f31e7778c17"
+}
