@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sexp_macro"
+bug-reports: "https://github.com/janestreet/sexp_macro/issues"
+dev-repo: "git+https://github.com/janestreet/sexp_macro.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexp_macro/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "async"    {= "v0.17~preview.128.47+23"}
+  "core"     {= "v0.17~preview.128.47+23"}
+  "ppx_jane" {= "v0.17~preview.128.47+23"}
+  "sexplib"  {= "v0.17~preview.128.47+23"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Sexp macros"
+description: "
+Sexp macros allow the user to define and use constants and simple functions in sexp files,
+include one sexp file in another.
+"
+url {
+src: "https://github.com/janestreet/sexp_macro/archive/72087e5a1d74b1a045cf64bdd8527cab2ff46052.tar.gz"
+checksum: "sha256=10a960cf7ef1a35d82b9bcc9d231a0207fb303bd2fdd37915640827761c0eac1"
+}
