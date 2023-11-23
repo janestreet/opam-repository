@@ -1,0 +1,39 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/toplevel_expect_test"
+bug-reports: "https://github.com/janestreet/toplevel_expect_test/issues"
+dev-repo: "git+https://github.com/janestreet/toplevel_expect_test.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/toplevel_expect_test/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "4.14.0"}
+  "core"                {= "v0.17~preview.129.00+111"}
+  "core_unix"           {= "v0.17~preview.129.00+111"}
+  "mlt_parser"          {= "v0.17~preview.129.00+111"}
+  "ppx_expect"          {= "v0.17~preview.129.00+111"}
+  "ppx_inline_test"     {= "v0.17~preview.129.00+111"}
+  "ppx_jane"            {= "v0.17~preview.129.00+111"}
+  "ppx_optcomp"         {= "v0.17~preview.129.00+111"}
+  "toplevel_backend"    {= "v0.17~preview.129.00+111"}
+  "base-threads"
+  "dune"                {>= "2.0.0"}
+  "ocaml-compiler-libs" {>= "v0.11.0"}
+  "ocamlfind"           {>= "1.7.2"}
+  "ppxlib"              {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Expectation tests for the OCaml toplevel"
+description: "
+Allows one to write both toplevel phrases and the expected output from
+the toplevel in the same file. This provides an easy way to test
+compilations errors as well as provide a nice alternative to using
+the toplevel in a terminal.
+"
+url {
+src: "https://github.com/janestreet/toplevel_expect_test/archive/3e6181cb9c63761fb58c51839032918c1b5f4929.tar.gz"
+checksum: "sha256=88db164fcb12e5f501a8f7e432b2242c23beef951971bf7ee91673e7e295daea"
+}

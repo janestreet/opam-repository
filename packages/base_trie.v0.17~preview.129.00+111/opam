@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/base_trie"
+bug-reports: "https://github.com/janestreet/base_trie/issues"
+dev-repo: "git+https://github.com/janestreet/base_trie.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/base_trie/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.14.0"}
+  "base"                     {= "v0.17~preview.129.00+111"}
+  "core"                     {= "v0.17~preview.129.00+111"}
+  "expect_test_helpers_core" {= "v0.17~preview.129.00+111"}
+  "ppx_jane"                 {= "v0.17~preview.129.00+111"}
+  "dune"                     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Trie data structure library"
+description: "
+This library provides an implementation of a trie data structure.
+
+Lookup is based on \"chains\" of keys; each node of the trie has children representing
+each potential next key in the chain.
+"
+url {
+src: "https://github.com/janestreet/base_trie/archive/fbeb77b13d7def02e0f279ae881ccce94c55ad42.tar.gz"
+checksum: "sha256=11f31c784ca40720a4d7ec693fae1729367fe72ff5853425e94758e94864eba8"
+}

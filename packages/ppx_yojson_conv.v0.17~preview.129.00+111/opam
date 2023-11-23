@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_yojson_conv"
+bug-reports: "https://github.com/janestreet/ppx_yojson_conv/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_yojson_conv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_yojson_conv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "4.14.0"}
+  "base"                {= "v0.17~preview.129.00+111"}
+  "ppx_js_style"        {= "v0.17~preview.129.00+111"}
+  "ppx_yojson_conv_lib" {= "v0.17~preview.129.00+111"}
+  "dune"                {>= "2.0.0"}
+  "ppxlib"              {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "[@@deriving] plugin to generate Yojson conversion functions"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_yojson_conv/archive/5c1d3f2dd8ff80889b3e56e11cc19f36f1d3b52a.tar.gz"
+checksum: "sha256=d52a5cdbdb20051e696671c524e749780cb0df2a89dbaa8e8e365299517bc567"
+}

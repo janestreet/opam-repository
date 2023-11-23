@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/parsexp_io"
+bug-reports: "https://github.com/janestreet/parsexp_io/issues"
+dev-repo: "git+https://github.com/janestreet/parsexp_io.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/parsexp_io/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "4.14.0"}
+  "base"         {= "v0.17~preview.129.00+111"}
+  "parsexp"      {= "v0.17~preview.129.00+111"}
+  "ppx_js_style" {= "v0.17~preview.129.00+111"}
+  "stdio"        {= "v0.17~preview.129.00+111"}
+  "dune"         {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "S-expression parsing library (IO functions)"
+description: "
+Parsexp_io provides functions for loading s-expressions from files.
+"
+url {
+src: "https://github.com/janestreet/parsexp_io/archive/8cd3f032fa6f1f9e491d90f4dc323458835f7b59.tar.gz"
+checksum: "sha256=9740cab8896cd759e67f043da93f239b8cb161cef84cb613cd8dc5ac3c6d73fe"
+}

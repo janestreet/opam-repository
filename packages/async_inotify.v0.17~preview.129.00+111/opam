@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_inotify"
+bug-reports: "https://github.com/janestreet/async_inotify/issues"
+dev-repo: "git+https://github.com/janestreet/async_inotify.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_inotify/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"      {>= "4.14.0"}
+  "async"      {= "v0.17~preview.129.00+111"}
+  "async_find" {= "v0.17~preview.129.00+111"}
+  "core"       {= "v0.17~preview.129.00+111"}
+  "core_unix"  {= "v0.17~preview.129.00+111"}
+  "ppx_jane"   {= "v0.17~preview.129.00+111"}
+  "dune"       {>= "2.0.0"}
+  "inotify"    {>= "2.4.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Async wrapper for inotify"
+description: "
+"
+url {
+src: "https://github.com/janestreet/async_inotify/archive/2aa0299d8a9f06fa65758b7931248bd8aa0c030d.tar.gz"
+checksum: "sha256=06a7456709588758b05d975b70e1e28f18ca6ce3e33746cd0a97785500a3b4c4"
+}

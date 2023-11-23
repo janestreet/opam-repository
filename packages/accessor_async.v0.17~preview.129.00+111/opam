@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/accessor_async"
+bug-reports: "https://github.com/janestreet/accessor_async/issues"
+dev-repo: "git+https://github.com/janestreet/accessor_async.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/accessor_async/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "4.14.0"}
+  "accessor_core" {= "v0.17~preview.129.00+111"}
+  "async_kernel"  {= "v0.17~preview.129.00+111"}
+  "core"          {= "v0.17~preview.129.00+111"}
+  "ppx_accessor"  {= "v0.17~preview.129.00+111"}
+  "ppx_jane"      {= "v0.17~preview.129.00+111"}
+  "dune"          {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Accessors for Async types, for use with the Accessor library"
+description: "
+This library provides accessors for numerous types in Async.
+"
+url {
+src: "https://github.com/janestreet/accessor_async/archive/fb726b8ffef9659eaa849fc43a627dd02b947c45.tar.gz"
+checksum: "sha256=f198afd8135df71ae4dc4c40e89c826703aec26533e6ce837ac0b0aa73528988"
+}
