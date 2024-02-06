@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/janestreet_lru_cache"
+bug-reports: "https://github.com/janestreet/janestreet_lru_cache/issues"
+dev-repo: "git+https://github.com/janestreet/janestreet_lru_cache.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/janestreet_lru_cache/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "core"     {= "v0.17~preview.129.07+242"}
+  "ppx_jane" {= "v0.17~preview.129.07+242"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "An LRU Cache implementation."
+description: "
+Implementation of a Least Recently Used Cache.
+"
+url {
+src: "https://github.com/janestreet/janestreet_lru_cache/archive/4a0e770e1e498621c2e988679b1ace6c7f9ddf55.tar.gz"
+checksum: "sha256=ee024d53fcb1ea002640b695d3c1630a48babcd1630b3c99f134063facffc5bb"
+}

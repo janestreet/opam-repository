@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hex_encode"
+bug-reports: "https://github.com/janestreet/hex_encode/issues"
+dev-repo: "git+https://github.com/janestreet/hex_encode.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hex_encode/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "core"     {= "v0.17~preview.129.07+242"}
+  "ppx_jane" {= "v0.17~preview.129.07+242"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hexadecimal encoding library"
+description: "
+This library implements hexadecimal encoding and decoding
+"
+url {
+src: "https://github.com/janestreet/hex_encode/archive/49c5fea1e6a3cdde1e4cf78478264bc51b11882f.tar.gz"
+checksum: "sha256=b7f46d238bcce82f97278824f4c1eabfdefa27040e830126bc37f8316ce8f336"
+}

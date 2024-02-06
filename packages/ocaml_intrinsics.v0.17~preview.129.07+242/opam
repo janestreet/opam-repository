@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ocaml_intrinsics"
+bug-reports: "https://github.com/janestreet/ocaml_intrinsics/issues"
+dev-repo: "git+https://github.com/janestreet/ocaml_intrinsics.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ocaml_intrinsics/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "4.14.0"}
+  "dune"              {>= "2.0.0"}
+  "dune-configurator"
+]
+synopsis: "Intrinsics"
+description: "
+Provides functions to invoke amd64 instructions (such as clz,popcnt,rdtsc,rdpmc)
+     when available, or compatible software implementation on other targets.
+"
+available: (arch = "x86_64" | arch = "arm64") & os != "win32"
+url {
+src: "https://github.com/janestreet/ocaml_intrinsics/archive/4a3de6dca7030ed1aa4d07d0ab9f09226d282ff7.tar.gz"
+checksum: "sha256=97c8c2bdadb09e0beeec580e70673513d89343821bef64a647ed519fdd7db24b"
+}

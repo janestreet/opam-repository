@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/netsnmp"
+bug-reports: "https://github.com/janestreet/netsnmp/issues"
+dev-repo: "git+https://github.com/janestreet/netsnmp.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/netsnmp/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "4.14.0"}
+  "async"        {= "v0.17~preview.129.07+242"}
+  "core"         {= "v0.17~preview.129.07+242"}
+  "ppx_jane"     {= "v0.17~preview.129.07+242"}
+  "conf-netsnmp" {>= "1.0.0"}
+  "dune"         {>= "2.0.0"}
+  "re"           {>= "1.8.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "An interface to the Net-SNMP client library"
+description: "
+Provides a wrapper around the Net-SNMP client libraries including
+MIB handling and SNMP requests
+"
+depexts: [
+  ["net-snmp"] {os-family = "arch"}
+]
+url {
+src: "https://github.com/janestreet/netsnmp/archive/22a41e474b75e2b011f49e3b7d65863b26e72222.tar.gz"
+checksum: "sha256=746916007323276c5f245cce096dba77a78d9670ff1541d04eacadedaedf8e2d"
+}
