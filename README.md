@@ -55,11 +55,14 @@ For Apple Silicon users, [Rosetta 2](https://support.apple.com/en-gb/HT211861) c
 ```sh
 # Launch x86_64 shell through the Rosetta 2 emulator
 arch -x86_64 zsh
-# Install Homebrew for x86_64, skip if already present
+# Install Homebrew for x86_64, skip if already present.
+# Uses /usr/local/ rather than /opt/homebrew/.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "($/usr/local/bin/brew shellenv)"
+eval "$(/usr/local/bin/brew shellenv)"
 # Install OPAM for x86_64, skip if already present
 brew install opam
+# clear zsh's command hash table
+rehash
 opam init
 # Continue with default instructions
 ```
