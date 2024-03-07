@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/re2"
+bug-reports: "https://github.com/janestreet/re2/issues"
+dev-repo: "git+https://github.com/janestreet/re2.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/re2/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "4.14.0"}
+  "core"              {= "v0.17~preview.129.11+135"}
+  "jane_rope"         {= "v0.17~preview.129.11+135"}
+  "ppx_jane"          {= "v0.17~preview.129.11+135"}
+  "regex_parser_intf" {= "v0.17~preview.129.11+135"}
+  "conf-g++"          {build}
+  "dune"              {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "OCaml bindings for RE2, Google's regular expression library"
+description: "
+"
+url {
+src: "https://github.com/janestreet/re2/archive/2e556d13b144f60de77bfd53faa7f154095695bd.tar.gz"
+checksum: "sha256=e505c08f08db02a9e0f708ef33b3e3d7e65b7e47a9bb14918425a3892afd98b9"
+}

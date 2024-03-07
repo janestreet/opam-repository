@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/resource_cache"
+bug-reports: "https://github.com/janestreet/resource_cache/issues"
+dev-repo: "git+https://github.com/janestreet/resource_cache.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/resource_cache/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "4.14.0"}
+  "async_kernel"     {= "v0.17~preview.129.11+135"}
+  "async_rpc_kernel" {= "v0.17~preview.129.11+135"}
+  "core"             {= "v0.17~preview.129.11+135"}
+  "ppx_jane"         {= "v0.17~preview.129.11+135"}
+  "dune"             {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "General resource cache"
+description: "
+This library offers a functor to create a resource cache over some
+abstract [Resource] type. The cache enables resource reuse while
+obeying various limits.
+"
+url {
+src: "https://github.com/janestreet/resource_cache/archive/10715cf5529da626c040b71d5068e5df39798729.tar.gz"
+checksum: "sha256=a6f974ece6c71b03dfb3d5095b79d52495e3e67b88cd8fd03bd29841f4d8c3d8"
+}

@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hg_lib"
+bug-reports: "https://github.com/janestreet/hg_lib/issues"
+dev-repo: "git+https://github.com/janestreet/hg_lib.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hg_lib/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.14.0"}
+  "async"                    {= "v0.17~preview.129.11+135"}
+  "core"                     {= "v0.17~preview.129.11+135"}
+  "core_kernel"              {= "v0.17~preview.129.11+135"}
+  "expect_test_helpers_core" {= "v0.17~preview.129.11+135"}
+  "ppx_jane"                 {= "v0.17~preview.129.11+135"}
+  "dune"                     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library that wraps the Mercurial command line interface"
+description: "
+A library that wraps the Mercurial command line interface.
+"
+url {
+src: "https://github.com/janestreet/hg_lib/archive/790d0faeabc379135e4706e1e38154c97461a076.tar.gz"
+checksum: "sha256=1552a502ef03da277c79c2891897d87867bf09a70dc08837beb916aefa4265af"
+}

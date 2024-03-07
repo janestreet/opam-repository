@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/gel"
+bug-reports: "https://github.com/janestreet/gel/issues"
+dev-repo: "git+https://github.com/janestreet/gel.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/gel/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "base"     {= "v0.17~preview.129.11+135"}
+  "ppx_jane" {= "v0.17~preview.129.11+135"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library to mark non-record fields global."
+description: "
+A library to mark non-record fields global. GEL stands for Global Even if inside a Local.
+"
+url {
+src: "https://github.com/janestreet/gel/archive/e21ab4017a9e99b288aaee573644e845bbc9cb9b.tar.gz"
+checksum: "sha256=36720427c3f1129db3f4b8b11a30c427ed77c844ebd346107a4b80261bf24d23"
+}
