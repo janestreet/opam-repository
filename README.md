@@ -7,7 +7,7 @@ It contains the development version of all Jane Street packages. To use
 it, type:
 
 ```sh
-opam repo add janestreet-bleeding https://ocaml.janestreet.com/opam-repository
+opam repo add janestreet-bleeding https://github.com/janestreet/opam-repository.git
 ```
 
 Note that the above url is not the one of this github repository. It
