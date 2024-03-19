@@ -11,6 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"                    {>= "4.14.0"}
+  "async"                    {= "v0.17~preview.129.15+205"}
   "base"                     {= "v0.17~preview.129.15+205"}
   "base_quickcheck"          {= "v0.17~preview.129.15+205"}
   "core"                     {= "v0.17~preview.129.15+205"}
@@ -30,6 +31,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_quick_test/archive/f0fc9a710c266ef666604bbb1f421da1b589a676.tar.gz"
-checksum: "sha256=aa30c6559c5f4f90ffcdc486f076df4966de86c80f4066df80c49e45e3edc174"
+src: "https://github.com/janestreet/ppx_quick_test/archive/d9f2e728d34de48f446e91d6e6188b8c8f88b3f9.tar.gz"
+checksum: "sha256=82852c185702d579135c2504f2ac1665433066c3eed81fb9246d25d9b3773d50"
 }
