@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_quick_test"
+bug-reports: "https://github.com/janestreet/ppx_quick_test/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_quick_test.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_quick_test/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "4.14.0"}
+  "base"                     {= "v0.17~preview.129.15+205"}
+  "base_quickcheck"          {= "v0.17~preview.129.15+205"}
+  "core"                     {= "v0.17~preview.129.15+205"}
+  "core_kernel"              {= "v0.17~preview.129.15+205"}
+  "expect_test_helpers_core" {= "v0.17~preview.129.15+205"}
+  "ppx_expect"               {= "v0.17~preview.129.15+205"}
+  "ppx_here"                 {= "v0.17~preview.129.15+205"}
+  "ppx_jane"                 {= "v0.17~preview.129.15+205"}
+  "ppx_sexp_conv"            {= "v0.17~preview.129.15+205"}
+  "ppx_sexp_message"         {= "v0.17~preview.129.15+205"}
+  "dune"                     {>= "2.0.0"}
+  "ppxlib"                   {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Spiritual equivalent of let%expect_test, but for property based tests as an ergonomic wrapper to write quickcheck tests."
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_quick_test/archive/f0fc9a710c266ef666604bbb1f421da1b589a676.tar.gz"
+checksum: "sha256=aa30c6559c5f4f90ffcdc486f076df4966de86c80f4066df80c49e45e3edc174"
+}

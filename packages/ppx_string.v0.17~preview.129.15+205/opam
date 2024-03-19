@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_string"
+bug-reports: "https://github.com/janestreet/ppx_string/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_string.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_string/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "base"     {= "v0.17~preview.129.15+205"}
+  "ppx_base" {= "v0.17~preview.129.15+205"}
+  "dune"     {>= "2.0.0"}
+  "ppxlib"   {>= "0.28.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Ppx extension for string interpolation"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_string/archive/4258a736331c7efcca80a456e51df1616ac6784b.tar.gz"
+checksum: "sha256=af250e9a73ba4df097562b3c05b4b55c6df3852d308c220b5710d3dfc1b215df"
+}

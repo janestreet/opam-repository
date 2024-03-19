@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_xilinx_reports"
+bug-reports: "https://github.com/janestreet/hardcaml_xilinx_reports/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_xilinx_reports.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_xilinx_reports/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "4.08.0"}
+  "async"        {= "v0.17~preview.129.15+205"}
+  "base"         {= "v0.17~preview.129.15+205"}
+  "core"         {= "v0.17~preview.129.15+205"}
+  "core_unix"    {= "v0.17~preview.129.15+205"}
+  "hardcaml"     {= "v0.17~preview.129.15+205"}
+  "ppx_hardcaml" {= "v0.17~preview.129.15+205"}
+  "ppx_jane"     {= "v0.17~preview.129.15+205"}
+  "stdio"        {= "v0.17~preview.129.15+205"}
+  "textutils"    {= "v0.17~preview.129.15+205"}
+  "dune"         {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml Xilinx Reports"
+description: "
+Provides a library which can take a hierarchical hardcaml design and run Xilinx
+Vivado synthesis on each module in the design hierarchy.
+
+Resource utilization and timing estimates are provided for each module.
+
+The synthesis process for each module can be configured to report statistics for
+just the local module, or for all modules below it as well. Running in different
+ways can provide better insight into the design.
+"
+url {
+src: "https://github.com/janestreet/hardcaml_xilinx_reports/archive/7479d2fa989534051b51bac8c734d25c546c1344.tar.gz"
+checksum: "sha256=5ab1271ad5150ae260f9b1ec52cd87345e2b5dd64195b8c02a59be05de39c4bf"
+}

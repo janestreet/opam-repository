@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/time_now"
+bug-reports: "https://github.com/janestreet/time_now/issues"
+dev-repo: "git+https://github.com/janestreet/time_now.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/time_now/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "4.14.0"}
+  "base"                {= "v0.17~preview.129.15+205"}
+  "jane-street-headers" {= "v0.17~preview.129.15+205"}
+  "jst-config"          {= "v0.17~preview.129.15+205"}
+  "ppx_base"            {= "v0.17~preview.129.15+205"}
+  "ppx_optcomp"         {= "v0.17~preview.129.15+205"}
+  "dune"                {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Reports the current time"
+description: "
+Provides a single function to report the current time in nanoseconds
+since the start of the Unix epoch.
+"
+url {
+src: "https://github.com/janestreet/time_now/archive/d7e3801d2f120b6723c28429de0dd63b669d47b8.tar.gz"
+checksum: "sha256=d749e1e08c77cc7b1ca69fa75dd75766fdd3642932c94a35dd6cd31257f902c2"
+}
