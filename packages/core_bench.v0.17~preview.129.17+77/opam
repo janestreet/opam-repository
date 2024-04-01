@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_bench"
+bug-reports: "https://github.com/janestreet/core_bench/issues"
+dev-repo: "git+https://github.com/janestreet/core_bench.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_bench/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "4.14.0"}
+  "core"              {= "v0.17~preview.129.17+77"}
+  "core_extended"     {= "v0.17~preview.129.17+77"}
+  "core_kernel"       {= "v0.17~preview.129.17+77"}
+  "core_unix"         {= "v0.17~preview.129.17+77"}
+  "delimited_parsing" {= "v0.17~preview.129.17+77"}
+  "ppx_compare"       {= "v0.17~preview.129.17+77"}
+  "ppx_fields_conv"   {= "v0.17~preview.129.17+77"}
+  "ppx_jane"          {= "v0.17~preview.129.17+77"}
+  "ppx_let"           {= "v0.17~preview.129.17+77"}
+  "ppx_sexp_conv"     {= "v0.17~preview.129.17+77"}
+  "textutils"         {= "v0.17~preview.129.17+77"}
+  "time_now"          {= "v0.17~preview.129.17+77"}
+  "dune"              {>= "2.0.0"}
+  "re"                {>= "1.8.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Benchmarking library"
+description: "
+"
+url {
+src: "https://github.com/janestreet/core_bench/archive/112baf8ad8e4fc79b7a2f950aab97653b24c6157.tar.gz"
+checksum: "sha256=f449ec0167904d27985bd407b57696b9e1c08cb19ab2117f44d02aa7734cba6c"
+}

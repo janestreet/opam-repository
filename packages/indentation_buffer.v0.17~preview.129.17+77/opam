@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/indentation_buffer"
+bug-reports: "https://github.com/janestreet/indentation_buffer/issues"
+dev-repo: "git+https://github.com/janestreet/indentation_buffer.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/indentation_buffer/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "core"     {= "v0.17~preview.129.17+77"}
+  "ppx_jane" {= "v0.17~preview.129.17+77"}
+  "dune"     {>= "2.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for building strings with indentation"
+description: "
+A library for building strings with indentation
+"
+url {
+src: "https://github.com/janestreet/indentation_buffer/archive/4c3ad263803cbd5008961950ae3cb0fe3a02d2fe.tar.gz"
+checksum: "sha256=6e1ff5883ae286e26f0b4f5cbff73c892229e6f4ff85d0718a691299de3993db"
+}
