@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "async"       {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
@@ -20,10 +20,10 @@ depends: [
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library that implements the websocket protocol on top of Async"
 description: "
-This library implements both the server and client side of 
+This library implements both the server and client side of
                 the websocket protocol.
 "
 url {
-src: "https://github.com/janestreet/async_websocket/archive/2570833d31a4b3d663b6280e4e0270cc876360b7.tar.gz"
-checksum: "sha256=7e30004e7ad9d522ed13efe82e9293eb4daca1220ec418407e1f040de0c7aee4"
+src: "https://github.com/janestreet/async_websocket/archive/bb02682d0b4e6b75cb18d80a24ca527aa8565372.tar.gz"
+checksum: "sha256=26972aadc34908fe45844bf5033f49a693573f9123f0208198a60fa9985d11a6"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"          {>= "4.14.0"}
+  "ocaml"          {>= "5.1.0"}
   "async"          {= "v0.17~preview.129.17+77"}
   "core"           {= "v0.17~preview.129.17+77"}
   "ppx_jane"       {= "v0.17~preview.129.17+77"}
@@ -25,6 +25,6 @@ This library helps debug a connection between two parties speaking a
 protocol by capturing the traffic that passes between them.
 "
 url {
-src: "https://github.com/janestreet/man_in_the_middle_debugger/archive/21fa07798fa881eea9ee5de0d069a554390293f1.tar.gz"
-checksum: "sha256=a47c8a3cd8e917196986bb5d57e16a8eadb99d466cf35769b1ed75ac39af2b6e"
+src: "https://github.com/janestreet/man_in_the_middle_debugger/archive/9ad995a3fe54183c6f0564da7a46159aef971ddc.tar.gz"
+checksum: "sha256=24c93b6b2a3acf0fc33bbdbfc623db86563837d8dc79ce2106ef7ff559998163"
 }

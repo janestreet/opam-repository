@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -24,6 +24,6 @@ version themselves. The more protocols that add themselves to
 to a service while using the wrong protocol.
 "
 url {
-src: "https://github.com/janestreet/protocol_version_header/archive/34bcf8210655895be45f53bb923954c103a89728.tar.gz"
-checksum: "sha256=aa5a4f2e2be635783cf4eff413017490a8688f88d17cae6b796c02953fe56cec"
+src: "https://github.com/janestreet/protocol_version_header/archive/fe27dcd1266c6ab89a20d9a7e0b66d689a741d36.tar.gz"
+checksum: "sha256=a311726e00acb88ee3df318eca3a609deb34c0958e740672c62c83b305496276"
 }

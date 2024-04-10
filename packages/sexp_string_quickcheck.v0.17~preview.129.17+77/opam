@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "parsexp"  {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ quickcheck-based tests that wish to exercise the concrete syntax of sexps,
 including escape sequences and comments.
 "
 url {
-src: "https://github.com/janestreet/sexp_string_quickcheck/archive/f9b5f8bec5b7cdc9dbb396ff8ebf73552624206f.tar.gz"
-checksum: "sha256=8d0efe7b9939c1a995caddcd51429e27387aa04fc79e126f908a7f57c7f9a819"
+src: "https://github.com/janestreet/sexp_string_quickcheck/archive/7cd02c212bb2cdc2b898a3df487fccbbb2f7642f.tar.gz"
+checksum: "sha256=32f8e18b1562156b47036a66a744ecff4f25d53d7350799ff61f0220ca445f00"
 }

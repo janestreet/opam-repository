@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.14.0"}
+  "ocaml"         {>= "5.1.0"}
   "ppx_cold"      {= "v0.17~preview.129.17+77"}
   "ppx_compare"   {= "v0.17~preview.129.17+77"}
   "ppx_enumerate" {= "v0.17~preview.129.17+77"}
@@ -29,6 +29,6 @@ Note that Base doesn't need ppx to build, it is only used as a
 verification tool.
 "
 url {
-src: "https://github.com/janestreet/ppx_base/archive/10f77215d637b885257ae1ef257c4e27b367ac67.tar.gz"
-checksum: "sha256=d1bc0361fc74420b5afa7d0660d56764dcc96176a0d55e886039a48c5c7e6556"
+src: "https://github.com/janestreet/ppx_base/archive/60cb6671e5f0b39307a233be0b4a4299ab3b24c3.tar.gz"
+checksum: "sha256=30960926acc119d37cef0283d27ffb5dfeb729d62376b72293c4f51c96bdb643"
 }

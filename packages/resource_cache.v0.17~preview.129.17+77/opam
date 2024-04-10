@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.14.0"}
+  "ocaml"            {>= "5.1.0"}
   "async_kernel"     {= "v0.17~preview.129.17+77"}
   "async_rpc_kernel" {= "v0.17~preview.129.17+77"}
   "core"             {= "v0.17~preview.129.17+77"}
@@ -25,6 +25,6 @@ abstract [Resource] type. The cache enables resource reuse while
 obeying various limits.
 "
 url {
-src: "https://github.com/janestreet/resource_cache/archive/7a515213702fd4ab15b86ec16dec13e50557919a.tar.gz"
-checksum: "sha256=86dca680aa4b266fe30022c61fce48ca008e901b6d4f63792292932ed1d73383"
+src: "https://github.com/janestreet/resource_cache/archive/c6c39c3828df557a4abb16d16b9fe27175c8e336.tar.gz"
+checksum: "sha256=4719d7db963e97ea3bea26f08a5840c8235843e620616b7c594ed6a5d32f4317"
 }

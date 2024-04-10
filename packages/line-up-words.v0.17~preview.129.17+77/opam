@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.14.0"}
+  "ocaml"         {>= "5.1.0"}
   "core"          {= "v0.17~preview.129.17+77"}
   "core_unix"     {= "v0.17~preview.129.17+77"}
   "patience_diff" {= "v0.17~preview.129.17+77"}
@@ -28,6 +28,6 @@ in a sequence of lines in an intelligent way.
 It comes as a binary and an emacs mode.
 "
 url {
-src: "https://github.com/janestreet/line-up-words/archive/a7814717e2b19e9e193cabe9904aaa882ac5f1ea.tar.gz"
-checksum: "sha256=c3313b62697b5e2b30ca73c0b3773ea65c51afdd97853a22100e37e76b0b54ab"
+src: "https://github.com/janestreet/line-up-words/archive/65b892e6142d8b3647283de30b42aa9336b36544.tar.gz"
+checksum: "sha256=01e479c59afa0a00ce1d18c53a7713f2b081b5c36bb87b6234d24272aff7a903"
 }

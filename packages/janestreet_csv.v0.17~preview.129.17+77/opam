@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.14.0"}
+  "ocaml"             {>= "5.1.0"}
   "async"             {= "v0.17~preview.129.17+77"}
   "bignum"            {= "v0.17~preview.129.17+77"}
   "core_kernel"       {= "v0.17~preview.129.17+77"}
@@ -34,6 +34,6 @@ contains subcommands for pretty printing, selecting, and combining
 CSVs, as well as some conversions to other formats.
 "
 url {
-src: "https://github.com/janestreet/janestreet_csv/archive/6b4b8354aaa5fb001dd89784cc82d424c78b8255.tar.gz"
-checksum: "sha256=a6ae0f4463c79fb69927e3c546a66f25f742de3a62c7a3eda27a71b3a4e86f7d"
+src: "https://github.com/janestreet/janestreet_csv/archive/97525c314ecadfb50f67f9c630830a7b199b1ad6.tar.gz"
+checksum: "sha256=5d3d99e821434f6941982562f819b3e60bf0c683e6402cd041966cb227a80fd4"
 }

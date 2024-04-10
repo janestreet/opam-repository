@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 A minimal library for generating ordinal names of integers.
 "
 url {
-src: "https://github.com/janestreet/ordinal_abbreviation/archive/e2b4a06b7444c5d4919fea683ba8806d28b03d9d.tar.gz"
-checksum: "sha256=e02e224b1309f4d909f4e996a05a4ecb6782b5778dca571f5459c741e9bcf5cd"
+src: "https://github.com/janestreet/ordinal_abbreviation/archive/1f86f6552f562f6fe6a081a78a91d2812037ae22.tar.gz"
+checksum: "sha256=1171d269fff9fe696b8b6b173dab918a4ac33a46b3705e9eeb96262d113e90a7"
 }

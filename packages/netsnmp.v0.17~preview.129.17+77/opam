@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "async"        {= "v0.17~preview.129.17+77"}
   "core"         {= "v0.17~preview.129.17+77"}
   "ppx_jane"     {= "v0.17~preview.129.17+77"}
@@ -28,6 +28,6 @@ depexts: [
   ["net-snmp"] {os-family = "arch"}
 ]
 url {
-src: "https://github.com/janestreet/netsnmp/archive/22a41e474b75e2b011f49e3b7d65863b26e72222.tar.gz"
-checksum: "sha256=746916007323276c5f245cce096dba77a78d9670ff1541d04eacadedaedf8e2d"
+src: "https://github.com/janestreet/netsnmp/archive/4e87cee6a1359ab21a4b0959a84398dc5c7ef38a.tar.gz"
+checksum: "sha256=c8635f126f1399a5bcf7e3566639cd27ae328a37cfde9e964a13bc704c1778e7"
 }

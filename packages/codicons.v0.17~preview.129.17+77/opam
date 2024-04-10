@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "core"        {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
   "virtual_dom" {= "v0.17~preview.129.17+77"}
@@ -22,6 +22,6 @@ description: "
 Icons from VS code
 "
 url {
-src: "https://github.com/janestreet/codicons/archive/fd6d4f29c164403ec89d1b563e2633143cc6a6d5.tar.gz"
-checksum: "sha256=3ceefed8c99a5af9ab368d6eaa9acd217c1831da6346179214b276bfd6c67875"
+src: "https://github.com/janestreet/codicons/archive/a369175a7bcdef7a8aa3a0c4aca0c93b0b342bec.tar.gz"
+checksum: "sha256=5ee43948bacae13750793df616820eaa928ee9cc89ff98b5ad8760a725cfa409"
 }

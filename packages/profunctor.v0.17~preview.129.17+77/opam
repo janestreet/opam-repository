@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"          {>= "4.14.0"}
+  "ocaml"          {>= "5.1.0"}
   "base"           {= "v0.17~preview.129.17+77"}
   "ppx_jane"       {= "v0.17~preview.129.17+77"}
   "record_builder" {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ and operations which can be used to traverse a record with them based on
 record_builder and the =ppx_fields= syntax extension.
 "
 url {
-src: "https://github.com/janestreet/profunctor/archive/13f225f79a94772a854fe561726a575fba93349c.tar.gz"
-checksum: "sha256=b138ba1513449bbbd130096552a32fab3a09dafbbce0553b11a633efd9a60deb"
+src: "https://github.com/janestreet/profunctor/archive/38d4138d97c30c5185b9f9425f35cf2a1bd195bb.tar.gz"
+checksum: "sha256=21300b7bd410572f15de8acd9ec01a8f8368575de11073772cc24b7fad730ef5"
 }

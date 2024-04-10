@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"               {>= "4.14.0"}
+  "ocaml"               {>= "5.1.0"}
   "base"                {= "v0.17~preview.129.17+77"}
   "core"                {= "v0.17~preview.129.17+77"}
   "core_kernel"         {= "v0.17~preview.129.17+77"}
@@ -33,6 +33,6 @@ The library itself may be found at
 https://github.com/Matt-Esch/virtual-dom.
 "
 url {
-src: "https://github.com/janestreet/virtual_dom/archive/968ab26b2909ef2c778ef50d8cf819608758b4c2.tar.gz"
-checksum: "sha256=67e65e582fed6240b8fb261c77a835486750fdd8d82754de65475556c943c9b7"
+src: "https://github.com/janestreet/virtual_dom/archive/f01fe31c5a38ef1e851cdf89906503b21f30979c.tar.gz"
+checksum: "sha256=fb0ee869dee58920ad3047704e9cd136b5e3583c0b3deb0ab697b1211a7eab95"
 }

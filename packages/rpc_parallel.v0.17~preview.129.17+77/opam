@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "async"       {= "v0.17~preview.129.17+77"}
   "core"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
@@ -28,6 +28,6 @@ Async Rpc.
 
 "
 url {
-src: "https://github.com/janestreet/rpc_parallel/archive/2c49a64d35f2f4741c36f2babf7088b66fbefe3d.tar.gz"
-checksum: "sha256=11588d7a53a5f10260173050a328053fe8b2971a62a9923b5c0a2f1eda36d0af"
+src: "https://github.com/janestreet/rpc_parallel/archive/d395c84e1109d1a8b012aec5659c276aa91dbf15.tar.gz"
+checksum: "sha256=cc2ae31ab5ce4d30c70311f5600a546883304ce95e3461c7da7894e7e6185714"
 }

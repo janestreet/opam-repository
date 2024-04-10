@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.14.0"}
+  "ocaml"             {>= "5.1.0"}
   "base"              {= "v0.17~preview.129.17+77"}
   "ppx_assert"        {= "v0.17~preview.129.17+77"}
   "dune"              {>= "2.0.0"}
@@ -27,6 +27,6 @@ different packages from Jane Street. Future updates may not be backward-compatib
 do not recommend using this package directly.
 "
 url {
-src: "https://github.com/janestreet/jst-config/archive/eee9163055396998436163f63016019bf63aa17b.tar.gz"
-checksum: "sha256=180e7c619c1a753cbeea0edcc3438e811059effd620b7fc75bfe5457a654709f"
+src: "https://github.com/janestreet/jst-config/archive/d3de8635dcf027a1c515b243d51bc4c501b5d2fa.tar.gz"
+checksum: "sha256=8aa09440e293fca4531039b38727e1dfc913c5390d0e21a84300e20c90696ff2"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.14.0"}
+  "ocaml"                    {>= "5.1.0"}
   "base"                     {= "v0.17~preview.129.17+77"}
   "expect_test_helpers_core" {= "v0.17~preview.129.17+77"}
   "ppx_jane"                 {= "v0.17~preview.129.17+77"}
@@ -26,6 +26,6 @@ a ppx by hand. For example, to get `[@@deriving foo]`, you only have to
 specify a module path such as `My_library.Foo`.
 "
 url {
-src: "https://github.com/janestreet/ppx_derive_at_runtime/archive/bf51ac0a994736dbdb040f6af927ddd0f2ed15a8.tar.gz"
-checksum: "sha256=ada5c71044eef12e2bbc6c80e72e8b78ec9ca45d20bf0f97b9d069dcedf564b3"
+src: "https://github.com/janestreet/ppx_derive_at_runtime/archive/d3e435e3487444e497a466bb5f9b2647676cb57c.tar.gz"
+checksum: "sha256=3b72bedcbd3c0e281641c0d6aeea5e98afc58be77dc62625f5b87df003ef539c"
 }

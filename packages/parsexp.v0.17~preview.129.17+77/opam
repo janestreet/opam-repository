@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "sexplib0" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
 ]
@@ -38,6 +38,6 @@ s-expressions from files or other external sources, you should use
 parsexp_io.
 "
 url {
-src: "https://github.com/janestreet/parsexp/archive/02dd4456b163e2a0c6c2fd21b1f6503ca78ec693.tar.gz"
-checksum: "sha256=ba6fdf603d941d81caa5506e41f4a30c4f0cce969ae2ddfa07d5fec215f86921"
+src: "https://github.com/janestreet/parsexp/archive/6e01ff2232328f0af7578c8233d650dafe82fd12.tar.gz"
+checksum: "sha256=2b11900bd86b656b2e3a9d75d8f1d25eb6f0f35c8067d727e82b1d4169229311"
 }

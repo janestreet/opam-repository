@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.14.0"}
+  "ocaml"         {>= "5.1.0"}
   "accessor_core" {= "v0.17~preview.129.17+77"}
   "async_kernel"  {= "v0.17~preview.129.17+77"}
   "core"          {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ description: "
 This library provides accessors for numerous types in Async.
 "
 url {
-src: "https://github.com/janestreet/accessor_async/archive/051717e66cdcae99f6624147e25ec5aa7108ba30.tar.gz"
-checksum: "sha256=7ae04a3bf5ff1564ef99b65beb08d73ecd8fd34f5e4734a13e6a5861f0bbc6b2"
+src: "https://github.com/janestreet/accessor_async/archive/75b4963d2a6c9688bc2b17abd33ada8dbe09bc10.tar.gz"
+checksum: "sha256=38b134f3b47518666a935248b3c363c25f509aed096a1ac43c44e655ff4975b9"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.14.0"}
+  "ocaml"             {>= "5.1.0"}
   "core"              {= "v0.17~preview.129.17+77"}
   "jane_rope"         {= "v0.17~preview.129.17+77"}
   "ppx_jane"          {= "v0.17~preview.129.17+77"}
@@ -23,6 +23,6 @@ synopsis: "OCaml bindings for RE2, Google's regular expression library"
 description: "
 "
 url {
-src: "https://github.com/janestreet/re2/archive/f69dcf329a258e42489dee8770c1c526899bb181.tar.gz"
-checksum: "sha256=33113e6e816b864de37220b8b3f0fbac59590a2267f3b16601bd314953341ab9"
+src: "https://github.com/janestreet/re2/archive/dc3c5d8a42f5d0a88523947e53e13363b54f2c09.tar.gz"
+checksum: "sha256=c2316ec131b4204dcf881acc82a75a6ec1d7a5e7c63eb73d0755b0e65a0e73be"
 }

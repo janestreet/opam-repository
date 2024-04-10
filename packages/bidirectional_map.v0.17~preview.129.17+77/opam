@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.14.0"}
+  "ocaml" {>= "5.1.0"}
   "dune"  {>= "2.0.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -21,6 +21,6 @@ A library for bidirectional maps with one-to-one key relationships,
 and bidirectional multimaps with many-to-many key relationships.
 "
 url {
-src: "https://github.com/janestreet/bidirectional_map/archive/0181bbde624447676f7d38c65f0514d6e2dce5e6.tar.gz"
-checksum: "sha256=cf008f27e498bb1a3b41fab7c100bccf9e3480f2a4a6a1785cf611ada098c3c4"
+src: "https://github.com/janestreet/bidirectional_map/archive/e008b04e772fd791ae5bb1d81f777d584c2b217d.tar.gz"
+checksum: "sha256=0fed95936f3ea12dd70643ad872245da3d1ea7243ddd1c03f5199fc9b122ccb9"
 }

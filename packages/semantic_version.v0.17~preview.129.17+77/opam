@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -22,6 +22,6 @@ description: "
 A library for representing semantic versions (https://semver.org)
 "
 url {
-src: "https://github.com/janestreet/semantic_version/archive/fb6e92d02e0e8f5758202f235c002dc2bedd917a.tar.gz"
-checksum: "sha256=a728bed793454b2a2f942c7144bc9c0b6e1da2061e0c6f97a55da2beb413d5b5"
+src: "https://github.com/janestreet/semantic_version/archive/c13989bbbc8bd9da3f48f20ff14addcdac72aef4.tar.gz"
+checksum: "sha256=2a7d4cb18b0c503004889e70dee680ed6ec32c38da526ce218857164cd42ca44"
 }

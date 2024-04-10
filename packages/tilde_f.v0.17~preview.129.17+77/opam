@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 Provides a let-syntax for continuation-passing style.
 "
 url {
-src: "https://github.com/janestreet/tilde_f/archive/d12b4a8329728909e691b42b879c904ecbd419c7.tar.gz"
-checksum: "sha256=bdfb9ab71b08c8c192cf619f10164176e6a28cdc00603edb493e942e1bb6cad6"
+src: "https://github.com/janestreet/tilde_f/archive/76a80ccd71630d6dea0191a163b94555adc438c6.tar.gz"
+checksum: "sha256=7b913afe46e993d792aa467785dd1ca262bb2d8d3b7766cb9b28b52dc9ea8f54"
 }

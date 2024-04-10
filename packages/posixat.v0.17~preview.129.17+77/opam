@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.14.0"}
+  "ocaml"         {>= "5.1.0"}
   "base"          {= "v0.17~preview.129.17+77"}
   "ppx_optcomp"   {= "v0.17~preview.129.17+77"}
   "ppx_sexp_conv" {= "v0.17~preview.129.17+77"}
@@ -27,6 +27,6 @@ descriptor. For instance this allows to reliably maintain several
 working directories inside the same process.
 "
 url {
-src: "https://github.com/janestreet/posixat/archive/16d9562f6bca7b2989f6143e8f8544c9293a28cd.tar.gz"
-checksum: "sha256=66197cafb3cec79464e0154fb512787b2e5ce1a89acd63733afc100f814bd80d"
+src: "https://github.com/janestreet/posixat/archive/3a374dfa1471e01b338d9a92827d5c1d4bd46782.tar.gz"
+checksum: "sha256=650b8207238b7b7c0463205a6469178c581cf158b920a0fb2fd67f19158b4dee"
 }

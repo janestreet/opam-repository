@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_base" {= "v0.17~preview.129.17+77"}
   "sexplib"  {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ A library for pretty-printing s-expressions, using better indentation rules than
 the default pretty printer in Sexplib.
 "
 url {
-src: "https://github.com/janestreet/sexp_pretty/archive/0ca2a8623ca17192a30a1262dac41c5e7c8a27c0.tar.gz"
-checksum: "sha256=a0cb6c60d55d773687581d486a76ad7e5df4ea00161998c38cd204e7100c4938"
+src: "https://github.com/janestreet/sexp_pretty/archive/b027a32d9ddcafbb146d171d1d90b90918ee15c0.tar.gz"
+checksum: "sha256=d74c72db75b14d36e82056f7d952593bf9b0c856b7252d36bf33b03e68d6fa34"
 }

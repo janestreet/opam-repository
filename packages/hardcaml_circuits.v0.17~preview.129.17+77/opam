@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "base"         {= "v0.17~preview.129.17+77"}
   "hardcaml"     {= "v0.17~preview.129.17+77"}
   "ppx_hardcaml" {= "v0.17~preview.129.17+77"}
@@ -23,6 +23,6 @@ description: "
 A small library of useful/interesting Hardcaml circuits.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_circuits/archive/986ec4425c9ba8d22c1f0e5bc0b5c8d56bac6666.tar.gz"
-checksum: "sha256=a7e8148a780840d1ce904299309403b87ed0d6a41201d7acfa13a3e22e74c0a7"
+src: "https://github.com/janestreet/hardcaml_circuits/archive/9b9cbc8c9e49cd2123731cb49d6a010b5443b68e.tar.gz"
+checksum: "sha256=abcc9b7f3ca1c0c2f101b91bfbddc003a3bdf0ef21bb66db4c63091a3e1fbb80"
 }

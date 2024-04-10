@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.14.0"}
+  "ocaml"            {>= "5.1.0"}
   "async_kernel"     {= "v0.17~preview.129.17+77"}
   "async_rpc_kernel" {= "v0.17~preview.129.17+77"}
   "core"             {= "v0.17~preview.129.17+77"}
@@ -26,6 +26,6 @@ synopsis: "A small library that provide Async support for JavaScript platforms"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_js/archive/f32401d9e63c4d25e6a0e2cb50bf6e6e6e8ab65d.tar.gz"
-checksum: "sha256=45bc8f1cd5c01a6141ff2fde68e86b6ee22a3da25c95cb3bb2db0993fa32127e"
+src: "https://github.com/janestreet/async_js/archive/2c51e00d1592c35ca59678acdff5e7a21484a083.tar.gz"
+checksum: "sha256=44782dec0a92cc78a5c9fb395ccacf7843af1737cfce72c32059dd85e18dd48a"
 }

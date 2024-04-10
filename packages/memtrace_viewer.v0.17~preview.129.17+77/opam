@@ -32,6 +32,6 @@ events can be filtered by lifetime, showing only allocations of
 objects that are still live at peak memory usage.
 "
 url {
-src: "https://github.com/janestreet/memtrace_viewer/archive/d751d4ff21b6cbe2bad11e2aed6c20fc2fe889f0.tar.gz"
-checksum: "sha256=4a3bf08b1e52354ea2f1801faebfedbcb2c64a48da8ad987c459dd69f1f22e4b"
+src: "https://github.com/janestreet/memtrace_viewer/archive/010d08ef192ed15c8a5ec75e3f4d2a8c387bbb4a.tar.gz"
+checksum: "sha256=366886dbc08d1b965c01d30b5147b33e7f7395626f57df04eef66d106c7a7b5e"
 }

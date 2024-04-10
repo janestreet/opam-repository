@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"          {>= "4.14.0"}
+  "ocaml"          {>= "5.1.0"}
   "core"           {= "v0.17~preview.129.17+77"}
   "core_unix"      {= "v0.17~preview.129.17+77"}
   "hardcaml"       {= "v0.17~preview.129.17+77"}
@@ -30,6 +30,6 @@ and linked into the running executable. The generated simulation object can be u
 any other cyclesim simulation.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_c/archive/fd661434fdbe0ebadc752545e8404b1b11963f50.tar.gz"
-checksum: "sha256=2c69d2d4506cbf732afbef46a30ee43ee71fc94030cc3165cd5f1df0d7053d8f"
+src: "https://github.com/janestreet/hardcaml_c/archive/a1e1fa90f07ce40b76fb24a3e4d3f35befec96e0.tar.gz"
+checksum: "sha256=1c8f8bbe60df3c8e11f0460386325635338eaedc2e821110644d9eaab71cd9fa"
 }

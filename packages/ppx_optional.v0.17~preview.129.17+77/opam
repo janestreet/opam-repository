@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "base"        {= "v0.17~preview.129.17+77"}
   "ppxlib_jane" {= "v0.17~preview.129.17+77"}
   "dune"        {>= "2.0.0"}
@@ -23,6 +23,6 @@ A ppx rewriter that rewrites simple match statements with an if then
 else expression.
 "
 url {
-src: "https://github.com/janestreet/ppx_optional/archive/0b2a375e8f5ec3b8581ce58b800c0188564dbc34.tar.gz"
-checksum: "sha256=56bbaa748c22af5ff1cba877cda7a75039ba9ececc1ab02b31fed4459a35d37f"
+src: "https://github.com/janestreet/ppx_optional/archive/8d32da9820780d2a1931e7c46094f3e1bc459dd9.tar.gz"
+checksum: "sha256=fd5b0afbdc5a2620f144388c2a53d3002e6bef1d33deeda1247d95b5edfe1213"
 }

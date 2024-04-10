@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "base"         {= "v0.17~preview.129.17+77"}
   "hardcaml"     {= "v0.17~preview.129.17+77"}
   "ppx_hardcaml" {= "v0.17~preview.129.17+77"}
@@ -23,6 +23,6 @@ description: "
 Library for constructing circuits with a pair of valid and ready handshake signals.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_handshake/archive/9ed6cd8b3116eef36ef61238d784faa26e7bf4a7.tar.gz"
-checksum: "sha256=0dfe519456081de7f06f350f93a6dc336037748784eb5ad64794bf97353b2557"
+src: "https://github.com/janestreet/hardcaml_handshake/archive/8ba25394cb33c18d51fd9617a270ac32be449696.tar.gz"
+checksum: "sha256=ff78f4224e4b8badeaa1af9379dc77bf55234dae043612935b9c9e7e2594c454"
 }

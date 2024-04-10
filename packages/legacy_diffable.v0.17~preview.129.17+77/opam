@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"           {>= "4.14.0"}
+  "ocaml"           {>= "5.1.0"}
   "core"            {= "v0.17~preview.129.17+77"}
   "ppx_jane"        {= "v0.17~preview.129.17+77"}
   "stored_reversed" {= "v0.17~preview.129.17+77"}
@@ -23,6 +23,6 @@ description: "
 Diffable interface.
 "
 url {
-src: "https://github.com/janestreet/legacy_diffable/archive/c27934be1887f9d7a9008cb6b3bf6b3eef14aa08.tar.gz"
-checksum: "sha256=f1373aeeb9afb0a6765fa9787028ec1d24b8eaad7fc3ed62c2a9aa50dfb66b4f"
+src: "https://github.com/janestreet/legacy_diffable/archive/fab5ff2ebffe3c2aac6d1724d3b91cfc59d84f90.tar.gz"
+checksum: "sha256=5384b5127c9d968b234964f91d850c50a15f0ec9a93d31eaca0904db9fac32e7"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"               {>= "4.14.0"}
+  "ocaml"               {>= "5.1.0"}
   "base"                {= "v0.17~preview.129.17+77"}
   "jane-street-headers" {= "v0.17~preview.129.17+77"}
   "jst-config"          {= "v0.17~preview.129.17+77"}
@@ -25,6 +25,6 @@ Provides a single function to report the current time in nanoseconds
 since the start of the Unix epoch.
 "
 url {
-src: "https://github.com/janestreet/time_now/archive/d7e3801d2f120b6723c28429de0dd63b669d47b8.tar.gz"
-checksum: "sha256=d749e1e08c77cc7b1ca69fa75dd75766fdd3642932c94a35dd6cd31257f902c2"
+src: "https://github.com/janestreet/time_now/archive/2b7f4bbd097541f8538bf1b9e89df2a85666e9f4.tar.gz"
+checksum: "sha256=e22bc93f754e50330e8d559e80e384966dd685143aac5c43da9e8c2614484f34"
 }

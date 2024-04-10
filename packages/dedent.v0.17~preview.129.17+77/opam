@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "stdio"    {= "v0.17~preview.129.17+77"}
@@ -22,6 +22,6 @@ description: "
 A library for improving redability of multi-line string constants in code.
 "
 url {
-src: "https://github.com/janestreet/dedent/archive/743e11db665c4a896b6ad44ee324e1668f8e9664.tar.gz"
-checksum: "sha256=de4e7514f4f969762ee42c9dec8919102ae6b927153d59171f96d0a787e54760"
+src: "https://github.com/janestreet/dedent/archive/9498368e659c23553bc6d5aea624ca7b1e3804a2.tar.gz"
+checksum: "sha256=62defd8c02d13b0a5433cf0eb4d2724f3b3ee88baff2d1322278966f8a84cbad"
 }

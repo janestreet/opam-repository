@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.14.0"}
+  "ocaml"            {>= "5.1.0"}
   "async_kernel"     {= "v0.17~preview.129.17+77"}
   "async_rpc_kernel" {= "v0.17~preview.129.17+77"}
   "base"             {= "v0.17~preview.129.17+77"}
@@ -26,6 +26,6 @@ description: "
 A collection of types suitable for incremental serialization.
 "
 url {
-src: "https://github.com/janestreet/streamable/archive/821a4bfabad23da7805e838e15917c8aa540ceb9.tar.gz"
-checksum: "sha256=fb2b9caeda51a0d4b2099c8323d6cafac7ba7fff9bd57a387ddaeda82d5867d7"
+src: "https://github.com/janestreet/streamable/archive/646640b76a314bac85af5474bd6f8b53a3b6b680.tar.gz"
+checksum: "sha256=265e98e4c8be164e668e5814e602eb721cad836efc65533c15f0b4449cf2855a"
 }

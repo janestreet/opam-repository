@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "hardcaml" {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
@@ -27,6 +27,6 @@ of bundles of ports when working with the Simulator, Netlist generation or
 hierarchical designs.
 "
 url {
-src: "https://github.com/janestreet/ppx_hardcaml/archive/94588b54f1f617224ed4efbaea470bc29d7eca55.tar.gz"
-checksum: "sha256=06a265e0f6f87ac71b01c799bd80e69ea617b0130090253790afbd2fcaeb9177"
+src: "https://github.com/janestreet/ppx_hardcaml/archive/d0c0d57aa9bc0fa3314b7d8714bc2bab36523e38.tar.gz"
+checksum: "sha256=216a4590a43f6932b341081b79f411e60e463cc67fdb8703a23e5348ed6e21be"
 }

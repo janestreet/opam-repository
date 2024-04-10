@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.14.0"}
+  "ocaml"         {>= "5.1.0"}
   "base"          {= "v0.17~preview.129.17+77"}
   "bin_prot"      {= "v0.17~preview.129.17+77"}
   "core_kernel"   {= "v0.17~preview.129.17+77"}
@@ -31,6 +31,6 @@ be simulated within Hardcaml.  Designs are converted to either Verilog or
 VHDL to interact with standard back end tooling.
 "
 url {
-src: "https://github.com/janestreet/hardcaml/archive/f7bd2f1d78fccfd0463b6cf0799bcb8feb27e096.tar.gz"
-checksum: "sha256=6b5abad9098f15366691aec9a8c6626e90f84985e734869220d5ca3d18ce29bc"
+src: "https://github.com/janestreet/hardcaml/archive/d2df3842b5462ecdf4e909be4800e2a046be4b9a.tar.gz"
+checksum: "sha256=ebec00d2ccc497855b7cbed4bc993e04af9ffd3bb2300b67f8f28192450f80c2"
 }

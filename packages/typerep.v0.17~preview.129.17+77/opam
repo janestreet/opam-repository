@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.14.0"}
+  "ocaml" {>= "5.1.0"}
   "base"  {= "v0.17~preview.129.17+77"}
   "dune"  {>= "2.0.0"}
 ]
@@ -19,6 +19,6 @@ synopsis: "Typerep is a library for runtime types"
 description: "
 "
 url {
-src: "https://github.com/janestreet/typerep/archive/15b2e3e18c44c7cadc81322d30f6a8bde8a0ff6c.tar.gz"
-checksum: "sha256=850d2896c2f6973abd351da80b719d8cba8362daf1ab539406b636f7107c953a"
+src: "https://github.com/janestreet/typerep/archive/7107149ffc6f45dd45cda4faa2e280e643f2c6aa.tar.gz"
+checksum: "sha256=b2ef08f5658ec97844011d4d29b2ec4c602e1621a5c080fe01c7192a3a899de8"
 }

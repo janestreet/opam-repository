@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.14.0"}
+  "ocaml"             {>= "5.1.0"}
   "async_rpc_kernel"  {= "v0.17~preview.129.17+77"}
   "babel"             {= "v0.17~preview.129.17+77"}
   "core"              {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ description: "
 Helper functions for creating stable/versioned `Polling_state_rpc.t`s with babel.
 "
 url {
-src: "https://github.com/janestreet/versioned_polling_state_rpc/archive/a3afa80bac68fffa6b92d491bcde78e6b46a6002.tar.gz"
-checksum: "sha256=4cf58330db46d45ffefc7c4657a556f7fd56a0bdffe2dae790e7ae7cb58866f6"
+src: "https://github.com/janestreet/versioned_polling_state_rpc/archive/18a38ee5e86ca7e9b4992e03fa1b41bbf18c19e4.tar.gz"
+checksum: "sha256=e30f5aaa4fb35e0c74eebfa6c7625d2c2b628204dbf82c5730dad5c470072e08"
 }

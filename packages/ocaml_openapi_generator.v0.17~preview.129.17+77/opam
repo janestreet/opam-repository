@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.14.0"}
+  "ocaml"            {>= "5.1.0"}
   "async"            {= "v0.17~preview.129.17+77"}
   "core"             {= "v0.17~preview.129.17+77"}
   "core_kernel"      {= "v0.17~preview.129.17+77"}
@@ -30,6 +30,6 @@ description: "
 An OpenAPI 3 to OCaml client generator.
 "
 url {
-src: "https://github.com/janestreet/ocaml_openapi_generator/archive/1a1f6f151d113060627b37ff1eeb727c3fa93ae4.tar.gz"
-checksum: "sha256=47e938084511dbeb291ad1a4939f1fd12978fe90c9eeeb9eb4163687a8ad5138"
+src: "https://github.com/janestreet/ocaml_openapi_generator/archive/801da729f9f59c8ed9d7d24cf7898ee43e35975b.tar.gz"
+checksum: "sha256=ff2b5a12ffc26da6014f82ee90e577805c3d884db5b471c109b0e51a737174eb"
 }

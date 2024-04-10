@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"     {>= "4.14.0"}
+  "ocaml"     {>= "5.1.0"}
   "async"     {= "v0.17~preview.129.17+77"}
   "core"      {= "v0.17~preview.129.17+77"}
   "core_unix" {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ Embed-file takes some files and generates code for an OCaml module
 defining string constants containing the contents of those files.
 "
 url {
-src: "https://github.com/janestreet/ocaml-embed-file/archive/4dd8794af8d76382c44a45b63d83f519d814d7ba.tar.gz"
-checksum: "sha256=695fdcccb92dd8f0977c0cc91ebbf95b0cedda054128050521151c77873d80af"
+src: "https://github.com/janestreet/ocaml-embed-file/archive/cf6837658a05d13d4961f47084c752db24c84801.tar.gz"
+checksum: "sha256=6b37078867bdc9fdb83cf0a4677cab9f575749406b305492980bf8fb092e9c1b"
 }

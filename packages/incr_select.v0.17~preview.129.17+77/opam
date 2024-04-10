@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "core"        {= "v0.17~preview.129.17+77"}
   "incremental" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
@@ -27,6 +27,6 @@ number of outputs that are changed, independent of the number of
 outputs that exist.
 "
 url {
-src: "https://github.com/janestreet/incr_select/archive/b49f04daee6c8a1b739ac6d86a6fc5837d7c2cd9.tar.gz"
-checksum: "sha256=c84a732d87bf68d42e5b4290c3b71ca318d3038a079930f90f5bc2e5f400f448"
+src: "https://github.com/janestreet/incr_select/archive/7215c0d945f62e88904558074871bf845ce3bfe5.tar.gz"
+checksum: "sha256=d7d147fc23707db543c544ef688b2485ca72eab241e192ff253e4f220bbcecaf"
 }

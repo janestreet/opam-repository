@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "posixat"      {= "v0.17~preview.129.17+77"}
   "sexplib0"     {= "v0.17~preview.129.17+77"}
   "base-threads"
@@ -25,6 +25,6 @@ for shell scripting in OCaml as well as a simple s-expression based
 shell interpreter. Shexp works on both Unix and Windows.
 "
 url {
-src: "https://github.com/janestreet/shexp/archive/8d47808cd81c0df13f0b2f626a0419723dee99e5.tar.gz"
-checksum: "sha256=d9cf8479fb6d8e4a7710a4f6b82a23e0ce8ae4bfa0acd8396d3d0c668b4e1b2b"
+src: "https://github.com/janestreet/shexp/archive/e9332f0d4cad9c9b13b8e2334f5d7d3e023156fe.tar.gz"
+checksum: "sha256=d7eba6657d7fec590904293f520fbedddfd6e91185c25016af0f0e5cf83b86c6"
 }

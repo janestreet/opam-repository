@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_base" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -20,6 +20,6 @@ synopsis: "Defines case conventions and functions to rename identifiers accordin
 description: "
 "
 url {
-src: "https://github.com/janestreet/capitalization/archive/d5a0d4e1d8bea85fd418b1f851786f8710f580eb.tar.gz"
-checksum: "sha256=b57031553cdcc892d5ffe1998606e9bee3d6e52de9073d6ecbc0a5a085d076e0"
+src: "https://github.com/janestreet/capitalization/archive/bde298f08a9ee1809cdc76d9746c453f083af2a3.tar.gz"
+checksum: "sha256=0635f60fd442f56f3f0e761af427d6f9b7ef10e6d8ce1899da0fbff254187d7a"
 }

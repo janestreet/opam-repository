@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.08.0"}
+  "ocaml"        {>= "5.1.0"}
   "async"        {= "v0.17~preview.129.17+77"}
   "base"         {= "v0.17~preview.129.17+77"}
   "core"         {= "v0.17~preview.129.17+77"}
@@ -35,6 +35,6 @@ just the local module, or for all modules below it as well. Running in different
 ways can provide better insight into the design.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_xilinx_reports/archive/7479d2fa989534051b51bac8c734d25c546c1344.tar.gz"
-checksum: "sha256=5ab1271ad5150ae260f9b1ec52cd87345e2b5dd64195b8c02a59be05de39c4bf"
+src: "https://github.com/janestreet/hardcaml_xilinx_reports/archive/8f21ebafb493b602f0c731907e4b015de9cb8b35.tar.gz"
+checksum: "sha256=f25ce7ddfc024532e047f32d446fce8394d3eb1db61334f87898c60b5c303331"
 }

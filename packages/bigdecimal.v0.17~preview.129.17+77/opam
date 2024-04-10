@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "bignum"   {= "v0.17~preview.129.17+77"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ A high-precision representation of decimal numbers as [mantissa * 10^exponent], 
 the mantissa is internally a [Bigint.t] and the exponent is an [int].
 "
 url {
-src: "https://github.com/janestreet/bigdecimal/archive/e44c65bce74081acdb9dd2e2a5d6700b982dff3a.tar.gz"
-checksum: "sha256=f5aeb4c78e3d7857a1c57fe2834c2e29890fe2fbc5db4cfb0b49b2d23b1e93c3"
+src: "https://github.com/janestreet/bigdecimal/archive/ce5c6ce1e8bcae045c02d9544d8ea6998f4afe64.tar.gz"
+checksum: "sha256=2123e035b3d3ad7c5b876ec38875917885fded048eee861e89d67ee47799cec9"
 }

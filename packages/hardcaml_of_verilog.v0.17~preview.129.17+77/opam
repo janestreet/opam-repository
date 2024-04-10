@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"           {>= "4.14.0"}
+  "ocaml"           {>= "5.1.0"}
   "base"            {= "v0.17~preview.129.17+77"}
   "core"            {= "v0.17~preview.129.17+77"}
   "core_unix"       {= "v0.17~preview.129.17+77"}
@@ -33,6 +33,6 @@ circuit.
 Code can also be generated to wrap the conversion process using Hardcaml interfaces.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_of_verilog/archive/dd8c9d9eaa4e888b708ad1589e2510d96185c061.tar.gz"
-checksum: "sha256=0d5c93cf67cbe39845be57b82b7f3f24d83a4e06885922887fbf6af5db74844c"
+src: "https://github.com/janestreet/hardcaml_of_verilog/archive/fb17d9535245c1a67fc5a17d137f9bf3fb3d2871.tar.gz"
+checksum: "sha256=24bbd040580509e252fe12eda41606899266d0499de1c18d5cbf23330ee96b46"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "int_repr" {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
@@ -22,6 +22,6 @@ description: "
 String type based on [Bigarray], for use in I/O and C-bindings.
 "
 url {
-src: "https://github.com/janestreet/base_bigstring/archive/b1ff8d5997b25ac51818ebd36e89f36d2d068814.tar.gz"
-checksum: "sha256=2fb223e197ebe6d4a85ffe5076e9c5d85ffeffee8230f93506c91603d0f9127a"
+src: "https://github.com/janestreet/base_bigstring/archive/feab85b4c01133dfa8fa26c9032606f88d513721.tar.gz"
+checksum: "sha256=8505d971f3a6ab93ae0913758dc50ee5bf8edf704783d73dc516674462c1aa71"
 }

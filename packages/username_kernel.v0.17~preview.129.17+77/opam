@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 A string representation for a user, typically a UNIX username
 "
 url {
-src: "https://github.com/janestreet/username_kernel/archive/51c6e69a0aae6725f4669d768eb65c86478424bf.tar.gz"
-checksum: "sha256=831bb6dd65045dcf3279919962615750853bb67e2db02b239d4bb1e065f12817"
+src: "https://github.com/janestreet/username_kernel/archive/868f5e128ad1db68432f3ea271468cc83cf013d1.tar.gz"
+checksum: "sha256=ac8843a4a22b4be17154c5a7e8ad78d5ac10c37cf55135d55b3f2ff579006817"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.14.0"}
+  "ocaml"                    {>= "5.1.0"}
   "core"                     {= "v0.17~preview.129.17+77"}
   "core_kernel"              {= "v0.17~preview.129.17+77"}
   "core_unix"                {= "v0.17~preview.129.17+77"}
@@ -25,6 +25,6 @@ synopsis: "File Diff using the Patience Diff algorithm"
 description: "
 "
 url {
-src: "https://github.com/janestreet/patdiff/archive/1f5884171264ad63051512b3c7aa7f390b74d1e5.tar.gz"
-checksum: "sha256=93541d7cdd8c7a17b1aeee8eed74e42cf08bc9e75c167e95d153607d00562ebc"
+src: "https://github.com/janestreet/patdiff/archive/61475638717c3cb6cbc0134bf355e0ba78a18e3c.tar.gz"
+checksum: "sha256=759d6b60039610a2b7f2f932f679b054656ac59f511b5016a36edd026a98f239"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 Libraries for fuzzy string matching
 "
 url {
-src: "https://github.com/janestreet/fuzzy_match/archive/6a72fa9220e8c0f7360777cb234b01e42ed151ac.tar.gz"
-checksum: "sha256=fb7bed580392f531ff964cd394180c48317c5651a569840e261ba887aa82b1ca"
+src: "https://github.com/janestreet/fuzzy_match/archive/902e8a987bb5cbd398bea5cd82da2d46dae733fe.tar.gz"
+checksum: "sha256=25e503815eb599c41b395cace6eeb71c1eab8cd3d0150ba24615a8b1bcb39119"
 }

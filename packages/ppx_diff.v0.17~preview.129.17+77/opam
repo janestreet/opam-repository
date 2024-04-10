@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.14.0"}
+  "ocaml"         {>= "5.1.0"}
   "base"          {= "v0.17~preview.129.17+77"}
   "gel"           {= "v0.17~preview.129.17+77"}
   "ppx_compare"   {= "v0.17~preview.129.17+77"}
@@ -26,6 +26,6 @@ description: "
 A PPX rewriter that generates the implementation of [Ldiffable.S]. Generates diffs and update functions for OCaml types.
 "
 url {
-src: "https://github.com/janestreet/ppx_diff/archive/c469a54af0f9acaaa0acdf7eb365ca53e1f8e5eb.tar.gz"
-checksum: "sha256=edf6d11ae40e569332cfd6dcec35d5d09bdb54c66bfbbf076aaa3f9d9e6bd8fc"
+src: "https://github.com/janestreet/ppx_diff/archive/e7cc1c01eb957dd6c0d55364fa9217ef38cc94ae.tar.gz"
+checksum: "sha256=4ff34682181420f52e2d88b755abab8316bf7304eec98e1a5a5f497057c78ec0"
 }

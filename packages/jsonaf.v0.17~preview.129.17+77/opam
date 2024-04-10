@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "angstrom" {>= "0.15.0"}
@@ -23,6 +23,6 @@ description: "
 A library for parsing, manipulating, and serializing data structured as JSON.
 "
 url {
-src: "https://github.com/janestreet/jsonaf/archive/ed0870765ed291d2e05ddc4fc7bf56b653ab2567.tar.gz"
-checksum: "sha256=9f8493a272205964e37a950f617b51bcec6f968ac8fc964474865ea855f79c07"
+src: "https://github.com/janestreet/jsonaf/archive/02d45de407612cb769d46ce5022bf52652b4a560.tar.gz"
+checksum: "sha256=8f044c0235e17a7471bdfb4210d6296fe65daa012275464964d30460075e3892"
 }

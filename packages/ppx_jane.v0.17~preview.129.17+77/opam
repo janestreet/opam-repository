@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                       {>= "4.14.0"}
+  "ocaml"                       {>= "5.1.0"}
   "base_quickcheck"             {= "v0.17~preview.129.17+77"}
   "ppx_assert"                  {= "v0.17~preview.129.17+77"}
   "ppx_base"                    {= "v0.17~preview.129.17+77"}
@@ -48,6 +48,6 @@ This package installs a ppx-jane executable, which is a ppx driver
 including all standard Jane Street ppx rewriters.
 "
 url {
-src: "https://github.com/janestreet/ppx_jane/archive/ffe42369099cb5ca24bbe0d4f7101eff7a240c88.tar.gz"
-checksum: "sha256=260af6e5f3be02900d312167fbeb3d14f4d797a7eb2246b3742b6fce1c10b32d"
+src: "https://github.com/janestreet/ppx_jane/archive/e06e617fbde985087f78f9bd983455b92a85c5ee.tar.gz"
+checksum: "sha256=ea7255e409e38fedd2d8c094c56d582e50e02215ae5086b80cb58b11fcfdb94b"
 }

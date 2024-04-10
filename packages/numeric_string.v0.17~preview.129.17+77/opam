@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -34,6 +34,6 @@ include a different treatment of case, special handling of whitespace
 or punctuation, etc.)
 "
 url {
-src: "https://github.com/janestreet/numeric_string/archive/45be9bf4f86420de75996301bec861f25e3d41e1.tar.gz"
-checksum: "sha256=4f627fb5cbb8791c04a760f36858eb7ff60e37bfc8f8d2587999cdded8d39084"
+src: "https://github.com/janestreet/numeric_string/archive/73b1cfa253ce5466bf5e1bedc24a3e2f11014adb.tar.gz"
+checksum: "sha256=50ae5a138ceaa44ab0c33f09be373c18157e6922217ccaf69bf52fd597a43671"
 }

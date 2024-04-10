@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "async_kernel" {= "v0.17~preview.129.17+77"}
   "core"         {= "v0.17~preview.129.17+77"}
   "ppx_jane"     {= "v0.17~preview.129.17+77"}
@@ -22,6 +22,6 @@ description: "
 A single-module library for a data structure.
 "
 url {
-src: "https://github.com/janestreet/sequencer_table/archive/df6ee11e76a7a64cba20d2d3fe664f135909c8b6.tar.gz"
-checksum: "sha256=86439b31b164e5a3e45dd0989e265c847ca948608890e1ae88db2485f38dddc8"
+src: "https://github.com/janestreet/sequencer_table/archive/c0a389adde3e4cb34b55760a7c60e2c4e4c7dd06.tar.gz"
+checksum: "sha256=550a54ba36915da095afd3072189940e72cdd80ba2c198f4b06941e9fc911c52"
 }

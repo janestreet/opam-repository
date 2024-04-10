@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"           {>= "4.14.0"}
+  "ocaml"           {>= "5.1.0"}
   "async"           {= "v0.17~preview.129.17+77"}
   "async_unix"      {= "v0.17~preview.129.17+77"}
   "core"            {= "v0.17~preview.129.17+77"}
@@ -36,6 +36,6 @@ description: "
 A ppx that takes in css strings and produces a module for accessing the unique names defined within.
 "
 url {
-src: "https://github.com/janestreet/ppx_css/archive/6cdeac3d3b4269cf3265d2389f23b83cf90171dd.tar.gz"
-checksum: "sha256=7a300aed9dff8a9c0803e92d4b000d7058bbcffc37b5ddfbddfaea9843278483"
+src: "https://github.com/janestreet/ppx_css/archive/b608efcfe94dce7bbf1bf2dfad1196c329d572de.tar.gz"
+checksum: "sha256=54220ebc69b4c5ee8c2c7b26cd32dc20a790357031ceb1a0d1f7360fb69279d9"
 }

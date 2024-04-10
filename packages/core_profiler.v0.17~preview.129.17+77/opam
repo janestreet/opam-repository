@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.14.0"}
+  "ocaml"            {>= "5.1.0"}
   "core"             {= "v0.17~preview.129.17+77"}
   "core_kernel"      {= "v0.17~preview.129.17+77"}
   "core_unix"        {= "v0.17~preview.129.17+77"}
@@ -28,6 +28,6 @@ Core_profiler is a library that helps you profile programs and
 estimate various costs.
 "
 url {
-src: "https://github.com/janestreet/core_profiler/archive/524d2e72fe936cb02c8799f43ebce4f98ba09c2e.tar.gz"
-checksum: "sha256=d6464de9c8c25488b1e6298d544c9ad40908e942cab2909dc4ebedfc06e439c2"
+src: "https://github.com/janestreet/core_profiler/archive/6ef90868b99b665a2629959455bb30c0313906d3.tar.gz"
+checksum: "sha256=d195bd1081dcefba7e1669b443b9c0678a47e6cd87e854b75b0ab6432f0ea399"
 }

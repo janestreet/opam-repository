@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 Implementation of a Least Recently Used Cache.
 "
 url {
-src: "https://github.com/janestreet/janestreet_lru_cache/archive/0763c4bca151d2285b899465e7620e764793dbf3.tar.gz"
-checksum: "sha256=543a513ed0b19c96cd7670dc4d67cfa09ebefa9766ce35e5d8a14161120eedbe"
+src: "https://github.com/janestreet/janestreet_lru_cache/archive/97c4178cb64d7d4b355bb126959bbbb59117996a.tar.gz"
+checksum: "sha256=a0ba7d237d2528c8243fca1442b484a6204d75c8cc5c793d07ce3cf61458aba8"
 }

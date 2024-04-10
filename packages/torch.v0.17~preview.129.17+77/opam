@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"               {>= "4.14"}
+  "ocaml"               {>= "5.1.0"}
   "base"                {= "v0.17~preview.129.17+77"}
   "core"                {= "v0.17~preview.129.17+77"}
   "core_unix"           {= "v0.17~preview.129.17+77"}
@@ -39,6 +39,6 @@ This brings to OCaml NumPy-like tensor computations with GPU acceleration and
 tape-based automatic differentiation.
 "
 url {
-src: "https://github.com/janestreet/torch/archive/f4e6924d0a405809c2f89b1136a74722e3b2c206.tar.gz"
-checksum: "sha256=10c02882c8bb7aada36e5be704bd761221062ca18c444888691f63739f02d50b"
+src: "https://github.com/janestreet/torch/archive/4083b0965f9b30b307454d403c9e1ea22661230f.tar.gz"
+checksum: "sha256=b455c8826afba875c0668684bddf060275b359d3aba92ca67f5e351f384f1383"
 }

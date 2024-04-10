@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.14.0"}
+  "ocaml"             {>= "5.1.0"}
   "core"              {= "v0.17~preview.129.17+77"}
   "core_extended"     {= "v0.17~preview.129.17+77"}
   "core_kernel"       {= "v0.17~preview.129.17+77"}
@@ -31,6 +31,6 @@ synopsis: "Benchmarking library"
 description: "
 "
 url {
-src: "https://github.com/janestreet/core_bench/archive/112baf8ad8e4fc79b7a2f950aab97653b24c6157.tar.gz"
-checksum: "sha256=f449ec0167904d27985bd407b57696b9e1c08cb19ab2117f44d02aa7734cba6c"
+src: "https://github.com/janestreet/core_bench/archive/304ed405dbc7c11ef4d77b40761c8969a128e111.tar.gz"
+checksum: "sha256=1d1633ceae869a120c1749e0f485b7908ded0568bf644fffaf67cd33f7d0959c"
 }

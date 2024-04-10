@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.14.0"}
+  "ocaml"            {>= "5.1.0"}
   "async_kernel"     {= "v0.17~preview.129.17+77"}
   "async_rpc_kernel" {= "v0.17~preview.129.17+77"}
   "babel"            {= "v0.17~preview.129.17+77"}
@@ -25,6 +25,6 @@ description: "
 An RPC which tracks state on the client and server so it only needs to send diffs across the wire.
 "
 url {
-src: "https://github.com/janestreet/polling_state_rpc/archive/0fe7a101c818d35921e822cfb593e2cc4b34f552.tar.gz"
-checksum: "sha256=53030372581ce2c8c75b3a65462db69cd8f4cae4fcb70e59afd7d514f568391d"
+src: "https://github.com/janestreet/polling_state_rpc/archive/f0edcfa13f88052b97c20345e1cd534daf82b018.tar.gz"
+checksum: "sha256=4f17e2bf68fc0f7c017900d55030a9c110dca5ecaa6dc177bec982279a188ea3"
 }

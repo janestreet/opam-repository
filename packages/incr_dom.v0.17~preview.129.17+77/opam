@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"           {>= "4.14.0"}
+  "ocaml"           {>= "5.1.0"}
   "async_js"        {= "v0.17~preview.129.17+77"}
   "async_kernel"    {= "v0.17~preview.129.17+77"}
   "core"            {= "v0.17~preview.129.17+77"}
@@ -48,6 +48,6 @@ If you want a more concrete sense of how this works, look in the
 examples directory.
 "
 url {
-src: "https://github.com/janestreet/incr_dom/archive/b28e0bac5b1f4b3e18d30cbcf0fa6a7e245438d0.tar.gz"
-checksum: "sha256=5dc638dd7e72662673dc4c575882a55fd0c73bccb61e3c5d48d273bb01da8d16"
+src: "https://github.com/janestreet/incr_dom/archive/ed9303aa65832f5cc048e49c1d700e236229d186.tar.gz"
+checksum: "sha256=b717c3b62900d2ee17d2cbd7d1b388aef7f161983a829f3b82e083cb5bfd4665"
 }

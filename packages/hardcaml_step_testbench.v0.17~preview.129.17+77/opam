@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                     {>= "4.14.0"}
+  "ocaml"                     {>= "5.1.0"}
   "base"                      {= "v0.17~preview.129.17+77"}
   "hardcaml"                  {= "v0.17~preview.129.17+77"}
   "hardcaml_event_driven_sim" {= "v0.17~preview.129.17+77"}
@@ -27,6 +27,6 @@ Allows multiple control threads to interact with a simulation module, all of whi
 synchronised to the system clock.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_step_testbench/archive/d03fa0d0bead293704c957a1c87e2f2ef5fda63b.tar.gz"
-checksum: "sha256=17c80a0f1f82f893899a44f0f8bb191fc991837488e925ea33e71594fed7670c"
+src: "https://github.com/janestreet/hardcaml_step_testbench/archive/d58b08c925984664e25095d77b275bef2384b270.tar.gz"
+checksum: "sha256=f19d753c289eb783e27fe824b2d773a89af360ca47941c83c99c9377afb66b6b"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"     {>= "4.14.0"}
+  "ocaml"     {>= "5.1.0"}
   "core"      {= "v0.17~preview.129.17+77"}
   "ppx_jane"  {= "v0.17~preview.129.17+77"}
   "base64"    {>= "3.4.0"}
@@ -23,6 +23,6 @@ description: "
 https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 "
 url {
-src: "https://github.com/janestreet/content_security_policy/archive/8aa3edc511573e3013df5bf9621b3777463c36f2.tar.gz"
-checksum: "sha256=6b6bb9394c57ae5c1c3f1713d121c697462c3549c3d10783882373c5ce3cac5c"
+src: "https://github.com/janestreet/content_security_policy/archive/758633781bc98ff7edd90cc57858bd91ebece5dd.tar.gz"
+checksum: "sha256=f8280822173999513230940241f09b6a8b0269b7487fbc208020bc02c483ffe7"
 }

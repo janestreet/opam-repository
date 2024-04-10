@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.14.0"}
+  "ocaml"             {>= "5.1.0"}
   "core"              {= "v0.17~preview.129.17+77"}
   "core_kernel"       {= "v0.17~preview.129.17+77"}
   "hardcaml"          {= "v0.17~preview.129.17+77"}
@@ -29,6 +29,6 @@ The main library provides means to convert a Hardcaml design into an event drive
 simulation model and write testbenches against it.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_event_driven_sim/archive/09e1f8e6d88b8fd9c7501e2b9b07f7e30d33c4b2.tar.gz"
-checksum: "sha256=d27469118a364eebb0ded46c60b2b6ce64d9a896950e13a7b4a0e22697d8e77b"
+src: "https://github.com/janestreet/hardcaml_event_driven_sim/archive/f5cc597db268b68ec250680b3e46dcaffcf9b068.tar.gz"
+checksum: "sha256=483bcf76c9bb9556c80eaec15d25567970f786cbf0373901317e6ae4fc7891f5"
 }

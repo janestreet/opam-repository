@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                    {>= "4.14.0"}
+  "ocaml"                    {>= "5.1.0"}
   "async"                    {= "v0.17~preview.129.17+77"}
   "async_kernel"             {= "v0.17~preview.129.17+77"}
   "async_unix"               {= "v0.17~preview.129.17+77"}
@@ -29,6 +29,6 @@ Ecaml is a library for writing Emacs plugins in OCaml. It uses Emacs
 25 support for plugins to load native OCaml compiled code.
 "
 url {
-src: "https://github.com/janestreet/ecaml/archive/099f5989c4a702dd174dac0d954bce7cfaf14ba8.tar.gz"
-checksum: "sha256=67e1727cbc9d0b836e557aef3f0ff7099a1bdd4af9249e127131d49d2fed2376"
+src: "https://github.com/janestreet/ecaml/archive/966a549868b8bb7211d9288394f092850908fa87.tar.gz"
+checksum: "sha256=de03cc2cee95522c142d35feda7adab59a93ff20491528b899b149a112ecfdb0"
 }

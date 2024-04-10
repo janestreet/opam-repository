@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"          {>= "4.14.0"}
+  "ocaml"          {>= "5.1.0"}
   "async"          {= "v0.17~preview.129.17+77"}
   "async_extra"    {= "v0.17~preview.129.17+77"}
   "async_inotify"  {= "v0.17~preview.129.17+77"}
@@ -34,6 +34,6 @@ synopsis: "SMTP client and server"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_smtp/archive/a6fdf7dd55f21907ed8adf59351e0b7e51018e53.tar.gz"
-checksum: "sha256=91bb665a9f361cf00293a63f70d19bca23270864517ed40a8954644e9c61f42e"
+src: "https://github.com/janestreet/async_smtp/archive/c3d36da815e39d6dce9bb42b9cfe0ae03dfc6d8a.tar.gz"
+checksum: "sha256=54e58b0643b4bd6068238640a7dc4c7050a0fa6f5e753fc989c01c69b9276e7a"
 }

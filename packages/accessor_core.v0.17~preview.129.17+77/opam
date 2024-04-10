@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"         {>= "4.14.0"}
+  "ocaml"         {>= "5.1.0"}
   "accessor_base" {= "v0.17~preview.129.17+77"}
   "core"          {= "v0.17~preview.129.17+77"}
   "ppx_accessor"  {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ description: "
 This library provides accessors for numerous types in Core.
 "
 url {
-src: "https://github.com/janestreet/accessor_core/archive/db399086f703219210728c058252d7313c5ec03b.tar.gz"
-checksum: "sha256=7a0ab76edc2b36dfedb620eff23c1896c34d49aaf189ad609ffeeadf9e7ae832"
+src: "https://github.com/janestreet/accessor_core/archive/12f51eb950b262808cc44bf419c7cc7fc103682d.tar.gz"
+checksum: "sha256=603d9afd6a8803f7d23d1a09a715ad4d6d07566109b46d76e43de03f971fd2db"
 }

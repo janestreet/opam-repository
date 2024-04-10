@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -21,6 +21,6 @@ description: "
 A library to mark non-record fields global. GEL stands for Global Even if inside a Local.
 "
 url {
-src: "https://github.com/janestreet/gel/archive/0a20be3fc14b45b0f174d878834cbb54a7cdd175.tar.gz"
-checksum: "sha256=d2448b543c116b3db6126e97a9d41e3a2e7231dba89b5244818a61363dfab571"
+src: "https://github.com/janestreet/gel/archive/4d4f3454b454a56cb8bac817423deefd66fc729a.tar.gz"
+checksum: "sha256=01b21ab61daae3032b7394cfc3515dc6f5dbb64201f1217ff4648cbadc135a53"
 }

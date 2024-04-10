@@ -13,7 +13,7 @@ run-test: [
   ["./run-tests-in-opam.sh" name jobs]
 ]
 depends: [
-  "ocaml"                      {>= "4.14.0"}
+  "ocaml"                      {>= "5.1.0"}
   "async"                      {= "v0.17~preview.129.17+77"}
   "async_unix"                 {= "v0.17~preview.129.17+77"}
   "base_trie"                  {= "v0.17~preview.129.17+77"}
@@ -52,6 +52,6 @@ break unexpectedly for versions of Neovim you wish to support is to write tests
 for your plugin.
 "
 url {
-src: "https://github.com/janestreet/vcaml/archive/3c973cece3e9d0b70259314122ecf2dbcd96b4ea.tar.gz"
-checksum: "sha256=55fa63287a16c3a74a4ec1c0c4c4d157999c1430dbd5dd2b1daf49c5def938cf"
+src: "https://github.com/janestreet/vcaml/archive/bb90efe8d6f19c8c84f102c44b0582855cbabbe9.tar.gz"
+checksum: "sha256=7305c99618276ee212c40f4f158bfe2cb1f9e546185ea4503bf0c6c63aaaf22d"
 }

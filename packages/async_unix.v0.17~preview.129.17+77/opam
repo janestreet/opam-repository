@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "async_kernel" {= "v0.17~preview.129.17+77"}
   "core"         {= "v0.17~preview.129.17+77"}
   "core_kernel"  {= "v0.17~preview.129.17+77"}
@@ -29,6 +29,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/async_unix/archive/a22be9be25133e175274b66de1f11164d8aec9a0.tar.gz"
-checksum: "sha256=d8c52a500c6a6032750abdd0d6b8a40861c975a5f61a1fc29d52213597ebe013"
+src: "https://github.com/janestreet/async_unix/archive/1f85783d07e385c04c0e1c87a44a6a11569da09a.tar.gz"
+checksum: "sha256=cb14b0c9618de0e8edf2b18fa982446e2da6878b6962215df40fd41304d3ec5f"
 }

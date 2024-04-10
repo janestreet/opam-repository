@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"               {>= "4.14.0"}
+  "ocaml"               {>= "5.1.0"}
   "core"                {= "v0.17~preview.129.17+77"}
   "js_of_ocaml_patches" {= "v0.17~preview.129.17+77"}
   "ppx_css"             {= "v0.17~preview.129.17+77"}
@@ -27,6 +27,6 @@ description: "
 The floating positioning library itself may be found at https://floating-ui.com/
 "
 url {
-src: "https://github.com/janestreet/virtual_dom_toplayer/archive/5beafebacc3e9b00aa380cb2b075c44379e139d4.tar.gz"
-checksum: "sha256=d5681963090a4d7be63edb95f497051bf756fa4f753f6056de54090a532db10c"
+src: "https://github.com/janestreet/virtual_dom_toplayer/archive/1d43724d454a8f7e39fb976ff25884cbdb6e3c17.tar.gz"
+checksum: "sha256=4d60a6408b15675e3fcd42cd5033b72b92fb6bdb9f14142de27a464f04a8047f"
 }

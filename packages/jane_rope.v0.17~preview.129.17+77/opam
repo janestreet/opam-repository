@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -20,6 +20,6 @@ synopsis: "String representation with cheap concatenation."
 description: "
 "
 url {
-src: "https://github.com/janestreet/jane_rope/archive/2c180e2237e1e2f6da1e57b3c487d5673670770a.tar.gz"
-checksum: "sha256=b46e7863755e407979a2db94a39012ef1b55f4ef8850cf08e094a7733ae4ae96"
+src: "https://github.com/janestreet/jane_rope/archive/1a66ef8139fc7855c4e55bf87f7ee2c4d0e8c4f9.tar.gz"
+checksum: "sha256=25c3e591bc52ed4148d65116548ce691ba5783f2b2eebf363074d7ec5ac392af"
 }

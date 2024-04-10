@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "base"         {= "v0.17~preview.129.17+77"}
   "core"         {= "v0.17~preview.129.17+77"}
   "int_repr"     {= "v0.17~preview.129.17+77"}
@@ -30,6 +30,6 @@ largest industrial user of OCaml.
 Core_kernel is the system-independent part of Core.
 "
 url {
-src: "https://github.com/janestreet/core_kernel/archive/b71fdbe6f51a809361f9bf930fe30524e15e1de7.tar.gz"
-checksum: "sha256=d00003e7fa0378a0f0b4d5c2ecd6ff14e8d097c403e3f48eeabc492e274bc5dc"
+src: "https://github.com/janestreet/core_kernel/archive/3a8c1a198a0bc61a4e040ec6a5d3df23447359d2.tar.gz"
+checksum: "sha256=a55198e6a953861a99566dfb2e628bcb65f642ed1261c2e7e35c18c8996b9cfe"
 }

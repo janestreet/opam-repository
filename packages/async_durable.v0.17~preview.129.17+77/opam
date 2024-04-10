@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"            {>= "4.14.0"}
+  "ocaml"            {>= "5.1.0"}
   "async_kernel"     {= "v0.17~preview.129.17+77"}
   "async_rpc_kernel" {= "v0.17~preview.129.17+77"}
   "core"             {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ description: "
 Async_durable helps recover from errors when connections can be easily be recreated.
 "
 url {
-src: "https://github.com/janestreet/async_durable/archive/f160113546399d6c5d671f48ce173fb54549d68e.tar.gz"
-checksum: "sha256=82a7cb503dcd45069b35e103ce2926567ab7210a83afa1721baf498f20399ba7"
+src: "https://github.com/janestreet/async_durable/archive/f5ecdc7f04275d65671ea0e3762e599dc52edf12.tar.gz"
+checksum: "sha256=76a55d12a3090286481192d4e1812d9e0b8e8bd096ddfd19cb3c0fe896a5e963"
 }

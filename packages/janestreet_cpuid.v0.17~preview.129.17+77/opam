@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "core"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
@@ -23,6 +23,6 @@ capabilities.
 "
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/janestreet_cpuid/archive/69b35ad5f803867e763c19d95747753213d4b401.tar.gz"
-checksum: "sha256=96e58bc79a17f61b2be77429a3ef8f5ff6746147c9872f271c470c8b060edd67"
+src: "https://github.com/janestreet/janestreet_cpuid/archive/895fb96d861f0196d8f49cfacb389b3473d27134.tar.gz"
+checksum: "sha256=cfe6a40ddff74492d5d87400161cbb0c033c206a2259a5674b192f4aee0dc993"
 }

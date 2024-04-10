@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"        {>= "4.14.0"}
+  "ocaml"        {>= "5.1.0"}
   "base"         {= "v0.17~preview.129.17+77"}
   "hardcaml"     {= "v0.17~preview.129.17+77"}
   "n_ary"        {= "v0.17~preview.129.17+77"}
@@ -28,6 +28,6 @@ The `Synthesis` module implements various arithmetic and logical RTL components 
 Xilinx LUT primitives.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_xilinx/archive/7249feac4289b35566859cdf0ec0f65f055dce68.tar.gz"
-checksum: "sha256=6ffbfdbf44bc9daba72858ce6cea706565de03f3a2b14ab14736ccc97808323d"
+src: "https://github.com/janestreet/hardcaml_xilinx/archive/43a5c6fd55ca2ddd2c1f844528660d599cfa1acf.tar.gz"
+checksum: "sha256=9888252f3416afc8bd8c94b2fb5c7ec5b1fe499a7f39707f3dfa20d6724edb69"
 }

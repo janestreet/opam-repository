@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"             {>= "4.14.0"}
+  "ocaml"             {>= "5.1.0"}
   "core"              {= "v0.17~preview.129.17+77"}
   "ppx_jane"          {= "v0.17~preview.129.17+77"}
   "splittable_random" {= "v0.17~preview.129.17+77"}
@@ -25,6 +25,6 @@ synopsis: "Core-flavoured wrapper around zarith's arbitrary-precision rationals"
 description: "
 "
 url {
-src: "https://github.com/janestreet/bignum/archive/a1a395d78b7a5403c838f4df549bb6eabb0da952.tar.gz"
-checksum: "sha256=7bb291943a8966bf0aaf01b26dd533043cab52389960a26b9d2abee0114402a8"
+src: "https://github.com/janestreet/bignum/archive/8d54752979726b45a0e335b2b866dbb1f43edccb.tar.gz"
+checksum: "sha256=4bedfaca597df5a93d46c743d83e9776a13c647b938970c6cf6a41ec17ac35b4"
 }

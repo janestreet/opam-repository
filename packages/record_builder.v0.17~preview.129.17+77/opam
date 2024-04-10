@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -25,6 +25,6 @@ automatically handles all of the mapping and combining of applicative terms
 needed to build the record from a single applicative term for each field.
 "
 url {
-src: "https://github.com/janestreet/record_builder/archive/b844f8aa1fc4f1c8e4088a8755636051d85eca1d.tar.gz"
-checksum: "sha256=66708ad72655eefd91e35717bd04baff57f778eb55a6336c6f33d94400df1597"
+src: "https://github.com/janestreet/record_builder/archive/286c167c72fbc9102910b65a421dff9b656c9893.tar.gz"
+checksum: "sha256=e6245ba07ded17da4dc0ef5ff6f26df1444e8093b9d25d747105a583313f4655"
 }

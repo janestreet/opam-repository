@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "dune"     {>= "2.0.0"}
@@ -24,6 +24,6 @@ makes it possible to parameterize a type with a witness that represents a type
 constructor.
 "
 url {
-src: "https://github.com/janestreet/higher_kinded/archive/0b0fa4ba0b593ba157f2ebd894bc818d1a178374.tar.gz"
-checksum: "sha256=a67ec008a48459d3b4b7cc3c8d201d869b75dd795369f1d3327510d11d7bb1cd"
+src: "https://github.com/janestreet/higher_kinded/archive/d2cbd325f6b354177366f3bfd3c2b73f4aa26484.tar.gz"
+checksum: "sha256=9f3dce467ac848da880cb41f80dbdff8187cc712cdfcef79c85e07e6c4645c11"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "async"       {= "v0.17~preview.129.17+77"}
   "core"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
@@ -35,6 +35,6 @@ It contains subcommands for pretty printing, querying, and modifying
 sexps, as well as some conversions to and from other formats.
 "
 url {
-src: "https://github.com/janestreet/sexp/archive/5de6d13106d3d41e5ebb663d5d22bfb139461b68.tar.gz"
-checksum: "sha256=65b799f698920df82dfb28c3524dd783363cc7c24d8cf06c418af58b08d26542"
+src: "https://github.com/janestreet/sexp/archive/d0cd60941890c897ec919cebd1ff9e8018d1eed0.tar.gz"
+checksum: "sha256=3d309c0e49a95d293c8da37b7639bd1fd222524849c2f506272150de8f63d36d"
 }

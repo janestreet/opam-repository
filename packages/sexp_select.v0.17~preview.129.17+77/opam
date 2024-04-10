@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "base"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
@@ -23,6 +23,6 @@ This library provides a convenient method to traverse sexp trees
 and return subtrees that match the given program.
 "
 url {
-src: "https://github.com/janestreet/sexp_select/archive/223f1b2fe5d76008879cef291ab164efdf2555b6.tar.gz"
-checksum: "sha256=f591be37e3378a1165663f6b6da3898543b972e1b6fa5901fdcbc37e00d36bcc"
+src: "https://github.com/janestreet/sexp_select/archive/f84eb6f82734a32b25dd3ffaf41a03f77485a211.tar.gz"
+checksum: "sha256=38397248414894b222089910e994ca5434872ec5ee5a11391d65b666b4696c02"
 }

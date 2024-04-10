@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml" {>= "4.14.0"}
+  "ocaml" {>= "5.1.0"}
   "dune"  {>= "2.0.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -21,6 +21,6 @@ Provides functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt
      See also ocaml_intrinsics library.
 "
 url {
-src: "https://github.com/janestreet/ocaml_intrinsics_kernel/archive/1871db7d542da81a770bfcd40368cf09157f5a6f.tar.gz"
-checksum: "sha256=ea57e4f59e900dfbe7f239a40c9310543ec4e811b87fffd16728fc193c96734f"
+src: "https://github.com/janestreet/ocaml_intrinsics_kernel/archive/0fb2a6370355ba8ae57f737ef5df9f2224c55263.tar.gz"
+checksum: "sha256=48821289d1dbad1a1f7075d3e7291a5bcc1335d868f748e4ad4d284a5bef9f55"
 }

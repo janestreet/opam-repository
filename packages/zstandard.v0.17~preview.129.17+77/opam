@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"       {>= "4.14.0"}
+  "ocaml"       {>= "5.1.0"}
   "core"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
@@ -24,6 +24,6 @@ Zstandard is a real-time compression algorithm which provides high compression r
 "
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/zstandard/archive/7135e9d2724b12ad7cee6247a8d708bac5d81a74.tar.gz"
-checksum: "sha256=26c0b9597f106b466ab0b0f6a2d3b4c3de9fc6eef0972b99787e618283cbfc99"
+src: "https://github.com/janestreet/zstandard/archive/10b949ee0022e1c6b27861240b8a75029bc8a9ad.tar.gz"
+checksum: "sha256=9e9ff228e5da890cc9ab9022eeec05e58226b7035b847dd6057297661f61b256"
 }

@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"                     {>= "4.14.0"}
+  "ocaml"                     {>= "5.1.0"}
   "async"                     {= "v0.17~preview.129.17+77"}
   "core"                      {= "v0.17~preview.129.17+77"}
   "core_kernel"               {= "v0.17~preview.129.17+77"}
@@ -26,6 +26,6 @@ description: "
 A library for typed manipulation of UNIX-style file paths.
 "
 url {
-src: "https://github.com/janestreet/file_path/archive/24fbec9479808e1f568855c1a4dd62f14fe4d7bb.tar.gz"
-checksum: "sha256=80fe22f17c8b187e2d82e29d461c1e839765e0835350bacd17bfa504cdf2663a"
+src: "https://github.com/janestreet/file_path/archive/c41fb59e57be55a3a4a8afb438024726bf52f0a9.tar.gz"
+checksum: "sha256=8c4546821ad4a48ba026ab616709c08ac116f29b3dea6a4c8574cace71532545"
 }

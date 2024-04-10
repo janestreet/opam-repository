@@ -10,7 +10,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 depends: [
-  "ocaml"    {>= "4.14.0"}
+  "ocaml"    {>= "5.1.0"}
   "async"    {= "v0.17~preview.129.17+77"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
@@ -22,6 +22,6 @@ synopsis: "Shell helpers for Async"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_shell/archive/ede2d05de9c93989cd7542017563d44aadd7a3e2.tar.gz"
-checksum: "sha256=6d4f931740e1be34fe62a283474a1a450b26d0327b065d8e548c174bd708117d"
+src: "https://github.com/janestreet/async_shell/archive/dd60fbe1cddac24d851b42bb3d8964baf1aad780.tar.gz"
+checksum: "sha256=e865fab404b4fb9a43d47a7973308125b5702d1467feef1d8af29b971938cfec"
 }
