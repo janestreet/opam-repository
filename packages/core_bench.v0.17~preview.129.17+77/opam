@@ -23,7 +23,7 @@ depends: [
   "ppx_sexp_conv"     {= "v0.17~preview.129.17+77"}
   "textutils"         {= "v0.17~preview.129.17+77"}
   "time_now"          {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "re"                {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -31,6 +31,6 @@ synopsis: "Benchmarking library"
 description: "
 "
 url {
-src: "https://github.com/janestreet/core_bench/archive/304ed405dbc7c11ef4d77b40761c8969a128e111.tar.gz"
-checksum: "sha256=1d1633ceae869a120c1749e0f485b7908ded0568bf644fffaf67cd33f7d0959c"
+src: "https://github.com/janestreet/core_bench/archive/5430d55ac9a21e4afc0cfd455bbb0d113ca356c6.tar.gz"
+checksum: "sha256=b5d6850df38e4eca2efee70e64c48192480162d4add7bd6e9bdb9ed36ad8c022"
 }

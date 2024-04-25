@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.17~preview.129.17+77"}
   "int_repr" {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "String type based on [Bigarray], for use in I/O and C-bindings"
@@ -22,6 +22,6 @@ description: "
 String type based on [Bigarray], for use in I/O and C-bindings.
 "
 url {
-src: "https://github.com/janestreet/base_bigstring/archive/feab85b4c01133dfa8fa26c9032606f88d513721.tar.gz"
-checksum: "sha256=8505d971f3a6ab93ae0913758dc50ee5bf8edf704783d73dc516674462c1aa71"
+src: "https://github.com/janestreet/base_bigstring/archive/e5a3a305178a205eff8d751d77e6097e71463d1d.tar.gz"
+checksum: "sha256=a019611757b9b1ba8d9aa5507e1d3e92ebb3918345c0e6c3db772acbcf0402f8"
 }

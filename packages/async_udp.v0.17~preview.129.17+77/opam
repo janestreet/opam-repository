@@ -14,7 +14,7 @@ depends: [
   "async"     {= "v0.17~preview.129.17+77"}
   "core_unix" {= "v0.17~preview.129.17+77"}
   "ppx_jane"  {= "v0.17~preview.129.17+77"}
-  "dune"      {>= "2.0.0"}
+  "dune"      {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Monadic concurrency library"
@@ -25,6 +25,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/async_udp/archive/b0c3251e99f24fbc8620c2ae7036d31b9b93d94d.tar.gz"
-checksum: "sha256=38c12273fa5feccb01f8c9cc2f540fec919777b47d87cf39d0d7ee95390fe5b7"
+src: "https://github.com/janestreet/async_udp/archive/7dcef7d836d33ba71ce9f0f7f38a986f4961fc4e.tar.gz"
+checksum: "sha256=d6d569ba9e7695a72ce3ab40d650230393db099a64a988f6b99d989e5d2cee96"
 }

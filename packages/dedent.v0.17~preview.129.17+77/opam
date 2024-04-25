@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "stdio"    {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for improving redability of multi-line string constants in code."
@@ -22,6 +22,6 @@ description: "
 A library for improving redability of multi-line string constants in code.
 "
 url {
-src: "https://github.com/janestreet/dedent/archive/9498368e659c23553bc6d5aea624ca7b1e3804a2.tar.gz"
-checksum: "sha256=62defd8c02d13b0a5433cf0eb4d2724f3b3ee88baff2d1322278966f8a84cbad"
+src: "https://github.com/janestreet/dedent/archive/ea95b7623567cc2bd077706d4075fc91ef824ec2.tar.gz"
+checksum: "sha256=7d818ab9f4cf7e7b17e1ecc629b3eed694f75969ca7356520bd9f8585ea12f7e"
 }

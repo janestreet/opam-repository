@@ -15,7 +15,7 @@ depends: [
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "core_unix"   {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
   "uutf"        {>= "1.0.2"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -23,6 +23,6 @@ synopsis: "Text output utilities"
 description: "
 "
 url {
-src: "https://github.com/janestreet/textutils/archive/c26d0d9fe16013dac7e82a7c32088b68bc1d2cb7.tar.gz"
-checksum: "sha256=a4784a1faf2c92f949bc955937d34580df97cecbdb94207eebfae6c89c8597b6"
+src: "https://github.com/janestreet/textutils/archive/ee36a27a34003ba370b098c1bc24e04876ec9523.tar.gz"
+checksum: "sha256=d56c84a65814836b3466c6d3c3d9132cca7219d9a58ab3507888127b0f03b343"
 }

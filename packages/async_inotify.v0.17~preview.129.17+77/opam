@@ -16,7 +16,7 @@ depends: [
   "core"       {= "v0.17~preview.129.17+77"}
   "core_unix"  {= "v0.17~preview.129.17+77"}
   "ppx_jane"   {= "v0.17~preview.129.17+77"}
-  "dune"       {>= "2.0.0"}
+  "dune"       {>= "3.11.0"}
   "inotify"    {>= "2.4.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ synopsis: "Async wrapper for inotify"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_inotify/archive/eac818197282dcd2deb9c31c10115c4457c7c490.tar.gz"
-checksum: "sha256=ca6496d2f48689029fdcb6ee890baf4be60f3e2f87141850049e9d214108db26"
+src: "https://github.com/janestreet/async_inotify/archive/ab42800ab18024d12a58f04a1c9bf88212027141.tar.gz"
+checksum: "sha256=8667d197c94c8a14a6cac4639c3339871d2fe09ee213750ddf4e36f603ad2a82"
 }

@@ -16,7 +16,7 @@ depends: [
   "hardcaml_event_driven_sim" {= "v0.17~preview.129.17+77"}
   "ppx_jane"                  {= "v0.17~preview.129.17+77"}
   "stdio"                     {= "v0.17~preview.129.17+77"}
-  "dune"                      {>= "2.0.0"}
+  "dune"                      {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml Testbench Monad"
@@ -27,6 +27,6 @@ Allows multiple control threads to interact with a simulation module, all of whi
 synchronised to the system clock.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_step_testbench/archive/d58b08c925984664e25095d77b275bef2384b270.tar.gz"
-checksum: "sha256=f19d753c289eb783e27fe824b2d773a89af360ca47941c83c99c9377afb66b6b"
+src: "https://github.com/janestreet/hardcaml_step_testbench/archive/f4db4828825a2e5090f98c56e1d69761f4314f5c.tar.gz"
+checksum: "sha256=f9fb44d57355f8860af6f9bc213dcd6f8da8d0ffb631dc84c644cba5a6d90e74"
 }

@@ -16,7 +16,7 @@ depends: [
   "jst-config"          {= "v0.17~preview.129.17+77"}
   "ppx_base"            {= "v0.17~preview.129.17+77"}
   "ppx_optcomp"         {= "v0.17~preview.129.17+77"}
-  "dune"                {>= "2.0.0"}
+  "dune"                {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Reports the current time"
@@ -25,6 +25,6 @@ Provides a single function to report the current time in nanoseconds
 since the start of the Unix epoch.
 "
 url {
-src: "https://github.com/janestreet/time_now/archive/2b7f4bbd097541f8538bf1b9e89df2a85666e9f4.tar.gz"
-checksum: "sha256=e22bc93f754e50330e8d559e80e384966dd685143aac5c43da9e8c2614484f34"
+src: "https://github.com/janestreet/time_now/archive/337e90e0a1818ca8035f9bfa085626b69cc184c6.tar.gz"
+checksum: "sha256=f2fb50e743b64b6248d4553bcf7c2eb9ace4855974951844f4311ea336fdc78b"
 }

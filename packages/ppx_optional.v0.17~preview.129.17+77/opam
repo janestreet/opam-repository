@@ -13,7 +13,7 @@ depends: [
   "ocaml"       {>= "5.1.0"}
   "base"        {= "v0.17~preview.129.17+77"}
   "ppxlib_jane" {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
   "ppxlib"      {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -23,6 +23,6 @@ A ppx rewriter that rewrites simple match statements with an if then
 else expression.
 "
 url {
-src: "https://github.com/janestreet/ppx_optional/archive/8d32da9820780d2a1931e7c46094f3e1bc459dd9.tar.gz"
-checksum: "sha256=fd5b0afbdc5a2620f144388c2a53d3002e6bef1d33deeda1247d95b5edfe1213"
+src: "https://github.com/janestreet/ppx_optional/archive/c17ca9f8d181f010a85022ef083b5b3c67ab2e01.tar.gz"
+checksum: "sha256=9c997a93a95bb96e9640ad9c67452ea297094ba7a71d0adb11facac6a3bd1b8f"
 }

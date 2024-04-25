@@ -16,7 +16,7 @@ depends: [
   "ppx_pattern_bind" {= "v0.17~preview.129.17+77"}
   "splay_tree"       {= "v0.17~preview.129.17+77"}
   "virtual_dom"      {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
   "js_of_ocaml"      {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx"  {>= "5.1.1" & < "5.7.0"}
 ]
@@ -26,6 +26,6 @@ description: "
 This library provides tools for rendering of tabular data efficiently, in particular supporting _partial rendering_, i.e. only rendering a subset of the widgets that are logically in the view, depending on what is expected to be visible to the end user.
 "
 url {
-src: "https://github.com/janestreet/incr_dom_partial_render/archive/f30de4aaff08a469d75519d946ba2ac6f360bdef.tar.gz"
-checksum: "sha256=4adf4d6aaa374428377425c59110e87648be12431b361fccacf014331afaeb1c"
+src: "https://github.com/janestreet/incr_dom_partial_render/archive/92fef1940269adc66b3e8500713e6a2fe0a41e98.tar.gz"
+checksum: "sha256=da2233e2016835eb6d2a416be0f4d27b2f88b8ca114ac820afb721f8c3e91fae"
 }

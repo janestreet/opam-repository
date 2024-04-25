@@ -13,13 +13,13 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_base" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Defines case conventions and functions to rename identifiers according to them"
 description: "
 "
 url {
-src: "https://github.com/janestreet/capitalization/archive/bde298f08a9ee1809cdc76d9746c453f083af2a3.tar.gz"
-checksum: "sha256=0635f60fd442f56f3f0e761af427d6f9b7ef10e6d8ce1899da0fbff254187d7a"
+src: "https://github.com/janestreet/capitalization/archive/797f555f37b3bce1ed5a8f174cb478c04a3f6a73.tar.gz"
+checksum: "sha256=fd921bb5cddb930c6884ed0ab065dd1cb1a1538bc11860ae44705fe6581438fb"
 }

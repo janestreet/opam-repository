@@ -16,7 +16,7 @@ depends: [
   "core"              {= "v0.17~preview.129.17+77"}
   "polling_state_rpc" {= "v0.17~preview.129.17+77"}
   "ppx_jane"          {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Helper functions for creating stable/versioned `Polling_state_rpc.t`s with babel."
@@ -24,6 +24,6 @@ description: "
 Helper functions for creating stable/versioned `Polling_state_rpc.t`s with babel.
 "
 url {
-src: "https://github.com/janestreet/versioned_polling_state_rpc/archive/18a38ee5e86ca7e9b4992e03fa1b41bbf18c19e4.tar.gz"
-checksum: "sha256=e30f5aaa4fb35e0c74eebfa6c7625d2c2b628204dbf82c5730dad5c470072e08"
+src: "https://github.com/janestreet/versioned_polling_state_rpc/archive/c7d5f9919a69b3ae8209463be24f696be4a37e21.tar.gz"
+checksum: "sha256=68385fff938037d5a1cdc7c7de194646871493331be631983834162f8a0ef2d6"
 }

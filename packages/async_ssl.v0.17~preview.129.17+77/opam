@@ -20,7 +20,7 @@ depends: [
   "conf-libssl"
   "ctypes"            {>= "0.18.0"}
   "ctypes-foreign"
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "dune-configurator"
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -30,6 +30,6 @@ This library allows you to create an SSL client and server, with
 encrypted communication between both.
 "
 url {
-src: "https://github.com/janestreet/async_ssl/archive/e2f1b580886d1bea82ef801d78d9c22ded526902.tar.gz"
-checksum: "sha256=b3a74f1f5fc7c1e6d08b99436df0b7755f9e862e990d9eea030797013f3fc47c"
+src: "https://github.com/janestreet/async_ssl/archive/2189f1490825b81f0e4ad7131e0db4cdb154072c.tar.gz"
+checksum: "sha256=fc7b92f87e8a5ceb86a9bd3c5438b52e32b7a52c827ca8a21320bba2dca28b7f"
 }

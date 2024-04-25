@@ -16,7 +16,7 @@ depends: [
   "core"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "OCaml/async implementation of the postgres protocol (i.e., does not use C-bindings to libpq)"
@@ -28,6 +28,6 @@ and COPY IN mode. The interface presented is minimal to keep the library simple
 for now, though in the future a layer on top may add convenience functions.
 "
 url {
-src: "https://github.com/janestreet/postgres_async/archive/092d602a694ead19a8a3377f294463510926553e.tar.gz"
-checksum: "sha256=4c345dd99760d679d4618732b905bbb2a4709046f8c0c9eff30a09c327575056"
+src: "https://github.com/janestreet/postgres_async/archive/647d87b855b4e1fb6773d6e94836592d3edc1c0d.tar.gz"
+checksum: "sha256=d445d844ca1ff0079ae8611b04a559901dd29da378341db53801930b5ce82e2e"
 }

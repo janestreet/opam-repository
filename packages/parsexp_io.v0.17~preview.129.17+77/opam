@@ -15,7 +15,7 @@ depends: [
   "parsexp"      {= "v0.17~preview.129.17+77"}
   "ppx_js_style" {= "v0.17~preview.129.17+77"}
   "stdio"        {= "v0.17~preview.129.17+77"}
-  "dune"         {>= "2.0.0"}
+  "dune"         {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "S-expression parsing library (IO functions)"
@@ -23,6 +23,6 @@ description: "
 Parsexp_io provides functions for loading s-expressions from files.
 "
 url {
-src: "https://github.com/janestreet/parsexp_io/archive/37f3fe630a88199f5e0b1f35750da18a15f4b0bd.tar.gz"
-checksum: "sha256=febb464f6283c0b66fc4943a9a43e50470a2081c3e8a83227beedd4d23f728c6"
+src: "https://github.com/janestreet/parsexp_io/archive/4d2542c4999994e5700e3f0b415d3bb010ccb194.tar.gz"
+checksum: "sha256=01e997dc9f6fea84a62da3171b36c3ba528c1afa2acad28e222b108adc6c6d3d"
 }

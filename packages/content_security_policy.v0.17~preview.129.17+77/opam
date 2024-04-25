@@ -15,7 +15,7 @@ depends: [
   "ppx_jane"  {= "v0.17~preview.129.17+77"}
   "base64"    {>= "3.4.0"}
   "cryptokit" {>= "1.16" & < "1.17"}
-  "dune"      {>= "2.0.0"}
+  "dune"      {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for building content-security policies"
@@ -23,6 +23,6 @@ description: "
 https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 "
 url {
-src: "https://github.com/janestreet/content_security_policy/archive/758633781bc98ff7edd90cc57858bd91ebece5dd.tar.gz"
-checksum: "sha256=f8280822173999513230940241f09b6a8b0269b7487fbc208020bc02c483ffe7"
+src: "https://github.com/janestreet/content_security_policy/archive/0412777c7c40db5eff8e41a09d68d5c40d07cbc3.tar.gz"
+checksum: "sha256=25d96e366cdd478cc3e4dec8b8b45e24f6f0122f479b6ec055262a22fffe4df2"
 }

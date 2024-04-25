@@ -14,7 +14,7 @@ depends: [
   "base"                {= "v0.17~preview.129.17+77"}
   "ppx_js_style"        {= "v0.17~preview.129.17+77"}
   "ppx_yojson_conv_lib" {= "v0.17~preview.129.17+77"}
-  "dune"                {>= "2.0.0"}
+  "dune"                {>= "3.11.0"}
   "ppxlib"              {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -23,6 +23,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_yojson_conv/archive/59f7e873d18b44c5e4da9295070afdb685a0197c.tar.gz"
-checksum: "sha256=ab7b0dbd4a3839efb5c1c23c541d8a436e8a49414428e8b14354fd78d130f32f"
+src: "https://github.com/janestreet/ppx_yojson_conv/archive/cff7af510870700bd3e6967a85690c64cb536b58.tar.gz"
+checksum: "sha256=1113150914c51c08881c2add0f342b14a8ee0f4db2ec1a9ea119928879066ad8"
 }

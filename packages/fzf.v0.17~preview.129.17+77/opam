@@ -14,7 +14,7 @@ depends: [
   "async"       {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for running the fzf command line tool"
@@ -22,6 +22,6 @@ description: "
 A library for running the fzf command line fuzzy matcher
 "
 url {
-src: "https://github.com/janestreet/fzf/archive/204fc785ff422212a22d924e0330936ee59f5408.tar.gz"
-checksum: "sha256=1f1c50d96783f10bd29a59b7609a7d541c4403b6da233b8c1dbb341d0f4409c3"
+src: "https://github.com/janestreet/fzf/archive/7492766a01b7394b7339b04e11f988da1e057a54.tar.gz"
+checksum: "sha256=bb6f81c3631897b9c14b26bc65619820fdf97414adac2c7c70a718132cceefcd"
 }

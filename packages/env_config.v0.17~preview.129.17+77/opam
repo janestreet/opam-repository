@@ -15,7 +15,7 @@ depends: [
   "core"      {= "v0.17~preview.129.17+77"}
   "core_unix" {= "v0.17~preview.129.17+77"}
   "ppx_jane"  {= "v0.17~preview.129.17+77"}
-  "dune"      {>= "2.0.0"}
+  "dune"      {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Helper library for retrieving configuration from an environment variable"
@@ -26,6 +26,6 @@ to override a configuration that is loaded from disk, computed, or embedded
 in a library.
 "
 url {
-src: "https://github.com/janestreet/env_config/archive/2e8db56a9dc94fb059fd8077ff0574b2c34cecf1.tar.gz"
-checksum: "sha256=2ee4fb7ba2feee46a6fef8de48cad191d64b4b599dec3a6f30b726d3eb338eb8"
+src: "https://github.com/janestreet/env_config/archive/8f11d3f56626f57bd1a6b6d6a5c4a89bbe3fb9f2.tar.gz"
+checksum: "sha256=f8e2c3fb54f0af564d61f3c1b6d2af6f563e71f1282de92b36927b56086b801a"
 }

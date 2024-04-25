@@ -19,7 +19,7 @@ depends: [
   "shell"            {= "v0.17~preview.129.17+77"}
   "textutils"        {= "v0.17~preview.129.17+77"}
   "textutils_kernel" {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Profiling library"
@@ -28,6 +28,6 @@ Core_profiler is a library that helps you profile programs and
 estimate various costs.
 "
 url {
-src: "https://github.com/janestreet/core_profiler/archive/6ef90868b99b665a2629959455bb30c0313906d3.tar.gz"
-checksum: "sha256=d195bd1081dcefba7e1669b443b9c0678a47e6cd87e854b75b0ab6432f0ea399"
+src: "https://github.com/janestreet/core_profiler/archive/d7cab152abea7ba6c19d6ff86a402e51ec330173.tar.gz"
+checksum: "sha256=6c4b71264b8c215a713a090570cd0201387f7188c46debb3a3162ab6ac0d7699"
 }

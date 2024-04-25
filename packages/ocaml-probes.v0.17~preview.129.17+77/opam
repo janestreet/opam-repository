@@ -11,7 +11,7 @@ build: [
 ]
 depends: [
   "ocaml" {>= "5.1.0"}
-  "dune"  {>= "2.0.0"}
+  "dune"  {>= "3.11.0"}
   "owee"  {>= "0.4"}
 ]
 synopsis: "USDT probes for OCaml: command line tool"
@@ -22,6 +22,6 @@ Experimental.
 depexts: ["linux-headers"] {os-family = "alpine"}
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/ocaml-probes/archive/8529029c5527be603fe4e32d072276de03e27f2c.tar.gz"
-checksum: "sha256=4f99418065970f7a9d05653d891ef09462026828b34a78fcd736a6f23227ec8c"
+src: "https://github.com/janestreet/ocaml-probes/archive/448245136bf9183d027c7c1cc930dffdd81331be.tar.gz"
+checksum: "sha256=909052dae8a3f45adb6e8a47e3ac2f59025608ae88e804c10fe546363c6a1b18"
 }

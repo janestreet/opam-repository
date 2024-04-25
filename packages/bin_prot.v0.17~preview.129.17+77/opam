@@ -19,7 +19,7 @@ depends: [
   "ppx_sexp_conv"      {= "v0.17~preview.129.17+77"}
   "ppx_stable_witness" {= "v0.17~preview.129.17+77"}
   "ppx_variants_conv"  {= "v0.17~preview.129.17+77"}
-  "dune"               {>= "2.0.0"}
+  "dune"               {>= "3.11.0"}
 ]
 depopts: [
   "mirage-xen-ocaml"
@@ -33,6 +33,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/bin_prot/archive/bd7e501622ffccdd0c33852d0316fc0f457704fc.tar.gz"
-checksum: "sha256=3e3e8c8e58b39dbf7ab261f9fee5b3df2901605ac5b08cb924a4dcf68fc8071a"
+src: "https://github.com/janestreet/bin_prot/archive/a4df06e3d616649e3dd9d3b7b10f73a5ec26035d.tar.gz"
+checksum: "sha256=980ef64897d9dfe51a0aabb8d58570d62b341f88c6b93849c43de6bd22ef969b"
 }

@@ -20,7 +20,7 @@ depends: [
   "ppx_string"    {= "v0.17~preview.129.17+77"}
   "sexplib"       {= "v0.17~preview.129.17+77"}
   "sexplib0"      {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
   "ppxlib"        {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -29,6 +29,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_typed_fields/archive/cc5c423138b6fbcba1d56973a255d06ee10acae0.tar.gz"
-checksum: "sha256=2df65e1d6834fa901f91172d4181166909fd2dab97a09487057472c9f876dd43"
+src: "https://github.com/janestreet/ppx_typed_fields/archive/ca1b922996c0c6e4b70dabc7c394fc13cd714d0f.tar.gz"
+checksum: "sha256=389f8732c82e55aa9a79f5f2091822e538df81500e5b0a09604cc08bb4096b9e"
 }

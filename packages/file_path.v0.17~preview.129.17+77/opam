@@ -18,7 +18,7 @@ depends: [
   "expect_test_helpers_async" {= "v0.17~preview.129.17+77"}
   "expect_test_helpers_core"  {= "v0.17~preview.129.17+77"}
   "ppx_jane"                  {= "v0.17~preview.129.17+77"}
-  "dune"                      {>= "2.0.0"}
+  "dune"                      {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for typed manipulation of UNIX-style file paths"
@@ -26,6 +26,6 @@ description: "
 A library for typed manipulation of UNIX-style file paths.
 "
 url {
-src: "https://github.com/janestreet/file_path/archive/c41fb59e57be55a3a4a8afb438024726bf52f0a9.tar.gz"
-checksum: "sha256=8c4546821ad4a48ba026ab616709c08ac116f29b3dea6a4c8574cace71532545"
+src: "https://github.com/janestreet/file_path/archive/cdb28af7d2aa59723e9da05bea84dbea3a018d2d.tar.gz"
+checksum: "sha256=04635fd37aa3145764e83ca41f616a543443d2958c7983b212c7c9573696e04d"
 }

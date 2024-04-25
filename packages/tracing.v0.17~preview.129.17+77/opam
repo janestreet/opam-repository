@@ -16,7 +16,7 @@ depends: [
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "core_unix"   {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Tracing library"
@@ -24,6 +24,6 @@ description: "
 Utilities for creating and parsing traces in Fuchsia Trace Format.
 "
 url {
-src: "https://github.com/janestreet/tracing/archive/ae7820ea953552dc9ed1f8555a9f8c69e48acb88.tar.gz"
-checksum: "sha256=9d656eb09217e5089be76ccb12f7208b2ceebfcee96699878b5b044224c1eace"
+src: "https://github.com/janestreet/tracing/archive/e4c37ff8429b8ec7f30696977b02468253950160.tar.gz"
+checksum: "sha256=968ae22d8385c2ff34c652708c2d8e31275deafb2ba20905f705a4e77cc304d4"
 }

@@ -16,7 +16,7 @@ depends: [
   "ppx_css"             {= "v0.17~preview.129.17+77"}
   "ppx_jane"            {= "v0.17~preview.129.17+77"}
   "virtual_dom"         {= "v0.17~preview.129.17+77"}
-  "dune"                {>= "2.0.0"}
+  "dune"                {>= "3.11.0"}
   "gen_js_api"          {>= "1.0.8"}
   "js_of_ocaml"         {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx"     {>= "5.1.1" & < "5.7.0"}
@@ -27,6 +27,6 @@ description: "
 The floating positioning library itself may be found at https://floating-ui.com/
 "
 url {
-src: "https://github.com/janestreet/virtual_dom_toplayer/archive/1d43724d454a8f7e39fb976ff25884cbdb6e3c17.tar.gz"
-checksum: "sha256=4d60a6408b15675e3fcd42cd5033b72b92fb6bdb9f14142de27a464f04a8047f"
+src: "https://github.com/janestreet/virtual_dom_toplayer/archive/a7cf18a92f990a42ee0744c4053c064444058da0.tar.gz"
+checksum: "sha256=65e19d5d8016c908f783b87fa922f14b5d6ce3df1df9e2cc12f31e6599e2d922"
 }

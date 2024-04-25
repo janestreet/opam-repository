@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml" {>= "5.1.0"}
   "base"  {= "v0.17~preview.129.17+77"}
-  "dune"  {>= "2.0.0"}
+  "dune"  {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Syntax extension to define first class values representing record fields, to get and set record fields, iterate and fold over all fields of a record and create new record values"
@@ -23,6 +23,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/fieldslib/archive/63c240aa0b9d2ed9eb332f4b481ebcbf13ea0ed0.tar.gz"
-checksum: "sha256=d42a5252730ca535355d06185dfb09107df6a98c248549d2512979cbf093a487"
+src: "https://github.com/janestreet/fieldslib/archive/e934ed7cd0503eb0ed13933c1f1e7e4cd4d4088b.tar.gz"
+checksum: "sha256=1a9f8541d146b55b54b8d6997abf9c192fc2ca0ef24cec440e64da8690531a75"
 }

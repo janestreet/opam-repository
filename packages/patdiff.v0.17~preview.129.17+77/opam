@@ -17,7 +17,7 @@ depends: [
   "expect_test_helpers_core" {= "v0.17~preview.129.17+77"}
   "patience_diff"            {= "v0.17~preview.129.17+77"}
   "ppx_jane"                 {= "v0.17~preview.129.17+77"}
-  "dune"                     {>= "2.0.0"}
+  "dune"                     {>= "3.11.0"}
   "re"                       {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -25,6 +25,6 @@ synopsis: "File Diff using the Patience Diff algorithm"
 description: "
 "
 url {
-src: "https://github.com/janestreet/patdiff/archive/61475638717c3cb6cbc0134bf355e0ba78a18e3c.tar.gz"
-checksum: "sha256=759d6b60039610a2b7f2f932f679b054656ac59f511b5016a36edd026a98f239"
+src: "https://github.com/janestreet/patdiff/archive/f39908b50fde2765f70bc93ad58fd3cf7dd48e66.tar.gz"
+checksum: "sha256=962822a8e2b53e48fc5c39bd84c57e382e342842c78cd308e7aa77d067714f1c"
 }

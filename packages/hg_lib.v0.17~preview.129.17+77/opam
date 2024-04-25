@@ -16,7 +16,7 @@ depends: [
   "core_kernel"              {= "v0.17~preview.129.17+77"}
   "expect_test_helpers_core" {= "v0.17~preview.129.17+77"}
   "ppx_jane"                 {= "v0.17~preview.129.17+77"}
-  "dune"                     {>= "2.0.0"}
+  "dune"                     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library that wraps the Mercurial command line interface"
@@ -24,6 +24,6 @@ description: "
 A library that wraps the Mercurial command line interface.
 "
 url {
-src: "https://github.com/janestreet/hg_lib/archive/68276cb6a091a813f6fa7d4831f410687a05b6ac.tar.gz"
-checksum: "sha256=c5ade5617ccd18ae9cbc6006052332ce354fa5825f16a8cca76366abed43089a"
+src: "https://github.com/janestreet/hg_lib/archive/814039648234ca29a1b65c20dc47c04e43bcf4a3.tar.gz"
+checksum: "sha256=09ecd88bd3ec54ce1cd4e4aaead0e4a90423b241a156eac15e2f09ee9216d88b"
 }

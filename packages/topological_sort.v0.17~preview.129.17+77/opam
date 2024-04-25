@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "stdio"    {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Topological sort algorithm"
@@ -23,6 +23,6 @@ Topological_sort is a single-module library that implements a simple
 topological-sort algorithm.
 "
 url {
-src: "https://github.com/janestreet/topological_sort/archive/9e4681dad32faa8c0484b139007337547a0f4b9e.tar.gz"
-checksum: "sha256=1971913f0f657d0e4567029514e1e8108a4eb557226fc047bcae12c9ac0036d1"
+src: "https://github.com/janestreet/topological_sort/archive/4f9753cce752ca5c429fdf116c521dfb88f6a070.tar.gz"
+checksum: "sha256=1f67be2b891dff1fbd5cad3d14126f0e28f6491c8940b72a5fb0982ab5c12746"
 }

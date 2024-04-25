@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Integers of various widths"
@@ -21,6 +21,6 @@ description: "
 Integers of various widths.
 "
 url {
-src: "https://github.com/janestreet/int_repr/archive/bffebcd9e95148265312d798bdddfb93b375550e.tar.gz"
-checksum: "sha256=4355a460d6d7546cfd1b2cfb8f162a1072da974d21915a3f1cd81b636b0ddaf6"
+src: "https://github.com/janestreet/int_repr/archive/51ce622a045286b105e7a0f91461a9ff36258ed0.tar.gz"
+checksum: "sha256=6e9af2a4858973b7f3454871382d283f2f1cc341f86b9c7e117eb67629551b6d"
 }

@@ -16,7 +16,7 @@ depends: [
   "ppx_jane"       {= "v0.17~preview.129.17+77"}
   "angstrom"       {>= "0.15.0"}
   "angstrom-async" {>= "0.15.0"}
-  "dune"           {>= "2.0.0"}
+  "dune"           {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Man-in-the-middle debugging library"
@@ -25,6 +25,6 @@ This library helps debug a connection between two parties speaking a
 protocol by capturing the traffic that passes between them.
 "
 url {
-src: "https://github.com/janestreet/man_in_the_middle_debugger/archive/9ad995a3fe54183c6f0564da7a46159aef971ddc.tar.gz"
-checksum: "sha256=24c93b6b2a3acf0fc33bbdbfc623db86563837d8dc79ce2106ef7ff559998163"
+src: "https://github.com/janestreet/man_in_the_middle_debugger/archive/31dae46c4ff19c5ce9899d6de8220a7d86cb48eb.tar.gz"
+checksum: "sha256=14d0caba884577a524f9df1097d1b7c5cc47dac754432c59b41df99d43f36a2c"
 }

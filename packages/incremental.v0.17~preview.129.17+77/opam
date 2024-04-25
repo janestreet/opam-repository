@@ -17,7 +17,7 @@ depends: [
   "ppx_jane"             {= "v0.17~preview.129.17+77"}
   "ppx_optcomp"          {= "v0.17~preview.129.17+77"}
   "uopt"                 {= "v0.17~preview.129.17+77"}
-  "dune"                 {>= "2.0.0"}
+  "dune"                 {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Library for incremental computations"
@@ -28,6 +28,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/incremental/archive/b36014c085b1a269ae0254d58b36333494eac782.tar.gz"
-checksum: "sha256=de9f25c58e80c0143978ecf156326a0b58c413c63eac2ee5dab65c1a9dff04e7"
+src: "https://github.com/janestreet/incremental/archive/a392c7128fd6442d75e52526cfe2ae69339eb6a0.tar.gz"
+checksum: "sha256=f04e0fb1e18f10a0c90b88468fce169273f1e9bf623b6240194cc87d26accafb"
 }

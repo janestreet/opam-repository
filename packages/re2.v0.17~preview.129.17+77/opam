@@ -16,13 +16,13 @@ depends: [
   "ppx_jane"          {= "v0.17~preview.129.17+77"}
   "regex_parser_intf" {= "v0.17~preview.129.17+77"}
   "conf-g++"          {build}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "OCaml bindings for RE2, Google's regular expression library"
 description: "
 "
 url {
-src: "https://github.com/janestreet/re2/archive/dc3c5d8a42f5d0a88523947e53e13363b54f2c09.tar.gz"
-checksum: "sha256=c2316ec131b4204dcf881acc82a75a6ec1d7a5e7c63eb73d0755b0e65a0e73be"
+src: "https://github.com/janestreet/re2/archive/e8dcea3323180467889124363f6437eff29314cc.tar.gz"
+checksum: "sha256=9a673e6be12f875b8b350528fb8745620215abc1155d793955c3e449ea775c67"
 }

@@ -17,7 +17,7 @@ depends: [
   "core"             {= "v0.17~preview.129.17+77"}
   "core_kernel"      {= "v0.17~preview.129.17+77"}
   "ppx_jane"         {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
   "ppxlib"           {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -26,6 +26,6 @@ description: "
 A collection of types suitable for incremental serialization.
 "
 url {
-src: "https://github.com/janestreet/streamable/archive/646640b76a314bac85af5474bd6f8b53a3b6b680.tar.gz"
-checksum: "sha256=265e98e4c8be164e668e5814e602eb721cad836efc65533c15f0b4449cf2855a"
+src: "https://github.com/janestreet/streamable/archive/38ee5eb9c85fb5353cfe574f6fb8e59b514b1ed9.tar.gz"
+checksum: "sha256=86ceaa5b81540f104bb84ac3f756d434073fe0da921750c676e1b646bdf098a7"
 }

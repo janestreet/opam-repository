@@ -16,7 +16,7 @@ depends: [
   "ppx_bench"        {= "v0.17~preview.129.17+77"}
   "ppx_inline_test"  {= "v0.17~preview.129.17+77"}
   "ppx_sexp_message" {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "PRNG that can be split into independent streams"
@@ -31,6 +31,6 @@ This library implements a splittable pseudo-random number generator that sacrifi
 cryptographic-quality randomness in favor of performance.
 "
 url {
-src: "https://github.com/janestreet/splittable_random/archive/5d8e2fd949abff50b725050dbee1a577bd8d0f66.tar.gz"
-checksum: "sha256=5ba5b29b69cce1e04a3488373aa00c8979cd0170e4bed3a08b4173209ad0b508"
+src: "https://github.com/janestreet/splittable_random/archive/04668ee7370c8f67d524fd675d44227a370ab38c.tar.gz"
+checksum: "sha256=99f34cbebe54f19809c0a0a27d1c3f87e8abbebd03888c94189c3f7359f3301f"
 }

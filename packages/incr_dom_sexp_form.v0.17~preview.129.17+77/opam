@@ -19,7 +19,7 @@ depends: [
   "ppx_jane"             {= "v0.17~preview.129.17+77"}
   "splay_tree"           {= "v0.17~preview.129.17+77"}
   "virtual_dom"          {= "v0.17~preview.129.17+77"}
-  "dune"                 {>= "2.0.0"}
+  "dune"                 {>= "3.11.0"}
   "js_of_ocaml"          {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx"      {>= "5.1.1" & < "5.7.0"}
 ]
@@ -29,6 +29,6 @@ description: "
 It relies on the fact that the type of the value being edited can be serialized via sexps.
 "
 url {
-src: "https://github.com/janestreet/incr_dom_sexp_form/archive/94d52e288a5737a6899b6dd39030af7b3b16b20a.tar.gz"
-checksum: "sha256=0835f8efe422ce28d91a482fb320fd2fe92ccf0c760fa4b9592c1cc5a99b64cb"
+src: "https://github.com/janestreet/incr_dom_sexp_form/archive/64fb22c537ff3e9a63cc01d42b0b4f9a1c37c1a0.tar.gz"
+checksum: "sha256=36e9b9525dc712b7ca138b09063a13d86b4b7cabdf112bf42a33f6e4a88aee67"
 }

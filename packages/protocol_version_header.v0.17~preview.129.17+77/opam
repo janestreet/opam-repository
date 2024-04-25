@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Protocol versioning"
@@ -24,6 +24,6 @@ version themselves. The more protocols that add themselves to
 to a service while using the wrong protocol.
 "
 url {
-src: "https://github.com/janestreet/protocol_version_header/archive/fe27dcd1266c6ab89a20d9a7e0b66d689a741d36.tar.gz"
-checksum: "sha256=a311726e00acb88ee3df318eca3a609deb34c0958e740672c62c83b305496276"
+src: "https://github.com/janestreet/protocol_version_header/archive/8779588056e4d4532d939c3cd1afef85031babf4.tar.gz"
+checksum: "sha256=cc3980eaec7368d5783f616ca54dcfa22dcf9fdc38be53bba4a58adf29feb8fd"
 }

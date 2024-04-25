@@ -12,13 +12,13 @@ build: [
 depends: [
   "ocaml" {>= "5.1.0"}
   "base"  {= "v0.17~preview.129.17+77"}
-  "dune"  {>= "2.0.0"}
+  "dune"  {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Typerep is a library for runtime types"
 description: "
 "
 url {
-src: "https://github.com/janestreet/typerep/archive/7107149ffc6f45dd45cda4faa2e280e643f2c6aa.tar.gz"
-checksum: "sha256=b2ef08f5658ec97844011d4d29b2ec4c602e1621a5c080fe01c7192a3a899de8"
+src: "https://github.com/janestreet/typerep/archive/bdece5d713cef552c9c321898001f6a70284c9b8.tar.gz"
+checksum: "sha256=36ccd55834eecadac0e7db344aaac4b42628e0a05adb474ffc96e5bab6867c2b"
 }

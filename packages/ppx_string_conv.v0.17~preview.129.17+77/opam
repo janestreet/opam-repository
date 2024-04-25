@@ -15,7 +15,7 @@ depends: [
   "capitalization" {= "v0.17~preview.129.17+77"}
   "ppx_let"        {= "v0.17~preview.129.17+77"}
   "ppx_string"     {= "v0.17~preview.129.17+77"}
-  "dune"           {>= "2.0.0"}
+  "dune"           {>= "3.11.0"}
   "ppxlib"         {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_string_conv/archive/4bfc0a8b8fca6190de84b5d99408d4028c9cc94a.tar.gz"
-checksum: "sha256=b4b95e7421b6e002e6413cd260ebb1ee9a3314e5bbdedb843022c322525a608f"
+src: "https://github.com/janestreet/ppx_string_conv/archive/97a37482689a47336e2083ad74c2ed74db5ec296.tar.gz"
+checksum: "sha256=672de0cb23b1b553d4a68953c5f9d8fe1e95a1dbf7542a92bb1a41dcb4d7a3fc"
 }

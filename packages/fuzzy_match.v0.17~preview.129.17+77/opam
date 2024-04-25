@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Libraries for fuzzy string matching"
@@ -21,6 +21,6 @@ description: "
 Libraries for fuzzy string matching
 "
 url {
-src: "https://github.com/janestreet/fuzzy_match/archive/902e8a987bb5cbd398bea5cd82da2d46dae733fe.tar.gz"
-checksum: "sha256=25e503815eb599c41b395cace6eeb71c1eab8cd3d0150ba24615a8b1bcb39119"
+src: "https://github.com/janestreet/fuzzy_match/archive/c0bd9601ab87a3041a4550c3680581cc0ed00f07.tar.gz"
+checksum: "sha256=3061acacf30da676631e499e1d44aaca636ff2fac11ab85c338880e2b3ae48c0"
 }

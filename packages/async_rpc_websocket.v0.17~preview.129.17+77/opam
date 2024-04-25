@@ -15,7 +15,7 @@ depends: [
   "cohttp_async_websocket" {= "v0.17~preview.129.17+77"}
   "ppx_jane"               {= "v0.17~preview.129.17+77"}
   "cohttp-async"           {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
-  "dune"                   {>= "2.0.0"}
+  "dune"                   {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Library to serve and dispatch Async RPCs over websockets"
@@ -31,6 +31,6 @@ is established, and routes to an optionally provided vanilla HTTP handler
 when non-websocket traffic occurs.
 "
 url {
-src: "https://github.com/janestreet/async_rpc_websocket/archive/c7f81af4f48bb5d691ef573b3f57f49e5550ad51.tar.gz"
-checksum: "sha256=42a55e912ef284623cfe3c73503ec579a8161c8f55c208e15def2a103e1f6297"
+src: "https://github.com/janestreet/async_rpc_websocket/archive/e9d8864afe696f93b6bd2e11490646f7befc3268.tar.gz"
+checksum: "sha256=7ca715842d085d7ec62a0b7dcbf33b010974bbddf1ddf7beecf65940f2e36712"
 }

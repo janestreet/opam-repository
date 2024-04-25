@@ -15,7 +15,7 @@ depends: [
   "core_extended" {= "v0.17~preview.129.17+77"}
   "jsonaf"        {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A friendly applicative interface for Jsonaf."
@@ -23,6 +23,6 @@ description: "
 This library provides an applicative interface for extracting values from JSON objects with an emphasis on readability and error handling, particularly with nested values.
 "
 url {
-src: "https://github.com/janestreet/of_json/archive/358a8a7203d3cadcba6028ac9c6a0873c7d37030.tar.gz"
-checksum: "sha256=1ae4d0691c89ec36edbfd901b0ee6c106d1c4420df5f277288aca0a108ab2dbc"
+src: "https://github.com/janestreet/of_json/archive/44b73386b135ea303842c914f2185f676d40da98.tar.gz"
+checksum: "sha256=7a4af4d0d480e865e2bff2dd49a7a0658477073a9ce3843e97620a5da14f205c"
 }

@@ -20,7 +20,7 @@ depends: [
   "ppx_jane"         {= "v0.17~preview.129.17+77"}
   "ppx_pattern_bind" {= "v0.17~preview.129.17+77"}
   "streamable"       {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Helpers for incremental operations on map like data structures"
@@ -31,6 +31,6 @@ along with the ability to efficiently diff map data structures using
 =Map.symmetric_diff=.
 "
 url {
-src: "https://github.com/janestreet/incr_map/archive/268596e19d5611c674a6966e5b120031e471cbd1.tar.gz"
-checksum: "sha256=517a71e166a68cf4653914428fd16dc7eff392a703393e66548d521a129491cd"
+src: "https://github.com/janestreet/incr_map/archive/86cf0b7d4dfec22ad315ea4592112c73aa76148c.tar.gz"
+checksum: "sha256=c5e742923bb1de3ace75656109254949253b45a4c822d7211193563da6a56fbf"
 }

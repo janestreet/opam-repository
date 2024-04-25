@@ -14,7 +14,7 @@ depends: [
   "base"          {= "v0.17~preview.129.17+77"}
   "ppx_optcomp"   {= "v0.17~preview.129.17+77"}
   "ppx_sexp_conv" {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Bindings to the posix *at functions"
@@ -27,6 +27,6 @@ descriptor. For instance this allows to reliably maintain several
 working directories inside the same process.
 "
 url {
-src: "https://github.com/janestreet/posixat/archive/3a374dfa1471e01b338d9a92827d5c1d4bd46782.tar.gz"
-checksum: "sha256=650b8207238b7b7c0463205a6469178c581cf158b920a0fb2fd67f19158b4dee"
+src: "https://github.com/janestreet/posixat/archive/5a27d32d620849cb22971d604a93396c8dd71f53.tar.gz"
+checksum: "sha256=ebd7d9db394e64edabcaa1cd6fe1215e0dd3ec1531283e26cab01db7310e4796"
 }

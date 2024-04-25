@@ -17,7 +17,7 @@ depends: [
   "gel"                     {= "v0.17~preview.129.17+77"}
   "ppx_jane"                {= "v0.17~preview.129.17+77"}
   "protocol_version_header" {= "v0.17~preview.129.17+77"}
-  "dune"                    {>= "2.0.0"}
+  "dune"                    {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Platform-independent core of Async RPC library"
@@ -28,6 +28,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/async_rpc_kernel/archive/cc6ae6be0c8659fd5f23de2b744e3afb3577751f.tar.gz"
-checksum: "sha256=d76799af1030b65f0c1302dddbf816b9d34600221cd197a8ef370ae091892006"
+src: "https://github.com/janestreet/async_rpc_kernel/archive/f334e493054eb8c9e88d0262ed3535e25050f8a4.tar.gz"
+checksum: "sha256=cb28c4514c8e41a93bc124d23eb485bb5fe6afc98f9785bf0ea59e781ae19571"
 }

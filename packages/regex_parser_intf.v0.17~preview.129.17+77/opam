@@ -12,13 +12,13 @@ build: [
 depends: [
   "ocaml" {>= "5.1.0"}
   "base"  {= "v0.17~preview.129.17+77"}
-  "dune"  {>= "2.0.0"}
+  "dune"  {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Interface shared by Re_parser and Re2.Parser"
 description: "
 "
 url {
-src: "https://github.com/janestreet/regex_parser_intf/archive/d37aef5250e41d611e06e39255334c1f03695ae2.tar.gz"
-checksum: "sha256=fea50004abc0882e78e56b1102d3f3e730c808321b0adfd7a312482911589215"
+src: "https://github.com/janestreet/regex_parser_intf/archive/399124e93ac048a0e5ba1e4ba4eb34690877ae0c.tar.gz"
+checksum: "sha256=ae349ff14c765fbf2dccd2613ad066e823bb84e2e665ddd7c388a80b5147b808"
 }

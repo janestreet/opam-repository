@@ -18,7 +18,7 @@ depends: [
   "ppx_let"          {= "v0.17~preview.129.17+77"}
   "ppx_sexp_conv"    {= "v0.17~preview.129.17+77"}
   "ppx_sexp_message" {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
   "zarith"           {>= "1.11"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -27,6 +27,6 @@ description: "
 Helpers for manipulating [Sexplib.Sexp_grammar] values.
 "
 url {
-src: "https://github.com/janestreet/sexp_grammar/archive/e9a48ebf58fd451e4228788c44d8487af385a5f4.tar.gz"
-checksum: "sha256=1cb445d4d05d19894ade734f96c0e3a571bc7241cdfaed30940d2b9d3c66cc93"
+src: "https://github.com/janestreet/sexp_grammar/archive/23dd57620d7dd66658cd89dcf3cab1cd9d784df7.tar.gz"
+checksum: "sha256=421c7aa84ab7d9ecccf619c7a875aad4759956336f459cbb21b5e824a64ab630"
 }

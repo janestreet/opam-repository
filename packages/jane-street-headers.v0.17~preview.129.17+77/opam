@@ -11,7 +11,7 @@ build: [
 ]
 depends: [
   "ocaml" {>= "5.1.0"}
-  "dune"  {>= "2.0.0"}
+  "dune"  {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Jane Street C header files"
@@ -19,6 +19,6 @@ description: "
 C header files shared between the various Jane Street packages
 "
 url {
-src: "https://github.com/janestreet/jane-street-headers/archive/69adb6415b0e373d08cc092c5f4f1a949484f2eb.tar.gz"
-checksum: "sha256=6e746b06bcb9e5155021d8aa6c4150825d70f0b3b9d39c2bafe15652c20fb49b"
+src: "https://github.com/janestreet/jane-street-headers/archive/085de06d2e646474166682afc997c57ae2b408f9.tar.gz"
+checksum: "sha256=7411e7c64de36453f88157ca0b32a43e65dfd2c07b3dc04cc85ed3e5290afe43"
 }

@@ -16,7 +16,7 @@ depends: [
   "n_ary"        {= "v0.17~preview.129.17+77"}
   "ppx_hardcaml" {= "v0.17~preview.129.17+77"}
   "ppx_jane"     {= "v0.17~preview.129.17+77"}
-  "dune"         {>= "2.0.0"}
+  "dune"         {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml wrappers for Xilinx memory primitives"
@@ -28,6 +28,6 @@ The `Synthesis` module implements various arithmetic and logical RTL components 
 Xilinx LUT primitives.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_xilinx/archive/43a5c6fd55ca2ddd2c1f844528660d599cfa1acf.tar.gz"
-checksum: "sha256=9888252f3416afc8bd8c94b2fb5c7ec5b1fe499a7f39707f3dfa20d6724edb69"
+src: "https://github.com/janestreet/hardcaml_xilinx/archive/27002c1174fc9f4eae424b8fb95eb137730d2b7a.tar.gz"
+checksum: "sha256=b92ef2adebe35f8cae64c865ca05ca757d9171472010195ad32c4c5ab8d5ce54"
 }

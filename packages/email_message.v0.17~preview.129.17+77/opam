@@ -20,7 +20,7 @@ depends: [
   "angstrom"    {>= "0.15.0"}
   "base64"      {>= "3.4.0"}
   "cryptokit"   {>= "1.16" & < "1.17"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
   "magic-mime"
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -28,6 +28,6 @@ synopsis: "E-mail message parser"
 description: "
 "
 url {
-src: "https://github.com/janestreet/email_message/archive/c8841513eca43db80933b7649d781f698e5e0eee.tar.gz"
-checksum: "sha256=f3bf41143921bc12faaa041914e1b5a84fc294b1edce99137b98431a9f2897b4"
+src: "https://github.com/janestreet/email_message/archive/f437cd4ba490499e133bbcef1ff5ab8958c17c8a.tar.gz"
+checksum: "sha256=28fd2188605d3a5994f08428805f94547a5ad0c531edea0666c5136614dd7759"
 }

@@ -15,7 +15,7 @@ depends: [
   "hardcaml"     {= "v0.17~preview.129.17+77"}
   "ppx_hardcaml" {= "v0.17~preview.129.17+77"}
   "ppx_jane"     {= "v0.17~preview.129.17+77"}
-  "dune"         {>= "2.0.0"}
+  "dune"         {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml Circuits"
@@ -23,6 +23,6 @@ description: "
 A small library of useful/interesting Hardcaml circuits.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_circuits/archive/9b9cbc8c9e49cd2123731cb49d6a010b5443b68e.tar.gz"
-checksum: "sha256=abcc9b7f3ca1c0c2f101b91bfbddc003a3bdf0ef21bb66db4c63091a3e1fbb80"
+src: "https://github.com/janestreet/hardcaml_circuits/archive/e4d596fd8fa4a109422f56d73ae22fa00cc47df3.tar.gz"
+checksum: "sha256=1a542a7df9e7664577d16ed4aaface027140ecdae96efe903f1a2cd3a17ed9c3"
 }

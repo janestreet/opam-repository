@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A splay tree implementation"
@@ -31,6 +31,6 @@ reduction operation which lets you specify an extra accumulator value,
 which can then be searched by efficiently.
 "
 url {
-src: "https://github.com/janestreet/splay_tree/archive/74691feae795f777c5068dc958bea35259336b7c.tar.gz"
-checksum: "sha256=ce9cc570c7885f593367ac96b9b9e78f997fbc7f18681c12c0fcbc0fc6b7f3c7"
+src: "https://github.com/janestreet/splay_tree/archive/64e6445044ac38c715f6aef9e2cedf8a88008b81.tar.gz"
+checksum: "sha256=d59b1c380737d029a52645b8624ef3e0c8a6c84aa79d9df94bc469f19ab3e7a0"
 }

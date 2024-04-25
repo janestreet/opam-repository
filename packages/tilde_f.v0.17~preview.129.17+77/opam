@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Provides a let-syntax for continuation-passing style."
@@ -21,6 +21,6 @@ description: "
 Provides a let-syntax for continuation-passing style.
 "
 url {
-src: "https://github.com/janestreet/tilde_f/archive/76a80ccd71630d6dea0191a163b94555adc438c6.tar.gz"
-checksum: "sha256=7b913afe46e993d792aa467785dd1ca262bb2d8d3b7766cb9b28b52dc9ea8f54"
+src: "https://github.com/janestreet/tilde_f/archive/dd61a148b20e65c670e96cab876cf12390ac49c0.tar.gz"
+checksum: "sha256=2e360ca3e84c2e87da096452d681a4a4bded6ce0f935dbd5e89085279bc13a24"
 }

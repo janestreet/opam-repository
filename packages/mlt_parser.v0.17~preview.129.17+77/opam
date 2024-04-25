@@ -14,7 +14,7 @@ depends: [
   "core"       {= "v0.17~preview.129.17+77"}
   "ppx_expect" {= "v0.17~preview.129.17+77"}
   "ppx_jane"   {= "v0.17~preview.129.17+77"}
-  "dune"       {>= "2.0.0"}
+  "dune"       {>= "3.11.0"}
   "ppxlib"     {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -25,6 +25,6 @@ sessions) both to power toplevel expect tests and to support a tool that convert
 .mlt files into .org files, for literate-style documentation.
 "
 url {
-src: "https://github.com/janestreet/mlt_parser/archive/23bf1269f39187861fde68430c99982eec506f04.tar.gz"
-checksum: "sha256=540502b41466ef73d56ab32a315c1538c876f8334f542ac4659a693cb1825750"
+src: "https://github.com/janestreet/mlt_parser/archive/e1dfe5a74c60812368d5d6fba07c9b91e403774d.tar.gz"
+checksum: "sha256=dfbc2cb492eef9daffbb0f7b8c337f1d27f32514475ec5defa3c43a75d9ff1af"
 }

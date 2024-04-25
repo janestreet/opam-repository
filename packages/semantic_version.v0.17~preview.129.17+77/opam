@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "re"       {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -22,6 +22,6 @@ description: "
 A library for representing semantic versions (https://semver.org)
 "
 url {
-src: "https://github.com/janestreet/semantic_version/archive/c13989bbbc8bd9da3f48f20ff14addcdac72aef4.tar.gz"
-checksum: "sha256=2a7d4cb18b0c503004889e70dee680ed6ec32c38da526ce218857164cd42ca44"
+src: "https://github.com/janestreet/semantic_version/archive/4f2962ca389979d1a3ba58b5417038e86447bc4c.tar.gz"
+checksum: "sha256=bd2ad5af5f1a6afd46243559983141d72a60f21150864b86914c56aa31596ff5"
 }

@@ -15,7 +15,7 @@ depends: [
   "async_rpc_kernel" {= "v0.17~preview.129.17+77"}
   "core"             {= "v0.17~preview.129.17+77"}
   "ppx_jane"         {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
   "js_of_ocaml"      {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx"  {>= "5.1.1" & < "5.7.0"}
   "uri"              {>= "3.0.0"}
@@ -26,6 +26,6 @@ synopsis: "A small library that provide Async support for JavaScript platforms"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_js/archive/2c51e00d1592c35ca59678acdff5e7a21484a083.tar.gz"
-checksum: "sha256=44782dec0a92cc78a5c9fb395ccacf7843af1737cfce72c32059dd85e18dd48a"
+src: "https://github.com/janestreet/async_js/archive/b4df3480f35da5a21b4d6dc2b2ac90bf5b3dba92.tar.gz"
+checksum: "sha256=995e6e724efd6cb40034c030426a9813f5d013ab1055bd6c66fee2ed49c86c1e"
 }

@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library with an encoding of higher kinded types in OCaml"
@@ -24,6 +24,6 @@ makes it possible to parameterize a type with a witness that represents a type
 constructor.
 "
 url {
-src: "https://github.com/janestreet/higher_kinded/archive/d2cbd325f6b354177366f3bfd3c2b73f4aa26484.tar.gz"
-checksum: "sha256=9f3dce467ac848da880cb41f80dbdff8187cc712cdfcef79c85e07e6c4645c11"
+src: "https://github.com/janestreet/higher_kinded/archive/90699e2a2fbec80af977b2022cad054bb080a1bb.tar.gz"
+checksum: "sha256=a90e5431c0ba46ea3a200b95ffc179298a21d95ec127aa90d88b1109ff09b23a"
 }

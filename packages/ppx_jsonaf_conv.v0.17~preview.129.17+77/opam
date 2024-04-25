@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.17~preview.129.17+77"}
   "jsonaf"   {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "ppxlib"   {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -23,6 +23,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_jsonaf_conv/archive/a8b11f91420cb6d80cb61eaaa65aba5e422be51e.tar.gz"
-checksum: "sha256=0b550339cd17cd93fdaff197a0cd92c0dc76c25a87e897f4636fbeebf753e3d4"
+src: "https://github.com/janestreet/ppx_jsonaf_conv/archive/5ac4f726feb21b21c548a62b0feff431505bcfa6.tar.gz"
+checksum: "sha256=1ffde25ffe1c20f71346390ec6a0528793a7f44c2955dfa8dd6b91f88927d646"
 }

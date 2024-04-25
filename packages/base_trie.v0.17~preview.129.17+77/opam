@@ -15,7 +15,7 @@ depends: [
   "core"                     {= "v0.17~preview.129.17+77"}
   "expect_test_helpers_core" {= "v0.17~preview.129.17+77"}
   "ppx_jane"                 {= "v0.17~preview.129.17+77"}
-  "dune"                     {>= "2.0.0"}
+  "dune"                     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Trie data structure library"
@@ -26,6 +26,6 @@ Lookup is based on \"chains\" of keys; each node of the trie has children repres
 each potential next key in the chain.
 "
 url {
-src: "https://github.com/janestreet/base_trie/archive/4a198143083001f388da2b6b9aecf0b426c012d1.tar.gz"
-checksum: "sha256=50de2593fae19d7736050e4ae6e059bf301ab94a06c21d43438765872a51d2f0"
+src: "https://github.com/janestreet/base_trie/archive/d2aaf7bce6a0dc81124856aab403547fe838d733.tar.gz"
+checksum: "sha256=e4a9712d450753510787242fa1f3e283c16f520bf95c990366e38b8690bcb752"
 }

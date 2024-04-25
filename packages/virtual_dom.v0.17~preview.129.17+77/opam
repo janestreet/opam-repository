@@ -18,7 +18,7 @@ depends: [
   "ppx_jane"            {= "v0.17~preview.129.17+77"}
   "stdio"               {= "v0.17~preview.129.17+77"}
   "base64"              {>= "3.4.0"}
-  "dune"                {>= "2.0.0"}
+  "dune"                {>= "3.11.0"}
   "gen_js_api"          {>= "1.0.8"}
   "js_of_ocaml"         {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx"     {>= "5.1.1" & < "5.7.0"}
@@ -33,6 +33,6 @@ The library itself may be found at
 https://github.com/Matt-Esch/virtual-dom.
 "
 url {
-src: "https://github.com/janestreet/virtual_dom/archive/f01fe31c5a38ef1e851cdf89906503b21f30979c.tar.gz"
-checksum: "sha256=fb0ee869dee58920ad3047704e9cd136b5e3583c0b3deb0ab697b1211a7eab95"
+src: "https://github.com/janestreet/virtual_dom/archive/48d6203a301023b34d677590ce8cafe558152c57.tar.gz"
+checksum: "sha256=24f66efee3cba1e04acc03f5d1352a9abf3be1b33ef6d0f7cd24508b04aa6e57"
 }

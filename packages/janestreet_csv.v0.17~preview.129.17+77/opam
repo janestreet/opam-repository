@@ -22,7 +22,7 @@ depends: [
   "ppx_jane"          {= "v0.17~preview.129.17+77"}
   "re2"               {= "v0.17~preview.129.17+77"}
   "textutils"         {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "pcre"
   "tyxml"             {>= "4.3.0"}
 ]
@@ -34,6 +34,6 @@ contains subcommands for pretty printing, selecting, and combining
 CSVs, as well as some conversions to other formats.
 "
 url {
-src: "https://github.com/janestreet/janestreet_csv/archive/97525c314ecadfb50f67f9c630830a7b199b1ad6.tar.gz"
-checksum: "sha256=5d3d99e821434f6941982562f819b3e60bf0c683e6402cd041966cb227a80fd4"
+src: "https://github.com/janestreet/janestreet_csv/archive/61936b8a5cfb8847722d720431b7cfcca444e650.tar.gz"
+checksum: "sha256=944fe933a4824e6848407e23eec740c5553dc3d0719aa09351dcb82f66436de5"
 }

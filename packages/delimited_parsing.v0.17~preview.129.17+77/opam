@@ -15,7 +15,7 @@ depends: [
   "core"          {= "v0.17~preview.129.17+77"}
   "core_extended" {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Parsing of character (e.g., comma) separated and fixed-width values"
@@ -24,6 +24,6 @@ Delimited_parsing parses character-separated values (such as CSV files) and fixe
 records.
 "
 url {
-src: "https://github.com/janestreet/delimited_parsing/archive/c39a83f09abe3a1f83689f54e1a81c431cb9a082.tar.gz"
-checksum: "sha256=e87edd9739c007410ac0290a17b9dd30a02c94ddb40cde68f0d611817d7d0387"
+src: "https://github.com/janestreet/delimited_parsing/archive/6f78c78b88863f60b83e38dbceb8a52bdfc74fd4.tar.gz"
+checksum: "sha256=59904ed73a3c47393fef2dab77cc81d59e20edc12241f95f5ceeaf370d594222"
 }

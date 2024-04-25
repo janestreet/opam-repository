@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for building strings with indentation"
@@ -21,6 +21,6 @@ description: "
 A library for building strings with indentation
 "
 url {
-src: "https://github.com/janestreet/indentation_buffer/archive/c273dd2b12020e764f2fb59b50db99dd668efbc6.tar.gz"
-checksum: "sha256=8431748e505954e8b0161e8191682927976585210db5f27f499528a74a0a7db9"
+src: "https://github.com/janestreet/indentation_buffer/archive/a2f676871f285e98f8627fd1b428b7f34cc35609.tar.gz"
+checksum: "sha256=73a918a3ac1f46c5a5d176a7559035a2946539ab25c046e46a86fece15ff1993"
 }

@@ -17,7 +17,7 @@ depends: [
   "hardcaml_handshake" {= "v0.17~preview.129.17+77"}
   "ppx_hardcaml"       {= "v0.17~preview.129.17+77"}
   "ppx_jane"           {= "v0.17~preview.129.17+77"}
-  "dune"               {>= "2.0.0"}
+  "dune"               {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml AXI Interface Types"
@@ -25,6 +25,6 @@ description: "
 AXI Lite, Full and Stream Interfaces for Hardcaml
 "
 url {
-src: "https://github.com/janestreet/hardcaml_axi/archive/5b6e40cc692ef0666f859e4feeacc53d833c71d0.tar.gz"
-checksum: "sha256=a3cd8bc18acf1a8a3ccbc8488ba4c9924bfb4f721a3f44a1facecb10de3e00f4"
+src: "https://github.com/janestreet/hardcaml_axi/archive/3f5b90cd380a36cae3177ae1afadf2bb4f5d3d4d.tar.gz"
+checksum: "sha256=c02fdf69eaaaec3bc9dcd5c9ed17cdb387c9f740df9ed68f808118269bb90749"
 }

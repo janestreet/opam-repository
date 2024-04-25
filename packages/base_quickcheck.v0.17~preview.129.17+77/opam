@@ -19,7 +19,7 @@ depends: [
   "ppx_sexp_value"    {= "v0.17~preview.129.17+77"}
   "ppxlib_jane"       {= "v0.17~preview.129.17+77"}
   "splittable_random" {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "ppxlib"            {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -29,6 +29,6 @@ Base_quickcheck provides randomized testing in the style of Haskell's Quickcheck
 with support for built-in types as well as types provided by Base.
 "
 url {
-src: "https://github.com/janestreet/base_quickcheck/archive/e317c201cc4ac8b85aa3833483c97d4f178a5512.tar.gz"
-checksum: "sha256=d35f914120b7beedea813373b62c0e769678e8168647afa3cf7d704e7fe118f0"
+src: "https://github.com/janestreet/base_quickcheck/archive/5fa21510bdad0412ec302a8d936d084e0c8524ed.tar.gz"
+checksum: "sha256=f8efff15fc609acaf3ef6133e32e64313664a5153f882e48ae454571e15c4dd5"
 }

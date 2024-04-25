@@ -17,7 +17,7 @@ depends: [
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
   "ppx_sexp_conv" {= "v0.17~preview.129.17+77"}
   "stdio"         {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
   "ppxlib"        {>= "0.28.0"}
   "zarith"        {>= "1.11"}
 ]
@@ -31,6 +31,6 @@ be simulated within Hardcaml.  Designs are converted to either Verilog or
 VHDL to interact with standard back end tooling.
 "
 url {
-src: "https://github.com/janestreet/hardcaml/archive/d2df3842b5462ecdf4e909be4800e2a046be4b9a.tar.gz"
-checksum: "sha256=ebec00d2ccc497855b7cbed4bc993e04af9ffd3bb2300b67f8f28192450f80c2"
+src: "https://github.com/janestreet/hardcaml/archive/aaad74fbc9ee20022496861bd34e71931bc660f5.tar.gz"
+checksum: "sha256=656c7b34fcdf763281738376c66d8d8718c0f1aed1b39f3c4621ed17bc7b0b82"
 }

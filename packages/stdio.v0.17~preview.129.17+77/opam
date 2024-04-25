@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml" {>= "5.1.0"}
   "base"  {= "v0.17~preview.129.17+77"}
-  "dune"  {>= "2.0.0"}
+  "dune"  {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Standard IO library for OCaml"
@@ -23,6 +23,6 @@ It re-exports the input/output functions of the OCaml standard
 libraries using a more consistent API.
 "
 url {
-src: "https://github.com/janestreet/stdio/archive/9e255e10243aef67936bf14a5d3d52675744c1af.tar.gz"
-checksum: "sha256=a1d472b80f9756153c3213cae7ba6ed7f727316fdeba2a9f01d695245cdfa759"
+src: "https://github.com/janestreet/stdio/archive/71d7752d802c92c3c6c980ff390b0b073383a906.tar.gz"
+checksum: "sha256=4b9e92c13ad8ddf200817998b2037faf952a3d9440f0658c77f24eda3023b447"
 }

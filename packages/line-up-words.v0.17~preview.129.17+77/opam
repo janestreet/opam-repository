@@ -16,7 +16,7 @@ depends: [
   "patience_diff" {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
   "re2"           {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
   "pcre"
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -28,6 +28,6 @@ in a sequence of lines in an intelligent way.
 It comes as a binary and an emacs mode.
 "
 url {
-src: "https://github.com/janestreet/line-up-words/archive/65b892e6142d8b3647283de30b42aa9336b36544.tar.gz"
-checksum: "sha256=01e479c59afa0a00ce1d18c53a7713f2b081b5c36bb87b6234d24272aff7a903"
+src: "https://github.com/janestreet/line-up-words/archive/2586978b5fd0ea384529842e68bc0efa6ac0253e.tar.gz"
+checksum: "sha256=272521dc47ef522332190449cc1b8fd61c4d5ac2e1bfa6f2a418bc8e9ff568df"
 }

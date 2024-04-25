@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "uutf"     {>= "1.0.2"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -21,6 +21,6 @@ synopsis: "Text output utilities"
 description: "
 "
 url {
-src: "https://github.com/janestreet/textutils_kernel/archive/f894b8852ac3c495c5f3bbace0973f2ffff0b31e.tar.gz"
-checksum: "sha256=5aba1662bde5f182d0557c5248e62b77eb55bc8410abf69403dc4dc5c1b219a1"
+src: "https://github.com/janestreet/textutils_kernel/archive/103f23ddc767a1ec0b3d1ce6a07d389e68f1de9f.tar.gz"
+checksum: "sha256=66be5c83bb0e3fad0148c45575aab98c4c777ac121ee6befb993deea2e400032"
 }

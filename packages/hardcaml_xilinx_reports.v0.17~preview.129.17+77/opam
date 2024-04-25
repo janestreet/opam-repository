@@ -20,7 +20,7 @@ depends: [
   "ppx_jane"     {= "v0.17~preview.129.17+77"}
   "stdio"        {= "v0.17~preview.129.17+77"}
   "textutils"    {= "v0.17~preview.129.17+77"}
-  "dune"         {>= "2.0.0"}
+  "dune"         {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml Xilinx Reports"
@@ -35,6 +35,6 @@ just the local module, or for all modules below it as well. Running in different
 ways can provide better insight into the design.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_xilinx_reports/archive/8f21ebafb493b602f0c731907e4b015de9cb8b35.tar.gz"
-checksum: "sha256=f25ce7ddfc024532e047f32d446fce8394d3eb1db61334f87898c60b5c303331"
+src: "https://github.com/janestreet/hardcaml_xilinx_reports/archive/bbca2fdd52765fa68eb4ee6de69e1d4c27e5a5ae.tar.gz"
+checksum: "sha256=51fc1c408046e4d33e06233b4a846fe56c1de74fda5036dbc6b7fea351e60eb3"
 }

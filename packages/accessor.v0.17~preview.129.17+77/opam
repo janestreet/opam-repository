@@ -14,7 +14,7 @@ depends: [
   "base"          {= "v0.17~preview.129.17+77"}
   "higher_kinded" {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library that makes it nicer to work with nested functional data structures"
@@ -27,6 +27,6 @@ increasingly complex data structures.
 In case you have ever heard of \"lenses\", this is an OCaml implementation of that idea.
 "
 url {
-src: "https://github.com/janestreet/accessor/archive/48e9de910b5e4b11ec5f168b9598eca12274120f.tar.gz"
-checksum: "sha256=203f4ca574f177079c1cd6271920e5a97aa46f677c5b23ca9cc37a0aabe670c3"
+src: "https://github.com/janestreet/accessor/archive/e2155ad74288095b316b5a66f2f6776043d521fe.tar.gz"
+checksum: "sha256=4561dd82b53f6f6df8e01c2ee2c9e32db1105d3b8ffeffe482e54ef66797b0a2"
 }

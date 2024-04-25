@@ -18,7 +18,7 @@ depends: [
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
   "stdio"       {= "v0.17~preview.129.17+77"}
   "cryptokit"   {>= "1.16" & < "1.17"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
   "notty"       {>= "0.2.1"}
   "num"
   "re"          {>= "1.8.0"}
@@ -35,6 +35,6 @@ to simulations.
 "
 conflicts: ["hardcaml-waveterm"] 
 url {
-src: "https://github.com/janestreet/hardcaml_waveterm/archive/2b09c1a2ed114a72849b00f415b1d4a67b2a585c.tar.gz"
-checksum: "sha256=67e2d066dc5a0489f61518e2386d134cf049420662ecf14fb40418a81aa7b209"
+src: "https://github.com/janestreet/hardcaml_waveterm/archive/ea45346aa4bba5c0de1f85e68e2b9561f0f41c0b.tar.gz"
+checksum: "sha256=de63052be38213760baa811db277b3c52a67e12b9f5bc91eae4047fdb630f847"
 }

@@ -15,7 +15,7 @@ depends: [
   "bin_prot"    {= "v0.17~preview.129.17+77"}
   "ppx_here"    {= "v0.17~preview.129.17+77"}
   "ppxlib_jane" {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
   "ppxlib"      {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_bin_prot/archive/905acb6f41f6704115a53a6b8ed0070332e92844.tar.gz"
-checksum: "sha256=db78cfe6af0e530f42d22664b62731c9381e622f9a73d80e49a196d497100be5"
+src: "https://github.com/janestreet/ppx_bin_prot/archive/30443fe99a0adec9bd1f98525969ff2e9c5adf3e.tar.gz"
+checksum: "sha256=a64c29061ea5471f867ce30264163ec31d1fb2ebf2e04d4b05cd62e7fa86b1bc"
 }

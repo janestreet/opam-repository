@@ -14,7 +14,7 @@ depends: [
   "core"        {= "v0.17~preview.129.17+77"}
   "incremental" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Handling of large set of incremental outputs from a single input"
@@ -27,6 +27,6 @@ number of outputs that are changed, independent of the number of
 outputs that exist.
 "
 url {
-src: "https://github.com/janestreet/incr_select/archive/7215c0d945f62e88904558074871bf845ce3bfe5.tar.gz"
-checksum: "sha256=d7d147fc23707db543c544ef688b2485ca72eab241e192ff253e4f220bbcecaf"
+src: "https://github.com/janestreet/incr_select/archive/2cfeeec63d53ac05ab149ea8fa015dd08f22d807.tar.gz"
+checksum: "sha256=343b2bb97d109cff0447a07a62e08455d384308c706a01bdcd2a35793a2b5369"
 }

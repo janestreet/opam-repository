@@ -14,7 +14,7 @@ depends: [
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "sexplib"  {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "num"
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -22,6 +22,6 @@ synopsis: "Runtime support for ppx_xml_conv and ppx_csv_conv_deprecated"
 description: "
 "
 url {
-src: "https://github.com/janestreet/csvfields/archive/5e369dc29dc284acf2dbefcf1ed08ad88901bc9f.tar.gz"
-checksum: "sha256=432b3d030701de59e17cc7dafac771c4b3de8a67252dad9c04f7a81090722b25"
+src: "https://github.com/janestreet/csvfields/archive/6579646d65b61919a39794b3742fda05305d2b03.tar.gz"
+checksum: "sha256=b2c88c55c1853363004a766bb8d91d914eba371bf03b1cec0e9ec826ba7aede1"
 }

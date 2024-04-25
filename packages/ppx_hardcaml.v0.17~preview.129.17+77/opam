@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.17~preview.129.17+77"}
   "hardcaml" {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "ppxlib"   {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -27,6 +27,6 @@ of bundles of ports when working with the Simulator, Netlist generation or
 hierarchical designs.
 "
 url {
-src: "https://github.com/janestreet/ppx_hardcaml/archive/d0c0d57aa9bc0fa3314b7d8714bc2bab36523e38.tar.gz"
-checksum: "sha256=216a4590a43f6932b341081b79f411e60e463cc67fdb8703a23e5348ed6e21be"
+src: "https://github.com/janestreet/ppx_hardcaml/archive/3b878896e75a01bc44c6572bdb6b805d665aa341.tar.gz"
+checksum: "sha256=665ebe9470456534df1cc5b7217394b1db6bcd3b89b33e152a7b895a9ba4f337"
 }

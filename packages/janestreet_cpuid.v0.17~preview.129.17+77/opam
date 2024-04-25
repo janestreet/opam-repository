@@ -14,7 +14,7 @@ depends: [
   "core"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 synopsis: "A library for parsing CPU capabilities out of the `cpuid` instruction."
 description: "
@@ -23,6 +23,6 @@ capabilities.
 "
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/janestreet_cpuid/archive/895fb96d861f0196d8f49cfacb389b3473d27134.tar.gz"
-checksum: "sha256=cfe6a40ddff74492d5d87400161cbb0c033c206a2259a5674b192f4aee0dc993"
+src: "https://github.com/janestreet/janestreet_cpuid/archive/5572e131d68ace262d752b375d1d5cc6ad88b227.tar.gz"
+checksum: "sha256=bc9e8ddb119984cf495ee227d271ceb2e326525778d6a24e94038f22d10ebf17"
 }

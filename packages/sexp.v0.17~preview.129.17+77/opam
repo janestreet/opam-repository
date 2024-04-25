@@ -25,7 +25,7 @@ depends: [
   "sexp_select" {= "v0.17~preview.129.17+77"}
   "sexplib"     {= "v0.17~preview.129.17+77"}
   "shell"       {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "S-expression swiss knife"
@@ -35,6 +35,6 @@ It contains subcommands for pretty printing, querying, and modifying
 sexps, as well as some conversions to and from other formats.
 "
 url {
-src: "https://github.com/janestreet/sexp/archive/d0cd60941890c897ec919cebd1ff9e8018d1eed0.tar.gz"
-checksum: "sha256=3d309c0e49a95d293c8da37b7639bd1fd222524849c2f506272150de8f63d36d"
+src: "https://github.com/janestreet/sexp/archive/84d7cffae28410449a234e344ca3de2334f4fc48.tar.gz"
+checksum: "sha256=07f9387dc72d398acd85c806db8ef4ebc1c487837229ed6ff444a58a7ec2c57a"
 }

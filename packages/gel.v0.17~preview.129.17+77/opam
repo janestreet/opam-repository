@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library to mark non-record fields global."
@@ -21,6 +21,6 @@ description: "
 A library to mark non-record fields global. GEL stands for Global Even if inside a Local.
 "
 url {
-src: "https://github.com/janestreet/gel/archive/4d4f3454b454a56cb8bac817423deefd66fc729a.tar.gz"
-checksum: "sha256=01b21ab61daae3032b7394cfc3515dc6f5dbb64201f1217ff4648cbadc135a53"
+src: "https://github.com/janestreet/gel/archive/45fd1a9aaab55aeb83a9a45f15f563ab31252f01.tar.gz"
+checksum: "sha256=496273baa0481fbfb8affde90ca827dc8fff6c961e46f026609f67fcea68ce78"
 }

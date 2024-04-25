@@ -16,7 +16,7 @@ depends: [
   "core"             {= "v0.17~preview.129.17+77"}
   "core_kernel"      {= "v0.17~preview.129.17+77"}
   "ppx_jane"         {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Durable connections for use with async"
@@ -24,6 +24,6 @@ description: "
 Async_durable helps recover from errors when connections can be easily be recreated.
 "
 url {
-src: "https://github.com/janestreet/async_durable/archive/f5ecdc7f04275d65671ea0e3762e599dc52edf12.tar.gz"
-checksum: "sha256=76a55d12a3090286481192d4e1812d9e0b8e8bd096ddfd19cb3c0fe896a5e963"
+src: "https://github.com/janestreet/async_durable/archive/a118cbe1acedc528ed8bd825ad0676fda7b540e1.tar.gz"
+checksum: "sha256=8514d06cae1a9b23b52d7b261137763ef1dc2d3e0baf08ce63d8d390910cf681"
 }

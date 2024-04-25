@@ -15,7 +15,7 @@ depends: [
   "csvfields"       {= "v0.17~preview.129.17+77"}
   "ppx_conv_func"   {= "v0.17~preview.129.17+77"}
   "ppx_fields_conv" {= "v0.17~preview.129.17+77"}
-  "dune"            {>= "2.0.0"}
+  "dune"            {>= "3.11.0"}
   "ppxlib"          {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_csv_conv/archive/52ce719a29707a3ba100c0c58cf333f324b84c3b.tar.gz"
-checksum: "sha256=aa55d59f6a7b82bb614460865f0cefdcd20deb21b6af2e1f47cfadec478f081d"
+src: "https://github.com/janestreet/ppx_csv_conv/archive/37ad795abdd15c9ccc46eae2c8641f962a36eda7.tar.gz"
+checksum: "sha256=e9f785ad44285fd353e00a6f477b2c3b0e6577954dfe943e8055e2a2401bc62d"
 }

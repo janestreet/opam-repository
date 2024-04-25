@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"    {>= "5.1.0"}
   "sexplib0" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "S-expression parsing library"
@@ -38,6 +38,6 @@ s-expressions from files or other external sources, you should use
 parsexp_io.
 "
 url {
-src: "https://github.com/janestreet/parsexp/archive/6e01ff2232328f0af7578c8233d650dafe82fd12.tar.gz"
-checksum: "sha256=2b11900bd86b656b2e3a9d75d8f1d25eb6f0f35c8067d727e82b1d4169229311"
+src: "https://github.com/janestreet/parsexp/archive/9c75383f40d04d0875f4e21c303bdd343d95d275.tar.gz"
+checksum: "sha256=74eeea1db6488051aa10f9b5f2463a8060178d663e36ddfdcd771b1649246365"
 }

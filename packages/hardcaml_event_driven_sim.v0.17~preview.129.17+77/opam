@@ -16,7 +16,7 @@ depends: [
   "hardcaml"          {= "v0.17~preview.129.17+77"}
   "hardcaml_waveterm" {= "v0.17~preview.129.17+77"}
   "ppx_jane"          {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml Event Driven Simulator"
@@ -29,6 +29,6 @@ The main library provides means to convert a Hardcaml design into an event drive
 simulation model and write testbenches against it.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_event_driven_sim/archive/f5cc597db268b68ec250680b3e46dcaffcf9b068.tar.gz"
-checksum: "sha256=483bcf76c9bb9556c80eaec15d25567970f786cbf0373901317e6ae4fc7891f5"
+src: "https://github.com/janestreet/hardcaml_event_driven_sim/archive/f3593b8c4d1e9f7bdcdfc572082d0c36699aed00.tar.gz"
+checksum: "sha256=52f77039e5ac498b0d897e93d1d040cae0df6f71a962440b2519f39be70ba4ce"
 }

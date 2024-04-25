@@ -17,7 +17,7 @@ depends: [
   "core_unix"   {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
   "sexplib"     {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Type-safe parallel library built on top of Async_rpc"
@@ -28,6 +28,6 @@ Async Rpc.
 
 "
 url {
-src: "https://github.com/janestreet/rpc_parallel/archive/d395c84e1109d1a8b012aec5659c276aa91dbf15.tar.gz"
-checksum: "sha256=cc2ae31ab5ce4d30c70311f5600a546883304ce95e3461c7da7894e7e6185714"
+src: "https://github.com/janestreet/rpc_parallel/archive/4d302450586fdaf7d90b1117cb7bce5c028aaf60.tar.gz"
+checksum: "sha256=a3ff150cfa25745048fc88e37f39073a2025f58fdcbd5c38badc9f9c1fefc448"
 }

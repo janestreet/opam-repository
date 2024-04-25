@@ -15,7 +15,7 @@ depends: [
   "core"      {= "v0.17~preview.129.17+77"}
   "core_unix" {= "v0.17~preview.129.17+77"}
   "ppx_jane"  {= "v0.17~preview.129.17+77"}
-  "dune"      {>= "2.0.0"}
+  "dune"      {>= "3.11.0"}
   "spawn"     {>= "v0.15"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -23,6 +23,6 @@ synopsis: "Utilities for building simple command-line based user interfaces"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_interactive/archive/a30c4513554b3abf54ee7ad4bf10df7e2af846ad.tar.gz"
-checksum: "sha256=0002cad45f81fd5c9b42b38339b6e7d4bea5f3b5dd46806bd9fdb772a2015990"
+src: "https://github.com/janestreet/async_interactive/archive/461e1fe67a7cffc7bd84e66443fe18dd9a85351e.tar.gz"
+checksum: "sha256=00c44a1e74d37bc32993c2b3cca39980cc3ef7f9da2c0daef5dd600203c712fb"
 }

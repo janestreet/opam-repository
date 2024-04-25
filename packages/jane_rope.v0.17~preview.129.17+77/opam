@@ -13,13 +13,13 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "String representation with cheap concatenation."
 description: "
 "
 url {
-src: "https://github.com/janestreet/jane_rope/archive/1a66ef8139fc7855c4e55bf87f7ee2c4d0e8c4f9.tar.gz"
-checksum: "sha256=25c3e591bc52ed4148d65116548ce691ba5783f2b2eebf363074d7ec5ac392af"
+src: "https://github.com/janestreet/jane_rope/archive/8f83dcdda9a764aec014b6aaa58e7772a9108f36.tar.gz"
+checksum: "sha256=0f00420cfe3bfc9073213d1ff57764798f6e78dd2b9f6381ebb5602c1a9cd44f"
 }

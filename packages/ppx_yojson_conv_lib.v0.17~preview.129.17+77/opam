@@ -11,7 +11,7 @@ build: [
 ]
 depends: [
   "ocaml"  {>= "5.1.0"}
-  "dune"   {>= "2.0.0"}
+  "dune"   {>= "3.11.0"}
   "yojson" {>= "1.7.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -20,6 +20,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_yojson_conv_lib/archive/f2a8703652adb48c008efe5337064e5a535dd357.tar.gz"
-checksum: "sha256=69dbd850a7bbd76d3c8d0b6eecb43452f46f18a1dc05678c02de114e2a14836d"
+src: "https://github.com/janestreet/ppx_yojson_conv_lib/archive/9a26ef422670f2dde6c99fc7bfd83dd710298ca6.tar.gz"
+checksum: "sha256=4c896579cb96c72883bbb8313a41374b4d92e92b8ee62278f63caf77aa5f4f90"
 }

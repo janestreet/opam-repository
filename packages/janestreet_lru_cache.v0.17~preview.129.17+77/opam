@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "An LRU Cache implementation."
@@ -21,6 +21,6 @@ description: "
 Implementation of a Least Recently Used Cache.
 "
 url {
-src: "https://github.com/janestreet/janestreet_lru_cache/archive/97c4178cb64d7d4b355bb126959bbbb59117996a.tar.gz"
-checksum: "sha256=a0ba7d237d2528c8243fca1442b484a6204d75c8cc5c793d07ce3cf61458aba8"
+src: "https://github.com/janestreet/janestreet_lru_cache/archive/40e964fa1bb25484b1a61b608f2d2771fc14708c.tar.gz"
+checksum: "sha256=0a8d2b0ac868e730bb4678cf80349f2ab600aa3c4ef286f1cd0f6ebcc2ff2314"
 }

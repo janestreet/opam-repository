@@ -18,7 +18,7 @@ depends: [
   "ppx_jane"       {= "v0.17~preview.129.17+77"}
   "ctypes"         {>= "0.18.0"}
   "ctypes-foreign"
-  "dune"           {>= "2.0.0"}
+  "dune"           {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml C Simulation Backend"
@@ -30,6 +30,6 @@ and linked into the running executable. The generated simulation object can be u
 any other cyclesim simulation.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_c/archive/a1e1fa90f07ce40b76fb24a3e4d3f35befec96e0.tar.gz"
-checksum: "sha256=1c8f8bbe60df3c8e11f0460386325635338eaedc2e821110644d9eaab71cd9fa"
+src: "https://github.com/janestreet/hardcaml_c/archive/9e9ac3af724e1ce9f8141c413ae19cc56da6ed87.tar.gz"
+checksum: "sha256=99d7f6ace49a4dca547ea89ee34d14438c403eb5f125bf07174d8f625a2493d5"
 }

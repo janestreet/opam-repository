@@ -13,7 +13,7 @@ depends: [
   "ocaml"             {>= "5.1.0"}
   "base"              {= "v0.17~preview.129.17+77"}
   "regex_parser_intf" {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "re"                {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ Applicative-based interface for parsing using regular expressions from `ocaml-re
 Shares its interface with `Re2.Parser`.
 "
 url {
-src: "https://github.com/janestreet/re_parser/archive/7449d6196434f40e670abc566dcfcb47b6e896b9.tar.gz"
-checksum: "sha256=ef018058d0959c07195b33abaabd7c7dbe7f909f7119cebd6de05b3383002138"
+src: "https://github.com/janestreet/re_parser/archive/955406b21364c4f6025fb0c92dea94e0f0da4840.tar.gz"
+checksum: "sha256=febd248699a8626d0f63cf8018b0b60775092b39101357a8c49550533a5708c3"
 }

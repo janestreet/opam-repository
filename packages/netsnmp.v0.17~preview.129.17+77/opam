@@ -15,7 +15,7 @@ depends: [
   "core"         {= "v0.17~preview.129.17+77"}
   "ppx_jane"     {= "v0.17~preview.129.17+77"}
   "conf-netsnmp" {>= "1.0.0"}
-  "dune"         {>= "2.0.0"}
+  "dune"         {>= "3.11.0"}
   "re"           {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -28,6 +28,6 @@ depexts: [
   ["net-snmp"] {os-family = "arch"}
 ]
 url {
-src: "https://github.com/janestreet/netsnmp/archive/4e87cee6a1359ab21a4b0959a84398dc5c7ef38a.tar.gz"
-checksum: "sha256=c8635f126f1399a5bcf7e3566639cd27ae328a37cfde9e964a13bc704c1778e7"
+src: "https://github.com/janestreet/netsnmp/archive/4c4d0e23cee4d30c168876cffb50bb612a7cb3d7.tar.gz"
+checksum: "sha256=0f0fb000c6b2903c31a383cb556d547b0aab993014e81ab69a3851db8fcbd76e"
 }

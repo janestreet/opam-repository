@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A minimal library for generating ordinal names of integers."
@@ -21,6 +21,6 @@ description: "
 A minimal library for generating ordinal names of integers.
 "
 url {
-src: "https://github.com/janestreet/ordinal_abbreviation/archive/1f86f6552f562f6fe6a081a78a91d2812037ae22.tar.gz"
-checksum: "sha256=1171d269fff9fe696b8b6b173dab918a4ac33a46b3705e9eeb96262d113e90a7"
+src: "https://github.com/janestreet/ordinal_abbreviation/archive/3011307ff20458e82e941a9b7823bc6e7342fa7d.tar.gz"
+checksum: "sha256=e9d81330797c02d53b2d888e976c98f5bd742468b5229b4f950036a33115f75e"
 }

@@ -14,7 +14,7 @@ depends: [
   "base"                     {= "v0.17~preview.129.17+77"}
   "expect_test_helpers_core" {= "v0.17~preview.129.17+77"}
   "ppx_jane"                 {= "v0.17~preview.129.17+77"}
-  "dune"                     {>= "2.0.0"}
+  "dune"                     {>= "3.11.0"}
   "ppxlib"                   {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -26,6 +26,6 @@ a ppx by hand. For example, to get `[@@deriving foo]`, you only have to
 specify a module path such as `My_library.Foo`.
 "
 url {
-src: "https://github.com/janestreet/ppx_derive_at_runtime/archive/d3e435e3487444e497a466bb5f9b2647676cb57c.tar.gz"
-checksum: "sha256=3b72bedcbd3c0e281641c0d6aeea5e98afc58be77dc62625f5b87df003ef539c"
+src: "https://github.com/janestreet/ppx_derive_at_runtime/archive/a0ea6fd0e712445d31900e5c27abc4c1cce87887.tar.gz"
+checksum: "sha256=eb587b4609b9fa18c0c1c404982bc6bd72393148703ba46a0e281557bc6ded59"
 }

@@ -19,7 +19,7 @@ depends: [
   "ppx_jane"                 {= "v0.17~preview.129.17+77"}
   "ppx_sexp_conv"            {= "v0.17~preview.129.17+77"}
   "ppx_sexp_message"         {= "v0.17~preview.129.17+77"}
-  "dune"                     {>= "2.0.0"}
+  "dune"                     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for N-ary datatypes and operations."
@@ -31,6 +31,6 @@ Provides tuples, enumerations, variants, and list operations
 implemented for N from 2 to 16, inclusive.
 "
 url {
-src: "https://github.com/janestreet/n_ary/archive/fa0c130f199bfda40105db94d64c0c0585f81c85.tar.gz"
-checksum: "sha256=49cc1cfe2901466b07716c98b05af6480f9092b48d2b4e17c01e76eda8708607"
+src: "https://github.com/janestreet/n_ary/archive/6003c24f1ebac34ab5eb162d9e57999c30a35b8f.tar.gz"
+checksum: "sha256=e4ec731b7f159e20485a253f5601cd71790d78e725f4abbd29da368fb4b7564e"
 }

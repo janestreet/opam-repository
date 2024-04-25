@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A small library describing abstract algebra concepts"
@@ -22,6 +22,6 @@ A library describing abstract algebra concepts. Currently, it includes
 Commutative_group and Vector_space.
 "
 url {
-src: "https://github.com/janestreet/abstract_algebra/archive/b80d3d465e591e2b7c7580cdd9ccd573cc9bc6e4.tar.gz"
-checksum: "sha256=38f3d7d81f80b97b482f514e629cf9fa988db62e7d883a7569b5ab48e2aaed43"
+src: "https://github.com/janestreet/abstract_algebra/archive/e639b8a3ae8a8d769a5ee89f951ef6b9ccbb0587.tar.gz"
+checksum: "sha256=c3111945bdc0347738d82848744c628476aba5dd494afff695165572b7b61cfd"
 }

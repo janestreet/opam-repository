@@ -33,7 +33,7 @@ depends: [
   "time_now"            {= "v0.17~preview.129.17+77"}
   "typerep"             {= "v0.17~preview.129.17+77"}
   "variantslib"         {= "v0.17~preview.129.17+77"}
-  "dune"                {>= "2.0.0"}
+  "dune"                {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Industrial strength alternative to OCaml's standard library"
@@ -45,6 +45,6 @@ largest industrial user of OCaml.
 This is the system-independent part of Core. Unix-specific parts were moved to [core_unix].
 "
 url {
-src: "https://github.com/janestreet/core/archive/78bce767004d14dd412630b66d51686e145f8a9c.tar.gz"
-checksum: "sha256=8bbc719f64602856048ffdc5afb765316330aa71dbd6e69ffbeaae051d7582a4"
+src: "https://github.com/janestreet/core/archive/b3a5ffa9bb3b530f48c2c39cd5508b9141b36b07.tar.gz"
+checksum: "sha256=664af7a2257b4e7be17d61b49877ebfecd3114a0c10777d325e760063004c1f5"
 }

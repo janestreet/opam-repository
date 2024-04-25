@@ -13,7 +13,7 @@ depends: [
   "ocaml"             {>= "5.1.0"}
   "base"              {= "v0.17~preview.129.17+77"}
   "ppx_assert"        {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "dune-configurator"
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -27,6 +27,6 @@ different packages from Jane Street. Future updates may not be backward-compatib
 do not recommend using this package directly.
 "
 url {
-src: "https://github.com/janestreet/jst-config/archive/d3de8635dcf027a1c515b243d51bc4c501b5d2fa.tar.gz"
-checksum: "sha256=8aa09440e293fca4531039b38727e1dfc913c5390d0e21a84300e20c90696ff2"
+src: "https://github.com/janestreet/jst-config/archive/6b0cc3a74be3bbf736caed4b385a315faf1f3ac8.tar.gz"
+checksum: "sha256=530449962b963b6d26f99867aba5fe0737b180dabe090afedc906b11bc4bf68a"
 }

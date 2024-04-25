@@ -14,7 +14,7 @@ depends: [
   "core"        {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
   "virtual_dom" {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Icons from VS code"
@@ -22,6 +22,6 @@ description: "
 Icons from VS code
 "
 url {
-src: "https://github.com/janestreet/codicons/archive/a369175a7bcdef7a8aa3a0c4aca0c93b0b342bec.tar.gz"
-checksum: "sha256=5ee43948bacae13750793df616820eaa928ee9cc89ff98b5ad8760a725cfa409"
+src: "https://github.com/janestreet/codicons/archive/88994910f856429b50e98122af07105fb662a60b.tar.gz"
+checksum: "sha256=97794acb1b7adf41bfb55384226ca053c46b2469fc0c99ff6034f881a3036a3c"
 }

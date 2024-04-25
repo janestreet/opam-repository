@@ -18,7 +18,7 @@ depends: [
   "ppx_optcomp"  {= "v0.17~preview.129.17+77"}
   "uopt"         {= "v0.17~preview.129.17+77"}
   "base-threads"
-  "dune"         {>= "2.0.0"}
+  "dune"         {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Industrial strength alternative to OCaml's standard library"
@@ -30,6 +30,6 @@ largest industrial user of OCaml.
 Core_kernel is the system-independent part of Core.
 "
 url {
-src: "https://github.com/janestreet/core_kernel/archive/3a8c1a198a0bc61a4e040ec6a5d3df23447359d2.tar.gz"
-checksum: "sha256=a55198e6a953861a99566dfb2e628bcb65f642ed1261c2e7e35c18c8996b9cfe"
+src: "https://github.com/janestreet/core_kernel/archive/5e0920bc2b22154c40e7b8a4c3513bfb9ce42341.tar.gz"
+checksum: "sha256=717d3080d07423dbd2be6ab48e66e15ddffa11a97150c2907f6f094e0e5c8903"
 }

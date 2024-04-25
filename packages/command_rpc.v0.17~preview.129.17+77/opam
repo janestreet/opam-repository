@@ -14,13 +14,13 @@ depends: [
   "async"    {= "v0.17~preview.129.17+77"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Utilities for Versioned RPC communication with a child process over stdin and stdout"
 description: "
 "
 url {
-src: "https://github.com/janestreet/command_rpc/archive/644dde92a2408e04c4aa11b4f166ec0fd0fc3ad3.tar.gz"
-checksum: "sha256=1f04cfd7de0fe1a6ac848abfe8c1eb7d8b1d743fae7af5c43b1df8bdaec323fe"
+src: "https://github.com/janestreet/command_rpc/archive/3125cf0c84fdc90512cc6772b5121a2c0f0b952a.tar.gz"
+checksum: "sha256=f2f8f45b5b5d2de15a1e686ae89b08877dc28a0db08e404eaf167d5682357420"
 }

@@ -19,7 +19,7 @@ depends: [
   "base64"          {>= "3.4.0"}
   "cohttp"          {>= "2.5.6"}
   "cohttp-async"    {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
-  "dune"            {>= "2.0.0"}
+  "dune"            {>= "3.11.0"}
   "uri-sexp"        {>= "3.0.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -36,6 +36,6 @@ hardened with many applications using it for several year, in
 conjunction with async-js and google-chrome.
 "
 url {
-src: "https://github.com/janestreet/cohttp_async_websocket/archive/f858ca39a8468a89b4a63018a0a647fed115388c.tar.gz"
-checksum: "sha256=e0228e818aa3f8766189912bd3725f0c360fe853f941ac9b99bf8236a35593c6"
+src: "https://github.com/janestreet/cohttp_async_websocket/archive/5b43541866786ad2cffb20d2e170aedb7b977526.tar.gz"
+checksum: "sha256=aec261b73ebe9c4114f1cc37cdd2b40bcd33ab69e29cbdc51a6bce9477da3d24"
 }

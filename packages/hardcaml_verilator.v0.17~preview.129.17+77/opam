@@ -18,7 +18,7 @@ depends: [
   "ppx_jane"       {= "v0.17~preview.129.17+77"}
   "ctypes"         {>= "0.18.0"}
   "ctypes-foreign"
-  "dune"           {>= "2.0.0"}
+  "dune"           {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml Verilator Simulation Backend"
@@ -29,6 +29,6 @@ This library transparently compiles a verilator-based shared library, and links 
 to the running executable to be used as a Cyclesim simulation.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_verilator/archive/8c439635ded2fa05991abe266fbb2eb973415c3a.tar.gz"
-checksum: "sha256=78e7cac89ec1017bc0986b1c0bc031a707901c8d299a6f3aa500d5762bf866ea"
+src: "https://github.com/janestreet/hardcaml_verilator/archive/022a77dd8a13bb116db52af7ba0bfa571edc57ab.tar.gz"
+checksum: "sha256=52e2a485e6ce475acb85d11915cccf5080159763ab3f69120183f3aff1987e1d"
 }

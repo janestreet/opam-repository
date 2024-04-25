@@ -18,7 +18,7 @@ depends: [
   "jsonaf"           {= "v0.17~preview.129.17+77"}
   "ppx_jane"         {= "v0.17~preview.129.17+77"}
   "ppx_jsonaf_conv"  {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
   "httpaf"           {>= "0.7.1"}
   "jingoo"           {>= "1.4.4" & < "1.5.0"}
   "ocaml-embed-file" {= "v0.17~preview.129.17+77"}
@@ -30,6 +30,6 @@ description: "
 An OpenAPI 3 to OCaml client generator.
 "
 url {
-src: "https://github.com/janestreet/ocaml_openapi_generator/archive/801da729f9f59c8ed9d7d24cf7898ee43e35975b.tar.gz"
-checksum: "sha256=ff2b5a12ffc26da6014f82ee90e577805c3d884db5b471c109b0e51a737174eb"
+src: "https://github.com/janestreet/ocaml_openapi_generator/archive/61ccd27b4374f4160687e373d11e870e926953df.tar.gz"
+checksum: "sha256=c100a900ae1e20dadc66629918e551351d6bcdd91e38134eb2f8ba12cc3d6a42"
 }

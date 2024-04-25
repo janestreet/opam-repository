@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "parsexp"  {= "v0.17~preview.129.17+77"}
   "sexplib0" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "num"
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -25,6 +25,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/sexplib/archive/8b3f952240b41f2bfdf185095353ad0f3059d95f.tar.gz"
-checksum: "sha256=5563d1908e99c34029f61b587adaf7cc7da7906e77ba5d76d7a562d259ea8769"
+src: "https://github.com/janestreet/sexplib/archive/f1d3a84dabf9e025c6d7c781a38df3289ea99f22.tar.gz"
+checksum: "sha256=35de5af60d094be14162f56e9c4bc514cf050cf85ca94108ad1aea5c98f056aa"
 }

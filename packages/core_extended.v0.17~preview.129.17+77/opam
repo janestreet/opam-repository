@@ -16,7 +16,7 @@ depends: [
   "core_unix"      {= "v0.17~preview.129.17+77"}
   "ppx_jane"       {= "v0.17~preview.129.17+77"}
   "record_builder" {= "v0.17~preview.129.17+77"}
-  "dune"           {>= "2.0.0"}
+  "dune"           {>= "3.11.0"}
   "re"             {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -27,6 +27,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/core_extended/archive/49bae3090a5bd979883ab00890f54fd6cbb126da.tar.gz"
-checksum: "sha256=c7271ad5fceb717db6315179d581dc5a4171f85200603fd5b7161cf90f0cc7c0"
+src: "https://github.com/janestreet/core_extended/archive/9d4ade00b7d98977b3452394c2e9de875e42f7e8.tar.gz"
+checksum: "sha256=f14a32573d6ff6abe2884c130f7b3eb3dda487bdb6130c7606d00c115b1e833b"
 }

@@ -20,7 +20,7 @@ depends: [
   "ppx_jane"        {= "v0.17~preview.129.17+77"}
   "splay_tree"      {= "v0.17~preview.129.17+77"}
   "virtual_dom"     {= "v0.17~preview.129.17+77"}
-  "dune"            {>= "2.0.0"}
+  "dune"            {>= "3.11.0"}
   "js_of_ocaml"     {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx" {>= "5.1.1" & < "5.7.0"}
 ]
@@ -30,6 +30,6 @@ description: "
 This library allows your program to receive input from the user using DOM elements such as checkboxes, text fields, and buttons. It allows you to inspect the user's input and decide afterwards what the rest of the [Interactive.t] should be. This library is intended to be used in conjunction with Incr_dom.
 "
 url {
-src: "https://github.com/janestreet/incr_dom_interactive/archive/102400935f96cd6928b1397bda7f41218d34fe65.tar.gz"
-checksum: "sha256=66ca62919f72d7f783f39f674d83711afdc75181fd5867ec3ec02b5e23d75222"
+src: "https://github.com/janestreet/incr_dom_interactive/archive/45f3c4474e935a2f6f627d85d555ef85be4d3daf.tar.gz"
+checksum: "sha256=90e9ae745831a1604a360c69b37253bf0895517c25e6e25b14b989e9897d3d66"
 }

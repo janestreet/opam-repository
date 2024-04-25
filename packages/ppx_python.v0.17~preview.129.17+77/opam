@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_base" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "ppxlib"   {>= "0.28.0"}
   "pyml"     {>= "20211015"}
 ]
@@ -23,6 +23,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_python/archive/f5265aac219d6aad7bcc6b8a5b46d64d97985ae3.tar.gz"
-checksum: "sha256=a032cfd6b486da1552f4d9917109f0f650ff771e43c7d33d3f4c5c82264e6ef5"
+src: "https://github.com/janestreet/ppx_python/archive/e325978857849e42fddb069fa7241187a8e27e6d.tar.gz"
+checksum: "sha256=e3558099fea308d122774d3b7c024d8f91fc7b9674ff22d0044042244a11a485"
 }

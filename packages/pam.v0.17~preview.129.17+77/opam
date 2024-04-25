@@ -14,7 +14,7 @@ depends: [
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "conf-pam"
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "OCaml bindings for the Linux-PAM library"
@@ -27,6 +27,6 @@ depexts: [
   ["pam-devel"] {os-family = "fedora"}
 ]
 url {
-src: "https://github.com/janestreet/pam/archive/6626b303c6912d86e3970fb96ccd26d825608bdd.tar.gz"
-checksum: "sha256=38ef8da74243897a1daf7317c8cd563fa2a63dadf5f4ba0bcc0695e400c288f1"
+src: "https://github.com/janestreet/pam/archive/edf99f38d2ed2766477e123bf8e2093910b1abe4.tar.gz"
+checksum: "sha256=6ac1ac769e3bae526dc0a8bdcc75b7d25b292f98a5d31ad3284a02d0e2e3748f"
 }

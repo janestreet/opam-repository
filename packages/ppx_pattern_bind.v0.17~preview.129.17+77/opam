@@ -13,7 +13,7 @@ depends: [
   "ocaml"   {>= "5.1.0"}
   "base"    {= "v0.17~preview.129.17+77"}
   "ppx_let" {= "v0.17~preview.129.17+77"}
-  "dune"    {>= "2.0.0"}
+  "dune"    {>= "3.11.0"}
   "ppxlib"  {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ easier to write incremental computations using pattern-matching in a
 way that causes incremental nodes to fire as little as possible.
 "
 url {
-src: "https://github.com/janestreet/ppx_pattern_bind/archive/319ddbd285e4e07ebd3bd4be51a7f4649bc9db83.tar.gz"
-checksum: "sha256=33e4bb796b5aec8b570e4208d87d2b99f0fd261a47f7064cd699315667727e92"
+src: "https://github.com/janestreet/ppx_pattern_bind/archive/8b07ec0808a59b031444ba49c476608a5f9aded4.tar.gz"
+checksum: "sha256=aa881ef0a56dd57e9b8b4648ff665c9689bd4d4015511ce98a8e47f845a5e8e4"
 }

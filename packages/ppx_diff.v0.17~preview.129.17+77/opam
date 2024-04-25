@@ -17,7 +17,7 @@ depends: [
   "ppx_enumerate" {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
   "ppxlib_jane"   {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
   "ppxlib"        {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -26,6 +26,6 @@ description: "
 A PPX rewriter that generates the implementation of [Ldiffable.S]. Generates diffs and update functions for OCaml types.
 "
 url {
-src: "https://github.com/janestreet/ppx_diff/archive/e7cc1c01eb957dd6c0d55364fa9217ef38cc94ae.tar.gz"
-checksum: "sha256=4ff34682181420f52e2d88b755abab8316bf7304eec98e1a5a5f497057c78ec0"
+src: "https://github.com/janestreet/ppx_diff/archive/736cefad731ec9005b0bf7145bf91d814beef5ba.tar.gz"
+checksum: "sha256=e599cc2debb9d8a5039afa76b23d0a33ee72a90969ad26ca1bb5b470643c3544"
 }

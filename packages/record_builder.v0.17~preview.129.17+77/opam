@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library which provides traversal of records with an applicative"
@@ -25,6 +25,6 @@ automatically handles all of the mapping and combining of applicative terms
 needed to build the record from a single applicative term for each field.
 "
 url {
-src: "https://github.com/janestreet/record_builder/archive/286c167c72fbc9102910b65a421dff9b656c9893.tar.gz"
-checksum: "sha256=e6245ba07ded17da4dc0ef5ff6f26df1444e8093b9d25d747105a583313f4655"
+src: "https://github.com/janestreet/record_builder/archive/4fd4c62471c8260b64321969186ff262fb0d23fa.tar.gz"
+checksum: "sha256=e779efb07aff23458af85d5169fff9c25aefbb4b5fabf5016e51b866f1a4ed3b"
 }

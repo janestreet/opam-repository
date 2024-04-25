@@ -14,7 +14,7 @@ depends: [
   "base"        {= "v0.17~preview.129.17+77"}
   "ppx_compare" {= "v0.17~preview.129.17+77"}
   "ppx_hash"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Efficient static string dictionaries"
@@ -27,6 +27,6 @@ This uses the algorithm the OCaml compiler uses for pattern matching
 on strings.
 "
 url {
-src: "https://github.com/janestreet/string_dict/archive/00854f13e5efae00b1c21e18be09036b9e43f0c2.tar.gz"
-checksum: "sha256=d6f07de9d5b4f0234438cae78d09534b9117d7c85d0e220084ae552aab08b674"
+src: "https://github.com/janestreet/string_dict/archive/97d71dbdf569136d9abde08a288407e19a01403e.tar.gz"
+checksum: "sha256=2d5222a9164eae425bd976f1d09d357a016a4d9bff225b6c89ac635a278bee49"
 }

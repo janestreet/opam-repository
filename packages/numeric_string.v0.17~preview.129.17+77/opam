@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A comparison function for strings that sorts numeric fragments of strings according to their numeric value, so that e.g. \"abc2\" < \"abc10\"."
@@ -34,6 +34,6 @@ include a different treatment of case, special handling of whitespace
 or punctuation, etc.)
 "
 url {
-src: "https://github.com/janestreet/numeric_string/archive/73b1cfa253ce5466bf5e1bedc24a3e2f11014adb.tar.gz"
-checksum: "sha256=50ae5a138ceaa44ab0c33f09be373c18157e6922217ccaf69bf52fd597a43671"
+src: "https://github.com/janestreet/numeric_string/archive/81adaadd3f51c26c308044f3fb62d6f2455d2933.tar.gz"
+checksum: "sha256=999ffdf64a0afcd1081c131aadb1175971e55a9ea3e5b33d724d62694d05f11d"
 }

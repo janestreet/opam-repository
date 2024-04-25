@@ -16,7 +16,7 @@ depends: [
   "ppx_accessor"  {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
   "ppx_optcomp"   {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Accessors for Core types, for use with the Accessor library"
@@ -24,6 +24,6 @@ description: "
 This library provides accessors for numerous types in Core.
 "
 url {
-src: "https://github.com/janestreet/accessor_core/archive/12f51eb950b262808cc44bf419c7cc7fc103682d.tar.gz"
-checksum: "sha256=603d9afd6a8803f7d23d1a09a715ad4d6d07566109b46d76e43de03f971fd2db"
+src: "https://github.com/janestreet/accessor_core/archive/469bcaada4fffa087b5d352a4146ac0a08f9979e.tar.gz"
+checksum: "sha256=c7a4df79d32c245e0d2807a8f17bb45d2989cc1698c914f71b7bc5531d89f354"
 }

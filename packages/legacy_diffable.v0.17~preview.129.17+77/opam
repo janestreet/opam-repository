@@ -15,7 +15,7 @@ depends: [
   "ppx_jane"        {= "v0.17~preview.129.17+77"}
   "stored_reversed" {= "v0.17~preview.129.17+77"}
   "streamable"      {= "v0.17~preview.129.17+77"}
-  "dune"            {>= "2.0.0"}
+  "dune"            {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "An interface for diffs."
@@ -23,6 +23,6 @@ description: "
 Diffable interface.
 "
 url {
-src: "https://github.com/janestreet/legacy_diffable/archive/fab5ff2ebffe3c2aac6d1724d3b91cfc59d84f90.tar.gz"
-checksum: "sha256=5384b5127c9d968b234964f91d850c50a15f0ec9a93d31eaca0904db9fac32e7"
+src: "https://github.com/janestreet/legacy_diffable/archive/9628bb9455af285477507b266cee8ec5a327e3c2.tar.gz"
+checksum: "sha256=0313ca8f3b5a90d3b0a462a72079253b408a61d43d36a1a726ff7a2b7c952c08"
 }

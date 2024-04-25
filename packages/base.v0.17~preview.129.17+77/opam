@@ -13,7 +13,7 @@ depends: [
   "ocaml"                   {>= "5.1.0"}
   "ocaml_intrinsics_kernel" {= "v0.17~preview.129.17+77"}
   "sexplib0"                {= "v0.17~preview.129.17+77"}
-  "dune"                    {>= "2.0.0"}
+  "dune"                    {>= "3.11.0"}
   "dune-configurator"
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -33,6 +33,6 @@ provided by companion libraries such as stdio:
   https://github.com/janestreet/stdio
 "
 url {
-src: "https://github.com/janestreet/base/archive/21579b5903c81be975591b0a9f12699be8380594.tar.gz"
-checksum: "sha256=0689cec882e9a9bd6a9215ad253a34557adf7cd8f8a5a2aa0d4bc465a5315b76"
+src: "https://github.com/janestreet/base/archive/3ce90cf26c60eea1f965f2358111e7cabc924953.tar.gz"
+checksum: "sha256=b8ae01b89888a7f931b36614cd67aa1dfb1f2ed1aa490555539efeaa531bbc9d"
 }

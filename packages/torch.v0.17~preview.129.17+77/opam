@@ -21,7 +21,7 @@ depends: [
   "stdio"               {= "v0.17~preview.129.17+77"}
   "ctypes"              {>= "0.18.0"}
   "ctypes-foreign"
-  "dune"                {>= "2.0.0"}
+  "dune"                {>= "3.11.0"}
   "dune-configurator"
   "ocaml-compiler-libs" {>= "v0.11.0"}
 ]
@@ -39,6 +39,6 @@ This brings to OCaml NumPy-like tensor computations with GPU acceleration and
 tape-based automatic differentiation.
 "
 url {
-src: "https://github.com/janestreet/torch/archive/4083b0965f9b30b307454d403c9e1ea22661230f.tar.gz"
-checksum: "sha256=b455c8826afba875c0668684bddf060275b359d3aba92ca67f5e351f384f1383"
+src: "https://github.com/janestreet/torch/archive/9f38904198cd4182c77a8442f47b8dcae6a15172.tar.gz"
+checksum: "sha256=6ce7c14c6ddaace951d1d65a2af9e4c0be11e3a487a2d3bd5b25b9439217b930"
 }

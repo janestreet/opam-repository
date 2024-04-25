@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "async"    {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "notty"    {>= "0.2.1"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ is an Async driver, which makes it easy to build terminal applications using
 Async for managing concurrency.
 "
 url {
-src: "https://github.com/janestreet/notty_async/archive/31204d7d3281b26175e5b9769db36cb784f22630.tar.gz"
-checksum: "sha256=85741b9278d649caae6a433a49e636e2e21943027deb40225de231efc13caacf"
+src: "https://github.com/janestreet/notty_async/archive/c5b5bba6ad5f0c3f598e108d602d19f2b9b199a6.tar.gz"
+checksum: "sha256=7e7749dcbf56c4f2da57ff825b250889602b8f24608286dc8f87fe3b2c365798"
 }

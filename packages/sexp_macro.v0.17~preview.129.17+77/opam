@@ -15,7 +15,7 @@ depends: [
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "sexplib"  {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Sexp macros"
@@ -24,6 +24,6 @@ Sexp macros allow the user to define and use constants and simple functions in s
 include one sexp file in another.
 "
 url {
-src: "https://github.com/janestreet/sexp_macro/archive/934fc0476880069bd4b7ffc843398d7995ade4bc.tar.gz"
-checksum: "sha256=86df6291e9c5964c12f20d3052b0ad811d3f17c855877d6969bbca711ac2c618"
+src: "https://github.com/janestreet/sexp_macro/archive/706bb1ce4f5e4c064672a6bf881f3a46888107f3.tar.gz"
+checksum: "sha256=2378c606c887a2ddc2a3ddf3219ebf07fc204e0a247cfcf17d0781f8b6fa62f2"
 }

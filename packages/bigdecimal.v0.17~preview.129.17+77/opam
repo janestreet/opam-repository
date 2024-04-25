@@ -14,7 +14,7 @@ depends: [
   "bignum"   {= "v0.17~preview.129.17+77"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "zarith"   {>= "1.11"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ A high-precision representation of decimal numbers as [mantissa * 10^exponent], 
 the mantissa is internally a [Bigint.t] and the exponent is an [int].
 "
 url {
-src: "https://github.com/janestreet/bigdecimal/archive/ce5c6ce1e8bcae045c02d9544d8ea6998f4afe64.tar.gz"
-checksum: "sha256=2123e035b3d3ad7c5b876ec38875917885fded048eee861e89d67ee47799cec9"
+src: "https://github.com/janestreet/bigdecimal/archive/dfd860abfa7bb7015d508e26262843b362dcac32.tar.gz"
+checksum: "sha256=4716107f02e31e0ce15f73830ea066eb5e4f344f3fbfb4a862ca814af45d8a06"
 }

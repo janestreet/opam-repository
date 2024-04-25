@@ -14,13 +14,13 @@ depends: [
   "async"    {= "v0.17~preview.129.17+77"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Directory traversal with Async"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_find/archive/7674584eb4022f928a0c5f917ebdcefd0d08c8cc.tar.gz"
-checksum: "sha256=8f4b3fc0b6f585aa7e26e7f574119565bded5f76fe3f5aa75c8305689908dd93"
+src: "https://github.com/janestreet/async_find/archive/ba8bfebc721e3154c75ac20641edee2392f78cc2.tar.gz"
+checksum: "sha256=6094c47050335e47e54304891b5e6290c7140335c0a1885620dcc2ee3dd2aa16"
 }

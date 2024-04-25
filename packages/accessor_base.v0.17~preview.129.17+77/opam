@@ -16,7 +16,7 @@ depends: [
   "higher_kinded" {= "v0.17~preview.129.17+77"}
   "ppx_accessor"  {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Accessors for Base types, for use with the Accessor library"
@@ -24,6 +24,6 @@ description: "
 This library provides accessors for numerous types in Base.
 "
 url {
-src: "https://github.com/janestreet/accessor_base/archive/56a4469ef5da8494b9cced30d6cf8a6a0c9f2ed1.tar.gz"
-checksum: "sha256=fbb0829943e22fcaaedf1fc603bb79d038836c44900b0a63b0b64fbda25b24da"
+src: "https://github.com/janestreet/accessor_base/archive/75d885796f097c1f02d5321df97e745aba26534e.tar.gz"
+checksum: "sha256=8f33d7374085a77ef94273fad37ec076cb0f5bb964dbd04359795f035e8a1b90"
 }

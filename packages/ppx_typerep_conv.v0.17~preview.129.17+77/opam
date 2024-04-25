@@ -13,7 +13,7 @@ depends: [
   "ocaml"   {>= "5.1.0"}
   "base"    {= "v0.17~preview.129.17+77"}
   "typerep" {= "v0.17~preview.129.17+77"}
-  "dune"    {>= "2.0.0"}
+  "dune"    {>= "3.11.0"}
   "ppxlib"  {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -22,6 +22,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_typerep_conv/archive/1d71f86b6c9528cce1583963096c9e35a88b879d.tar.gz"
-checksum: "sha256=5c8ceeeb464886feff59be2b4852909c3887220d8c2665e11583781d0c36a867"
+src: "https://github.com/janestreet/ppx_typerep_conv/archive/d35b53fb5e6011bd462e9d42273eca52245487b8.tar.gz"
+checksum: "sha256=4373ff78d6cac99377ba35daaa6ff947616485d49125163db920439fb6f5c6fb"
 }

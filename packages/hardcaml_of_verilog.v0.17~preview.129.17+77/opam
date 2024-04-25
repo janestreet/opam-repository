@@ -21,7 +21,7 @@ depends: [
   "ppx_jane"        {= "v0.17~preview.129.17+77"}
   "ppx_jsonaf_conv" {= "v0.17~preview.129.17+77"}
   "stdio"           {= "v0.17~preview.129.17+77"}
-  "dune"            {>= "2.0.0"}
+  "dune"            {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Convert Verilog to a Hardcaml design"
@@ -33,6 +33,6 @@ circuit.
 Code can also be generated to wrap the conversion process using Hardcaml interfaces.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_of_verilog/archive/fb17d9535245c1a67fc5a17d137f9bf3fb3d2871.tar.gz"
-checksum: "sha256=24bbd040580509e252fe12eda41606899266d0499de1c18d5cbf23330ee96b46"
+src: "https://github.com/janestreet/hardcaml_of_verilog/archive/51c2208d422d293d1291762c0ba207cc48d82392.tar.gz"
+checksum: "sha256=77d6b526a337c1a876b09765c7316558b0a2f38741785df3893635e9bf6bbdea"
 }

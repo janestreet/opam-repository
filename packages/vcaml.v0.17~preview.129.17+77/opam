@@ -29,7 +29,7 @@ depends: [
   "textutils"                  {= "v0.17~preview.129.17+77"}
   "angstrom"                   {>= "0.15.0"}
   "angstrom-async"             {>= "0.15.0"}
-  "dune"                       {>= "2.0.0"}
+  "dune"                       {>= "3.11.0"}
   "faraday"                    {>= "0.8.1"}
   "re"                         {>= "1.8.0"}
 ]
@@ -52,6 +52,6 @@ break unexpectedly for versions of Neovim you wish to support is to write tests
 for your plugin.
 "
 url {
-src: "https://github.com/janestreet/vcaml/archive/bb90efe8d6f19c8c84f102c44b0582855cbabbe9.tar.gz"
-checksum: "sha256=7305c99618276ee212c40f4f158bfe2cb1f9e546185ea4503bf0c6c63aaaf22d"
+src: "https://github.com/janestreet/vcaml/archive/2e04406c3da21ed7b5bcad1500d1584cd09214a6.tar.gz"
+checksum: "sha256=892b962e18d246683bc8f5692e56c91853dc174ef840a883d1d18679411d41c0"
 }

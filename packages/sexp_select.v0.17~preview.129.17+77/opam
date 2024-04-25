@@ -14,7 +14,7 @@ depends: [
   "base"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library to use CSS-style selectors to traverse sexp trees"
@@ -23,6 +23,6 @@ This library provides a convenient method to traverse sexp trees
 and return subtrees that match the given program.
 "
 url {
-src: "https://github.com/janestreet/sexp_select/archive/f84eb6f82734a32b25dd3ffaf41a03f77485a211.tar.gz"
-checksum: "sha256=38397248414894b222089910e994ca5434872ec5ee5a11391d65b666b4696c02"
+src: "https://github.com/janestreet/sexp_select/archive/771bf97fb90c3d963efe36fa6f7b5f6a96f6332f.tar.gz"
+checksum: "sha256=3831193b820c1da77d579c7fad7b42352c9a637bbd9f492ddfb7e50e6801a31a"
 }

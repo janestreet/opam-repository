@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "An identifier for a user"
@@ -21,6 +21,6 @@ description: "
 A string representation for a user, typically a UNIX username
 "
 url {
-src: "https://github.com/janestreet/username_kernel/archive/868f5e128ad1db68432f3ea271468cc83cf013d1.tar.gz"
-checksum: "sha256=ac8843a4a22b4be17154c5a7e8ad78d5ac10c37cf55135d55b3f2ff579006817"
+src: "https://github.com/janestreet/username_kernel/archive/6d96b31ec32ae0c181e57d374174de0f342e9558.tar.gz"
+checksum: "sha256=d1b8f80ed919dfe436ac4a3b15e38855417f418d6529f4448d20ae58da84255c"
 }

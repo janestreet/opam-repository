@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "An [option]-like type that incurs no allocation, without requiring a reserved value in the underlying type"
@@ -21,6 +21,6 @@ description: "
 Uopt_base provides an unboxed option type, for use in high-performance systems which avoid allocation. It has several downsides as compared to [option], and is not recommended for use in general-purpose software.
 "
 url {
-src: "https://github.com/janestreet/uopt/archive/e53cf77da4d546c7a03d32a6a75d1a0c20212b02.tar.gz"
-checksum: "sha256=7f2ee6267f3634761dffb1eb4b89e3f786e3ea1378005712bc83ca46bfa08d10"
+src: "https://github.com/janestreet/uopt/archive/f560f209b33c885a651caa16bac2e05184f7e8c9.tar.gz"
+checksum: "sha256=78cd063b69e631e6bec2c87baaccffeb10e6a1bee2afc3c33fff20feb322622b"
 }

@@ -17,7 +17,7 @@ depends: [
   "ppx_hardcaml"      {= "v0.17~preview.129.17+77"}
   "ppx_jane"          {= "v0.17~preview.129.17+77"}
   "stdio"             {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "re"                {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -33,6 +33,6 @@ Circuits can also be converted to NuSMV format for advanced bounded and unbounde
 checking tasks.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_verify/archive/48a8907b2a55145035b495cb1bf646b420789ab7.tar.gz"
-checksum: "sha256=271bf083660d7385e739ed8bfe5d7e0562a9fc44d4c5d3e1946d1b6023101319"
+src: "https://github.com/janestreet/hardcaml_verify/archive/b1d339450d28bf043526fa472ee00b302814083c.tar.gz"
+checksum: "sha256=4b73beda65334e57983871725260bdf47f645cd49e59c575d238ef5f85eb3a55"
 }

@@ -15,7 +15,7 @@ depends: [
   "async_rpc_kernel" {= "v0.17~preview.129.17+77"}
   "core"             {= "v0.17~preview.129.17+77"}
   "ppx_jane"         {= "v0.17~preview.129.17+77"}
-  "dune"             {>= "2.0.0"}
+  "dune"             {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "General resource cache"
@@ -25,6 +25,6 @@ abstract [Resource] type. The cache enables resource reuse while
 obeying various limits.
 "
 url {
-src: "https://github.com/janestreet/resource_cache/archive/c6c39c3828df557a4abb16d16b9fe27175c8e336.tar.gz"
-checksum: "sha256=4719d7db963e97ea3bea26f08a5840c8235843e620616b7c594ed6a5d32f4317"
+src: "https://github.com/janestreet/resource_cache/archive/391cd0936c7c808b9040194684702b272dc76a4b.tar.gz"
+checksum: "sha256=38cc23d749e0b32a059d38e88af973f8a3eac4fab26506ced3c3376319dc57c7"
 }

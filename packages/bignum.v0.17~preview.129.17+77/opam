@@ -16,7 +16,7 @@ depends: [
   "splittable_random" {= "v0.17~preview.129.17+77"}
   "typerep"           {= "v0.17~preview.129.17+77"}
   "zarith_stubs_js"   {= "v0.17~preview.129.17+77"}
-  "dune"              {>= "2.0.0"}
+  "dune"              {>= "3.11.0"}
   "num"
   "zarith"            {>= "1.11"}
 ]
@@ -25,6 +25,6 @@ synopsis: "Core-flavoured wrapper around zarith's arbitrary-precision rationals"
 description: "
 "
 url {
-src: "https://github.com/janestreet/bignum/archive/8d54752979726b45a0e335b2b866dbb1f43edccb.tar.gz"
-checksum: "sha256=4bedfaca597df5a93d46c743d83e9776a13c647b938970c6cf6a41ec17ac35b4"
+src: "https://github.com/janestreet/bignum/archive/4489c29d6c7ca275996c00c94adac868ea7b0fb0.tar.gz"
+checksum: "sha256=1f183034ec17ab8d8927ef9609bb90cd557d344edbe9c112ed539a7e26e874aa"
 }

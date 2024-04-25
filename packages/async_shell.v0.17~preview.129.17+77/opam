@@ -15,13 +15,13 @@ depends: [
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
   "shell"    {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Shell helpers for Async"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_shell/archive/dd60fbe1cddac24d851b42bb3d8964baf1aad780.tar.gz"
-checksum: "sha256=e865fab404b4fb9a43d47a7973308125b5702d1467feef1d8af29b971938cfec"
+src: "https://github.com/janestreet/async_shell/archive/fe711edf2356cc3fe643078f62a872154d41b1f7.tar.gz"
+checksum: "sha256=b97a88d825c203acc5e8629480b263189e97537fd71a2a5f2e8f02fa4e6dcc85"
 }

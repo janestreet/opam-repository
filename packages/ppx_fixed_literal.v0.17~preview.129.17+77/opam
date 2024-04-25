@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"  {>= "5.1.0"}
   "base"   {= "v0.17~preview.129.17+77"}
-  "dune"   {>= "2.0.0"}
+  "dune"   {>= "3.11.0"}
   "ppxlib" {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -22,6 +22,6 @@ A ppx rewriter that rewrites fixed point literal of the
 form 1.0v to conversion functions currently in scope.
 "
 url {
-src: "https://github.com/janestreet/ppx_fixed_literal/archive/6bcb04f0316bfa2d34cda6c8fbd200cb217bb3ed.tar.gz"
-checksum: "sha256=cea5e88ef30b28cf08bde3fbbc11a89558f1decb3c817056cff37e51c1fffb45"
+src: "https://github.com/janestreet/ppx_fixed_literal/archive/35f266bd97867272a8e83f25f76ece4e9e46c5c6.tar.gz"
+checksum: "sha256=cd3ec6087362494bb57e618cdbabaf2909a6fd11d4ecda3755341ee8225eb6d3"
 }

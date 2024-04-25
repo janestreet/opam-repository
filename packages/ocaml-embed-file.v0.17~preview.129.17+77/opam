@@ -15,7 +15,7 @@ depends: [
   "core"      {= "v0.17~preview.129.17+77"}
   "core_unix" {= "v0.17~preview.129.17+77"}
   "ppx_jane"  {= "v0.17~preview.129.17+77"}
-  "dune"      {>= "2.0.0"}
+  "dune"      {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Files contents as module constants"
@@ -24,6 +24,6 @@ Embed-file takes some files and generates code for an OCaml module
 defining string constants containing the contents of those files.
 "
 url {
-src: "https://github.com/janestreet/ocaml-embed-file/archive/cf6837658a05d13d4961f47084c752db24c84801.tar.gz"
-checksum: "sha256=6b37078867bdc9fdb83cf0a4677cab9f575749406b305492980bf8fb092e9c1b"
+src: "https://github.com/janestreet/ocaml-embed-file/archive/b029a4b8d556c7de205d868f7f66a1d284a0a934.tar.gz"
+checksum: "sha256=4f51871a8dca87af0d05ce595d2c18b20636f64272dd31c4adc19ba473ed1c18"
 }

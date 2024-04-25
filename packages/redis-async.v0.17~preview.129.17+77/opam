@@ -16,7 +16,7 @@ depends: [
   "core"        {= "v0.17~preview.129.17+77"}
   "core_kernel" {= "v0.17~preview.129.17+77"}
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Redis client for Async applications"
@@ -29,6 +29,6 @@ types.
 Supports client tracking and internally uses the RESP3 protocol. 
 "
 url {
-src: "https://github.com/janestreet/redis-async/archive/3a1a5df6e803422e1fc216534f53f0c759ead8ef.tar.gz"
-checksum: "sha256=f71fd2e86cf754139a2784b19a880b576cb3addb092200d2840e7afe381a7d09"
+src: "https://github.com/janestreet/redis-async/archive/3a8e8166ce865e2d3ed8872e38deb3ee169cfc11.tar.gz"
+checksum: "sha256=01f1f1702910fa5318775e1211687ee1e087543c331e025c53499647a76f8927"
 }

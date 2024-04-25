@@ -22,7 +22,7 @@ depends: [
   "timezone"                 {= "v0.17~preview.129.17+77"}
   "uopt"                     {= "v0.17~preview.129.17+77"}
   "base-threads"
-  "dune"                     {>= "2.0.0"}
+  "dune"                     {>= "3.11.0"}
   "spawn"                    {>= "v0.15"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -32,6 +32,6 @@ Unix-specific extensions to some of the modules defined in [core] and [core_kern
 "
 depexts: ["linux-headers"] {os-family = "alpine"}
 url {
-src: "https://github.com/janestreet/core_unix/archive/e7f1ccb1652b80bfbffb5780f113ba36443c5004.tar.gz"
-checksum: "sha256=951f72c0338769749e5352c477312b9444b0ab147bf99b14b26f8f47d04d9d9d"
+src: "https://github.com/janestreet/core_unix/archive/8b232339b01e9268dc7f6ccd1c0bbb6267f4ab7a.tar.gz"
+checksum: "sha256=1bd75206498e8ad448e1a9741fe2d806a198ceec1b82172532f62c931f53b08b"
 }

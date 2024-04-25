@@ -20,7 +20,7 @@ depends: [
   "incremental"     {= "v0.17~preview.129.17+77"}
   "ppx_jane"        {= "v0.17~preview.129.17+77"}
   "virtual_dom"     {= "v0.17~preview.129.17+77"}
-  "dune"            {>= "2.0.0"}
+  "dune"            {>= "3.11.0"}
   "js_of_ocaml"     {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx" {>= "5.1.1" & < "5.7.0"}
 ]
@@ -48,6 +48,6 @@ If you want a more concrete sense of how this works, look in the
 examples directory.
 "
 url {
-src: "https://github.com/janestreet/incr_dom/archive/ed9303aa65832f5cc048e49c1d700e236229d186.tar.gz"
-checksum: "sha256=b717c3b62900d2ee17d2cbd7d1b388aef7f161983a829f3b82e083cb5bfd4665"
+src: "https://github.com/janestreet/incr_dom/archive/2ee3256c70281168f11bef4897e43b1a56cdd531.tar.gz"
+checksum: "sha256=e94b2e3e5051a03930ebac22d62419b70255bc20e06715abdef6f8ccab829b14"
 }

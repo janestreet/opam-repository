@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.17~preview.129.17+77"}
   "ppx_base" {= "v0.17~preview.129.17+77"}
   "sexplib"  {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
   "re"       {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -24,6 +24,6 @@ A library for pretty-printing s-expressions, using better indentation rules than
 the default pretty printer in Sexplib.
 "
 url {
-src: "https://github.com/janestreet/sexp_pretty/archive/b027a32d9ddcafbb146d171d1d90b90918ee15c0.tar.gz"
-checksum: "sha256=d74c72db75b14d36e82056f7d952593bf9b0c856b7252d36bf33b03e68d6fa34"
+src: "https://github.com/janestreet/sexp_pretty/archive/39a0175ccd28366deb46792c0015e0374c631daa.tar.gz"
+checksum: "sha256=348fa91c104396f2c7d0ac1af8ca5bbe0d04b02a84ab73181639e3e5ffff7dad"
 }

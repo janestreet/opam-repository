@@ -17,7 +17,7 @@ depends: [
   "ppx_jane"        {= "v0.17~preview.129.17+77"}
   "sexp_pretty"     {= "v0.17~preview.129.17+77"}
   "stdio"           {= "v0.17~preview.129.17+77"}
-  "dune"            {>= "2.0.0"}
+  "dune"            {>= "3.11.0"}
   "re"              {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -29,6 +29,6 @@ If you want helpers for writing expect tests using the Async library,
 look at expect_test_helpers_async.
 "
 url {
-src: "https://github.com/janestreet/expect_test_helpers_core/archive/b30946cd4c2d4c21e3da4c71dd85b12c50fc3c53.tar.gz"
-checksum: "sha256=b84dc6329ff5c61d173d455efed17e780ce975b5653c699f0fd3b44827a1629b"
+src: "https://github.com/janestreet/expect_test_helpers_core/archive/f5de10a8a9ecec1625213925f428dd2f0a56ec78.tar.gz"
+checksum: "sha256=0bfe0480fdae8e97b0450f15667ea0569a0fa804391c6a0516e899b5dd709209"
 }

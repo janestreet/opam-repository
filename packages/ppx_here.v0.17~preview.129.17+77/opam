@@ -12,7 +12,7 @@ build: [
 depends: [
   "ocaml"  {>= "5.1.0"}
   "base"   {= "v0.17~preview.129.17+77"}
-  "dune"   {>= "2.0.0"}
+  "dune"   {>= "3.11.0"}
   "ppxlib" {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -21,6 +21,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_here/archive/703cfd2092632249964e214343b36b7696a15336.tar.gz"
-checksum: "sha256=4d9cd93f026a59b850b7edd443c321c5006b09b8cf2b76b7e7c6f8f30d5f36a9"
+src: "https://github.com/janestreet/ppx_here/archive/b00005e060d3cfaf631f905c3bb54daaeaf74301.tar.gz"
+checksum: "sha256=e63277688cf4d42ef7ebeea527f60d9a6e3fe648677b3101386d23a7776819e9"
 }

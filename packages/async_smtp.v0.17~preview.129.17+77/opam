@@ -27,13 +27,13 @@ depends: [
   "textutils"      {= "v0.17~preview.129.17+77"}
   "base64"         {>= "3.4.0"}
   "cryptokit"      {>= "1.16" & < "1.17"}
-  "dune"           {>= "2.0.0"}
+  "dune"           {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "SMTP client and server"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_smtp/archive/c3d36da815e39d6dce9bb42b9cfe0ae03dfc6d8a.tar.gz"
-checksum: "sha256=54e58b0643b4bd6068238640a7dc4c7050a0fa6f5e753fc989c01c69b9276e7a"
+src: "https://github.com/janestreet/async_smtp/archive/6b9b4535d55aa1c26f4af46353ad44f9ad675040.tar.gz"
+checksum: "sha256=a38dd78a9c80e98a2fc632834a8e0cb60cf436d8eadae21e1bf473ffe31c168d"
 }

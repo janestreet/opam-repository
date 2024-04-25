@@ -16,7 +16,7 @@ depends: [
   "ppx_jane"    {= "v0.17~preview.129.17+77"}
   "conf-zstd"
   "ctypes"      {>= "0.18.0"}
-  "dune"        {>= "2.0.0"}
+  "dune"        {>= "3.11.0"}
 ]
 synopsis: "OCaml bindings to Zstandard"
 description: "
@@ -24,6 +24,6 @@ Zstandard is a real-time compression algorithm which provides high compression r
 "
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/zstandard/archive/10b949ee0022e1c6b27861240b8a75029bc8a9ad.tar.gz"
-checksum: "sha256=9e9ff228e5da890cc9ab9022eeec05e58226b7035b847dd6057297661f61b256"
+src: "https://github.com/janestreet/zstandard/archive/72bda6ef79952a9e074b422a27c1dd3707142363.tar.gz"
+checksum: "sha256=0f42c43a1b7fb3bcea9b90cb5248c1db24374911b9d49d3474b245298e6d66c6"
 }

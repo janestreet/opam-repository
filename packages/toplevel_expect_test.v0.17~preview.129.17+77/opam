@@ -20,7 +20,7 @@ depends: [
   "ppx_optcomp"         {= "v0.17~preview.129.17+77"}
   "toplevel_backend"    {= "v0.17~preview.129.17+77"}
   "base-threads"
-  "dune"                {>= "2.0.0"}
+  "dune"                {>= "3.11.0"}
   "ocaml-compiler-libs" {>= "v0.11.0"}
   "ocamlfind"           {>= "1.7.2"}
   "ppxlib"              {>= "0.28.0"}
@@ -34,6 +34,6 @@ compilations errors as well as provide a nice alternative to using
 the toplevel in a terminal.
 "
 url {
-src: "https://github.com/janestreet/toplevel_expect_test/archive/cbd727237159aa309fc5bedca500a89c910bcddb.tar.gz"
-checksum: "sha256=585ef95c39466977ee0ae9bfdd6119be63c2944525f9b6678e1e6cf6906715c4"
+src: "https://github.com/janestreet/toplevel_expect_test/archive/a2a9e73f47ec3d06d3409a757d6e51417b495ed6.tar.gz"
+checksum: "sha256=b8b2b3b7b7fe40d04d8d52c2686fd33a91b897ded24fdea2d062326f9c1de3b5"
 }

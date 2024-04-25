@@ -17,7 +17,7 @@ depends: [
   "hardcaml"  {= "v0.17~preview.129.17+77"}
   "ppx_jane"  {= "v0.17~preview.129.17+77"}
   "stdio"     {= "v0.17~preview.129.17+77"}
-  "dune"      {>= "2.0.0"}
+  "dune"      {>= "3.11.0"}
   "re"        {>= "1.8.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -27,6 +27,6 @@ A tool for reading Xilinx VHDL Unisim and XPM component definitions from a Vivad
 installation and generating Hardcaml interfaces automatically.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_xilinx_components/archive/4fb80f22862a807829f59bd98eed148ce1c33b24.tar.gz"
-checksum: "sha256=6027faa6edf4653a72a29125056e6f61b0e2866adadbe3c148e5e454328a20ef"
+src: "https://github.com/janestreet/hardcaml_xilinx_components/archive/6e772b466099454dc981525bb494f60e156248a6.tar.gz"
+checksum: "sha256=959cd9f9a855089e2909573229abbfe45e85c03d294abab4d50a88bd72783929"
 }

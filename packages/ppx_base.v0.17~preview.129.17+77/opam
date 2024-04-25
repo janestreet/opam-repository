@@ -17,7 +17,7 @@ depends: [
   "ppx_globalize" {= "v0.17~preview.129.17+77"}
   "ppx_hash"      {= "v0.17~preview.129.17+77"}
   "ppx_sexp_conv" {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
   "ppxlib"        {>= "0.28.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
@@ -29,6 +29,6 @@ Note that Base doesn't need ppx to build, it is only used as a
 verification tool.
 "
 url {
-src: "https://github.com/janestreet/ppx_base/archive/60cb6671e5f0b39307a233be0b4a4299ab3b24c3.tar.gz"
-checksum: "sha256=30960926acc119d37cef0283d27ffb5dfeb729d62376b72293c4f51c96bdb643"
+src: "https://github.com/janestreet/ppx_base/archive/518b4e243cc7e900e1e66026f9cddaf6e750d951.tar.gz"
+checksum: "sha256=c1122be069fcad46072f3cab49f2874bb63d962d1b8efe277b888081b3dfa6be"
 }

@@ -16,7 +16,7 @@ depends: [
   "core"          {= "v0.17~preview.129.17+77"}
   "ppx_accessor"  {= "v0.17~preview.129.17+77"}
   "ppx_jane"      {= "v0.17~preview.129.17+77"}
-  "dune"          {>= "2.0.0"}
+  "dune"          {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Accessors for Async types, for use with the Accessor library"
@@ -24,6 +24,6 @@ description: "
 This library provides accessors for numerous types in Async.
 "
 url {
-src: "https://github.com/janestreet/accessor_async/archive/75b4963d2a6c9688bc2b17abd33ada8dbe09bc10.tar.gz"
-checksum: "sha256=38b134f3b47518666a935248b3c363c25f509aed096a1ac43c44e655ff4975b9"
+src: "https://github.com/janestreet/accessor_async/archive/46b461ef571a0862ee24b8dfa020f2816a842b3d.tar.gz"
+checksum: "sha256=c8c55ec16b38bc9e769122100c318ed85213ea0c59884181c1611dffcb69eac6"
 }

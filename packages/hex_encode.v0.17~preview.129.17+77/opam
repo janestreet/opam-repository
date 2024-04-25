@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hexadecimal encoding library"
@@ -21,6 +21,6 @@ description: "
 This library implements hexadecimal encoding and decoding
 "
 url {
-src: "https://github.com/janestreet/hex_encode/archive/b25ddd94b899cd1c30a9065dc73c98184ef634b8.tar.gz"
-checksum: "sha256=a39950a5c5b663a81153308db887dabc4bb60641475b482caa2817fa4ac2eee8"
+src: "https://github.com/janestreet/hex_encode/archive/2815d10f432b8163026d27bc804082e7a59491f7.tar.gz"
+checksum: "sha256=b184917d206bcb51e96da3f76af609a9ff30ba830ecb003988fdc9156b85d8cc"
 }

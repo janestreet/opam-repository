@@ -13,7 +13,7 @@ depends: [
   "ocaml"    {>= "5.1.0"}
   "core"     {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Code for computing the diff of two sexps"
@@ -22,6 +22,6 @@ The code behind the [diff] subcommand of the Jane Street's [sexp]
 command line tool.
 "
 url {
-src: "https://github.com/janestreet/sexp_diff/archive/f5f76a73e47aa14a72f011d2458d9f0daa8e7d3a.tar.gz"
-checksum: "sha256=5e310d576c4d685d54ae786761d8d0c854886d1520530f2d1c7d15a02b84d244"
+src: "https://github.com/janestreet/sexp_diff/archive/d02eaf2cd59d9414ff67d1323faf48f8f64a4168.tar.gz"
+checksum: "sha256=5c8c23e6b8634de330c6a6e0df2dd6003d4ecfeda60f0d37028eeffe0f3c818e"
 }

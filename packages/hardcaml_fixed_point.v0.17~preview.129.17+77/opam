@@ -14,7 +14,7 @@ depends: [
   "base"     {= "v0.17~preview.129.17+77"}
   "hardcaml" {= "v0.17~preview.129.17+77"}
   "ppx_jane" {= "v0.17~preview.129.17+77"}
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Hardcaml fixed point arithmetic"
@@ -23,6 +23,6 @@ Signed and Unsigned fixed point operations, with a full complement of rounding a
 overflow functionality.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_fixed_point/archive/2e34f269f8aabe3480d9dda25926fc5b7686705f.tar.gz"
-checksum: "sha256=6465d3f84594ad1a1bf566b2f0708611237a8bfc853c42408f3a90b4786d8ad7"
+src: "https://github.com/janestreet/hardcaml_fixed_point/archive/b0a13b1ee919517cc8f157117ba5eb75c1c27249.tar.gz"
+checksum: "sha256=b19304f21d383ee5e2d5a5e7fdc82b7c470f9c1a785a5a70095efcb30246e871"
 }
