@@ -24,6 +24,6 @@ description: "
 Utilities for creating and parsing traces in Fuchsia Trace Format.
 "
 url {
-src: "https://github.com/janestreet/tracing/archive/e4c37ff8429b8ec7f30696977b02468253950160.tar.gz"
-checksum: "sha256=968ae22d8385c2ff34c652708c2d8e31275deafb2ba20905f705a4e77cc304d4"
+src: "https://github.com/janestreet/tracing/archive/9636f1ee2fc090ffad7c532a9cf84acecc626d5d.tar.gz"
+checksum: "sha256=093b3f55a82a19117717e11e04e149f768b46206a6a7a82894ae41c5aba6c2c8"
 }

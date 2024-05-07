@@ -21,6 +21,6 @@ synopsis: "Directory traversal with Async"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_find/archive/ba8bfebc721e3154c75ac20641edee2392f78cc2.tar.gz"
-checksum: "sha256=6094c47050335e47e54304891b5e6290c7140335c0a1885620dcc2ee3dd2aa16"
+src: "https://github.com/janestreet/async_find/archive/10b025af6653897b0997679c8619f21e3dd05382.tar.gz"
+checksum: "sha256=e3e89271468e732d929c698d2b5e4ffb3d913f9dac4631fed79d7492517c7200"
 }

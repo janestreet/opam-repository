@@ -21,6 +21,6 @@ description: "
 Additions to js_of_ocaml's standard library that are required by Jane Street libraries. Most, if not everything in this library is intended to be upstreamed.
 "
 url {
-src: "https://github.com/janestreet/js_of_ocaml_patches/archive/25c9a00c8b4cbbdf4068b7c91b79ef971f3c3664.tar.gz"
-checksum: "sha256=33c7f47373b0826b91034fe759f067ea0fb3c46d1a5081d49431971bddd45b87"
+src: "https://github.com/janestreet/js_of_ocaml_patches/archive/1361d7dc94d9e9e492a5982c2fbdefe11a188cc8.tar.gz"
+checksum: "sha256=3c74d32f77d693f139928a6da0ce4c33c43cb492ed615a01b5beffe32bec175e"
 }

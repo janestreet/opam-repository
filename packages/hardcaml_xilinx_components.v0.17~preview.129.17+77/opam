@@ -27,6 +27,6 @@ A tool for reading Xilinx VHDL Unisim and XPM component definitions from a Vivad
 installation and generating Hardcaml interfaces automatically.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_xilinx_components/archive/6e772b466099454dc981525bb494f60e156248a6.tar.gz"
-checksum: "sha256=959cd9f9a855089e2909573229abbfe45e85c03d294abab4d50a88bd72783929"
+src: "https://github.com/janestreet/hardcaml_xilinx_components/archive/6387ebe71aa2be790dde1cb4f71bab164761c109.tar.gz"
+checksum: "sha256=ec939d8d9ade5fd519653628f9fc7da489f7f24078f95bb423616771b66d7f3c"
 }

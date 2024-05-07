@@ -27,6 +27,6 @@ descriptor. For instance this allows to reliably maintain several
 working directories inside the same process.
 "
 url {
-src: "https://github.com/janestreet/posixat/archive/5a27d32d620849cb22971d604a93396c8dd71f53.tar.gz"
-checksum: "sha256=ebd7d9db394e64edabcaa1cd6fe1215e0dd3ec1531283e26cab01db7310e4796"
+src: "https://github.com/janestreet/posixat/archive/55dabbd25564af0ff8bb6f11f880d1cd0714e71c.tar.gz"
+checksum: "sha256=500810cd245a9af7499ee1dc5914de3a1a7422f1ad4a0362c75ed411edd7b65e"
 }

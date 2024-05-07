@@ -22,6 +22,6 @@ Timezone handles parsing timezone data and create [Timezone.t] that
 can later be used to manipulate time in core_kernel or core.
 "
 url {
-src: "https://github.com/janestreet/timezone/archive/56d608110d40a6afa2e3f7ea6f8f995b1fe46d34.tar.gz"
-checksum: "sha256=b8573d35155853a2f5c03081e33677860a30a78213ae25a97cc8d0a73e46b8ae"
+src: "https://github.com/janestreet/timezone/archive/bfd7d15f71cd54d063f09e996ffe6b9255247652.tar.gz"
+checksum: "sha256=4e9fbca22920519edb905f9e8f4009f594f1e13fe5ad9d7cba5752eb18a9bf01"
 }

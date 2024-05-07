@@ -25,6 +25,6 @@ description: "
 An RPC which tracks state on the client and server so it only needs to send diffs across the wire.
 "
 url {
-src: "https://github.com/janestreet/polling_state_rpc/archive/c4172bfcf7dc6e5080021fe9bb4dd2937263c939.tar.gz"
-checksum: "sha256=bd501008d2b8f6cf88a0db041bf619fadd1ae49c985e6d865f49510d8501d423"
+src: "https://github.com/janestreet/polling_state_rpc/archive/55814119515a9d856c9437e6ba6e1bb2d2237d94.tar.gz"
+checksum: "sha256=aa03518ecb0a61ae4081edcb09d601e8b56d4ba0a2444dbc00d828f407156ae8"
 }

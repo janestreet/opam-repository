@@ -30,6 +30,6 @@ This library allows you to create an SSL client and server, with
 encrypted communication between both.
 "
 url {
-src: "https://github.com/janestreet/async_ssl/archive/2189f1490825b81f0e4ad7131e0db4cdb154072c.tar.gz"
-checksum: "sha256=fc7b92f87e8a5ceb86a9bd3c5438b52e32b7a52c827ca8a21320bba2dca28b7f"
+src: "https://github.com/janestreet/async_ssl/archive/9f0c41f162a7f55e7654c381f86e4fa9789b9db9.tar.gz"
+checksum: "sha256=70533c23e38df36a1c229cd3aa555a8ababe6a3e01cd5bdc72233cf8693a5fe8"
 }

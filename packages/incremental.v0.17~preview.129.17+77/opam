@@ -28,6 +28,6 @@ OCaml's standard library that was developed by Jane Street, the
 largest industrial user of OCaml.
 "
 url {
-src: "https://github.com/janestreet/incremental/archive/a392c7128fd6442d75e52526cfe2ae69339eb6a0.tar.gz"
-checksum: "sha256=f04e0fb1e18f10a0c90b88468fce169273f1e9bf623b6240194cc87d26accafb"
+src: "https://github.com/janestreet/incremental/archive/e8e752e700c697d90eff86a1fa1bf964bbd47733.tar.gz"
+checksum: "sha256=6ef2c7fabc6d201b2553d24f24ee8027eb7556aad11cae89e21250e01cb86148"
 }

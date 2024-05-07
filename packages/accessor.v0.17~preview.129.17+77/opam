@@ -27,6 +27,6 @@ increasingly complex data structures.
 In case you have ever heard of \"lenses\", this is an OCaml implementation of that idea.
 "
 url {
-src: "https://github.com/janestreet/accessor/archive/e2155ad74288095b316b5a66f2f6776043d521fe.tar.gz"
-checksum: "sha256=4561dd82b53f6f6df8e01c2ee2c9e32db1105d3b8ffeffe482e54ef66797b0a2"
+src: "https://github.com/janestreet/accessor/archive/c8e1b20ae69854d9cbc83a203cfdafcd037c6b02.tar.gz"
+checksum: "sha256=286797652bc2df1627390028c097bb843b3219f244d6a8e57874a8231ef8d356"
 }

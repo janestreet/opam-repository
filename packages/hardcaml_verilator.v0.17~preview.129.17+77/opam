@@ -29,6 +29,6 @@ This library transparently compiles a verilator-based shared library, and links 
 to the running executable to be used as a Cyclesim simulation.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_verilator/archive/022a77dd8a13bb116db52af7ba0bfa571edc57ab.tar.gz"
-checksum: "sha256=52e2a485e6ce475acb85d11915cccf5080159763ab3f69120183f3aff1987e1d"
+src: "https://github.com/janestreet/hardcaml_verilator/archive/7d7b7cff53d193f3d8788a6ecbf6938bd87db56b.tar.gz"
+checksum: "sha256=7c0516d0838a358472a31737b75d681e565846a0193c1d7c1b2b4e481755f5fe"
 }

@@ -35,6 +35,6 @@ It contains subcommands for pretty printing, querying, and modifying
 sexps, as well as some conversions to and from other formats.
 "
 url {
-src: "https://github.com/janestreet/sexp/archive/84d7cffae28410449a234e344ca3de2334f4fc48.tar.gz"
-checksum: "sha256=07f9387dc72d398acd85c806db8ef4ebc1c487837229ed6ff444a58a7ec2c57a"
+src: "https://github.com/janestreet/sexp/archive/7d120434ba36b5315d1a28f41ab6974cffb5232b.tar.gz"
+checksum: "sha256=654740f6bb1d0aa9c3648c264786eb95d6284116e1a865a85d4cde60db0094a3"
 }

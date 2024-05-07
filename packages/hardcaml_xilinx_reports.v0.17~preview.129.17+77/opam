@@ -35,6 +35,6 @@ just the local module, or for all modules below it as well. Running in different
 ways can provide better insight into the design.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_xilinx_reports/archive/bbca2fdd52765fa68eb4ee6de69e1d4c27e5a5ae.tar.gz"
-checksum: "sha256=51fc1c408046e4d33e06233b4a846fe56c1de74fda5036dbc6b7fea351e60eb3"
+src: "https://github.com/janestreet/hardcaml_xilinx_reports/archive/4d26ab4172d30a5c8a1e5a72a9b798e00ad215e8.tar.gz"
+checksum: "sha256=9d6710da8e6642dec554c5651a0d297d7bd6b580cfbf4664f22917e09b30b44d"
 }

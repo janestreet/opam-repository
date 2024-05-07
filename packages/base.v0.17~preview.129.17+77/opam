@@ -33,6 +33,6 @@ provided by companion libraries such as stdio:
   https://github.com/janestreet/stdio
 "
 url {
-src: "https://github.com/janestreet/base/archive/43b7fcb7fb11ddc2cb310cb264bb00acf815971a.tar.gz"
-checksum: "sha256=2a12915a3f41608d21fafb05b58a4e08ab4e3298eea1baab42bb6252c30128a9"
+src: "https://github.com/janestreet/base/archive/b6430a41ba658335aaeff796b37c10b1d1803637.tar.gz"
+checksum: "sha256=ad3800e102ef3d5aea6af5ef5b8315acb2027d492bb5aeab0ee44fb85e4e2c43"
 }

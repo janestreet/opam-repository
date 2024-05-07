@@ -21,6 +21,6 @@ A library for bidirectional maps with one-to-one key relationships,
 and bidirectional multimaps with many-to-many key relationships.
 "
 url {
-src: "https://github.com/janestreet/bidirectional_map/archive/54530a06190bb12e2e3e3bfd245ff48db3550832.tar.gz"
-checksum: "sha256=12f1dad83920ab065a389949d8e46e5db132ef63ab249e1518147c71d656714b"
+src: "https://github.com/janestreet/bidirectional_map/archive/462ac939a318522e90275e2440ba9fdd94f0c362.tar.gz"
+checksum: "sha256=60b74d7f0e265261f0d3b7f28c1d1bc63a4390c1337c3daffff0c71be4bbd3ce"
 }

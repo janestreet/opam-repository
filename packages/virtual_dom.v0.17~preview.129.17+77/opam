@@ -33,6 +33,6 @@ The library itself may be found at
 https://github.com/Matt-Esch/virtual-dom.
 "
 url {
-src: "https://github.com/janestreet/virtual_dom/archive/48d6203a301023b34d677590ce8cafe558152c57.tar.gz"
-checksum: "sha256=24f66efee3cba1e04acc03f5d1352a9abf3be1b33ef6d0f7cd24508b04aa6e57"
+src: "https://github.com/janestreet/virtual_dom/archive/ec9a75c9badcdbaaac59cf92c559911f68c1e6e7.tar.gz"
+checksum: "sha256=8c729d5bf4eb728434c051011f3b22df5dcb0bb4cfecbaed2530819fb1d33da8"
 }

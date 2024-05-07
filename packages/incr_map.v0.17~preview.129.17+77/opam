@@ -31,6 +31,6 @@ along with the ability to efficiently diff map data structures using
 =Map.symmetric_diff=.
 "
 url {
-src: "https://github.com/janestreet/incr_map/archive/86cf0b7d4dfec22ad315ea4592112c73aa76148c.tar.gz"
-checksum: "sha256=c5e742923bb1de3ace75656109254949253b45a4c822d7211193563da6a56fbf"
+src: "https://github.com/janestreet/incr_map/archive/f889cb2813218286218a915e1ad16c727c9e65a1.tar.gz"
+checksum: "sha256=6f88d8b1fb8a8d923b4adf6c8b866b6e71dce8f96107ae192f80bc998760da79"
 }
