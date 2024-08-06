@@ -48,9 +48,9 @@ depends: [
 ]
 url {
   src:
-    "https://github.com/ocaml-wasm/dune/archive/b09525280f74a38dd9eb9b83a41b4a0756043657.tar.gz"
+    "https://github.com/ocaml-wasm/dune/archive/ac04ab0ece7b21db94f2894bfbb54b04a57f42ef.tar.gz"
   checksum: [
-    "sha256=8470000389324b9a3cf376e06caba426e6e4ddfa14b6c84719288ccde748a8ba"
+    "sha256=dfff5d33dd9a2802a56883c82d32834cee2a6877b0fac98be3ac245e2e6e1f8b"
   ]
 }
 x-commit-hash: "b98be5f4c2bbac6f07ad0a9fa28de177f666b509"
