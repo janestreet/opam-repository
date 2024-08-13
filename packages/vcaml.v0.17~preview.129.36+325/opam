@@ -1,0 +1,60 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/vcaml"
+bug-reports: "https://github.com/janestreet/vcaml/issues"
+dev-repo: "git+https://github.com/janestreet/vcaml.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/vcaml/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+run-test: [
+  ["./run-tests-in-opam.sh" name jobs]
+]
+depends: [
+  "ocaml"                      {>= "5.1.0"}
+  "async"                      {= "v0.17~preview.129.36+325"}
+  "async_kernel"               {= "v0.17~preview.129.36+325"}
+  "async_unix"                 {= "v0.17~preview.129.36+325"}
+  "base_trie"                  {= "v0.17~preview.129.36+325"}
+  "core"                       {= "v0.17~preview.129.36+325"}
+  "core_kernel"                {= "v0.17~preview.129.36+325"}
+  "core_unix"                  {= "v0.17~preview.129.36+325"}
+  "expect_test_helpers_async"  {= "v0.17~preview.129.36+325"}
+  "expect_test_helpers_core"   {= "v0.17~preview.129.36+325"}
+  "jsonaf"                     {= "v0.17~preview.129.36+325"}
+  "man_in_the_middle_debugger" {= "v0.17~preview.129.36+325"}
+  "ppx_jane"                   {= "v0.17~preview.129.36+325"}
+  "ppx_optcomp"                {= "v0.17~preview.129.36+325"}
+  "semantic_version"           {= "v0.17~preview.129.36+325"}
+  "textutils"                  {= "v0.17~preview.129.36+325"}
+  "angstrom"                   {>= "0.15.0"}
+  "angstrom-async"             {>= "0.15.0"}
+  "bigstringaf"
+  "dune"                       {>= "3.11.0"}
+  "faraday"                    {>= "0.8.1"}
+  "re"                         {>= "1.8.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "OCaml bindings for the Neovim API"
+description: "
+
+VCaml provides OCaml bindings for Neovim and models some of Neovim's trickier
+semantics so plugin authors do not need to consider them when writing plugins.
+Plugins communicate with Neovim remotely over Msgpack RPC (see `:h api` for
+details).
+"
+post-messages: "
+
+This version of VCaml is built and tested against Neovim 0.9.1. Because Neovim
+is an evolving project and VCaml does not provide versionining guarantees,
+expect the degree of breakage to increase the further away your version of
+Neovim is from the tested version. The best way to ensure that nothing will
+break unexpectedly for versions of Neovim you wish to support is to write tests
+for your plugin.
+"
+url {
+src: "https://github.com/janestreet/vcaml/archive/8c014b5aac236c53cd90e5fd25c5ac1abe63d2f0.tar.gz"
+checksum: "sha256=cefe7d6b01c55f7f327873e17644a08453aeffc2955b1d03511e42b2c9c9a82a"
+}

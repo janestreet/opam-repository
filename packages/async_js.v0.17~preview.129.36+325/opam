@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_js"
+bug-reports: "https://github.com/janestreet/async_js/issues"
+dev-repo: "git+https://github.com/janestreet/async_js.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_js/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "async_kernel"     {= "v0.17~preview.129.36+325"}
+  "async_rpc_kernel" {= "v0.17~preview.129.36+325"}
+  "core"             {= "v0.17~preview.129.36+325"}
+  "ppx_expect"       {= "v0.17~preview.129.36+325"}
+  "ppx_jane"         {= "v0.17~preview.129.36+325"}
+  "dune"             {>= "3.11.0"}
+  "js_of_ocaml"      {>= "5.1.1" & < "5.7.0"}
+  "js_of_ocaml-ppx"  {>= "5.1.1" & < "5.7.0"}
+  "uri"              {>= "3.0.0"}
+  "uri-sexp"         {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A small library that provide Async support for JavaScript platforms"
+description: "
+"
+url {
+src: "https://github.com/janestreet/async_js/archive/1a98097727db44f0149fc176ecc2cb592934e0fb.tar.gz"
+checksum: "sha256=2274dc08a4a662d5e3f2f2ccf18f342f891a3f26ad8633aa878c1564d2abe22f"
+}

@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/incr_map"
+bug-reports: "https://github.com/janestreet/incr_map/issues"
+dev-repo: "git+https://github.com/janestreet/incr_map.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/incr_map/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"              {>= "5.1.0"}
+  "abstract_algebra"   {= "v0.17~preview.129.36+325"}
+  "bignum"             {= "v0.17~preview.129.36+325"}
+  "core"               {= "v0.17~preview.129.36+325"}
+  "incremental"        {= "v0.17~preview.129.36+325"}
+  "legacy_diffable"    {= "v0.17~preview.129.36+325"}
+  "ppx_diff"           {= "v0.17~preview.129.36+325"}
+  "ppx_jane"           {= "v0.17~preview.129.36+325"}
+  "ppx_pattern_bind"   {= "v0.17~preview.129.36+325"}
+  "ppx_stable_witness" {= "v0.17~preview.129.36+325"}
+  "streamable"         {= "v0.17~preview.129.36+325"}
+  "dune"               {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Helpers for incremental operations on map like data structures"
+description: "
+A set of functions for operating incrementally and efficiently on map
+like data structures.  This leverages new functionality in Incremental
+along with the ability to efficiently diff map data structures using
+=Map.symmetric_diff=.
+"
+url {
+src: "https://github.com/janestreet/incr_map/archive/6728e73feabc39f9789395ff4444a8e10a436ee6.tar.gz"
+checksum: "sha256=e521dffce2c30ae0d317dc072c813d437dcbebc61ca5fb00d84dd40f481c4057"
+}
