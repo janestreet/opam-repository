@@ -27,7 +27,7 @@ depends: [
   "js_of_ocaml"     {>= "5.1.1" & < "5.7.0"}
   "js_of_ocaml-ppx" {>= "5.1.1" & < "5.7.0"}
   "menhirLib"
-  "ppxlib"          {>= "0.28.0"}
+  "ppxlib"          {= "0.32.0+jst"}
   "sedlex"          {>= "2.6"}
 ]
 available: arch != "arm32" & arch != "x86_32"

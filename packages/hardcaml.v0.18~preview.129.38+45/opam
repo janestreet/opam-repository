@@ -21,7 +21,7 @@ depends: [
   "splittable_random" {= "v0.18~preview.129.38+45"}
   "stdio"             {= "v0.18~preview.129.38+45"}
   "dune"              {>= "3.11.0"}
-  "ppxlib"            {>= "0.28.0"}
+  "ppxlib"            {= "0.32.0+jst"}
   "zarith"            {>= "1.11"}
 ]
 available: arch != "arm32" & arch != "x86_32"
