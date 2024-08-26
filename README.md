@@ -24,12 +24,10 @@ eval $(opam env --switch 5.1.1+flambda2)
 If the installation was successful, you can now use OCaml with our extensions! Try creating `hello.ml` and running it with `ocamlc -o hello hello.ml && ./hello`:
 
 ```ocaml
-external globalize_string : local_ string -> string = "%obj_dup"
-
-let hello () = local_ "Hello, World!"
+external globalize_string : string @ local -> string = "%obj_dup"
 
 let () =
-  let local_message = hello () in
+  let local_message : string @@ local = "Hello, World" in
   (* Can't print [local_message] -- the value would escape. *)
   let global_message = globalize_string local_message in
   (* Copy the string to create a new global value. *)
