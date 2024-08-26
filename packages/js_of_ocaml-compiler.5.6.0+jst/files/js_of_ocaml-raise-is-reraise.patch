@@ -1,0 +1,166 @@
+diff --git a/compiler/tests-compiler/effects_continuations.ml b/compiler/tests-compiler/effects_continuations.ml
+--- a/compiler/tests-compiler/effects_continuations.ml
++++ b/compiler/tests-compiler/effects_continuations.ml
+@@ -109,7 +108,7 @@ let%expect_test "test-compiler/lib-effec
+      }
+      try{
+       if(caml_string_equal(s, cst$0))
+-       throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++       throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+       var _B_ = 7, m = _B_;
+      }
+      catch(_F_){
+@@ -128,7 +127,7 @@ let%expect_test "test-compiler/lib-effec
+        });
+      if(caml_string_equal(s, cst)){
+       var _z_ = Stdlib[8], raise = caml_pop_trap();
+-      return raise(caml_maybe_attach_backtrace(_z_, 1));
++      return raise(caml_maybe_attach_backtrace(_z_, 0));
+      }
+      var _A_ = Stdlib[79];
+      return caml_cps_call2
+diff --git a/compiler/tests-compiler/effects_exceptions.ml b/compiler/tests-compiler/effects_exceptions.ml
+--- a/compiler/tests-compiler/effects_exceptions.ml
++++ b/compiler/tests-compiler/effects_exceptions.ml
+@@ -68,7 +67,7 @@ let%expect_test "test-compiler/lib-effec
+      }
+      try{
+       if(caml_string_equal(s, cst$0))
+-       throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++       throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+       var _o_ = 7, m = _o_;
+      }
+      catch(_s_){
+@@ -87,7 +86,7 @@ let%expect_test "test-compiler/lib-effec
+        });
+      if(caml_string_equal(s, cst)){
+       var _m_ = Stdlib[8], raise = caml_pop_trap();
+-      return raise(caml_maybe_attach_backtrace(_m_, 1));
++      return raise(caml_maybe_attach_backtrace(_m_, 0));
+      }
+      var _n_ = Stdlib[79];
+      return caml_cps_call2
+@@ -114,7 +114,7 @@ let%expect_test "test-compiler/lib-effec
+                    var
+                     exn = match[2],
+                     raise = caml_pop_trap(),
+-                    exn$0 = caml_maybe_attach_backtrace(exn, 1);
++                    exn$0 = caml_maybe_attach_backtrace(exn, 0);
+                    return raise(exn$0);
+                   });
+         }
+diff --git a/compiler/tests-compiler/eliminate_exception_handler.ml b/compiler/tests-compiler/eliminate_exception_handler.ml
+--- a/compiler/tests-compiler/eliminate_exception_handler.ml
++++ b/compiler/tests-compiler/eliminate_exception_handler.ml
+@@ -52,6 +52,6 @@ try raise Not_found with
+   [%expect
+     {|
+     function some_name(param){
+-     try{throw caml_maybe_attach_backtrace(Stdlib[8], 1);}catch(_a_){return 0;}
++     try{throw caml_maybe_attach_backtrace(Stdlib[8], 0);}catch(_a_){return 0;}
+     }
+     //end |}]
+diff --git a/compiler/tests-compiler/exceptions.ml b/compiler/tests-compiler/exceptions.ml
+--- a/compiler/tests-compiler/exceptions.ml
++++ b/compiler/tests-compiler/exceptions.ml
+@@ -34,25 +34,25 @@ let prevent_inline = some_name
+     {|
+     function some_name(param){
+      try{
+-      try{throw caml_maybe_attach_backtrace(Stdlib[8], 1);}
++      try{throw caml_maybe_attach_backtrace(Stdlib[8], 0);}
+       catch(x$0){var x = caml_wrap_exception(x$0), i$0 = x;}
+      }
+      catch(i$1){var i = caml_wrap_exception(i$1), i$0 = i;}
+-     throw caml_maybe_attach_backtrace(i$0, 1);
++     throw caml_maybe_attach_backtrace(i$0, 0);
+     }
+     //end |}];
+   print_fun_decl (program ~debug:false) None;
+   [%expect
+     {|
+     function _a_(_b_){
+      try{
+-      try{throw caml_maybe_attach_backtrace(Stdlib[8], 1);}
++      try{throw caml_maybe_attach_backtrace(Stdlib[8], 0);}
+       catch(_f_){var _d_ = caml_wrap_exception(_f_);}
+      }
+      catch(_e_){
+       var _c_ = caml_wrap_exception(_e_);
+-      throw caml_maybe_attach_backtrace(_c_, 1);
++      throw caml_maybe_attach_backtrace(_c_, 0);
+      }
+-     throw caml_maybe_attach_backtrace(_d_, 1);
++     throw caml_maybe_attach_backtrace(_d_, 0);
+     }
+     //end |}]
+diff --git a/compiler/tests-compiler/gh1354.ml b/compiler/tests-compiler/gh1354.ml
+--- a/compiler/tests-compiler/gh1354.ml
++++ b/compiler/tests-compiler/gh1354.ml
+@@ -63,7 +63,7 @@ with Exit ->
+         _d_ =
+           [0, [4, 0, 0, 0, [12, 10, 0]], runtime.caml_string_of_jsbytes("%d\n")],
+         _a_ = 0;
+-       try{0; _b_ = _a_ + 1 | 0; throw caml_maybe_attach_backtrace(Stdlib[3], 1);}
++       try{0; _b_ = _a_ + 1 | 0; throw caml_maybe_attach_backtrace(Stdlib[3], 0);}
+        catch(_e_){
+         var _c_ = caml_wrap_exception(_e_);
+         if(_c_ !== Stdlib[3]) throw caml_maybe_attach_backtrace(_c_, 0);
+@@ -144,11 +145,11 @@ with Exit ->
+          0;
+          _g_ = _i_;
+          _c_ = _i_;
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+         catch(_k_){
+          caml_call3(Stdlib_Printf[3], _h_, _g_ | 0, _b_);
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+        }
+        catch(_j_){
+@@ -220,11 +222,11 @@ with Exit ->
+          0;
+          _e_ = _g_;
+          _b_ = _g_;
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+         catch(_i_){
+          caml_call2(Stdlib_Printf[3], _f_, _e_);
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+        }
+        catch(_h_){
+diff --git a/compiler/tests-compiler/loops.ml b/compiler/tests-compiler/loops.ml
+--- a/compiler/tests-compiler/loops.ml
++++ b/compiler/tests-compiler/loops.ml
+@@ -174,7 +175,7 @@ let for_for_while () =
+        for(;;){
+         if(10 > caml_div(k, j)){
+          try{caml_div(k, j);}
+-         catch(_c_){throw caml_maybe_attach_backtrace(Stdlib[8], 1);}
++         catch(_c_){throw caml_maybe_attach_backtrace(Stdlib[8], 0);}
+          id[1]++;
+          continue;
+         }
+@@ -456,7 +456,7 @@ let add_substitute =
+        continue;
+       }
+       var start$0 = i$4 + 1 | 0;
+-      if(lim$1 <= start$0) throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++      if(lim$1 <= start$0) throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+       var opening = caml_string_get(s, start$0), switch$0 = 0;
+       if(40 !== opening && 123 !== opening){
+        var start = start$0 + 1 | 0, lim$0 = caml_ml_string_length(s), i$2 = start;
+@@ -498,7 +498,7 @@ let add_substitute =
+        }
+        var lim = caml_ml_string_length(s), k = k$2, stop = new_start;
+        for(;;){
+-        if(lim <= stop) throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++        if(lim <= stop) throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+         if(caml_string_get(s, stop) === opening){
+          var i = stop + 1 | 0, k$0 = k + 1 | 0, k = k$0, stop = i;
+          continue;

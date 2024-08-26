@@ -1,0 +1,32 @@
+diff --git a/compiler/lib/config.ml b/compiler/lib/config.ml
+These are config changes that we would like to undo but take some work to migrate toward:
+
+[auto_link] - will only link compilation units that are actively used in fast_build. If
+enabled it should make our development builds substantially faster and smaller. We need
+to be careful to keep it enabled for inline tests because they rely on no autolinking
+behavior. See the [--linkall] param in ocamlc, ocamlopt and js_of_ocaml for more
+information.
+
+[use_js_string] - changes the representation of string. When false it is an object. If
+changed to true it will be an actually JavaScript string (still a series of bytes, just
+using a native string as the structure and requiring conversion to utf16 for interop).
+--- a/compiler/lib/config.ml
++++ b/compiler/lib/config.ml
+@@ -90,7 +90,7 @@ module Flag = struct
+ 
+   let safe_string = o ~name:"safestring" ~default:true
+ 
+-  let use_js_string = o ~name:"use-js-string" ~default:true
++  let use_js_string = o ~name:"use-js-string" ~default:false
+ 
+   let check_magic = o ~name:"check-magic-number" ~default:true
+ 
+@@ -98,7 +98,7 @@ module Flag = struct
+ 
+   let header = o ~name:"header" ~default:true
+ 
+-  let auto_link = o ~name:"auto-link" ~default:true
++  let auto_link = o ~name:"auto-link" ~default:false
+ 
+   let es6 = o ~name:"es6" ~default:false
+ end
