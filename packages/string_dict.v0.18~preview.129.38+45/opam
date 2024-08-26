@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/string_dict"
+bug-reports: "https://github.com/janestreet/string_dict/issues"
+dev-repo: "git+https://github.com/janestreet/string_dict.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/string_dict/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "base"        {= "v0.18~preview.129.38+45"}
+  "ppx_compare" {= "v0.18~preview.129.38+45"}
+  "ppx_hash"    {= "v0.18~preview.129.38+45"}
+  "dune"        {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Efficient static string dictionaries"
+description: "
+Efficient static string dictionaries.
+By static, we mean that new key-value pairs cannot be added after the
+dictionary is created.
+
+This uses the algorithm the OCaml compiler uses for pattern matching
+on strings.
+"
+url {
+src: "https://github.com/janestreet/string_dict/archive/8f97e3f7f792d7f3bd7996f932f6f4a3ad0aa0f6.tar.gz"
+checksum: "sha256=3d76ecd9a347e9459f05d15e0e89d2e5033df5560231331fc654f7f04ea2c6fa"
+}

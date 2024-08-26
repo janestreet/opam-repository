@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/base"
+bug-reports: "https://github.com/janestreet/base/issues"
+dev-repo: "git+https://github.com/janestreet/base.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/base/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                   {>= "5.1.0"}
+  "ocaml_intrinsics_kernel" {= "v0.18~preview.129.38+45"}
+  "sexplib0"                {= "v0.18~preview.129.38+45"}
+  "dune"                    {>= "3.11.0"}
+  "dune-configurator"
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Full standard library replacement for OCaml"
+description: "
+Full standard library replacement for OCaml
+
+Base is a complete and portable alternative to the OCaml standard
+library. It provides all standard functionalities one would expect
+from a language standard library. It uses consistent conventions
+across all of its module.
+
+Base aims to be usable in any context. As a result system dependent
+features such as I/O are not offered by Base. They are instead
+provided by companion libraries such as stdio:
+
+  https://github.com/janestreet/stdio
+"
+url {
+src: "https://github.com/janestreet/base/archive/b6ea40197d507005d3970c3fadb60b0cc5f0b234.tar.gz"
+checksum: "sha256=277a8d907a94719967fc3f8bd148b2739a811c180da63e96b0428fca3e2e57e9"
+}

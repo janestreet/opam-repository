@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_step_testbench"
+bug-reports: "https://github.com/janestreet/hardcaml_step_testbench/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_step_testbench.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_step_testbench/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                     {>= "5.1.0"}
+  "base"                      {= "v0.18~preview.129.38+45"}
+  "core"                      {= "v0.18~preview.129.38+45"}
+  "hardcaml"                  {= "v0.18~preview.129.38+45"}
+  "hardcaml_event_driven_sim" {= "v0.18~preview.129.38+45"}
+  "ppx_jane"                  {= "v0.18~preview.129.38+45"}
+  "stdio"                     {= "v0.18~preview.129.38+45"}
+  "dune"                      {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml Testbench Monad"
+description: "
+A monad for interacting with Hardcaml.Cyclesim based simulations.
+
+Allows multiple control threads to interact with a simulation module, all of which are
+synchronised to the system clock.
+"
+url {
+src: "https://github.com/janestreet/hardcaml_step_testbench/archive/91ecc38b7ca9b0ec78fbd3c7ddb9ac5a37ed01f6.tar.gz"
+checksum: "sha256=1e88d497c113c0ed726570d5cc591f1ebd4c88bda34eccf791f511c546a52fa5"
+}

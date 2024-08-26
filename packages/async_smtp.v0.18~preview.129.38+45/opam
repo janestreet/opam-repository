@@ -1,0 +1,42 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_smtp"
+bug-reports: "https://github.com/janestreet/async_smtp/issues"
+dev-repo: "git+https://github.com/janestreet/async_smtp.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_smtp/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"          {>= "5.1.0"}
+  "async"          {= "v0.18~preview.129.38+45"}
+  "async_extra"    {= "v0.18~preview.129.38+45"}
+  "async_inotify"  {= "v0.18~preview.129.38+45"}
+  "async_log"      {= "v0.18~preview.129.38+45"}
+  "async_sendfile" {= "v0.18~preview.129.38+45"}
+  "async_shell"    {= "v0.18~preview.129.38+45"}
+  "async_ssl"      {= "v0.18~preview.129.38+45"}
+  "bin_prot"       {= "v0.18~preview.129.38+45"}
+  "core"           {= "v0.18~preview.129.38+45"}
+  "core_kernel"    {= "v0.18~preview.129.38+45"}
+  "core_unix"      {= "v0.18~preview.129.38+45"}
+  "email_message"  {= "v0.18~preview.129.38+45"}
+  "ppx_jane"       {= "v0.18~preview.129.38+45"}
+  "re2"            {= "v0.18~preview.129.38+45"}
+  "resource_cache" {= "v0.18~preview.129.38+45"}
+  "sexp_macro"     {= "v0.18~preview.129.38+45"}
+  "textutils"      {= "v0.18~preview.129.38+45"}
+  "base64"         {>= "3.4.0"}
+  "cryptokit"      {>= "1.16" & < "1.17"}
+  "dune"           {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "SMTP client and server"
+description: "
+"
+url {
+src: "https://github.com/janestreet/async_smtp/archive/a85c7865ad59663b827c186bef63c9f2bc4b5b57.tar.gz"
+checksum: "sha256=f08c3725becf0b0916da272d9e8b871964fb986ad0941c8a78f4789aeb22e7cf"
+}

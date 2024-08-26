@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ocaml_intrinsics_kernel"
+bug-reports: "https://github.com/janestreet/ocaml_intrinsics_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/ocaml_intrinsics_kernel.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ocaml_intrinsics_kernel/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune"  {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Intrinsics"
+description: "
+Provides functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
+     when available, or compatible software implementation on other targets.
+     See also ocaml_intrinsics library.
+"
+url {
+src: "https://github.com/janestreet/ocaml_intrinsics_kernel/archive/a9856b2721b7e4b2d4e88d6c6a63eb8da1aac3fc.tar.gz"
+checksum: "sha256=9264c4bd08895df8d542e7a572ed55c4eee04f85da89fbf0b1ebe01b5003e935"
+}

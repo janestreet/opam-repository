@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_bench"
+bug-reports: "https://github.com/janestreet/bonsai_bench/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_bench.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_bench/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "bonsai"           {= "v0.18~preview.129.38+45"}
+  "core"             {= "v0.18~preview.129.38+45"}
+  "core_bench"       {= "v0.18~preview.129.38+45"}
+  "expectable"       {= "v0.18~preview.129.38+45"}
+  "incr_dom"         {= "v0.18~preview.129.38+45"}
+  "ppx_jane"         {= "v0.18~preview.129.38+45"}
+  "ppx_pattern_bind" {= "v0.18~preview.129.38+45"}
+  "textutils"        {= "v0.18~preview.129.38+45"}
+  "dune"             {>= "3.11.0"}
+  "js_of_ocaml"      {>= "5.1.1" & < "5.7.0"}
+  "js_of_ocaml-ppx"  {>= "5.1.1" & < "5.7.0"}
+  "ocaml-embed-file" {= "v0.18~preview.129.38+45"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for benchmarking bonsai web applications"
+description: "
+Bonsai is a library for building reusable UI components inside an
+     Incremental-style UI framework such as Incr_dom or React. This repository
+     provides benchmarking capabilities.
+"
+url {
+src: "https://github.com/janestreet/bonsai_bench/archive/c373600ec60f1cb833094a4038802aba969a920d.tar.gz"
+checksum: "sha256=e3ca574febbe68d07b199c3cd19dcc068ca627a87044f62b60568306bdc98e00"
+}
