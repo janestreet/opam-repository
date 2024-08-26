@@ -16,7 +16,7 @@ depends: [
   "core_unix"   {= "v0.18~preview.129.38+45"}
   "ppx_jane"    {= "v0.18~preview.129.38+45"}
   "dune"        {>= "3.11.0"}
-  "uutf"        {>= "1.0.2"}
+  "uutf"        {= "1.0.3+jst"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Text output utilities"

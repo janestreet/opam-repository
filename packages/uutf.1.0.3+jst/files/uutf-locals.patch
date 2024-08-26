@@ -6,7 +6,7 @@ diff --git a/src/uutf.ml b/src/uutf.ml
  
    type 'a folder =
 -    'a -> int -> [ `Uchar of Uchar.t | `Malformed of string ] -> 'a
-+    'a -> (int -> [ `Uchar of Uchar.t | `Malformed of string ] -> 'a[@local])
++    'a -> local_ (int -> [ `Uchar of Uchar.t | `Malformed of string ] -> 'a)
  
    let fold_utf_8 ?(pos = 0) ?len f acc s =
      let rec loop acc f s i last =
@@ -19,13 +19,13 @@ diff --git a/src/uutf.mli b/src/uutf.mli
  
 -  type 'a folder = 'a -> int -> [ `Uchar of Uchar.t | `Malformed of string ] ->
 -    'a
-+  type 'a folder = 'a -> (int -> [ `Uchar of Uchar.t | `Malformed of string ] ->
-+    'a[@local])
++  type 'a folder = 'a -> local_ (int -> [ `Uchar of Uchar.t | `Malformed of string ] ->
++    'a)
    (** The type for character folders. The integer is the index in the
        string where the [`Uchar] or [`Malformed] starts. *)
  
 -  val fold_utf_8 : ?pos:int -> ?len:int -> 'a folder -> 'a -> string -> 'a
-+  val fold_utf_8 : ?pos:int -> ?len:int -> ('a folder [@local]) -> 'a -> string -> 'a
++  val fold_utf_8 : ?pos:int -> ?len:int -> local_ 'a folder -> 'a -> string -> 'a
    (** [fold_utf_8 f a s ?pos ?len ()] is
        [f (] ... [(f (f a pos u]{_0}[) j]{_1}[ u]{_1}[)] ... [)] ... [)
        j]{_n}[ u]{_n}
@@ -34,7 +34,7 @@ diff --git a/src/uutf.mli b/src/uutf.mli
        [String.length s - pos]. *)
  
 -  val fold_utf_16be : ?pos:int -> ?len:int -> 'a folder -> 'a -> string -> 'a
-+  val fold_utf_16be : ?pos:int -> ?len:int -> ('a folder [@local]) -> 'a -> string -> 'a
++  val fold_utf_16be : ?pos:int -> ?len:int -> local_ 'a folder -> 'a -> string -> 'a
    (** [fold_utf_16be f a s ?pos ?len ()] is
        [f (] ... [(f (f a pos u]{_0}[) j]{_1}[ u]{_1}[)] ... [)] ... [)
        j]{_n}[ u]{_n}
@@ -43,7 +43,7 @@ diff --git a/src/uutf.mli b/src/uutf.mli
        [String.length s - pos]. *)
  
 -  val fold_utf_16le : ?pos:int -> ?len:int -> 'a folder -> 'a -> string -> 'a
-+  val fold_utf_16le : ?pos:int -> ?len:int -> ('a folder [@local]) -> 'a -> string -> 'a
++  val fold_utf_16le : ?pos:int -> ?len:int -> local_ 'a folder -> 'a -> string -> 'a
    (** [fold_utf_16le f a s ?pos ?len ()] is
        [f (] ... [(f (f a pos u]{_0}[) j]{_1}[ u]{_1}[)] ... [)] ... [)
        j]{_n}[ u]{_n}
