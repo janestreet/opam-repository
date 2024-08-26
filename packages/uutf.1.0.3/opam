@@ -10,7 +10,7 @@ license: ["ISC"]
 tags: ["unicode" "text" "utf-8" "utf-16" "codec" "org:erratique"]
 depends: ["ocaml" {>= "4.03.0"}
           "ocamlfind" {build}
-          "ocamlbuild" {build}
+          "ocamlbuild" {build & = "0.14.2+jst"}
           "topkg" {build & >= "1.0.3"}]
 depopts: ["cmdliner"]
 conflicts: ["cmdliner" {< "0.9.8"}]
@@ -32,7 +32,7 @@ can be found in the Stdlib and you are encouraged to migrate to it.
 
 Uutf has no dependency and is distributed under the ISC license.
 
-Home page: http://erratique.ch/software/uutf  
+Home page: http://erratique.ch/software/uutf
 Contact: Daniel Bünzli `<daniel.buenzl i@erratique.ch>`"""
 patches: ["uutf-locals.patch"]
 extra-files: [["uutf-locals.patch" "sha256=58274d2cab59a96b2ddbc2a230fa4cbf3d885ef9d077531967eb2790bf48ad9a"]]
