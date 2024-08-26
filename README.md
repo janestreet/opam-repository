@@ -7,20 +7,18 @@ extensions, including all Jane Street packages and necessary patches to external
 
 **WARNING**: this repository is experimental and is not officially supported by Jane Street. Use at your own risk.
 
-If you are using MacOS on Apple Silicon or Windows, please read **Known Issues** first.
-
 Start by adding the repository to OPAM:
 
 ```sh
 opam repo add janestreet-bleeding-with-extensions https://github.com/janestreet/opam-repository.git#with-extensions
 ```
 
-Next, create a new switch with our compiler and a patched version of Dune:
+Next, create a new switch with our compiler:
 
 ```sh
 # This may take some time
-opam switch create 4.14.1-jst --repos janestreet-bleeding-with-extensions,default --packages ocaml-base-compiler=4.14.1-18,dune=3.10.0
-eval $(opam env --switch 4.14.1-jst)
+opam switch create 5.1.1+flambda2 --repos janestreet-bleeding-with-extensions,default
+eval $(opam env --switch 5.1.1+flambda2)
 ```
 
 If the installation was successful, you can now use OCaml with our extensions! Try creating `hello.ml` and running it with `ocamlc -o hello hello.ml && ./hello`:
@@ -45,38 +43,10 @@ refer to [Real World OCaml](https://dev.realworldocaml.org/index.html).
 
 ## Known issues
 
-### ARM64 and other platforms
+### Platforms other than x86_64 or ARM64
 
-This compiler version does not yet support ARM64 and other architectures different from x86_64.
-Work on supporting ARM64 is being tracked [here](https://github.com/ocaml-flambda/flambda-backend/pull/1691).
-
-For Apple Silicon users, [Rosetta 2](https://support.apple.com/en-gb/HT211861) can be used to set up the x86_64 version of our compiler:
-
-```sh
-# Launch x86_64 shell through the Rosetta 2 emulator
-arch -x86_64 zsh
-# Install Homebrew for x86_64, skip if already present.
-# Uses /usr/local/ rather than /opt/homebrew/.
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/usr/local/bin/brew shellenv)"
-# Install OPAM for x86_64, skip if already present
-brew install opam
-# clear zsh's command hash table
-rehash
-opam init
-# Continue with default instructions
-```
+This compiler version does not yet support architectures other than x86_64 or ARM64.
 
 ### Windows
 
 This compiler version does not yet support Windows. Windows users are recommended to use WSL 2 to try out our compiler.
-
-### Js_of_ocaml
-
-Support for Js_of_ocaml requires patches to the JSOO compiler, which have not yet been published.
-
-### Flambda 2 backend
-
-Please note that installing our compiler through this repository will only enable you to experiment with our language extensions.
-To use our compiler backend, Flambda 2, or configure other features of our compiler, follow the installation instructions
-provided [here](https://github.com/ocaml-flambda/flambda-backend).
