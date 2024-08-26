@@ -16,7 +16,7 @@ depends: [
   "ppx_jane"    {= "v0.18~preview.129.38+45"}
   "ppxlib_jane" {= "v0.18~preview.129.38+45"}
   "dune"        {>= "3.11.0"}
-  "ppxlib"      {>= "0.33.0"}
+  "ppxlib"      {>= "0.32.0+jst"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "[@@deriving] plugin to generate Jsonaf conversion functions"
