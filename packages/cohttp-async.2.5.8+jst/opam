@@ -32,7 +32,7 @@ depends: [
   "async" {< "v0.15.0" & with-test}
   "base" {>= "v0.11.0"}
   "core" {with-test}
-  "cohttp" {= version}
+  "cohttp" {= "2.5.8"}
   "conduit-async" {>= "1.2.0" & < "3.0.0"}
   "core_unix" {>= "v0.14.0"}
   "magic-mime"
