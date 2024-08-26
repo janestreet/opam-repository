@@ -22,7 +22,7 @@ depends: [
   "stdio"             {= "v0.18~preview.129.38+45"}
   "dune"              {>= "3.11.0"}
   "ppxlib"            {= "0.32.0+jst"}
-  "zarith"            {>= "1.11"}
+  "zarith"            {= "1.12+jst"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "RTL Hardware Design in OCaml"

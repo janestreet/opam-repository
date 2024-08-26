@@ -16,7 +16,7 @@ depends: [
   "ppx_jane"           {= "v0.18~preview.129.38+45"}
   "ppx_stable_witness" {= "v0.18~preview.129.38+45"}
   "dune"               {>= "3.11.0"}
-  "zarith"             {>= "1.11"}
+  "zarith"             {= "1.12+jst"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Arbitrary-precision decimal based on Zarith"

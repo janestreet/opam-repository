@@ -1,0 +1,88 @@
+diff --git a/q.ml b/q.ml
+--- a/q.ml
++++ b/q.ml
+@@ -17,8 +17,8 @@
+  *)
+ 
+ type t = {
+-    num: Z.t; (** Numerator. *)
+-    den: Z.t; (** Denominator, >= 0 *)
++    global_ num: Z.t; (** Numerator. *)
++    global_ den: Z.t; (** Denominator, >= 0 *)
+   }
+ (* Type of rationals.
+    Invariants:
+@@ -104,7 +104,7 @@ type kind =
+   | UNDEF  (* 0/0 *)
+   | NZERO  (* non-special, non-0 *)
+ 
+-let classify n =
++let classify (local_ n) =
+   if n.den == Z.zero then
+     match Z.sign n.num with
+     | 1  -> INF
+@@ -127,10 +127,12 @@ let sign x = Z.sign x.num
+    sign -inf = -1
+ *)
+ 
+-let equal x y =
++let equal__local (local_ x) (local_ y) =
+   (Z.equal x.num y.num) && (Z.equal x.den y.den) && (classify x <> UNDEF)
+ 
+-let compare x y =
++let equal x y = equal__local x y
++
++let compare__local (local_ x) (local_ y) =
+   match classify x, classify y with
+   | UNDEF,UNDEF | INF,INF | MINF,MINF -> 0
+   | UNDEF,_ -> -1
+@@ -147,6 +149,8 @@ let compare x y =
+         (Z.mul x.num y.den)
+         (Z.mul y.num x.den)
+ 
++let compare x y = compare__local x y
++
+ let min a b = if compare a b <= 0 then a else b
+ let max a b = if compare a b >= 0 then a else b
+ 
+diff --git a/q.mli b/q.mli
+--- a/q.mli
++++ b/q.mli
+@@ -22,8 +22,8 @@
+ (** {1 Types} *)
+ 
+ type t = {
+-    num: Z.t; (** Numerator. *)
+-    den: Z.t; (** Denominator, >= 0 *)
++    global_ num: Z.t; (** Numerator. *)
++    global_ den: Z.t; (** Denominator, >= 0 *)
+   }
+ (** A rational is represented as a pair numerator/denominator, reduced to
+     have a non-negative denominator and no common factor.
+@@ -99,7 +99,7 @@ type kind =
+     whether the numerator and/or denominator is null.
+  *)
+ 
+-val classify: t -> kind
++val classify: local_ t -> kind
+ (** Determines the kind of a rational. *)
+ 
+ val is_real: t -> bool
+@@ -110,6 +110,8 @@ val sign: t -> int
+     negative (including -inf), and 0 if it is null or undefined.
+  *)
+ 
++val compare__local : local_ t -> local_ t -> int
++
+ val compare: t -> t -> int
+ (** [compare x y] compares [x] to [y] and returns 1 if [x] is strictly
+     greater that [y], -1 if it is strictly smaller, and 0 if they are
+@@ -124,6 +126,8 @@ val compare: t -> t -> int
+     the ordering of rationals.
+  *)
+ 
++val equal__local : local_ t -> local_ t -> bool
++
+ val equal: t -> t -> bool
+ (** Equality testing.
+     Unlike [compare], this follows IEEE semantics: [undef] <> [undef].
