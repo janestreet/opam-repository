@@ -61,7 +61,6 @@ patches: [
  "js_of_ocaml-Env_value-arguments.patch"
  "js_of_ocaml-explicitly-ignore-unused-c-var.patch"
  "js_of_ocaml-fix-build_fs.patch"
- "js_of_ocaml-float32.patch"
  "js_of_ocaml-gc-channel-objects.patch"
  "js_of_ocaml-gh1482.patch"
  "js_of_ocaml-iarray-primitives.patch"
