@@ -23,6 +23,6 @@ description: "
 String type based on [Bigarray], for use in I/O and C-bindings.
 "
 url {
-src: "https://github.com/janestreet/base_bigstring/archive/4ecd64eab662396f7a6cc47780fcb57b678fc99a.tar.gz"
-checksum: "sha256=9a8499f79df52ab697de3e7b321065dd7d0a0689d73f94b89b6b2169e114e0b0"
+src: "https://github.com/janestreet/base_bigstring/archive/e0a078cd2065f20a215276520307603f9ad1e2cf.tar.gz"
+checksum: "sha256=5b454991fed40c526508de400ec1990d969e9dcc0e6e659a6233f154d713f491"
 }

@@ -21,6 +21,6 @@ Provides functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt
      See also ocaml_intrinsics library.
 "
 url {
-src: "https://github.com/janestreet/ocaml_intrinsics_kernel/archive/a9856b2721b7e4b2d4e88d6c6a63eb8da1aac3fc.tar.gz"
-checksum: "sha256=9264c4bd08895df8d542e7a572ed55c4eee04f85da89fbf0b1ebe01b5003e935"
+src: "https://github.com/janestreet/ocaml_intrinsics_kernel/archive/997a5da542ade9efe0ff743e02ed21f291cde1ed.tar.gz"
+checksum: "sha256=d367fce950b1cf5c3b21799f346f636fe388567635d6d2c381829383f470b56d"
 }
