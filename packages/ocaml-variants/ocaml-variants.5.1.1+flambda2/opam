@@ -32,3 +32,5 @@ url {
   src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.1.1minus-20.tar.gz"
   checksum: ["sha256=1d401dce2ecb37bcac9e4864fa648477c377cc70cbb0a86b30743348fee3a1ab"]
 }
+patches: ["enable-sigwait.patch"]
+extra-files: [["enable-sigwait.patch" "sha256=448bf9b3ee142b7c858625b75018f200346f32959072991302209c2b988c490f"]]
