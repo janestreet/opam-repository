@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_unix"
+bug-reports: "https://github.com/janestreet/core_unix/issues"
+dev-repo: "git+https://github.com/janestreet/core_unix.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_unix/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "core"                     {= "v0.18~preview.129.42+498"}
+  "core_kernel"              {= "v0.18~preview.129.42+498"}
+  "expect_test_helpers_core" {= "v0.18~preview.129.42+498"}
+  "jane-street-headers"      {= "v0.18~preview.129.42+498"}
+  "jst-config"               {= "v0.18~preview.129.42+498"}
+  "ppx_diff"                 {= "v0.18~preview.129.42+498"}
+  "ppx_jane"                 {= "v0.18~preview.129.42+498"}
+  "ppx_optcomp"              {= "v0.18~preview.129.42+498"}
+  "ppx_stable_witness"       {= "v0.18~preview.129.42+498"}
+  "sexplib"                  {= "v0.18~preview.129.42+498"}
+  "uopt"                     {= "v0.18~preview.129.42+498"}
+  "base-threads"
+  "dune"                     {>= "3.11.0"}
+  "spawn"                    {>= "v0.15"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Unix-specific portions of Core"
+description: "
+Unix-specific extensions to some of the modules defined in [core] and [core_kernel].
+"
+depexts: ["linux-headers"] {os-family = "alpine"}
+url {
+src: "https://github.com/janestreet/core_unix/archive/b0dee35dcbb11c9127e63cbeacc8c866e1582fe1.tar.gz"
+checksum: "sha256=666af92f64b602029cf74d8e578e9812da388513ff2feddfd323b2e887c3f848"
+}

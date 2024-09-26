@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_bin_prot"
+bug-reports: "https://github.com/janestreet/ppx_bin_prot/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_bin_prot.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_bin_prot/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "base"                {= "v0.18~preview.129.42+498"}
+  "bin_prot"            {= "v0.18~preview.129.42+498"}
+  "ppx_here"            {= "v0.18~preview.129.42+498"}
+  "ppxlib_jane"         {= "v0.18~preview.129.42+498"}
+  "dune"                {>= "3.11.0"}
+  "ocaml-compiler-libs" {>= "v0.11.0"}
+  "ppxlib"              {>= "0.33.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Generation of bin_prot readers and writers from types"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_bin_prot/archive/197355d75437ce8233ce4464602539cdef9a28f9.tar.gz"
+checksum: "sha256=8036d3433485f59052f92d8e0320f5ec6f86cfdbdb24e30cb3a6f0f7979e2890"
+}

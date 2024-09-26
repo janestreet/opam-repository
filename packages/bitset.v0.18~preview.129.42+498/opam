@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bitset"
+bug-reports: "https://github.com/janestreet/bitset/issues"
+dev-repo: "git+https://github.com/janestreet/bitset.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/bitset/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                   {>= "5.1.0"}
+  "core"                    {= "v0.18~preview.129.42+498"}
+  "ocaml_intrinsics_kernel" {= "v0.18~preview.129.42+498"}
+  "ppx_jane"                {= "v0.18~preview.129.42+498"}
+  "dune"                    {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for flat bitsets"
+description: "
+ An efficient mutable bitset.
+"
+url {
+src: "https://github.com/janestreet/bitset/archive/0a4e8f913252495d1f3f19d8124817b309b1fca1.tar.gz"
+checksum: "sha256=c84f6f1333e16b8dafec5b85c943cec5d7b8f390e8fc93c2dbe7afdcf1cf38cd"
+}

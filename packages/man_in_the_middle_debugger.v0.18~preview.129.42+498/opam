@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/man_in_the_middle_debugger"
+bug-reports: "https://github.com/janestreet/man_in_the_middle_debugger/issues"
+dev-repo: "git+https://github.com/janestreet/man_in_the_middle_debugger.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/man_in_the_middle_debugger/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"          {>= "5.1.0"}
+  "async"          {= "v0.18~preview.129.42+498"}
+  "core"           {= "v0.18~preview.129.42+498"}
+  "ppx_jane"       {= "v0.18~preview.129.42+498"}
+  "angstrom"       {>= "0.15.0"}
+  "angstrom-async" {>= "0.15.0"}
+  "dune"           {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Man-in-the-middle debugging library"
+description: "
+This library helps debug a connection between two parties speaking a
+protocol by capturing the traffic that passes between them.
+"
+url {
+src: "https://github.com/janestreet/man_in_the_middle_debugger/archive/2dc29e70c9284d5215d77fe221f6db2e4b8ffd6a.tar.gz"
+checksum: "sha256=a449424ad62f05a6789f6405841c68f0619583bcdf9b3be41b2d7cbb34faf1f7"
+}

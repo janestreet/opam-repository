@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_html"
+bug-reports: "https://github.com/janestreet/ppx_html/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_html.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_html/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "base"                     {= "v0.18~preview.129.42+498"}
+  "core"                     {= "v0.18~preview.129.42+498"}
+  "core_kernel"              {= "v0.18~preview.129.42+498"}
+  "expect_test_helpers_core" {= "v0.18~preview.129.42+498"}
+  "expectable"               {= "v0.18~preview.129.42+498"}
+  "patdiff"                  {= "v0.18~preview.129.42+498"}
+  "ppx_css"                  {= "v0.18~preview.129.42+498"}
+  "ppx_jane"                 {= "v0.18~preview.129.42+498"}
+  "virtual_dom"              {= "v0.18~preview.129.42+498"}
+  "angstrom"                 {>= "0.15.0"}
+  "dune"                     {>= "3.11.0"}
+  "ocaml-compiler-libs"      {>= "v0.11.0"}
+  "ppxlib"                   {>= "0.33.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "PPX_HTML is a way of constructing Vdom.Node.t's using HTML syntax."
+description: "
+PPX_HTML is a way of constructing Vdom.Node.t's using HTML syntax.
+"
+url {
+src: "https://github.com/janestreet/ppx_html/archive/8e78d816873206c42a6e866d97a026058828e612.tar.gz"
+checksum: "sha256=b04eedcc2ff9cb0afff8582119e57450dd0fd9f8f3b8025c766b0b74e9ee68f0"
+}
