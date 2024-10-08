@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/toplevel_backend"
+bug-reports: "https://github.com/janestreet/toplevel_backend/issues"
+dev-repo: "git+https://github.com/janestreet/toplevel_backend.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/toplevel_backend/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "base"        {= "v0.18~preview.130.00+55"}
+  "core"        {= "v0.18~preview.130.00+55"}
+  "parsexp"     {= "v0.18~preview.130.00+55"}
+  "ppx_here"    {= "v0.18~preview.130.00+55"}
+  "ppx_jane"    {= "v0.18~preview.130.00+55"}
+  "ppx_optcomp" {= "v0.18~preview.130.00+55"}
+  "stdio"       {= "v0.18~preview.130.00+55"}
+  "dune"        {>= "3.11.0"}
+  "ocamlfind"   {>= "1.7.2"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Shared backend for setting up toplevels"
+description: "
+Module for setting up dependencies (like printers and liblinks) for toplevels.
+"
+url {
+src: "https://github.com/janestreet/toplevel_backend/archive/916da050e94eae872f5bd7fa38913a0cae8d5adf.tar.gz"
+checksum: "sha256=3c0b56529fa669d93028d4e7e6715cd00d01f79df7ca8c55d9bff58c95b6bc72"
+}

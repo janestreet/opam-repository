@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sexp_grammar"
+bug-reports: "https://github.com/janestreet/sexp_grammar/issues"
+dev-repo: "git+https://github.com/janestreet/sexp_grammar.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexp_grammar/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "async_rpc_kernel" {= "v0.18~preview.130.00+55"}
+  "core"             {= "v0.18~preview.130.00+55"}
+  "core_kernel"      {= "v0.18~preview.130.00+55"}
+  "dedent"           {= "v0.18~preview.130.00+55"}
+  "parsexp_prefix"   {= "v0.18~preview.130.00+55"}
+  "ppx_bin_prot"     {= "v0.18~preview.130.00+55"}
+  "ppx_compare"      {= "v0.18~preview.130.00+55"}
+  "ppx_hash"         {= "v0.18~preview.130.00+55"}
+  "ppx_jane"         {= "v0.18~preview.130.00+55"}
+  "ppx_let"          {= "v0.18~preview.130.00+55"}
+  "ppx_sexp_conv"    {= "v0.18~preview.130.00+55"}
+  "ppx_sexp_message" {= "v0.18~preview.130.00+55"}
+  "dune"             {>= "3.11.0"}
+  "ppxlib"           {>= "0.33.0"}
+  "zarith"           {>= "1.11"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Sexp grammar helpers"
+description: "
+Helpers for manipulating [Sexplib.Sexp_grammar] values.
+"
+url {
+src: "https://github.com/janestreet/sexp_grammar/archive/e0aa81811d92218ae5de93f14b0abc71a3125d94.tar.gz"
+checksum: "sha256=900880fa971841bb0404bd769bcd8021bb60202f094c9b1de266b8e335c7d67d"
+}

@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_conv_func"
+bug-reports: "https://github.com/janestreet/ppx_conv_func/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_conv_func.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_conv_func/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "5.1.0"}
+  "base"   {= "v0.18~preview.130.00+55"}
+  "dune"   {>= "3.11.0"}
+  "ppxlib" {>= "0.33.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Deprecated"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_conv_func/archive/e3aae145bfeb87bf17ecda1f145bdd45e4638a08.tar.gz"
+checksum: "sha256=b61db7740dc0a8728dd2e2e182ec957eca7c9945c2ed2975da044bd480ddbb40"
+}

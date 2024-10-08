@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/fzf"
+bug-reports: "https://github.com/janestreet/fzf/issues"
+dev-repo: "git+https://github.com/janestreet/fzf.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/fzf/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "async"       {= "v0.18~preview.130.00+55"}
+  "core"        {= "v0.18~preview.130.00+55"}
+  "core_kernel" {= "v0.18~preview.130.00+55"}
+  "core_unix"   {= "v0.18~preview.130.00+55"}
+  "ppx_jane"    {= "v0.18~preview.130.00+55"}
+  "dune"        {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for running the fzf command line tool"
+description: "
+A library for running the fzf command line fuzzy matcher
+"
+url {
+src: "https://github.com/janestreet/fzf/archive/2dbe8a753be5aca381479fbe08b5cd67fd789d85.tar.gz"
+checksum: "sha256=1c32499f229e8328f08f500a227799178556721f9ed3ce519fa67b5eea5328e1"
+}

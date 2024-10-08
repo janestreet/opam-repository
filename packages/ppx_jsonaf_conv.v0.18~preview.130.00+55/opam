@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_jsonaf_conv"
+bug-reports: "https://github.com/janestreet/ppx_jsonaf_conv/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_jsonaf_conv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_jsonaf_conv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "base"        {= "v0.18~preview.130.00+55"}
+  "jsonaf"      {= "v0.18~preview.130.00+55"}
+  "ppx_jane"    {= "v0.18~preview.130.00+55"}
+  "ppxlib_jane" {= "v0.18~preview.130.00+55"}
+  "dune"        {>= "3.11.0"}
+  "ppxlib"      {>= "0.33.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "[@@deriving] plugin to generate Jsonaf conversion functions"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_jsonaf_conv/archive/3d44803a53e12a34b6c23a5d1b319de5446e485c.tar.gz"
+checksum: "sha256=cc27ca36164f6118a14700bac2aea9bcae734ed055adc47a2239f2b6bdd6cd36"
+}
