@@ -36,9 +36,9 @@ build: [
 ]
 url {
   src:
-    "https://github.com/ocaml-wasm/wasm_of_ocaml/archive/33f15771e684eb3974bbdf6117f901a80eaada87.tar.gz"
+    "https://github.com/ocaml-wasm/wasm_of_ocaml/archive/090b7b29fc17a39353cbbf9ee7933d7371db93cf.tar.gz"
   checksum: [
-    "sha256=23c9bb168a93c327ea4c2785d9636017c95fa47014177edc92366d3ea5399a7d"
+    "sha256=38a945f439c31a85044b40d90bdead154daf07453f26041039f07dcc7b314a12"
   ]
 }
 x-commit-hash: "b9c9a4b8d933c6a7d879b31912c20164ab6232e0"
