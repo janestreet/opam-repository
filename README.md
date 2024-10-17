@@ -10,15 +10,15 @@ extensions, including all Jane Street packages and necessary patches to external
 Start by adding the repository to OPAM:
 
 ```sh
-opam repo add janestreet-bleeding-with-extensions https://github.com/janestreet/opam-repository.git#with-extensions
+opam repo add with-extensions-dev https://github.com/janestreet/opam-repository.git#with-extensions-edv
 ```
 
 Next, create a new switch with our compiler:
 
 ```sh
 # This may take some time
-opam switch create 5.1.1+flambda2 --repos janestreet-bleeding-with-extensions,default
-eval $(opam env --switch 5.1.1+flambda2)
+opam switch create 5.2.0+flambda2 --repos with-extensions-dev,default
+eval $(opam env --switch 5.2.0+flambda2)
 ```
 
 If the installation was successful, you can now use OCaml with our extensions! Try creating `hello.ml` and running it with `ocamlc -o hello hello.ml && ./hello`:
