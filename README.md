@@ -10,7 +10,7 @@ extensions, including all Jane Street packages and necessary patches to external
 Start by adding the repository to OPAM:
 
 ```sh
-opam repo add with-extensions-dev https://github.com/janestreet/opam-repository.git#with-extensions-edv
+opam repo add with-extensions-dev https://github.com/janestreet/opam-repository.git#with-extensions-dev
 ```
 
 Next, create a new switch with our compiler:
