@@ -1,0 +1,35 @@
+--- a/src/common.ml
++++ b/src/common.ml
+@@ -112,7 +112,7 @@ class type_is_recursive rec_flag tds =
+     method! constructor_declaration cd =
+       (* Don't recurse through cd.pcd_res *)
+       match cd.pcd_args with
+-      | Pcstr_tuple args -> List.iter args ~f:self#core_type
++      | Pcstr_tuple args -> List.iter args ~f:self#constructor_argument
+       | Pcstr_record fields -> List.iter fields ~f:self#label_declaration
+ 
+     method! attributes _ = (* Don't recurse through attributes *)
+@@ -225,6 +225,15 @@ let is_polymorphic_variant =
+         | None -> if sig_ then `Maybe else `Surely_not
+         | Some typ -> check typ)
+ 
++let parameter_may_be_non_value params =
++  List.exists params ~f:(fun (ty, _) ->
++     match Ppxlib_jane.Jane_syntax.Core_type.of_ast ty with
++     | Some (Jtyp_layout (Ltyp_var { jkind; _ }), _) -> (
++         match jkind.txt with
++         | Default | Abbreviation { txt = "value"; _ } -> false
++         | _ -> true)
++     | _ -> false)
++
+ let mk_named_sig ~loc ~sg_name ~handle_polymorphic_variant = function
+   | [ td ]
+     when String.equal td.ptype_name.txt "t" && List.is_empty td.ptype_cstrs ->
+@@ -235,6 +244,7 @@ let mk_named_sig ~loc ~sg_name ~handle_p
+       else
+         let arity = List.length td.ptype_params in
+         if arity >= 4 then None
++        else if parameter_may_be_non_value td.ptype_params then None
+         else
+           let mty =
+             if arity = 0 then sg_name else Printf.sprintf "%s%d" sg_name arity

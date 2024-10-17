@@ -1,0 +1,42 @@
+--- a/traverse/ppxlib_traverse.ml
++++ b/traverse/ppxlib_traverse.ml
+@@ -19,12 +19,12 @@ let tvars_of_vars = List.map ~f:tvar_of_
+ 
+ let fst_expr ~loc expr =
+   match expr.pexp_desc with
+-  | Pexp_tuple [ fst; _ ] -> fst
++  | Pexp_tuple [ None, fst; None, _ ] -> fst
+   | _ -> [%expr Stdlib.fst [%e expr]]
+ 
+ let snd_expr ~loc expr =
+   match expr.pexp_desc with
+-  | Pexp_tuple [ _; snd ] -> snd
++  | Pexp_tuple [ None, _; None, snd ] -> snd
+   | _ -> [%expr Stdlib.snd [%e expr]]
+ 
+ let methods_of_class_exn = function
+@@ -413,12 +413,15 @@ let rec type_expr_mapper ~(what : what) 
+   let loc = te.ptyp_loc in
+   match te.ptyp_desc with
+   | Ptyp_var s -> evar ~loc ("_" ^ s)
+-  | Ptyp_tuple tes ->
++  | Ptyp_tuple labeled_tes ->
++     (match Ppxlib_jane.as_unlabeled_tuple labeled_tes with
++      | Some tes ->
+       let vars = vars_of_list tes ~get_loc:(fun t -> t.ptyp_loc) in
+       let deconstruct = ppat_tuple ~loc (pvars_of_vars vars) in
+       let reconstruct = what#tuple ~loc (evars_of_vars vars) in
+       let mappers = map_variables ~what vars tes in
+       what#abstract ~loc deconstruct (what#combine ~loc mappers ~reconstruct)
++      | None -> what#any ~loc)
+   | Ptyp_constr (path, params) -> (
+       let map =
+         pexp_send ~loc (evar ~loc "self") (Loc.map path ~f:mangle_type_name)
+@@ -488,6 +491,7 @@ let gen_variant ~(what : what) ~loc cds 
+           in
+           match args with
+           | Pcstr_tuple args ->
++              let args = List.map args ~f:(fun ca -> ca.pca_type) in
+               let vars = vars_of_list args ~get_loc:(fun t -> t.ptyp_loc) in
+               let deconstruct =
+                 ppat_construct cstr ~loc

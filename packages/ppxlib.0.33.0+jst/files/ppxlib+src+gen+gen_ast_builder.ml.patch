@@ -1,0 +1,20 @@
+--- a/src/gen/gen_ast_builder.ml
++++ b/src/gen/gen_ast_builder.ml
+@@ -88,10 +88,15 @@ struct
+     let body =
+       let l = List.filter funcs ~f:(fun f -> f <> "loc" && f <> "attributes") in
+       match l with
+-      | [ x ] -> Exp.fun_ Nolabel None (pvar x) body
++      | [ x ] ->
++          Ppxlib_jane.Ast_builder.Default.add_fun_param
++            ~loc:!Ast_helper.default_loc
++            Nolabel None (pvar x) body
+       | _ ->
+           List.fold_right l ~init:body ~f:(fun func acc ->
+-              Exp.fun_ (Labelled func) None (pvar func) acc)
++            Ppxlib_jane.Ast_builder.Default.add_fun_param
++              ~loc:!Ast_helper.default_loc
++              (Labelled func) None (pvar func) acc)
+     in
+     (* let body =
+          if List.mem "attributes" ~set:funcs then

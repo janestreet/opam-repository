@@ -1,0 +1,11 @@
+--- a/src/deriving.ml
++++ b/src/deriving.ml
+@@ -587,7 +587,7 @@ let mk_deriving_attr context ~prefix ~su
+                  (map1 (many __) ~f:parse_arguments))
+       in
+       let generators =
+-        pexp_tuple (many (generator ()))
++        (pexp_tuple (many (generator ())))
+         ||| map (generator ()) ~f:(fun f x -> f [ x ])
+       in
+       pstr (pstr_eval generators nil ^:: nil))

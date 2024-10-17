@@ -1,0 +1,57 @@
+--- a/src/ast_pattern.ml
++++ b/src/ast_pattern.ml
+@@ -205,6 +205,30 @@ let pack3 t = map t ~f:(fun f x y z -> f
+ 
+ include Ast_pattern_generated
+ 
++(*-------------------------------------------------------*)
++
++(* override changed nodes *)
++
++let ptyp_arrow label cty1 cty2 =
++  ptyp_arrow label cty1 cty2 drop drop
++
++let ptyp_tuple l = ptyp_tuple (map_value ~f:(List.map ~f:snd) l)
++
++let value_binding ~pat ~expr =
++  value_binding ~pat ~expr ~modes:drop
++
++let ppat_constraint pat cty =
++  ppat_constraint pat (some cty) drop
++
++let ppat_tuple l = ppat_tuple (map_value ~f:(List.map ~f:snd) l) drop
++
++let pexp_constraint exp cty =
++  pexp_constraint exp (some cty) drop
++
++let pexp_tuple l = pexp_tuple (map_value ~f:(List.map ~f:snd) l)
++
++(* ----------------------------------------------------- *)
++
+ let echar t = pexp_constant (pconst_char t)
+ let estring t = pexp_constant (pconst_string t drop drop)
+ let efloat t = pexp_constant (pconst_float t drop)
+@@ -235,6 +259,14 @@ let no_label t = cst Asttypes.Nolabel ~t
+ let ebool t = pexp_construct (lident (bool' t)) none
+ let pbool t = ppat_construct (lident (bool' t)) none
+ 
++let pexp_function cases =
++  pexp_function nil none
++    (pfunction_cases cases
++       drop
++       (T (fun _ _ attrs k ->
++            Common.assert_no_attributes attrs;
++            k)))
++
+ let extension (T f1) (T f2) =
+   T
+     (fun ctx loc ((name : _ Loc.t), payload) k ->
+@@ -249,7 +281,7 @@ let rec parse_elist (e : Parsetree.expre
+   | Pexp_construct ({ txt = Lident "::"; _ }, Some arg) -> (
+       Common.assert_no_attributes arg.pexp_attributes;
+       match arg.pexp_desc with
+-      | Pexp_tuple [ hd; tl ] -> parse_elist tl (hd :: acc)
++      | Pexp_tuple [ None, hd; None, tl ] -> parse_elist tl (hd :: acc)
+       | _ -> fail arg.pexp_loc "list")
+   | _ -> fail e.pexp_loc "list"
+ 

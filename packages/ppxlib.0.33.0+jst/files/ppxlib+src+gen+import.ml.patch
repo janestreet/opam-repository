@@ -1,0 +1,11 @@
+--- a/src/gen/import.ml
++++ b/src/gen/import.ml
+@@ -38,7 +38,7 @@ let common_prefix l =
+ 
+ let map_keyword = function
+   | ( "open" | "private" | "downto" | "to" | "mutable" | "rec" | "nonrec"
+-    | "virtual" | "type" | "mod" | "begin" | "end" ) as s ->
++    | "virtual" | "type" | "mod" | "begin" | "end" | "with" | "functor" ) as s ->
+       s ^ "_"
+   | s -> s
+ 
