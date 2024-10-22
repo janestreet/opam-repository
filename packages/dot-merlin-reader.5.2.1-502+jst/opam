@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer:   "defree@gmail.com"
+authors:      "The Merlin team"
+synopsis:     "Reads config files for merlin"
+homepage:     "https://github.com/janestreet/merlin-jst"
+bug-reports:  "https://github.com/janestreet/merlin-jst/issues"
+dev-repo:     "git+https://github.com/janestreet/merlin-jst.git"
+license:      "MIT"
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.2" }
+  "dune" {>= "3.0"}
+  "merlin-lib" {= version}
+  "ocamlfind" {>= "1.6.0"}
+]
+description:
+  "Helper process: reads .merlin files and outputs the normalized content to
+  stdout."
+url {
+  src:
+    "https://github.com/janestreet/merlin-jst/archive/6362f77bfe49dc5556763dfe500e784a3fccafc9.tar.gz"
+  checksum: [
+  ]
+}
