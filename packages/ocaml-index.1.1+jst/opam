@@ -34,5 +34,7 @@ url {
   src:
     "https://github.com/janestreet/merlin-jst/archive/6362f77bfe49dc5556763dfe500e784a3fccafc9.tar.gz"
   checksum: [
+    "sha256=a38947c8a21c519e4891b3249671c050e593110ccfc0be64ee601dd951888f86"
+    "sha512=bf8522f92332bcb0f708d4460c4f7602c25afe58268782c5f9caf26a3933da47288ea6117701a86a691e9ab6d098e6282cca88753c28607334ddc403fb9ef105"
   ]
 }
