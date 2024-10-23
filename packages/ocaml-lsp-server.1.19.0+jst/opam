@@ -1,0 +1,72 @@
+opam-version: "2.0"
+synopsis: "LSP Server for OCaml"
+description: "An LSP server for OCaml."
+maintainer: ["Rudi Grinberg <me@rgrinberg.com>"]
+authors: [
+  "Andrey Popp <8mayday@gmail.com>"
+  "Rusty Key <iam@stfoo.ru>"
+  "Louis Roché <louis@louisroche.net>"
+  "Oleksiy Golovko <alexei.golovko@gmail.com>"
+  "Rudi Grinberg <me@rgrinberg.com>"
+  "Sacha Ayoun <sachaayoun@gmail.com>"
+  "cannorin <cannorin@gmail.com>"
+  "Ulugbek Abdullaev <ulugbekna@gmail.com>"
+  "Thibaut Mattio <thibaut.mattio@gmail.com>"
+  "Max Lantas <mnxndev@outlook.com>"
+]
+license: "ISC"
+homepage: "https://github.com/janestreet/ocaml-lsp"
+bug-reports: "https://github.com/janestreet/ocaml-lsp/issues"
+depends: [
+  "dune" {>= "3.0"}
+  "yojson"
+  "base" {>= "v0.16.0"}
+  "lsp" {= version}
+  "jsonrpc" {= version}
+  "re" {>= "1.5.0"}
+  "ppx_yojson_conv_lib" {>= "v0.14"}
+  "dune-rpc" {>= "3.4.0"}
+  "chrome-trace" {>= "3.3.0"}
+  "dyn"
+  "stdune"
+  "fiber" {>= "3.1.1" & < "4.0.0"}
+  "ocaml" {>= "5.2.0" & < "5.3.0"}
+  "xdg"
+  "ordering"
+  "dune-build-info"
+  "spawn"
+  "astring"
+  "camlp-streams"
+  "ppx_expect" {>= "v0.15.0" & < "0.17.0" & with-test}
+  "ocamlformat" {with-test & = "0.26.2"}
+  "ocamlc-loc" {>= "3.7.0"}
+  "pp" {>= "1.1.2"}
+  "csexp" {>= "1.5"}
+  "ocamlformat-rpc-lib" {>= "0.21.0"}
+  "odoc" {with-doc}
+  "merlin-lib" {>= "5.0" & < "6.0"}
+  "ocaml-index" {>= "1.0" & post}
+]
+dev-repo: "git+https://github.com/janestreet/ocaml-lsp.git"
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@doc" {with-doc}
+  ]
+]
+url {
+  src:
+    "https://github.com/janestreet/ocaml-lsp/archive/56045172dfa078eb53c9ac1e3cdd18cd4646b90a.tar.gz"
+  checksum: [
+    "sha256=e73c413efd28e2f5be63cf468662083f724bb2dc575883cc36fba054857c749b"
+    "sha512=c44d093e7d43bccbcfe77ef9d47a5163d9644acca312ea0d3edbf6f59d10a36a4d2081614b7ecfa7027b807cfc352c6d5fff81d7d619f6032f07f3ca38aaff39"
+  ]
+}
+x-commit-hash: "56045172dfa078eb53c9ac1e3cdd18cd4646b90a"
