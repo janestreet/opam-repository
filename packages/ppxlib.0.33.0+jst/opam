@@ -22,16 +22,17 @@ bug-reports: "https://github.com/ocaml-ppx/ppxlib/issues"
 depends: [
   "dune"                {>= "2.7"}
   "ocaml"               {>= "4.04.1" & < "5.3.0"}
-  "ocaml-compiler-libs" {= "v0.12.4"}
+  "ocaml-compiler-libs" {>= "v0.11.0"}
   "ppx_derivers"        {>= "1.0"}
   "sexplib0"            {>= "v0.12"}
   "sexplib0"            {with-test & >= "v0.15"}
   "stdlib-shims"
+  "ppxlib_ast"
+  "ppxlib_jane"
   "ocamlfind"           {with-test}
   "re"                  {with-test & >= "1.9.0"}
   "cinaps"              {with-test & >= "v0.12.1"}
   "odoc"                {with-doc}
-  "ppxlib_jane"         {post}
 ]
 conflicts: [
   "ocaml-migrate-parsetree" {< "2.0.0"}
@@ -40,7 +41,7 @@ conflicts: [
   "base-effects"
 ]
 build: [
-  ["./cleanup.sh"]
+  ["rm" "-rf" "ast" "astlib" "stdppx" "traverse_builtins"]
   ["dune" "subst"] {dev}
   [
     "dune"
@@ -63,22 +64,6 @@ url {
     "sha256=54afd640f863c2f39a6c844f6ceff63c8796e865da7db6d49c60019516fc00d4"
 }
 patches: [
-  "ppxlib+ast+ast.ml.patch"
-  "ppxlib+ast+ast_helper_lite.ml.patch"
-  "ppxlib+ast+ast_helper_lite.mli.patch"
-  "ppxlib+ast+supported_version+supported_version.ml.patch"
-  "ppxlib+ast+versions.ml.patch"
-  "ppxlib+ast+versions.mli.patch"
-  "ppxlib+astlib+ast_414.ml.patch"
-  "ppxlib+astlib+ast_500.ml.patch"
-  "ppxlib+astlib+ast_999.ml.patch"
-  "ppxlib+astlib+astlib.ml.patch"
-  "ppxlib+astlib+cinaps+astlib_cinaps_helpers.ml.patch"
-  "ppxlib+astlib+config+gen.ml.patch"
-  "ppxlib+astlib+migrate_500_999.ml.patch"
-  "ppxlib+astlib+migrate_999_500.ml.patch"
-  "ppxlib+astlib+pprintast.ml.patch"
-  "ppxlib+astlib+stdlib0.ml.patch"
   "ppxlib+metaquot+ppxlib_metaquot.ml.patch"
   "ppxlib+src+ast_builder.ml.patch"
   "ppxlib+src+ast_builder_intf.ml.patch"
@@ -95,74 +80,10 @@ patches: [
   "ppxlib+src+name.ml.patch"
   "ppxlib+src+utils.ml.patch"
   "ppxlib+traverse+ppxlib_traverse.ml.patch"
-  "location_check.ml.patch"
   "dune.patch"
+  "location_check.ml.patch"
 ]
 extra-files: [
-  [
-    "ppxlib+ast+ast.ml.patch"
-    "sha256=e7ed1b34e836ab00abb407ead54d320578ca307f7908367dfbdceb8b95a51193"
-  ]
-  [
-    "ppxlib+ast+ast_helper_lite.ml.patch"
-    "sha256=0312e58723289d52d62a5caa765ca655745dcf739b1a98733ac90a7764f72246"
-  ]
-  [
-    "ppxlib+ast+ast_helper_lite.mli.patch"
-    "sha256=044daea7c27086516c47be3ec8f8342076f0724c1224bc59b55e54301e4c15df"
-  ]
-  [
-    "ppxlib+ast+supported_version+supported_version.ml.patch"
-    "sha256=a7762cf03e1aeb12d3916da21e08874737a0324e7e3ebd4d13431e04641dec7d"
-  ]
-  [
-    "ppxlib+ast+versions.ml.patch"
-    "sha256=b0860295416b010107a99dbd14f094376c6b44109747f3436935ad861aeda19d"
-  ]
-  [
-    "ppxlib+ast+versions.mli.patch"
-    "sha256=3ea1dd81309fa433ef498a9e756f6a6f815cc3a919bfbe177ceb1e085ffdb055"
-  ]
-  [
-    "ppxlib+astlib+ast_414.ml.patch"
-    "sha256=7099a0ca2284b64f4bd2790d6efde5928e3bbc794211b8b3207f49b1685f66e4"
-  ]
-  [
-    "ppxlib+astlib+ast_500.ml.patch"
-    "sha256=cfb9281d210a4b7744b938afb39c06cb360b86b7fbdef86f0a496e9ce87e006d"
-  ]
-  [
-    "ppxlib+astlib+ast_999.ml.patch"
-    "sha256=af2226ce407381b910bc00d505b335edb9771305c7e8ceb0069758b0788906b9"
-  ]
-  [
-    "ppxlib+astlib+astlib.ml.patch"
-    "sha256=fc728f66702ffcd43060a8d034c053a2e24939eba89a18f1a3b4d86dee71c41b"
-  ]
-  [
-    "ppxlib+astlib+cinaps+astlib_cinaps_helpers.ml.patch"
-    "sha256=8a45c26531773e7bbc0ca0a195ac0ad7fc7b559fe97110f3adde66181e6f7781"
-  ]
-  [
-    "ppxlib+astlib+config+gen.ml.patch"
-    "sha256=63e1849d90ca2a6c391a401b0e87ce853dbfc44488ba3b8d449af7a81b5ddbad"
-  ]
-  [
-    "ppxlib+astlib+migrate_500_999.ml.patch"
-    "sha256=9a0485dd5e6a30550768e387e7009ce7aa4c7f43ec026b55f48a9648bf2c0310"
-  ]
-  [
-    "ppxlib+astlib+migrate_999_500.ml.patch"
-    "sha256=1c422f7d1a94cf128a7adadfbebb51a51a73f466d38f4507258389ef3906516c"
-  ]
-  [
-    "ppxlib+astlib+pprintast.ml.patch"
-    "sha256=3b16febba5ac5862b6e7eefd26dbd1f8112faeac835ba94178afe4573b991d97"
-  ]
-  [
-    "ppxlib+astlib+stdlib0.ml.patch"
-    "sha256=3a4d847410794bdd03accf7e5ca0401da9ade61e0d7e299c83103d31118ff384"
-  ]
   [
     "ppxlib+metaquot+ppxlib_metaquot.ml.patch"
     "sha256=9046b93015c168806ea3c9d85c7aba17d97d9073f1bdde9c4523a47ab11e9bfc"
@@ -228,27 +149,11 @@ extra-files: [
     "sha256=f97292ecb883e27079a62450e1187be71d8cdca489705f1576eb103d8639b330"
   ]
   [
+    "dune.patch"
+    "sha256=349dc9cbe7e373ca4cd187263e2d995a064b98599e97060a01718bb6d252db17"
+  ]
+  [
     "location_check.ml.patch"
     "sha256=c284c46d1ce5eff24da1f77ad838739e947551bbdf228b5bcc9e357cde51fa7f"
-  ]
-  [
-    "dune.patch"
-    "sha256=4893e1e741c8385deca6700a52bb3845db31b937bac976a08cfe42bdfc90a5eb"
-  ]
-  [
-    "cleanup.sh"
-    "sha256=3f5e764a2904ea9ede5a031e5d72ed627bdf54efb2d26fcf8aa6bc0503582f2d"
-  ]
-  [
-    "astlib/ast_999.ml"
-    "sha256=4ec86e15a04e0393f3e17bd680ae0906a893e36c83dca862acd9e033a5728dba"
-  ]
-  [
-    "astlib/migrate_500_999.ml"
-    "sha256=e1598c0f6b45b8ce8af19824fd5a54e357ddaa3b37ba09037daa07661e95d6fb"
-  ]
-  [
-    "astlib/migrate_999_500.ml"
-    "sha256=ceac8144cdc61c822b65ba2016e029350e1fd237786b9f854c90f9c9ef762d4f"
   ]
 ]

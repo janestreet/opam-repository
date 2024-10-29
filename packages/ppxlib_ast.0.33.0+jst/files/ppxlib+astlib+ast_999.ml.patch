@@ -1,4 +1,4 @@
---- a//dev/null
+--- /dev/null
 +++ b/astlib/ast_999.ml
 @@ -0,0 +1,1226 @@
 +module Asttypes = struct

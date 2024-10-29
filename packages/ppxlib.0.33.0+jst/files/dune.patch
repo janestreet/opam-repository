@@ -1,39 +1,3 @@
---- a/ast/dune
-+++ b/ast/dune
-@@ -13,7 +13,7 @@
-  (preprocess
-   (per_module
-    ((action
--     (run %{exe:pp/pp.exe} %{ocaml_version} %{input-file}))
-+     (run %{exe:pp/pp.exe} 9.99 %{input-file}))
-     versions)))
-  (lint
-   (pps ppxlib_traverse -deriving-keep-w32=impl)))
---- a/astlib/dune
-+++ b/astlib/dune
-@@ -10,7 +10,7 @@
- (rule
-  (targets ast-version)
-  (action
--  (run %{ocaml} %{dep:config/gen.ml} %{ocaml_version})))
-+  (run %{ocaml} %{dep:config/gen.ml} 9.99)))
-
- (cinaps
-  (files *.ml *.mli)
---- a/ast/dune
-+++ b/ast/dune
-@@ -5,9 +5,9 @@
- (library
-  (name ppxlib_ast)
-  (public_name ppxlib.ast)
-- (libraries astlib stdlib-shims)
-+ (libraries astlib compiler-libs.common ocaml-compiler-libs.common ocaml-compiler-libs.shadow stdlib-shims)
-  (flags
--  (:standard -safe-string)
-+  (:standard -safe-string -open Ocaml_shadow)
-   -w
-   -9-27-32)
-  (preprocess
 --- a/src/dune
 +++ b/src/dune
 @@ -3,16 +3,19 @@
@@ -75,3 +39,63 @@
 + (libraries ppxlib ppxlib_ast ppxlib_jane ppxlib_traverse_builtins stdppx stdlib-shims)
   (preprocess
    (pps ppxlib_metaquot)))
+--- /dev/null
++++ b/shims/ast/dune
+@@ -0,0 +1,5 @@
++(library
++ (name ppxlib_ast)
++ (wrapped false)
++ (public_name ppxlib.ast)
++ (libraries (re_export ppxlib_ast.ast)))
+--- /dev/null
++++ b/shims/astlib/dune
+@@ -0,0 +1,5 @@
++(library
++ (name astlib)
++ (wrapped false)
++ (public_name ppxlib.astlib)
++ (libraries (re_export ppxlib_ast.astlib)))
+--- /dev/null
++++ b/shims/stdppx/dune
+@@ -0,0 +1,5 @@
++(library
++ (name stdppx)
++ (wrapped false)
++ (public_name ppxlib.stdppx)
++ (libraries (re_export ppxlib_ast.stdppx)))
+--- /dev/null
++++ b/shims/traverse_builtins/dune
+@@ -0,0 +1,5 @@
++(library
++ (name ppxlib_traverse_builtins)
++ (wrapped false)
++ (public_name ppxlib.traverse_builtins)
++ (libraries (re_export ppxlib_ast.traverse_builtins)))
+--- a/dune-project
++++ b/dune-project
+@@ -21,6 +21,8 @@
+   (sexplib0 (>= v0.12))
+   (sexplib0 (and :with-test (>= "v0.15"))) ; Printexc.register_printer in sexplib0 changed
+   stdlib-shims
++  ppxlib_ast
++  ppxlib_jane
+   (ocamlfind :with-test)
+   (re (and :with-test (>= 1.9.0)))
+   (cinaps (and :with-test (>= v0.12.1))))
+--- a/src/dune
++++ b/src/dune
+@@ -28,12 +28,12 @@
+  (targets ast_pattern_generated.ml)
+  (deps gen/gen_ast_pattern.exe)
+  (action
+-  (run ./gen/gen_ast_pattern.exe %{lib:ppxlib.ast:ast.ml})))
++  (run ./gen/gen_ast_pattern.exe %{lib:ppxlib_ast.ast:ast.ml})))
+
+ (rule
+  (targets ast_builder_generated.ml)
+  (deps gen/gen_ast_builder.exe)
+  (action
+-  (run ./gen/gen_ast_builder.exe %{lib:ppxlib.ast:ast.ml})))
++  (run ./gen/gen_ast_builder.exe %{lib:ppxlib_ast.ast:ast.ml})))
+
+ (ocamllex skip_hash_bang)

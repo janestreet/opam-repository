@@ -1,4 +1,4 @@
---- a//dev/null
+--- /dev/null
 +++ b/astlib/migrate_500_999.ml
 @@ -0,0 +1,1523 @@
 +open Stdlib0
