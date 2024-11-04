@@ -1,4 +1,3 @@
-diff --git a/src/uutf.ml b/src/uutf.ml
 --- a/src/uutf.ml
 +++ b/src/uutf.ml
 @@ -719,7 +719,7 @@ module String = struct
@@ -10,7 +9,6 @@ diff --git a/src/uutf.ml b/src/uutf.ml
  
    let fold_utf_8 ?(pos = 0) ?len f acc s =
      let rec loop acc f s i last =
-diff --git a/src/uutf.mli b/src/uutf.mli
 --- a/src/uutf.mli
 +++ b/src/uutf.mli
 @@ -325,12 +325,12 @@ module String : sig
