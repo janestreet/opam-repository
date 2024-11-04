@@ -1,4 +1,3 @@
-diff --git a/caml_z.c b/caml_z.c
 --- a/caml_z.c
 +++ b/caml_z.c
 @@ -3049,15 +3049,16 @@ CAMLprim value ml_z_kronecker(value a, v

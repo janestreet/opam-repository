@@ -1,6 +1,6 @@
 opam-version: "2.0"
-name: "zarith"
 version: "1.12+jst"
+name: "zarith"
 synopsis:
   "Implements arithmetic and logical operations over arbitrary-precision integers"
 description: """\
@@ -13,7 +13,7 @@ authors: ["Antoine Miné" "Xavier Leroy" "Pascal Cuoq"]
 homepage: "https://github.com/ocaml/Zarith"
 bug-reports: "https://github.com/ocaml/Zarith/issues"
 depends: [
-  "ocaml" {>= "4.04.0"}
+  "ocaml"     {>= "4.04.0"}
   "ocamlfind"
   "conf-gmp"
 ]
@@ -50,7 +50,18 @@ url {
     "sha512=8075573ae65579a2606b37dd1b213032a07d220d28c733f9288ae80d36f8a2cc4d91632806df2503c130ea9658dc207ee3a64347c21aa53969050a208f5b2bb4"
   ]
 }
-
-patches: ["zarith-local.patch" "zarith-gc.patch"]
-extra-files: [["zarith-local.patch" "sha256=835488d238876f62f9f7411448a8f44f166dbb2f7d5cc2c005ce100f7505c6e5"]
-              ["zarith-gc.patch" "sha256=8989083af5fb1a558859d751bb788fa334fbb7bea6630b3be74d62672bd65690"]]
+patches: ["zarith-abs.patch" "zarith-gc.patch" "zarith-local.patch"]
+extra-files: [
+  [
+    "zarith-abs.patch"
+    "sha256=0e8ac23bfd2846424eb2a5c9116cdf8c62d3b4e56f318347886ca7431d8c195e"
+  ]
+  [
+    "zarith-gc.patch"
+    "sha256=7b6129d76df91ef2d6d9ed427b621d7f6c20c79436d6c97bad55e0b452a62851"
+  ]
+  [
+    "zarith-local.patch"
+    "sha256=bd168f393265f734efda1cb5b61588bf8edb07e10f1d49d9fc1df81aafcfecc2"
+  ]
+]
