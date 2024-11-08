@@ -27,7 +27,7 @@ bug-reports: "https://github.com/dbuenzli/uutf/issues"
 depends: [
   "ocaml"      {>= "4.03.0"}
   "ocamlfind"  {build}
-  "ocamlbuild" {build}
+  "ocamlbuild" {build & = "0.15.0+jst"}
   "topkg"      {build & >= "1.0.3"}
   "cmdliner"
 ]

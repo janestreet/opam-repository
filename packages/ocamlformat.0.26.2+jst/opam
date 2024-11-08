@@ -28,7 +28,7 @@ depends: [
   "ocaml"               {>= "4.08"}
   "cmdliner"            {with-test = "false" & >= "1.1.0" | with-test & >= "1.2.0"}
   "dune"                {>= "2.8"}
-  "ocamlformat-lib"     {= version}
+  "ocamlformat-lib"     {= "0.26.2+jst"}
   "ocamlformat-rpc-lib" {with-test & = version}
   "re"                  {>= "1.10.3"}
   "odoc"                {with-doc}

@@ -36,7 +36,7 @@ depends: [
   "ocp-indent"          {with-test = "false" & >= "1.8.0" | with-test & >= "1.8.1"}
   "stdio"
   "uuseg"               {>= "10.0.0"}
-  "uutf"                {>= "1.0.1"}
+  "uutf"                {= "1.0.3+jst"}
   "csexp"               {>= "1.4.0"}
   "astring"
   "result"

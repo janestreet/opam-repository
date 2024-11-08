@@ -13,12 +13,12 @@ bug-reports: "https://github.com/ocaml/merlin/issues"
 depends: [
   "ocaml"             {>= "5.2" & < "5.3"}
   "dune"              {>= "3.0.0"}
-  "merlin-lib"        {= version}
-  "dot-merlin-reader" {= version}
-  "ocaml-index"       {>= "1.0" & post}
+  "merlin-lib"        {= "5.2.1-502+jst"}
+  "dot-merlin-reader" {= "5.2.1-502+jst"}
+  "ocaml-index"       {= "1.1+jst"}
   "yojson"            {>= "2.0.0"}
   "conf-jq"           {with-test}
-  "ppxlib"            {with-test}
+  "ppxlib"            {with-test & = "0.33.0+jst"}
   "alcotest"          {with-test}
 ]
 conflicts: [
