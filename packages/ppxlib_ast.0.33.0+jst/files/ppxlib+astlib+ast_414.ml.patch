@@ -1,6 +1,32 @@
 --- a/astlib/ast_414.ml
 +++ b/astlib/ast_414.ml
-@@ -90,6 +90,16 @@ module Parsetree = struct
+@@ -74,6 +74,12 @@ module Parsetree = struct
+             Suffixes [[g-z][G-Z]] are accepted by the parser.
+             Suffixes except ['l'], ['L'] and ['n'] are rejected by the typechecker
+     *)
++    | Pconst_unboxed_integer of string * char
++    (** Integer constants such as [#3] [#3l] [#3L] [#3n].
++
++        A suffix [[g-z][G-Z]] is required by the parser.
++        Suffixes except ['l'], ['L'] and ['n'] are rejected by the typechecker
++    *)
+     | Pconst_char of char  (** Character such as ['c']. *)
+     | Pconst_string of string * Location.t * string option
+         (** Constant string such as ["constant"] or
+@@ -84,12 +90,28 @@ module Parsetree = struct
+     | Pconst_float of string * char option
+         (** Float constant such as [3.4], [2e5] or [1.4e-4].
+ 
+-            Suffixes [g-z][G-Z] are accepted by the parser.
++            Suffixes [[g-z][G-Z]] are accepted by the parser.
+             Suffixes are rejected by the typechecker.
+     *)
++    | Pconst_unboxed_float of string * char option
++    (** Float constant such as [#3.4], [#2e5] or [#1.4e-4].
++
++        Suffixes [[g-z][G-Z]] are accepted by the parser.
++        Suffixes except ['s'] are rejected by the typechecker.
++    *)
  
    type location_stack = Location.t list
  
@@ -17,7 +43,7 @@
    (** {1 Extension points} *)
  
    type attribute (*IF_CURRENT = Parsetree.attribute *) = {
-@@ -106,7 +116,7 @@ module Parsetree = struct
+@@ -106,7 +128,7 @@ module Parsetree = struct
    and extension = string loc * payload
    (** Extension points such as [[%id ARG] and [%%id ARG]].
  
@@ -26,13 +52,18 @@
    *)
  
    and attributes = attribute list
-@@ -132,18 +142,27 @@ module Parsetree = struct
+@@ -130,20 +152,30 @@ module Parsetree = struct
+     }
+ 
    and core_type_desc (*IF_CURRENT = Parsetree.core_type_desc *) =
-     | Ptyp_any  (** [_] *)
-     | Ptyp_var of string  (** A type variable such as ['a] *)
+-    | Ptyp_any  (** [_] *)
+-    | Ptyp_var of string  (** A type variable such as ['a] *)
 -    | Ptyp_arrow of arg_label * core_type * core_type
 -        (** [Ptyp_arrow(lbl, T1, T2)] represents:
 -              - [T1 -> T2]    when [lbl] is
++    | Ptyp_any of jkind_annotation option (** [_] or [_ : k] *)
++    | Ptyp_var of string * jkind_annotation option
++        (** A type variable such as ['a] or ['a : k] *)
 +    | Ptyp_arrow of arg_label * core_type * core_type * modes * modes
 +        (** [Ptyp_arrow(lbl, T1, T2, M1, M2)] represents:
 +              - [T1 @ M1 -> T2 @ M2]    when [lbl] is
@@ -62,16 +93,29 @@
  
               Invariant: [n >= 2].
            *)
-@@ -166,7 +185,7 @@ module Parsetree = struct
+@@ -166,7 +198,11 @@ module Parsetree = struct
                - [T #tconstr]             when [l=[T]],
                - [(T1, ..., Tn) #tconstr] when [l=[T1 ; ... ; Tn]].
             *)
 -    | Ptyp_alias of core_type * string  (** [T as 'a]. *)
-+    | Ptyp_alias of core_type * string loc  (** [T as 'a]. *)
++    | Ptyp_alias of core_type * string loc option * jkind_annotation option
++        (** [T as 'a] or [T as ('a : k)] or [T as (_ : k)].
++
++            Invariant: the name or jkind annotation is non-None.
++        *)
      | Ptyp_variant of row_field list * closed_flag * label list option
          (** [Ptyp_variant([`A;`B], flag, labels)] represents:
                - [[ `A|`B ]]
-@@ -273,10 +292,26 @@ module Parsetree = struct
+@@ -182,7 +218,7 @@ module Parsetree = struct
+                         when [flag]   is {{!Asttypes.closed_flag.Closed}[Closed]},
+                          and [labels] is [Some ["X";"Y"]].
+            *)
+-    | Ptyp_poly of string loc list * core_type
++    | Ptyp_poly of (string loc * jkind_annotation option) list * core_type
+         (** ['a1 ... 'an. T]
+ 
+            Can only appear in the following context:
+@@ -273,10 +309,26 @@ module Parsetree = struct
  
               Other forms of interval are recognized by the parser
               but rejected by the type-checker. *)
@@ -101,7 +145,7 @@
            *)
      | Ppat_construct of Longident.t loc * (string loc list * pattern) option
          (** [Ppat_construct(C, args)] represents:
-@@ -302,7 +337,11 @@ module Parsetree = struct
+@@ -302,7 +354,11 @@ module Parsetree = struct
             *)
      | Ppat_array of pattern list  (** Pattern [[| P1; ...; Pn |]] *)
      | Ppat_or of pattern * pattern  (** Pattern [P1 | P2] *)
@@ -114,7 +158,7 @@
      | Ppat_type of Longident.t loc  (** Pattern [#tconst] *)
      | Ppat_lazy of pattern  (** Pattern [lazy P] *)
      | Ppat_unpack of string option loc
-@@ -341,30 +380,21 @@ module Parsetree = struct
+@@ -341,30 +397,21 @@ module Parsetree = struct
                - [let rec P1 = E1 and ... and Pn = EN in E]
                   when [flag] is {{!Asttypes.rec_flag.Recursive}[Recursive]}.
             *)
@@ -159,7 +203,7 @@
      | Pexp_apply of expression * (arg_label * expression) list
          (** [Pexp_apply(E0, [(l1, E1) ; ... ; (ln, En)])]
                represents [E0 ~l1:E1 ... ~ln:En]
-@@ -380,11 +410,24 @@ module Parsetree = struct
+@@ -380,11 +427,24 @@ module Parsetree = struct
          (** [match E0 with P1 -> E1 | ... | Pn -> En] *)
      | Pexp_try of expression * case list
          (** [try E0 with P1 -> E1 | ... | Pn -> En] *)
@@ -186,7 +230,7 @@
      | Pexp_construct of Longident.t loc * expression option
          (** [Pexp_construct(C, exp)] represents:
               - [C]               when [exp] is [None],
-@@ -418,7 +461,7 @@ module Parsetree = struct
+@@ -418,7 +478,7 @@ module Parsetree = struct
                - [for i = E1 downto E2 do E3 done]
                     when [direction] is {{!Asttypes.direction_flag.Downto}[Downto]}
             *)
@@ -195,7 +239,16 @@
      | Pexp_coerce of expression * core_type option * core_type
          (** [Pexp_coerce(E, from, T)] represents
                - [(E :> T)]      when [from] is [None],
-@@ -461,6 +504,7 @@ module Parsetree = struct
+@@ -446,7 +506,7 @@ module Parsetree = struct
+              {{!class_field_kind.Cfk_concrete}[Cfk_concrete]} for methods (not
+              values). *)
+     | Pexp_object of class_structure  (** [object ... end] *)
+-    | Pexp_newtype of string loc * expression  (** [fun (type t) -> E] *)
++    | Pexp_newtype of string loc * jkind_annotation option * expression
+     | Pexp_pack of module_expr
+         (** [(module ME)].
+ 
+@@ -461,6 +521,7 @@ module Parsetree = struct
                - [let* P0 = E00 and* P1 = E01 in E1] *)
      | Pexp_extension of extension  (** [[%id]] *)
      | Pexp_unreachable  (** [.] *)
@@ -203,7 +256,7 @@
  
    and case (*IF_CURRENT = Parsetree.case *) =
      {
-@@ -485,12 +529,83 @@ module Parsetree = struct
+@@ -485,12 +546,83 @@ module Parsetree = struct
        pbop_loc : Location.t;
      }
  
@@ -226,7 +279,7 @@
 +        Note: If [E0] is provided, only
 +        {{!Asttypes.arg_label.Optional}[Optional]} is allowed.
 +    *)
-+    | Pparam_newtype of string loc * jkind_annotation loc option
++    | Pparam_newtype of string loc * jkind_annotation option
 +    (** [Pparam_newtype x] represents the parameter [(type x)].
 +        [x] carries the location of the identifier, whereas the [pparam_loc]
 +        on the enclosing [function_param] node is the location of the [(type x)]
@@ -287,7 +340,15 @@
        pval_prim: string list;
        pval_attributes: attributes;  (** [... [\@\@id1] [\@\@id2]] *)
        pval_loc: Location.t;
-@@ -553,6 +668,7 @@ module Parsetree = struct
+@@ -515,6 +647,7 @@ module Parsetree = struct
+       ptype_private: private_flag;  (** for [= private ...] *)
+       ptype_manifest: core_type option;  (** represents [= T] *)
+       ptype_attributes: attributes;  (** [... [\@\@id1] [\@\@id2]] *)
++      ptype_jkind_annotation: jkind_annotation option; (** for [: jkind] *)
+       ptype_loc: Location.t;
+     }
+   (**
+@@ -553,6 +686,7 @@ module Parsetree = struct
      {
        pld_name: string loc;
        pld_mutable: mutable_flag;
@@ -295,7 +356,16 @@
        pld_type: core_type;
        pld_loc: Location.t;
        pld_attributes: attributes;  (** [l : T [\@id1] [\@id2]] *)
-@@ -578,8 +694,15 @@ module Parsetree = struct
+@@ -571,15 +705,23 @@ module Parsetree = struct
+   and constructor_declaration (*IF_CURRENT = Parsetree.constructor_declaration *) =
+     {
+       pcd_name: string loc;
+-      pcd_vars: string loc list;
++      pcd_vars: (string loc * jkind_annotation option) list;
++        (** jkind annotations are [C : ('a : kind1) ('a2 : kind2). ...] *)
+       pcd_args: constructor_arguments;
+       pcd_res: core_type option;
+       pcd_loc: Location.t;
        pcd_attributes: attributes;  (** [C of ... [\@id1] [\@id2]] *)
      }
  
@@ -312,7 +382,26 @@
      | Pcstr_record of label_declaration list
          (** Values of type {!constructor_declaration}
        represents the constructor arguments of:
-@@ -896,7 +1019,7 @@ module Parsetree = struct
+@@ -626,7 +768,8 @@ module Parsetree = struct
+   (** Definition of a new exception ([exception E]). *)
+ 
+   and extension_constructor_kind (*IF_CURRENT = Parsetree.extension_constructor_kind *) =
+-    | Pext_decl of string loc list * constructor_arguments * core_type option
++    | Pext_decl of (string loc * jkind_annotation option) list
++                   * constructor_arguments * core_type option
+         (** [Pext_decl(existentials, c_args, t_opt)]
+             describes a new extension constructor. It can be:
+             - [C of T1 * ... * Tn] when:
+@@ -868,7 +1011,7 @@ module Parsetree = struct
+               - [(X : MT)] when [name] is [Some X],
+               - [(_ : MT)] when [name] is [None] *)
+ 
+-  and signature = signature_item list
++  and signature = { psg_items: signature_item list }
+ 
+   and signature_item (*IF_CURRENT = Parsetree.signature_item *) =
+     {
+@@ -896,13 +1039,15 @@ module Parsetree = struct
      | Psig_modtypesubst of module_type_declaration
          (** [module type S :=  ...]  *)
      | Psig_open of open_description  (** [open X] *)
@@ -321,7 +410,15 @@
      | Psig_class of class_description list
          (** [class c1 : ... and ... and cn : ...] *)
      | Psig_class_type of class_type_declaration list
-@@ -963,6 +1086,7 @@ module Parsetree = struct
+         (** [class type ct1 = ... and ... and ctn = ...] *)
+     | Psig_attribute of attribute  (** [[\@\@\@id]] *)
+     | Psig_extension of extension * attributes  (** [[%%id]] *)
++    | Psig_kind_abbrev of string loc * jkind_annotation
++        (** [kind_abbrev_ name = k] *)
+ 
+   and module_declaration (*IF_CURRENT = Parsetree.module_declaration *) =
+     {
+@@ -963,6 +1108,7 @@ module Parsetree = struct
  
    and 'a include_infos (*IF_CURRENT = 'a Parsetree.include_infos *) =
      {
@@ -329,7 +426,14 @@
        pincl_mod: 'a;
        pincl_loc: Location.t;
        pincl_attributes: attributes;
-@@ -1053,6 +1177,7 @@ module Parsetree = struct
+@@ -1048,11 +1194,14 @@ module Parsetree = struct
+     | Pstr_include of include_declaration  (** [include ME] *)
+     | Pstr_attribute of attribute  (** [[\@\@\@id]] *)
+     | Pstr_extension of extension * attributes  (** [[%%id]] *)
++    | Pstr_kind_abbrev of string loc * jkind_annotation
++        (** [kind_abbrev_ name = k] *)
+ 
+   and value_binding (*IF_CURRENT = Parsetree.value_binding *) =
      {
        pvb_pat: pattern;
        pvb_expr: expression;
@@ -337,19 +441,23 @@
        pvb_attributes: attributes;
        pvb_loc: Location.t;
      }
-@@ -1066,6 +1191,16 @@ module Parsetree = struct
+@@ -1066,6 +1215,20 @@ module Parsetree = struct
      }
    (** Values of type [module_binding] represents [module X = ME] *)
  
-+  and jkind_const_annotation = string Location.loc
-+
-+  and jkind_annotation (*IF_CURRENT = Parsetree.jkind_annotation *) =
++  and jkind_annotation_desc (*IF_CURRENT = Parsetree.jkind_annotation_desc *) =
 +    | Default
-+    | Abbreviation of jkind_const_annotation
++    | Abbreviation of string
 +    | Mod of jkind_annotation * modes
 +    | With of jkind_annotation * core_type
 +    | Kind_of of core_type
 +    | Product of jkind_annotation list
++
++  and jkind_annotation (*IF_CURRENT = Parsetree.jkind_annotation *) =
++    { pjkind_loc : Location.t
++    ; pjkind_desc : jkind_annotation_desc
++    }
++
 +
    (** {1 Toplevel} *)
  

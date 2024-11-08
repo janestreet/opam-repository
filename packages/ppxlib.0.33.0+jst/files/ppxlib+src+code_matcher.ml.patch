@@ -1,6 +1,11 @@
 --- a/src/code_matcher.ml
 +++ b/src/code_matcher.ml
-@@ -56,18 +56,53 @@ struct
+@@ -1,4 +1,3 @@
+-(*$ open Ppxlib_cinaps_helpers $*)
+ open! Import
+ module Format = Stdlib.Format
+ module Filename = Stdlib.Filename
+@@ -56,18 +55,53 @@ struct
      in
      loop [] l
  
@@ -57,7 +62,7 @@
    let rec last prev = function [] -> prev | x :: l -> last x l
  
    let diff_asts ~generated ~round_trip =
-@@ -127,11 +162,11 @@ struct
+@@ -127,11 +161,11 @@ struct
          mismatch_handler loc expected
      | x :: expected, y :: source ->
          let loc = M.get_loc y in
@@ -72,3 +77,27 @@
            in
            if Poly.( <> ) x round_trip then
              Location.raise_errorf ~loc
+@@ -164,7 +198,7 @@ module Str = Make (struct
+   let to_sexp = Ast_traverse.sexp_of#structure_item
+ end)
+ 
+-(*$ str_to_sig _last_text_block *)
++
+ module Sig = Make (struct
+   type t = signature_item
+ 
+@@ -175,13 +209,11 @@ module Sig = Make (struct
+     let apply o = o#signature_item
+   end
+ 
+-  let parse = Parse.interface
++  let parse x = let { psg_items } = Parse.interface x in psg_items
+   let pp = Pprintast.signature_item
+   let to_sexp = Ast_traverse.sexp_of#signature_item
+ end)
+ 
+-(*$*)
+-
+ let match_structure_res = Str.do_match
+ 
+ let match_structure ~pos ~expected ~mismatch_handler l =

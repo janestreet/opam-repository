@@ -1,6 +1,6 @@
 --- a/src/ast_pattern.ml
 +++ b/src/ast_pattern.ml
-@@ -205,6 +205,30 @@ let pack3 t = map t ~f:(fun f x y z -> f
+@@ -205,6 +205,35 @@ let pack3 t = map t ~f:(fun f x y z -> f
  
  include Ast_pattern_generated
  
@@ -12,6 +12,9 @@
 +  ptyp_arrow label cty1 cty2 drop drop
 +
 +let ptyp_tuple l = ptyp_tuple (map_value ~f:(List.map ~f:snd) l)
++let ptyp_var l = ptyp_var l drop
++
++let type_declaration = type_declaration ~jkind_annotation:drop
 +
 +let value_binding ~pat ~expr =
 +  value_binding ~pat ~expr ~modes:drop
@@ -26,12 +29,14 @@
 +
 +let pexp_tuple l = pexp_tuple (map_value ~f:(List.map ~f:snd) l)
 +
++let signature t = signature ~items:t
++
 +(* ----------------------------------------------------- *)
 +
  let echar t = pexp_constant (pconst_char t)
  let estring t = pexp_constant (pconst_string t drop drop)
  let efloat t = pexp_constant (pconst_float t drop)
-@@ -235,6 +259,14 @@ let no_label t = cst Asttypes.Nolabel ~t
+@@ -235,6 +264,14 @@ let no_label t = cst Asttypes.Nolabel ~t
  let ebool t = pexp_construct (lident (bool' t)) none
  let pbool t = ppat_construct (lident (bool' t)) none
  
@@ -46,7 +51,7 @@
  let extension (T f1) (T f2) =
    T
      (fun ctx loc ((name : _ Loc.t), payload) k ->
-@@ -249,7 +281,7 @@ let rec parse_elist (e : Parsetree.expre
+@@ -249,7 +286,7 @@ let rec parse_elist (e : Parsetree.expre
    | Pexp_construct ({ txt = Lident "::"; _ }, Some arg) -> (
        Common.assert_no_attributes arg.pexp_attributes;
        match arg.pexp_desc with

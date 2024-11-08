@@ -15,11 +15,13 @@
    | _ -> [%expr Stdlib.snd [%e expr]]
  
  let methods_of_class_exn = function
-@@ -413,12 +413,15 @@ let rec type_expr_mapper ~(what : what) 
+@@ -412,13 +412,16 @@ let mangle_type_name lid =
+ let rec type_expr_mapper ~(what : what) te =
    let loc = te.ptyp_loc in
    match te.ptyp_desc with
-   | Ptyp_var s -> evar ~loc ("_" ^ s)
+-  | Ptyp_var s -> evar ~loc ("_" ^ s)
 -  | Ptyp_tuple tes ->
++  | Ptyp_var (s, _) -> evar ~loc ("_" ^ s)
 +  | Ptyp_tuple labeled_tes ->
 +     (match Ppxlib_jane.as_unlabeled_tuple labeled_tes with
 +      | Some tes ->
@@ -32,6 +34,15 @@
    | Ptyp_constr (path, params) -> (
        let map =
          pexp_send ~loc (evar ~loc "self") (Loc.map path ~f:mangle_type_name)
+@@ -465,7 +468,7 @@ let erase_type_variables =
+     inherit Ast_traverse.map as super
+ 
+     method! core_type_desc =
+-      function Ptyp_var _ -> Ptyp_any | x -> super#core_type_desc x
++      function Ptyp_var (_, jkind) -> Ptyp_any jkind | x -> super#core_type_desc x
+   end
+ 
+ let gen_variant ~(what : what) ~loc cds =
 @@ -488,6 +491,7 @@ let gen_variant ~(what : what) ~loc cds 
            in
            match args with
@@ -40,3 +51,12 @@
                let vars = vars_of_list args ~get_loc:(fun t -> t.ptyp_loc) in
                let deconstruct =
                  ppat_construct cstr ~loc
+@@ -527,7 +531,7 @@ let gen_mapper ~(what : what) td =
+   List.fold_right td.ptype_params ~init:body ~f:(fun (ty, _) acc ->
+       let loc = ty.ptyp_loc in
+       match ty.ptyp_desc with
+-      | Ptyp_var s -> pexp_fun ~loc Nolabel None (pvar ~loc ("_" ^ s)) acc
++      | Ptyp_var (s, _) -> pexp_fun ~loc Nolabel None (pvar ~loc ("_" ^ s)) acc
+       | _ -> pexp_fun ~loc Nolabel None (ppat_any ~loc) acc)
+ 
+ let type_deps =

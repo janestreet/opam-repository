@@ -17,10 +17,41 @@
  (* Note on the use of Lexing.position in this module.
     If [pos_fname = ""], then use [!input_name] instead.
     If [pos_lnum = -1], then [pos_bol = 0]. Use [pos_cnum] and
-@@ -167,19 +177,30 @@ and core_type = Parsetree.core_type = {
+@@ -116,6 +126,12 @@ and constant = Parsetree.constant =
+ 
+           Suffixes [\[g-z\]\[G-Z\]] are accepted by the parser. Suffixes except
+           ['l'], ['L'] and ['n'] are rejected by the typechecker *)
++  | Pconst_unboxed_integer of string * char
++      (** Integer constants such as [#3] [#3l] [#3L] [#3n].
++
++          A suffix [\[g-z\]\[G-Z\]] is required by the parser.
++          Suffixes except ['l'], ['L'] and ['n'] are rejected by the typechecker
++      *)
+   | Pconst_char of char  (** Character such as ['c']. *)
+   | Pconst_string of string * location * string option
+       (** Constant string such as ["constant"] or
+@@ -125,8 +141,14 @@ and constant = Parsetree.constant =
+   | Pconst_float of string * char option
+       (** Float constant such as [3.4], [2e5] or [1.4e-4].
+ 
+-          Suffixes [g-z][G-Z] are accepted by the parser. Suffixes are rejected
++          Suffixes [\[g-z\]\[G-Z\]] are accepted by the parser. Suffixes are rejected
+           by the typechecker. *)
++  | Pconst_unboxed_float of string * char option
++      (** Float constant such as [#3.4], [#2e5] or [#1.4e-4].
++
++          Suffixes [\[g-z\]\[G-Z\]] are accepted by the parser.
++          Suffixes except ['s'] are rejected by the typechecker.
++      *)
+ 
+ (** {1 Extension points} *)
+ 
+@@ -165,21 +187,33 @@ and core_type = Parsetree.core_type = {
+ }
+ 
  and core_type_desc = Parsetree.core_type_desc =
-   | Ptyp_any  (** [_] *)
-   | Ptyp_var of string  (** A type variable such as ['a] *)
+-  | Ptyp_any  (** [_] *)
+-  | Ptyp_var of string  (** A type variable such as ['a] *)
 -  | Ptyp_arrow of arg_label * core_type * core_type
 -      (** [Ptyp_arrow(lbl, T1, T2)] represents:
 -
@@ -34,6 +65,9 @@
 -          [T1 * ... * Tn].
 -
 -          Invariant: [n >= 2]. *)
++  | Ptyp_any of jkind_annotation option (** [_] or [_ : k] *)
++  | Ptyp_var of string * jkind_annotation option
++      (** A type variable such as ['a] or ['a : k] *)
 +  | Ptyp_arrow of arg_label * core_type * core_type * modes * modes
 +      (** [Ptyp_arrow(lbl, T1, T2, M1, M2)] represents:
 +            - [T1 @ M1 -> T2 @ M2]    when [lbl] is
@@ -61,16 +95,31 @@
    | Ptyp_constr of longident_loc * core_type list
        (** [Ptyp_constr(lident, l)] represents:
  
-@@ -199,7 +220,7 @@ and core_type_desc = Parsetree.core_type
+@@ -199,7 +233,11 @@ and core_type_desc = Parsetree.core_type
            - [#tconstr] when [l=\[\]],
            - [T #tconstr] when [l=\[T\]],
            - [(T1, ..., Tn) #tconstr] when [l=\[T1 ; ... ; Tn\]]. *)
 -  | Ptyp_alias of core_type * string  (** [T as 'a]. *)
-+  | Ptyp_alias of core_type * string loc  (** [T as 'a]. *)
++  | Ptyp_alias of core_type * string loc option * jkind_annotation option
++      (** [T as 'a] or [T as ('a : k)] or [T as (_ : k)].
++
++          Invariant: the name or jkind annotation is non-None.
++      *)
    | Ptyp_variant of row_field list * closed_flag * label list option
        (** [Ptyp_variant(\[`A;`B\], flag, labels)] represents:
  
-@@ -303,10 +324,27 @@ and pattern_desc = Parsetree.pattern_des
+@@ -212,8 +250,9 @@ and core_type_desc = Parsetree.core_type
+           - [\[< `A|`B > `X `Y \]] when [flag] is
+             {{!Asttypes.closed_flag.Closed} [Closed]}, and [labels] is
+             [Some \["X";"Y"\]]. *)
+-  | Ptyp_poly of string loc list * core_type
++  | Ptyp_poly of (string loc * jkind_annotation option) list * core_type
+       (** ['a1 ... 'an. T]
++          [('a1 : k1) ... ('an : kn). T]
+ 
+           Can only appear in the following context:
+ 
+@@ -303,10 +342,27 @@ and pattern_desc = Parsetree.pattern_des
  
            Other forms of interval are recognized by the parser but rejected by
            the type-checker. *)
@@ -102,7 +151,7 @@
    | Ppat_construct of longident_loc * (string loc list * pattern) option
        (** [Ppat_construct(C, args)] represents:
  
-@@ -331,7 +369,11 @@ and pattern_desc = Parsetree.pattern_des
+@@ -331,7 +387,11 @@ and pattern_desc = Parsetree.pattern_des
            Invariant: [n > 0] *)
    | Ppat_array of pattern list  (** Pattern [\[| P1; ...; Pn |\]] *)
    | Ppat_or of pattern * pattern  (** Pattern [P1 | P2] *)
@@ -115,7 +164,7 @@
    | Ppat_type of longident_loc  (** Pattern [#tconst] *)
    | Ppat_lazy of pattern  (** Pattern [lazy P] *)
    | Ppat_unpack of string option loc
-@@ -367,28 +409,21 @@ and expression_desc = Parsetree.expressi
+@@ -367,28 +427,21 @@ and expression_desc = Parsetree.expressi
              {{!Asttypes.rec_flag.Nonrecursive} [Nonrecursive]},
            - [let rec P1 = E1 and ... and Pn = EN in E] when [flag] is
              {{!Asttypes.rec_flag.Recursive} [Recursive]}. *)
@@ -159,7 +208,7 @@
    | Pexp_apply of expression * (arg_label * expression) list
        (** [Pexp_apply(E0, \[(l1, E1) ; ... ; (ln, En)\])] represents
            [E0 ~l1:E1 ... ~ln:En]
-@@ -403,10 +438,24 @@ and expression_desc = Parsetree.expressi
+@@ -403,10 +456,24 @@ and expression_desc = Parsetree.expressi
        (** [match E0 with P1 -> E1 | ... | Pn -> En] *)
    | Pexp_try of expression * cases
        (** [try E0 with P1 -> E1 | ... | Pn -> En] *)
@@ -188,7 +237,7 @@
    | Pexp_construct of longident_loc * expression option
        (** [Pexp_construct(C, exp)] represents:
  
-@@ -440,7 +489,7 @@ and expression_desc = Parsetree.expressi
+@@ -440,7 +507,7 @@ and expression_desc = Parsetree.expressi
              {{!Asttypes.direction_flag.Upto} [Upto]}
            - [for i = E1 downto E2 do E3 done] when [direction] is
              {{!Asttypes.direction_flag.Downto} [Downto]} *)
@@ -197,7 +246,17 @@
    | Pexp_coerce of expression * core_type option * core_type
        (** [Pexp_coerce(E, from, T)] represents
  
-@@ -482,6 +531,7 @@ and expression_desc = Parsetree.expressi
+@@ -467,7 +534,8 @@ and expression_desc = Parsetree.expressi
+           {{!class_field_kind.Cfk_concrete} [Cfk_concrete]} for methods (not
+           values). *)
+   | Pexp_object of class_structure  (** [object ... end] *)
+-  | Pexp_newtype of string loc * expression  (** [fun (type t) -> E] *)
++  | Pexp_newtype of string loc * jkind_annotation option * expression
++      (** [fun (type t) -> E] or [fun (type t : k) -> E] *)
+   | Pexp_pack of module_expr
+       (** [(module ME)].
+ 
+@@ -482,6 +550,7 @@ and expression_desc = Parsetree.expressi
            - [let* P0 = E00 and* P1 = E01 in E1] *)
    | Pexp_extension of extension  (** [\[%id\]] *)
    | Pexp_unreachable  (** [.] *)
@@ -205,7 +264,7 @@
  
  and case = Parsetree.case = {
    pc_lhs : pattern;
-@@ -503,11 +553,82 @@ and binding_op = Parsetree.binding_op = 
+@@ -503,11 +572,82 @@ and binding_op = Parsetree.binding_op = 
    pbop_loc : location;
  }
  
@@ -228,7 +287,7 @@
 +      Note: If [E0] is provided, only
 +      {{!Asttypes.arg_label.Optional}[Optional]} is allowed.
 +  *)
-+  | Pparam_newtype of string loc * jkind_annotation loc option
++  | Pparam_newtype of string loc * jkind_annotation option
 +  (** [Pparam_newtype x] represents the parameter [(type x)].
 +      [x] carries the location of the identifier, whereas the [pparam_loc]
 +      on the enclosing [function_param] node is the location of the [(type x)]
@@ -288,7 +347,15 @@
    pval_prim : string list;
    pval_attributes : attributes;  (** [... \[@@id1\] \[@@id2\]] *)
    pval_loc : location;
-@@ -560,6 +681,7 @@ and type_kind = Parsetree.type_kind =
+@@ -530,6 +670,7 @@ and type_declaration = Parsetree.type_de
+   ptype_private : private_flag;  (** for [= private ...] *)
+   ptype_manifest : core_type option;  (** represents [= T] *)
+   ptype_attributes : attributes;  (** [... \[@@id1\] \[@@id2\]] *)
++  ptype_jkind_annotation: jkind_annotation option; (** for [: jkind] *)
+   ptype_loc : location;
+ }
+ (** Here are type declarations and their representation, for various
+@@ -560,6 +701,7 @@ and type_kind = Parsetree.type_kind =
  and label_declaration = Parsetree.label_declaration = {
    pld_name : string loc;
    pld_mutable : mutable_flag;
@@ -296,7 +363,16 @@
    pld_type : core_type;
    pld_loc : location;
    pld_attributes : attributes;  (** [l : T \[@id1\] \[@id2\]] *)
-@@ -580,8 +702,14 @@ and constructor_declaration = Parsetree.
+@@ -573,15 +715,22 @@ and label_declaration = Parsetree.label_
+ 
+ and constructor_declaration = Parsetree.constructor_declaration = {
+   pcd_name : string loc;
+-  pcd_vars : string loc list;
++  pcd_vars: (string loc * jkind_annotation option) list;
++    (** jkind annotations are [C : ('a : kind1) ('a2 : kind2). ...] *)
+   pcd_args : constructor_arguments;
+   pcd_res : core_type option;
+   pcd_loc : location;
    pcd_attributes : attributes;  (** [C of ... \[@id1\] \[@id2\]] *)
  }
  
@@ -312,7 +388,37 @@
    | Pcstr_record of label_declaration list
        (** Values of type {!constructor_declaration} represents the constructor
            arguments of:
-@@ -882,7 +1010,7 @@ and signature_item_desc = Parsetree.sign
+@@ -621,7 +770,8 @@ and type_exception = Parsetree.type_exce
+ (** Definition of a new exception ([exception E]). *)
+ 
+ and extension_constructor_kind = Parsetree.extension_constructor_kind =
+-  | Pext_decl of string loc list * constructor_arguments * core_type option
++  | Pext_decl of (string loc * jkind_annotation option) list
++                 * constructor_arguments * core_type option
+       (** [Pext_decl(existentials, c_args, t_opt)] describes a new extension
+           constructor. It can be:
+ 
+@@ -647,7 +797,7 @@ and extension_constructor_kind = Parsetr
+               - [c_args] is [\[T1; ...; Tn\]],
+               - [t_opt] is [Some T0].
+            }
+-           {- [C: 'a... . T1 * ... * Tn -> T0]
++           {- [C: ('a : k)... . T1 * ... * Tn -> T0]
+               when
+ 
+               - [existentials] is [\['a;...\]],
+@@ -857,7 +1007,9 @@ and functor_parameter = Parsetree.functo
+           - [(X : MT)] when [name] is [Some X],
+           - [(_ : MT)] when [name] is [None] *)
+ 
+-and signature = signature_item list
++and signature = Parsetree.signature = { psg_items : signature_items }
++
++and signature_items = signature_item list
+ 
+ and signature_item = Parsetree.signature_item = {
+   psig_desc : signature_item_desc;
+@@ -882,13 +1034,15 @@ and signature_item_desc = Parsetree.sign
        (** [module type S = MT] and [module type S] *)
    | Psig_modtypesubst of module_type_declaration  (** [module type S :=  ...] *)
    | Psig_open of open_description  (** [open X] *)
@@ -321,7 +427,15 @@
    | Psig_class of class_description list
        (** [class c1 : ... and ... and cn : ...] *)
    | Psig_class_type of class_type_declaration list
-@@ -946,6 +1074,7 @@ and open_declaration = module_expr open_
+       (** [class type ct1 = ... and ... and ctn = ...] *)
+   | Psig_attribute of attribute  (** [\[@@@id\]] *)
+   | Psig_extension of extension * attributes  (** [\[%%id\]] *)
++  | Psig_kind_abbrev of string loc * jkind_annotation
++      (** [kind_abbrev_ name = k] *)
+ 
+ and module_declaration = Parsetree.module_declaration = {
+   pmd_name : string option loc;
+@@ -946,6 +1100,7 @@ and open_declaration = module_expr open_
      - [open struct ... end] *)
  
  and 'a include_infos = 'a Parsetree.include_infos = {
@@ -329,7 +443,13 @@
    pincl_mod : 'a;
    pincl_loc : location;
    pincl_attributes : attributes;
-@@ -1032,6 +1161,7 @@ and structure_item_desc = Parsetree.stru
+@@ -1028,10 +1183,13 @@ and structure_item_desc = Parsetree.stru
+   | Pstr_include of include_declaration  (** [include ME] *)
+   | Pstr_attribute of attribute  (** [\[@@@id\]] *)
+   | Pstr_extension of extension * attributes  (** [\[%%id\]] *)
++  | Pstr_kind_abbrev of string loc * jkind_annotation
++      (** [kind_abbrev_ name = k] *)
+ 
  and value_binding = Parsetree.value_binding = {
    pvb_pat : pattern;
    pvb_expr : expression;
@@ -337,24 +457,27 @@
    pvb_attributes : attributes;
    pvb_loc : location;
  }
-@@ -1044,6 +1174,16 @@ and module_binding = Parsetree.module_bi
+@@ -1044,6 +1202,19 @@ and module_binding = Parsetree.module_bi
  }
  (** Values of type [module_binding] represents [module X = ME] *)
  
-+and jkind_const_annotation = string loc
-+
-+and jkind_annotation = Parsetree.jkind_annotation =
++and jkind_annotation_desc = Parsetree.jkind_annotation_desc =
 +  | Default
-+  | Abbreviation of jkind_const_annotation
++  | Abbreviation of string
 +  | Mod of jkind_annotation * modes
 +  | With of jkind_annotation * core_type
 +  | Kind_of of core_type
 +  | Product of jkind_annotation list
 +
++and jkind_annotation = Parsetree.jkind_annotation =
++  { pjkind_loc : location
++  ; pjkind_desc : jkind_annotation_desc
++  }
++
  (** {1 Toplevel} *)
  (** {2 Toplevel phrases} *)
  
-@@ -1072,169 +1212,143 @@ and cases = case list [@@deriving_inline
+@@ -1072,405 +1243,341 @@ and cases = case list [@@deriving_inline
  
  class virtual map =
    object (self)
@@ -480,6 +603,9 @@
 -            let a = self#char a in
 -            Pconst_char a
 +            let b = self#option self#char b in Pconst_integer (a, b)
++        | Pconst_unboxed_integer (a, b) ->
++            let a = self#string a in
++            let b = self#char b in Pconst_unboxed_integer (a, b)
 +        | Pconst_char a -> let a = self#char a in Pconst_char a
          | Pconst_string (a, b, c) ->
              let a = self#string a in
@@ -494,6 +620,9 @@
 -
 -    method attribute : attribute -> attribute =
 +            let b = self#option self#char b in Pconst_float (a, b)
++        | Pconst_unboxed_float (a, b) ->
++            let a = self#string a in
++            let b = self#option self#char b in Pconst_unboxed_float (a, b)
 +    method attribute : attribute -> attribute=
        fun { attr_name; attr_payload; attr_loc } ->
          let attr_name = self#loc self#string attr_name in
@@ -547,12 +676,15 @@
 +    method core_type_desc : core_type_desc -> core_type_desc=
        fun x ->
          match x with
-         | Ptyp_any -> Ptyp_any
+-        | Ptyp_any -> Ptyp_any
 -        | Ptyp_var a ->
--            let a = self#string a in
++        | Ptyp_any a ->
++            let a = self#option self#jkind_annotation a in Ptyp_any a
++        | Ptyp_var (a, b) ->
+             let a = self#string a in
 -            Ptyp_var a
 -        | Ptyp_arrow (a, b, c) ->
-+        | Ptyp_var a -> let a = self#string a in Ptyp_var a
++            let b = self#option self#jkind_annotation b in Ptyp_var (a, b)
 +        | Ptyp_arrow (a, b, c, d, e) ->
              let a = self#arg_label a in
              let b = self#core_type b in
@@ -589,19 +721,22 @@
              let a = self#longident_loc a in
 -            let b = self#list self#core_type b in
 -            Ptyp_class (a, b)
+-        | Ptyp_alias (a, b) ->
 +            let b = self#list self#core_type b in Ptyp_class (a, b)
-         | Ptyp_alias (a, b) ->
++        | Ptyp_alias (a, b, c) ->
              let a = self#core_type a in
 -            let b = self#string b in
 -            Ptyp_alias (a, b)
-+            let b = self#loc self#string b in Ptyp_alias (a, b)
++            let b = self#option (self#loc self#string) b in
++            let c = self#option self#jkind_annotation c in
++            Ptyp_alias (a, b, c)
          | Ptyp_variant (a, b, c) ->
              let a = self#list self#row_field a in
              let b = self#closed_flag b in
-@@ -1242,235 +1356,182 @@ class virtual map =
+             let c = self#option (self#list self#label) c in
              Ptyp_variant (a, b, c)
          | Ptyp_poly (a, b) ->
-             let a = self#list (self#loc self#string) a in
+-            let a = self#list (self#loc self#string) a in
 -            let b = self#core_type b in
 -            Ptyp_poly (a, b)
 -        | Ptyp_package a ->
@@ -612,6 +747,11 @@
 -            Ptyp_extension a
 -
 -    method package_type : package_type -> package_type =
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#loc self#string a in
++                   let b = self#option self#jkind_annotation b in (a, b)) a in
 +            let b = self#core_type b in Ptyp_poly (a, b)
 +        | Ptyp_package a -> let a = self#package_type a in Ptyp_package a
 +        | Ptyp_extension a -> let a = self#extension a in Ptyp_extension a
@@ -918,7 +1058,7 @@
          | Pexp_ifthenelse (a, b, c) ->
              let a = self#expression a in
              let b = self#expression b in
-@@ -1478,156 +1539,156 @@ class virtual map =
+@@ -1478,160 +1585,164 @@ class virtual map =
              Pexp_ifthenelse (a, b, c)
          | Pexp_sequence (a, b) ->
              let a = self#expression a in
@@ -1003,16 +1143,18 @@
 -        | Pexp_object a ->
 -            let a = self#class_structure a in
 -            Pexp_object a
+-        | Pexp_newtype (a, b) ->
 +            let b = self#option self#core_type b in Pexp_poly (a, b)
 +        | Pexp_object a -> let a = self#class_structure a in Pexp_object a
-         | Pexp_newtype (a, b) ->
++        | Pexp_newtype (a, b, c) ->
              let a = self#loc self#string a in
 -            let b = self#expression b in
 -            Pexp_newtype (a, b)
 -        | Pexp_pack a ->
 -            let a = self#module_expr a in
 -            Pexp_pack a
-+            let b = self#expression b in Pexp_newtype (a, b)
++            let b = self#option self#jkind_annotation b in
++            let c = self#expression c in Pexp_newtype (a, b, c)
 +        | Pexp_pack a -> let a = self#module_expr a in Pexp_pack a
          | Pexp_open (a, b) ->
              let a = self#open_declaration a in
@@ -1068,7 +1210,7 @@
 +            let c = self#pattern c in Pparam_val (a, b, c)
 +        | Pparam_newtype (a, b) ->
 +            let a = self#loc self#string a in
-+            let b = self#option (self#loc self#jkind_annotation) b in
++            let b = self#option self#jkind_annotation b in
 +            Pparam_newtype (a, b)
 +    method function_param : function_param -> function_param=
 +      fun { pparam_loc; pparam_desc } ->
@@ -1131,7 +1273,8 @@
 +    method type_declaration : type_declaration -> type_declaration=
 +      fun
 +        { ptype_name; ptype_params; ptype_cstrs; ptype_kind; ptype_private;
-+          ptype_manifest; ptype_attributes; ptype_loc }
++          ptype_manifest; ptype_attributes; ptype_jkind_annotation; ptype_loc
++          }
 +        ->
          let ptype_name = self#loc self#string ptype_name in
          let ptype_params =
@@ -1169,11 +1312,18 @@
          let ptype_kind = self#type_kind ptype_kind in
          let ptype_private = self#private_flag ptype_private in
          let ptype_manifest = self#option self#core_type ptype_manifest in
-@@ -1641,10 +1702,9 @@ class virtual map =
+         let ptype_attributes = self#attributes ptype_attributes in
++        let ptype_jkind_annotation =
++          self#option self#jkind_annotation ptype_jkind_annotation in
+         let ptype_loc = self#location ptype_loc in
+         {
+           ptype_name;
+@@ -1641,10 +1752,10 @@ class virtual map =
            ptype_private;
            ptype_manifest;
            ptype_attributes;
 -          ptype_loc;
++          ptype_jkind_annotation;
 +          ptype_loc
          }
 -
@@ -1182,7 +1332,7 @@
        fun x ->
          match x with
          | Ptype_abstract -> Ptype_abstract
-@@ -1652,22 +1712,32 @@ class virtual map =
+@@ -1652,68 +1763,77 @@ class virtual map =
              let a = self#list self#constructor_declaration a in
              Ptype_variant a
          | Ptype_record a ->
@@ -1223,9 +1373,15 @@
 +      fun { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes }
 +        ->
          let pcd_name = self#loc self#string pcd_name in
-         let pcd_vars = self#list (self#loc self#string) pcd_vars in
+-        let pcd_vars = self#list (self#loc self#string) pcd_vars in
++        let pcd_vars =
++          self#list
++            (fun (a, b) ->
++               let a = self#loc self#string a in
++               let b = self#option self#jkind_annotation b in (a, b))
++            pcd_vars in
          let pcd_args = self#constructor_arguments pcd_args in
-@@ -1675,45 +1745,39 @@ class virtual map =
+         let pcd_res = self#option self#core_type pcd_res in
          let pcd_loc = self#location pcd_loc in
          let pcd_attributes = self#attributes pcd_attributes in
          { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes }
@@ -1295,7 +1451,7 @@
          let ptyext_private = self#private_flag ptyext_private in
          let ptyext_loc = self#location ptyext_loc in
          let ptyext_attributes = self#attributes ptyext_attributes in
-@@ -1723,224 +1787,168 @@ class virtual map =
+@@ -1723,224 +1843,172 @@ class virtual map =
            ptyext_constructors;
            ptyext_private;
            ptyext_loc;
@@ -1332,7 +1488,12 @@
        fun x ->
          match x with
          | Pext_decl (a, b, c) ->
-             let a = self#list (self#loc self#string) a in
+-            let a = self#list (self#loc self#string) a in
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#loc self#string a in
++                   let b = self#option self#jkind_annotation b in (a, b)) a in
              let b = self#constructor_arguments b in
 -            let c = self#option self#core_type c in
 -            Pext_decl (a, b, c)
@@ -1579,7 +1740,7 @@
        fun x ->
          match x with
          | Pcf_inherit (a, b, c) ->
-@@ -1951,1090 +1959,849 @@ class virtual map =
+@@ -1951,1090 +2019,886 @@ class virtual map =
          | Pcf_val a ->
              let a =
                (fun (a, b, c) ->
@@ -1705,7 +1866,11 @@
 -
 -    method signature_item : signature_item -> signature_item =
 +            let b = self#module_type b in Named (a, b)
-+    method signature : signature -> signature= self#list self#signature_item
++    method signature : signature -> signature=
++      fun { psg_items } ->
++        let psg_items = self#signature_items psg_items in { psg_items }
++    method signature_items : signature_items -> signature_items=
++      self#list self#signature_item
 +    method signature_item : signature_item -> signature_item=
        fun { psig_desc; psig_loc } ->
          let psig_desc = self#signature_item_desc psig_desc in
@@ -1785,6 +1950,9 @@
 -
 -    method module_declaration : module_declaration -> module_declaration =
 +            let b = self#attributes b in Psig_extension (a, b)
++        | Psig_kind_abbrev (a, b) ->
++            let a = self#loc self#string a in
++            let b = self#jkind_annotation b in Psig_kind_abbrev (a, b)
 +    method module_declaration : module_declaration -> module_declaration=
        fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
          let pmd_name = self#loc (self#option self#string) pmd_name in
@@ -2011,6 +2179,9 @@
 -    method value_binding : value_binding -> value_binding =
 -      fun { pvb_pat; pvb_expr; pvb_attributes; pvb_loc } ->
 +            let b = self#attributes b in Pstr_extension (a, b)
++        | Pstr_kind_abbrev (a, b) ->
++            let a = self#loc self#string a in
++            let b = self#jkind_annotation b in Pstr_kind_abbrev (a, b)
 +    method value_binding : value_binding -> value_binding=
 +      fun { pvb_pat; pvb_expr; pvb_modes; pvb_attributes; pvb_loc } ->
          let pvb_pat = self#pattern pvb_pat in
@@ -2031,9 +2202,8 @@
          { pmb_name; pmb_expr; pmb_attributes; pmb_loc }
 -
 -    method toplevel_phrase : toplevel_phrase -> toplevel_phrase =
-+    method jkind_const_annotation :
-+      jkind_const_annotation -> jkind_const_annotation= self#loc self#string
-+    method jkind_annotation : jkind_annotation -> jkind_annotation=
++    method jkind_annotation_desc :
++      jkind_annotation_desc -> jkind_annotation_desc=
        fun x ->
          match x with
 -        | Ptop_def a ->
@@ -2045,8 +2215,7 @@
 -
 -    method toplevel_directive : toplevel_directive -> toplevel_directive =
 +        | Default -> Default
-+        | Abbreviation a ->
-+            let a = self#jkind_const_annotation a in Abbreviation a
++        | Abbreviation a -> let a = self#string a in Abbreviation a
 +        | Mod (a, b) ->
 +            let a = self#jkind_annotation a in
 +            let b = self#modes b in Mod (a, b)
@@ -2055,6 +2224,11 @@
 +            let b = self#core_type b in With (a, b)
 +        | Kind_of a -> let a = self#core_type a in Kind_of a
 +        | Product a -> let a = self#list self#jkind_annotation a in Product a
++    method jkind_annotation : jkind_annotation -> jkind_annotation=
++      fun { pjkind_loc; pjkind_desc } ->
++        let pjkind_loc = self#location pjkind_loc in
++        let pjkind_desc = self#jkind_annotation_desc pjkind_desc in
++        { pjkind_loc; pjkind_desc }
 +    method toplevel_phrase : toplevel_phrase -> toplevel_phrase=
 +      fun x ->
 +        match x with
@@ -2206,6 +2380,7 @@
 -            self#string a;
 -            self#option self#char b
 +        | Pconst_integer (a, b) -> (self#string a; self#option self#char b)
++        | Pconst_unboxed_integer (a, b) -> (self#string a; self#char b)
          | Pconst_char a -> self#char a
          | Pconst_string (a, b, c) ->
 -            self#string a;
@@ -2218,6 +2393,8 @@
 -    method attribute : attribute -> unit =
 +            (self#string a; self#location b; self#option self#string c)
 +        | Pconst_float (a, b) -> (self#string a; self#option self#char b)
++        | Pconst_unboxed_float (a, b) ->
++            (self#string a; self#option self#char b)
 +    method attribute : attribute -> unit=
        fun { attr_name; attr_payload; attr_loc } ->
          self#loc self#string attr_name;
@@ -2258,13 +2435,16 @@
 +    method core_type_desc : core_type_desc -> unit=
        fun x ->
          match x with
-         | Ptyp_any -> ()
-         | Ptyp_var a -> self#string a
+-        | Ptyp_any -> ()
+-        | Ptyp_var a -> self#string a
 -        | Ptyp_arrow (a, b, c) ->
 -            self#arg_label a;
 -            self#core_type b;
 -            self#core_type c
 -        | Ptyp_tuple a -> self#list self#core_type a
++        | Ptyp_any a -> self#option self#jkind_annotation a
++        | Ptyp_var (a, b) ->
++            (self#string a; self#option self#jkind_annotation b)
 +        | Ptyp_arrow (a, b, c, d, e) ->
 +            (self#arg_label a;
 +             self#core_type b;
@@ -2292,7 +2472,10 @@
 -            self#core_type a;
 -            self#string b
 +            (self#longident_loc a; self#list self#core_type b)
-+        | Ptyp_alias (a, b) -> (self#core_type a; self#loc self#string b)
++        | Ptyp_alias (a, b, c) ->
++            (self#core_type a;
++             self#option (self#loc self#string) b;
++             self#option self#jkind_annotation c)
          | Ptyp_variant (a, b, c) ->
 -            self#list self#row_field a;
 -            self#closed_flag b;
@@ -2303,7 +2486,11 @@
          | Ptyp_poly (a, b) ->
 -            self#list (self#loc self#string) a;
 -            self#core_type b
-+            (self#list (self#loc self#string) a; self#core_type b)
++            (self#list
++               (fun (a, b) ->
++                  self#loc self#string a; self#option self#jkind_annotation b)
++               a;
++             self#core_type b)
          | Ptyp_package a -> self#package_type a
          | Ptyp_extension a -> self#extension a
 -
@@ -2586,7 +2773,10 @@
 -        | Pexp_newtype (a, b) ->
 -            self#loc self#string a;
 -            self#expression b
-+        | Pexp_newtype (a, b) -> (self#loc self#string a; self#expression b)
++        | Pexp_newtype (a, b, c) ->
++            (self#loc self#string a;
++             self#option self#jkind_annotation b;
++             self#expression c)
          | Pexp_pack a -> self#module_expr a
 -        | Pexp_open (a, b) ->
 -            self#open_declaration a;
@@ -2627,8 +2817,7 @@
 +        | Pparam_val (a, b, c) ->
 +            (self#arg_label a; self#option self#expression b; self#pattern c)
 +        | Pparam_newtype (a, b) ->
-+            (self#loc self#string a;
-+             self#option (self#loc self#jkind_annotation) b)
++            (self#loc self#string a; self#option self#jkind_annotation b)
 +    method function_param : function_param -> unit=
 +      fun { pparam_loc; pparam_desc } ->
 +        self#location pparam_loc; self#function_param_desc pparam_desc
@@ -2672,7 +2861,8 @@
 +    method type_declaration : type_declaration -> unit=
 +      fun
 +        { ptype_name; ptype_params; ptype_cstrs; ptype_kind; ptype_private;
-+          ptype_manifest; ptype_attributes; ptype_loc }
++          ptype_manifest; ptype_attributes; ptype_jkind_annotation; ptype_loc
++          }
 +        ->
          self#loc self#string ptype_name;
          self#list
@@ -2696,6 +2886,7 @@
          self#private_flag ptype_private;
          self#option self#core_type ptype_manifest;
          self#attributes ptype_attributes;
++        self#option self#jkind_annotation ptype_jkind_annotation;
          self#location ptype_loc
 -
 -    method type_kind : type_kind -> unit =
@@ -2727,7 +2918,11 @@
 +      fun { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes }
 +        ->
          self#loc self#string pcd_name;
-         self#list (self#loc self#string) pcd_vars;
+-        self#list (self#loc self#string) pcd_vars;
++        self#list
++          (fun (a, b) ->
++             self#loc self#string a; self#option self#jkind_annotation b)
++          pcd_vars;
          self#constructor_arguments pcd_args;
          self#option self#core_type pcd_res;
          self#location pcd_loc;
@@ -2799,7 +2994,10 @@
 -            self#list (self#loc self#string) a;
 -            self#constructor_arguments b;
 -            self#option self#core_type c
-+            (self#list (self#loc self#string) a;
++            (self#list
++               (fun (a, b) ->
++                  self#loc self#string a; self#option self#jkind_annotation b)
++               a;
 +             self#constructor_arguments b;
 +             self#option self#core_type c)
          | Pext_rebind a -> self#longident_loc a
@@ -3070,7 +3268,10 @@
 -
 -    method signature_item : signature_item -> unit =
 +            (self#loc (self#option self#string) a; self#module_type b)
-+    method signature : signature -> unit= self#list self#signature_item
++    method signature : signature -> unit=
++      fun { psg_items } -> self#signature_items psg_items
++    method signature_items : signature_items -> unit=
++      self#list self#signature_item
 +    method signature_item : signature_item -> unit=
        fun { psig_desc; psig_loc } ->
 -        self#signature_item_desc psig_desc;
@@ -3089,7 +3290,7 @@
          | Psig_typesubst a -> self#list self#type_declaration a
          | Psig_typext a -> self#type_extension a
          | Psig_exception a -> self#type_exception a
-@@ -3044,125 +2811,92 @@ class virtual iter =
+@@ -3044,125 +2908,94 @@ class virtual iter =
          | Psig_modtype a -> self#module_type_declaration a
          | Psig_modtypesubst a -> self#module_type_declaration a
          | Psig_open a -> self#open_description a
@@ -3105,6 +3306,8 @@
 -
 -    method module_declaration : module_declaration -> unit =
 +        | Psig_extension (a, b) -> (self#extension a; self#attributes b)
++        | Psig_kind_abbrev (a, b) ->
++            (self#loc self#string a; self#jkind_annotation b)
 +    method module_declaration : module_declaration -> unit=
        fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
          self#loc (self#option self#string) pmd_name;
@@ -3248,7 +3451,7 @@
          | Pstr_typext a -> self#type_extension a
          | Pstr_exception a -> self#type_exception a
          | Pstr_module a -> self#module_binding a
-@@ -3173,159 +2907,140 @@ class virtual iter =
+@@ -3173,159 +3006,148 @@ class virtual iter =
          | Pstr_class_type a -> self#list self#class_type_declaration a
          | Pstr_include a -> self#include_declaration a
          | Pstr_attribute a -> self#attribute a
@@ -3259,6 +3462,8 @@
 -    method value_binding : value_binding -> unit =
 -      fun { pvb_pat; pvb_expr; pvb_attributes; pvb_loc } ->
 +        | Pstr_extension (a, b) -> (self#extension a; self#attributes b)
++        | Pstr_kind_abbrev (a, b) ->
++            (self#loc self#string a; self#jkind_annotation b)
 +    method value_binding : value_binding -> unit=
 +      fun { pvb_pat; pvb_expr; pvb_modes; pvb_attributes; pvb_loc } ->
          self#pattern pvb_pat;
@@ -3276,17 +3481,18 @@
          self#location pmb_loc
 -
 -    method toplevel_phrase : toplevel_phrase -> unit =
-+    method jkind_const_annotation : jkind_const_annotation -> unit=
-+      self#loc self#string
-+    method jkind_annotation : jkind_annotation -> unit=
++    method jkind_annotation_desc : jkind_annotation_desc -> unit=
 +      fun x ->
 +        match x with
 +        | Default -> ()
-+        | Abbreviation a -> self#jkind_const_annotation a
++        | Abbreviation a -> self#string a
 +        | Mod (a, b) -> (self#jkind_annotation a; self#modes b)
 +        | With (a, b) -> (self#jkind_annotation a; self#core_type b)
 +        | Kind_of a -> self#core_type a
 +        | Product a -> self#list self#jkind_annotation a
++    method jkind_annotation : jkind_annotation -> unit=
++      fun { pjkind_loc; pjkind_desc } ->
++        self#location pjkind_loc; self#jkind_annotation_desc pjkind_desc
 +    method toplevel_phrase : toplevel_phrase -> unit=
        fun x ->
          match x with
@@ -3441,6 +3647,8 @@
 -            let acc = self#option self#char b acc in
 -            acc
 +            let acc = self#option self#char b acc in acc
++        | Pconst_unboxed_integer (a, b) ->
++            let acc = self#string a acc in let acc = self#char b acc in acc
          | Pconst_char a -> self#char a acc
          | Pconst_string (a, b, c) ->
              let acc = self#string a acc in
@@ -3454,6 +3662,9 @@
 -            acc
 -
 -    method attribute : attribute -> 'acc -> 'acc =
++            let acc = self#option self#char b acc in acc
++        | Pconst_unboxed_float (a, b) ->
++            let acc = self#string a acc in
 +            let acc = self#option self#char b acc in acc
 +    method attribute : attribute -> 'acc -> 'acc=
        fun { attr_name; attr_payload; attr_loc } acc ->
@@ -3479,7 +3690,7 @@
        fun x acc ->
          match x with
          | PStr a -> self#structure a acc
-@@ -3333,160 +3048,146 @@ class virtual ['acc] fold =
+@@ -3333,160 +3155,154 @@ class virtual ['acc] fold =
          | PTyp a -> self#core_type a acc
          | PPat (a, b) ->
              let acc = self#pattern a acc in
@@ -3501,9 +3712,13 @@
 +    method core_type_desc : core_type_desc -> 'acc -> 'acc=
        fun x acc ->
          match x with
-         | Ptyp_any -> acc
-         | Ptyp_var a -> self#string a acc
+-        | Ptyp_any -> acc
+-        | Ptyp_var a -> self#string a acc
 -        | Ptyp_arrow (a, b, c) ->
++        | Ptyp_any a -> self#option self#jkind_annotation a acc
++        | Ptyp_var (a, b) ->
++            let acc = self#string a acc in
++            let acc = self#option self#jkind_annotation b acc in acc
 +        | Ptyp_arrow (a, b, c, d, e) ->
              let acc = self#arg_label a acc in
              let acc = self#core_type b acc in
@@ -3535,12 +3750,14 @@
              let acc = self#longident_loc a acc in
 -            let acc = self#list self#core_type b acc in
 -            acc
+-        | Ptyp_alias (a, b) ->
 +            let acc = self#list self#core_type b acc in acc
-         | Ptyp_alias (a, b) ->
++        | Ptyp_alias (a, b, c) ->
              let acc = self#core_type a acc in
 -            let acc = self#string b acc in
 -            acc
-+            let acc = self#loc self#string b acc in acc
++            let acc = self#option (self#loc self#string) b acc in
++            let acc = self#option self#jkind_annotation c acc in acc
          | Ptyp_variant (a, b, c) ->
              let acc = self#list self#row_field a acc in
              let acc = self#closed_flag b acc in
@@ -3548,9 +3765,15 @@
 -            acc
 +            let acc = self#option (self#list self#label) c acc in acc
          | Ptyp_poly (a, b) ->
-             let acc = self#list (self#loc self#string) a acc in
+-            let acc = self#list (self#loc self#string) a acc in
 -            let acc = self#core_type b acc in
 -            acc
++            let acc =
++              self#list
++                (fun (a, b) acc ->
++                   let acc = self#loc self#string a acc in
++                   let acc = self#option self#jkind_annotation b acc in acc)
++                a acc in
 +            let acc = self#core_type b acc in acc
          | Ptyp_package a -> self#package_type a acc
          | Ptyp_extension a -> self#extension a acc
@@ -3702,7 +3925,7 @@
          | Ppat_type a -> self#longident_loc a acc
          | Ppat_lazy a -> self#pattern a acc
          | Ppat_unpack a -> self#loc (self#option self#string) a acc
-@@ -3494,18 +3195,14 @@ class virtual ['acc] fold =
+@@ -3494,18 +3310,14 @@ class virtual ['acc] fold =
          | Ppat_extension a -> self#extension a acc
          | Ppat_open (a, b) ->
              let acc = self#longident_loc a acc in
@@ -3725,7 +3948,7 @@
        fun x acc ->
          match x with
          | Pexp_ident a -> self#longident_loc a acc
-@@ -3513,555 +3210,471 @@ class virtual ['acc] fold =
+@@ -3513,555 +3325,486 @@ class virtual ['acc] fold =
          | Pexp_let (a, b, c) ->
              let acc = self#rec_flag a acc in
              let acc = self#list self#value_binding b acc in
@@ -3889,11 +4112,13 @@
 -            acc
 +            let acc = self#option self#core_type b acc in acc
          | Pexp_object a -> self#class_structure a acc
-         | Pexp_newtype (a, b) ->
+-        | Pexp_newtype (a, b) ->
++        | Pexp_newtype (a, b, c) ->
              let acc = self#loc self#string a acc in
 -            let acc = self#expression b acc in
 -            acc
-+            let acc = self#expression b acc in acc
++            let acc = self#option self#jkind_annotation b acc in
++            let acc = self#expression c acc in acc
          | Pexp_pack a -> self#module_expr a acc
          | Pexp_open (a, b) ->
              let acc = self#open_declaration a acc in
@@ -3944,8 +4169,7 @@
 +            let acc = self#pattern c acc in acc
 +        | Pparam_newtype (a, b) ->
 +            let acc = self#loc self#string a acc in
-+            let acc = self#option (self#loc self#jkind_annotation) b acc in
-+            acc
++            let acc = self#option self#jkind_annotation b acc in acc
 +    method function_param : function_param -> 'acc -> 'acc=
 +      fun { pparam_loc; pparam_desc } acc ->
 +        let acc = self#location pparam_loc acc in
@@ -3997,7 +4221,8 @@
 +    method type_declaration : type_declaration -> 'acc -> 'acc=
 +      fun
 +        { ptype_name; ptype_params; ptype_cstrs; ptype_kind; ptype_private;
-+          ptype_manifest; ptype_attributes; ptype_loc }
++          ptype_manifest; ptype_attributes; ptype_jkind_annotation; ptype_loc
++          }
 +        acc ->
          let acc = self#loc self#string ptype_name acc in
          let acc =
@@ -4040,6 +4265,8 @@
 -        acc
 -
 -    method type_kind : type_kind -> 'acc -> 'acc =
++        let acc =
++          self#option self#jkind_annotation ptype_jkind_annotation acc in
 +        let acc = self#location ptype_loc acc in acc
 +    method type_kind : type_kind -> 'acc -> 'acc=
        fun x acc ->
@@ -4071,7 +4298,13 @@
 +      fun { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes }
 +        acc ->
          let acc = self#loc self#string pcd_name acc in
-         let acc = self#list (self#loc self#string) pcd_vars acc in
+-        let acc = self#list (self#loc self#string) pcd_vars acc in
++        let acc =
++          self#list
++            (fun (a, b) acc ->
++               let acc = self#loc self#string a acc in
++               let acc = self#option self#jkind_annotation b acc in acc)
++            pcd_vars acc in
          let acc = self#constructor_arguments pcd_args acc in
          let acc = self#option self#core_type pcd_res acc in
          let acc = self#location pcd_loc acc in
@@ -4163,7 +4396,13 @@
        fun x acc ->
          match x with
          | Pext_decl (a, b, c) ->
-             let acc = self#list (self#loc self#string) a acc in
+-            let acc = self#list (self#loc self#string) a acc in
++            let acc =
++              self#list
++                (fun (a, b) acc ->
++                   let acc = self#loc self#string a acc in
++                   let acc = self#option self#jkind_annotation b acc in acc)
++                a acc in
              let acc = self#constructor_arguments b acc in
 -            let acc = self#option self#core_type c acc in
 -            acc
@@ -4485,6 +4724,8 @@
 -    method signature_item : signature_item -> 'acc -> 'acc =
 +            let acc = self#module_type b acc in acc
 +    method signature : signature -> 'acc -> 'acc=
++      fun { psg_items } acc -> self#signature_items psg_items acc
++    method signature_items : signature_items -> 'acc -> 'acc=
 +      self#list self#signature_item
 +    method signature_item : signature_item -> 'acc -> 'acc=
        fun { psig_desc; psig_loc } acc ->
@@ -4506,7 +4747,7 @@
          | Psig_typesubst a -> self#list self#type_declaration a acc
          | Psig_typext a -> self#type_extension a acc
          | Psig_exception a -> self#type_exception a acc
-@@ -4071,147 +3684,117 @@ class virtual ['acc] fold =
+@@ -4071,147 +3814,120 @@ class virtual ['acc] fold =
          | Psig_modtype a -> self#module_type_declaration a acc
          | Psig_modtypesubst a -> self#module_type_declaration a acc
          | Psig_open a -> self#open_description a acc
@@ -4524,6 +4765,9 @@
 -
 -    method module_declaration : module_declaration -> 'acc -> 'acc =
 +            let acc = self#attributes b acc in acc
++        | Psig_kind_abbrev (a, b) ->
++            let acc = self#loc self#string a acc in
++            let acc = self#jkind_annotation b acc in acc
 +    method module_declaration : module_declaration -> 'acc -> 'acc=
        fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } acc ->
          let acc = self#loc (self#option self#string) pmd_name acc in
@@ -4699,7 +4943,7 @@
          | Pstr_typext a -> self#type_extension a acc
          | Pstr_exception a -> self#type_exception a acc
          | Pstr_module a -> self#module_binding a acc
-@@ -4224,1576 +3807,1506 @@ class virtual ['acc] fold =
+@@ -4224,1812 +3940,1766 @@ class virtual ['acc] fold =
          | Pstr_attribute a -> self#attribute a acc
          | Pstr_extension (a, b) ->
              let acc = self#extension a acc in
@@ -4709,6 +4953,9 @@
 -    method value_binding : value_binding -> 'acc -> 'acc =
 -      fun { pvb_pat; pvb_expr; pvb_attributes; pvb_loc } acc ->
 +            let acc = self#attributes b acc in acc
++        | Pstr_kind_abbrev (a, b) ->
++            let acc = self#loc self#string a acc in
++            let acc = self#jkind_annotation b acc in acc
 +    method value_binding : value_binding -> 'acc -> 'acc=
 +      fun { pvb_pat; pvb_expr; pvb_modes; pvb_attributes; pvb_loc } acc ->
          let acc = self#pattern pvb_pat acc in
@@ -4730,13 +4977,11 @@
 -
 -    method toplevel_phrase : toplevel_phrase -> 'acc -> 'acc =
 +        let acc = self#location pmb_loc acc in acc
-+    method jkind_const_annotation : jkind_const_annotation -> 'acc -> 'acc=
-+      self#loc self#string
-+    method jkind_annotation : jkind_annotation -> 'acc -> 'acc=
++    method jkind_annotation_desc : jkind_annotation_desc -> 'acc -> 'acc=
 +      fun x acc ->
 +        match x with
 +        | Default -> acc
-+        | Abbreviation a -> self#jkind_const_annotation a acc
++        | Abbreviation a -> self#string a acc
 +        | Mod (a, b) ->
 +            let acc = self#jkind_annotation a acc in
 +            let acc = self#modes b acc in acc
@@ -4745,6 +4990,10 @@
 +            let acc = self#core_type b acc in acc
 +        | Kind_of a -> self#core_type a acc
 +        | Product a -> self#list self#jkind_annotation a acc
++    method jkind_annotation : jkind_annotation -> 'acc -> 'acc=
++      fun { pjkind_loc; pjkind_desc } acc ->
++        let acc = self#location pjkind_loc acc in
++        let acc = self#jkind_annotation_desc pjkind_desc acc in acc
 +    method toplevel_phrase : toplevel_phrase -> 'acc -> 'acc=
        fun x acc ->
          match x with
@@ -4960,6 +5209,10 @@
 +            let (a, acc) = self#string a acc in
 +            let (b, acc) = self#option self#char b acc in
 +            ((Pconst_integer (a, b)), acc)
++        | Pconst_unboxed_integer (a, b) ->
++            let (a, acc) = self#string a acc in
++            let (b, acc) = self#char b acc in
++            ((Pconst_unboxed_integer (a, b)), acc)
          | Pconst_char a ->
 -            let a, acc = self#char a acc in
 -            (Pconst_char a, acc)
@@ -4982,6 +5235,10 @@
 +            let (a, acc) = self#string a acc in
 +            let (b, acc) = self#option self#char b acc in
 +            ((Pconst_float (a, b)), acc)
++        | Pconst_unboxed_float (a, b) ->
++            let (a, acc) = self#string a acc in
++            let (b, acc) = self#option self#char b acc in
++            ((Pconst_unboxed_float (a, b)), acc)
 +    method attribute : attribute -> 'acc -> (attribute * 'acc)=
        fun { attr_name; attr_payload; attr_loc } acc ->
 -        let attr_name, acc = self#loc self#string attr_name acc in
@@ -5047,8 +5304,8 @@
 +      core_type_desc -> 'acc -> (core_type_desc * 'acc)=
        fun x acc ->
          match x with
-         | Ptyp_any -> (Ptyp_any, acc)
-         | Ptyp_var a ->
+-        | Ptyp_any -> (Ptyp_any, acc)
+-        | Ptyp_var a ->
 -            let a, acc = self#string a acc in
 -            (Ptyp_var a, acc)
 -        | Ptyp_arrow (a, b, c) ->
@@ -5056,7 +5313,13 @@
 -            let b, acc = self#core_type b acc in
 -            let c, acc = self#core_type c acc in
 -            (Ptyp_arrow (a, b, c), acc)
-+            let (a, acc) = self#string a acc in ((Ptyp_var a), acc)
++        | Ptyp_any a ->
++            let (a, acc) = self#option self#jkind_annotation a acc in
++            ((Ptyp_any a), acc)
++        | Ptyp_var (a, b) ->
++            let (a, acc) = self#string a acc in
++            let (b, acc) = self#option self#jkind_annotation b acc in
++            ((Ptyp_var (a, b)), acc)
 +        | Ptyp_arrow (a, b, c, d, e) ->
 +            let (a, acc) = self#arg_label a acc in
 +            let (b, acc) = self#core_type b acc in
@@ -5100,16 +5363,18 @@
 -            let a, acc = self#longident_loc a acc in
 -            let b, acc = self#list self#core_type b acc in
 -            (Ptyp_class (a, b), acc)
-+            let (a, acc) = self#longident_loc a acc in
-+            let (b, acc) = self#list self#core_type b acc in
-+            ((Ptyp_class (a, b)), acc)
-         | Ptyp_alias (a, b) ->
+-        | Ptyp_alias (a, b) ->
 -            let a, acc = self#core_type a acc in
 -            let b, acc = self#string b acc in
 -            (Ptyp_alias (a, b), acc)
++            let (a, acc) = self#longident_loc a acc in
++            let (b, acc) = self#list self#core_type b acc in
++            ((Ptyp_class (a, b)), acc)
++        | Ptyp_alias (a, b, c) ->
 +            let (a, acc) = self#core_type a acc in
-+            let (b, acc) = self#loc self#string b acc in
-+            ((Ptyp_alias (a, b)), acc)
++            let (b, acc) = self#option (self#loc self#string) b acc in
++            let (c, acc) = self#option self#jkind_annotation c acc in
++            ((Ptyp_alias (a, b, c)), acc)
          | Ptyp_variant (a, b, c) ->
 -            let a, acc = self#list self#row_field a acc in
 -            let b, acc = self#closed_flag b acc in
@@ -5123,7 +5388,12 @@
 -            let a, acc = self#list (self#loc self#string) a acc in
 -            let b, acc = self#core_type b acc in
 -            (Ptyp_poly (a, b), acc)
-+            let (a, acc) = self#list (self#loc self#string) a acc in
++            let (a, acc) =
++              self#list
++                (fun (a, b) acc ->
++                   let (a, acc) = self#loc self#string a acc in
++                   let (b, acc) = self#option self#jkind_annotation b acc in
++                   ((a, b), acc)) a acc in
 +            let (b, acc) = self#core_type b acc in ((Ptyp_poly (a, b)), acc)
          | Ptyp_package a ->
 -            let a, acc = self#package_type a acc in
@@ -5629,15 +5899,17 @@
          | Pexp_object a ->
 -            let a, acc = self#class_structure a acc in
 -            (Pexp_object a, acc)
-+            let (a, acc) = self#class_structure a acc in
-+            ((Pexp_object a), acc)
-         | Pexp_newtype (a, b) ->
+-        | Pexp_newtype (a, b) ->
 -            let a, acc = self#loc self#string a acc in
 -            let b, acc = self#expression b acc in
 -            (Pexp_newtype (a, b), acc)
++            let (a, acc) = self#class_structure a acc in
++            ((Pexp_object a), acc)
++        | Pexp_newtype (a, b, c) ->
 +            let (a, acc) = self#loc self#string a acc in
-+            let (b, acc) = self#expression b acc in
-+            ((Pexp_newtype (a, b)), acc)
++            let (b, acc) = self#option self#jkind_annotation b acc in
++            let (c, acc) = self#expression c acc in
++            ((Pexp_newtype (a, b, c)), acc)
          | Pexp_pack a ->
 -            let a, acc = self#module_expr a acc in
 -            (Pexp_pack a, acc)
@@ -5730,7 +6002,7 @@
 +            ((Pparam_val (a, b, c)), acc)
 +        | Pparam_newtype (a, b) ->
 +            let (a, acc) = self#loc self#string a acc in
-+            let (b, acc) = self#option (self#loc self#jkind_annotation) b acc in
++            let (b, acc) = self#option self#jkind_annotation b acc in
 +            ((Pparam_newtype (a, b)), acc)
 +    method function_param :
 +      function_param -> 'acc -> (function_param * 'acc)=
@@ -5788,7 +6060,8 @@
 +      type_declaration -> 'acc -> (type_declaration * 'acc)=
 +      fun
 +        { ptype_name; ptype_params; ptype_cstrs; ptype_kind; ptype_private;
-+          ptype_manifest; ptype_attributes; ptype_loc }
++          ptype_manifest; ptype_attributes; ptype_jkind_annotation; ptype_loc
++          }
 +        acc ->
 +        let (ptype_name, acc) = self#loc self#string ptype_name acc in
 +        let (ptype_params, acc) =
@@ -5851,6 +6124,8 @@
 +        let (ptype_manifest, acc) =
 +          self#option self#core_type ptype_manifest acc in
 +        let (ptype_attributes, acc) = self#attributes ptype_attributes acc in
++        let (ptype_jkind_annotation, acc) =
++          self#option self#jkind_annotation ptype_jkind_annotation acc in
 +        let (ptype_loc, acc) = self#location ptype_loc acc in
 +        ({
 +           ptype_name;
@@ -5860,6 +6135,7 @@
 +           ptype_private;
 +           ptype_manifest;
 +           ptype_attributes;
++           ptype_jkind_annotation;
 +           ptype_loc
 +         }, acc)
 +    method type_kind : type_kind -> 'acc -> (type_kind * 'acc)=
@@ -5927,7 +6203,12 @@
 +      fun { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes }
 +        acc ->
 +        let (pcd_name, acc) = self#loc self#string pcd_name acc in
-+        let (pcd_vars, acc) = self#list (self#loc self#string) pcd_vars acc in
++        let (pcd_vars, acc) =
++          self#list
++            (fun (a, b) acc ->
++               let (a, acc) = self#loc self#string a acc in
++               let (b, acc) = self#option self#jkind_annotation b acc in
++               ((a, b), acc)) pcd_vars acc in
 +        let (pcd_args, acc) = self#constructor_arguments pcd_args acc in
 +        let (pcd_res, acc) = self#option self#core_type pcd_res acc in
 +        let (pcd_loc, acc) = self#location pcd_loc acc in
@@ -6069,7 +6350,12 @@
 -            let b, acc = self#constructor_arguments b acc in
 -            let c, acc = self#option self#core_type c acc in
 -            (Pext_decl (a, b, c), acc)
-+            let (a, acc) = self#list (self#loc self#string) a acc in
++            let (a, acc) =
++              self#list
++                (fun (a, b) acc ->
++                   let (a, acc) = self#loc self#string a acc in
++                   let (b, acc) = self#option self#jkind_annotation b acc in
++                   ((a, b), acc)) a acc in
 +            let (b, acc) = self#constructor_arguments b acc in
 +            let (c, acc) = self#option self#core_type c acc in
 +            ((Pext_decl (a, b, c)), acc)
@@ -6554,6 +6840,11 @@
 +            let (a, acc) = self#loc (self#option self#string) a acc in
 +            let (b, acc) = self#module_type b acc in ((Named (a, b)), acc)
 +    method signature : signature -> 'acc -> (signature * 'acc)=
++      fun { psg_items } acc ->
++        let (psg_items, acc) = self#signature_items psg_items acc in
++        ({ psg_items }, acc)
++    method signature_items :
++      signature_items -> 'acc -> (signature_items * 'acc)=
        self#list self#signature_item
 -
 -    method signature_item : signature_item -> 'acc -> signature_item * 'acc =
@@ -6660,6 +6951,10 @@
 +            let (a, acc) = self#extension a acc in
 +            let (b, acc) = self#attributes b acc in
 +            ((Psig_extension (a, b)), acc)
++        | Psig_kind_abbrev (a, b) ->
++            let (a, acc) = self#loc self#string a acc in
++            let (b, acc) = self#jkind_annotation b acc in
++            ((Psig_kind_abbrev (a, b)), acc)
 +    method module_declaration :
 +      module_declaration -> 'acc -> (module_declaration * 'acc)=
        fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } acc ->
@@ -6986,6 +7281,10 @@
 +            let (a, acc) = self#extension a acc in
 +            let (b, acc) = self#attributes b acc in
 +            ((Pstr_extension (a, b)), acc)
++        | Pstr_kind_abbrev (a, b) ->
++            let (a, acc) = self#loc self#string a acc in
++            let (b, acc) = self#jkind_annotation b acc in
++            ((Pstr_kind_abbrev (a, b)), acc)
 +    method value_binding : value_binding -> 'acc -> (value_binding * 'acc)=
 +      fun { pvb_pat; pvb_expr; pvb_modes; pvb_attributes; pvb_loc } acc ->
 +        let (pvb_pat, acc) = self#pattern pvb_pat acc in
@@ -7008,17 +7307,13 @@
          ({ pmb_name; pmb_expr; pmb_attributes; pmb_loc }, acc)
 -
 -    method toplevel_phrase : toplevel_phrase -> 'acc -> toplevel_phrase * 'acc =
-+    method jkind_const_annotation :
-+      jkind_const_annotation -> 'acc -> (jkind_const_annotation * 'acc)=
-+      self#loc self#string
-+    method jkind_annotation :
-+      jkind_annotation -> 'acc -> (jkind_annotation * 'acc)=
++    method jkind_annotation_desc :
++      jkind_annotation_desc -> 'acc -> (jkind_annotation_desc * 'acc)=
 +      fun x acc ->
 +        match x with
 +        | Default -> (Default, acc)
 +        | Abbreviation a ->
-+            let (a, acc) = self#jkind_const_annotation a acc in
-+            ((Abbreviation a), acc)
++            let (a, acc) = self#string a acc in ((Abbreviation a), acc)
 +        | Mod (a, b) ->
 +            let (a, acc) = self#jkind_annotation a acc in
 +            let (b, acc) = self#modes b acc in ((Mod (a, b)), acc)
@@ -7030,6 +7325,12 @@
 +        | Product a ->
 +            let (a, acc) = self#list self#jkind_annotation a acc in
 +            ((Product a), acc)
++    method jkind_annotation :
++      jkind_annotation -> 'acc -> (jkind_annotation * 'acc)=
++      fun { pjkind_loc; pjkind_desc } acc ->
++        let (pjkind_loc, acc) = self#location pjkind_loc acc in
++        let (pjkind_desc, acc) = self#jkind_annotation_desc pjkind_desc acc in
++        ({ pjkind_loc; pjkind_desc }, acc)
 +    method toplevel_phrase :
 +      toplevel_phrase -> 'acc -> (toplevel_phrase * 'acc)=
        fun x acc ->
@@ -7239,6 +7540,9 @@
 -            let a = self#char ctx a in
 -            Pconst_char a
 +            let b = self#option self#char ctx b in Pconst_integer (a, b)
++        | Pconst_unboxed_integer (a, b) ->
++            let a = self#string ctx a in
++            let b = self#char ctx b in Pconst_unboxed_integer (a, b)
 +        | Pconst_char a -> let a = self#char ctx a in Pconst_char a
          | Pconst_string (a, b, c) ->
              let a = self#string ctx a in
@@ -7248,11 +7552,14 @@
 +            let c = self#option self#string ctx c in Pconst_string (a, b, c)
          | Pconst_float (a, b) ->
              let a = self#string ctx a in
--            let b = self#option self#char ctx b in
++            let b = self#option self#char ctx b in Pconst_float (a, b)
++        | Pconst_unboxed_float (a, b) ->
++            let a = self#string ctx a in
+             let b = self#option self#char ctx b in
 -            Pconst_float (a, b)
 -
 -    method attribute : 'ctx -> attribute -> attribute =
-+            let b = self#option self#char ctx b in Pconst_float (a, b)
++            Pconst_unboxed_float (a, b)
 +    method attribute : 'ctx -> attribute -> attribute=
        fun ctx { attr_name; attr_payload; attr_loc } ->
          let attr_name = self#loc self#string ctx attr_name in
@@ -7307,12 +7614,16 @@
 +    method core_type_desc : 'ctx -> core_type_desc -> core_type_desc=
        fun ctx x ->
          match x with
-         | Ptyp_any -> Ptyp_any
+-        | Ptyp_any -> Ptyp_any
 -        | Ptyp_var a ->
--            let a = self#string ctx a in
++        | Ptyp_any a ->
++            let a = self#option self#jkind_annotation ctx a in Ptyp_any a
++        | Ptyp_var (a, b) ->
+             let a = self#string ctx a in
 -            Ptyp_var a
 -        | Ptyp_arrow (a, b, c) ->
-+        | Ptyp_var a -> let a = self#string ctx a in Ptyp_var a
++            let b = self#option self#jkind_annotation ctx b in
++            Ptyp_var (a, b)
 +        | Ptyp_arrow (a, b, c, d, e) ->
              let a = self#arg_label ctx a in
              let b = self#core_type ctx b in
@@ -7349,24 +7660,33 @@
              let a = self#longident_loc ctx a in
 -            let b = self#list self#core_type ctx b in
 -            Ptyp_class (a, b)
+-        | Ptyp_alias (a, b) ->
 +            let b = self#list self#core_type ctx b in Ptyp_class (a, b)
-         | Ptyp_alias (a, b) ->
++        | Ptyp_alias (a, b, c) ->
              let a = self#core_type ctx a in
 -            let b = self#string ctx b in
 -            Ptyp_alias (a, b)
-+            let b = self#loc self#string ctx b in Ptyp_alias (a, b)
++            let b = self#option (self#loc self#string) ctx b in
++            let c = self#option self#jkind_annotation ctx c in
++            Ptyp_alias (a, b, c)
          | Ptyp_variant (a, b, c) ->
              let a = self#list self#row_field ctx a in
              let b = self#closed_flag ctx b in
-@@ -5801,235 +5314,188 @@ class virtual ['ctx] map_with_context =
+             let c = self#option (self#list self#label) ctx c in
              Ptyp_variant (a, b, c)
          | Ptyp_poly (a, b) ->
-             let a = self#list (self#loc self#string) ctx a in
+-            let a = self#list (self#loc self#string) ctx a in
 -            let b = self#core_type ctx b in
 -            Ptyp_poly (a, b)
 -        | Ptyp_package a ->
 -            let a = self#package_type ctx a in
 -            Ptyp_package a
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#loc self#string ctx a in
++                   let b = self#option self#jkind_annotation ctx b in (a, b))
++                ctx a in
 +            let b = self#core_type ctx b in Ptyp_poly (a, b)
 +        | Ptyp_package a -> let a = self#package_type ctx a in Ptyp_package a
          | Ptyp_extension a ->
@@ -7678,7 +7998,7 @@
          | Pexp_ifthenelse (a, b, c) ->
              let a = self#expression ctx a in
              let b = self#expression ctx b in
-@@ -6037,157 +5503,163 @@ class virtual ['ctx] map_with_context =
+@@ -6037,161 +5707,171 @@ class virtual ['ctx] map_with_context =
              Pexp_ifthenelse (a, b, c)
          | Pexp_sequence (a, b) ->
              let a = self#expression ctx a in
@@ -7764,15 +8084,17 @@
          | Pexp_object a ->
 -            let a = self#class_structure ctx a in
 -            Pexp_object a
+-        | Pexp_newtype (a, b) ->
 +            let a = self#class_structure ctx a in Pexp_object a
-         | Pexp_newtype (a, b) ->
++        | Pexp_newtype (a, b, c) ->
              let a = self#loc self#string ctx a in
 -            let b = self#expression ctx b in
 -            Pexp_newtype (a, b)
 -        | Pexp_pack a ->
 -            let a = self#module_expr ctx a in
 -            Pexp_pack a
-+            let b = self#expression ctx b in Pexp_newtype (a, b)
++            let b = self#option self#jkind_annotation ctx b in
++            let c = self#expression ctx c in Pexp_newtype (a, b, c)
 +        | Pexp_pack a -> let a = self#module_expr ctx a in Pexp_pack a
          | Pexp_open (a, b) ->
              let a = self#open_declaration ctx a in
@@ -7828,7 +8150,7 @@
 +            let c = self#pattern ctx c in Pparam_val (a, b, c)
 +        | Pparam_newtype (a, b) ->
 +            let a = self#loc self#string ctx a in
-+            let b = self#option (self#loc self#jkind_annotation) ctx b in
++            let b = self#option self#jkind_annotation ctx b in
 +            Pparam_newtype (a, b)
 +    method function_param : 'ctx -> function_param -> function_param=
 +      fun ctx { pparam_loc; pparam_desc } ->
@@ -7894,7 +8216,8 @@
 -            ptype_loc;
 -          } ->
 +        { ptype_name; ptype_params; ptype_cstrs; ptype_kind; ptype_private;
-+          ptype_manifest; ptype_attributes; ptype_loc }
++          ptype_manifest; ptype_attributes; ptype_jkind_annotation; ptype_loc
++          }
 +        ->
          let ptype_name = self#loc self#string ctx ptype_name in
          let ptype_params =
@@ -7932,11 +8255,18 @@
          let ptype_kind = self#type_kind ctx ptype_kind in
          let ptype_private = self#private_flag ctx ptype_private in
          let ptype_manifest = self#option self#core_type ctx ptype_manifest in
-@@ -6201,10 +5673,9 @@ class virtual ['ctx] map_with_context =
+         let ptype_attributes = self#attributes ctx ptype_attributes in
++        let ptype_jkind_annotation =
++          self#option self#jkind_annotation ctx ptype_jkind_annotation in
+         let ptype_loc = self#location ctx ptype_loc in
+         {
+           ptype_name;
+@@ -6201,10 +5881,10 @@ class virtual ['ctx] map_with_context =
            ptype_private;
            ptype_manifest;
            ptype_attributes;
 -          ptype_loc;
++          ptype_jkind_annotation;
 +          ptype_loc
          }
 -
@@ -7945,7 +8275,7 @@
        fun ctx x ->
          match x with
          | Ptype_abstract -> Ptype_abstract
-@@ -6212,22 +5683,33 @@ class virtual ['ctx] map_with_context =
+@@ -6212,69 +5892,79 @@ class virtual ['ctx] map_with_context =
              let a = self#list self#constructor_declaration ctx a in
              Ptype_variant a
          | Ptype_record a ->
@@ -7987,9 +8317,15 @@
 +      fun ctx
 +        { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes } ->
          let pcd_name = self#loc self#string ctx pcd_name in
-         let pcd_vars = self#list (self#loc self#string) ctx pcd_vars in
+-        let pcd_vars = self#list (self#loc self#string) ctx pcd_vars in
++        let pcd_vars =
++          self#list
++            (fun ctx (a, b) ->
++               let a = self#loc self#string ctx a in
++               let b = self#option self#jkind_annotation ctx b in (a, b)) ctx
++            pcd_vars in
          let pcd_args = self#constructor_arguments ctx pcd_args in
-@@ -6235,46 +5717,40 @@ class virtual ['ctx] map_with_context =
+         let pcd_res = self#option self#core_type ctx pcd_res in
          let pcd_loc = self#location ctx pcd_loc in
          let pcd_attributes = self#attributes ctx pcd_attributes in
          { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes }
@@ -8059,7 +8395,7 @@
          let ptyext_private = self#private_flag ctx ptyext_private in
          let ptyext_loc = self#location ctx ptyext_loc in
          let ptyext_attributes = self#attributes ctx ptyext_attributes in
-@@ -6284,225 +5760,173 @@ class virtual ['ctx] map_with_context =
+@@ -6284,225 +5974,178 @@ class virtual ['ctx] map_with_context =
            ptyext_constructors;
            ptyext_private;
            ptyext_loc;
@@ -8096,7 +8432,13 @@
        fun ctx x ->
          match x with
          | Pext_decl (a, b, c) ->
-             let a = self#list (self#loc self#string) ctx a in
+-            let a = self#list (self#loc self#string) ctx a in
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#loc self#string ctx a in
++                   let b = self#option self#jkind_annotation ctx b in (a, b))
++                ctx a in
              let b = self#constructor_arguments ctx b in
 -            let c = self#option self#core_type ctx c in
 -            Pext_decl (a, b, c)
@@ -8346,7 +8688,7 @@
        fun ctx x ->
          match x with
          | Pcf_inherit (a, b, c) ->
-@@ -6513,1119 +5937,972 @@ class virtual ['ctx] map_with_context =
+@@ -6513,3873 +6156,3736 @@ class virtual ['ctx] map_with_context =
          | Pcf_val a ->
              let a =
                (fun ctx (a, b, c) ->
@@ -8473,6 +8815,9 @@
 -    method signature : 'ctx -> signature -> signature =
 +            let b = self#module_type ctx b in Named (a, b)
 +    method signature : 'ctx -> signature -> signature=
++      fun ctx { psg_items } ->
++        let psg_items = self#signature_items ctx psg_items in { psg_items }
++    method signature_items : 'ctx -> signature_items -> signature_items=
        self#list self#signature_item
 -
 -    method signature_item : 'ctx -> signature_item -> signature_item =
@@ -8557,6 +8902,9 @@
 -    method module_declaration : 'ctx -> module_declaration -> module_declaration
 -        =
 +            let b = self#attributes ctx b in Psig_extension (a, b)
++        | Psig_kind_abbrev (a, b) ->
++            let a = self#loc self#string ctx a in
++            let b = self#jkind_annotation ctx b in Psig_kind_abbrev (a, b)
 +    method module_declaration :
 +      'ctx -> module_declaration -> module_declaration=
        fun ctx { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
@@ -8798,6 +9146,9 @@
 -    method value_binding : 'ctx -> value_binding -> value_binding =
 -      fun ctx { pvb_pat; pvb_expr; pvb_attributes; pvb_loc } ->
 +            let b = self#attributes ctx b in Pstr_extension (a, b)
++        | Pstr_kind_abbrev (a, b) ->
++            let a = self#loc self#string ctx a in
++            let b = self#jkind_annotation ctx b in Pstr_kind_abbrev (a, b)
 +    method value_binding : 'ctx -> value_binding -> value_binding=
 +      fun ctx { pvb_pat; pvb_expr; pvb_modes; pvb_attributes; pvb_loc } ->
          let pvb_pat = self#pattern ctx pvb_pat in
@@ -8818,10 +9169,8 @@
          { pmb_name; pmb_expr; pmb_attributes; pmb_loc }
 -
 -    method toplevel_phrase : 'ctx -> toplevel_phrase -> toplevel_phrase =
-+    method jkind_const_annotation :
-+      'ctx -> jkind_const_annotation -> jkind_const_annotation=
-+      self#loc self#string
-+    method jkind_annotation : 'ctx -> jkind_annotation -> jkind_annotation=
++    method jkind_annotation_desc :
++      'ctx -> jkind_annotation_desc -> jkind_annotation_desc=
        fun ctx x ->
          match x with
 -        | Ptop_def a ->
@@ -8834,8 +9183,7 @@
 -    method toplevel_directive : 'ctx -> toplevel_directive -> toplevel_directive
 -        =
 +        | Default -> Default
-+        | Abbreviation a ->
-+            let a = self#jkind_const_annotation ctx a in Abbreviation a
++        | Abbreviation a -> let a = self#string ctx a in Abbreviation a
 +        | Mod (a, b) ->
 +            let a = self#jkind_annotation ctx a in
 +            let b = self#modes ctx b in Mod (a, b)
@@ -8845,6 +9193,11 @@
 +        | Kind_of a -> let a = self#core_type ctx a in Kind_of a
 +        | Product a ->
 +            let a = self#list self#jkind_annotation ctx a in Product a
++    method jkind_annotation : 'ctx -> jkind_annotation -> jkind_annotation=
++      fun ctx { pjkind_loc; pjkind_desc } ->
++        let pjkind_loc = self#location ctx pjkind_loc in
++        let pjkind_desc = self#jkind_annotation_desc ctx pjkind_desc in
++        { pjkind_loc; pjkind_desc }
 +    method toplevel_phrase : 'ctx -> toplevel_phrase -> toplevel_phrase=
 +      fun ctx x ->
 +        match x with
@@ -9090,6 +9443,10 @@
              let b = self#option self#char b in
 -            self#constr "Pconst_integer" [ a; b ]
 +            self#constr "Pconst_integer" [a; b]
++        | Pconst_unboxed_integer (a, b) ->
++            let a = self#string a in
++            let b = self#char b in
++            self#constr "Pconst_unboxed_integer" [a; b]
          | Pconst_char a ->
 -            let a = self#char a in
 -            self#constr "Pconst_char" [ a ]
@@ -9107,6 +9464,10 @@
 -
 -    method attribute : attribute -> 'res =
 +            self#constr "Pconst_float" [a; b]
++        | Pconst_unboxed_float (a, b) ->
++            let a = self#string a in
++            let b = self#option self#char b in
++            self#constr "Pconst_unboxed_float" [a; b]
 +    method attribute : attribute -> 'res=
        fun { attr_name; attr_payload; attr_loc } ->
          let attr_name = self#loc self#string attr_name in
@@ -9178,12 +9539,17 @@
 +    method core_type_desc : core_type_desc -> 'res=
        fun x ->
          match x with
-         | Ptyp_any -> self#constr "Ptyp_any" []
+-        | Ptyp_any -> self#constr "Ptyp_any" []
 -        | Ptyp_var a ->
--            let a = self#string a in
++        | Ptyp_any a ->
++            let a = self#option self#jkind_annotation a in
++            self#constr "Ptyp_any" [a]
++        | Ptyp_var (a, b) ->
+             let a = self#string a in
 -            self#constr "Ptyp_var" [ a ]
 -        | Ptyp_arrow (a, b, c) ->
-+        | Ptyp_var a -> let a = self#string a in self#constr "Ptyp_var" [a]
++            let b = self#option self#jkind_annotation b in
++            self#constr "Ptyp_var" [a; b]
 +        | Ptyp_arrow (a, b, c, d, e) ->
              let a = self#arg_label a in
              let b = self#core_type b in
@@ -9221,12 +9587,15 @@
              let a = self#longident_loc a in
              let b = self#list self#core_type b in
 -            self#constr "Ptyp_class" [ a; b ]
+-        | Ptyp_alias (a, b) ->
 +            self#constr "Ptyp_class" [a; b]
-         | Ptyp_alias (a, b) ->
++        | Ptyp_alias (a, b, c) ->
              let a = self#core_type a in
 -            let b = self#string b in
 -            self#constr "Ptyp_alias" [ a; b ]
-+            let b = self#loc self#string b in self#constr "Ptyp_alias" [a; b]
++            let b = self#option (self#loc self#string) b in
++            let c = self#option self#jkind_annotation c in
++            self#constr "Ptyp_alias" [a; b; c]
          | Ptyp_variant (a, b, c) ->
              let a = self#list self#row_field a in
              let b = self#closed_flag b in
@@ -9234,9 +9603,15 @@
 -            self#constr "Ptyp_variant" [ a; b; c ]
 +            self#constr "Ptyp_variant" [a; b; c]
          | Ptyp_poly (a, b) ->
-             let a = self#list (self#loc self#string) a in
+-            let a = self#list (self#loc self#string) a in
 -            let b = self#core_type b in
 -            self#constr "Ptyp_poly" [ a; b ]
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#loc self#string a in
++                   let b = self#option self#jkind_annotation b in
++                   self#tuple [a; b]) a in
 +            let b = self#core_type b in self#constr "Ptyp_poly" [a; b]
          | Ptyp_package a ->
 -            let a = self#package_type a in
@@ -9376,8 +9751,7 @@
 +                (fun (a, b) ->
 +                   let a = self#option self#string a in
 +                   let b = self#pattern b in self#tuple [a; b]) a in
-+            let b = self#closed_flag b in
-+            self#constr "Ppat_tuple" [a; b]
++            let b = self#closed_flag b in self#constr "Ppat_tuple" [a; b]
 +        | Ppat_unboxed_tuple (a, b) ->
 +            let a =
 +              self#list
@@ -9682,12 +10056,14 @@
          | Pexp_object a ->
 -            let a = self#class_structure a in
 -            self#constr "Pexp_object" [ a ]
+-        | Pexp_newtype (a, b) ->
 +            let a = self#class_structure a in self#constr "Pexp_object" [a]
-         | Pexp_newtype (a, b) ->
++        | Pexp_newtype (a, b, c) ->
              let a = self#loc self#string a in
 -            let b = self#expression b in
 -            self#constr "Pexp_newtype" [ a; b ]
-+            let b = self#expression b in self#constr "Pexp_newtype" [a; b]
++            let b = self#option self#jkind_annotation b in
++            let c = self#expression c in self#constr "Pexp_newtype" [a; b; c]
          | Pexp_pack a ->
 -            let a = self#module_expr a in
 -            self#constr "Pexp_pack" [ a ]
@@ -9758,7 +10134,7 @@
 +            let c = self#pattern c in self#constr "Pparam_val" [a; b; c]
 +        | Pparam_newtype (a, b) ->
 +            let a = self#loc self#string a in
-+            let b = self#option (self#loc self#jkind_annotation) b in
++            let b = self#option self#jkind_annotation b in
 +            self#constr "Pparam_newtype" [a; b]
 +    method function_param : function_param -> 'res=
 +      fun { pparam_loc; pparam_desc } ->
@@ -9832,7 +10208,8 @@
 +    method type_declaration : type_declaration -> 'res=
 +      fun
 +        { ptype_name; ptype_params; ptype_cstrs; ptype_kind; ptype_private;
-+          ptype_manifest; ptype_attributes; ptype_loc }
++          ptype_manifest; ptype_attributes; ptype_jkind_annotation; ptype_loc
++          }
 +        ->
          let ptype_name = self#loc self#string ptype_name in
          let ptype_params =
@@ -9871,6 +10248,8 @@
          let ptype_private = self#private_flag ptype_private in
          let ptype_manifest = self#option self#core_type ptype_manifest in
          let ptype_attributes = self#attributes ptype_attributes in
++        let ptype_jkind_annotation =
++          self#option self#jkind_annotation ptype_jkind_annotation in
          let ptype_loc = self#location ptype_loc in
          self#record
 -          [
@@ -9892,6 +10271,7 @@
 +          ("ptype_private", ptype_private);
 +          ("ptype_manifest", ptype_manifest);
 +          ("ptype_attributes", ptype_attributes);
++          ("ptype_jkind_annotation", ptype_jkind_annotation);
 +          ("ptype_loc", ptype_loc)]
 +    method type_kind : type_kind -> 'res=
        fun x ->
@@ -9942,9 +10322,15 @@
 +      fun { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes }
 +        ->
          let pcd_name = self#loc self#string pcd_name in
-         let pcd_vars = self#list (self#loc self#string) pcd_vars in
+-        let pcd_vars = self#list (self#loc self#string) pcd_vars in
++        let pcd_vars =
++          self#list
++            (fun (a, b) ->
++               let a = self#loc self#string a in
++               let b = self#option self#jkind_annotation b in
++               self#tuple [a; b]) pcd_vars in
          let pcd_args = self#constructor_arguments pcd_args in
-@@ -7633,2753 +6910,2632 @@ class virtual ['res] lift =
+         let pcd_res = self#option self#core_type pcd_res in
          let pcd_loc = self#location pcd_loc in
          let pcd_attributes = self#attributes pcd_attributes in
          self#record
@@ -10088,7 +10474,13 @@
        fun x ->
          match x with
          | Pext_decl (a, b, c) ->
-             let a = self#list (self#loc self#string) a in
+-            let a = self#list (self#loc self#string) a in
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#loc self#string a in
++                   let b = self#option self#jkind_annotation b in
++                   self#tuple [a; b]) a in
              let b = self#constructor_arguments b in
              let c = self#option self#core_type c in
 -            self#constr "Pext_decl" [ a; b; c ]
@@ -10526,7 +10918,12 @@
 -
 -    method signature_item : signature_item -> 'res =
 +            let b = self#module_type b in self#constr "Named" [a; b]
-+    method signature : signature -> 'res= self#list self#signature_item
++    method signature : signature -> 'res=
++      fun { psg_items } ->
++        let psg_items = self#signature_items psg_items in
++        self#record [("psg_items", psg_items)]
++    method signature_items : signature_items -> 'res=
++      self#list self#signature_item
 +    method signature_item : signature_item -> 'res=
        fun { psig_desc; psig_loc } ->
          let psig_desc = self#signature_item_desc psig_desc in
@@ -10607,6 +11004,10 @@
 -
 -    method module_declaration : module_declaration -> 'res =
 +            let b = self#attributes b in self#constr "Psig_extension" [a; b]
++        | Psig_kind_abbrev (a, b) ->
++            let a = self#loc self#string a in
++            let b = self#jkind_annotation b in
++            self#constr "Psig_kind_abbrev" [a; b]
 +    method module_declaration : module_declaration -> 'res=
        fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
          let pmd_name = self#loc (self#option self#string) pmd_name in
@@ -10886,6 +11287,10 @@
 -    method value_binding : value_binding -> 'res =
 -      fun { pvb_pat; pvb_expr; pvb_attributes; pvb_loc } ->
 +            let b = self#attributes b in self#constr "Pstr_extension" [a; b]
++        | Pstr_kind_abbrev (a, b) ->
++            let a = self#loc self#string a in
++            let b = self#jkind_annotation b in
++            self#constr "Pstr_kind_abbrev" [a; b]
 +    method value_binding : value_binding -> 'res=
 +      fun { pvb_pat; pvb_expr; pvb_modes; pvb_attributes; pvb_loc } ->
          let pvb_pat = self#pattern pvb_pat in
@@ -10926,15 +11331,12 @@
 +          ("pmb_expr", pmb_expr);
 +          ("pmb_attributes", pmb_attributes);
 +          ("pmb_loc", pmb_loc)]
-+    method jkind_const_annotation : jkind_const_annotation -> 'res=
-+      self#loc self#string
-+    method jkind_annotation : jkind_annotation -> 'res=
++    method jkind_annotation_desc : jkind_annotation_desc -> 'res=
 +      fun x ->
 +        match x with
 +        | Default -> self#constr "Default" []
 +        | Abbreviation a ->
-+            let a = self#jkind_const_annotation a in
-+            self#constr "Abbreviation" [a]
++            let a = self#string a in self#constr "Abbreviation" [a]
 +        | Mod (a, b) ->
 +            let a = self#jkind_annotation a in
 +            let b = self#modes b in self#constr "Mod" [a; b]
@@ -10945,6 +11347,12 @@
 +        | Product a ->
 +            let a = self#list self#jkind_annotation a in
 +            self#constr "Product" [a]
++    method jkind_annotation : jkind_annotation -> 'res=
++      fun { pjkind_loc; pjkind_desc } ->
++        let pjkind_loc = self#location pjkind_loc in
++        let pjkind_desc = self#jkind_annotation_desc pjkind_desc in
++        self#record
++          [("pjkind_loc", pjkind_loc); ("pjkind_desc", pjkind_desc)]
 +    method toplevel_phrase : toplevel_phrase -> 'res=
        fun x ->
          match x with
@@ -11244,6 +11652,12 @@
 -              self#constr ctx "Pconst_integer" [ Stdlib.snd a; Stdlib.snd b ] )
 +            ((Pconst_integer ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Pconst_integer" [Stdlib.snd a; Stdlib.snd b]))
++        | Pconst_unboxed_integer (a, b) ->
++            let a = self#string ctx a in
++            let b = self#char ctx b in
++            ((Pconst_unboxed_integer ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Pconst_unboxed_integer"
++                 [Stdlib.snd a; Stdlib.snd b]))
          | Pconst_char a ->
              let a = self#char ctx a in
 -            ( Pconst_char (Stdlib.fst a),
@@ -11269,6 +11683,12 @@
 -    method attribute : 'ctx -> attribute -> attribute * 'res =
 +            ((Pconst_float ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Pconst_float" [Stdlib.snd a; Stdlib.snd b]))
++        | Pconst_unboxed_float (a, b) ->
++            let a = self#string ctx a in
++            let b = self#option self#char ctx b in
++            ((Pconst_unboxed_float ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Pconst_unboxed_float"
++                 [Stdlib.snd a; Stdlib.snd b]))
 +    method attribute : 'ctx -> attribute -> (attribute * 'res)=
        fun ctx { attr_name; attr_payload; attr_loc } ->
          let attr_name = self#loc self#string ctx attr_name in
@@ -11371,14 +11791,19 @@
        fun ctx x ->
          match x with
 -        | Ptyp_any -> (Ptyp_any, self#constr ctx "Ptyp_any" [])
-+        | Ptyp_any -> (Ptyp_any, (self#constr ctx "Ptyp_any" []))
-         | Ptyp_var a ->
+-        | Ptyp_var a ->
++        | Ptyp_any a ->
++            let a = self#option self#jkind_annotation ctx a in
++            ((Ptyp_any (Stdlib.fst a)),
++              (self#constr ctx "Ptyp_any" [Stdlib.snd a]))
++        | Ptyp_var (a, b) ->
              let a = self#string ctx a in
 -            ( Ptyp_var (Stdlib.fst a),
 -              self#constr ctx "Ptyp_var" [ Stdlib.snd a ] )
 -        | Ptyp_arrow (a, b, c) ->
-+            ((Ptyp_var (Stdlib.fst a)),
-+              (self#constr ctx "Ptyp_var" [Stdlib.snd a]))
++            let b = self#option self#jkind_annotation ctx b in
++            ((Ptyp_var ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Ptyp_var" [Stdlib.snd a; Stdlib.snd b]))
 +        | Ptyp_arrow (a, b, c, d, e) ->
              let a = self#arg_label ctx a in
              let b = self#core_type ctx b in
@@ -11439,16 +11864,19 @@
              let b = self#list self#core_type ctx b in
 -            ( Ptyp_class (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Ptyp_class" [ Stdlib.snd a; Stdlib.snd b ] )
+-        | Ptyp_alias (a, b) ->
 +            ((Ptyp_class ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Ptyp_class" [Stdlib.snd a; Stdlib.snd b]))
-         | Ptyp_alias (a, b) ->
++        | Ptyp_alias (a, b, c) ->
              let a = self#core_type ctx a in
 -            let b = self#string ctx b in
 -            ( Ptyp_alias (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Ptyp_alias" [ Stdlib.snd a; Stdlib.snd b ] )
-+            let b = self#loc self#string ctx b in
-+            ((Ptyp_alias ((Stdlib.fst a), (Stdlib.fst b))),
-+              (self#constr ctx "Ptyp_alias" [Stdlib.snd a; Stdlib.snd b]))
++            let b = self#option (self#loc self#string) ctx b in
++            let c = self#option self#jkind_annotation ctx c in
++            ((Ptyp_alias ((Stdlib.fst a), (Stdlib.fst b), (Stdlib.fst c))),
++              (self#constr ctx "Ptyp_alias"
++                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
          | Ptyp_variant (a, b, c) ->
              let a = self#list self#row_field ctx a in
              let b = self#closed_flag ctx b in
@@ -11460,7 +11888,14 @@
 +              (self#constr ctx "Ptyp_variant"
 +                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
          | Ptyp_poly (a, b) ->
-             let a = self#list (self#loc self#string) ctx a in
+-            let a = self#list (self#loc self#string) ctx a in
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#loc self#string ctx a in
++                   let b = self#option self#jkind_annotation ctx b in
++                   (((Stdlib.fst a), (Stdlib.fst b)),
++                     (self#tuple ctx [Stdlib.snd a; Stdlib.snd b]))) ctx a in
              let b = self#core_type ctx b in
 -            ( Ptyp_poly (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Ptyp_poly" [ Stdlib.snd a; Stdlib.snd b ] )
@@ -12145,15 +12580,19 @@
              let a = self#class_structure ctx a in
 -            ( Pexp_object (Stdlib.fst a),
 -              self#constr ctx "Pexp_object" [ Stdlib.snd a ] )
+-        | Pexp_newtype (a, b) ->
 +            ((Pexp_object (Stdlib.fst a)),
 +              (self#constr ctx "Pexp_object" [Stdlib.snd a]))
-         | Pexp_newtype (a, b) ->
++        | Pexp_newtype (a, b, c) ->
              let a = self#loc self#string ctx a in
-             let b = self#expression ctx b in
+-            let b = self#expression ctx b in
 -            ( Pexp_newtype (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Pexp_newtype" [ Stdlib.snd a; Stdlib.snd b ] )
-+            ((Pexp_newtype ((Stdlib.fst a), (Stdlib.fst b))),
-+              (self#constr ctx "Pexp_newtype" [Stdlib.snd a; Stdlib.snd b]))
++            let b = self#option self#jkind_annotation ctx b in
++            let c = self#expression ctx c in
++            ((Pexp_newtype ((Stdlib.fst a), (Stdlib.fst b), (Stdlib.fst c))),
++              (self#constr ctx "Pexp_newtype"
++                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
          | Pexp_pack a ->
              let a = self#module_expr ctx a in
 -            ( Pexp_pack (Stdlib.fst a),
@@ -12289,7 +12728,7 @@
 +                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
 +        | Pparam_newtype (a, b) ->
 +            let a = self#loc self#string ctx a in
-+            let b = self#option (self#loc self#jkind_annotation) ctx b in
++            let b = self#option self#jkind_annotation ctx b in
 +            ((Pparam_newtype ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Pparam_newtype" [Stdlib.snd a; Stdlib.snd b]))
 +    method function_param :
@@ -12404,7 +12843,8 @@
 -            ptype_loc;
 -          } ->
 +        { ptype_name; ptype_params; ptype_cstrs; ptype_kind; ptype_private;
-+          ptype_manifest; ptype_attributes; ptype_loc }
++          ptype_manifest; ptype_attributes; ptype_jkind_annotation; ptype_loc
++          }
 +        ->
          let ptype_name = self#loc self#string ctx ptype_name in
          let ptype_params =
@@ -12453,6 +12893,8 @@
          let ptype_private = self#private_flag ctx ptype_private in
          let ptype_manifest = self#option self#core_type ctx ptype_manifest in
          let ptype_attributes = self#attributes ctx ptype_attributes in
++        let ptype_jkind_annotation =
++          self#option self#jkind_annotation ctx ptype_jkind_annotation in
          let ptype_loc = self#location ctx ptype_loc in
 -        ( {
 -            ptype_name = Stdlib.fst ptype_name;
@@ -12485,6 +12927,7 @@
 +           ptype_private = (Stdlib.fst ptype_private);
 +           ptype_manifest = (Stdlib.fst ptype_manifest);
 +           ptype_attributes = (Stdlib.fst ptype_attributes);
++           ptype_jkind_annotation = (Stdlib.fst ptype_jkind_annotation);
 +           ptype_loc = (Stdlib.fst ptype_loc)
 +         },
 +          (self#record ctx
@@ -12495,6 +12938,7 @@
 +             ("ptype_private", (Stdlib.snd ptype_private));
 +             ("ptype_manifest", (Stdlib.snd ptype_manifest));
 +             ("ptype_attributes", (Stdlib.snd ptype_attributes));
++             ("ptype_jkind_annotation", (Stdlib.snd ptype_jkind_annotation));
 +             ("ptype_loc", (Stdlib.snd ptype_loc))]))
 +    method type_kind : 'ctx -> type_kind -> (type_kind * 'res)=
        fun ctx x ->
@@ -12572,7 +13016,14 @@
 +      fun ctx
 +        { pcd_name; pcd_vars; pcd_args; pcd_res; pcd_loc; pcd_attributes } ->
          let pcd_name = self#loc self#string ctx pcd_name in
-         let pcd_vars = self#list (self#loc self#string) ctx pcd_vars in
+-        let pcd_vars = self#list (self#loc self#string) ctx pcd_vars in
++        let pcd_vars =
++          self#list
++            (fun ctx (a, b) ->
++               let a = self#loc self#string ctx a in
++               let b = self#option self#jkind_annotation ctx b in
++               (((Stdlib.fst a), (Stdlib.fst b)),
++                 (self#tuple ctx [Stdlib.snd a; Stdlib.snd b]))) ctx pcd_vars in
          let pcd_args = self#constructor_arguments ctx pcd_args in
          let pcd_res = self#option self#core_type ctx pcd_res in
          let pcd_loc = self#location ctx pcd_loc in
@@ -12803,7 +13254,14 @@
        fun ctx x ->
          match x with
          | Pext_decl (a, b, c) ->
-             let a = self#list (self#loc self#string) ctx a in
+-            let a = self#list (self#loc self#string) ctx a in
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#loc self#string ctx a in
++                   let b = self#option self#jkind_annotation ctx b in
++                   (((Stdlib.fst a), (Stdlib.fst b)),
++                     (self#tuple ctx [Stdlib.snd a; Stdlib.snd b]))) ctx a in
              let b = self#constructor_arguments ctx b in
              let c = self#option self#core_type ctx c in
 -            ( Pext_decl (Stdlib.fst a, Stdlib.fst b, Stdlib.fst c),
@@ -13499,6 +13957,12 @@
 +            ((Named ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Named" [Stdlib.snd a; Stdlib.snd b]))
 +    method signature : 'ctx -> signature -> (signature * 'res)=
++      fun ctx { psg_items } ->
++        let psg_items = self#signature_items ctx psg_items in
++        ({ psg_items = (Stdlib.fst psg_items) },
++          (self#record ctx [("psg_items", (Stdlib.snd psg_items))]))
++    method signature_items :
++      'ctx -> signature_items -> (signature_items * 'res)=
        self#list self#signature_item
 -
 -    method signature_item : 'ctx -> signature_item -> signature_item * 'res =
@@ -13630,6 +14094,12 @@
 -        : 'ctx -> module_declaration -> module_declaration * 'res =
 +            ((Psig_extension ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Psig_extension" [Stdlib.snd a; Stdlib.snd b]))
++        | Psig_kind_abbrev (a, b) ->
++            let a = self#loc self#string ctx a in
++            let b = self#jkind_annotation ctx b in
++            ((Psig_kind_abbrev ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Psig_kind_abbrev"
++                 [Stdlib.snd a; Stdlib.snd b]))
 +    method module_declaration :
 +      'ctx -> module_declaration -> (module_declaration * 'res)=
        fun ctx { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
@@ -14093,6 +14563,12 @@
 -      fun ctx { pvb_pat; pvb_expr; pvb_attributes; pvb_loc } ->
 +            ((Pstr_extension ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Pstr_extension" [Stdlib.snd a; Stdlib.snd b]))
++        | Pstr_kind_abbrev (a, b) ->
++            let a = self#loc self#string ctx a in
++            let b = self#jkind_annotation ctx b in
++            ((Pstr_kind_abbrev ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Pstr_kind_abbrev"
++                 [Stdlib.snd a; Stdlib.snd b]))
 +    method value_binding : 'ctx -> value_binding -> (value_binding * 'res)=
 +      fun ctx { pvb_pat; pvb_expr; pvb_modes; pvb_attributes; pvb_loc } ->
          let pvb_pat = self#pattern ctx pvb_pat in
@@ -14161,16 +14637,13 @@
 +             ("pmb_expr", (Stdlib.snd pmb_expr));
 +             ("pmb_attributes", (Stdlib.snd pmb_attributes));
 +             ("pmb_loc", (Stdlib.snd pmb_loc))]))
-+    method jkind_const_annotation :
-+      'ctx -> jkind_const_annotation -> (jkind_const_annotation * 'res)=
-+      self#loc self#string
-+    method jkind_annotation :
-+      'ctx -> jkind_annotation -> (jkind_annotation * 'res)=
++    method jkind_annotation_desc :
++      'ctx -> jkind_annotation_desc -> (jkind_annotation_desc * 'res)=
 +      fun ctx x ->
 +        match x with
 +        | Default -> (Default, (self#constr ctx "Default" []))
 +        | Abbreviation a ->
-+            let a = self#jkind_const_annotation ctx a in
++            let a = self#string ctx a in
 +            ((Abbreviation (Stdlib.fst a)),
 +              (self#constr ctx "Abbreviation" [Stdlib.snd a]))
 +        | Mod (a, b) ->
@@ -14191,6 +14664,18 @@
 +            let a = self#list self#jkind_annotation ctx a in
 +            ((Product (Stdlib.fst a)),
 +              (self#constr ctx "Product" [Stdlib.snd a]))
++    method jkind_annotation :
++      'ctx -> jkind_annotation -> (jkind_annotation * 'res)=
++      fun ctx { pjkind_loc; pjkind_desc } ->
++        let pjkind_loc = self#location ctx pjkind_loc in
++        let pjkind_desc = self#jkind_annotation_desc ctx pjkind_desc in
++        ({
++           pjkind_loc = (Stdlib.fst pjkind_loc);
++           pjkind_desc = (Stdlib.fst pjkind_desc)
++         },
++          (self#record ctx
++             [("pjkind_loc", (Stdlib.snd pjkind_loc));
++             ("pjkind_desc", (Stdlib.snd pjkind_desc))]))
 +    method toplevel_phrase :
 +      'ctx -> toplevel_phrase -> (toplevel_phrase * 'res)=
        fun ctx x ->

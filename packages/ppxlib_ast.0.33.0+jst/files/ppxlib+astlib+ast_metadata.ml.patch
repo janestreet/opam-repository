@@ -1,0 +1,8 @@
+--- a/astlib/ast_metadata.ml
++++ b/astlib/ast_metadata.ml
+@@ -1 +1,5 @@
+ include Ocaml_common.Ast_mapper
++
++let add_ppx_context_sig_items = add_ppx_context_sig
++
++let drop_ppx_context_sig_items = drop_ppx_context_sig

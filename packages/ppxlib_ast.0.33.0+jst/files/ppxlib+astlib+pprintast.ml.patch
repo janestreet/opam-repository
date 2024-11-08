@@ -1,6 +1,6 @@
 --- a/astlib/pprintast.ml
 +++ b/astlib/pprintast.ml
-@@ -1,1758 +1,118 @@
+@@ -1,1758 +1,124 @@
 -(**************************************************************************)
 -(*                                                                        *)
 -(*                                 OCaml                                  *)
@@ -523,7 +523,9 @@
 -              (list aux ~sep:"@ and@ ") cstrs)
 -    | Ptyp_extension e -> extension ctxt f e
 -    | _ -> paren true (core_type ctxt) f x
--
++let top_phrase fmt phrase =
++  Janestreet.top_phrase fmt (To_janestreet.copy_toplevel_phrase phrase)
+ 
 -(********************pattern********************)
 -(* be cautious when use [pattern], [pattern1] is preferred *)
 -and pattern ctxt f x =
@@ -581,8 +583,8 @@
 -                vl (simple_pattern ctxt) x
 -          | None -> pp f "%a" longident_loc li)
 -    | _ -> simple_pattern ctxt f x
-+let top_phrase fmt phrase =
-+  Janestreet.top_phrase fmt (To_janestreet.copy_toplevel_phrase phrase)
++let core_type fmt typ =
++  Janestreet.core_type fmt (To_janestreet.copy_core_type typ)
  
 -and simple_pattern ctxt (f : Format.formatter) (x : pattern) : unit =
 -  if x.ppat_attributes <> [] then pattern ctxt f x
@@ -655,8 +657,8 @@
 -        ->
 -          pp f "~%s@;" l
 -      | _ -> pp f "~%s:%a@;" l (simple_pattern ctxt) p)
-+let core_type fmt typ =
-+  Janestreet.core_type fmt (To_janestreet.copy_core_type typ)
++let pattern fmt pat =
++  Janestreet.pattern fmt (To_janestreet.copy_pattern pat)
  
 -and sugar_expr ctxt f e =
 -  if e.pexp_attributes <> [] then false
@@ -740,8 +742,8 @@
 -              i rest
 -        | _ -> false)
 -    | _ -> false
-+let pattern fmt pat =
-+  Janestreet.pattern fmt (To_janestreet.copy_pattern pat)
++let signature fmt sg =
++  Janestreet.signature fmt (To_janestreet.copy_signature sg)
  
 -and expression ctxt f x =
 -  if x.pexp_attributes <> [] then
@@ -893,8 +895,8 @@
 -    | Pexp_extension e -> extension ctxt f e
 -    | Pexp_unreachable -> pp f "."
 -    | _ -> expression1 ctxt f x
-+let signature fmt sg =
-+  Janestreet.signature fmt (To_janestreet.copy_signature sg)
++let structure fmt st =
++  Janestreet.structure fmt (To_janestreet.copy_structure st)
  
 -and expression1 ctxt f x =
 -  if x.pexp_attributes <> [] then expression ctxt f x
@@ -912,8 +914,8 @@
 -        pp f "@[<hov2>%a.%a@]" (simple_expr ctxt) e longident_loc li
 -    | Pexp_send (e, s) -> pp f "@[<hov2>%a#%s@]" (simple_expr ctxt) e s.txt
 -    | _ -> simple_expr ctxt f x
-+let structure fmt st =
-+  Janestreet.structure fmt (To_janestreet.copy_structure st)
++let string_of_structure st =
++  Janestreet.string_of_structure (To_janestreet.copy_structure st)
  
 -and simple_expr ctxt f x =
 -  if x.pexp_attributes <> [] then expression ctxt f x
@@ -1025,8 +1027,8 @@
 -  | Pctf_extension e ->
 -      item_extension ctxt f e;
 -      item_attributes ctxt f x.pctf_attributes
-+let string_of_structure st =
-+  Janestreet.string_of_structure (To_janestreet.copy_structure st)
++let class_expr fmt clexpr =
++  Janestreet.class_expr fmt (To_janestreet.copy_class_expr clexpr)
  
 -and class_signature ctxt f { pcsig_self = ct; pcsig_fields = l; _ } =
 -  pp f "@[<hv0>@[<hv2>object@[<1>%a@]@ %a@]@ end@]"
@@ -1078,8 +1080,8 @@
 -        x
 -        (list ~sep:"@," (class_type_declaration "and"))
 -        xs
-+let class_expr fmt clexpr =
-+  Janestreet.class_expr fmt (To_janestreet.copy_class_expr clexpr)
++let class_field fmt clfield =
++  Janestreet.class_field fmt (To_janestreet.copy_class_field clfield)
  
 -and class_field ctxt f x =
 -  match x.pcf_desc with
@@ -1197,8 +1199,8 @@
 -          (list (with_constraint ctxt) ~sep:"@ and@ ")
 -          l
 -    | _ -> module_type1 ctxt f x
-+let class_field fmt clfield =
-+  Janestreet.class_field fmt (To_janestreet.copy_class_field clfield)
++let class_type fmt clty =
++  Janestreet.class_type fmt (To_janestreet.copy_class_type clty)
  
 -and with_constraint ctxt f = function
 -  | Pwith_type (li, ({ ptype_params = ls; _ } as td)) ->
@@ -1237,8 +1239,8 @@
 -    | _ -> paren true (module_type ctxt) f x
 -
 -and signature ctxt f x = list ~sep:"@\n" (signature_item ctxt) f x
-+let class_type fmt clty =
-+  Janestreet.class_type fmt (To_janestreet.copy_class_type clty)
++let class_signature fmt clsig =
++  Janestreet.class_signature fmt (To_janestreet.copy_class_signature clsig)
  
 -and signature_item ctxt f x : unit =
 -  match x.psig_desc with
@@ -1332,8 +1334,8 @@
 -  | Psig_extension (e, a) ->
 -      item_extension ctxt f e;
 -      item_attributes ctxt f a
-+let class_signature fmt clsig =
-+  Janestreet.class_signature fmt (To_janestreet.copy_class_signature clsig)
++let class_type_field fmt ctf =
++  Janestreet.class_type_field fmt (To_janestreet.copy_class_type_field ctf)
  
 -and module_expr ctxt f x =
 -  if x.pmod_attributes <> [] then
@@ -1380,8 +1382,8 @@
 -      pattern ctxt f x;
 -      pp f " when ";
 -      expression ctxt f e
-+let class_type_field fmt ctf =
-+  Janestreet.class_type_field fmt (To_janestreet.copy_class_type_field ctf)
++let module_expr fmt mod_expr =
++  Janestreet.module_expr fmt (To_janestreet.copy_module_expr mod_expr)
  
 -(* transform [f = fun g h -> ..] to [f g h = ... ] could be improved *)
 -and binding ctxt f { pvb_pat = p; pvb_expr = x; _ } =
@@ -1466,8 +1468,8 @@
 -        | { ppat_desc = Ppat_var _; ppat_attributes = [] } ->
 -            pp f "%a@ %a" (simple_pattern ctxt) p pp_print_pexp_function x
 -        | _ -> pp f "%a@;=@;%a" (pattern ctxt) p (expression ctxt) x)
-+let module_expr fmt mod_expr =
-+  Janestreet.module_expr fmt (To_janestreet.copy_module_expr mod_expr)
++let module_type fmt mod_ty =
++  Janestreet.module_type fmt (To_janestreet.copy_module_type mod_ty)
  
 -(* [in] is not printed *)
 -and bindings ctxt f (rf, l) =
@@ -1496,8 +1498,8 @@
 -  | pat, exp ->
 -      pp f "@[<2>%s %a@;=@;%a@]" x.pbop_op.txt (pattern ctxt) pat
 -        (expression ctxt) exp
-+let module_type fmt mod_ty =
-+  Janestreet.module_type fmt (To_janestreet.copy_module_type mod_ty)
++let signature_item fmt sig_item =
++  Janestreet.signature_item fmt (To_janestreet.copy_signature_item sig_item)
  
 -and structure_item ctxt f x =
 -  match x.pstr_desc with
@@ -1661,8 +1663,11 @@
 -      (core_type ctxt) pld.pld_type (attributes ctxt) pld.pld_attributes
 -  in
 -  pp f "{@\n%a}" (list type_record_field ~sep:";@\n") lbls
-+let signature_item fmt sig_item =
-+  Janestreet.signature_item fmt (To_janestreet.copy_signature_item sig_item)
++let signature_items fmt items =
++  List.iteri (fun i item ->
++      if i > 0 then Format.fprintf fmt "\n";
++      signature_item fmt item)
++    items
  
 -and type_declaration ctxt f x =
 -  (* type_declaration has an attribute field,

@@ -72,3 +72,20 @@
  end)
  
  let () =
+@@ -281,10 +323,15 @@ let () =
+           let lift = lifter loc in
+           lift#typed (lift#signature s) "signature");
+       E.declare "metaquot.sigi" ctx
+-        A.(psig (__ ^:: nil))
++        A.(psig (signature (__ ^:: nil)))
+         (fun ~loc ~path:_ s ->
+           let lift = lifter loc in
+           lift#typed (lift#signature_item s) "signature_item");
++      E.declare "metaquot.sigil" ctx
++        A.(psig (signature __))
++        (fun ~loc ~path:_ s ->
++          let lift = lifter loc in
++          lift#typed (lift#signature_items s) "signature_items");
+       E.declare "metaquot.type" ctx
+         A.(ptyp __)
+         (fun ~loc ~path:_ t ->

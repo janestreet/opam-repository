@@ -1,0 +1,43 @@
+--- a/src/context_free.ml
++++ b/src/context_free.ml
+@@ -1,4 +1,3 @@
+-(*$ open Ppxlib_cinaps_helpers $*)
+ open! Import
+ open Common
+ open With_errors
+@@ -704,8 +703,8 @@ class map_top_down ?(expect_mismatch_han
+       in
+       loop st ~in_generated_code:false
+ 
+-    (*$ str_to_sig _last_text_block *)
+-    method! signature base_ctxt sg =
++
++    method! signature_items base_ctxt psg_items =
+       let rec with_extra_items item ~extra_items ~expect_items ~rest
+           ~in_generated_code =
+         loop (rev_concat extra_items) ~in_generated_code:true
+@@ -742,7 +741,7 @@ class map_top_down ?(expect_mismatch_han
+                 >>= function
+                 | None ->
+                     super#signature_item base_ctxt item >>= fun item ->
+-                    self#signature base_ctxt rest >>| fun rest -> item :: rest
++                    self#signature_items base_ctxt rest >>| fun rest -> item :: rest
+                 | Some items ->
+                     ((), attributes_errors attrs) >>= fun () ->
+                     (* assert_no_attributes attrs; *)
+@@ -794,10 +793,12 @@ class map_top_down ?(expect_mismatch_han
+                     with_extra_items expanded_item ~extra_items ~expect_items
+                       ~rest ~in_generated_code
+                 | _, _ ->
+-                    self#signature base_ctxt rest >>| fun rest ->
++                    self#signature_items base_ctxt rest >>| fun rest ->
+                     expanded_item :: rest))
+       in
+-      loop sg ~in_generated_code:false
++      loop psg_items ~in_generated_code:false
+ 
+-    (*$*)
++    method! signature base_ctxt { psg_items } =
++      let psg_items, l = self#signature_items base_ctxt psg_items in
++      { psg_items }, l
+   end

@@ -1,0 +1,205 @@
+--- a/src/driver.ml
++++ b/src/driver.ml
+@@ -46,7 +46,7 @@ let get_default_path_str : structure -> 
+   | [] -> ""
+   | { pstr_loc = loc; _ } :: _ -> get_default_path loc
+ 
+-let get_default_path_sig : signature -> string = function
++let get_default_path_sig : signature_item list -> string = function
+   | [] -> ""
+   | { psig_loc = loc; _ } :: _ -> get_default_path loc
+ 
+@@ -151,7 +151,7 @@ module Transform = struct
+     enclose_intf :
+       (Expansion_context.Base.t ->
+       Location.t option ->
+-      Parsetree.signature * Parsetree.signature)
++      Parsetree.signature_item list * Parsetree.signature_item list)
+       option;
+     instrument : Instrument.t option;
+     rules : Context_free.Rule.t list;
+@@ -280,13 +280,13 @@ module Transform = struct
+       map#structure base_ctxt (List.concat [ attrs; header; st; footer ])
+       >>= fun st -> match impl with None -> return st | Some f -> f ctxt st
+     in
+-    let map_intf ctxt sg_with_attrs =
+-      let attrs, sg =
++    let map_intf ctxt { psg_items = sg_with_attrs } =
++      let attrs, psg_items =
+         List.split_while sg_with_attrs ~f:(function
+           | { psig_desc = Psig_attribute _; _ } -> true
+           | _ -> false)
+       in
+-      let file_path = get_default_path_sig sg in
++      let file_path = get_default_path_sig psg_items in
+       let base_ctxt =
+         Expansion_context.Base.top_level ~tool_name ~file_path ~input_name
+       in
+@@ -295,12 +295,14 @@ module Transform = struct
+         | None -> ([], [])
+         | Some f ->
+             let whole_loc =
+-              loc_of_list sg ~get_loc:(fun sg -> sg.Parsetree.psig_loc)
++              loc_of_list psg_items ~get_loc:(fun sg -> sg.Parsetree.psig_loc)
+             in
+             gen_header_and_footer Signature_item whole_loc (f base_ctxt)
+       in
+-      map#signature base_ctxt (List.concat [ attrs; header; sg; footer ])
+-      >>= fun sg -> match intf with None -> return sg | Some f -> f ctxt sg
++      map#signature_items base_ctxt (List.concat [ attrs; header; psg_items; footer ])
++      >>= fun psg_items ->
++        let sg = { psg_items } in
++        match intf with None -> return sg | Some f -> f ctxt sg
+     in
+     { t with impl = Some map_impl; intf = Some map_intf }
+ 
+@@ -526,12 +528,12 @@ let get_whole_ast_passes ~hook ~expect_m
+   in
+   linters @ preprocess @ before_instrs @ make_generic cts @ after_instrs
+ 
+-let apply_transforms (type t) ~tool_name ~file_path ~field ~lint_field
++let apply_transforms (type ts) ~tool_name ~file_path ~field ~lint_field
+     ~dropped_so_far ~hook ~expect_mismatch_handler ~input_name ~f_exception
+-    ~embed_errors x =
++    ~embed_errors ~append_error x =
+   let exception
+     Wrapper of
+-      t list
++      ts
+       * label loc list
+       * (location * label) list
+       * exn
+@@ -587,7 +589,7 @@ let apply_transforms (type t) ~tool_name
+     in
+     Ok (finish acc)
+   with Wrapper (x, dropped, lint_errors, exn, errors) ->
+-    Error (finish (f_exception exn :: x, dropped, lint_errors, errors))
++    Error (finish (append_error (f_exception exn) x, dropped, lint_errors, errors))
+ 
+ (*$*)
+ 
+@@ -617,7 +619,7 @@ let exn_to_sig_extension exn =
+ 
+ let error_to_extension error ~(kind : Kind.t) =
+   match kind with
+-  | Intf -> Intf_or_impl.Intf [ error_to_sig_extension error ]
++  | Intf -> Intf_or_impl.Intf { psg_items = [ error_to_sig_extension error ] }
+   | Impl -> Intf_or_impl.Impl [ error_to_str_extension error ]
+ 
+ let exn_to_extension exn ~(kind : Kind.t) =
+@@ -703,6 +705,7 @@ let map_structure_gen st ~tool_name ~hoo
+   let file_path = get_default_path_str st in
+   match
+     apply_transforms st ~tool_name ~file_path
++      ~append_error:(fun err st -> err :: st)
+       ~field:(fun (ct : Transform.t) -> ct.impl)
+       ~lint_field:(fun (ct : Transform.t) -> ct.lint_impl)
+       ~dropped_so_far:Attribute.dropped_so_far_structure ~hook
+@@ -725,8 +728,6 @@ let map_structure st =
+   with
+   | Ok ast | Error ast -> ast
+ 
+-(*$ str_to_sig _last_text_block *)
+-
+ let map_signature_gen sg ~tool_name ~hook ~expect_mismatch_handler ~input_name
+     ~embed_errors =
+   Cookies.acknowledge_cookies T;
+@@ -738,21 +739,26 @@ let map_signature_gen sg ~tool_name ~hoo
+       match lint_errors with
+       | [] -> sg
+       | _ ->
+-          List.map lint_errors
+-            ~f:(fun ({ attr_name = { loc; _ }; _ } as attr) ->
+-              Ast_builder.Default.psig_attribute ~loc attr)
+-          @ sg
++        { psg_items =
++            List.map lint_errors
++              ~f:(fun ({ attr_name = { loc; _ }; _ } as attr) ->
++                Ast_builder.Default.psig_attribute ~loc attr)
++            @ sg.psg_items
++        }
+     in
+     sg
+   in
+-  let with_errors errors sg =
+-    List.map errors ~f:(fun error ->
+-        Ast_builder.Default.psig_extension
+-          ~loc:(Location.Error.get_location error)
+-          (Location.Error.to_extension error)
+-          []
+-        |> ghost#signature_item)
+-    @ sg
++  let with_errors errors { psg_items } =
++    let psg_items =
++      List.map errors ~f:(fun error ->
++          Ast_builder.Default.psig_extension
++            ~loc:(Location.Error.get_location error)
++            (Location.Error.to_extension error)
++            []
++          |> ghost#signature_item)
++      @ psg_items
++    in
++    { psg_items }
+   in
+   let cookies_and_check sg =
+     Cookies.call_post_handlers T;
+@@ -780,9 +786,10 @@ let map_signature_gen sg ~tool_name ~hoo
+     in
+     with_errors errors sg
+   in
+-  let file_path = get_default_path_sig sg in
++  let file_path = get_default_path_sig sg.psg_items in
+   match
+     apply_transforms sg ~tool_name ~file_path
++      ~append_error:(fun err sg -> { psg_items = err :: sg.psg_items })
+       ~field:(fun (ct : Transform.t) -> ct.intf)
+       ~lint_field:(fun (ct : Transform.t) -> ct.lint_intf)
+       ~dropped_so_far:Attribute.dropped_so_far_signature ~hook
+@@ -970,8 +977,7 @@ let add_cookies_str st =
+   in
+   prefix @ st
+ 
+-(*$ str_to_sig _last_text_block *)
+-let extract_cookies_sig sg =
++let extract_cookies_sig { psg_items = sg } =
+   let sg =
+     match sg with
+     | ({
+@@ -980,7 +986,7 @@ let extract_cookies_sig sg =
+          _;
+        } as prefix)
+       :: sg ->
+-        let prefix = Ppxlib_ast.Selected_ast.to_ocaml Signature [ prefix ] in
++        let prefix = Ppxlib_ast.Selected_ast.to_ocaml (List Signature_item) [ prefix ] in
+         assert (
+           List.is_empty
+             (Astlib.Ast_metadata.drop_ppx_context_sig ~restore:true prefix));
+@@ -991,14 +997,14 @@ let extract_cookies_sig sg =
+      since restoring the ppx context resets the cookies *)
+   List.iter !Cookies.given_through_cli ~f:(fun (name, expr) ->
+       Cookies.set T name expr);
+-  sg
++  { psg_items = sg }
+ 
+-let add_cookies_sig sg =
++let add_cookies_sig { psg_items = sg  } =
+   let prefix =
+-    Astlib.Ast_metadata.add_ppx_context_sig ~tool_name:"ppxlib_driver" []
+-    |> Ppxlib_ast.Selected_ast.of_ocaml Signature
++    Astlib.Ast_metadata.add_ppx_context_sig_items ~tool_name:"ppxlib_driver" []
++    |> Ppxlib_ast.Selected_ast.of_ocaml (List Signature_item)
+   in
+-  prefix @ sg
++  { psg_items = prefix @ sg }
+ 
+ (*$*)
+ 
+@@ -1162,7 +1168,7 @@ let process_file (kind : Kind.t) fn ~inp
+           | Intf ast -> Pprintast.signature ppf ast
+           | Impl ast -> Pprintast.structure ppf ast);
+           let null_ast =
+-            match ast with Intf [] | Impl [] -> true | _ -> false
++            match ast with Intf { psg_items = [] } | Impl [] -> true | _ -> false
+           in
+           if not null_ast then Stdlib.Format.pp_print_newline ppf ())
+   | Dump_ast ->
