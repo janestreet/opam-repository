@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_concrete"
+bug-reports: "https://github.com/janestreet/bonsai_concrete/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_concrete.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_concrete/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "core"        {= "v0.18~preview.130.04+450"}
+  "core_kernel" {= "v0.18~preview.130.04+450"}
+  "incr_map"    {= "v0.18~preview.130.04+450"}
+  "incr_select" {= "v0.18~preview.130.04+450"}
+  "incremental" {= "v0.18~preview.130.04+450"}
+  "ppx_jane"    {= "v0.18~preview.130.04+450"}
+  "virtual_dom" {= "v0.18~preview.130.04+450"}
+  "dune"        {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Shared dependencies of bonsai and incr_dom."
+description: "
+This repo contains shared dependencies between incr_dom and bonsai: ui_incr
+  and ui_time_source. Respectively, these libraries are bonsai and incr_dom's
+  Incr.t and way of keeping track of time in a testable way. 
+
+  Both of these libraries are in their own repo (rather than in incr_dom's repo)
+  as incr_dom's repo contains js_of_ocaml'able libraries, while both of these libraries
+  do not depend on js_of_ocaml. Splitting these 'concrete' libraries to their own
+  repo avoids a dependency of the bonsai repo on js_of_ocaml. 
+"
+url {
+src: "https://github.com/janestreet/bonsai_concrete/archive/352dcafbb7c50b45cc7eb71f5aa54875cfa02789.tar.gz"
+checksum: "sha256=07118f946334ddfc9d17598a25da9aef53bd520807e72e947047f47536cac514"
+}

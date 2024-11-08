@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/splittable_random"
+bug-reports: "https://github.com/janestreet/splittable_random/issues"
+dev-repo: "git+https://github.com/janestreet/splittable_random.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/splittable_random/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "base"             {= "v0.18~preview.130.04+450"}
+  "ppx_assert"       {= "v0.18~preview.130.04+450"}
+  "ppx_bench"        {= "v0.18~preview.130.04+450"}
+  "ppx_inline_test"  {= "v0.18~preview.130.04+450"}
+  "ppx_sexp_message" {= "v0.18~preview.130.04+450"}
+  "dune"             {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "PRNG that can be split into independent streams"
+description: "
+PRNG that can be split into independent streams
+
+A splittable pseudo-random number generator (SPRNG) functions like a PRNG in that it can
+be used as a stream of random values; it can also be \"split\" to produce a second,
+independent stream of random values.
+
+This library implements a splittable pseudo-random number generator that sacrifices
+cryptographic-quality randomness in favor of performance.
+"
+url {
+src: "https://github.com/janestreet/splittable_random/archive/971b1468c7d69bca56c8d24a55608ba6a62642b3.tar.gz"
+checksum: "sha256=6367bdc20aad355d36a3123e11028b30189dbb0c239ac96d56b8f9a99b79d6de"
+}

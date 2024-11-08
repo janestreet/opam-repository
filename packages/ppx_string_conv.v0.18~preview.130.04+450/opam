@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_string_conv"
+bug-reports: "https://github.com/janestreet/ppx_string_conv/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_string_conv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_string_conv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"          {>= "5.1.0"}
+  "base"           {= "v0.18~preview.130.04+450"}
+  "capitalization" {= "v0.18~preview.130.04+450"}
+  "ppx_let"        {= "v0.18~preview.130.04+450"}
+  "ppx_string"     {= "v0.18~preview.130.04+450"}
+  "ppxlib_jane"    {= "v0.18~preview.130.04+450"}
+  "dune"           {>= "3.11.0"}
+  "ppxlib"         {= "0.33.0+jst"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Ppx extension for generating of_string & to_string"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_string_conv/archive/9b2110388e52d788d7aff427c17853368493cf2e.tar.gz"
+checksum: "sha256=45182a74c4c3ecec6c9d580b3f123c483f4c28942b5dae67e8898ef42cf188dc"
+}

@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/incr_dom_partial_render"
+bug-reports: "https://github.com/janestreet/incr_dom_partial_render/issues"
+dev-repo: "git+https://github.com/janestreet/incr_dom_partial_render.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/incr_dom_partial_render/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "core"             {= "v0.18~preview.130.04+450"}
+  "incr_dom"         {= "v0.18~preview.130.04+450"}
+  "incr_map"         {= "v0.18~preview.130.04+450"}
+  "incremental"      {= "v0.18~preview.130.04+450"}
+  "ppx_jane"         {= "v0.18~preview.130.04+450"}
+  "ppx_pattern_bind" {= "v0.18~preview.130.04+450"}
+  "splay_tree"       {= "v0.18~preview.130.04+450"}
+  "virtual_dom"      {= "v0.18~preview.130.04+450"}
+  "dune"             {>= "3.11.0"}
+  "js_of_ocaml"      {>= "5.1.1" & < "5.7.0"}
+  "js_of_ocaml-ppx"  {>= "5.1.1" & < "5.7.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for simplifying rendering of large amounts of data"
+description: "
+This library provides tools for rendering of tabular data efficiently, in particular supporting _partial rendering_, i.e. only rendering a subset of the widgets that are logically in the view, depending on what is expected to be visible to the end user.
+"
+url {
+src: "https://github.com/janestreet/incr_dom_partial_render/archive/133779ec8a7dbd8efca9731fab9ac6818434bbd7.tar.gz"
+checksum: "sha256=afff245275d9fb534ffcacbb376a8c10782beaea8d4f40892875f6137896c716"
+}

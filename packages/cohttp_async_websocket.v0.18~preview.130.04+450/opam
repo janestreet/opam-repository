@@ -1,0 +1,42 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/cohttp_async_websocket"
+bug-reports: "https://github.com/janestreet/cohttp_async_websocket/issues"
+dev-repo: "git+https://github.com/janestreet/cohttp_async_websocket.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/cohttp_async_websocket/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "async"           {= "v0.18~preview.130.04+450"}
+  "async_ssl"       {= "v0.18~preview.130.04+450"}
+  "async_websocket" {= "v0.18~preview.130.04+450"}
+  "core"            {= "v0.18~preview.130.04+450"}
+  "ppx_jane"        {= "v0.18~preview.130.04+450"}
+  "base64"          {>= "3.4.0"}
+  "cohttp"          {>= "2.5.6"}
+  "cohttp-async"    {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
+  "dune"            {>= "3.11.0"}
+  "uri"             {>= "3.0.0"}
+  "uri-sexp"        {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Websocket library for use with cohttp and async"
+description: "
+Websocket library for use with cohttp and async.
+
+Cohttp_async_websocket is a full-featured server-side
+websocket implementation, using Async as the concurrency library,
+and Cohttp for HTTP negotiation.
+
+It implements a large portion of RFC6445. The library has been
+hardened with many applications using it for several year, in
+conjunction with async-js and google-chrome.
+"
+url {
+src: "https://github.com/janestreet/cohttp_async_websocket/archive/91012731efa639e0a25dc3b7f1b74b1f81732231.tar.gz"
+checksum: "sha256=e18e87066dba6fb8a952b6f2990e46f78bf72b1ad0258734b69ea2e2a40be134"
+}

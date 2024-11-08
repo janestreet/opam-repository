@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_of_verilog"
+bug-reports: "https://github.com/janestreet/hardcaml_of_verilog/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_of_verilog.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_of_verilog/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "base"            {= "v0.18~preview.130.04+450"}
+  "core"            {= "v0.18~preview.130.04+450"}
+  "core_unix"       {= "v0.18~preview.130.04+450"}
+  "hardcaml"        {= "v0.18~preview.130.04+450"}
+  "hardcaml_verify" {= "v0.18~preview.130.04+450"}
+  "jsonaf"          {= "v0.18~preview.130.04+450"}
+  "ppx_hardcaml"    {= "v0.18~preview.130.04+450"}
+  "ppx_jane"        {= "v0.18~preview.130.04+450"}
+  "ppx_jsonaf_conv" {= "v0.18~preview.130.04+450"}
+  "stdio"           {= "v0.18~preview.130.04+450"}
+  "dune"            {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Convert Verilog to a Hardcaml design"
+description: "
+The opensource synthesis tool yosys is used to convert a verilog design to a JSON based
+netlist representation. This library can load the JSON netlist and build a hardcaml
+circuit.
+
+Code can also be generated to wrap the conversion process using Hardcaml interfaces.
+"
+url {
+src: "https://github.com/janestreet/hardcaml_of_verilog/archive/4b0809980fdadf2b6fcd1d2267f7188d472bd32b.tar.gz"
+checksum: "sha256=27414b62998fd6d158ce7197f94d1c1fa5609908677d4073622d1ad16acce607"
+}

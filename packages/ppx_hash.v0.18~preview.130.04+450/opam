@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_hash"
+bug-reports: "https://github.com/janestreet/ppx_hash/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_hash.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_hash/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "base"                {= "v0.18~preview.130.04+450"}
+  "ppx_compare"         {= "v0.18~preview.130.04+450"}
+  "ppx_sexp_conv"       {= "v0.18~preview.130.04+450"}
+  "ppxlib_jane"         {= "v0.18~preview.130.04+450"}
+  "dune"                {>= "3.11.0"}
+  "ocaml-compiler-libs" {= "v0.17.0+jst"}
+  "ppxlib"              {= "0.33.0+jst"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A ppx rewriter that generates hash functions from type expressions and definitions"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_hash/archive/513308bb171158becfe890a8934b80981bf3a749.tar.gz"
+checksum: "sha256=af4dbac0fce5c844dbc7929effb0e94c7f1094eaaa4b3eb233e1cfe528334129"
+}

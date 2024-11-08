@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/virtual_dom_toplayer"
+bug-reports: "https://github.com/janestreet/virtual_dom_toplayer/issues"
+dev-repo: "git+https://github.com/janestreet/virtual_dom_toplayer.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/virtual_dom_toplayer/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "am_running_how_js"   {= "v0.18~preview.130.04+450"}
+  "core"                {= "v0.18~preview.130.04+450"}
+  "incr_dom"            {= "v0.18~preview.130.04+450"}
+  "js_of_ocaml_patches" {= "v0.18~preview.130.04+450"}
+  "ppx_css"             {= "v0.18~preview.130.04+450"}
+  "ppx_jane"            {= "v0.18~preview.130.04+450"}
+  "sexplib"             {= "v0.18~preview.130.04+450"}
+  "virtual_dom"         {= "v0.18~preview.130.04+450"}
+  "dune"                {>= "3.11.0"}
+  "gen_js_api"          {= "1.1.2+jst"}
+  "js_of_ocaml"         {>= "5.1.1" & < "5.7.0"}
+  "js_of_ocaml-ppx"     {>= "5.1.1" & < "5.7.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "OCaml bindings for the floating positioning library for 'toplevel' virtual dom components"
+description: "
+The floating positioning library itself may be found at https://floating-ui.com/
+"
+url {
+src: "https://github.com/janestreet/virtual_dom_toplayer/archive/09d77029d0015a1e7aa8776b072856eca7c651c5.tar.gz"
+checksum: "sha256=12160a2251d05548483849c860afc3366f65079db6dbb00834c3ad6a7e54bc53"
+}

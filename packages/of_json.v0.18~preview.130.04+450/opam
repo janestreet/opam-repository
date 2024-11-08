@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/of_json"
+bug-reports: "https://github.com/janestreet/of_json/issues"
+dev-repo: "git+https://github.com/janestreet/of_json.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/of_json/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "5.1.0"}
+  "core"          {= "v0.18~preview.130.04+450"}
+  "core_extended" {= "v0.18~preview.130.04+450"}
+  "jsonaf"        {= "v0.18~preview.130.04+450"}
+  "ppx_jane"      {= "v0.18~preview.130.04+450"}
+  "dune"          {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A friendly applicative interface for Jsonaf."
+description: "
+This library provides an applicative interface for extracting values from JSON objects with an emphasis on readability and error handling, particularly with nested values.
+"
+url {
+src: "https://github.com/janestreet/of_json/archive/b319d5da9d99395298e703e4c8c92336bcd13487.tar.gz"
+checksum: "sha256=1e7601e79b38ebf3bbd6b80b8cdf52b144ef78948361335c811c58f2edc4bffb"
+}

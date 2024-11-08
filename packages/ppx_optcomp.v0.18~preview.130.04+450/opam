@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_optcomp"
+bug-reports: "https://github.com/janestreet/ppx_optcomp/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_optcomp.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_optcomp/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "base"                {= "v0.18~preview.130.04+450"}
+  "ppxlib_jane"         {= "v0.18~preview.130.04+450"}
+  "stdio"               {= "v0.18~preview.130.04+450"}
+  "dune"                {>= "3.11.0"}
+  "ocaml-compiler-libs" {= "v0.17.0+jst"}
+  "ppxlib"              {= "0.33.0+jst"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Optional compilation for OCaml"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_optcomp/archive/49a88eede2256956f3e978704ff46a6a8b030b98.tar.gz"
+checksum: "sha256=09f56b3c9c9dff22455d352a187f596eb0f88c5aa64ec4904f9b6f33c104e4e1"
+}

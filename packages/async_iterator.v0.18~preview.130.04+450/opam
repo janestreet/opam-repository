@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_iterator"
+bug-reports: "https://github.com/janestreet/async_iterator/issues"
+dev-repo: "git+https://github.com/janestreet/async_iterator.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_iterator/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "async"            {= "v0.18~preview.130.04+450"}
+  "async_rpc_kernel" {= "v0.18~preview.130.04+450"}
+  "base"             {= "v0.18~preview.130.04+450"}
+  "core"             {= "v0.18~preview.130.04+450"}
+  "core_kernel"      {= "v0.18~preview.130.04+450"}
+  "maybe_pushback"   {= "v0.18~preview.130.04+450"}
+  "ppx_jane"         {= "v0.18~preview.130.04+450"}
+  "rpc_parallel"     {= "v0.18~preview.130.04+450"}
+  "dune"             {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "An opinionated asynchronous stream-processing framework"
+description: "
+Async_iterator provides a suite of tools for building single-process,
+multi-process-pipeline, and distributed stream processing applications. It aims to provide
+an ergonomic interface, competitive with traditional queue- or pipe-based solutions, while
+strongly encouraging good performance and correctness practices, via said interface.
+
+Async_iterator is relied upon by many of the most mission-critical systems at Jane Street.
+"
+url {
+src: "https://github.com/janestreet/async_iterator/archive/1ee072cac50439b13b9a3076f182562f3b79e2d4.tar.gz"
+checksum: "sha256=4adb01f788b97ecafe58bf11ab6bbdb91682674cca6a03bf3a825e30af8cbc69"
+}
