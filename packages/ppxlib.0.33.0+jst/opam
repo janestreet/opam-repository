@@ -57,11 +57,12 @@ build: [
 ]
 dev-repo: "git+https://github.com/ocaml-ppx/ppxlib.git"
 url {
-  src: https://github.com/ocaml-ppx/ppxlib/archive/1f788de67fd04d7e608376ac26ee57deeeb93fdd.tar.gz
+  src: "https://github.com/ocaml-ppx/ppxlib/archive/1f788de67fd04d7e608376ac26ee57deeeb93fdd.tar.gz"
   checksum: [
     "sha256=54afd640f863c2f39a6c844f6ceff63c8796e865da7db6d49c60019516fc00d4"
   ]
 }
+x-commit-hash: "563d5651e877c6f7d5561f9d8ca93fca05b07d07"
 patches: [
   "ppxlib+metaquot+ppxlib_metaquot.ml.patch"
   "ppxlib+src+ast_builder.ml.patch"
@@ -188,6 +189,6 @@ extra-files: [
   ]
   [
     "location_check.ml.patch"
-    "sha256=c284c46d1ce5eff24da1f77ad838739e947551bbdf228b5bcc9e357cde51fa7f"
+    "sha256=920d0a4c16e01d17a71098498b519d79002b3415796e72ef6a311446a21f044b"
   ]
 ]

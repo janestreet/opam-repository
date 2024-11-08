@@ -1,14 +1,21 @@
 --- a/src/location_check.ml
 +++ b/src/location_check.ml
-@@ -161,7 +166,7 @@ let should_ignore loc attrs =
+@@ -161,12 +166,12 @@ let should_ignore loc attrs =
 
  let rec extract_constraint e =
    match e.pexp_desc with
 -  | Pexp_constraint (e, ct) | Pexp_coerce (e, _, ct) -> Some (e, ct)
+-  | Pexp_newtype (name, exp) ->
 +  | Pexp_constraint (e, Some ct, _) | Pexp_coerce (e, _, ct) -> Some (e, ct)
-   | Pexp_newtype (name, exp) ->
++  | Pexp_newtype (name, jkind, exp) ->
        Option.map (extract_constraint exp) ~f:(fun (exp, ct) ->
            ( {
+               e with
+-              pexp_desc = Pexp_newtype (name, exp);
++              pexp_desc = Pexp_newtype (name, jkind, exp);
+               pexp_loc = { e.pexp_loc with loc_ghost = true };
+             },
+             ct ))
 @@ -401,11 +401,11 @@ let enforce_invariants fname =
            match (x.pvb_pat.ppat_desc, extract_constraint x.pvb_expr) with
            (* let x : type a b c. ct = e *)
