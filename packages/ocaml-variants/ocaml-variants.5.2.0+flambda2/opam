@@ -29,7 +29,6 @@ install: [
   "sh" "-exc" "PATH=%{prefix}%/init_deps/bin/:$PATH make install"
 ]
 url {
-  src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-1.tar.gz"
-  checksum: ["sha256=fe57a23a4d26bb5020b122ff9de50b13d2d8e1a3af17c1917d91e811407db617"]
+  src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-2.tar.gz"
+  checksum: ["sha256=fea242bf6707991bcd6de388a247aaf966e4936098a7db170560b3e879436c6c"]
 }
-extra-files: [["enable-sigwait.patch" "sha256=448bf9b3ee142b7c858625b75018f200346f32959072991302209c2b988c490f"]]
