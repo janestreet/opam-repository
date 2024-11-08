@@ -1,0 +1,22 @@
+--- a/src/ast_builder.mli
++++ b/src/ast_builder.mli
+@@ -43,6 +43,9 @@ module Default : sig
+       res:core_type option ->
+       unit ->
+       constructor_declaration
++
++    val pmty_signature : loc:location -> signature -> module_type
++    val signature : loc:location -> signature_item list -> signature
+   end
+ 
+   val ppat_construct :
+@@ -84,6 +87,9 @@ module type S = sig
+       res:core_type option ->
+       unit ->
+       constructor_declaration
++
++    val pmty_signature : signature -> module_type
++    val signature : signature_item list -> signature
+   end
+ 
+   val ppat_construct : longident loc -> pattern option -> pattern

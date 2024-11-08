@@ -1,0 +1,25 @@
+--- a/src/code_matcher.mli
++++ b/src/code_matcher.mli
+@@ -26,16 +26,16 @@ val match_structure :
+ 
+ val match_signature_res :
+   pos:Lexing.position ->
+-  expected:signature ->
+-  mismatch_handler:(Location.t -> signature -> unit) ->
+-  signature ->
++  expected:signature_item list ->
++  mismatch_handler:(Location.t -> signature_item list -> unit) ->
++  signature_item list ->
+   (unit, Location.Error.t NonEmptyList.t) result
+ (** Same for signatures *)
+ 
+ val match_signature :
+   pos:Lexing.position ->
+-  expected:signature ->
+-  mismatch_handler:(Location.t -> signature -> unit) ->
+-  signature ->
++  expected:signature_item list ->
++  mismatch_handler:(Location.t -> signature_item list -> unit) ->
++  signature_item list ->
+   unit
+ (** Same for signatures *)

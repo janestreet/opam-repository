@@ -1,0 +1,12 @@
+--- a/q.ml
++++ b/q.ml
+@@ -303,8 +303,7 @@ let neg x =
+    neg -inf = inf
+  *)
+ 
+-let abs x =
+-  mk (Z.abs x.num) x.den
++let abs x = if Z.sign x.num >= 0 then x else mk (Z.abs x.num) x.den
+ (* abs undef = undef
+    abs inf = abs -inf = inf
+  *)

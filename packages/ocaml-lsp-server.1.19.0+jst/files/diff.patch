@@ -1,0 +1,843 @@
+--- a/ocaml-lsp-server/src/code_actions/action_add_rec.ml
++++ b/ocaml-lsp-server/src/code_actions/action_add_rec.ml
+@@ -6,7 +6,7 @@ let action_title = "Add missing `rec` keyword"
+ let let_bound_vars bindings =
+   List.filter_map bindings ~f:(fun vb ->
+     match vb.Typedtree.vb_pat.pat_desc with
+-    | Typedtree.Tpat_var (id, loc, _) -> Some (id, loc)
++    | Typedtree.Tpat_var (id, loc, _, _) -> Some (id, loc)
+     | _ -> None)
+ ;;
+
+--- a/ocaml-lsp-server/src/code_actions/action_extract.ml
++++ b/ocaml-lsp-server/src/code_actions/action_extract.ml
+@@ -68,14 +68,17 @@ let tightest_enclosing_binder_position typedtree range =
+       I.default_iterator.expr iter expr;
+       match expr.exp_desc with
+       | Texp_let (_, _, body)
+-      | Texp_while (_, body)
+-      | Texp_for (_, _, _, _, _, body)
++      | Texp_while { wh_body = body; _ }
++      | Texp_for { for_body = body; _ }
+       | Texp_letmodule (_, _, _, _, body)
+       | Texp_letexception (_, body)
+       | Texp_open (_, body) -> found_if_expr_contains body
+       | Texp_letop { body; _ } -> found_if_case_contains [ body ]
+-      | Texp_function (_, Tfunction_cases { cases; _ }) -> found_if_case_contains cases
+-      | Texp_match (_, cases, _) -> found_if_case_contains cases
++      | Texp_function { body; _ } ->
++        (match body with
++         | Tfunction_body expr -> found_if_expr_contains expr
++         | Tfunction_cases { fc_cases = cases; _ } -> found_if_case_contains cases)
++      | Texp_match (_, _, cases, _) -> found_if_case_contains cases
+       | Texp_try (_, cases) -> found_if_case_contains cases
+       | _ -> ())
+   in
+@@ -111,7 +114,7 @@ let free (expr : Typedtree.expression) =
+   let idents = ref [] in
+   let expr_iter (iter : I.iterator) (expr : Typedtree.expression) =
+     match expr.exp_desc with
+-    | Texp_ident (path, { txt = ident; _ }, _) -> idents := (ident, path) :: !idents
++    | Texp_ident (path, { txt = ident; _ }, _, _, _) -> idents := (ident, path) :: !idents
+     | _ ->
+       I.default_iterator.expr iter expr;
+       (* if a variable was bound but is no longer, it must be associated with a
+--- a/ocaml-lsp-server/src/code_actions/action_inline.ml
++++ b/ocaml-lsp-server/src/code_actions/action_inline.ml
+@@ -19,7 +19,7 @@ let check_shadowing (inlined_expr : Typedtree.expression) new_env =
+   let exception Env_mismatch of (Longident.t * [ `Unbound | `Shadowed ]) in
+   let expr_iter (iter : I.iterator) (expr : Typedtree.expression) =
+     match expr.exp_desc with
+-    | Texp_ident (path, { txt = ident; _ }, _) ->
++    | Texp_ident (path, { txt = ident; _ }, _, _, _) ->
+       let in_orig_env =
+         find_path_by_name ident orig_env
+         |> Option.map ~f:(Path.same path)
+@@ -66,7 +66,7 @@ let find_inline_task typedtree pos =
+       match expr.exp_desc with
+       | Texp_let
+           ( Nonrecursive
+-          , [ { vb_pat = { pat_desc = Tpat_var (inlined_var, { loc; _ }, _); _ }
++          , [ { vb_pat = { pat_desc = Tpat_var (inlined_var, { loc; _ }, _, _); _ }
+               ; vb_expr = inlined_expr
+               ; _
+               }
+@@ -81,7 +81,7 @@ let find_inline_task typedtree pos =
+       match item.str_desc with
+       | Tstr_value
+           ( Nonrecursive
+-          , [ { vb_pat = { pat_desc = Tpat_var (inlined_var, { loc; _ }, _); _ }
++          , [ { vb_pat = { pat_desc = Tpat_var (inlined_var, { loc; _ }, _, _); _ }
+               ; vb_expr = inlined_expr
+               ; _
+               }
+@@ -154,13 +154,13 @@ end = struct
+     let paths = ref Loc.Map.empty in
+     let expr_iter (iter : I.iterator) (expr : Typedtree.expression) =
+       match expr.exp_desc with
+-      | Texp_ident (path, { loc; _ }, _) -> paths := Loc.Map.set !paths loc path
++      | Texp_ident (path, { loc; _ }, _, _, _) -> paths := Loc.Map.set !paths loc path
+       | _ -> I.default_iterator.expr iter expr
+     in
+     let pat_iter (type k) (iter : I.iterator) (pat : k Typedtree.general_pattern) =
+       match pat.pat_desc with
+-      | Tpat_var (id, { loc; _ }, _) -> paths := Loc.Map.set !paths loc (Pident id)
+-      | Tpat_alias (pat, id, { loc; _ }, _) ->
++      | Tpat_var (id, { loc; _ }, _, _) -> paths := Loc.Map.set !paths loc (Pident id)
++      | Tpat_alias (pat, id, { loc; _ }, _, _) ->
+         paths := Loc.Map.set !paths loc (Pident id);
+         I.default_iterator.pat iter pat
+       | _ -> I.default_iterator.pat iter pat
+@@ -193,7 +193,7 @@ let subst same subst_expr subst_id body =
+ let rec is_pure (expr : Parsetree.expression) =
+   match expr.pexp_desc with
+   | Pexp_ident _ | Pexp_constant _ | Pexp_unreachable -> true
+-  | Pexp_field (e, _) | Pexp_constraint (e, _) -> is_pure e
++  | Pexp_field (e, _) | Pexp_constraint (e, _, _) -> is_pure e
+   | _ -> false
+ ;;
+
+@@ -215,11 +215,24 @@ let beta_reduce (paths : Paths.t) (app : Parsetree.expression) =
+     match pat.ppat_desc with
+     | Ppat_any | Ppat_construct ({ txt = Lident "()"; _ }, _) ->
+       if is_pure arg then body else with_let ()
+-    | Ppat_var param | Ppat_constraint ({ ppat_desc = Ppat_var param; _ }, _) ->
++    | Ppat_var param | Ppat_constraint ({ ppat_desc = Ppat_var param; _ }, _, _) ->
+       if is_pure arg then with_subst param else with_let ()
+-    | Ppat_tuple pats ->
++    | Ppat_tuple (pats, Closed) ->
+       (match arg.pexp_desc with
+-       | Pexp_tuple args -> List.fold_left2 ~f:beta_reduce_arg ~init:body pats args
++       | Pexp_tuple args ->
++         (* Match up elements based on their order. If there are any labels, this means
++            that we cannot rely on their order, so we bail out. *)
++         let beta_reduce_element body (pat_label, pat) (arg_label, arg) =
++           match body, pat_label, arg_label with
++           | Some body, None, None -> Some (beta_reduce_arg body pat arg)
++           | None, _, _ | _, Some _, _ | _, _, Some _ -> None
++         in
++         let result_if_no_labels =
++           List.fold_left2 ~f:beta_reduce_element ~init:(Some body) pats args
++         in
++         (match result_if_no_labels with
++          | Some result -> result
++          | None -> with_let ())
+        | _ -> with_let ())
+     | _ -> with_let ()
+   in
+@@ -274,12 +287,12 @@ let inline_edits pipeline task =
+   let arg_iter
+     env
+     (iter : I.iterator)
+-    (label : Asttypes.arg_label)
++    (label : Typedtree.arg_label)
+     (m_arg_expr : Typedtree.expression option)
+     =
+     match label, m_arg_expr with
+     (* handle the labeled argument shorthand `f ~x` when inlining `x` *)
+-    | Labelled name, Some { exp_desc = Texp_ident (Pident id, { loc; _ }, _); _ }
++    | Labelled name, Some { exp_desc = Texp_ident (Pident id, { loc; _ }, _, _, _); _ }
+     (* inlining is allowed for optional arguments that are being passed a Some
+        parameter, i.e. `x` may be inlined in `let x = 1 in (fun ?(x = 0) -> x)
+        ~x` *)
+@@ -288,7 +301,10 @@ let inline_edits pipeline task =
+           { exp_desc =
+               (* construct is part of desugaring, assumed to be Some *)
+               Texp_construct
+-                (_, _, [ { exp_desc = Texp_ident (Pident id, { loc; _ }, _); _ } ])
++                ( _
++                , _
++                , [ { exp_desc = Texp_ident (Pident id, { loc; _ }, _, _, _); _ } ]
++                , _ )
+           ; _
+           } )
+       when Ident.same task.inlined_var id && not_shadowed env ->
+@@ -300,6 +316,9 @@ let inline_edits pipeline task =
+        optional parameter i.e. `x` may _not_ be inlined in `let x = Some 1 in
+        (fun ?(x = 0) -> x) ?x` *)
+     | Optional _, Some _ -> ()
++    (* inlining is not allowed for source position arguments because the source
++       location would not be well defined *)
++    | Position _, Some _ -> ()
+     | _, _ -> Option.iter m_arg_expr ~f:(iter.expr iter)
+   in
+   let paths = Paths.of_typedtree task.inlined_expr in
+@@ -308,7 +327,7 @@ let inline_edits pipeline task =
+     match expr.exp_desc with
+     (* when inlining into an application context, attempt to beta reduce the
+        result *)
+-    | Texp_apply ({ exp_desc = Texp_ident (Pident id, _, _); _ }, _)
++    | Texp_apply ({ exp_desc = Texp_ident (Pident id, _, _, _, _); _ }, _, _, _, _)
+       when Ident.same task.inlined_var id && not_shadowed expr.exp_env ->
+       let reduced_pexpr =
+         let app_pexpr = find_parsetree_loc_exn pipeline expr.exp_loc in
+@@ -322,10 +341,16 @@ let inline_edits pipeline task =
+         @@ strip_attribute "merlin.loc" reduced_pexpr
+       in
+       insert_edit newText expr.exp_loc
+-    | Texp_apply (func, args) ->
++    | Texp_apply (func, args, _, _, _) ->
+       iter.expr iter func;
+-      List.iter args ~f:(fun (l, e) -> arg_iter expr.exp_env iter l e)
+-    | Texp_ident (Pident id, { loc; _ }, _)
++      List.iter args ~f:(fun (l, e) ->
++        let e =
++          match e with
++          | Typedtree.Arg (e, _sort) -> Some e
++          | Omitted _ -> None
++        in
++        arg_iter expr.exp_env iter l e)
++    | Texp_ident (Pident id, { loc; _ }, _, _, _)
+       when Ident.same task.inlined_var id && not_shadowed expr.exp_env ->
+       insert_edit newText loc
+     | _ -> I.default_iterator.expr iter expr
+--- a/ocaml-lsp-server/src/code_actions/action_mark_remove_unused.ml
++++ b/ocaml-lsp-server/src/code_actions/action_mark_remove_unused.ml
+@@ -73,7 +73,9 @@ let rec mark_value_unused_edit name contexts =
+         pats
+         ~f:
+           (function
+-           | { loc = field_loc; _ }, _, { pat_desc = Tpat_var (ident, _, _); pat_loc; _ }
++           | ( { loc = field_loc; _ }
++             , _
++             , { pat_desc = Tpat_var (ident, _, _, _); pat_loc; _ } )
+              when Ident.name ident = name ->
+              (* Special case for record shorthand *)
+              if field_loc.loc_start = pat_loc.loc_start
+@@ -95,7 +97,7 @@ let rec mark_value_unused_edit name contexts =
+     (match m_field_edit with
+      | Some e -> Some e
+      | None -> mark_value_unused_edit name cs)
+-  | Pattern { pat_desc = Tpat_var (ident, _, _); pat_loc = loc; _ } :: _ ->
++  | Pattern { pat_desc = Tpat_var (ident, _, _, _); pat_loc = loc; _ } :: _ ->
+     if Ident.name ident = name
+     then
+       let+ start = Position.of_lexical_position loc.loc_start in
+@@ -130,7 +132,8 @@ let enclosing_value_binding_range name =
+         { exp_desc =
+             Texp_let
+               ( _
+-              , [ { vb_pat = { pat_desc = Tpat_var (_, { txt = name'; _ }, _); _ }; _ } ]
++              , [ { vb_pat = { pat_desc = Tpat_var (_, { txt = name'; _ }, _, _); _ }; _ }
++                ]
+               , { exp_loc = { loc_start = let_end; _ }; _ } )
+         ; exp_loc = { loc_start = let_start; _ }
+         ; _
+--- a/ocaml-lsp-server/src/folding_range.ml
++++ b/ocaml-lsp-server/src/folding_range.ml
+@@ -143,11 +143,8 @@ let fold_over_parsetree (parsetree : Mreader.parsetree) =
+           let lident_range = Range.of_loc lident.Asttypes.loc in
+           let pat_range = Range.of_loc pat.Parsetree.ppat_loc in
+           push { Range.start = lident_range.end_; end_ = pat_range.end_ })
+-      | Ppat_var _
+-      | Ppat_alias _
+-      | Ppat_constant _
+-      | Ppat_interval _
+-      | Ppat_tuple _
++      | Ppat_var _ | Ppat_alias _ | Ppat_constant _ | Ppat_interval _ | Ppat_tuple _
++      | Ppat_unboxed_tuple (_, _)
+       | Ppat_construct _
+       | Ppat_variant _
+       | Ppat_array _
+@@ -204,6 +201,7 @@ let fold_over_parsetree (parsetree : Mreader.parsetree) =
+       | Pexp_lazy _
+       | Pexp_letexception _
+       | Pexp_tuple _
++      | Pexp_unboxed_tuple _
+       | Pexp_construct _
+       | Pexp_ident _
+       | Pexp_constant _
+@@ -217,6 +215,7 @@ let fold_over_parsetree (parsetree : Mreader.parsetree) =
+       | Pexp_setinstvar _
+       | Pexp_override _
+       | Pexp_assert _
++      | Pexp_stack _
+       | Pexp_unreachable -> Ast_iterator.default_iterator.expr self expr
+     in
+     let module_binding
+@@ -254,7 +253,7 @@ let fold_over_parsetree (parsetree : Mreader.parsetree) =
+       | Pstr_extension _ ->
+         Range.of_loc structure_item.pstr_loc |> push;
+         Ast_iterator.default_iterator.structure_item self structure_item
+-      | Pstr_include { pincl_loc; pincl_mod; pincl_attributes } ->
++      | Pstr_include { pincl_loc; pincl_mod; pincl_attributes; pincl_kind = _ } ->
+         push @@ Range.of_loc pincl_loc;
+         self.module_expr self pincl_mod;
+         self.attributes self pincl_attributes
+@@ -293,14 +292,17 @@ let fold_over_parsetree (parsetree : Mreader.parsetree) =
+   List.rev_map !ranges ~f:folding_range
+ ;;
+
+-let compute (state : State.t) (params : FoldingRangeParams.t) =
++let compute
++  (state : State.t)
++  (params : FoldingRangeParams.t)
++  =
+   Fiber.of_thunk (fun () ->
+     let doc = Document_store.get state.store params.textDocument.uri in
+     match Document.kind doc with
+     | `Other -> Fiber.return None
+     | `Merlin m ->
+       let+ ranges =
+-        Document.Merlin.with_pipeline_exn ~name:"folding range" m (fun pipeline ->
++        Document.Merlin.with_pipeline_exn m (fun pipeline ->
+           let parsetree = Mpipeline.reader_parsetree pipeline in
+           fold_over_parsetree parsetree)
+       in
+--- a/ocaml-lsp-server/src/inlay_hints.ml
++++ b/ocaml-lsp-server/src/inlay_hints.ml
+@@ -19,6 +19,7 @@ let outline_type ~env typ =
+ let hint_binding_iter
+   ?(hint_let_bindings = false)
+   ?(hint_pattern_variables = false)
++  ?(hint_function_params = false)
+   typedtree
+   range
+   k
+@@ -45,21 +46,25 @@ let hint_binding_iter
+     if range_overlaps_loc range e.exp_loc
+     then (
+       match e.exp_desc with
+-      | Texp_function
+-          ( _
+-          , Tfunction_cases
+-              { cases =
+-                  [ { c_rhs = { exp_desc = Texp_let (_, [ { vb_pat; _ } ], body); _ }; _ }
+-                  ]
+-              ; _
+-              } ) ->
+-        iter.pat iter vb_pat;
+-        iter.expr iter body
++      | Texp_function { body; params; _ } ->
++        (match body with
++         | Tfunction_cases { fc_cases; _ } ->
++           if hint_function_params
++           then
++             List.iter params ~f:(fun (param : Typedtree.function_param) ->
++               match param.fp_kind with
++               | Tparam_pat pat -> iter.pat iter pat
++               | Tparam_optional_default (pat, _, _) -> iter.pat iter pat);
++           List.iter fc_cases ~f:(fun { Typedtree.c_lhs; c_rhs; _ } ->
++             if hint_pattern_variables then iter.pat iter c_lhs;
++             iter.expr iter c_rhs)
++         | Tfunction_body body when not hint_function_params -> iter.expr iter body
++         | _ -> I.default_iterator.expr iter e)
+       | Texp_let (_, vbs, body) ->
+         List.iter vbs ~f:(value_binding hint_let_bindings iter);
+         iter.expr iter body
+       | Texp_letop { body; _ } -> case hint_let_bindings iter body
+-      | Texp_match (expr, cases, _) ->
++      | Texp_match (expr, _, cases, _) ->
+         iter.expr iter expr;
+         List.iter cases ~f:(case hint_pattern_variables iter)
+       (* Stop iterating when we see a ghost location to avoid annotating generated code *)
+@@ -104,7 +109,123 @@ let hint_binding_iter
+   iterator.structure iterator typedtree
+ ;;
+
+-let compute (state : State.t) { InlayHintParams.range; textDocument = { uri }; _ } =
++let let_syntax_at typer pos =
++  let drop_library_name_if_in_scope
++    (env : Env.t)
++    (decl : Types.module_declaration)
++    (path : Path.t)
++    =
++    let rec to_lident (path : Path.t) : Longident.t =
++      match path with
++      | Pident ident -> Lident (Ident.name ident)
++      | Pdot (path, name) -> Ldot (to_lident path, name)
++      | Papply (lhs, rhs) -> Lapply (to_lident lhs, to_lident rhs)
++      | Pextra_ty (path, _) -> to_lident path
++    in
++    let rec drop_libname (path : Path.t) : Longident.t option =
++      match path with
++      | Pident _ -> None
++      | Pdot (Pident _, name) -> Some (Lident name)
++      | Pdot (path, name) ->
++        Option.map (drop_libname path) ~f:(fun ident -> Longident.Ldot (ident, name))
++      | Papply _ | Pextra_ty _ -> None
++    in
++    match drop_libname path with
++    | Some ident ->
++      (try
++         let let_syntax : Longident.t = Ldot (Ldot (ident, "Let_syntax"), "Let_syntax") in
++         let _, decl' = Env.find_module_by_name let_syntax env in
++         if Ocaml_typing.Shape.Uid.equal decl.md_uid decl'.md_uid
++         then ident
++         else to_lident path
++       with
++       | _ -> to_lident path)
++    | None -> to_lident path
++  in
++  List.find_map (Mtyper.node_at typer pos) ~f:(fun (env, _) ->
++    try
++      let path, decl = Env.find_module_by_name (Lident "Let_syntax") env in
++      match path with
++      | Pdot (Pdot (path, "Let_syntax"), "Let_syntax") ->
++        Some (drop_library_name_if_in_scope env decl path)
++      | single_let_syntax ->
++        (* The [Let_syntax] module is avialable via an alias (e.g. like it would be when
++           there is an [open Async] or similar). Try to resolve the original name of the
++           module. *)
++        let rec strip_let_syntax_suffix = function
++          | Path.Pdot (path, "Let_syntax") -> strip_let_syntax_suffix path
++          | path -> path
++        in
++        let normalized =
++          strip_let_syntax_suffix (Env.normalize_module_path None env single_let_syntax)
++        in
++        let short =
++          Ocaml_typing.Short_paths.find_module (Env.short_paths env) normalized
++        in
++        Some (drop_library_name_if_in_scope env decl short)
++    with
++    | _ -> None)
++;;
++
++let hint_let_syntax_ppx_iter typer parsetree range create_inlay_hint =
++  let current_let_syntax = ref [] in
++  let push_let_syntax pos =
++    match let_syntax_at typer pos with
++    | Some path ->
++      let syntax = "." ^ Format.asprintf "%a" Pprintast.longident path in
++      current_let_syntax := syntax :: !current_let_syntax
++    | None ->
++      (match !current_let_syntax with
++       | hd :: _ -> current_let_syntax := hd :: !current_let_syntax
++       | [] -> ())
++  in
++  let pop_let_syntax () =
++    current_let_syntax
++    := match !current_let_syntax with
++       | [] -> []
++       | _ :: tl -> tl
++  in
++  let structure (iter : Ast_iterator.iterator) (items : Parsetree.structure) =
++    let prev_let_syntax = !current_let_syntax in
++    let (_ : bool) =
++      List.fold_left items ~init:false ~f:(fun should_push (item : Parsetree.structure_item) ->
++        if should_push then push_let_syntax item.pstr_loc.loc_end;
++        iter.structure_item iter item;
++        match item.pstr_desc with
++        | Pstr_open _ | Pstr_include _ -> true
++        | _ -> false)
++    in
++    current_let_syntax := prev_let_syntax
++  in
++  let expr (iter : Ast_iterator.iterator) (expr : Parsetree.expression) =
++    match expr.pexp_desc with
++    | Pexp_open (decl, body) ->
++      iter.open_declaration iter decl;
++      push_let_syntax expr.pexp_loc.loc_start;
++      iter.expr iter body;
++      pop_let_syntax ()
++    | Pexp_extension (name, payload) ->
++      (* Generate annotation for [bind] and [map] extensions. *)
++      (match name.txt with
++       | "bind" | "map" ->
++         (match !current_let_syntax with
++          | syntax :: _ when range_overlaps_loc range name.loc ->
++            create_inlay_hint syntax name.loc
++          | _ -> ())
++       | _ -> ());
++      iter.payload iter payload
++    | _ -> Ast_iterator.default_iterator.expr iter expr
++  in
++  let iterator = { Ast_iterator.default_iterator with structure; expr } in
++  match parsetree with
++  | `Interface signature -> iterator.signature iterator signature
++  | `Implementation structure -> iterator.structure iterator structure
++;;
++
++let compute
++  (state : State.t)
++  { InlayHintParams.range; textDocument = { uri }; _ }
++  =
+   let doc =
+     let store = state.store in
+     Document_store.get store uri
+@@ -121,7 +242,7 @@ let compute (state : State.t) { InlayHintParams.range; textDocument = { uri }; _
+         Option.map state.configuration.data.inlay_hints ~f:(fun c ->
+           c.hint_pattern_variables)
+       in
+-      Document.Merlin.with_pipeline_exn ~name:"inlay-hints" doc (fun pipeline ->
++      Document.Merlin.with_pipeline_exn doc (fun pipeline ->
+         let hints = ref [] in
+         (match Mtyper.get_typedtree (Mpipeline.typer_result pipeline) with
+          | `Interface _ -> ()
+--- a/ocaml-lsp-server/src/semantic_highlighting.ml
++++ b/ocaml-lsp-server/src/semantic_highlighting.ml
+@@ -276,6 +276,7 @@ end
+ (** To traverse OCaml parsetree and produce semantic tokens. *)
+ module Parsetree_fold (M : sig
+     val source : string
++    val mconfig : Mconfig.t
+   end) : sig
+   val apply : Mreader.parsetree -> Tokens.t
+ end = struct
+@@ -354,7 +355,7 @@ end = struct
+     (ca : Parsetree.constructor_arguments)
+     =
+     match ca with
+-    | Pcstr_tuple l -> List.iter l ~f:(fun ct -> self.typ self ct)
++    | Pcstr_tuple l -> List.iter l ~f:(fun (ca : Parsetree.constructor_argument) -> self.typ self ca.pca_type)
+     | Pcstr_record l -> List.iter l ~f:(fun r -> self.label_declaration self r)
+   ;;
+
+@@ -389,12 +390,9 @@ end = struct
+       | Ptyp_any -> `Custom_iterator
+       | Ptyp_variant (_, _, _)
+       | Ptyp_alias (_, _)
+-      | Ptyp_arrow _
+-      | Ptyp_extension _
+-      | Ptyp_package _
+-      | Ptyp_object _
+-      | Ptyp_tuple _
+-      | Ptyp_open _ -> `Default_iterator
++      | Ptyp_arrow _ | Ptyp_extension _ | Ptyp_package _ | Ptyp_object _
++      | Ptyp_open (_, _)
++      | Ptyp_tuple _ | Ptyp_unboxed_tuple _ -> `Default_iterator
+     in
+     match iter with
+     | `Default_iterator -> Ast_iterator.default_iterator.typ self ct
+@@ -419,7 +417,13 @@ end = struct
+
+   let label_declaration
+     (self : Ast_iterator.iterator)
+-    ({ pld_name; pld_mutable = _; pld_type; pld_loc = _; pld_attributes } :
++    ({ pld_name
++     ; pld_mutable = _
++     ; pld_type
++     ; pld_loc = _
++     ; pld_attributes
++     ; pld_modalities = _
++     } :
+       Parsetree.label_declaration)
+     =
+     add_token pld_name.loc (Token_type.of_builtin Property) Token_modifiers_set.empty;
+@@ -443,8 +447,8 @@ end = struct
+            self.expr self pvb_expr;
+            `Custom_iterator
+          | _ -> `Default_iterator)
+-      | ( Ppat_constraint ({ ppat_desc = Ppat_var n; _ }, pat_ct)
+-        , Pexp_constraint (e, exp_ct) )
++      | ( Ppat_constraint ({ ppat_desc = Ppat_var n; _ }, Some pat_ct, _)
++        , Pexp_constraint (e, Some exp_ct, _) )
+         when Loc.compare pat_ct.ptyp_loc exp_ct.ptyp_loc = 0 ->
+         (* handles [let f : t -> unit = fun t -> ()] *)
+         add_token
+@@ -507,12 +511,10 @@ end = struct
+   ;;
+
+   let const loc (constant : Parsetree.constant) =
+-    let token_type =
+-      match constant with
+-      | Parsetree.Pconst_integer _ | Pconst_float _ -> Token_type.of_builtin Number
+-      | Pconst_char _ | Pconst_string _ -> Token_type.of_builtin String
+-    in
+-    add_token loc token_type Token_modifiers_set.empty
++    match constant with
++    | Parsetree.Pconst_integer _ | Pconst_float _ ->
++      add_token loc (Token_type.of_builtin Number) Token_modifiers_set.empty
++    | Pconst_char _ | Pconst_string _ -> ()
+   ;;
+
+   let pexp_apply (self : Ast_iterator.iterator) (expr : Parsetree.expression) args =
+@@ -568,9 +570,44 @@ end = struct
+            Option.iter vo ~f:(fun v -> self.expr self v));
+         `Custom_iterator
+       | Pexp_apply (expr, args) -> pexp_apply self expr args
+-      | Pexp_function _ | Pexp_let (_, _, _) -> `Default_iterator
++      | Pexp_let (_, _, _) -> `Default_iterator
++      | Pexp_function (params, constraint_, function_body) ->
++        List.iter params ~f:(fun (param : Parsetree.function_param) ->
++          match param.pparam_desc with
++          (* handles types like [type a] in [let f (type a) x y z = ...] *)
++          | Pparam_newtype (t, _) ->
++            add_token
++              t.loc
++              (Token_type.of_builtin TypeParameter)
++              Token_modifiers_set.empty
++          (* handles value parameters and optional args *)
++          | Pparam_val (_, expr_opt, pat) ->
++            (match expr_opt with
++             | None -> self.pat self pat
++             | Some e ->
++               if Loc.compare e.pexp_loc pat.ppat_loc < 0
++               then (
++                 self.expr self e;
++                 self.pat self pat)
++               else (
++                 self.pat self pat;
++                 self.expr self e)));
++        (* handles type constraints like [let f () : ty = ...] *)
++        Option.iter constraint_ ~f:(fun constraint_ ->
++          match constraint_.type_constraint with
++          | Pconstraint ct -> self.typ self ct
++          | Pcoerce (ct1, ct2) ->
++            Option.iter ct1 ~f:(self.typ self);
++            self.typ self ct2);
++        (match function_body with
++         | Pfunction_body e -> self.expr self e
++         | Pfunction_cases (cases, loc, attributes) ->
++           self.cases self cases;
++           self.location self loc;
++           self.attributes self attributes);
++        `Custom_iterator
+       | Pexp_try (_, _)
+-      | Pexp_tuple _
++      | Pexp_tuple _ | Pexp_unboxed_tuple _
+       | Pexp_variant (_, _)
+       (* ^ label for a poly variant is missing location info -- we could have a
+          workaround by "parsing" this part of code ourselves*)
+@@ -615,15 +652,12 @@ end = struct
+         self.expr self e0;
+         self.expr self e1;
+         `Custom_iterator
+-      | Pexp_constraint (e, ct) ->
+-        (* handles [let f () : int = 1] and [let f () = (1 : int)] *)
+-        if Loc.compare e.pexp_loc ct.ptyp_loc > 0
+-        then (
+-          self.typ self ct;
+-          self.expr self e)
+-        else (
+-          self.expr self e;
+-          self.typ self ct);
++      | Pexp_constraint (e, ct, _) ->
++        self.expr self e;
++        Option.iter ct ~f:(self.typ self);
++        `Custom_iterator
++      | Pexp_stack e ->
++        self.expr self e;
+         `Custom_iterator
+       | Pexp_letop { let_; ands; body } ->
+         List.iter
+@@ -706,9 +740,9 @@ end = struct
+           if Loc.compare fld.loc pat.ppat_loc <> 0 (* handles field punning *)
+           then self.pat self pat);
+         `Custom_iterator
+-      | Ppat_constraint (p, ct) ->
++      | Ppat_constraint (p, ct, _) ->
+         self.pat self p;
+-        self.typ self ct;
++        Option.iter ct ~f:(self.typ self);
+         `Custom_iterator
+       | Ppat_or _
+       | Ppat_exception _
+@@ -716,6 +750,7 @@ end = struct
+       | Ppat_array _
+       | Ppat_extension _
+       | Ppat_tuple _
++      | Ppat_unboxed_tuple _
+       | Ppat_lazy _
+       | Ppat_any
+       | Ppat_interval _ -> `Default_iterator
+@@ -772,13 +807,19 @@ end = struct
+
+   let value_description
+     (self : Ast_iterator.iterator)
+-    ({ pval_name; pval_type; pval_prim = _; pval_attributes; pval_loc = _ } :
++    ({ pval_name
++     ; pval_type
++     ; pval_prim = _
++     ; pval_attributes
++     ; pval_loc = _
++     ; pval_modalities = _
++     } :
+       Parsetree.value_description)
+     =
+     add_token
+       pval_name.loc
+       (match pval_type.ptyp_desc with
+-       | Ptyp_arrow (_, _, _) -> Token_type.of_builtin Function
++       | Ptyp_arrow (_, _, _, _, _) -> Token_type.of_builtin Function
+        | Ptyp_class (_, _) -> Token_type.of_builtin Class
+        | Ptyp_package _ -> Token_type.module_
+        | Ptyp_extension _
+@@ -787,7 +828,8 @@ end = struct
+        | Ptyp_alias (_, _)
+        | Ptyp_variant (_, _, _)
+        | Ptyp_poly (_, _)
+-       | Ptyp_tuple _ | Ptyp_any | Ptyp_var _ | Ptyp_open _ ->
++       | Ptyp_open (_, _)
++       | Ptyp_tuple _ | Ptyp_unboxed_tuple _ | Ptyp_any | Ptyp_var _ ->
+          Token_type.of_builtin Variable)
+       (Token_modifiers_set.singleton Declaration);
+     self.typ self pval_type;
+@@ -875,13 +917,15 @@ let gen_new_id =
+ ;;
+
+ let compute_tokens doc =
+-  let+ parsetree, source =
+-    Document.Merlin.with_pipeline_exn ~name:"semantic highlighting" doc (fun p ->
++  let* parsetree, source =
++    Document.Merlin.with_pipeline_exn doc (fun p ->
+       Mpipeline.reader_parsetree p, Mpipeline.input_source p)
+   in
++  let+ config = Document.Merlin.mconfig doc in
+   let module Fold =
+     Parsetree_fold (struct
+       let source = Msource.text source
++      let mconfig = config
+     end)
+   in
+   Fold.apply parsetree
+@@ -897,7 +941,18 @@ let compute_encoded_tokens doc =
+ module Debug = struct
+   let meth_request_full = "ocamllsp/textDocument/semanticTokens/full"
+
+-  let on_request_full : params:Jsonrpc.Structured.t option -> State.t -> Json.t Fiber.t =
++  let get_doc_id ~(params : Jsonrpc.Structured.t option) =
++    match params with
++    | Some (`Assoc _ as json) | Some (`List _ as json) ->
++      let params = SemanticTokensParams.t_of_yojson json in
++      Some params.textDocument
++    | None -> None
++  ;;
++
++  let on_request_full
++    :  params:Jsonrpc.Structured.t option -> State.t
++    -> Json.t Fiber.t
++    =
+     fun ~params state ->
+     Fiber.of_thunk (fun () ->
+       match params with
+@@ -925,7 +980,9 @@ module Debug = struct
+   ;;
+ end
+
+-let on_request_full : State.t -> SemanticTokensParams.t -> SemanticTokens.t option Fiber.t
++let on_request_full
++  :  State.t -> SemanticTokensParams.t
++  -> SemanticTokens.t option Fiber.t
+   =
+   fun state params ->
+   Fiber.of_thunk (fun () ->
+--- a/ocaml-lsp-server/src/signature_help.ml
++++ b/ocaml-lsp-server/src/signature_help.ml
+@@ -11,7 +11,7 @@ open struct
+ end
+
+ type parameter_info =
+-  { label : Asttypes.arg_label
++  { label : Typedtree.arg_label
+   ; param_start : int
+   ; param_end : int
+   ; argument : Typedtree.expression option
+@@ -35,7 +35,7 @@ let extract_ident (exp_desc : Typedtree.expression_desc) =
+     | Lapply (p1, p2) -> Format.fprintf ppf "%a(%a)" longident p1 longident p2
+   in
+   match exp_desc with
+-  | Texp_ident (_, { txt = li; _ }, _) ->
++  | Texp_ident (_, { txt = li; _ }, _, _, _) ->
+     let ppf, to_string = Format.to_string () in
+     longident ppf li;
+     Some (to_string ())
+@@ -69,7 +69,7 @@ let pp_parameter_type env ppf ty =
+
+ (* print parameter labels and types *)
+ let pp_parameter env label ppf ty =
+-  match (label : Asttypes.arg_label) with
++  match (label : Typedtree.arg_label) with
+   | Nolabel -> pp_parameter_type env ppf ty
+   | Labelled l -> Format.fprintf ppf "%s:%a" l (pp_parameter_type env) ty
+   | Optional l ->
+@@ -81,6 +81,7 @@ let pp_parameter env label ppf ty =
+       | _ -> ty
+     in
+     Format.fprintf ppf "?%s:%a" l (pp_parameter_type env) (unwrap_option ty)
++  | Position l -> Format.fprintf ppf "%s:[%%call_pos]" l
+ ;;
+
+ (* record buffer offsets to be able to underline parameter types *)
+@@ -99,10 +100,15 @@ let separate_function_signature ~args (e : Typedtree.expression) =
+   let ppf = Format.formatter_of_buffer buffer in
+   let rec separate ?(i = 0) ?(parameters = []) args ty =
+     match args, Types.get_desc ty with
+-    | (_l, arg) :: args, Tarrow (label, ty1, ty2, _) ->
++    | (_l, arg) :: args, Tarrow ((label, _, _), ty1, ty2, _) ->
++      let arg =
++        match arg with
++        | Typedtree.Arg (e, _sort) -> Some e
++        | Omitted _ -> None
++      in
+       let parameter = print_parameter_offset ppf buffer e.exp_env label ty1 ?arg in
+       separate args ty2 ~i:(succ i) ~parameters:(parameter :: parameters)
+-    | [], Tarrow (label, ty1, ty2, _) ->
++    | [], Tarrow ((label, _, _), ty1, ty2, _) ->
+       let parameter = print_parameter_offset ppf buffer e.exp_env label ty1 in
+       separate args ty2 ~i:(succ i) ~parameters:(parameter :: parameters)
+     (* end of function type, print remaining type without recording offsets *)
+@@ -129,7 +135,7 @@ let active_parameter_by_arg ~arg params =
+
+ let active_parameter_by_prefix ~prefix params =
+   let common = function
+-    | Asttypes.Nolabel -> Some 0
++    | Typedtree.Nolabel -> Some 0
+     | l when String.is_prefixed ~by:"~" prefix || String.is_prefixed ~by:"?" prefix ->
+       Some (String.common_prefix_len (Btype.prefixed_label_name l) prefix)
+     | _ -> None
+@@ -156,7 +162,7 @@ let is_arrow t =
+ let application_signature ~prefix = function
+   (* provide signature information for applied functions *)
+   | (_, Browse_raw.Expression arg)
+-    :: (_, Expression { exp_desc = Texp_apply (({ exp_type; _ } as e), args); _ })
++    :: (_, Expression { exp_desc = Texp_apply (({ exp_type; _ } as e), args, _, _, _); _ })
+     :: _
+     when is_arrow exp_type ->
+     let result = separate_function_signature e ~args in
+@@ -189,7 +195,10 @@ let format_doc ~markdown ~doc =
+      else { MarkupContent.value = doc; kind = MarkupKind.PlainText })
+ ;;
+
+-let run (state : State.t) { SignatureHelpParams.textDocument = { uri }; position; _ } =
++let run
++  (state : State.t)
++  { SignatureHelpParams.textDocument = { uri }; position; _ }
++  =
+   let open Fiber.O in
+   let doc =
+     let store = state.store in
+@@ -209,11 +218,13 @@ let run (state : State.t) { SignatureHelpParams.textDocument = { uri }; position
+     Fiber.return help
+   | `Merlin merlin ->
+     let* application_signature =
+-      let* inside_comment = Check_for_comments.position_in_comment ~position ~merlin in
++      let* inside_comment =
++        Check_for_comments.position_in_comment ~position ~merlin
++      in
+       match inside_comment with
+       | true -> Fiber.return None
+       | false ->
+-        Document.Merlin.with_pipeline_exn ~name:"signature-help" merlin (fun pipeline ->
++        Document.Merlin.with_pipeline_exn merlin (fun pipeline ->
+           let typer = Mpipeline.typer_result pipeline in
+           let pos = Mpipeline.get_lexing_pos pipeline pos in
+           let node = Mtyper.node_at typer pos in
+@@ -231,7 +242,6 @@ let run (state : State.t) { SignatureHelpParams.textDocument = { uri }; position
+        let offset = String.length prefix in
+        let+ doc =
+          Document.Merlin.doc_comment
+-           ~name:"signature help-position"
+            merlin
+            application_signature.function_position
+        in
+@@ -243,7 +253,7 @@ let run (state : State.t) { SignatureHelpParams.textDocument = { uri }; position
+          in
+          let documentation =
+            let open Option.O in
+-           let+ doc in
++           let+ doc = doc in
+            let markdown =
+              ClientCapabilities.markdown_support
+                (State.client_capabilities state)
+--- a/ocaml-lsp-server/src/workspace_symbol.ml
++++ b/ocaml-lsp-server/src/workspace_symbol.ml
+@@ -71,7 +71,7 @@ end = struct
+   open Browse_tree
+
+   let id_of_patt = function
+-    | { pat_desc = Tpat_var (id, _, _); _ } -> Some id
++    | { pat_desc = Tpat_var (id, _, _, _); _ } -> Some id
+     | _ -> None
+   ;;

@@ -1,6 +1,6 @@
 opam-version: "2.0"
-name: "gen_js_api"
 version: "1.1.2+jst"
+name: "gen_js_api"
 synopsis: "Easy OCaml bindings for JavaScript libraries"
 description: """\
 gen_js_api aims at simplifying the creation of OCaml bindings for
@@ -18,14 +18,14 @@ license: "MIT"
 homepage: "https://github.com/LexiFi/gen_js_api"
 bug-reports: "https://github.com/LexiFi/gen_js_api/issues"
 depends: [
-  "dune" {>= "2.7"}
-  "ocaml" {>= "4.08"}
-  "ppxlib" {>= "0.26"}
+  "dune"                 {>= "2.7"}
+  "ocaml"                {>= "4.08"}
+  "ppxlib"               {= "0.33.0+jst"}
   "js_of_ocaml-compiler" {with-test}
-  "conf-npm" {with-test}
-  "ojs" {= "1.1.2"}
-  "odoc" {with-doc}
-  "ppxlib_jane"
+  "conf-npm"             {with-test}
+  "ojs"                  {= "1.1.2"}
+  "odoc"                 {with-doc}
+"ppxlib_jane"
 ]
 conflicts: [
   "js_of_ocaml-compiler" {< "4.0.0"}
@@ -46,18 +46,33 @@ build: [
 ]
 dev-repo: "git+https://github.com/LexiFi/gen_js_api.git"
 url {
-  src: "https://github.com/LexiFi/gen_js_api/archive/5175a31cdb6686e93f0fb473708c8614f2962e35.tar.gz"
+  src: "https://github.com/LexiFi/gen_js_api/archive/refs/tags/v1.1.2.tar.gz"
   checksum: [
-    "sha256=2243bb02a247c397ab98146330bddfbb9291175a1f2cb52b6f3254251f4a4db9"
+    "md5=58ab892f1702400247d692f44215b365"
+    "sha512=26196c124f6c4dc488012990ac99dbde2377b17ac178709e55cf493385ba6253c05d1118415f55accc4cb487e6b4494c24a2f8ac113f65a374e55f3036f6b9ec"
   ]
 }
 patches: [
- "gen-js-api+dune.patch"
- "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
- "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
+  "gen-js-api+js_of_ocaml-globalThis.patch"
+  "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
+  "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
+  "dune.patch"
 ]
 extra-files: [
- ["gen-js-api+dune.patch" "sha256=486d4235a5baa84b63b867ceaa9000b8c7fa6c9429999ab247e4ba3401da214e"]
- ["gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch" "sha256=4ee1edbd3d7dc28b1709d2a5cec5de7e80736d4d17c1a22287240bb15e5dadae"]
- ["gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch" "sha256=09b7fc89ed57403c850355da846129cedfdb1a2200a629e60f27ad928dd6d75f"]
+  [
+    "gen-js-api+js_of_ocaml-globalThis.patch"
+    "sha256=e6551eaf518dbefd723a2e234a54c6ef8070c947c091d0cfda6f6880b233372c"
+  ]
+  [
+    "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
+    "sha256=4bcca59531d1c30227f153728b653a03cfca4048fe0dd6e14c0702fde8739e12"
+  ]
+  [
+    "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
+    "sha256=0711bdb8cf174a7f1031f3d9164981fda1ff8f164b512a54800aae74001c5b8c"
+  ]
+  [
+    "dune.patch"
+    "sha256=486d4235a5baa84b63b867ceaa9000b8c7fa6c9429999ab247e4ba3401da214e"
+  ]
 ]

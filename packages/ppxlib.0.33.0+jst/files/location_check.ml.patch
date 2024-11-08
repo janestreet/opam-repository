@@ -1,0 +1,59 @@
+--- a/src/location_check.ml
++++ b/src/location_check.ml
+@@ -161,12 +166,12 @@ let should_ignore loc attrs =
+
+ let rec extract_constraint e =
+   match e.pexp_desc with
+-  | Pexp_constraint (e, ct) | Pexp_coerce (e, _, ct) -> Some (e, ct)
+-  | Pexp_newtype (name, exp) ->
++  | Pexp_constraint (e, Some ct, _) | Pexp_coerce (e, _, ct) -> Some (e, ct)
++  | Pexp_newtype (name, jkind, exp) ->
+       Option.map (extract_constraint exp) ~f:(fun (exp, ct) ->
+           ( {
+               e with
+-              pexp_desc = Pexp_newtype (name, exp);
++              pexp_desc = Pexp_newtype (name, jkind, exp);
+               pexp_loc = { e.pexp_loc with loc_ghost = true };
+             },
+             ct ))
+@@ -401,11 +401,11 @@ let enforce_invariants fname =
+           match (x.pvb_pat.ppat_desc, extract_constraint x.pvb_expr) with
+           (* let x : type a b c. ct = e *)
+           | ( Ppat_constraint
+-                (pvb_pat, { ptyp_desc = Ptyp_poly (_ :: _, ctp); _ }),
++                (pvb_pat, Some { ptyp_desc = Ptyp_poly (_ :: _, ctp); _ }, _),
+               Some (pvb_expr, cte) )
+           (* let x :  ct = e
+              let x :> ct = e *)
+-          | ( Ppat_constraint (pvb_pat, { ptyp_desc = Ptyp_poly ([], ctp); _ }),
++          | ( Ppat_constraint (pvb_pat, Some { ptyp_desc = Ptyp_poly ([], ctp); _ }, _),
+               Some (pvb_expr, cte) )
+             when Location.compare ctp.ptyp_loc cte.ptyp_loc = 0 ->
+               let acc = Non_intersecting_ranges.empty in
+@@ -590,7 +590,7 @@ let enforce_invariants fname =
+                     self#longident_loc lid acc
+                   else
+                     match e.pexp_desc with
+-                    | Pexp_constraint (e, c) ->
++                    | Pexp_constraint (e, Some c, _) ->
+                         (* { foo : int } and { foo : int = x } ... *)
+                         let _ = self#core_type c acc in
+                         self#expression e acc
+@@ -656,7 +656,7 @@ let enforce_invariants fname =
+                   self#longident_loc lid acc
+                 else
+                   match pat.ppat_desc with
+-                  | Ppat_constraint (p, c) ->
++                  | Ppat_constraint (p, Some c, _) ->
+                       (* { foo : int } and { foo : int = x } ... *)
+                       let _ = self#core_type c acc in
+                       self#pattern p acc
+@@ -668,7 +668,7 @@ let enforce_invariants fname =
+                 let acc = self#pattern pat acc in
+                 acc)
+             labels acc
+-      | Ppat_constraint ({ ppat_desc = Ppat_unpack a; _ }, b) ->
++      | Ppat_constraint ({ ppat_desc = Ppat_unpack a; _ }, Some b, _) ->
+           let acc = self#loc (self#option self#string) a acc in
+           self#core_type b acc
+       | _ -> super#pattern_desc x acc

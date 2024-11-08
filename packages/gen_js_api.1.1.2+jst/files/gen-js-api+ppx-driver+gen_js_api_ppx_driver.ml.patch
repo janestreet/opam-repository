@@ -1,4 +1,3 @@
-diff --git a/ppx-driver/gen_js_api_ppx_driver.ml b/gen-js-api/ppx-driver/gen_js_api_ppx_driver.ml
 --- a/ppx-driver/gen_js_api_ppx_driver.ml
 +++ b/ppx-driver/gen_js_api_ppx_driver.ml
 @@ -11,6 +11,10 @@ let () =

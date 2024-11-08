@@ -1,0 +1,101 @@
+--- a/ast/dune
++++ b/ast/dune
+@@ -4,16 +4,16 @@
+
+ (library
+  (name ppxlib_ast)
+- (public_name ppxlib.ast)
+- (libraries astlib stdlib-shims)
++ (public_name ppxlib_ast.ast)
++ (libraries astlib compiler-libs.common ocaml-compiler-libs.common ocaml-compiler-libs.shadow stdlib-shims)
+  (flags
+-  (:standard -safe-string)
++  (:standard -safe-string -open Ocaml_shadow)
+   -w
+   -9-27-32)
+  (preprocess
+   (per_module
+    ((action
+-     (run %{exe:pp/pp.exe} %{ocaml_version} %{input-file}))
++     (run %{exe:pp/pp.exe} 9.99 %{input-file}))
+     versions)))
+  (lint
+   (pps ppxlib_traverse -deriving-keep-w32=impl)))
+--- a/astlib/dune
++++ b/astlib/dune
+@@ -1,6 +1,6 @@
+ (library
+  (name astlib)
+- (public_name ppxlib.astlib)
++ (public_name ppxlib_ast.astlib)
+  (libraries ocaml-compiler-libs.common compiler-libs.common)
+  (flags -w -9)
+  (preprocess
+@@ -10,7 +10,7 @@
+ (rule
+  (targets ast-version)
+  (action
+-  (run %{ocaml} %{dep:config/gen.ml} %{ocaml_version})))
++  (run %{ocaml} %{dep:config/gen.ml} 9.99)))
+
+ (cinaps
+  (files *.ml *.mli)
+--- a/stdppx/dune
++++ b/stdppx/dune
+@@ -1,6 +1,6 @@
+ (library
+  (name stdppx)
+- (public_name ppxlib.stdppx)
++ (public_name ppxlib_ast.stdppx)
+  (libraries sexplib0 stdlib-shims)
+  (flags
+   (:standard -safe-string)))
+--- a/traverse_builtins/dune
++++ b/traverse_builtins/dune
+@@ -1,5 +1,5 @@
+ (library
+  (name ppxlib_traverse_builtins)
+- (public_name ppxlib.traverse_builtins)
++ (public_name ppxlib_ast.traverse_builtins)
+  (flags
+   (:standard -safe-string)))
+--- a/dune-project
++++ b/dune-project
+@@ -1,10 +1,10 @@
+ (lang dune 2.7)
+-(name ppxlib)
++(name ppxlib_ast)
+ (using cinaps 1.0)
+ (allow_approximate_merlin)
+ (implicit_transitive_deps false)
+ (cram enable)
+-(generate_opam_files true)
++(generate_opam_files false)
+
+ (source (github ocaml-ppx/ppxlib))
+ (license MIT)
+@@ -13,7 +13,7 @@
+ (documentation "https://ocaml-ppx.github.io/ppxlib/")
+
+ (package
+- (name ppxlib)
++ (name ppxlib_ast)
+  (depends
+   (ocaml (and (and (>= 4.04.1) (< 5.2.0)) (<> 5.1.0~alpha1)))
+   (ocaml-compiler-libs (>= v0.11.0))
+@@ -39,15 +39,3 @@ OCaml syntax directly and `ppxlib.traverse` which provides various
+ ways of automatically traversing values of a given type, in particular
+ allowing to inject a complex structured value into generated code.
+ "))
+-
+-(package
+- (name ppxlib-bench)
+- (synopsis "Run ppxlib benchmarks")
+- (description "Third-party code in benchmarks depends on later versions of the ocaml
+-than ppxlib itself. Also the benchmark runner has dependencies that ppxlib doesn't
+-have.")
+- (depends
+-  (ocaml (>= 4.04.1))
+-  (ppxlib (= :version))
+-  base
+-  yojson))

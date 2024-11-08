@@ -1,0 +1,116 @@
+diff --git a/dune b/dune
+index 266fba5..c531198 100755
+--- a/dune
++++ b/dune
+@@ -453,6 +453,10 @@
+ (install
+  (files
+   (ocaml/compilerlibs/META as compiler-libs/META)
++   (ocaml/otherlibs/stdlib_upstream_compatible/META as stdlib_upstream_compatible/META)
++   (ocaml/otherlibs/stdlib_stable/META as stdlib_stable/META)
++   (ocaml/otherlibs/stdlib_beta/META as stdlib_beta/META)
++   (ocaml/otherlibs/stdlib_alpha/META as stdlib_alpha/META)
+   (external/owee/libcompiler_owee_stubs.a
+    as
+    compiler-libs/libcompiler_owee_stubs.a)
+diff --git a/ocaml/configure b/ocaml/configure
+index 0d07820..8dd5c79 100755
+--- a/ocaml/configure
++++ b/ocaml/configure
+@@ -3561,6 +3561,14 @@ ac_config_files="$ac_config_files otherlibs/dynlink/META"
+
+ ac_config_files="$ac_config_files otherlibs/runtime_events/META"
+
++ac_config_files="$ac_config_files otherlibs/stdlib_upstream_compatible/META"
++
++ac_config_files="$ac_config_files otherlibs/stdlib_stable/META"
++
++ac_config_files="$ac_config_files otherlibs/stdlib_beta/META"
++
++ac_config_files="$ac_config_files otherlibs/stdlib_alpha/META"
++
+ ac_config_files="$ac_config_files stdlib/META"
+
+
+@@ -22173,6 +22181,10 @@ do
+     "compilerlibs/META") CONFIG_FILES="$CONFIG_FILES compilerlibs/META" ;;
+     "otherlibs/dynlink/META") CONFIG_FILES="$CONFIG_FILES otherlibs/dynlink/META" ;;
+     "otherlibs/runtime_events/META") CONFIG_FILES="$CONFIG_FILES otherlibs/runtime_events/META" ;;
++    "otherlibs/stdlib_upstream_compatible/META") CONFIG_FILES="$CONFIG_FILES otherlibs/stdlib_upstream_compatible/META" ;;
++    "otherlibs/stdlib_stable/META") CONFIG_FILES="$CONFIG_FILES otherlibs/stdlib_stable/META" ;;
++    "otherlibs/stdlib_beta/META") CONFIG_FILES="$CONFIG_FILES otherlibs/stdlib_beta/META" ;;
++    "otherlibs/stdlib_alpha/META") CONFIG_FILES="$CONFIG_FILES otherlibs/stdlib_alpha/META" ;;
+     "stdlib/META") CONFIG_FILES="$CONFIG_FILES stdlib/META" ;;
+     "native-symlinks") CONFIG_COMMANDS="$CONFIG_COMMANDS native-symlinks" ;;
+     "ocamldoc/META") CONFIG_FILES="$CONFIG_FILES ocamldoc/META" ;;
+diff --git a/ocaml/configure.ac b/ocaml/configure.ac
+index 1f19f74..2011c68 100644
+--- a/ocaml/configure.ac
++++ b/ocaml/configure.ac
+@@ -312,6 +312,10 @@ AS_IF([test "x$enable_runtime5" = "xyes"],
+ AC_CONFIG_FILES([compilerlibs/META])
+ AC_CONFIG_FILES([otherlibs/dynlink/META])
+ AC_CONFIG_FILES([otherlibs/runtime_events/META])
++AC_CONFIG_FILES([otherlibs/stdlib_upstream_compatible/META])
++AC_CONFIG_FILES([otherlibs/stdlib_stable/META])
++AC_CONFIG_FILES([otherlibs/stdlib_beta/META])
++AC_CONFIG_FILES([otherlibs/stdlib_alpha/META])
+ AC_CONFIG_FILES([stdlib/META])
+
+ # Definitions related to the version of OCaml
+diff --git a/ocaml/otherlibs/stdlib_alpha/META.in b/ocaml/otherlibs/stdlib_alpha/META.in
+new file mode 100644
+index 0000000..8bb8976
+--- /dev/null
++++ b/ocaml/otherlibs/stdlib_alpha/META.in
+@@ -0,0 +1,8 @@
++# @configure_input@
++
++version = "@VERSION@"
++description = "Alpha extensions"
++archive(byte) = "stdlib_alpha.cma"
++archive(native) = "stdlib_alpha.cmxa"
++plugin(byte) = "stdlib_alpha.cma"
++plugin(native) = "stdlib_alpha.cmxs"
+diff --git a/ocaml/otherlibs/stdlib_beta/META.in b/ocaml/otherlibs/stdlib_beta/META.in
+new file mode 100644
+index 0000000..8a5f94d
+--- /dev/null
++++ b/ocaml/otherlibs/stdlib_beta/META.in
+@@ -0,0 +1,8 @@
++# @configure_input@
++
++version = "@VERSION@"
++description = "Beta extensions"
++archive(byte) = "stdlib_beta.cma"
++archive(native) = "stdlib_beta.cmxa"
++plugin(byte) = "stdlib_beta.cma"
++plugin(native) = "stdlib_beta.cmxs"
+diff --git a/ocaml/otherlibs/stdlib_stable/META.in b/ocaml/otherlibs/stdlib_stable/META.in
+new file mode 100644
+index 0000000..4b2e4d9
+--- /dev/null
++++ b/ocaml/otherlibs/stdlib_stable/META.in
+@@ -0,0 +1,8 @@
++# @configure_input@
++
++version = "@VERSION@"
++description = "Stable extensions"
++archive(byte) = "stdlib_stable.cma"
++archive(native) = "stdlib_stable.cmxa"
++plugin(byte) = "stdlib_stable.cma"
++plugin(native) = "stdlib_stable.cmxs"
+diff --git a/ocaml/otherlibs/stdlib_upstream_compatible/META.in b/ocaml/otherlibs/stdlib_upstream_compatible/META.in
+new file mode 100644
+index 0000000..0a95513
+--- /dev/null
++++ b/ocaml/otherlibs/stdlib_upstream_compatible/META.in
+@@ -0,0 +1,8 @@
++# @configure_input@
++
++version = "@VERSION@"
++description = "Upstream-compatible extensions"
++archive(byte) = "stdlib_upstream_compatible.cma"
++archive(native) = "stdlib_upstream_compatible.cmxa"
++plugin(byte) = "stdlib_upstream_compatible.cma"
++plugin(native) = "stdlib_upstream_compatible.cmxs"

@@ -1,0 +1,58 @@
+opam-version: "2.0"
+version: "0.26.2+jst"
+name: "ocamlformat"
+synopsis: "Auto-formatter for OCaml code"
+description: """\
+**ocamlformat** is a code formatter for OCaml. It comes with opinionated default settings but is also fully customizable to suit your coding style.
+
+- **Profiles:** ocamlformat offers profiles we predefined formatting configurations. Profiles include `default`, `ocamlformat`, `janestreet`.
+- **Configurable:** Users can change the formatting profile and configure every option in their `.ocamlformat` configuration file.
+- **Format Comments:** ocamlformat can format comments, docstrings, and even code blocks in your comments.
+- **RPC:** ocamlformat provides an RPC server that can be used by other tools to easily format OCaml Code."""
+maintainer: [
+  "Guillaume Petiot <guillaume@tarides.com>"
+  "Jules Aguillon <jules@j3s.fr>"
+  "Emile Trotignon <emile@tarides.com>"
+]
+authors: [
+  "Josh Berdine <jjb@fb.com>"
+  "Hugo Heuzard <hugo.heuzard@gmail.com>"
+  "Etienne Millon <etienne@tarides.com>"
+  "Guillaume Petiot <guillaume@tarides.com>"
+  "Jules Aguillon <jules@j3s.fr>"
+]
+license: ["MIT" "LGPL-2.1-only WITH OCaml-LGPL-linking-exception"]
+homepage: "https://github.com/ocaml-ppx/ocamlformat"
+bug-reports: "https://github.com/ocaml-ppx/ocamlformat/issues"
+depends: [
+  "ocaml"               {>= "4.08"}
+  "cmdliner"            {with-test = "false" & >= "1.1.0" | with-test & >= "1.2.0"}
+  "dune"                {>= "2.8"}
+  "ocamlformat-lib"     {= "0.26.2+jst"}
+  "ocamlformat-rpc-lib" {with-test & = version}
+  "re"                  {>= "1.10.3"}
+  "odoc"                {with-doc}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/ocaml-ppx/ocamlformat.git"
+x-commit-hash: "f5727b32127730a2722f86c7119eb6d8f884e26d"
+url {
+  src:
+    "https://github.com/janestreet/ocamlformat/archive/1103e7246de6dac0d3f5a639f5dbe7b6a3530cf8.tar.gz"
+  checksum:
+    "sha256=c535d678cf3ed7d18590f09f3bbabe5e7ad26f566bfbd0bb500cbc7c0b767847"
+}
+
