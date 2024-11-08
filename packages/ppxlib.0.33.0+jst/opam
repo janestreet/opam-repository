@@ -96,7 +96,7 @@ extra-files: [
   ]
   [
     "ppxlib+src+ast_builder.ml.patch"
-    "sha256=29bc121227b93e0efee741a8bb3d948fecbaf03a15677660ccaf404dabec6140"
+    "sha256=75d55caa1d5f3442b085bd761c16607f98827c36d18810c88c1a82a7c5f176d6"
   ]
   [
     "ppxlib+src+ast_builder.mli.patch"
@@ -104,7 +104,7 @@ extra-files: [
   ]
   [
     "ppxlib+src+ast_builder_intf.ml.patch"
-    "sha256=5d4c0fd2fd92692dfdd155926be2bd100e4b74744063ca4e21fb6ed534ce56ee"
+    "sha256=54f58a7bcb3e8443484074e5e4d543a2ce37a47d1c97c80b34092bcb53108d77"
   ]
   [
     "ppxlib+src+ast_pattern.ml.patch"
@@ -156,11 +156,11 @@ extra-files: [
   ]
   [
     "ppxlib+src+gen+gen_ast_builder.ml.patch"
-    "sha256=7c22b0d1f925b3dfa3219d5a51b04596bb75af9710248600a193afa6cab1d981"
+    "sha256=3fd5287178c8f0de72bf27043a99c055ee6a75409e45d0e474002f55167a4b3f"
   ]
   [
     "ppxlib+src+gen+gen_ast_pattern.ml.patch"
-    "sha256=20d83d43149bbbfaf2d65f83fb21c007e14c10b2626fdc4ee8d3e743a93e477a"
+    "sha256=4a801a47ccbd2b1995da079ba12ceebbdcfb5506463112204f00b6121a37d75b"
   ]
   [
     "ppxlib+src+gen+import.ml.patch"

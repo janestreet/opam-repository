@@ -53,11 +53,16 @@ url {
   ]
 }
 patches: [
+  "gen-js-api+js_of_ocaml-globalThis.patch"
   "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
   "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
   "dune.patch"
 ]
 extra-files: [
+  [
+    "gen-js-api+js_of_ocaml-globalThis.patch"
+    "sha256=e6551eaf518dbefd723a2e234a54c6ef8070c947c091d0cfda6f6880b233372c"
+  ]
   [
     "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
     "sha256=4bcca59531d1c30227f153728b653a03cfca4048fe0dd6e14c0702fde8739e12"

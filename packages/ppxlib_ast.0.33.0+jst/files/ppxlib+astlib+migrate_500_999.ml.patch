@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/astlib/migrate_500_999.ml
-@@ -0,0 +1,1676 @@
+@@ -0,0 +1,1773 @@
 +open Stdlib0
 +module From = Ast_500
 +module To = Ast_999
@@ -87,6 +87,16 @@
 +        ~loc:(copy_location pexp_loc)
 +        ~attrs:(copy_attributes pexp_attributes)
 +        (Jexp_layout (Lexp_constant (Integer (x, c))))
++  | Pexp_array (Immutable, xs) ->
++      Jane_syntax.Expression.expr_of
++        ~loc:(copy_location pexp_loc)
++        ~attrs:(copy_attributes pexp_attributes)
++        (Jexp_immutable_array (Iaexp_immutable_array (List.map copy_expression xs)))
++  | Pexp_comprehension c ->
++      Jane_syntax.Expression.expr_of
++        ~loc:(copy_location pexp_loc)
++        ~attrs:(copy_attributes pexp_attributes)
++        (Jexp_comprehension (copy_comprehension_expression c))
 +  | _ ->
 +    {
 +      Ast_999.Parsetree.pexp_desc = copy_expression_desc pexp_desc;
@@ -147,8 +157,10 @@
 +  | Ast_500.Parsetree.Pexp_setfield (x0, x1, x2) ->
 +      Ast_999.Parsetree.Pexp_setfield
 +        (copy_expression x0, copy_loc copy_Longident_t x1, copy_expression x2)
-+  | Ast_500.Parsetree.Pexp_array x0 ->
++  | Ast_500.Parsetree.Pexp_array (Mutable, x0) ->
 +      Ast_999.Parsetree.Pexp_array (List.map copy_expression x0)
++  | Ast_500.Parsetree.Pexp_array (Immutable, _) ->
++      failwith "Pexp_array (immutable) should have been handled in copy_expression"
 +  | Ast_500.Parsetree.Pexp_ifthenelse (x0, x1, x2) ->
 +      Ast_999.Parsetree.Pexp_ifthenelse
 +        (copy_expression x0, copy_expression x1, Option.map copy_expression x2)
@@ -217,8 +229,55 @@
 +  | Ast_500.Parsetree.Pexp_extension x0 ->
 +      Ast_999.Parsetree.Pexp_extension (copy_extension x0)
 +  | Ast_500.Parsetree.Pexp_unreachable -> Ast_999.Parsetree.Pexp_unreachable
-+  | Ast_500.Parsetree.Pexp_stack e -> Ast_999.Parsetree.Pexp_stack
-+      (copy_expression e)
++  | Ast_500.Parsetree.Pexp_stack e ->
++      Ast_999.Parsetree.Pexp_stack (copy_expression e)
++  | Ast_500.Parsetree.Pexp_comprehension _ ->
++      failwith "Pexp_comprehension should have been handled in copy_expression"
++
++and copy_comprehension_iterator :
++    Ast_500.Parsetree.comprehension_iterator -> Jane_syntax.Comprehensions.iterator
++  = function
++    | Pcomp_range { start; stop; direction } ->
++      Range
++        { start = copy_expression start;
++          stop = copy_expression stop;
++          direction = copy_direction_flag direction;
++        }
++    | Pcomp_in x0 -> In (copy_expression x0)
++
++and copy_comprehension_clause_binding :
++  Ast_500.Parsetree.comprehension_clause_binding -> Jane_syntax.Comprehensions.clause_binding
++  = fun
++    { pcomp_cb_pattern;
++      pcomp_cb_iterator;
++      pcomp_cb_attributes;
++    } ->
++    { pattern = copy_pattern pcomp_cb_pattern;
++      iterator = copy_comprehension_iterator pcomp_cb_iterator;
++      attributes = copy_attributes pcomp_cb_attributes;
++    }
++
++and copy_comprehension_clause :
++  Ast_500.Parsetree.comprehension_clause -> Jane_syntax.Comprehensions.clause
++  = function
++  | Pcomp_for cbs -> For (List.map copy_comprehension_clause_binding cbs)
++  | Pcomp_when x0 -> When (copy_expression x0)
++
++and copy_comprehension : Ast_500.Parsetree.comprehension -> Jane_syntax.Comprehensions.comprehension =
++  fun
++    { pcomp_body;
++      pcomp_clauses;
++    } ->
++  { body = copy_expression pcomp_body;
++    clauses = List.map copy_comprehension_clause pcomp_clauses;
++  }
++
++and copy_comprehension_expression :
++  Ast_500.Parsetree.comprehension_expression -> Jane_syntax.Comprehensions.expression
++  = function
++  | Pcomp_list_comprehension x0 -> Cexp_list_comprehension (copy_comprehension x0)
++  | Pcomp_array_comprehension (x0, x1) ->
++      Cexp_array_comprehension (copy_mutable_flag x0, copy_comprehension x1)
 +
 +and copy_letop : Ast_500.Parsetree.letop -> Ast_999.Parsetree.letop =
 + fun { Ast_500.Parsetree.let_; Ast_500.Parsetree.ands; Ast_500.Parsetree.body } ->
@@ -513,6 +572,11 @@
 +       ~loc:(copy_location ppat_loc)
 +       ~attrs:(copy_attributes ppat_attributes)
 +       (Jpat_layout (Lpat_constant (Integer (x, c))))
++   | Ppat_array (Immutable, xs) ->
++     Jane_syntax.Pattern.pat_of
++       ~loc:(copy_location ppat_loc)
++       ~attrs:(copy_attributes ppat_attributes)
++       (Jpat_immutable_array (Iapat_immutable_array (List.map copy_pattern xs)))
 +   | _ ->
 +     {
 +       Ast_999.Parsetree.ppat_desc = copy_pattern_desc ppat_desc;
@@ -556,8 +620,10 @@
 +              (copy_loc copy_Longident_t x0, copy_pattern x1))
 +            x0,
 +          copy_closed_flag x1 )
-+  | Ast_500.Parsetree.Ppat_array x0 ->
++  | Ast_500.Parsetree.Ppat_array (Mutable, x0) ->
 +      Ast_999.Parsetree.Ppat_array (List.map copy_pattern x0)
++  | Ast_500.Parsetree.Ppat_array (Immutable, _) ->
++      failwith "Ppat_array (immutable) should have been handled in copy_pattern"
 +  | Ast_500.Parsetree.Ppat_or (x0, x1) ->
 +      Ast_999.Parsetree.Ppat_or (copy_pattern x0, copy_pattern x1)
 +  | Ast_500.Parsetree.Ppat_constraint (x0, x1, x2) ->
@@ -932,6 +998,15 @@
 +    Ast_999.Parsetree.pmb_loc = copy_location pmb_loc;
 +  }
 +
++and copy_module_instance :
++  Ast_500.Parsetree.module_instance -> Jane_syntax.Instances.instance =
++  fun { pmod_instance_head; pmod_instance_args } ->
++  { head = pmod_instance_head;
++    args =
++      List.map (fun (param, arg) -> param, copy_module_instance arg)
++        pmod_instance_args;
++  }
++
 +and copy_module_expr :
 +    Ast_500.Parsetree.module_expr -> Ast_999.Parsetree.module_expr =
 + fun {
@@ -939,6 +1014,16 @@
 +       Ast_500.Parsetree.pmod_loc;
 +       Ast_500.Parsetree.pmod_attributes;
 +     } ->
++
++  match pmod_desc with
++  | Pmod_instance x0 ->
++    let e =
++      Jane_syntax.Instances.module_expr_of
++        ~loc:(copy_location pmod_loc)
++        (Imod_instance (copy_module_instance x0))
++    in
++    { e with pmod_attributes = copy_attributes pmod_attributes @ e.pmod_attributes }
++  | _ ->
 +  {
 +    Ast_999.Parsetree.pmod_desc = copy_module_expr_desc pmod_desc;
 +    Ast_999.Parsetree.pmod_loc = copy_location pmod_loc;
@@ -984,6 +1069,8 @@
 +      Ast_999.Parsetree.Pmod_unpack (copy_expression x0)
 +  | Ast_500.Parsetree.Pmod_extension x0 ->
 +      Ast_999.Parsetree.Pmod_extension (copy_extension x0)
++  | Ast_500.Parsetree.Pmod_instance _ ->
++      failwith "Pmod_instance should have been handled in copy_module_expr"
 +
 +and copy_functor_parameter :
 +    Ast_500.Parsetree.functor_parameter -> Ast_999.Parsetree.functor_parameter =
@@ -1000,6 +1087,14 @@
 +       Ast_500.Parsetree.pmty_loc;
 +       Ast_500.Parsetree.pmty_attributes;
 +     } ->
++
++  match pmty_desc with
++  | Pmty_strengthen (x0, x1) ->
++    Jane_syntax.Module_type.mty_of
++      ~loc:(copy_location pmty_loc)
++      ~attrs:(copy_attributes pmty_attributes)
++      (Jmty_strengthen { mty = copy_module_type x0; mod_id = x1 })
++  | _ ->
 +  {
 +    Ast_999.Parsetree.pmty_desc = copy_module_type_desc pmty_desc;
 +    Ast_999.Parsetree.pmty_loc = copy_location pmty_loc;
@@ -1025,6 +1120,8 @@
 +      Ast_999.Parsetree.Pmty_extension (copy_extension x0)
 +  | Ast_500.Parsetree.Pmty_alias x0 ->
 +      Ast_999.Parsetree.Pmty_alias (copy_loc copy_Longident_t x0)
++  | Ast_500.Parsetree.Pmty_strengthen _ ->
++    failwith "Pmty_strengthen should have been handled in copy_module_type"
 +
 +and copy_with_constraint :
 +    Ast_500.Parsetree.with_constraint -> Ast_999.Parsetree.with_constraint =

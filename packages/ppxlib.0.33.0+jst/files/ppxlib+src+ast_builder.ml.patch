@@ -123,16 +123,20 @@
  
    let pexp_tuple_opt ~loc l =
      match l with [] -> None | _ :: _ -> Some (pexp_tuple ~loc l)
-@@ -99,7 +188,7 @@ module Default = struct
+@@ -98,8 +187,11 @@ module Default = struct
+   let ppat_tuple_opt ~loc l =
      match l with [] -> None | _ :: _ -> Some (ppat_tuple ~loc l)
  
++  let pexp_array ~loc l = pexp_array ~loc Mutable l
++  let ppat_array ~loc l = ppat_array ~loc Mutable l
++
    let ptyp_poly ~loc vars ty =
 -    match vars with [] -> ty | _ -> ptyp_poly ~loc vars ty
 +    match vars with [] -> ty | _ -> ptyp_poly ~loc (List.map vars ~f:(fun v -> v, None)) ty
  
    let pexp_apply ~loc e el =
      match (e, el) with
-@@ -111,9 +200,23 @@ module Default = struct
+@@ -111,9 +203,23 @@ module Default = struct
    let eapply ~loc e el =
      pexp_apply ~loc e (List.map el ~f:(fun e -> (Asttypes.Nolabel, e)))
  
@@ -159,7 +163,7 @@
  
    let esequence ~loc el =
      match List.rev el with
-@@ -180,52 +283,62 @@ module Default = struct
+@@ -180,52 +286,62 @@ module Default = struct
      type_constr_conv longident ~loc ~f []
  
    let eta_reduce =
@@ -259,7 +263,7 @@
          in
          pexp_constraint ~loc expr ty
        else expr
-@@ -248,13 +361,13 @@ module Default = struct
+@@ -248,13 +364,13 @@ module Default = struct
          | _ -> None
      in
      fun expr ->
@@ -275,7 +279,7 @@
                  Poly.( = ) (arg_label : arg_label) param_label
                  &&
                  match arg with
-@@ -295,6 +408,9 @@ module type S = sig
+@@ -295,6 +411,9 @@ module type S = sig
        res:core_type option ->
        unit ->
        constructor_declaration
@@ -285,7 +289,7 @@
    end
  
    val ppat_construct : longident loc -> pattern option -> pattern
-@@ -315,7 +431,11 @@ end) : S = struct
+@@ -315,7 +434,11 @@ end) : S = struct
      let ppat_construct = ppat_construct
  
      let constructor_declaration ~name ~vars ~args ~res () =
@@ -297,7 +301,7 @@
    end
  
    (*----- stable layer above Ast_builder_generated.Make (Loc) -----*)
-@@ -340,6 +460,26 @@ end) : S = struct
+@@ -340,6 +463,26 @@ end) : S = struct
  
    (*---------------------------------------------------------------*)
  
@@ -324,7 +328,16 @@
    let pstr_value_list = Default.pstr_value_list
  
    let nonrec_type_declaration ~name ~params ~cstrs ~kind ~private_ ~manifest =
-@@ -389,17 +529,30 @@ end) : S = struct
+@@ -359,6 +502,8 @@ end) : S = struct
+   let ptyp_tuple l = Default.ptyp_tuple ~loc l
+   let pexp_tuple_opt l = Default.pexp_tuple_opt ~loc l
+   let ppat_tuple_opt l = Default.ppat_tuple_opt ~loc l
++  let pexp_array l = Default.pexp_array ~loc l
++  let ppat_array l = Default.ppat_array ~loc l
+   let ptyp_poly vars ty = Default.ptyp_poly ~loc vars ty
+   let pexp_apply e el = Default.pexp_apply ~loc e el
+   let eint t = Default.eint ~loc t
+@@ -389,17 +534,30 @@ end) : S = struct
    let elist l = Default.elist ~loc l
    let plist l = Default.plist ~loc l
  

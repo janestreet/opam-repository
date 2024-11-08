@@ -11,7 +11,7 @@
    val pstr_value_list :
      loc:Location.t ->
      Asttypes.rec_flag ->
-@@ -110,6 +114,63 @@ module type Additional_helpers = sig
+@@ -110,6 +114,65 @@ module type Additional_helpers = sig
  
    val eta_reduce_if_possible_and_nonrec :
      expression -> rec_flag:rec_flag -> expression
@@ -40,6 +40,7 @@
 +
 +  val ppat_constraint : (pattern -> core_type -> pattern) with_loc
 +  val ppat_tuple : (pattern list -> pattern) with_loc
++  val ppat_array : (pattern list -> pattern) with_loc
 +
 +  val value_binding
 +    : (pat:pattern -> expr:expression -> value_binding) with_loc
@@ -60,6 +61,7 @@
 +  val ptyp_alias : (core_type -> string loc -> core_type) with_loc
 +  val ptyp_poly : (string loc list -> core_type -> core_type) with_loc
 +  val pexp_newtype : (string loc -> expression -> expression) with_loc
++  val pexp_array : (expression list -> expression) with_loc
 +
 +  val type_declaration :
 +    (name:string loc ->
