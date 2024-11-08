@@ -32,3 +32,9 @@ url {
   src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-2.tar.gz"
   checksum: ["sha256=fea242bf6707991bcd6de388a247aaf966e4936098a7db170560b3e879436c6c"]
 }
+extra-files: [
+  ["meta.patch" "sha256=3f165d873951620a3189938a909305aa0de3c77b998b6c84125f39ae95e91fb2"]
+]
+patches: [
+  "meta.patch"
+]
