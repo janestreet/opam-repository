@@ -34,7 +34,9 @@ url {
 }
 extra-files: [
   ["meta.patch" "sha256=3f165d873951620a3189938a909305aa0de3c77b998b6c84125f39ae95e91fb2"]
+  ["remove-sigwait.patch" "sha256=1983f61bd5a53cd9918acd297c40ea5327370325c2974c18dfdcd21f9f0cac20"]
 ]
 patches: [
   "meta.patch"
+  "remove-sigwait.patch"
 ]

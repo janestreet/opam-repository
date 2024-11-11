@@ -1,0 +1,42 @@
+diff --git a/ocaml/otherlibs/systhreads/st_posix.h b/ocaml/otherlibs/systhreads/st_posix.h
+index 1ed25fdef3..675464b77d 100644
+--- a/ocaml/otherlibs/systhreads/st_posix.h
++++ b/ocaml/otherlibs/systhreads/st_posix.h
+@@ -79,7 +79,6 @@ value caml_thread_sigmask(value cmd, value sigs)
+ 
+ value caml_wait_signal(value sigs)
+ {
+-#ifdef HAS_SIGWAIT
+   sigset_t set;
+   int retcode, signo;
+ 
+@@ -89,8 +88,4 @@ value caml_wait_signal(value sigs)
+   caml_leave_blocking_section();
+   sync_check_error(retcode, "Thread.wait_signal");
+   return Val_int(caml_rev_convert_signal_number(signo));
+-#else
+-  caml_invalid_argument("Thread.wait_signal not implemented");
+-  return Val_int(0);            /* not reached */
+-#endif
+ }
+diff --git a/ocaml/otherlibs/systhreads4/st_posix.h b/ocaml/otherlibs/systhreads4/st_posix.h
+index a43c78fbc9..0c6e4daabf 100644
+--- a/ocaml/otherlibs/systhreads4/st_posix.h
++++ b/ocaml/otherlibs/systhreads4/st_posix.h
+@@ -541,7 +541,6 @@ value caml_thread_sigmask(value cmd, value sigs) /* ML */
+ 
+ value caml_wait_signal(value sigs) /* ML */
+ {
+-#ifdef HAS_SIGWAIT
+   sigset_t set;
+   int retcode, signo;
+ 
+@@ -551,8 +550,4 @@ value caml_wait_signal(value sigs) /* ML */
+   caml_leave_blocking_section();
+   st_check_error(retcode, "Thread.wait_signal");
+   return Val_int(caml_rev_convert_signal_number(signo));
+-#else
+-  caml_invalid_argument("Thread.wait_signal not implemented");
+-  return Val_int(0);            /* not reached */
+-#endif
+ }
