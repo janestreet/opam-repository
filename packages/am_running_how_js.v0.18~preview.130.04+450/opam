@@ -14,8 +14,8 @@ depends: [
   "core"            {= "v0.18~preview.130.04+450"}
   "ppx_jane"        {= "v0.18~preview.130.04+450"}
   "dune"            {>= "3.11.0"}
-  "js_of_ocaml"     {>= "5.1.1" & < "5.7.0"}
-  "js_of_ocaml-ppx" {>= "5.1.1" & < "5.7.0"}
+  "js_of_ocaml"     {= "5.6.0+jst"}
+  "js_of_ocaml-ppx" {= "5.6.0+jst"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "A library for determining the js_of_ocaml environment that an OCaml program is running in."
