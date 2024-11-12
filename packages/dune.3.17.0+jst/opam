@@ -48,8 +48,8 @@ depends: [
 ]
 url {
   src:
-    "https://github.com/ocaml-wasm/dune/archive/ac04ab0ece7b21db94f2894bfbb54b04a57f42ef.tar.gz"
+    "https://github.com/ocaml/dune/archive/678fc7da4753d557fbe8b850f59cf632afde39ec.tar.gz"
   checksum: [
-    "sha256=dfff5d33dd9a2802a56883c82d32834cee2a6877b0fac98be3ac245e2e6e1f8b"
+    "sha256=f38d3a0a3994dd14fcd029b21443811b3421390e5c1383606aa342230bc88f91"
   ]
 }
