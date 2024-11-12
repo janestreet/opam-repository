@@ -20,7 +20,7 @@ depends: [
   "ppxlib"     {>= "0.15.0" & = "0.33.0+jst"}
   "re"         {with-test}
   "cmdliner"   {>= "1.1.0"}
-  "sedlex"     {>= "2.3"}
+  "sedlex"     {= "3.2+jst"}
   "menhir"
   "menhirLib"
   "menhirSdk"
