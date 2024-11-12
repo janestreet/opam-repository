@@ -1,7 +1,6 @@
-diff --git a/runtime/array.js b/runtime/array.js
 --- a/runtime/array.js
 +++ b/runtime/array.js
-@@ -131,3 +131,13 @@ function caml_floatarray_create(len){
+@@ -131,3 +131,13 @@
    for (var i = 1; i < len; i++) b[i] = 0;
    return b
  }
@@ -15,7 +14,6 @@ diff --git a/runtime/array.js b/runtime/array.js
 +function caml_array_of_iarray(a) {
 +  return a;
 +}
-diff --git a/runtime/wasm/array.wat b/runtime/wasm/array.wat
 --- a/runtime/wasm/array.wat
 +++ b/runtime/wasm/array.wat
 @@ -293,4 +293,13 @@

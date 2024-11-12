@@ -1,7 +1,6 @@
-diff --git a/compiler/tests-jsoo/test_floats.ml b/compiler/tests-jsoo/test_floats.ml
 --- a/compiler/tests-jsoo/test_floats.ml
 +++ b/compiler/tests-jsoo/test_floats.ml
-@@ -26,26 +26,6 @@ let%expect_test _ =
+@@ -26,26 +26,6 @@
    Printf.printf "%g\n" (1. /. z);
    [%expect {|-inf|}]
  

@@ -1,7 +1,6 @@
-diff --git a/compiler/ppx/ppx_optcomp_light.ml b/compiler/ppx/ppx_optcomp_light.ml
 --- a/compiler/ppx/ppx_optcomp_light.ml
 +++ b/compiler/ppx/ppx_optcomp_light.ml
-@@ -209,9 +209,13 @@ class map =
+@@ -209,9 +209,13 @@
      method expression_desc : expression_desc -> expression_desc =
        fun x ->
          match x with
@@ -18,10 +17,9 @@ diff --git a/compiler/ppx/ppx_optcomp_light.ml b/compiler/ppx/ppx_optcomp_light.
          | Pexp_match (a, b) ->
              let a = self#expression a in
              let b = self#cases b in
-diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_internal/ppx_js_internal.ml
 --- a/ppx/ppx_js/lib_internal/ppx_js_internal.ml
 +++ b/ppx/ppx_js/lib_internal/ppx_js_internal.ml
-@@ -250,7 +250,7 @@ let invoker ?(extra_types = []) uplift d
+@@ -250,7 +250,7 @@
    in
    let make_fun (label, pat) (label', typ) expr =
      assert (label' = label);
@@ -30,7 +28,7 @@ diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_interna
    in
    let invoker =
      List.fold_right2
-@@ -309,10 +309,10 @@ let method_call ~loc ~apply_loc obj (met
+@@ -309,10 +309,10 @@
    in
    Exp.apply
      ~loc:apply_loc
@@ -43,7 +41,7 @@ diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_interna
               ~loc:gloc
               nolabel
               None
-@@ -355,7 +355,7 @@ let prop_get ~loc obj prop =
+@@ -355,7 +355,7 @@
      invoker
      [ app_arg obj
      ; app_arg
@@ -52,7 +50,7 @@ diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_interna
             ~loc:gloc
             nolabel
             None
-@@ -379,9 +379,8 @@ let prop_get ~loc obj prop =
+@@ -379,9 +379,8 @@
  let prop_set ~loc ~prop_loc obj prop value =
    let gloc = { obj.pexp_loc with Location.loc_ghost = true } in
    let obj =
@@ -64,7 +62,7 @@ diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_interna
    in
    let invoker =
      invoker
-@@ -409,7 +408,7 @@ let prop_set ~loc ~prop_loc obj prop val
+@@ -409,7 +408,7 @@
      [ app_arg obj
      ; app_arg value
      ; app_arg
@@ -73,7 +71,7 @@ diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_interna
             ~loc:{ loc with loc_ghost = true }
             nolabel
             None
-@@ -583,9 +582,13 @@ let preprocess_literal_object mappper fi
+@@ -583,9 +582,13 @@
      | Pcf_method (id, priv, Cfk_concrete (bang, body)) ->
          let names = check_name id names in
          let body = format_meth (mappper body) in
@@ -89,7 +87,7 @@ diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_interna
            | _ -> []
          in
          let fun_ty = create_meth_ty body in
-@@ -641,7 +644,7 @@ let literal_object self_id (fields : fie
+@@ -641,7 +644,7 @@
    let body = function
      | Val (_, _, _, body) -> body
      | Meth (_, _, _, body, _) ->
@@ -98,7 +96,7 @@ diff --git a/ppx/ppx_js/lib_internal/ppx_js_internal.ml b/ppx/ppx_js/lib_interna
    in
    let extra_types =
      List.concat
-@@ -725,14 +728,17 @@ let literal_object self_id (fields : fie
+@@ -725,14 +728,17 @@
      invoker
      (List.map fields ~f:(fun f -> app_arg (body f))
      @ [ app_arg

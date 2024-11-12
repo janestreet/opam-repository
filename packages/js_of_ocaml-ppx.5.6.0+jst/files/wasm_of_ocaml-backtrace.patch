@@ -1,0 +1,121 @@
+--- a/compiler/bin-wasm_of_ocaml/compile.ml
++++ b/compiler/bin-wasm_of_ocaml/compile.ml
+@@ -245,7 +245,7 @@
+         | None -> `Fst name)
+   in
+   let t1 = Timer.make () in
+-  let builtin = Js_of_ocaml_compiler_runtime_files.runtime @ builtin in
++  let builtin = Js_of_ocaml_compiler_runtime_files.runtime @ Wasm_of_ocaml_compiler_runtime_files.runtime @ builtin in
+   List.iter builtin ~f:(fun t ->
+       let filename = Builtins.File.name t in
+       let runtimes = Linker.Fragment.parse_builtin t in
+--- /dev/null
++++ b/compiler/lib-runtime-files/wasm/wasm_of_ocaml_compiler_runtime_files.ml
+@@ -0,0 +1,23 @@
++(* Js_of_ocaml compiler
++ * http://www.ocsigen.org/js_of_ocaml/
++ * Copyright (C) 2020 Hugo Heuzard
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License as published by
++ * the Free Software Foundation, with linking exception;
++ * either version 2.1 of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ *)
++
++ let runtime =
++    Wa_files.[ flags ]
++
++  include Wa_files
+--- a/runtime/wasm/backtrace.wat
++++ b/runtime/wasm/backtrace.wat
+@@ -1,4 +1,6 @@
+ (module
++   (import "bindings" "backtrace_status" (func $backtrace_status (result i32)))
++   (import "bindings" "record_backtrace" (func $record_backtrace (param i32) (result (ref eq))))
+    (import "fail" "caml_invalid_argument"
+       (func $caml_invalid_argument (param (ref eq))))
+
+@@ -9,9 +11,11 @@
+       (param (ref eq)) (result (ref eq))
+       (array.new_fixed $block 1 (ref.i31 (i32.const 0))))
+
++
+    (func (export "caml_backtrace_status")
+       (param (ref eq)) (result (ref eq))
+-      (ref.i31 (i32.const 0)))
++      (ref.i31
++         (call $backtrace_status)))
+
+    (func (export "caml_convert_raw_backtrace")
+       (param (ref eq)) (result (ref eq))
+@@ -48,5 +52,6 @@
+       (ref.i31 (i32.const 0)))
+
+    (func (export "caml_record_backtrace") (param (ref eq)) (result (ref eq))
+-      (ref.i31 (i32.const 0)))
++         (call $record_backtrace
++            (i31.get_s (ref.cast (ref i31) (local.get 0)))))
+ )
+--- /dev/null
++++ b/runtime/wasm/flags.js
+@@ -0,0 +1,2 @@
++//Provides: with_js_error
++var with_js_error = FLAG("with-js-error");
+--- a/runtime/wasm/runtime.js
++++ b/runtime/wasm/runtime.js
+@@ -135,7 +135,35 @@
+     for (var i = 0; i < s.length; i++) h = hash_int(h, s.charCodeAt(i));
+     return h ^ s.length;
+   }
+
++    var caml_record_backtrace_flag = js.with_js_error
++
++    function jsoo_sys_getenv (n) {
++      var process = globalThis.process;
++
++      //nodejs env
++      if(process && process.env && process.env[n] != undefined) {
++        return process.env[n];
++      }
++
++      if(globalThis.jsoo_static_env && globalThis.jsoo_static_env[n]) {
++        return globalThis.jsoo_static_env[n];
++      }
++    }
++
++    (function () {
++      var r = jsoo_sys_getenv("OCAMLRUNPARAM")
++      if(r !== undefined){
++        var l = r.split(",");
++        for(var i = 0; i < l.length; i++){
++          if(l[i] == "b") { caml_record_backtrace_flag = 1; break }
++          else if (l[i].startsWith("b=")) {
++            caml_record_backtrace_flag = +(l[i].slice(2))}
++          else continue;
++        }
++      }
++    }) ()
++
+   const bindings = {
+     jstag:
+       WebAssembly.JSTag ||
+@@ -403,7 +431,9 @@
+     channel_list,
+     exit: (n) => isNode && process.exit(n),
+     argv: () => (isNode ? process.argv.slice(1) : ["a.out"]),
+-    getenv: (n) => (isNode ? process.env[n] : null),
++    getenv: jsoo_sys_getenv,
++    backtrace_status: () => caml_record_backtrace_flag,
++    record_backtrace: b => caml_record_backtrace_flag=b,
+     system: (c) => {
+       var res = require("node:child_process").spawnSync(c, {
+         shell: true,

@@ -1,0 +1,10 @@
+--- a/toplevel/bin/jsoo_mkcmis.ml
++++ b/toplevel/bin/jsoo_mkcmis.ml
+@@ -58,6 +58,7 @@
+   | [] -> List.rev acc
+
+ let () =
++  Js_of_ocaml_compiler.Config.set_target `JavaScript;
+   let args = List.tl (Array.to_list Sys.argv) in
+   let args = scan_args [] args in
+   let runtime_files, args =

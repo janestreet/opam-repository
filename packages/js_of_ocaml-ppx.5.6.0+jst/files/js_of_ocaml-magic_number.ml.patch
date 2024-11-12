@@ -1,47 +1,21 @@
-diff --git a/compiler/lib/magic_number.ml b/compiler/lib/magic_number.ml
 --- a/compiler/lib/magic_number.ml
 +++ b/compiler/lib/magic_number.ml
-@@ -64,7 +64,8 @@ let compare (p1, n1) (p2, n2) =
+@@ -64,8 +64,8 @@
 
  let equal a b = compare a b = 0
 
--let current_exe =
-+let current_exe = "Caml1999X", 534
-+(*
-   let v =
-     match Ocaml_version.v with
-     | `V4_04 -> 11
-@@ -79,8 +80,10 @@ let current_exe =
-     | `V4_14 -> 31
-   in
-   "Caml1999X", v
-+*)
+-let v =
+-  let current = Ocaml_version.current in
++let v = 552
++  (* let current = Ocaml_version.current in
+   match current with
+   | 4 :: 08 :: _ -> 25
+   | 4 :: 09 :: _ -> 26
+@@ -83,6 +83,6 @@
+       then failwith "OCaml version unsupported. Upgrade to OCaml 4.08 or newer."
+       else (
+         assert (Ocaml_version.compare current [ 5; 4 ] >= 0);
+-        failwith "OCaml version unsupported. Upgrade js_of_ocaml.")
++        failwith "OCaml version unsupported. Upgrade js_of_ocaml.") *)
 
--let current_cmo =
-+let current_cmo = "Caml1999O", 534
-+(*
-   let v =
-     match Ocaml_version.v with
-     | `V4_04 -> 11
-@@ -94,9 +97,11 @@ let current_cmo =
-     | `V4_13 -> 30
-     | `V4_14 -> 31
-   in
--  "Caml1999O", v
-+   "Caml1999O", v
-+   *)
-
--let current_cma =
-+let current_cma = "Caml1999A", 534
-+(*
-   let v =
-     match Ocaml_version.v with
-     | `V4_04 -> 12
-@@ -111,6 +116,7 @@ let current_cma =
-     | `V4_14 -> 31
-   in
-   "Caml1999A", v
-+*)
-
- let current = function
-   | `Exe -> current_exe
+ let current_exe = "Caml1999X", v

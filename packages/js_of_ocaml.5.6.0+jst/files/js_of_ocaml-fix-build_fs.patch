@@ -1,7 +1,6 @@
-diff --git a/compiler/bin-js_of_ocaml/build_fs.ml b/compiler/bin-js_of_ocaml/build_fs.ml
 --- a/compiler/bin-js_of_ocaml/build_fs.ml
 +++ b/compiler/bin-js_of_ocaml/build_fs.ml
-@@ -51,9 +51,11 @@ let f { files; output_file; include_dirs
+@@ -51,9 +51,11 @@
      {|
  //Provides: jsoo_create_file_extern
  function jsoo_create_file_extern(name,content){
@@ -15,3 +14,14 @@ diff --git a/compiler/bin-js_of_ocaml/build_fs.ml b/compiler/bin-js_of_ocaml/bui
      if(!globalThis.caml_fs_tmp) globalThis.caml_fs_tmp = [];
      globalThis.caml_fs_tmp.push({name:name,content:content});
    }
+--- a/compiler/tests-full/fs.expected.js
++++ b/compiler/tests-full/fs.expected.js
+@@ -18,6 +18,8 @@
+    function a(a, b){
+     if(c.jsoo_create_file)
+      c.jsoo_create_file(a, b);
++    else if(c.caml_create_file)
++     c.caml_create_file(a, b);
+     else{
+      if(! c.caml_fs_tmp) c.caml_fs_tmp = [];
+      c.caml_fs_tmp.push({name: a, content: b});

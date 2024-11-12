@@ -1,7 +1,6 @@
-diff --git a/compiler/lib/flow.ml b/compiler/lib/flow.ml
 --- a/compiler/lib/flow.ml
 +++ b/compiler/lib/flow.ml
-@@ -324,21 +324,30 @@ let the_def_of info x =
+@@ -324,21 +324,29 @@
  let the_const_of info x =
    match x with
    | Pv x ->
@@ -17,15 +16,14 @@ diff --git a/compiler/lib/flow.ml b/compiler/lib/flow.ml
 -        None
 -        (fun u v ->
 -          match u, v with
--          | Some i, Some j when Poly.(Code.constant_equal i j = Some true) -> u
+-          | Some i, Some j when constant_identical ~target i j -> u
 -          | _ -> None)
 -        x
-+
 +
 +      (* If this variable was minted after we constructed the info table, conservatively
 +         assume we know nothing. Transformations of array-access primitives in
 +         [specialize_js.ml] mint variables in this way. *)
-+      if Var.idx x >= Array.length info.info_defs
++      if Var.idx x >= Array.length info.Info.info_defs
 +      then None
 +      else (
 +        get_approx
@@ -40,17 +38,16 @@ diff --git a/compiler/lib/flow.ml b/compiler/lib/flow.ml
 +          None
 +          (fun u v ->
 +            match u, v with
-+            | Some i, Some j when Poly.(Code.constant_equal i j = Some true) -> u
++            | Some i, Some j when constant_identical ~target i j -> u
 +            | _ -> None)
 +          x
 +      )
    | Pc c -> Some c
 
  let the_int info x =
-diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
 --- a/compiler/lib/generate.ml
 +++ b/compiler/lib/generate.ml
-@@ -1099,6 +1099,7 @@ let register_bin_math_prim name prim =
+@@ -1099,6 +1099,7 @@
        J.call (J.dot (s_var "Math") prim) [ cx; cy ] loc)
 
  let _ =
@@ -58,7 +55,7 @@ diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
    register_un_prim_ctx "%caml_format_int_special" `Pure (fun ctx cx loc ->
        let s = J.EBin (J.Plus, str_js_utf8 "", cx) in
        ocaml_string ~ctx ~loc s);
-@@ -2101,6 +2102,20 @@ let compile_program ctx pc =
+@@ -2101,6 +2102,20 @@
    res
 
  let init () =
@@ -79,7 +76,7 @@ diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
    List.iter
      ~f:(fun (nm, nm') -> Primitive.alias nm nm')
      [ "%int_mul", "caml_mul"
-@@ -2120,6 +2135,7 @@ let init () =
+@@ -2120,6 +2135,7 @@
      ; "caml_int32_shift_right_unsigned", "%int_lsr"
      ; "caml_int32_of_int", "%identity"
      ; "caml_int32_to_int", "%identity"
@@ -87,7 +84,7 @@ diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
      ; "caml_int32_of_float", "caml_int_of_float"
      ; "caml_int32_to_float", "%identity"
      ; "caml_int32_format", "caml_format_int"
-@@ -2139,6 +2155,7 @@ let init () =
+@@ -2139,6 +2155,7 @@
      ; "caml_nativeint_shift_right_unsigned", "%int_lsr"
      ; "caml_nativeint_of_int", "%identity"
      ; "caml_nativeint_to_int", "%identity"
@@ -95,23 +92,23 @@ diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
      ; "caml_nativeint_of_float", "caml_int_of_float"
      ; "caml_nativeint_to_float", "%identity"
      ; "caml_nativeint_of_int32", "%identity"
-@@ -2160,8 +2177,12 @@ let init () =
+@@ -2160,9 +2177,13 @@
      ; "caml_array_set_addr", "caml_array_set"
      ; "caml_array_unsafe_get_float", "caml_array_unsafe_get"
      ; "caml_floatarray_unsafe_get", "caml_array_unsafe_get"
 +    ; "caml_array_unsafe_get_indexed_by_int32", "caml_array_unsafe_get"
 +    ; "caml_array_unsafe_get_indexed_by_nativeint", "caml_array_unsafe_get"
      ; "caml_array_unsafe_set_float", "caml_array_unsafe_set"
+     ; "caml_array_unsafe_set_addr", "caml_array_unsafe_set"
      ; "caml_floatarray_unsafe_set", "caml_array_unsafe_set"
 +    ; "caml_array_unsafe_set_indexed_by_int32", "caml_array_unsafe_set"
 +    ; "caml_array_unsafe_set_indexed_by_nativeint", "caml_array_unsafe_set"
      ; "caml_check_bound_gen", "caml_check_bound"
      ; "caml_check_bound_float", "caml_check_bound"
      ; "caml_alloc_dummy_float", "caml_alloc_dummy"
-diff --git a/compiler/lib/specialize_js.ml b/compiler/lib/specialize_js.ml
 --- a/compiler/lib/specialize_js.ml
 +++ b/compiler/lib/specialize_js.ml
-@@ -164,6 +164,32 @@ let specialize_instrs ~target info l =
+@@ -164,6 +164,32 @@
              ( x
              , Prim
                  ( Extern
@@ -144,7 +141,7 @@ diff --git a/compiler/lib/specialize_js.ml b/compiler/lib/specialize_js.ml
                      (( "caml_array_get"
                       | "caml_array_get_float"
                       | "caml_floatarray_get"
-@@ -207,6 +233,32 @@ let specialize_instrs ~target info l =
+@@ -207,6 +233,32 @@
              ( x
              , Prim
                  ( Extern
@@ -177,10 +174,9 @@ diff --git a/compiler/lib/specialize_js.ml b/compiler/lib/specialize_js.ml
                      (( "caml_array_set"
                       | "caml_array_set_float"
                       | "caml_floatarray_set"
-diff --git a/compiler/lib/wasm/wa_generate.ml b/compiler/lib/wasm/wa_generate.ml
 --- a/compiler/lib/wasm/wa_generate.ml
 +++ b/compiler/lib/wasm/wa_generate.ml
-@@ -159,9 +159,41 @@ module Generate (Target : Wa_target_sig.
+@@ -159,9 +159,41 @@
              let l = List.map ~f:transl_prim_arg l in
              match p, l with
              | Extern "caml_array_unsafe_get", [ x; y ] -> Memory.gen_array_get x y
@@ -222,7 +218,7 @@ diff --git a/compiler/lib/wasm/wa_generate.ml b/compiler/lib/wasm/wa_generate.ml
              | Extern "caml_array_unsafe_set_addr", [ x; y; z ] ->
                  seq (Memory.array_set x y z) Value.unit
              | Extern "caml_floatarray_unsafe_set", [ x; y; z ] ->
-@@ -1071,6 +1103,7 @@ let init () =
+@@ -1071,6 +1103,7 @@
      [ "caml_make_array", "%identity"
      ; "caml_ensure_stack_capacity", "%identity"
      ; "caml_callback", "caml_trampoline"
@@ -230,10 +226,9 @@ diff --git a/compiler/lib/wasm/wa_generate.ml b/compiler/lib/wasm/wa_generate.ml
      ]
    in
 
-diff --git a/runtime/int64.js b/runtime/int64.js
 --- a/runtime/int64.js
 +++ b/runtime/int64.js
-@@ -270,6 +270,27 @@ function caml_int64_of_int32 (x) {
+@@ -270,6 +270,27 @@
  //Provides: caml_int64_to_int32 const
  function caml_int64_to_int32 (x) { return x.toInt() }
 
@@ -261,7 +256,6 @@ diff --git a/runtime/int64.js b/runtime/int64.js
  //Provides: caml_int64_to_float const
  function caml_int64_to_float (x) { return x.toFloat () }
 
-diff --git a/runtime/wasm/int32.wat b/runtime/wasm/int32.wat
 --- a/runtime/wasm/int32.wat
 +++ b/runtime/wasm/int32.wat
 @@ -113,6 +113,20 @@
@@ -285,7 +279,6 @@ diff --git a/runtime/wasm/int32.wat b/runtime/wasm/int32.wat
     (export "caml_nativeint_compare" (func $caml_int32_compare))
     (func $caml_int32_compare (export "caml_int32_compare")
        (param (ref eq)) (param (ref eq)) (result (ref eq))
-diff --git a/runtime/wasm/int64.wat b/runtime/wasm/int64.wat
 --- a/runtime/wasm/int64.wat
 +++ b/runtime/wasm/int64.wat
 @@ -328,4 +328,17 @@

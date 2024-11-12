@@ -1,9 +1,11 @@
 opam-version: "2.0"
+version: "5.6.0+jst"
+name: "js_of_ocaml-compiler"
 synopsis: "Compiler from OCaml bytecode to JavaScript"
 description:
   "Js_of_ocaml is a compiler from OCaml bytecode to JavaScript. It makes it possible to run pure OCaml programs in JavaScript environment like browsers and Node.js"
-maintainer: ["Ocsigen team <dev@ocsigen.org>"]
-authors: ["Ocsigen team <dev@ocsigen.org>"]
+maintainer: "Ocsigen team <dev@ocsigen.org>"
+authors: "Ocsigen team <dev@ocsigen.org>"
 license: [
   "GPL-2.0-or-later" "LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception"
 ]
@@ -11,110 +13,283 @@ homepage: "https://ocsigen.org/js_of_ocaml/latest/manual/overview"
 doc: "https://ocsigen.org/js_of_ocaml/latest/manual/overview"
 bug-reports: "https://github.com/ocsigen/js_of_ocaml/issues"
 depends: [
-  "dune" {>= "3.7"}
-  "ocaml" {>= "4.08" & < "5.2"}
-  "num" {with-test}
+  "dune"       {>= "3.7"}
+  "ocaml"      {>= "5.2"}
+  "num"        {with-test}
   "ppx_expect" {>= "v0.14.2" & with-test}
-  "ppxlib" {>= "0.15.0"}
-  "re" {with-test}
-  "cmdliner" {>= "1.1.0"}
-  "sedlex" {>= "2.3"}
+  "ppxlib"     {>= "0.15.0" & = "0.33.0+jst"}
+  "re"         {with-test}
+  "cmdliner"   {>= "1.1.0"}
+  "sedlex"     {>= "2.3"}
   "menhir"
   "menhirLib"
   "menhirSdk"
   "yojson"
-  "odoc" {with-doc}
-  "ppxlib_jane"
+  "odoc"       {with-doc}
 ]
 depopts: ["ocamlfind"]
 conflicts: [
   "ocamlfind" {< "1.5.1"}
   "js_of_ocaml" {< "3.0"}
 ]
-dev-repo: "git+https://github.com/ocsigen/js_of_ocaml.git"
 build: [
   ["dune" "subst"] {dev}
-  [
-    "dune"
-    "build"
-    "-p"
-    name
-    "-j"
-    jobs
-    "@install"
-    "@doc" {with-doc}
-  ]
+  ["dune" "build" "-p" name "-j" jobs "@install" "@doc" {with-doc}]
 ]
+dev-repo: "git+https://github.com/ocsigen/js_of_ocaml.git"
+x-commit-hash: "b9c9a4b8d933c6a7d879b31912c20164ab6232e0"
 url {
   src:
-    "https://github.com/ocaml-wasm/wasm_of_ocaml/archive/33f15771e684eb3974bbdf6117f901a80eaada87.tar.gz"
-  checksum: [
-    "sha256=23c9bb168a93c327ea4c2785d9636017c95fa47014177edc92366d3ea5399a7d"
-  ]
+    "https://github.com/ocaml-wasm/wasm_of_ocaml/archive/090b7b29fc17a39353cbbf9ee7933d7371db93cf.tar.gz"
+  checksum:
+    "sha256=38a945f439c31a85044b40d90bdead154daf07453f26041039f07dcc7b314a12"
 }
-x-commit-hash: "b9c9a4b8d933c6a7d879b31912c20164ab6232e0"
 patches: [
- "js_of_ocaml-add-unboxed-and-float-block.patch"
- "js_of_ocaml-caml_hash_exn.patch"
- "js_of_ocaml-caml_provides_sub_local.patch"
- "js_of_ocaml-compilation_unit-name.patch"
- "js_of_ocaml-Env_value-arguments.patch"
- "js_of_ocaml-explicitly-ignore-unused-c-var.patch"
- "js_of_ocaml-fix-build_fs.patch"
- "js_of_ocaml-gc-channel-objects.patch"
- "js_of_ocaml-gh1482.patch"
- "js_of_ocaml-iarray-primitives.patch"
- "js_of_ocaml-ident-is_global.patch"
- "js_of_ocaml-important-config-changes.patch"
- "js_of_ocaml-index-by-unboxed-int.patch"
- "js_of_ocaml-internal-keyboard_code-changes.patch"
- "js_of_ocaml-internal-obj-changes.patch"
- "js_of_ocaml-internal-ocaml-5-compatibility.patch"
- "js_of_ocaml-internal-stdlib-changes.patch"
- "js_of_ocaml-int_u-array-primitives.patch"
- "js_of_ocaml-json-call.patch"
- "js_of_ocaml-magic_number.ml.patch"
- "js_of_ocaml-mixed-block-bytecode-op.patch"
- "js_of_ocaml-mixed-block-bytecode-op-regression-test.patch"
- "js_of_ocaml-n-ary-functions.patch"
- "js_of_ocaml-ocaml_version-ppx.patch"
- "js_of_ocaml-opt-level-setting.patch"
- "js_of_ocaml-raise-is-reraise.patch"
- "js_of_ocaml-remove-float-externals.patch"
- "js_of_ocaml-wasm-temp-differences.patch"
- "js_of_ocaml-with_async_exns.patch"
- "js_of_ocaml-dune.patch"
+  "js_of_ocaml-magic_number.ml.patch"
+  "js_of_ocaml-compilation_unit-name.patch"
+  "js_of_ocaml-with_async_exns.patch"
+  "js_of_ocaml-internal-obj-changes.patch"
+  "js_of_ocaml-add-unboxed-and-float-block.patch"
+  "js_of_ocaml-ident-is_global.patch"
+  "js_of_ocaml-remove-float-externals.patch"
+  "js_of_ocaml-ppx_js_as_lib.patch"
+  "js_of_ocaml-ocaml_version-ppx.patch"
+  "js_of_ocaml-test-diffs-caused-by-build-differences.patch"
+  "js_of_ocaml-fix-build_fs.patch"
+  "js_of_ocaml-Env_value-arguments.patch"
+  "js_of_ocaml-iarray-primitives.patch"
+  "js_of_ocaml-raise-is-reraise.patch"
+  "js_of_ocaml-important-config-changes.patch"
+  "js_of_ocaml-internal-ocaml-5-compatibility.patch"
+  "js_of_ocaml-wasm-temp-differences.patch"
+  "js_of_ocaml-caml_provides_sub_local.patch"
+  "js_of_ocaml-caml_hash_exn.patch"
+  "wasm_of_ocaml-build-prefix-sourcemaps.patch"
+  "wasm_of_ocaml-add-stubs-of-fs-fns.patch"
+  "wasm_of_ocaml-add-bigstring_memrchr.patch"
+  "wasm_of_ocaml-bring-back-eval.patch"
+  "js_of_ocaml-index-by-unboxed-int.patch"
+  "js_of_ocaml-mixed-block-bytecode-op.patch"
+  "js_of_ocaml-mixed-block-bytecode-op-regression-test.patch"
+  "wasm_of_ocaml-caml_ml_set_channel_output.patch"
+  "wasm_of_ocaml-remove-zzz-log.patch"
+  "js_of_ocaml-int_u-array-primitives.patch"
+  "wasm_of_ocaml-backtrace.patch"
+  "js_of_ocaml-n-ary-functions.patch"
+  "wasm_of_ocaml-yojson-support.patch"
+  "js_of_ocaml-int64-of-string-fixes.patch"
+  "js_of_ocaml-tmp-import-patch.patch"
+  "js_of_ocaml-symtable-5.2-api.patch"
+  "js_of_ocaml-set-target-mkcmis.patch"
+  "js_of_ocaml-js-string-concat-bug.patch"
+  "js_of_ocaml-js-object-in-json-recovery.patch"
+  "js_of_ocaml-re-allow-int32-nativeint-in-js.patch"
+  "js_of_ocaml-gc-channel-objects.patch"
+  "wasm_of_ocaml-blake2.patch"
+  "js_of_ocaml-jane-street-5.2-compatibility.patch"
+  "js_of_ocaml-migrate-labeled-tuples-shims.patch"
+  "wasm_of_ocaml-fetch-base-fix.patch"
+  "wasm_of_ocaml-gh113.patch"
+  "js_of_ocaml-floatarray_create_local.patch"
+  "wasm_of_ocaml-gh48.patch"
+  "wasm_of_ocaml-iter_props-bug.patch"
+  "dune.patch"
 ]
 extra-files: [
- ["js_of_ocaml-add-unboxed-and-float-block.patch" "sha256=93981e779bdae36a70787e29e1f164169cb3b1d95840bf75ccc6cf5ad9fc2f8a"]
- ["js_of_ocaml-caml_hash_exn.patch" "sha256=9228fd3416c8268dfdf37ca7101d4ba60a9d2b9d8a30d57ecc21a2228b64a30e"]
- ["js_of_ocaml-caml_provides_sub_local.patch" "sha256=4f757c8b1dfea941f178e35fe8e00e668b914eae6b047b1adc3b0c4e50ccfe30"]
- ["js_of_ocaml-compilation_unit-name.patch" "sha256=850a47a8101d07f84583a0651790ce1b6f793b992d425da1b9e3416b71ca0e2e"]
- ["js_of_ocaml-Env_value-arguments.patch" "sha256=2b0e52b2c4f3ca1679f93c80f06362e3c1b9c335e7e3e70a453fa04674433237"]
- ["js_of_ocaml-explicitly-ignore-unused-c-var.patch" "sha256=a221a94e8447bf5328d746fae42914bbd1559a4a1688cd2dc253a8c71c384fd4"]
- ["js_of_ocaml-fix-build_fs.patch" "sha256=10663318c17dea4d6613cdf97dc6a7eb96606403ae040ba9701aca7872a2a4c2"]
- ["js_of_ocaml-float32.patch" "sha256=e1d0e8dc9ce87df43695eda06c74294a7064e5b9fd719dcb4c0cfd5b7cbd4a60"]
- ["js_of_ocaml-gc-channel-objects.patch" "sha256=578291ffa07b6cf571640278cf161db4ee74bf5ea3c7a431daac21472882476a"]
- ["js_of_ocaml-gh1482.patch" "sha256=58eff7e56c2d9cf1364c775f14aeb4850ae8a2b90a95e488a49241c2b0cefca9"]
- ["js_of_ocaml-iarray-primitives.patch" "sha256=8726d0092283bf0b3136d65e113ef5f9befb6beee14bb3f86f8408f8fdf8ccd2"]
- ["js_of_ocaml-ident-is_global.patch" "sha256=ca0e7d7987892aa1972d8543ffc4a7e668cf2f92297740106fb4c9e6d5788114"]
- ["js_of_ocaml-important-config-changes.patch" "sha256=41747c503ccc578dbe168581fa3f7db793f13b2da26ebeaf5b18504029251fe0"]
- ["js_of_ocaml-index-by-unboxed-int.patch" "sha256=ffaa479000e3928ad1ed6caea968f7c5587ca0fc275c9be85c6c03a9018872cb"]
- ["js_of_ocaml-internal-keyboard_code-changes.patch" "sha256=89bfef8a8a8e6fa3754389b3ae9450e2ece99ba58a75d0e556a9193e91cbd69b"]
- ["js_of_ocaml-internal-obj-changes.patch" "sha256=81933956de7e0eac4b20236068b85061f19e29a42121e9eaaa09acb4c8b75b4c"]
- ["js_of_ocaml-internal-ocaml-5-compatibility.patch" "sha256=9f043aad1b8e3d2c765cce320fcaf1f9d65d4ed78e846cf85bc72e2025f69df7"]
- ["js_of_ocaml-internal-stdlib-changes.patch" "sha256=33731a46c87c07b5034b94ff102fe40098c3b7d79e7c0c3967f30d90ecd02187"]
- ["js_of_ocaml-int_u-array-primitives.patch" "sha256=f0b576e11253e3c75aa2a1eb495fd64db1add6d6102ec6b82244dde8268e700e"]
- ["js_of_ocaml-json-call.patch" "sha256=c0a5289a98dab51c8b7c5ce66f15c7a6269deeb1a86edf225b9de36816fbb463"]
- ["js_of_ocaml-magic_number.ml.patch" "sha256=037faa606c7dec0f62febd580a022f0d3acb7d60549a9e90beb6b15293e5bcf8"]
- ["js_of_ocaml-mixed-block-bytecode-op.patch" "sha256=3af71bd76857d4fbed5f278338af7d7968a2c21ff052b85637bd5f0b82500663"]
- ["js_of_ocaml-mixed-block-bytecode-op-regression-test.patch" "sha256=6c7cd391c707e71bf3f3ab31a62cba2bb28b349d98c32901d9e959f60a7a4397"]
- ["js_of_ocaml-n-ary-functions.patch" "sha256=68e4895fb29b01bc9e27ef3143ec2a5708f7db6555056ddf919d09e72a7dfb40"]
- ["js_of_ocaml-ocaml_version-ppx.patch" "sha256=d3e46bcf1f0bca9a9ca81ad8cad64b8fa722b49792e1d6d373ce840244e6ca17"]
- ["js_of_ocaml-opt-level-setting.patch" "sha256=b3f2e9b31376ad2133fc5af406bf0b4e56322e2fc5097298ebd51e3ca172da55"]
- ["js_of_ocaml-raise-is-reraise.patch" "sha256=cf522515b7dab058402a9b82b95d8b6f0bb58870458931f3744ce311939f0fc9"]
- ["js_of_ocaml-remove-float-externals.patch" "sha256=4b117d9662a49acb25573e53d235ac8d0a72ddbc7777572f802f2462af22965d"]
- ["js_of_ocaml-wasm-temp-differences.patch" "sha256=37b6e4c8bdcadd046b9be4e53d5c9b447d443777f42d68c615153f70cd4de73c"]
- ["js_of_ocaml-with_async_exns.patch" "sha256=1d49299d299f835004da87f01c11b1062a599b690b2bd33c6347f9cb447db59f"]
- ["js_of_ocaml-dune.patch" "sha256=f76da998ab76de56309bd0da3e4db1fb496d6d235d7a0ac2f78e3bafe098714e"]
+  [
+    "js_of_ocaml-magic_number.ml.patch"
+    "sha256=509eebbfd6b7aace679fe0b8f76aa9917d8b62d0d6448eeb8b1f1bd8a78598cf"
+  ]
+  [
+    "js_of_ocaml-compilation_unit-name.patch"
+    "sha256=ca9a9bcac814177b9aa58ca2d500a74779b189c33291f0193503a376fddeafa4"
+  ]
+  [
+    "js_of_ocaml-with_async_exns.patch"
+    "sha256=0df2643d0b528b121e939506b6240cc35225bc5bffbcc80e6322e9cc8a269419"
+  ]
+  [
+    "js_of_ocaml-internal-obj-changes.patch"
+    "sha256=dbe8158e5815f63402ed319b23c3484b6329b6281902a3c90a97c92cbc6d2aeb"
+  ]
+  [
+    "js_of_ocaml-add-unboxed-and-float-block.patch"
+    "sha256=625447650ca1c56f597000c3a7191309d1f1ed795f3670bc367d6383a07fc07e"
+  ]
+  [
+    "js_of_ocaml-ident-is_global.patch"
+    "sha256=9cc507a14142220868af1c6f1e35b06648718f21924b0fb192d6bcf4d28395f6"
+  ]
+  [
+    "js_of_ocaml-remove-float-externals.patch"
+    "sha256=a3aa95ee08210377c1470e5bf0f832bc27ad98299bca22c7a88eb9fd6c32e655"
+  ]
+  [
+    "js_of_ocaml-ppx_js_as_lib.patch"
+    "sha256=0a5f7bfab90d25c2eb2d67832b7a2e5ca6a210e1fdb8a69b850f34bb9e8f8858"
+  ]
+  [
+    "js_of_ocaml-ocaml_version-ppx.patch"
+    "sha256=df6bcb6da8aa3dfd6bd0a178679987d41c400ec1803f4a66659cfc822d1b280f"
+  ]
+  [
+    "js_of_ocaml-test-diffs-caused-by-build-differences.patch"
+    "sha256=00d38ead67c67220351605d72c2b3a4e3faa8053087ef8ab47b7067b42900ba9"
+  ]
+  [
+    "js_of_ocaml-fix-build_fs.patch"
+    "sha256=b0f37f8a2301efd30ff1cf83eda273c1ac286a3f375c4456cd90acb129f6bb78"
+  ]
+  [
+    "js_of_ocaml-Env_value-arguments.patch"
+    "sha256=f600a7c618567634e7ac4e256918ee7aae2dde17e15f8a2c60b1061c32af950d"
+  ]
+  [
+    "js_of_ocaml-iarray-primitives.patch"
+    "sha256=74cca8956d9fed9d94bfa347e5a12fe0ab84b20228f0940774c9f773bd414f4d"
+  ]
+  [
+    "js_of_ocaml-raise-is-reraise.patch"
+    "sha256=0e92ff2f01d8b925f9802e9460cc3e8767408b8cca453b265de685f3993350fb"
+  ]
+  [
+    "js_of_ocaml-important-config-changes.patch"
+    "sha256=d7d25264de8f8fdaa58e1201bae3f8c07b310f1794b72ddd6a1d9667fae130a4"
+  ]
+  [
+    "js_of_ocaml-internal-ocaml-5-compatibility.patch"
+    "sha256=116b68d8afb0a90f313a3b03339a1e711d6c5341586db83d3a614380f388624d"
+  ]
+  [
+    "js_of_ocaml-wasm-temp-differences.patch"
+    "sha256=d644765237b939ab611c10f71672504ced91bf4ba0e8fe87a6cebc521bf2f34a"
+  ]
+  [
+    "js_of_ocaml-caml_provides_sub_local.patch"
+    "sha256=e1a969ca88e1373729672c3a6485c6134df6d73d6a6159b464c19a1bf5b14436"
+  ]
+  [
+    "js_of_ocaml-caml_hash_exn.patch"
+    "sha256=d8fa2605fff8ffa3ad9a2b12c6a9a2fd24540a0611bc7de57cb4546f8cdbb40e"
+  ]
+  [
+    "wasm_of_ocaml-build-prefix-sourcemaps.patch"
+    "sha256=b2f7e5dfd5ca6226b866986bcbec63b5eb30677bcc751ec88d7859affd1be83b"
+  ]
+  [
+    "wasm_of_ocaml-add-stubs-of-fs-fns.patch"
+    "sha256=eca0a589b1adecbf403e0e0a1e33ea2ab62f7d0e011a9183c3bc128c840102bf"
+  ]
+  [
+    "wasm_of_ocaml-add-bigstring_memrchr.patch"
+    "sha256=60940cef895569cbcd471ac913e91bddfa6b7e53d4cef69fa7ba888778ab7ee5"
+  ]
+  [
+    "wasm_of_ocaml-bring-back-eval.patch"
+    "sha256=3e19c3282539cdaf0e4b01621da48c9e33f47356ce9fce93ec7760f1d5f4a65d"
+  ]
+  [
+    "js_of_ocaml-index-by-unboxed-int.patch"
+    "sha256=ec5cda6172b322df50c401aadaa98e37f37791346e9cb505fd7dd64d7bc474fd"
+  ]
+  [
+    "js_of_ocaml-mixed-block-bytecode-op.patch"
+    "sha256=3a749f6458e94f8be6e8f410b00ca0dbf7492e62506b887c177fe52d9d41b495"
+  ]
+  [
+    "js_of_ocaml-mixed-block-bytecode-op-regression-test.patch"
+    "sha256=046c0cde7de52fe9b31ba4aeb1185aefbb3c9d3b3abb50b111e699d2b69c89a0"
+  ]
+  [
+    "wasm_of_ocaml-caml_ml_set_channel_output.patch"
+    "sha256=d5249ad3f957b69a6772d951f98eedce72bac53982c209af55093b789c5ba57c"
+  ]
+  [
+    "wasm_of_ocaml-remove-zzz-log.patch"
+    "sha256=90283df209f9466d949505e9d0d7553044c7a02ff6137845b9958c660ee17fed"
+  ]
+  [
+    "js_of_ocaml-int_u-array-primitives.patch"
+    "sha256=99eba4301613d03e0305017a687c768bd24a22cef0db25ab62cbc3d304f647ba"
+  ]
+  [
+    "wasm_of_ocaml-backtrace.patch"
+    "sha256=a636c1897dda1fbc116af9af03a06fa2d64f9b93e687960cf9c1597edfe9e566"
+  ]
+  [
+    "js_of_ocaml-n-ary-functions.patch"
+    "sha256=17a3fe079559cf2bd4a176ccc5649e999db8b36afe39cb22512ed802c771d67a"
+  ]
+  [
+    "wasm_of_ocaml-yojson-support.patch"
+    "sha256=0dd02da5688eeb5249bb1f612687c01d5421fdd54e9b883d688130f988cfa592"
+  ]
+  [
+    "js_of_ocaml-int64-of-string-fixes.patch"
+    "sha256=d1b02122d48f25f0d2997cab408a3d080e5921fa7b8127d9bc00b6a46a8c9104"
+  ]
+  [
+    "js_of_ocaml-tmp-import-patch.patch"
+    "sha256=bd08a6f9dd6e28a068a96f8889120c10bb183252a1f00b173bd72b1387aaefd4"
+  ]
+  [
+    "js_of_ocaml-symtable-5.2-api.patch"
+    "sha256=9a999950e8984cc582e3830f447111e1082dc720609334de66a011347d26da9b"
+  ]
+  [
+    "js_of_ocaml-set-target-mkcmis.patch"
+    "sha256=2040705d6f0dc5e20b3dc94903a2472abaeef4a0227e8dc0f4c08d849b0c88e7"
+  ]
+  [
+    "js_of_ocaml-js-string-concat-bug.patch"
+    "sha256=be43aeb30d136e02d2e3fcbeed9c344abe1506e9749da765fce392bff7682e17"
+  ]
+  [
+    "js_of_ocaml-js-object-in-json-recovery.patch"
+    "sha256=13b7bcee1c64e23a87f5c3a5834da0f9764351cc6f2c041fec901e7ccc51a26f"
+  ]
+  [
+    "js_of_ocaml-re-allow-int32-nativeint-in-js.patch"
+    "sha256=a4a929961f40e88647b80fcb674a75b596ef01cb6cee2480af51f79f6135123f"
+  ]
+  [
+    "js_of_ocaml-gc-channel-objects.patch"
+    "sha256=9b4478ea61014c5ca2b3b90818b34a31dbc60f188577d89e64b1c83b166c1302"
+  ]
+  [
+    "wasm_of_ocaml-blake2.patch"
+    "sha256=c2482636db51735781f6577f62f0e95d8ab8817f934a807017f443832985c13d"
+  ]
+  [
+    "js_of_ocaml-jane-street-5.2-compatibility.patch"
+    "sha256=9a21f7bad6bb11ca210ca9d926a8733dd7c90fd99db11003d9c1f4ea01e02d1e"
+  ]
+  [
+    "js_of_ocaml-migrate-labeled-tuples-shims.patch"
+    "sha256=a4397d610c34887ced4fb800763629610367c23dad4e17c53d5698283aba4366"
+  ]
+  [
+    "wasm_of_ocaml-fetch-base-fix.patch"
+    "sha256=d4f4441ff0800e40ff3f85f61fd8043fe416c60ad9f379a1225d148edae8b497"
+  ]
+  [
+    "wasm_of_ocaml-gh113.patch"
+    "sha256=2f2548e5aeb8fde16e4136c1ec9764aba9527719758b112f8896d73147fad0d2"
+  ]
+  [
+    "js_of_ocaml-floatarray_create_local.patch"
+    "sha256=07863239b3b604e61803a9824b87263fa5c4a4c801f0eb97c9b64ef879952338"
+  ]
+  [
+    "wasm_of_ocaml-gh48.patch"
+    "sha256=95d10a237e0048561a8a9a2b4bc038f5dbf19d83ac224ede800e9b29c9fe5abf"
+  ]
+  [
+    "wasm_of_ocaml-iter_props-bug.patch"
+    "sha256=85f7a4521eb90e8200571d8d139ee9b05c9a4fbf79a331eb3a568a207ec2e79e"
+  ]
+  [
+    "dune.patch"
+    "sha256=f76da998ab76de56309bd0da3e4db1fb496d6d235d7a0ac2f78e3bafe098714e"
+  ]
 ]

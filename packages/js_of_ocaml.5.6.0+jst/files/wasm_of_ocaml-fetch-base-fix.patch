@@ -1,0 +1,20 @@
+--- a/runtime/wasm/runtime.js
++++ b/runtime/wasm/runtime.js
+@@ -496,6 +496,7 @@
+     generated,
+   );
+   const options = { builtins: ["js-string", "text-decoder", "text-encoder"] };
++  const fetchBase = globalThis?.document?.currentScript?.src;
+
+   function loadRelative(src) {
+     const path = require("node:path");
+@@ -504,8 +505,7 @@
+     return require("node:fs/promises").readFile(f);
+   }
+   function fetchRelative(src) {
+-    const base = globalThis?.document?.currentScript?.src;
+-    const url = base ? new URL(src, base) : src;
++    const url = fetchBase ? new URL(src, fetchBase) : src;
+     return fetch(url);
+   }
+   const loadCode = isNode ? loadRelative : fetchRelative;

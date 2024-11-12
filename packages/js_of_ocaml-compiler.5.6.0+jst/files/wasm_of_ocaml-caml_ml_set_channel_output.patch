@@ -1,0 +1,19 @@
+--- a/runtime/wasm/io.wat
++++ b/runtime/wasm/io.wat
+@@ -823,6 +823,16 @@
+                (then (call $caml_flush (local.get $ch))))))
+       (ref.i31 (i32.const 0)))
+
++   (data $caml_ml_set_channel_output "caml_ml_set_channel_output")
++
++   (func (export "caml_ml_set_channel_output")
++      (param (ref eq) (ref eq)) (result (ref eq))
++      ;; ZZZ
++      (call $log_str
++         (array.new_data $string $caml_ml_set_channel_output
++            (i32.const 0) (i32.const 26)))
++      (ref.i31 (i32.const 0)))
++
+    (data $caml_ml_set_channel_refill "caml_ml_set_channel_refill")
+
+    (func (export "caml_ml_set_channel_refill")

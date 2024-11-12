@@ -1,0 +1,14 @@
+--- a/compiler/lib/wasm/wa_wat_output.ml
++++ b/compiler/lib/wasm/wa_wat_output.ml
+@@ -462,6 +462,11 @@
+         match loc with
+         | Javascript.N | U | Pi Parse_info.{ src = None; _ } -> instruction i
+         | Pi Parse_info.{ src = Some src; col; line; _ } ->
++            let src =
++                match Build_path_prefix_map.get_build_path_prefix_map () with
++                | Some map -> Build_path_prefix_map.rewrite map src
++                | None -> src
++            in
+             let loc = Format.sprintf "%s:%d:%d" src line col in
+             Comment ("@ " ^ loc) :: instruction i)
+   and instructions l = List.concat (List.map ~f:instruction l) in

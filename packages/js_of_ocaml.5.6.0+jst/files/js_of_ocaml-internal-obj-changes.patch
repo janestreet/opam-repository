@@ -1,7 +1,6 @@
-diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
 --- a/compiler/lib/generate.ml
 +++ b/compiler/lib/generate.ml
-@@ -1113,8 +1113,6 @@ let _ =
+@@ -1113,8 +1113,6 @@
    register_tern_prim "caml_array_unsafe_set" (fun cx cy cz _ ->
        J.EBin (J.Eq, Mlvalue.Array.field cx cy, cz));
    register_un_prim "caml_alloc_dummy" `Pure (fun _ _ -> J.array []);
@@ -10,10 +9,9 @@ diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
    register_un_prim "caml_int_of_float" `Pure (fun cx _loc -> to_int cx);
    register_un_math_prim "caml_abs_float" "abs";
    register_un_math_prim "caml_acos_float" "acos";
-diff --git a/compiler/tests-compiler/obj.ml b/compiler/tests-compiler/obj.ml
 --- a/compiler/tests-compiler/obj.ml
 +++ b/compiler/tests-compiler/obj.ml
-@@ -50,13 +50,13 @@ let%expect_test "static eval of string g
+@@ -50,13 +50,13 @@
      //end
      function my_tag(x){return runtime.caml_obj_tag([0, x, 0]);}
      //end
@@ -31,10 +29,9 @@ diff --git a/compiler/tests-compiler/obj.ml b/compiler/tests-compiler/obj.ml
 -    function my_dup(t){return [0, t, 0].slice();}
 +    function my_dup(t){return runtime.caml_obj_dup([0, t, 0]);}
      //end |}]
-diff --git a/compiler/tests-compiler/obj_dup.ml b/compiler/tests-compiler/obj_dup.ml
 --- a/compiler/tests-compiler/obj_dup.ml
 +++ b/compiler/tests-compiler/obj_dup.ml
-@@ -28,7 +28,7 @@ let%expect_test _ =
+@@ -28,7 +28,7 @@
      let print_bool b = print_endline (string_of_bool b)
      let () =
        let s = "Hello" in
@@ -43,7 +40,7 @@ diff --git a/compiler/tests-compiler/obj_dup.ml b/compiler/tests-compiler/obj_du
        print_bool (s = s');
        print_bool (s != s')
    |};
-@@ -44,7 +44,7 @@ let%expect_test _ =
+@@ -44,7 +44,7 @@
      let print_bool b = print_endline (string_of_bool b)
      let () =
        let s = Bytes.of_string "Hello" in
@@ -52,7 +49,7 @@ diff --git a/compiler/tests-compiler/obj_dup.ml b/compiler/tests-compiler/obj_du
        print_bool (s = s');
        print_bool (s != s');
        Bytes.set s' 1 'a';
-@@ -63,7 +63,7 @@ let%expect_test _ =
+@@ -63,7 +63,7 @@
      let print_bool b = print_endline (string_of_bool b)
      let () =
        let s = "Hello" in
@@ -61,7 +58,7 @@ diff --git a/compiler/tests-compiler/obj_dup.ml b/compiler/tests-compiler/obj_du
        print_bool (s = s');
        print_bool (s != s')
    |};
-@@ -79,7 +79,7 @@ let%expect_test _ =
+@@ -79,7 +79,7 @@
      let print_bool b = print_endline (string_of_bool b)
      let () =
        let s = Bytes.of_string "Hello" in
@@ -70,53 +67,17 @@ diff --git a/compiler/tests-compiler/obj_dup.ml b/compiler/tests-compiler/obj_du
        print_bool (s = s');
        print_bool (s != s');
        Bytes.set s' 1 'a';
-diff --git a/lib/tests/test_fun_call.ml b/lib/tests/test_fun_call.ml
---- a/lib/tests/test_fun_call.ml
-+++ b/lib/tests/test_fun_call.ml
-@@ -388,26 +388,26 @@ let%expect_test _ =
-     | Invalid_argument s | Failure s -> Printf.printf "Error: %s" s
-     | _ -> Printf.printf "Error: unknown"
-   in
-   (*
--  f (Obj.magic cb1);
-+  f (Sys.opaque_identity (Obj.magic cb1));
-   [%expect {|
-     got 1, done
-     Result: 0 |}];
--  f (Obj.magic cb2);
-+  f (Sys.opaque_identity (Obj.magic cb2));
-   [%expect {|
-     got 1, 2, done
-     Result: 0 |}];
- *)
--  f (Obj.magic cb3);
-+  f (Sys.opaque_identity (Obj.magic cb3));
-   [%expect {|
-     got 1, 2, 3, done
-     Result: 0 |}];
--  f (Obj.magic cb4);
-+  f (Sys.opaque_identity (Obj.magic cb4));
-   [%expect {|
-     Result: other |}];
--  f (Obj.magic cb5);
-+  f (Sys.opaque_identity (Obj.magic cb5));
-   [%expect {|
-     Result: other |}]
-
- let%expect_test _ =
-   let open Js_of_ocaml in
-diff --git a/runtime/obj.js b/runtime/obj.js
 --- a/runtime/obj.js
 +++ b/runtime/obj.js
-@@ -69,11 +69,49 @@ function caml_obj_with_tag(tag,x) {
+@@ -77,11 +77,49 @@
  }
 
  //Provides: caml_obj_dup mutable (mutable)
 +//Requires: MlInt64, MlBytes, caml_failwith
- function caml_obj_dup (x) {
+ function caml_obj_dup(x) {
 -  var l = x.length;
 -  var a = new Array(l);
--  for(var i = 0; i < l; i++ ) a[i] = x[i];
+-  for (var i = 0; i < l; i++) a[i] = x[i];
 -  return a;
 +  switch (typeof x) {
 +    case 'number':

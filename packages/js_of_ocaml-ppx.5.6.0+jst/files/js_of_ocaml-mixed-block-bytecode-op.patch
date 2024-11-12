@@ -1,7 +1,6 @@
-diff --git a/compiler/lib/instr.ml b/compiler/lib/instr.ml
 --- a/compiler/lib/instr.ml
 +++ b/compiler/lib/instr.ml
-@@ -169,6 +169,7 @@ type t =
+@@ -169,6 +169,7 @@
    | RERAISE
    | RAISE_NOTRACE
    | GETSTRINGCHAR
@@ -9,7 +8,7 @@ diff --git a/compiler/lib/instr.ml b/compiler/lib/instr.ml
    | PERFORM
    | RESUME
    | RESUMETERM
-@@ -353,13 +356,14 @@ let ops =
+@@ -353,13 +354,14 @@
       ; RERAISE, KStop 0, "RERAISE"
       ; RAISE_NOTRACE, KStop 0, "RAISE_NOTRACE"
       ; GETSTRINGCHAR, KNullary, "GETSTRINGCHAR"
@@ -24,10 +23,9 @@ diff --git a/compiler/lib/instr.ml b/compiler/lib/instr.ml
    let ops =
      Array.mapi ~f:(fun i (c, k, n) -> { code = c; kind = k; name = n; opcode = i }) instrs
    in
-diff --git a/compiler/lib/instr.mli b/compiler/lib/instr.mli
 --- a/compiler/lib/instr.mli
 +++ b/compiler/lib/instr.mli
-@@ -168,6 +168,7 @@ type t =
+@@ -168,6 +168,7 @@
    | RERAISE
    | RAISE_NOTRACE
    | GETSTRINGCHAR
@@ -35,27 +33,24 @@ diff --git a/compiler/lib/instr.mli b/compiler/lib/instr.mli
    | PERFORM
    | RESUME
    | RESUMETERM
-diff --git a/compiler/lib/parse_bytecode.ml b/compiler/lib/parse_bytecode.ml
 --- a/compiler/lib/parse_bytecode.ml
 +++ b/compiler/lib/parse_bytecode.ml
-@@ -1351,7 +1351,7 @@ and compile infos pc state instrs =
-         let x, state = State.fresh_var state loc in
-         if debug_parser () then Format.printf "%a = ATOM(%d)@." Var.print x i;
-         compile infos (pc + 2) state ((Let (x, Block (i, [||], NotArray)), loc) :: instrs)
+@@ -1461,7 +1461,7 @@
+           (pc + 2)
+           state
+           ((Let (x, Block (i, [||], Unknown, Maybe_mutable)), loc) :: instrs)
 -    | MAKEBLOCK ->
 +    | MAKE_FAUX_MIXEDBLOCK | MAKEBLOCK ->
          let size = getu code (pc + 1) in
          let tag = getu code (pc + 2) in
          let state = State.push state loc in
-diff -r 83fbabb72986 -r e4a231fc0deb compiler/lib/ocaml_compiler.ml
 --- a/compiler/lib/ocaml_compiler.ml	Mon Jul 22 18:34:59 2024 -0400
 +++ b/compiler/lib/ocaml_compiler.ml	Mon Jul 22 18:28:48 2024 -0400
-@@ -44,7 +44,7 @@
-         (match target with
-         | `JavaScript -> Int32.of_int_warning_on_overflow i
-         | `Wasm -> Int31.of_int_warning_on_overflow i)
+@@ -42,6 +42,6 @@
+       Float_array (Array.of_list l)
+   | ((Const_pointer i) [@if ocaml_version < (4, 12, 0)]) ->
+       Int (Targetint.of_int_warning_on_overflow i)
 -  | Const_block (tag, l) ->
 +  | Const_mixed_block (tag, _, l) | Const_block (tag, l) ->
-       let l = Array.of_list (List.map l ~f:(fun c -> constant_of_const ~target c)) in
+       let l = Array.of_list (List.map l ~f:constant_of_const) in
        Tuple (tag, l, Unknown)
- 

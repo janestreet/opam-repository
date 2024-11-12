@@ -1,7 +1,6 @@
-diff --git a/compiler/bin-js_of_ocaml/js_of_ocaml.ml b/compiler/bin-js_of_ocaml/js_of_ocaml.ml
 --- a/compiler/bin-js_of_ocaml/js_of_ocaml.ml
 +++ b/compiler/bin-js_of_ocaml/js_of_ocaml.ml
-@@ -43,31 +43,32 @@ let _ =
+@@ -43,31 +43,32 @@
      | _ -> argv
    in
    try
@@ -59,10 +58,9 @@ diff --git a/compiler/bin-js_of_ocaml/js_of_ocaml.ml b/compiler/bin-js_of_ocaml/
    with
    | (Match_failure _ | Assert_failure _ | Not_found) as exc ->
        let backtrace = Printexc.get_backtrace () in
-diff --git a/compiler/bin-jsoo_minify/jsoo_minify.ml b/compiler/bin-jsoo_minify/jsoo_minify.ml
 --- a/compiler/bin-jsoo_minify/jsoo_minify.ml
 +++ b/compiler/bin-jsoo_minify/jsoo_minify.ml
-@@ -96,10 +96,11 @@ let main =
+@@ -96,10 +96,11 @@
  
  let _ =
    try
@@ -78,10 +76,9 @@ diff --git a/compiler/bin-jsoo_minify/jsoo_minify.ml b/compiler/bin-jsoo_minify/
    with
    | (Match_failure _ | Assert_failure _ | Not_found) as exc ->
        let backtrace = Printexc.get_backtrace () in
-diff --git a/compiler/lib/generate.ml b/compiler/lib/generate.ml
 --- a/compiler/lib/generate.ml
 +++ b/compiler/lib/generate.ml
-@@ -1105,7 +1103,9 @@ let _ =
+@@ -1105,7 +1105,9 @@
        bool (J.EBin (J.EqEq, cx, cy)));
    register_bin_prim "caml_js_instanceof" `Mutator (fun cx cy _ ->
        bool (J.EBin (J.InstanceOf, cx, cy)));
