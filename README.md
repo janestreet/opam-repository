@@ -35,6 +35,14 @@ let () =
 ;;
 ```
 
+Our switch now supports developer tooling such as `ocamlformat` or `merlin`!
+Be sure to install versions of those tools marked with `+jst`, and enjoy
+editor support in VSCode, Emacs and Vim:
+
+```sh
+opam install ocamlformat.0.26.2+jst merlin.5.2.1-502+jst ocaml-lsp-server.1.19.0+jst
+```
+
 Our libraries such as Base and Core contain various functions to deal with local values. Install them with `opam install`,
 and read their documentation and interface files to learn more. For a general introduction to OCaml and our libraries,
 refer to [Real World OCaml](https://dev.realworldocaml.org/index.html).
