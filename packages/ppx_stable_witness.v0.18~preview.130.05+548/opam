@@ -1,0 +1,27 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_stable_witness"
+bug-reports: "https://github.com/janestreet/ppx_stable_witness/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_stable_witness.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_stable_witness/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "base"        {= "v0.18~preview.130.05+548"}
+  "ppxlib_jane" {= "v0.18~preview.130.05+548"}
+  "dune"        {>= "3.11.0"}
+  "ppxlib"      {>= "0.33.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Ppx extension for deriving a witness that a type is intended to be stable.  In this\n   context, stable means that the serialization format will never change.  This allows\n   programs running at different versions of the code to safely communicate."
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_stable_witness/archive/08a2be039874d681d87eaffbc36da32c7173df19.tar.gz"
+checksum: "sha256=9dd39aa00dfd221eba3d68af85dbc0db58fc5e54e37668dec342fcfbd69bb048"
+}

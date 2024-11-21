@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_durable"
+bug-reports: "https://github.com/janestreet/async_durable/issues"
+dev-repo: "git+https://github.com/janestreet/async_durable.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_durable/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "async_kernel"     {= "v0.18~preview.130.05+548"}
+  "async_rpc_kernel" {= "v0.18~preview.130.05+548"}
+  "core"             {= "v0.18~preview.130.05+548"}
+  "core_kernel"      {= "v0.18~preview.130.05+548"}
+  "ppx_jane"         {= "v0.18~preview.130.05+548"}
+  "dune"             {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Durable connections for use with async"
+description: "
+Async_durable helps recover from errors when connections can be easily be recreated.
+"
+url {
+src: "https://github.com/janestreet/async_durable/archive/0f8bc60c9e34f3d2711e7d788d388f835d1cb476.tar.gz"
+checksum: "sha256=7df32cfff0164adc72bc59d43c44805f214ec51af4aae9c4ef0e63aed8748bc8"
+}

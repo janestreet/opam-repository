@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_xilinx"
+bug-reports: "https://github.com/janestreet/hardcaml_xilinx/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_xilinx.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_xilinx/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "5.1.0"}
+  "base"              {= "v0.18~preview.130.05+548"}
+  "hardcaml"          {= "v0.18~preview.130.05+548"}
+  "hardcaml_circuits" {= "v0.18~preview.130.05+548"}
+  "n_ary"             {= "v0.18~preview.130.05+548"}
+  "ppx_hardcaml"      {= "v0.18~preview.130.05+548"}
+  "ppx_jane"          {= "v0.18~preview.130.05+548"}
+  "dune"              {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml wrappers for Xilinx memory primitives"
+description: "
+The Hardcaml_xilinx library provides wrappers for Xilinx specific RAM and FIFO primitive
+blocks. In many cases a simulation model is provided.
+
+The `Synthesis` module implements various arithmetic and logical RTL components with
+Xilinx LUT primitives.
+"
+url {
+src: "https://github.com/janestreet/hardcaml_xilinx/archive/f8aaddeb0b2ec6524ffe79ae49c23ffe4fbeb59f.tar.gz"
+checksum: "sha256=89f0dc9bab5d41f50d603e3d051fe4c26b9a7a7cfb1c0130f14c748e5ec2c03a"
+}

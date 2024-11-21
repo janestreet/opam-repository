@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/postgres_async"
+bug-reports: "https://github.com/janestreet/postgres_async/issues"
+dev-repo: "git+https://github.com/janestreet/postgres_async.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/postgres_async/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "async"       {= "v0.18~preview.130.05+548"}
+  "async_ssl"   {= "v0.18~preview.130.05+548"}
+  "async_unix"  {= "v0.18~preview.130.05+548"}
+  "core"        {= "v0.18~preview.130.05+548"}
+  "core_kernel" {= "v0.18~preview.130.05+548"}
+  "ppx_jane"    {= "v0.18~preview.130.05+548"}
+  "dune"        {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "OCaml/async implementation of the postgres protocol (i.e., does not use C-bindings to libpq)"
+description: "
+postgres_async is an OCaml PostgreSQL client that implements the PostgreSQL
+protocol rather than binding to the libpq C library. It provides support for
+regular queries (including support for 'parameters': \"SELECT * WHERE a = $1\")
+and COPY IN mode. The interface presented is minimal to keep the library simple
+for now, though in the future a layer on top may add convenience functions.
+"
+url {
+src: "https://github.com/janestreet/postgres_async/archive/ede9095d0b5177236849d5dd03da32ad5823d4e1.tar.gz"
+checksum: "sha256=5f31dab95bcd04efbe1fa03581fa6049417c3adb926c02b649588184223398a8"
+}

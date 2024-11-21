@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ordinal_abbreviation"
+bug-reports: "https://github.com/janestreet/ordinal_abbreviation/issues"
+dev-repo: "git+https://github.com/janestreet/ordinal_abbreviation.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ordinal_abbreviation/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.130.05+548"}
+  "ppx_jane" {= "v0.18~preview.130.05+548"}
+  "dune"     {>= "3.11.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A minimal library for generating ordinal names of integers."
+description: "
+A minimal library for generating ordinal names of integers.
+"
+url {
+src: "https://github.com/janestreet/ordinal_abbreviation/archive/3011307ff20458e82e941a9b7823bc6e7342fa7d.tar.gz"
+checksum: "sha256=e9d81330797c02d53b2d888e976c98f5bd742468b5229b4f950036a33115f75e"
+}

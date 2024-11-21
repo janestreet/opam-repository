@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_ssl"
+bug-reports: "https://github.com/janestreet/async_ssl/issues"
+dev-repo: "git+https://github.com/janestreet/async_ssl.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_ssl/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "5.1.0"}
+  "async"             {= "v0.18~preview.130.05+548"}
+  "base"              {= "v0.18~preview.130.05+548"}
+  "core"              {= "v0.18~preview.130.05+548"}
+  "ppx_jane"          {= "v0.18~preview.130.05+548"}
+  "ppx_optcomp"       {= "v0.18~preview.130.05+548"}
+  "stdio"             {= "v0.18~preview.130.05+548"}
+  "conf-libssl"
+  "ctypes"            {>= "0.18.0"}
+  "ctypes-foreign"
+  "dune"              {>= "3.11.0"}
+  "dune-configurator"
+  "integers"
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "An Async-pipe-based interface with OpenSSL"
+description: "
+This library allows you to create an SSL client and server, with
+encrypted communication between both.
+"
+url {
+src: "https://github.com/janestreet/async_ssl/archive/6f72bcd52e6a77c37478f9043c8699cd0920ce2c.tar.gz"
+checksum: "sha256=12006297324056601bc374b96401777b4fce879c7a97933bebe204c6d8e05fe0"
+}

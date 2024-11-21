@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_variants_conv"
+bug-reports: "https://github.com/janestreet/ppx_variants_conv/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_variants_conv.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_variants_conv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "base"        {= "v0.18~preview.130.05+548"}
+  "ppxlib_jane" {= "v0.18~preview.130.05+548"}
+  "variantslib" {= "v0.18~preview.130.05+548"}
+  "dune"        {>= "3.11.0"}
+  "ppxlib"      {>= "0.33.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Generation of accessor and iteration functions for ocaml variant types"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_variants_conv/archive/5137f3418623c27abfeb275d36d3a76dc99065d7.tar.gz"
+checksum: "sha256=cfa42eb9a8f7cd3a79b26305cc98f9f3d94661b8cd95bcf6438dc0dbc1e2f5f1"
+}

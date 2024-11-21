@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_inline_test"
+bug-reports: "https://github.com/janestreet/ppx_inline_test/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_inline_test.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_inline_test/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.130.05+548"}
+  "sexplib0" {= "v0.18~preview.130.05+548"}
+  "time_now" {= "v0.18~preview.130.05+548"}
+  "dune"     {>= "3.11.0"}
+  "ppxlib"   {>= "0.33.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Syntax extension for writing in-line tests in ocaml code"
+description: "
+Part of the Jane Street's PPX rewriters collection.
+"
+url {
+src: "https://github.com/janestreet/ppx_inline_test/archive/f2e03c918bf9a516da2880bc7e3344a04422094d.tar.gz"
+checksum: "sha256=7d2175b0c822b7d1e9bbb6f1201c96bbf9b792ec6aa4473075e9224a0c14daf9"
+}
