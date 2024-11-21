@@ -52,6 +52,6 @@ Bonsai is a library for building reusable UI components inside an
      testing capabilities.
 "
 url {
-src: "https://github.com/janestreet/bonsai_web_test/archive/d71afba427a6d194040ecd329dd629be7f74675e.tar.gz"
-checksum: "sha256=4c098940ec43ddb3f9dc3988908615f00f4d9c698981dda35ca3340c619dda03"
+src: "https://github.com/janestreet/bonsai_web_test/archive/38df2573cf7520c7b1b8945a217e4949ba84b452.tar.gz"
+checksum: "sha256=15f6059cc2c7abebf5502ac9473e05b41a0e738da2960574c1b1a63444bdd592"
 }

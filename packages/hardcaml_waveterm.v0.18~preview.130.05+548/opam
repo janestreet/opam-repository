@@ -37,6 +37,6 @@ to simulations.
 "
 conflicts: ["hardcaml-waveterm"] 
 url {
-src: "https://github.com/janestreet/hardcaml_waveterm/archive/48d569d4339b48734dd708ba09a39e8d77a1d0c3.tar.gz"
-checksum: "sha256=bf2b974fe339433f28b134fe6caf489180162f7c3b01891f50794d6bb4907d41"
+src: "https://github.com/janestreet/hardcaml_waveterm/archive/915d078f6f0786fd178a9472dd5e209d74976fdc.tar.gz"
+checksum: "sha256=9b07dcbc047399d9631859f0c42ed1514178d30dc72a4bcfc802328a630411a8"
 }

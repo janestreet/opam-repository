@@ -34,6 +34,6 @@ Unix-specific extensions to some of the modules defined in [core] and [core_kern
 "
 depexts: ["linux-headers"] {os-family = "alpine"}
 url {
-src: "https://github.com/janestreet/core_unix/archive/2be05e3ec5c768502d78a8455033fe6a96482515.tar.gz"
-checksum: "sha256=5caa3c52c93dbde3d53a99a1ef2eb4d94550f822e4ddc9028267767885907ae5"
+src: "https://github.com/janestreet/core_unix/archive/7cfc81d50daa45294fa1b5c9d40dc5321c72c295.tar.gz"
+checksum: "sha256=583885fafc3d7b724ad2cf6fed185966ecee5e013fccef1d23f2f3530f3047eb"
 }

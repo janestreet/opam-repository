@@ -29,6 +29,6 @@ not be able to recover the key stored in the other one.
 This is similar to [Univ] in spirit.
 "
 url {
-src: "https://github.com/janestreet/univ_map/archive/251e3df98ecd4cb82de669dd4e284c192fc1b92f.tar.gz"
-checksum: "sha256=e25c4e549ef9806f111714acd5e8236bdc359e1197a1badacf225b71d8096706"
+src: "https://github.com/janestreet/univ_map/archive/aa1f372b0e8356b2aa38ef612a76f8175bbcdebf.tar.gz"
+checksum: "sha256=4463df2ed32db1d1fe13a1904b98c9a8a169b4183edffc3c766f23887c636c1a"
 }

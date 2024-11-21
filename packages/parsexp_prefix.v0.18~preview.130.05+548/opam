@@ -30,6 +30,6 @@ This library provides utility parsers for prefixes of sexps, where the sexp
     in the middle of writing a sexp in a text editor.
 "
 url {
-src: "https://github.com/janestreet/parsexp_prefix/archive/8a8aca6123d262fb66adb0d9d35a0e0b0aa53973.tar.gz"
-checksum: "sha256=c7ac9780763f555a5bb21ec714529d7e0503ec9618b0917bac498a7259a18039"
+src: "https://github.com/janestreet/parsexp_prefix/archive/51a36c96302f9fafcc81c1b3095632c9b7d98313.tar.gz"
+checksum: "sha256=d9bd8f5d2ad2a0225efac02823d1c9997330257ba5a44fb60e8448bc2b7b3fdc"
 }

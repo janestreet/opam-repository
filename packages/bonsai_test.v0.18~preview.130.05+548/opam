@@ -39,6 +39,6 @@ Bonsai is a library for building composable state machines. This libary
     provides testing capabilities.
 "
 url {
-src: "https://github.com/janestreet/bonsai_test/archive/d0f7c67829775aab37477cafc5cbb41bc1b48ee0.tar.gz"
-checksum: "sha256=976834f8114a91fad1770da7572268cb3e57caf8d6c6fcfa72805c71c2baa6a4"
+src: "https://github.com/janestreet/bonsai_test/archive/b272015f0677ea99cf5300088ff91b72a73c7d69.tar.gz"
+checksum: "sha256=c2dbc859a82d8a1c41e543f705556d49eb5b47104f3d982cffd1b1bc48a54deb"
 }

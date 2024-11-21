@@ -26,6 +26,6 @@ description: "
 A small library of useful/interesting Hardcaml circuits.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_circuits/archive/db37ed3d87e685cf6803b0b4de0ad97db146dd49.tar.gz"
-checksum: "sha256=9b2d3e0d28f59cf59cb2db9dd4510301399bd23a8bbf3fbca8e641aaa5b675ba"
+src: "https://github.com/janestreet/hardcaml_circuits/archive/8545c36cb6ca3878296b19ffad5af23c7fc0be18.tar.gz"
+checksum: "sha256=e379554dc241fd2485dc6c01d6459166f9066ced0cdd87e1710d999cf4f0083a"
 }

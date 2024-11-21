@@ -23,6 +23,6 @@ A ppx rewriter that rewrites simple match statements with an if then
 else expression.
 "
 url {
-src: "https://github.com/janestreet/ppx_optional/archive/c76e3075ab8a15a07b54727de140c4e90eff8168.tar.gz"
-checksum: "sha256=01cb1923ccbea0898e953ba5a090b024acb16132581c8d997d111fa29615353d"
+src: "https://github.com/janestreet/ppx_optional/archive/f2e57e2f6eb7fdb62e9bf90bfd1fa2291ecaae3f.tar.gz"
+checksum: "sha256=90ca2cc8d674c28738d9cc57ca8ffb86f587870fd0f350d481d065c39d8997e7"
 }

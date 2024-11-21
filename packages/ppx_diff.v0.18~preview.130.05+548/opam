@@ -26,6 +26,6 @@ description: "
 A PPX rewriter that generates the implementation of [Ldiffable.S]. Generates diffs and update functions for OCaml types.
 "
 url {
-src: "https://github.com/janestreet/ppx_diff/archive/5f3ba9f8bed83aee535e052359fe3f3db8bca308.tar.gz"
-checksum: "sha256=d2313e0803adbfd4a6f6ca89bdef387ea1b21d2f8d555412a9cbdb2106a7b8a0"
+src: "https://github.com/janestreet/ppx_diff/archive/6d1328969590cbbe934ff5ffdef82544c96c7561.tar.gz"
+checksum: "sha256=5efa7eea4abe1f50c9ea50833a6bd2b0fb492f6fcbd1b8cb0f6e309dde21854a"
 }

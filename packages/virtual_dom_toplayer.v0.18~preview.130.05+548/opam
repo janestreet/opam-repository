@@ -30,6 +30,6 @@ description: "
 The floating positioning library itself may be found at https://floating-ui.com/
 "
 url {
-src: "https://github.com/janestreet/virtual_dom_toplayer/archive/a783e4699a0c9079b6a36dca0c0e9113bc2aa6f7.tar.gz"
-checksum: "sha256=facc12535e33172f2fdfa83481384704cb2ea252351c2baaf99c6cbe1747cb49"
+src: "https://github.com/janestreet/virtual_dom_toplayer/archive/9587aa3b3388f26dae728d640ded123cb44bf880.tar.gz"
+checksum: "sha256=dfc355afe7f4530bb123cd5ff62fdc4bd1e3cf8e7d8fcefd483ba3017e0bb81d"
 }

@@ -22,6 +22,6 @@ description: "
 A library for representing semantic versions (https://semver.org)
 "
 url {
-src: "https://github.com/janestreet/semantic_version/archive/02ac656d80c9a722d47fee43a2e6b0ee542fabdd.tar.gz"
-checksum: "sha256=2cb3c4bd9917fd7cd46dfee86c537cf27e89d5183c3d27f27bd68a5c2e3da270"
+src: "https://github.com/janestreet/semantic_version/archive/0397a4dc69f2bb7c466af6b06ccfa8d774d9c431.tar.gz"
+checksum: "sha256=76163d953d150f8cf5c9800e016741e15a9f2c8af7e54e9d20726d1b2efac5f1"
 }

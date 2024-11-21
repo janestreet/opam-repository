@@ -30,6 +30,6 @@ and linked into the running executable. The generated simulation object can be u
 any other cyclesim simulation.
 "
 url {
-src: "https://github.com/janestreet/hardcaml_c/archive/1eb297edd89a382275d22ae65f3b5625b1831b1b.tar.gz"
-checksum: "sha256=bb5e9bc6f1434c49c49e10f06ec0311bcabfa6686788b0c4ec1ca238f81a85b7"
+src: "https://github.com/janestreet/hardcaml_c/archive/d0bc2c0e9db8b451b4a7f4451ec80983beeb0436.tar.gz"
+checksum: "sha256=0902e78ea778bbbb8c45e1897de2f1e639975e1c89a7944fe16271648fd3a6f2"
 }

@@ -31,6 +31,6 @@ description: "
 An OpenAPI 3 to OCaml client generator.
 "
 url {
-src: "https://github.com/janestreet/ocaml_openapi_generator/archive/1b4fc9bf9b340217fb2c8dab064e368fabafa1a9.tar.gz"
-checksum: "sha256=7b99342db283a205880fdf506f7e56e068aad1b1892c98ab524f229f0cdff7a2"
+src: "https://github.com/janestreet/ocaml_openapi_generator/archive/b113cc88fd0af5e677777bae6c69ff8d2945b28a.tar.gz"
+checksum: "sha256=b75039781abcf879eb3ac5448157c5321159c102128a7a66f55b5f7b303dffa7"
 }

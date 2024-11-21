@@ -24,6 +24,6 @@ description: "
 Part of the Jane Street's PPX rewriters collection.
 "
 url {
-src: "https://github.com/janestreet/ppx_optcomp/archive/fa2c8e7257cd5c45fb1f77565c11beff2bca5f00.tar.gz"
-checksum: "sha256=24ded95bce12a7a73f00194d5d869e3fe0705f31d5ea61fcbb0912b41a24dd99"
+src: "https://github.com/janestreet/ppx_optcomp/archive/755f3c7e48f6c7f4f5e4657f700f44d381d25100.tar.gz"
+checksum: "sha256=f1eb90819b25b7c2d5f8529e228af29e3b96954295a61c069fd6233130f24f7e"
 }

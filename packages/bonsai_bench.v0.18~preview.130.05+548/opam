@@ -33,6 +33,6 @@ Bonsai is a library for building reusable UI components inside an
      provides benchmarking capabilities.
 "
 url {
-src: "https://github.com/janestreet/bonsai_bench/archive/b4d6bf4ad763cf57fb59e41bde683868d8891974.tar.gz"
-checksum: "sha256=836b8a9dcb6e641b8948a9f0e7ed83fc0c8f3c347eee8d59985a51c59ada964e"
+src: "https://github.com/janestreet/bonsai_bench/archive/293c9743d03440b5b21a26089714d6ed20026d4e.tar.gz"
+checksum: "sha256=bc2efebc00c4717d32e46021b5ed392264b0f431c8e39c68e51921e399f8a91e"
 }

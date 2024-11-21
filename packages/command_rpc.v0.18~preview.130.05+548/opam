@@ -23,6 +23,6 @@ synopsis: "Utilities for Versioned RPC communication with a child process over s
 description: "
 "
 url {
-src: "https://github.com/janestreet/command_rpc/archive/196890582fdba0b30984d89dbeba3013227144fd.tar.gz"
-checksum: "sha256=616042bf461435cdd9bc5a0330dc2ac5ca75798408aa4634969fd4c35e1a6b36"
+src: "https://github.com/janestreet/command_rpc/archive/4e3bb24c0927fae137c59d316c85af418985b645.tar.gz"
+checksum: "sha256=8829b7d3083e4c794b24f8db2967767fa6cdab246f5fae1a16755a569cd45ffe"
 }

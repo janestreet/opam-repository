@@ -25,6 +25,6 @@ description: "
 A library for filesystem operations with the file_path library.
 "
 url {
-src: "https://github.com/janestreet/filesystem/archive/f541954ad5649440eda30ea80c73233c2adbe486.tar.gz"
-checksum: "sha256=689b09aa02aac5232d4531b15d55348922ae60493a5347b49cacf63b077d89ae"
+src: "https://github.com/janestreet/filesystem/archive/8406769d0c751553064104972a2ae0d05d3fc8c6.tar.gz"
+checksum: "sha256=154c8a4ea2415f2b4480eaa6694e80abf8c9e6e73063e8471b52ae6732b8dda3"
 }

@@ -27,6 +27,6 @@ synopsis: "A small library that provide Async support for JavaScript platforms"
 description: "
 "
 url {
-src: "https://github.com/janestreet/async_js/archive/c9765a1ea1ae4362ca1100dba67f6be111c0c5c2.tar.gz"
-checksum: "sha256=d68112c56b834bcc49a02b1edcd5dd0ad0a528a76dad673b89eef75dd4ada606"
+src: "https://github.com/janestreet/async_js/archive/9c4916bbb737589c478120144463ac8b82bfe125.tar.gz"
+checksum: "sha256=37a0fed770a5728d9650d1d09366a96784f123e67a5a0c1ae1ddacd61da485d2"
 }

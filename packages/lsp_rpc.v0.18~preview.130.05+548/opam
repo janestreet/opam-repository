@@ -31,6 +31,6 @@ writing language servers in OCaml. The underlying LSP and JSON RPC libraries com
 OCaml-LSP project; this library provides an Async RPC layer on top of them.
 "
 url {
-src: "https://github.com/janestreet/lsp_rpc/archive/9e76ac7c2c50adf19c7560539dad08fed4501d6f.tar.gz"
-checksum: "sha256=6e167df5686c6d3293004e5054c0c2ce6597cdfaac6b6ab933cd09bb271e7578"
+src: "https://github.com/janestreet/lsp_rpc/archive/0590636164fcfc41f58ca094a90e9211f7b55144.tar.gz"
+checksum: "sha256=596c1a053879f9ccf1116faaaaae1c6f1b04ec1fc798b534ff987a1692ffc65d"
 }

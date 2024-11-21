@@ -28,6 +28,6 @@ to override a configuration that is loaded from disk, computed, or embedded
 in a library.
 "
 url {
-src: "https://github.com/janestreet/env_config/archive/efd4f940d6331d59a53c2e820cb3087aa7ab3d10.tar.gz"
-checksum: "sha256=356e2dddbfa9fe6484c1539b2640d72f954ec471ecec9eeaa5ea7d0b73ded80c"
+src: "https://github.com/janestreet/env_config/archive/2ea5fd05e5587a2fd3ca00919c935664e47444c7.tar.gz"
+checksum: "sha256=809e4189f1f3d4668ac00472f22c848a8865db344376256e4a79363211f74ae9"
 }

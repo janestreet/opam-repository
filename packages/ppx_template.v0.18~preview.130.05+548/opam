@@ -22,6 +22,6 @@ description: "
 This PPX rewriter is used internally at Jane Street to simulate polymorphism over various extensions to OCaml's type system, in cases where there is not yet built-in compiler support. The long-term goal is thus to delete it entirely.
 "
 url {
-src: "https://github.com/janestreet/ppx_template/archive/de9dd3ebd3de206fae48db611c734a7ffa1d8895.tar.gz"
-checksum: "sha256=9bf997a91e626db918e7f6d28a9eee09565d4c7f93689eaaac832ad6147d19ff"
+src: "https://github.com/janestreet/ppx_template/archive/34eefb4d95cc74fb6c78551e204555c8d3e2b74a.tar.gz"
+checksum: "sha256=f26bd6e3cd08790ddadbe7004e32246a0fca7afe3617530f6a94e119ec341422"
 }

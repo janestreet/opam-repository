@@ -19,6 +19,6 @@ synopsis: "Typerep is a library for runtime types"
 description: "
 "
 url {
-src: "https://github.com/janestreet/typerep/archive/a88ff2990dbed96d70b101252dc2f4a18ceef0be.tar.gz"
-checksum: "sha256=a745e466eb197c1d077ebfb09dea9da500d75bee309c7bd7d6fe7cc175ba78e1"
+src: "https://github.com/janestreet/typerep/archive/e2469ce57caa3a46ff114402c35871e84ea4632f.tar.gz"
+checksum: "sha256=ff98d1979eceedf7f48c1a25ef344443ed3580593f1e68e422edbbb6428c9d84"
 }

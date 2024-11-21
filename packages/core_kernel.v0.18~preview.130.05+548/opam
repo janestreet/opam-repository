@@ -35,6 +35,6 @@ largest industrial user of OCaml.
 Core_kernel is the system-independent part of Core.
 "
 url {
-src: "https://github.com/janestreet/core_kernel/archive/5d82308302494a0c5d0c985b123733dee95ec747.tar.gz"
-checksum: "sha256=abdc0735a71962cae31e13aef120cd42571dd975a3daa391e64f70a5a7efbddf"
+src: "https://github.com/janestreet/core_kernel/archive/c76d3cf64deba399d5f8093d212f4cdd56ef0fc4.tar.gz"
+checksum: "sha256=d35c4a712147c7bbe0865cb4c25b48dda669f910241b92bbc7d3a4362176efe6"
 }

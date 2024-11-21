@@ -28,6 +28,6 @@ depexts: [
   ["net-snmp"] {os-family = "arch"}
 ]
 url {
-src: "https://github.com/janestreet/netsnmp/archive/cb9ce9a39a261135de975b638623003ff40b80db.tar.gz"
-checksum: "sha256=34b209c5391ffd32d21924031a4a16a243744b4534bee468aeb66e9d39e5e7fb"
+src: "https://github.com/janestreet/netsnmp/archive/a8b830932c648811d2df8e17aa921ff39badba21.tar.gz"
+checksum: "sha256=5459bd93ca8bd226e0f6478dad2313fab503ec8b170a07face3ba52606ae06be"
 }

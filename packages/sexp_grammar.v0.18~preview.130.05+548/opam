@@ -33,6 +33,6 @@ description: "
 Helpers for manipulating [Sexplib.Sexp_grammar] values.
 "
 url {
-src: "https://github.com/janestreet/sexp_grammar/archive/61a140ff991d8a8e5d4f463b5ffe7e248b743dce.tar.gz"
-checksum: "sha256=1d1b308bc7525040a55d69bcfd3077b052aee85175e4ca222deaabd845cbfef2"
+src: "https://github.com/janestreet/sexp_grammar/archive/e07c8d1560b02f6ebb6f6f2a10c70d14def8b062.tar.gz"
+checksum: "sha256=bb56fa530fac48146d77eecd217b6b89bad26e1ace015b2e597b16b1eb6d6b9c"
 }

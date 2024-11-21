@@ -25,6 +25,6 @@ Zstandard is a real-time compression algorithm which provides high compression r
 "
 available: (arch = "x86_64" | arch = "arm64") & os = "linux"
 url {
-src: "https://github.com/janestreet/zstandard/archive/7457ce0f703f2da1a29928aa2075106c289fcfdd.tar.gz"
-checksum: "sha256=36f91d878d565314a82c38ff62bc2f58f71194a8bc68252c11f378f2703d762b"
+src: "https://github.com/janestreet/zstandard/archive/80403278ade94045189b5ebabe1d1eb5de559b5b.tar.gz"
+checksum: "sha256=bc16bf1dfd9ee54fd911ab0c5134fbd5941cd6e625154c23476ebf137ec76652"
 }

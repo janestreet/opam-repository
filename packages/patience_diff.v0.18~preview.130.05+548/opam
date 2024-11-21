@@ -21,6 +21,6 @@ synopsis: "Diff library using Bram Cohen's patience diff algorithm"
 description: "
 "
 url {
-src: "https://github.com/janestreet/patience_diff/archive/ca915e2ffab37d1d771b5a307f4402184eb58118.tar.gz"
-checksum: "sha256=fd30f69fba1361d12057f9fbf1c41acff580efa71fd2df9fd7587bc072dc3d3f"
+src: "https://github.com/janestreet/patience_diff/archive/8a9ede7e5fa8b60f6aab8da1c56e2e787208d54b.tar.gz"
+checksum: "sha256=3731beb220567bbc35ec231e94c4a86e61f74d8012ba0fe022913f16589f5339"
 }

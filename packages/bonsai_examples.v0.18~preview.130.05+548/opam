@@ -40,6 +40,6 @@ A collection of bonsai_web examples. Bonsai is a library for building
     Incr_dom or React. This repository contains its examples.
 "
 url {
-src: "https://github.com/janestreet/bonsai_examples/archive/f03720fa1f642a34807d800e7636354da50fbf69.tar.gz"
-checksum: "sha256=212c5ff34e662950947f4184dc3b9f3a6113440bcf843bbdd0b43e96cc2c57c7"
+src: "https://github.com/janestreet/bonsai_examples/archive/cc9ff10b6fcd30e0bee0b1124b8ba7118380b5d1.tar.gz"
+checksum: "sha256=688e0974cfed231e6a1c5797b33b282a5c90ca94bf4dd0843ae136ab04142c39"
 }

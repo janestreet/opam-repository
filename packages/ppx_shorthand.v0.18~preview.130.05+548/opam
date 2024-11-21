@@ -21,6 +21,6 @@ description: "
 This ppx is a collection of small AST transformations that might not otherwise warrant their own ppx.
 "
 url {
-src: "https://github.com/janestreet/ppx_shorthand/archive/a4c55fdeae1d03904b7cb3402c34c7758987ce38.tar.gz"
-checksum: "sha256=c84a8719283f1e4b1e0c3dbacd011b6bbb5bff1b2dfe95ac46aee6aefd6952d7"
+src: "https://github.com/janestreet/ppx_shorthand/archive/316b701da9ae249c7bc240bd77738ca0e5f8b9cb.tar.gz"
+checksum: "sha256=7098bd55a2de7cace753d1ecab31eb866dc3320d9128e2178d83cb92efa5f614"
 }
