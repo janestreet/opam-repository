@@ -17,6 +17,12 @@ depends: [
   "base-nnp" {post}
   "ocaml-options-vanilla" {post}
 ]
+conflicts: [
+  "ocamlformat" {!= "0.26.2+jst"}
+  "merlin" {!= "5.2.1-502+jst"}
+  "ocaml-lsp-server" {!= "1.19.0+jst"}
+  "utop" {!= "2.14.0+jst"}
+]
 conflict-class: "ocaml-core-compiler"
 flags: compiler
 setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
