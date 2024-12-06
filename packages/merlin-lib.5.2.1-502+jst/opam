@@ -32,4 +32,9 @@ url {
   checksum:
     "sha256=2428481b8bcddcec2cb57c3bee65bc72ced5b179635f1f373d7599db8f45ddcb"
 }
-
+patches: [
+  "extensions.patch"
+]
+extra-files: [
+  ["extensions.patch" "sha256=318db319779c87f5b7af460bd939109100f61ad6fa96fda811ef7f98e655091f" ]
+]
