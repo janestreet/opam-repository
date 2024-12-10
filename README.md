@@ -7,17 +7,11 @@ extensions, including all Jane Street packages and necessary patches to external
 
 **WARNING**: this repository is experimental and is not officially supported by Jane Street. Use at your own risk.
 
-Start by adding the repository to OPAM:
-
-```sh
-opam repo add with-extensions https://github.com/janestreet/opam-repository.git#with-extensions
-```
-
-Next, create a new switch with our compiler:
+Start by creating a new switch including our repository in OPAM:
 
 ```sh
 # This may take some time
-opam switch create 5.2.0+flambda2 --repos with-extensions,default
+opam switch create 5.2.0+flambda2 --repos with-extensions=git+https://github.com/janestreet/opam-repository.git#with-extensions,default
 eval $(opam env --switch 5.2.0+flambda2)
 ```
 
