@@ -35,8 +35,10 @@ url {
 extra-files: [
   ["meta.patch" "sha256=3f165d873951620a3189938a909305aa0de3c77b998b6c84125f39ae95e91fb2"]
   ["remove-sigwait.patch" "sha256=1983f61bd5a53cd9918acd297c40ea5327370325c2974c18dfdcd21f9f0cac20"]
+  ["fix-arm64-asm.patch" "sha256=bbfcfe847b62aceeae65331168ab2de68a9264651cf5abcb41d3502c54f7a506"]
 ]
 patches: [
   "meta.patch"
   "remove-sigwait.patch"
+  "fix-arm64-asm.patch"
 ]
