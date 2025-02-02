@@ -34,3 +34,9 @@ url {
 src: "https://github.com/janestreet/async_ssl/archive/fd31f0aa87837d8f2a2d47620d8288d4f6aef4c4.tar.gz"
 checksum: "sha256=4d001b8b00c806e96ec914aced34642df956b02c3719ca75dadfe6bbe8e5c7ea"
 }
+extra-files: [
+  ["fix-on-aarch64.patch" "sha256=c13895bf9378c49e3c45092e4fed3dbf2340cc30f65e365cfee6bcbe070d1af1"]
+]
+patches: [
+  "fix-on-aarch64.patch"
+]
