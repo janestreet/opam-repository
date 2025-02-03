@@ -1,0 +1,23 @@
+diff --git a/src/dune b/src/dune
+index bf67dbc..f351ed4 100644
+--- a/src/dune
++++ b/src/dune
+@@ -24,7 +24,7 @@
+   (language c)
+   (names ffi_generated_stubs)
+   (flags
+-   (:standard \ -Werror -pedantic -Wall -Wunused -Wincompatible-pointer-types)
++   (:standard -Werror -pedantic -Wall -Wunused -Wno-incompatible-pointer-types)
+    -w
+    (:include ../bindings/openssl-ccopt.sexp)
+    -Wno-int-conversion
+@@ -36,6 +36,7 @@
+  (flags :standard -w -9-27-32-34)
+  (c_library_flags
+   :standard
++  -Wno-incompatible-pointer-types
+   (:include ../bindings/openssl-cclib.sexp))
+  (libraries async core async_ssl_bindings ctypes.stubs ctypes integers)
+  (preprocess
+-- 
+
