@@ -50,6 +50,7 @@ url {
   checksum:
     "sha512=50cc4486021da46fb08156e9daec0d57b4ca469b07309c508d5a9a41e9dbcf1f32dec2ed7be027326544453dcaf9c2534919395fd826dc7768efc6cc4bfcc9f8"
 }
+x-maintenance-intent: ["(latest)"]
 patches: ["uutf-locals.patch"]
 extra-files: [
   [

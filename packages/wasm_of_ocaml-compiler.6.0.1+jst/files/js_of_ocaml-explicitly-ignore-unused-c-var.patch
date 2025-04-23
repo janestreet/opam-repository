@@ -1,0 +1,12 @@
+diff --git a/compiler/tests-jsoo/flush_stubs.c b/compiler/tests-jsoo/flush_stubs.c
+https://github.com/ocsigen/js_of_ocaml/pull/1560
+--- a/compiler/tests-jsoo/flush_stubs.c
++++ b/compiler/tests-jsoo/flush_stubs.c
+@@ -4,6 +4,7 @@
+ #include "caml/memory.h"
+
+ CAMLprim value flush_stdout_stderr (value unit) {
++  (void)unit;
+   CAMLparam0 ();   /* v is ignored */
+   fflush(stderr);
+   fflush(stdout);

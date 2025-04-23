@@ -1,0 +1,18 @@
+--- a/runtime/js/obj.js
++++ b/runtime/js/obj.js
+@@ -92,14 +92,7 @@
+       }
+
+       if (x instanceof MlBytes) {
+-        if (typeof x.c === 'string') {
+-          // we can re-use the content because strings are immutable
+-          return new MlBytes(x.t, x.c, x.l);
+-        } else {
+-          // it must be an array, as defined in ./mlBytes.js
+-          var content = Array.prototype.slice.call(x.c);
+-          return new MlBytes(x.t, content, x.l);
+-        }
++        return MlBytes.prototype.slice.call(x);
+       }
+
+       if (x instanceof Array) {

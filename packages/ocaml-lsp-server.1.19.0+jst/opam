@@ -40,14 +40,14 @@ depends: [
   "astring"
   "camlp-streams"
   "ppx_expect"          {>= "v0.15.0" & < "0.17.0" & with-test}
-  "ocamlformat"         {with-test & = "0.26.2+jst"}
+  "ocamlformat"         {with-test & = "0.26.2" & = "0.26.2+jst"}
   "ocamlc-loc"          {>= "3.7.0"}
   "pp"                  {>= "1.1.2"}
   "csexp"               {>= "1.5"}
   "ocamlformat-rpc-lib" {>= "0.21.0"}
   "odoc"                {with-doc}
-  "merlin-lib"          {= "5.2.1-502+jst"}
-  "ocaml-index"         {= "1.1+jst"}
+  "merlin-lib"          {>= "5.0" & < "6.0" & = "5.2.1-502+jst"}
+  "ocaml-index"         {>= "1.0" & post & = "1.1+jst"}
 ]
 build: [
   ["dune" "subst"] {dev}

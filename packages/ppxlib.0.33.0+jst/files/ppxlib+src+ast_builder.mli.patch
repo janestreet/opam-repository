@@ -1,22 +1,37 @@
 --- a/src/ast_builder.mli
 +++ b/src/ast_builder.mli
-@@ -43,6 +43,9 @@ module Default : sig
+@@ -43,6 +43,17 @@ module Default : sig
        res:core_type option ->
        unit ->
        constructor_declaration
 +
 +    val pmty_signature : loc:location -> signature -> module_type
-+    val signature : loc:location -> signature_item list -> signature
++
++    val signature : loc:location -> ?modalities:modalities -> signature_item list -> signature
++
++    val label_declaration :
++      loc:location -> name:string loc ->
++      mutable_:mutable_flag ->
++      modalities:modality list ->
++      type_:core_type ->
++      label_declaration
    end
  
    val ppat_construct :
-@@ -84,6 +87,9 @@ module type S = sig
+@@ -84,6 +95,16 @@ module type S = sig
        res:core_type option ->
        unit ->
        constructor_declaration
 +
 +    val pmty_signature : signature -> module_type
-+    val signature : signature_item list -> signature
++    val signature : ?modalities:modalities -> signature_item list -> signature
++
++    val label_declaration :
++      name:string loc ->
++      mutable_:mutable_flag ->
++      modalities:modality list ->
++      type_:core_type ->
++      label_declaration
    end
  
    val ppat_construct : longident loc -> pattern option -> pattern

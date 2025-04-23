@@ -1,6 +1,6 @@
 --- a/lib/ojs.ml
 +++ b/lib/ojs.ml
-@@ -58,7 +58,7 @@ let undefined = pure_js_expr "undefined"
+@@ -58,6 +58,6 @@ let undefined = pure_js_expr "undefined"
 
  external equals: t -> t -> bool = "caml_js_equals"
 

@@ -1,0 +1,74 @@
+--- a/compiler/lib-wasm/gc_target.ml
++++ b/compiler/lib-wasm/gc_target.ml
+@@ -687,6 +687,10 @@
+
+   let tag e = wasm_array_get e (Arith.const 0l)
+
++  let check_is_float_array e =
++    let* float_array = Type.float_array_type in
++    Value.ref_test (Value.ref float_array) e
++
+   let array_length e =
+     let* block = Type.block_type in
+     let* e = wasm_cast block e in
+--- a/compiler/lib-wasm/generate.ml
++++ b/compiler/lib-wasm/generate.ml
+@@ -343,10 +343,17 @@
+                   x
+             | Extern "caml_check_bound_float", [ x; y ] ->
+                 seq
+-                  (let* cond =
+-                     Arith.uge (Value.int_val y) (Memory.float_array_length x)
++                  (let a = Code.Var.fresh () in
++                   let* () = store a x in
++                   let label = label_index context bound_error_pc in
++                   (* If this is not a float array, it must be the
++                      empty array, and the bound check should fail. *)
++                   let* cond = Arith.eqz (Memory.check_is_float_array (load a)) in
++                   let* () = instr (W.Br_if (label, cond)) in
++                   let* cond =
++                     Arith.uge (Value.int_val y) (Memory.float_array_length (load a))
+                    in
+-                   instr (W.Br_if (label_index context bound_error_pc, cond)))
++                   instr (W.Br_if (label, cond)))
+                   x
+             | Extern "caml_add_float", [ f; g ] -> float_bin_op Add f g
+             | Extern "caml_sub_float", [ f; g ] -> float_bin_op Sub f g
+--- a/compiler/lib-wasm/target_sig.ml
++++ b/compiler/lib-wasm/target_sig.ml
+@@ -61,6 +61,8 @@
+
+     val float_array_set : expression -> expression -> expression -> unit Code_generation.t
+
++    val check_is_float_array : expression -> expression
++
+     val gen_array_get : expression -> expression -> expression
+
+     val gen_array_set : expression -> expression -> expression -> unit Code_generation.t
+--- a/compiler/tests-wasm_of_ocaml/dune
++++ b/compiler/tests-wasm_of_ocaml/dune
+@@ -1,5 +1,5 @@
+ (tests
+- (names gh38 gh46 gh107 gh112)
++ (names gh38 gh46 gh107 gh112 gh1904)
+  (modes js wasm)
+  (js_of_ocaml
+   (flags :standard --disable optcall --no-inline))
+--- /dev/null
++++ b/compiler/tests-wasm_of_ocaml/gh1904.ml
+@@ -0,0 +1,15 @@
++let empty = [||]
++
++let get (x : float array) = x.(0)
++
++let set (x : float array) e = x.(0) <- e
++
++let catch_bound_error f x =
++  try
++    ignore (f x);
++    assert false
++  with Invalid_argument _ -> ()
++
++let () =
++  catch_bound_error get empty;
++  catch_bound_error (fun () -> set empty 0.) ()

@@ -19,30 +19,38 @@ depends: [
 ]
 conflicts: [
   "ocamlformat" {!= "0.26.2+jst"}
+  "ocamlformat-lib" {!= "0.26.2+jst"}
   "merlin" {!= "5.2.1-502+jst"}
+  "dot-merlin-reader" {!= "5.2.1-502+jst"}
+  "merlin-lib" {!= "5.2.1-502+jst"}
   "ocaml-lsp-server" {!= "1.19.0+jst"}
+  "lsp" {!= "1.19.0+jst"}
+  "jsonrpc" {!= "1.19.0+jst"}
   "utop" {!= "2.14.0+jst"}
+  "js_of_ocaml-compiler" {!= "6.0.1+jst"}
+  "js_of_ocaml" {!= "6.0.1+jst"}
+  "js_of_ocaml-ppx" {!= "6.0.1+jst"}
+  "wasm_of_ocaml-compiler" {!= "6.0.1+jst"}
+  "sedlex" {!= "3.3+jst"}
+  "zarith" {!= "1.12+jst"}
+  "ocamlbuild" {!= "0.15.0+jst"}
+  "cohttp-async" {!= "2.5.8+jst"}
+  "ocaml-index" {!= "1.1+jst"}
+  "uutf" {!= "1.0.3+jst"}
+  "gen_js_api" {!= "1.1.2+jst"}
 ]
 conflict-class: "ocaml-core-compiler"
 flags: compiler
 setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
 build: [
-  ["autoconf"]
-  ["./configure" "--enable-runtime5" "--enable-middle-end=flambda2" "--disable-naked-pointers" "--prefix=%{prefix}%" "--with-dune=%{prefix}%/init_deps/bin/dune"]
+  ["sh" "-exc" "autoconf || autoconf27"]
+  ["./configure" "--enable-runtime5" "--enable-middle-end=flambda2" "--enable-poll-insertion" "--disable-naked-pointers" "--prefix=%{prefix}%" "--with-dune=%{prefix}%/init_deps/bin/dune"]
   ["sh" "-exc" "PATH=%{prefix}%/init_deps/bin/:$PATH make -j%{jobs}%"]
 ]
 install: [
   "sh" "-exc" "PATH=%{prefix}%/init_deps/bin/:$PATH make install"
 ]
 url {
-  src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-2.tar.gz"
-  checksum: ["sha256=fea242bf6707991bcd6de388a247aaf966e4936098a7db170560b3e879436c6c"]
+  src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-8.tar.gz"
+  checksum: ["sha256=d2ac44c3d857c3aba6cfa7628a8dd6ccd786b596d4b378c873b533166ec1eeb2"]
 }
-extra-files: [
-  ["meta.patch" "sha256=3f165d873951620a3189938a909305aa0de3c77b998b6c84125f39ae95e91fb2"]
-  ["remove-sigwait.patch" "sha256=1983f61bd5a53cd9918acd297c40ea5327370325c2974c18dfdcd21f9f0cac20"]
-]
-patches: [
-  "meta.patch"
-  "remove-sigwait.patch"
-]

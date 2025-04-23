@@ -1,0 +1,56 @@
+--- a/compiler/lib/instr.ml
++++ b/compiler/lib/instr.ml
+@@ -169,6 +169,7 @@
+   | RERAISE
+   | RAISE_NOTRACE
+   | GETSTRINGCHAR
++  | MAKE_FAUX_MIXEDBLOCK
+   | PERFORM
+   | RESUME
+   | RESUMETERM
+@@ -353,13 +354,14 @@
+      ; RERAISE, KStop 0, "RERAISE"
+      ; RAISE_NOTRACE, KStop 0, "RAISE_NOTRACE"
+      ; GETSTRINGCHAR, KNullary, "GETSTRINGCHAR"
+      ; PERFORM, if_v500 KNullaryCall, "PERFORM"
+      ; RESUME, if_v500 KNullaryCall, "RESUME"
+      ; RESUMETERM, if_v500 (KStop 1), "RESUMETERM"
+      ; REPERFORMTERM, if_v500 (KStop 1), "REPERFORMTERM"
++     ; MAKE_FAUX_MIXEDBLOCK, KBinary, "MAKE_FAUX_MIXEDBLOCK"
+      ; FIRST_UNIMPLEMENTED_OP, K_will_not_happen, "FIRST_UNIMPLEMENTED_OP"
+     |]
+   in
+   let ops =
+     Array.mapi ~f:(fun i (c, k, n) -> { code = c; kind = k; name = n; opcode = i }) instrs
+   in
+--- a/compiler/lib/instr.mli
++++ b/compiler/lib/instr.mli
+@@ -168,6 +168,7 @@
+   | RERAISE
+   | RAISE_NOTRACE
+   | GETSTRINGCHAR
++  | MAKE_FAUX_MIXEDBLOCK
+   | PERFORM
+   | RESUME
+   | RESUMETERM
+--- a/compiler/lib/parse_bytecode.ml
++++ b/compiler/lib/parse_bytecode.ml
+@@ -1375,7 +1375,7 @@
+           (pc + 2)
+           state
+           (Let (x, Block (i, [||], Unknown, Maybe_mutable)) :: instrs)
+-    | MAKEBLOCK ->
++    | MAKE_FAUX_MIXEDBLOCK | MAKEBLOCK ->
+         let size = getu code (pc + 1) in
+         let tag = getu code (pc + 2) in
+         let state = State.push state in
+--- a/compiler/lib/ocaml_compiler.ml	Mon Jul 22 18:34:59 2024 -0400
++++ b/compiler/lib/ocaml_compiler.ml	Mon Jul 22 18:28:48 2024 -0400
+@@ -42,6 +42,6 @@
+       Float_array (Array.of_list l)
+   | ((Const_pointer i) [@if ocaml_version < (4, 12, 0)]) ->
+       Int (Targetint.of_int_warning_on_overflow i)
+-  | Const_block (tag, l) ->
++  | Const_mixed_block (tag, _, l) | Const_block (tag, l) ->
+       let l = Array.of_list (List.map l ~f:constant_of_const) in
+       Tuple (tag, l, Unknown)

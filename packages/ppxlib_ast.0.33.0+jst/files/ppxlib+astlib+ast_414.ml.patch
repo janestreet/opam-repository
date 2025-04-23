@@ -145,11 +145,20 @@
            *)
      | Ppat_construct of Longident.t loc * (string loc list * pattern) option
          (** [Ppat_construct(C, args)] represents:
-@@ -300,9 +352,14 @@ module Parsetree = struct
+@@ -300,9 +352,23 @@ module Parsetree = struct
  
             Invariant: [n > 0]
             *)
 -    | Ppat_array of pattern list  (** Pattern [[| P1; ...; Pn |]] *)
++    | Ppat_record_unboxed_product of (Longident.t loc * pattern) list * closed_flag
++        (** [Ppat_record_unboxed_product([(l1, P1) ; ... ; (ln, Pn)], flag)] represents:
++              - [#{ l1=P1; ...; ln=Pn }]
++                  when [flag] is {{!Asttypes.closed_flag.Closed}[Closed]}
++              - [#{ l1=P1; ...; ln=Pn; _}]
++                  when [flag] is {{!Asttypes.closed_flag.Open}[Open]}
++
++            Invariant: [n > 0]
++          *)
 +    | Ppat_array of mutable_flag * pattern list
 +        (** Pattern [[| P1; ...; Pn |]] or [[: P1; ...; Pn :]] *)
      | Ppat_or of pattern * pattern  (** Pattern [P1 | P2] *)
@@ -162,7 +171,7 @@
      | Ppat_type of Longident.t loc  (** Pattern [#tconst] *)
      | Ppat_lazy of pattern  (** Pattern [lazy P] *)
      | Ppat_unpack of string option loc
-@@ -341,30 +398,21 @@ module Parsetree = struct
+@@ -341,30 +407,21 @@ module Parsetree = struct
                - [let rec P1 = E1 and ... and Pn = EN in E]
                   when [flag] is {{!Asttypes.rec_flag.Recursive}[Recursive]}.
             *)
@@ -182,7 +191,7 @@
 -                        when [lbl] is {{!Asttypes.arg_label.Optional}[Optional l]}
 -                         and [exp0] is [Some E0]
 +    | Pexp_function of
-+        function_param list * function_constraint option * function_body
++        function_param list * function_constraint * function_body
 +    (** [Pexp_function ([P1; ...; Pn], C, body)] represents any construct
 +        involving [fun] or [function], including:
 +        - [fun P1 ... Pn -> E]
@@ -207,7 +216,7 @@
      | Pexp_apply of expression * (arg_label * expression) list
          (** [Pexp_apply(E0, [(l1, E1) ; ... ; (ln, En)])]
                represents [E0 ~l1:E1 ... ~ln:En]
-@@ -380,11 +428,24 @@ module Parsetree = struct
+@@ -380,11 +437,24 @@ module Parsetree = struct
          (** [match E0 with P1 -> E1 | ... | Pn -> En] *)
      | Pexp_try of expression * case list
          (** [try E0 with P1 -> E1 | ... | Pn -> En] *)
@@ -234,8 +243,19 @@
      | Pexp_construct of Longident.t loc * expression option
          (** [Pexp_construct(C, exp)] represents:
               - [C]               when [exp] is [None],
-@@ -406,7 +467,8 @@ module Parsetree = struct
+@@ -403,10 +473,19 @@ module Parsetree = struct
+ 
+              Invariant: [n > 0]
+            *)
++    | Pexp_record_unboxed_product of (Longident.t loc * expression) list * expression option
++        (** [Pexp_record_unboxed_product([(l1,P1) ; ... ; (ln,Pn)], exp0)] represents
++              - [#{ l1=P1; ...; ln=Pn }]         when [exp0] is [None]
++              - [#{ E0 with l1=P1; ...; ln=Pn }] when [exp0] is [Some E0]
++
++            Invariant: [n > 0]
++          *)
      | Pexp_field of expression * Longident.t loc  (** [E.l] *)
++    | Pexp_unboxed_field of expression * Longident.t loc  (** [E.#l] *)
      | Pexp_setfield of expression * Longident.t loc * expression
          (** [E1.l <- E2] *)
 -    | Pexp_array of expression list  (** [[| E1; ...; En |]] *)
@@ -244,7 +264,7 @@
      | Pexp_ifthenelse of expression * expression * expression option
          (** [if E1 then E2 else E3] *)
      | Pexp_sequence of expression * expression  (** [E1; E2] *)
-@@ -418,7 +480,7 @@ module Parsetree = struct
+@@ -418,7 +497,7 @@ module Parsetree = struct
                - [for i = E1 downto E2 do E3 done]
                     when [direction] is {{!Asttypes.direction_flag.Downto}[Downto]}
             *)
@@ -253,7 +273,7 @@
      | Pexp_coerce of expression * core_type option * core_type
          (** [Pexp_coerce(E, from, T)] represents
                - [(E :> T)]      when [from] is [None],
-@@ -446,7 +508,7 @@ module Parsetree = struct
+@@ -446,7 +525,7 @@ module Parsetree = struct
               {{!class_field_kind.Cfk_concrete}[Cfk_concrete]} for methods (not
               values). *)
      | Pexp_object of class_structure  (** [object ... end] *)
@@ -262,7 +282,7 @@
      | Pexp_pack of module_expr
          (** [(module ME)].
  
-@@ -461,6 +523,13 @@ module Parsetree = struct
+@@ -461,6 +540,15 @@ module Parsetree = struct
                - [let* P0 = E00 and* P1 = E01 in E1] *)
      | Pexp_extension of extension  (** [[%id]] *)
      | Pexp_unreachable  (** [.] *)
@@ -273,10 +293,12 @@
 +          - [BODY] is an expression.
 +          - [CLAUSES] is a series of [comprehension_clause].
 +      *)
++    | Pexp_overwrite of expression * expression
++    | Pexp_hole
  
    and case (*IF_CURRENT = Parsetree.case *) =
      {
-@@ -485,12 +554,120 @@ module Parsetree = struct
+@@ -485,12 +573,130 @@ module Parsetree = struct
        pbop_loc : Location.t;
      }
  
@@ -342,11 +364,21 @@
 +
 +  and function_constraint (*IF_CURRENT = Parsetree.function_constraint *) =
 +    { mode_annotations : modes;
-+      (** The mode annotation placed on a function let-binding when the function
-+              has a type constraint on the body, e.g.
-+              [let local_ f x : int -> int = ...].
++      (** The mode annotation placed on a function let-binding, e.g.
++        [let local_ f x : int -> int = ...].
++        The [local_] syntax is parsed into two nodes: the field here, and [pvb_modes].
++        This field only affects the interpretation of [ret_type_constraint], while the
++        latter is translated in [typecore] to [Pexp_constraint] to contrain the mode of the
++        function.
++
 +      *)
-+      type_constraint : type_constraint;
++      ret_mode_annotations : modes;
++      (** The mode annotation placed on a function's body, e.g.
++        [let f x : int -> int @@ local = ...].
++        This field constrains the mode of function's body.
++      *)
++      ret_type_constraint : type_constraint option;
++      (** The type constraint placed on a function's body. *)
 +    }
 +  (** See the comment on {{!expression_desc.Pexp_function}[Pexp_function]}. *)
 +
@@ -364,7 +396,7 @@
 +  and comprehension_clause_binding (*IF_CURRENT = Parsetree.comprehension_clause_binding *) =
 +    { pcomp_cb_pattern : pattern;
 +      pcomp_cb_iterator : comprehension_iterator;
-+      pcomp_cb_attributes : attribute list
++      pcomp_cb_attributes : attributes
 +    }
 +
 +  and comprehension_clause (*IF_CURRENT = Parsetree.comprehension_clause *) =
@@ -397,7 +429,7 @@
        pval_prim: string list;
        pval_attributes: attributes;  (** [... [\@\@id1] [\@\@id2]] *)
        pval_loc: Location.t;
-@@ -515,6 +692,7 @@ module Parsetree = struct
+@@ -515,6 +721,7 @@ module Parsetree = struct
        ptype_private: private_flag;  (** for [= private ...] *)
        ptype_manifest: core_type option;  (** represents [= T] *)
        ptype_attributes: attributes;  (** [... [\@\@id1] [\@\@id2]] *)
@@ -405,7 +437,14 @@
        ptype_loc: Location.t;
      }
    (**
-@@ -553,6 +731,7 @@ module Parsetree = struct
+@@ -547,12 +754,14 @@ module Parsetree = struct
+     | Ptype_abstract
+     | Ptype_variant of constructor_declaration list
+     | Ptype_record of label_declaration list  (** Invariant: non-empty list *)
++    | Ptype_record_unboxed_product of label_declaration list  (** Invariant: non-empty list *)
+     | Ptype_open
+ 
+   and label_declaration (*IF_CURRENT = Parsetree.label_declaration *) =
      {
        pld_name: string loc;
        pld_mutable: mutable_flag;
@@ -413,7 +452,7 @@
        pld_type: core_type;
        pld_loc: Location.t;
        pld_attributes: attributes;  (** [l : T [\@id1] [\@id2]] *)
-@@ -571,15 +750,23 @@ module Parsetree = struct
+@@ -571,15 +780,23 @@ module Parsetree = struct
    and constructor_declaration (*IF_CURRENT = Parsetree.constructor_declaration *) =
      {
        pcd_name: string loc;
@@ -439,7 +478,7 @@
      | Pcstr_record of label_declaration list
          (** Values of type {!constructor_declaration}
        represents the constructor arguments of:
-@@ -626,7 +813,8 @@ module Parsetree = struct
+@@ -626,7 +843,8 @@ module Parsetree = struct
    (** Definition of a new exception ([exception E]). *)
  
    and extension_constructor_kind (*IF_CURRENT = Parsetree.extension_constructor_kind *) =
@@ -449,7 +488,14 @@
          (** [Pext_decl(existentials, c_args, t_opt)]
              describes a new extension constructor. It can be:
              - [C of T1 * ... * Tn] when:
-@@ -860,6 +1048,7 @@ module Parsetree = struct
+@@ -854,21 +1072,26 @@ module Parsetree = struct
+   and module_type_desc (*IF_CURRENT = Parsetree.module_type_desc *) =
+     | Pmty_ident of Longident.t loc  (** [Pmty_ident(S)] represents [S] *)
+     | Pmty_signature of signature  (** [sig ... end] *)
+-    | Pmty_functor of functor_parameter * module_type
++    | Pmty_functor of functor_parameter * module_type * modes
+         (** [functor(X : MT1) -> MT2] *)
+     | Pmty_with of module_type * with_constraint list  (** [MT with ...] *)
      | Pmty_typeof of module_expr  (** [module type of ME] *)
      | Pmty_extension of extension  (** [[%id]] *)
      | Pmty_alias of Longident.t loc  (** [(module M)] *)
@@ -457,16 +503,22 @@
  
    and functor_parameter (*IF_CURRENT = Parsetree.functor_parameter *) =
      | Unit  (** [()] *)
-@@ -868,7 +1057,7 @@ module Parsetree = struct
+-    | Named of string option loc * module_type
++    | Named of string option loc * module_type * modes
+         (** [Named(name, MT)] represents:
                - [(X : MT)] when [name] is [Some X],
                - [(_ : MT)] when [name] is [None] *)
  
 -  and signature = signature_item list
-+  and signature = { psg_items: signature_item list }
++  and signature (*IF_CURRENT = Parsetree.signature *) =
++    { psg_modalities : modalities;
++      psg_items: signature_item list;
++      psg_loc : Location.t;
++     }
  
    and signature_item (*IF_CURRENT = Parsetree.signature_item *) =
      {
-@@ -896,13 +1085,15 @@ module Parsetree = struct
+@@ -896,18 +1119,21 @@ module Parsetree = struct
      | Psig_modtypesubst of module_type_declaration
          (** [module type S :=  ...]  *)
      | Psig_open of open_description  (** [open X] *)
@@ -483,7 +535,13 @@
  
    and module_declaration (*IF_CURRENT = Parsetree.module_declaration *) =
      {
-@@ -963,6 +1154,7 @@ module Parsetree = struct
+       pmd_name: string option loc;
+       pmd_type: module_type;
++      pmd_modalities: modalities;
+       pmd_attributes: attributes;  (** [... [\@\@id1] [\@\@id2]] *)
+       pmd_loc: Location.t;
+     }
+@@ -963,6 +1189,7 @@ module Parsetree = struct
  
    and 'a include_infos (*IF_CURRENT = 'a Parsetree.include_infos *) =
      {
@@ -491,8 +549,12 @@
        pincl_mod: 'a;
        pincl_loc: Location.t;
        pincl_attributes: attributes;
-@@ -1009,6 +1201,14 @@ module Parsetree = struct
-     | Pmod_constraint of module_expr * module_type  (** [(ME : MT)] *)
+@@ -1006,9 +1233,17 @@ module Parsetree = struct
+     | Pmod_functor of functor_parameter * module_expr
+         (** [functor(X : MT1) -> ME] *)
+     | Pmod_apply of module_expr * module_expr  (** [ME1(ME2)] *)
+-    | Pmod_constraint of module_expr * module_type  (** [(ME : MT)] *)
++    | Pmod_constraint of module_expr * module_type option * modes  (** [(ME : MT)] *)
      | Pmod_unpack of expression  (** [(val E)] *)
      | Pmod_extension of extension  (** [[%id]] *)
 +    | Pmod_instance of module_instance
@@ -506,7 +568,7 @@
  
    and structure = structure_item list
  
-@@ -1048,11 +1248,14 @@ module Parsetree = struct
+@@ -1048,11 +1283,14 @@ module Parsetree = struct
      | Pstr_include of include_declaration  (** [include ME] *)
      | Pstr_attribute of attribute  (** [[\@\@\@id]] *)
      | Pstr_extension of extension * attributes  (** [[%%id]] *)
@@ -521,7 +583,7 @@
        pvb_attributes: attributes;
        pvb_loc: Location.t;
      }
-@@ -1066,6 +1269,20 @@ module Parsetree = struct
+@@ -1066,6 +1304,20 @@ module Parsetree = struct
      }
    (** Values of type [module_binding] represents [module X = ME] *)
  
@@ -529,7 +591,7 @@
 +    | Default
 +    | Abbreviation of string
 +    | Mod of jkind_annotation * modes
-+    | With of jkind_annotation * core_type
++    | With of jkind_annotation * core_type * modalities
 +    | Kind_of of core_type
 +    | Product of jkind_annotation list
 +

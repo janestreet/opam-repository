@@ -1,0 +1,28 @@
+--- a/runtime/js/sys.js
++++ b/runtime/js/sys.js
+@@ -290,8 +290,13 @@
+ function caml_sys_isatty(_chan) {
+   return 0;
+ }
+
++//Provides: caml_sys_const_runtime5 const
++function caml_sys_const_runtime5(_unit) {
++    return 0;
++}
++
+ //Provides: caml_runtime_variant
+ //Requires: caml_string_of_jsbytes
+ function caml_runtime_variant(_unit) {
+   return caml_string_of_jsbytes("");
+--- a/runtime/wasm/sys.wat
++++ b/runtime/wasm/sys.wat
+@@ -146,5 +146,9 @@
+       (param (ref eq)) (result (ref eq))
+       (ref.i31 (i32.const 0)))
+
++   (func (export "caml_sys_const_runtime5")
++      (param (ref eq)) (result (ref eq))
++      (ref.i31 (i32.const 0)))
++
+    (func (export "caml_runtime_variant") (param (ref eq)) (result (ref eq))
+       (array.new_fixed $bytes 0))

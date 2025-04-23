@@ -1,6 +1,16 @@
 --- a/ast/ast_helper_lite.mli
 +++ b/ast/ast_helper_lite.mli
-@@ -150,8 +150,16 @@ module Exp : sig
+@@ -116,6 +116,9 @@ module Pat : sig
+   val record :
+     ?loc:loc -> ?attrs:attrs -> (lid * pattern) list -> closed_flag -> pattern
+ 
++  val record_unboxed_product :
++    ?loc:loc -> ?attrs:attrs -> (lid * pattern) list -> closed_flag -> pattern
++
+   val array : ?loc:loc -> ?attrs:attrs -> pattern list -> pattern
+   val or_ : ?loc:loc -> ?attrs:attrs -> pattern -> pattern -> pattern
+   val constraint_ : ?loc:loc -> ?attrs:attrs -> pattern -> core_type -> pattern
+@@ -150,8 +153,16 @@ module Exp : sig
      pattern ->
      expression ->
      expression
@@ -17,7 +27,7 @@
  
    val apply :
      ?loc:loc ->
-@@ -162,6 +170,7 @@ module Exp : sig
+@@ -162,6 +173,7 @@ module Exp : sig
  
    val match_ : ?loc:loc -> ?attrs:attrs -> expression -> case list -> expression
    val try_ : ?loc:loc -> ?attrs:attrs -> expression -> case list -> expression
@@ -25,7 +35,25 @@
    val tuple : ?loc:loc -> ?attrs:attrs -> expression list -> expression
  
    val construct :
-@@ -264,6 +273,8 @@ module Exp : sig
+@@ -177,8 +189,17 @@ module Exp : sig
+     expression option ->
+     expression
+ 
++  val record_unboxed_product :
++    ?loc:loc ->
++    ?attrs:attrs ->
++    (lid * expression) list ->
++    expression option ->
++    expression
++
+   val field : ?loc:loc -> ?attrs:attrs -> expression -> lid -> expression
+ 
++  val unboxed_field : ?loc:loc -> ?attrs:attrs -> expression -> lid -> expression
++
+   val setfield :
+     ?loc:loc -> ?attrs:attrs -> expression -> lid -> expression -> expression
+ 
+@@ -264,8 +285,13 @@ module Exp : sig
  
    val extension : ?loc:loc -> ?attrs:attrs -> extension -> expression
    val unreachable : ?loc:loc -> ?attrs:attrs -> unit -> expression
@@ -33,8 +61,13 @@
 +
    val case : pattern -> ?guard:expression -> expression -> case
    val binding_op : str -> pattern -> expression -> loc -> binding_op
++
++  val overwrite : ?loc:loc -> ?attrs:attrs -> expression -> expression -> expression
++  val hole : ?loc:loc -> ?attrs:attrs -> unit -> expression
  end
-@@ -351,7 +362,7 @@ module Mty : sig
+ 
+ (** Value declarations *)
+@@ -351,10 +377,10 @@ module Mty : sig
    val attr : module_type -> attribute -> module_type
    val ident : ?loc:loc -> ?attrs:attrs -> lid -> module_type
    val alias : ?loc:loc -> ?attrs:attrs -> lid -> module_type
@@ -42,4 +75,8 @@
 +  val signature : ?loc:loc -> ?attrs:attrs -> signature_item list -> module_type
  
    val functor_ :
-     ?loc:loc -> ?attrs:attrs -> functor_parameter -> module_type -> module_type
+-    ?loc:loc -> ?attrs:attrs -> functor_parameter -> module_type -> module_type
++    ?loc:loc -> ?attrs:attrs -> functor_parameter -> module_type -> modes -> module_type
+ 
+   val with_ :
+     ?loc:loc ->

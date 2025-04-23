@@ -1,0 +1,26 @@
+--- a/compiler/lib/eval.ml
++++ b/compiler/lib/eval.ml
+@@ -385,9 +385,9 @@
+
+                             (* Avoid duplicating the constant here as it would cause an
+                                allocation *)
+                             arg
+-                        | Some (Int32 _ | NativeInt _), `JavaScript -> assert false
++                        | Some (Int32 _ | NativeInt _), `JavaScript -> arg
+                         | Some ((Float _ | NativeString _) as c), `JavaScript -> Pc c
+                         | Some (String _ as c), `JavaScript
+                           when Config.Flag.use_js_string () -> Pc c
+
+--- a/compiler/lib/generate.ml
++++ b/compiler/lib/generate.ml
+@@ -494,8 +494,8 @@
+           in
+           Mlvalue.Block.make ~tag ~args:l, instrs)
+   | Int i -> targetint i, instrs
+-  | Int32 _ | NativeInt _ ->
+-      assert false (* Should not be produced when compiling to Javascript *)
++  | Int32 i | NativeInt i ->
++    J.ENum (J.Num.of_targetint (Targetint.of_int32_exn i)), instrs
+
+ let constant ~ctx x level =
+   let expr, instr = constant_rec ~ctx x level [] in

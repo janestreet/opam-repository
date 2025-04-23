@@ -11,7 +11,7 @@
    val pstr_value_list :
      loc:Location.t ->
      Asttypes.rec_flag ->
-@@ -110,6 +114,65 @@ module type Additional_helpers = sig
+@@ -110,6 +114,72 @@ module type Additional_helpers = sig
  
    val eta_reduce_if_possible_and_nonrec :
      expression -> rec_flag:rec_flag -> expression
@@ -72,6 +72,13 @@
 +     manifest:core_type option ->
 +     type_declaration)
 +      with_loc
++
++  val module_declaration :
++    (name:string option loc -> type_:module_type -> module_declaration) with_loc
++
++  val pmty_functor : (functor_parameter -> module_type -> module_type) with_loc
++
++  val pmod_constraint : (module_expr -> module_type -> module_expr) with_loc
 +
 +  (* ----------------------------------------------------- *)
  end

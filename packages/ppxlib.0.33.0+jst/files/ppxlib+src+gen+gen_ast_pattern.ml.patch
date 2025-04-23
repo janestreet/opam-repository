@@ -56,3 +56,12 @@
                gen_combinator_for_constructor ?wrapper path ~prefix cd)
          in
          match wrapper with
+@@ -178,6 +185,8 @@ let gen_td ?wrapper path td =
+             ~name:(function_name_of_path path ^ "_attributes")
+           :: items
+         else items
++    | Ptype_record_unboxed_product _ ->
++        failwith "Gen_ast_pattern.gen_td: unboxed records are not yet supported"
+     | Ptype_abstract | Ptype_open -> []
+ 
+ let is_abstract td =

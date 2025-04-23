@@ -1,0 +1,109 @@
+diff --git a/compiler/tests-compiler/effects_continuations.ml b/compiler/tests-compiler/effects_continuations.ml
+More stdlib offsets in internal-obj-changes.patch.
+--- a/compiler/tests-compiler/effects_continuations.ml
++++ b/compiler/tests-compiler/effects_continuations.ml
+@@ -201,7 +200,7 @@ let%expect_test "test-compiler/lib-effec
+     }
+     //end
+     function loop3(param, cont){
+-     var _f_ = Stdlib_List[9];
++     var _f_ = Stdlib_List[10];
+      return caml_cps_call2
+              (_f_,
+               _e_,
+diff --git a/compiler/tests-compiler/gh1007.ml b/compiler/tests-compiler/gh1007.ml
+--- a/compiler/tests-compiler/gh1007.ml
++++ b/compiler/tests-compiler/gh1007.ml
+@@ -498,12 +498,12 @@ let ()  = M.run ()
+       var _e_ = i + 1 | 0;
+       if(4 !== i){var i = _e_; continue;}
+       var
+-       _c_ = caml_call1(Stdlib_List[9], delayed[1]),
++       _c_ = caml_call1(Stdlib_List[10], delayed[1]),
+        _d_ = function(f){return caml_call1(f, 0);};
+-      return caml_call2(Stdlib_List[17], _d_, _c_);
++      return caml_call2(Stdlib_List[18], _d_, _c_);
+      }
+     }
+     //end |}]
+
+ let%expect_test _ =
+   let prog =
+@@ -622,10 +623,10 @@ let ()  = M.run ()
+        var _g_ = i + 1 | 0;
+        if(4 !== i){var i = _g_; continue a;}
+        var
+-        _e_ = caml_call1(Stdlib_List[9], delayed[1]),
++        _e_ = caml_call1(Stdlib_List[10], delayed[1]),
+         _f_ = function(f){return caml_call1(f, 0);};
+-       return caml_call2(Stdlib_List[17], _f_, _e_);
++       return caml_call2(Stdlib_List[18], _f_, _e_);
+       }
+      }
+     }
+     //end |}]
+diff --git a/compiler/tests-compiler/loops.ml b/compiler/tests-compiler/loops.ml
+--- a/compiler/tests-compiler/loops.ml
++++ b/compiler/tests-compiler/loops.ml
+@@ -44,12 +44,12 @@ let%expect_test "rec-fun" =
+        continue;
+       }
+       var
+-       _a_ = caml_call1(Stdlib_List[9], acc$0),
+-       _b_ = caml_call1(Stdlib_List[9], _a_);
+-      return caml_call1(Stdlib_List[9], _b_);
++       _a_ = caml_call1(Stdlib_List[10], acc$0),
++       _b_ = caml_call1(Stdlib_List[10], _a_);
++      return caml_call1(Stdlib_List[10], _b_);
+      }
+     }
+     //end |}]
+
+ let%expect_test "rec-fun-2" =
+   let program =
+@@ -80,9 +81,9 @@ let rec fun_with_loop acc = function
+      for(;;){
+       if(! param$0){
+        var
+-        _c_ = caml_call1(Stdlib_List[9], acc$0),
+-        _d_ = caml_call1(Stdlib_List[9], _c_);
+-       return caml_call1(Stdlib_List[9], _d_);
++        _c_ = caml_call1(Stdlib_List[10], acc$0),
++        _d_ = caml_call1(Stdlib_List[10], _c_);
++       return caml_call1(Stdlib_List[10], _d_);
+       }
+       var x = param$0[1];
+       if(1 === x && ! param$0[2]){
+@@ -481,7 +482,7 @@ let add_substitute =
+         var
+          match$0 =
+            [0,
+-            caml_call3(Stdlib_String[15], s, start$0, stop$0 - start$0 | 0),
++            caml_call3(Stdlib_String[16], s, start$0, stop$0 - start$0 | 0),
+             stop$0];
+         switch$0 = 1;
+         break;
+@@ -515,7 +516,7 @@ let add_substitute =
+          match$0 =
+            [0,
+             caml_call3
+-             (Stdlib_String[15], s, new_start, (stop - start$0 | 0) - 1 | 0),
++             (Stdlib_String[16], s, new_start, (stop - start$0 | 0) - 1 | 0),
+             stop + 1 | 0];
+         break;
+        }
+diff --git a/compiler/tests-compiler/mutable_closure.ml b/compiler/tests-compiler/mutable_closure.ml
+--- a/compiler/tests-compiler/mutable_closure.ml
++++ b/compiler/tests-compiler/mutable_closure.ml
+@@ -162,10 +162,10 @@ let%expect_test _ =
+       var
+        _c_ = indirect[1],
+        _d_ = function(f){return caml_call1(f, 0);},
+-       indirect$0 = caml_call2(Stdlib_List[19], _d_, _c_),
++       indirect$0 = caml_call2(Stdlib_List[20], _d_, _c_),
+        direct$0 = direct[1];
+       if(runtime.caml_equal(indirect$0, direct$0)) return 0;
+       throw caml_maybe_attach_backtrace([0, Assert_failure, _b_], 1);
+      }
+     }
+     //end|}]

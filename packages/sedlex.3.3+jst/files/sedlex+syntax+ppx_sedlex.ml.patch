@@ -1,0 +1,69 @@
+--- a/src/syntax/ppx_sedlex.ml
++++ b/src/syntax/ppx_sedlex.ml
+@@ -306,7 +306,7 @@ let regexp_of_pattern env =
+   let rec char_pair_op func name p tuple =
+     (* Construct something like Sub(a,b) *)
+     match tuple with
+-      | Some { ppat_desc = Ppat_tuple [p0; p1] } -> begin
++      | Some { ppat_desc = Ppat_tuple ([None, p0; None, p1], Closed) } -> begin
+           match func (aux p0) (aux p1) with
+             | Some r -> r
+             | None ->
+@@ -321,8 +321,11 @@ let regexp_of_pattern env =
+     (* interpret one pattern node *)
+     match p.ppat_desc with
+       | Ppat_or (p1, p2) -> Sedlex.alt (aux p1) (aux p2)
+-      | Ppat_tuple (p :: pl) ->
+-          List.fold_left (fun r p -> Sedlex.seq r (aux p)) (aux p) pl
++      | Ppat_tuple (labeled_pl, Closed) ->
++        (match Ppxlib_jane.as_unlabeled_tuple labeled_pl with
++         | Some (p :: pl) -> List.fold_left (fun r p -> Sedlex.seq r (aux p)) (aux p) pl
++         | Some [] -> err p.ppat_loc "empty tuple unexpected"
++         | None -> err p.ppat_loc "labeled tuples not allowed in regexps")
+       | Ppat_construct ({ txt = Lident "Star" }, Some (_, p)) ->
+           Sedlex.rep (aux p)
+       | Ppat_construct ({ txt = Lident "Plus" }, Some (_, p)) ->
+@@ -334,13 +337,13 @@ let regexp_of_pattern env =
+                 {
+                   ppat_desc =
+                     Ppat_tuple
+-                      [
+-                        p0;
+-                        {
++                      ([
++                        None, p0;
++                        None, {
+                           ppat_desc =
+                             Ppat_constant (i1 as i2) | Ppat_interval (i1, i2);
+                         };
+-                      ];
++                      ], Closed);
+                 } ) ) -> begin
+           match (i1, i2) with
+             | Pconst_integer (i1, _), Pconst_integer (i2, _) ->
+@@ -515,14 +518,23 @@ let post_handler cookies =
+     Driver.Cookies.set cookies "sedlex.regexps"
+       (pexp_extension ~loc ({ loc; txt = "regexps" }, PStr !regexps)))
+ 
++let loc_ghoster =
++  object
++    inherit Ast_traverse.map as super
++    method! location location = super#location { location with loc_ghost = true }
++  end
++;;
++
+ let extensions =
+   [
+     Extension.declare "sedlex" Extension.Context.expression
+       Ast_pattern.(single_expr_payload __)
+-      (fun ~loc:_ ~path:_ expr -> mapper#expression expr);
++      (fun ~loc:_ ~path:_ expr ->
++        let output = mapper#expression expr in
++        loc_ghoster#expression output);
+   ]
+ 
+ let () =
+   Driver.Cookies.add_handler pre_handler;
+   Driver.Cookies.add_post_handler post_handler;
+-  Driver.register_transformation "sedlex" ~impl:mapper#structure
++  Driver.register_transformation "sedlex" ~impl:(fun s -> s |> mapper#structure |> loc_ghoster#structure)

@@ -43,7 +43,7 @@
      in
      (* let body =
           if List.mem "attributes" ~set:funcs then
-@@ -117,7 +123,7 @@ struct
+@@ -117,11 +123,13 @@ struct
                let prefix =
                  common_prefix (List.map cds ~f:(fun cd -> cd.pcd_name.txt))
                in
@@ -52,3 +52,19 @@
                    gen_combinator_for_constructor ~wrapper path ~prefix cd))
        | Ptype_record lds ->
            let prefix = prefix_of_record lds in
+           [ gen_combinator_for_record path ~prefix lds ]
++      | Ptype_record_unboxed_product _ ->
++        failwith "Gen_ast_builder.Gen.gen_td: unboxed records are not yet supported"
+       | Ptype_abstract | Ptype_open -> []
+ end
+ 
+@@ -206,7 +214,8 @@ let generate filename =
+               (Named
+                  ( Loc.mk (Some "Loc"),
+                    Mty.signature
+-                     [ Sig.value (Val.mk (Loc.mk "loc") (M.ctyp "Location.t")) ]
++                     [ Sig.value (Val.mk (Loc.mk "loc") (M.ctyp "Location.t")) ],
++                   []
+                  ))
+               (Mod.structure (M.stri "let loc = Loc.loc" :: items true))));
+     ]

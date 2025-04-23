@@ -13,7 +13,7 @@ bug-reports: "https://github.com/ocaml/merlin/issues"
 depends: [
   "ocaml"      {>= "5.2"}
   "dune"       {>= "3.0"}
-  "merlin-lib" {= version}
+  "merlin-lib" {= version & = "5.2.1-502+jst"}
   "ocamlfind"  {>= "1.6.0"}
 ]
 build: [
@@ -24,8 +24,8 @@ dev-repo: "git+https://github.com/ocaml/merlin.git"
 x-commit-hash: "0eaccc1b8520d605b1e00685e1c3f8acb5da534c"
 url {
   src:
-    "https://github.com/janestreet/merlin-jst/archive/105231128fbba145a42a59c88d2507805a4de9ed.tar.gz"
+    "https://github.com/janestreet/merlin-jst/archive/a1ef620d3154709b41355452fde6792db289b6ce.tar.gz"
   checksum:
-    "sha256=2428481b8bcddcec2cb57c3bee65bc72ced5b179635f1f373d7599db8f45ddcb"
+    "sha256=1a1a14b014ac28c321a41341c5eebbcd460d5ec8c9d612addc3b0c819c9a8b6f"
 }
 

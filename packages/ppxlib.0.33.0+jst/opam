@@ -22,7 +22,7 @@ bug-reports: "https://github.com/ocaml-ppx/ppxlib/issues"
 depends: [
   "dune"                {>= "2.7"}
   "ocaml"               {>= "4.04.1" & < "5.3.0"}
-  "ocaml-compiler-libs" {= "v0.17.0+jst"}
+  "ocaml-compiler-libs" {>= "v0.11.0" & = "v0.17.0+jst"}
   "ppx_derivers"        {>= "1.0"}
   "sexplib0"            {>= "v0.12"}
   "sexplib0"            {with-test & >= "v0.15"}
@@ -65,17 +65,22 @@ url {
 x-commit-hash: "563d5651e877c6f7d5561f9d8ca93fca05b07d07"
 patches: [
   "ppxlib+metaquot+ppxlib_metaquot.ml.patch"
+  "ppxlib+runner_as_ppx+ppxlib_runner_as_ppx.ml.patch"
   "ppxlib+src+ast_builder.ml.patch"
   "ppxlib+src+ast_builder.mli.patch"
   "ppxlib+src+ast_builder_intf.ml.patch"
   "ppxlib+src+ast_pattern.ml.patch"
   "ppxlib+src+ast_pattern.mli.patch"
   "ppxlib+src+ast_traverse.ml.patch"
+  "ppxlib+src+attribute.ml.patch"
+  "ppxlib+src+attribute.mli.patch"
   "ppxlib+src+cinaps+ppxlib_cinaps_helpers.ml.patch"
   "ppxlib+src+code_matcher.ml.patch"
   "ppxlib+src+code_matcher.mli.patch"
   "ppxlib+src+common.ml.patch"
+  "ppxlib+src+common.mli.patch"
   "ppxlib+src+context_free.ml.patch"
+  "ppxlib+src+context_free.mli.patch"
   "ppxlib+src+deriving.ml.patch"
   "ppxlib+src+deriving.mli.patch"
   "ppxlib+src+driver.ml.patch"
@@ -83,9 +88,12 @@ patches: [
   "ppxlib+src+gen+gen_ast_builder.ml.patch"
   "ppxlib+src+gen+gen_ast_pattern.ml.patch"
   "ppxlib+src+gen+import.ml.patch"
+  "ppxlib+src+ignore_unused_warning.ml.patch"
   "ppxlib+src+location.ml.patch"
+  "ppxlib+src+location.mli.patch"
   "ppxlib+src+name.ml.patch"
   "ppxlib+src+utils.ml.patch"
+  "ppxlib+src+utils.mli.patch"
   "ppxlib+traverse+ppxlib_traverse.ml.patch"
   "dune.patch"
   "location_check.ml.patch"
@@ -96,28 +104,40 @@ extra-files: [
     "sha256=003d0352f4e730aeb961cd992b4291640ca0812dc82026841d94ab9d5a629714"
   ]
   [
+    "ppxlib+runner_as_ppx+ppxlib_runner_as_ppx.ml.patch"
+    "sha256=2d3c5106d177079785e1a81fddc4a7d2aee0a00c576976aab6e45ff82d619931"
+  ]
+  [
     "ppxlib+src+ast_builder.ml.patch"
-    "sha256=75d55caa1d5f3442b085bd761c16607f98827c36d18810c88c1a82a7c5f176d6"
+    "sha256=7d51efac59b7fb1a9104372b317da31de7c5f71a780117ea3b1925084ddaeffb"
   ]
   [
     "ppxlib+src+ast_builder.mli.patch"
-    "sha256=f76592ee00a643adb2ab73da360a6a5d56332e58ed1fcef7a500e5b6d1800832"
+    "sha256=52d672b30e2f884eb197c56884e96dc75c51f08349f569f2facb7487e6041853"
   ]
   [
     "ppxlib+src+ast_builder_intf.ml.patch"
-    "sha256=54f58a7bcb3e8443484074e5e4d543a2ce37a47d1c97c80b34092bcb53108d77"
+    "sha256=9b55f5bd1f7796363e9483f1dc32da5ded8e1cb4c46aa9b9c82840bb877cf253"
   ]
   [
     "ppxlib+src+ast_pattern.ml.patch"
-    "sha256=18cce043836766345085b4e79e1a30ad7c0169c5736bbb71aa112866b721ad2f"
+    "sha256=11711611e05630c1282180dc8a748a76545f67e14ed7ad6c6aa4fd94589cfdd3"
   ]
   [
     "ppxlib+src+ast_pattern.mli.patch"
-    "sha256=3cb3d24194b858922e67ae38f7cf7234c428d968559a835c59257f40d38a71a7"
+    "sha256=acc7476fce28e593d837192562212d1dbda460d3f82ada80f9154a92ffec162b"
   ]
   [
     "ppxlib+src+ast_traverse.ml.patch"
-    "sha256=f29949a4ef58a451a8ab44cfb1f5e1de6988ebd354a51db6cc3be5b4773bd758"
+    "sha256=1cf7ff1940cac40a0386b65650ecf745c251a0f1cd14d88af41ca298ac6f1ae1"
+  ]
+  [
+    "ppxlib+src+attribute.ml.patch"
+    "sha256=740aab4fc2195bf7acf102ab11e7bda249434595ae19928c6adf759ecabc43ec"
+  ]
+  [
+    "ppxlib+src+attribute.mli.patch"
+    "sha256=496836086c405c9b096acc97c1830d37ad615c10be270e1b037fcf55c0118b44"
   ]
   [
     "ppxlib+src+cinaps+ppxlib_cinaps_helpers.ml.patch"
@@ -125,19 +145,27 @@ extra-files: [
   ]
   [
     "ppxlib+src+code_matcher.ml.patch"
-    "sha256=4275661fdb09a47fd2fa5238e8f7c79d5638d9cac584ef34b6c3ea20635a67dd"
+    "sha256=a08c8f60c4b2471c17845c3a31712b23a16abc73612e4787032d2438217c6588"
   ]
   [
     "ppxlib+src+code_matcher.mli.patch"
-    "sha256=3fcaae1ab62e79090d391c9a812680d52455b0c078576d8bb5d4dcf325937785"
+    "sha256=0014b9354e5a24c24d382db6afcae70c70a852768c82f10f6ca4cb5ca05a1249"
   ]
   [
     "ppxlib+src+common.ml.patch"
-    "sha256=b52cf35c293288363f39a87159e84633ecaffe0f8a73ace140236a3f327dfd26"
+    "sha256=1053b7edfffb3279e345dbfdd5222a90fcbe7e87a99e9a0f6b61dfdaaa3f0e7e"
+  ]
+  [
+    "ppxlib+src+common.mli.patch"
+    "sha256=69769c220fc43d0b00d7033c6d1eb390df47538dac604aba15f6f51a1a504064"
   ]
   [
     "ppxlib+src+context_free.ml.patch"
-    "sha256=ee9245e6818b4df7963588bf136058e0d4a7150ea0c4f7fc806585dfddcb1a53"
+    "sha256=f0e0859083214f1ce8d9def7df0956e77613846375713b9d9f8b3eb226515c27"
+  ]
+  [
+    "ppxlib+src+context_free.mli.patch"
+    "sha256=74dcf6ae6cbcb89a0f48279c64ca1e26db2d14ff6288d71f7d6d1029a106a47e"
   ]
   [
     "ppxlib+src+deriving.ml.patch"
@@ -149,7 +177,7 @@ extra-files: [
   ]
   [
     "ppxlib+src+driver.ml.patch"
-    "sha256=0f563897b2abd9eaa6e5fa72aed4129fa37f7318a16773ea996c7fe3c55ad0b4"
+    "sha256=f4752975a02cc5f7e1a19a96f34663ce068ab3b64ea8b64f18d56e6010763f2b"
   ]
   [
     "ppxlib+src+driver.mli.patch"
@@ -157,31 +185,43 @@ extra-files: [
   ]
   [
     "ppxlib+src+gen+gen_ast_builder.ml.patch"
-    "sha256=3fd5287178c8f0de72bf27043a99c055ee6a75409e45d0e474002f55167a4b3f"
+    "sha256=ac68b651aa66061c202c076e4e009b14fd580748ceebced4b1096b1e9fa3ebb4"
   ]
   [
     "ppxlib+src+gen+gen_ast_pattern.ml.patch"
-    "sha256=4a801a47ccbd2b1995da079ba12ceebbdcfb5506463112204f00b6121a37d75b"
+    "sha256=b9b763a2f04c239231748c895b84e5f6ae6af4fae6727b041a5282bbcdd38317"
   ]
   [
     "ppxlib+src+gen+import.ml.patch"
     "sha256=217b43ca4ec72e0f590e44b4b280fdbce917f1b3835d9258471079e6978a39d2"
   ]
   [
+    "ppxlib+src+ignore_unused_warning.ml.patch"
+    "sha256=292bc60e7e628d839e5dcaaee1dbcfe60b65e51de6b7f588005d8ab4c65c1af6"
+  ]
+  [
     "ppxlib+src+location.ml.patch"
-    "sha256=5eeb0d326191b4c9bb1d006b36d7fcd202cd4f56c3c47ee52aa18f89050f4abf"
+    "sha256=2773f5b33af2bb7537ad45567fd85df72a5b1090d6fc678bc9cd974de2fbb168"
+  ]
+  [
+    "ppxlib+src+location.mli.patch"
+    "sha256=c437419eb0cd3b2227c84b5860034fc8fb3fa2a5c82ef4f4a524af02ed079aee"
   ]
   [
     "ppxlib+src+name.ml.patch"
-    "sha256=3158a8f718a3362dc28b93809e0ef25c668ab1d888b22c7a1d86bbca34776bd4"
+    "sha256=aa3ff1484bea746b5dbdc27d102ffe979d00c50930a3c84a3c47936c61d5ae50"
   ]
   [
     "ppxlib+src+utils.ml.patch"
-    "sha256=b6406b84d9cd46bb17ec77cfb61a6046ab3617222d37f6ba54e277a000d1ac7b"
+    "sha256=a6ef119dc9aa4632fe5cf9bf5f7da782a349604c309b84946dfd727da4025685"
+  ]
+  [
+    "ppxlib+src+utils.mli.patch"
+    "sha256=f1aefb00cc5b06d6564920d80c3dfcda5c7211823f21c7d8bf8feb7efc3dd97d"
   ]
   [
     "ppxlib+traverse+ppxlib_traverse.ml.patch"
-    "sha256=afa1fb4ef26094b6cb01b7eb9904dcc708630c567910667265774d4e774a6a66"
+    "sha256=51b412cfb18e773d24110c191b234683d2573d34dcb4e6de9e31fea41f9925ff"
   ]
   [
     "dune.patch"
@@ -189,6 +229,6 @@ extra-files: [
   ]
   [
     "location_check.ml.patch"
-    "sha256=920d0a4c16e01d17a71098498b519d79002b3415796e72ef6a311446a21f044b"
+    "sha256=6fbc41954c6289420f2fb1ec0b548a46bc923b09af4a771eb7d5c50958541b3d"
   ]
 ]

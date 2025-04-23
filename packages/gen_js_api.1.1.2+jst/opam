@@ -20,8 +20,8 @@ bug-reports: "https://github.com/LexiFi/gen_js_api/issues"
 depends: [
   "dune"                 {>= "2.7"}
   "ocaml"                {>= "4.08"}
-  "ppxlib"               {= "0.33.0+jst"}
-  "js_of_ocaml-compiler" {with-test}
+  "ppxlib"               {>= "0.26" & = "0.33.0+jst"}
+  "js_of_ocaml-compiler" {with-test & = "6.0.1+jst"}
   "conf-npm"             {with-test}
   "ojs"                  {= "1.1.2"}
   "odoc"                 {with-doc}
@@ -56,12 +56,13 @@ patches: [
   "gen-js-api+js_of_ocaml-globalThis.patch"
   "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
   "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
+  "gen-js-api+unsafe_multidomain_alert.patch"
   "dune.patch"
 ]
 extra-files: [
   [
     "gen-js-api+js_of_ocaml-globalThis.patch"
-    "sha256=e6551eaf518dbefd723a2e234a54c6ef8070c947c091d0cfda6f6880b233372c"
+    "sha256=7828fe1796e89139bbfe38e9fdf6b0d959d15bf4e9762f24bfe3749de409398d"
   ]
   [
     "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
@@ -69,7 +70,11 @@ extra-files: [
   ]
   [
     "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
-    "sha256=0711bdb8cf174a7f1031f3d9164981fda1ff8f164b512a54800aae74001c5b8c"
+    "sha256=813d51aee7836858c33494e3bc458516a39aac6f3f515ae70631cf66e026e329"
+  ]
+  [
+    "gen-js-api+unsafe_multidomain_alert.patch"
+    "sha256=41fd51a6dd20b44bc07451e4635623554c4aa80e5e5f9472faf4161c7a7b0a7a"
   ]
   [
     "dune.patch"

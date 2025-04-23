@@ -1,6 +1,6 @@
 --- a/src/ast_pattern.mli
 +++ b/src/ast_pattern.mli
-@@ -171,6 +171,58 @@ include module type of Ast_pattern_gener
+@@ -171,6 +171,61 @@ include module type of Ast_pattern_gener
          (expression, 'a, 'c) t
      ]} *)
  
@@ -54,12 +54,15 @@
 +
 +val signature : (signature_item list, 'a, 'b) t -> (signature, 'a, 'b) t
 +
++val module_declaration: name:(string option, 'a, 'b) t -> type_:(module_type, 'b, 'c) t ->
++  (module_declaration, 'a, 'c) t
++
 +(* ----------------------------------------------------- *)
 +
  val true_ : (bool, 'a, 'a) t
  val false_ : (bool, 'a, 'a) t
  val eint : (int, 'a, 'b) t -> (expression, 'a, 'b) t
-@@ -189,6 +241,8 @@ val pint64 : (int64, 'a, 'b) t -> (patte
+@@ -189,6 +244,8 @@ val pint64 : (int64, 'a, 'b) t -> (patte
  val pnativeint : (nativeint, 'a, 'b) t -> (pattern, 'a, 'b) t
  val single_expr_payload : (expression, 'a, 'b) t -> (payload, 'a, 'b) t
  
@@ -68,3 +71,13 @@
  val no_label :
    (expression, 'a, 'b) t -> (Asttypes.arg_label * expression, 'a, 'b) t
  
+@@ -205,6 +262,9 @@ val elist : (expression, 'a -> 'a, 'b) t
+ val esequence :
+   (expression, 'a -> 'a, 'b) t -> (expression, 'b list -> 'c, 'c) t
+ 
++val fail : Location.t -> string -> _
++(** Raises the exception that [Ast_pattern] recognizes as a matching failure. *)
++
+ type context
+ 
+ val of_func : (context -> Location.t -> 'a -> 'b -> 'c) -> ('a, 'b, 'c) t

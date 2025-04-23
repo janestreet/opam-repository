@@ -28,7 +28,7 @@ depends: [
   "ocaml"               {>= "4.08"}
   "cmdliner"            {with-test = "false" & >= "1.1.0" | with-test & >= "1.2.0"}
   "dune"                {>= "2.8"}
-  "ocamlformat-lib"     {= "0.26.2+jst"}
+  "ocamlformat-lib"     {= version & = "0.26.2+jst"}
   "ocamlformat-rpc-lib" {with-test & = version}
   "re"                  {>= "1.10.3"}
   "odoc"                {with-doc}
@@ -51,8 +51,7 @@ dev-repo: "git+https://github.com/ocaml-ppx/ocamlformat.git"
 x-commit-hash: "f5727b32127730a2722f86c7119eb6d8f884e26d"
 url {
   src:
-    "https://github.com/janestreet/ocamlformat/archive/1103e7246de6dac0d3f5a639f5dbe7b6a3530cf8.tar.gz"
+    "https://github.com/janestreet/ocamlformat/archive/3dc38a7920db9c36742dd2c3c1be2dc0baa5757c.tar.gz"
   checksum:
-    "sha256=c535d678cf3ed7d18590f09f3bbabe5e7ad26f566bfbd0bb500cbc7c0b767847"
+    "sha256=170909dadb8ca908a283dc2cd979b4bdff4e4fb7c257cbae7207f32c99373583"
 }
-

@@ -151,11 +151,20 @@
    | Ppat_construct of longident_loc * (string loc list * pattern) option
        (** [Ppat_construct(C, args)] represents:
  
-@@ -329,9 +385,14 @@ and pattern_desc = Parsetree.pattern_des
+@@ -329,9 +385,23 @@ and pattern_desc = Parsetree.pattern_des
              {{!Asttypes.closed_flag.Open} [Open]}
  
            Invariant: [n > 0] *)
 -  | Ppat_array of pattern list  (** Pattern [\[| P1; ...; Pn |\]] *)
++  | Ppat_record_unboxed_product of (longident_loc * pattern) list * closed_flag
++      (** [Ppat_record_unboxed_product([(l1, P1) ; ... ; (ln, Pn)], flag)] represents:
++            - [#{ l1=P1; ...; ln=Pn }]
++                when [flag] is {{!Asttypes.closed_flag.Closed}[Closed]}
++            - [#{ l1=P1; ...; ln=Pn; _}]
++                when [flag] is {{!Asttypes.closed_flag.Open}[Open]}
++
++          Invariant: [n > 0]
++        *)
 +  | Ppat_array of mutable_flag * pattern list
 +      (** Pattern [[| P1; ...; Pn |]] or [[: P1; ...; Pn :]] *)
    | Ppat_or of pattern * pattern  (** Pattern [P1 | P2] *)
@@ -168,7 +177,7 @@
    | Ppat_type of longident_loc  (** Pattern [#tconst] *)
    | Ppat_lazy of pattern  (** Pattern [lazy P] *)
    | Ppat_unpack of string option loc
-@@ -367,28 +428,21 @@ and expression_desc = Parsetree.expressi
+@@ -367,28 +437,21 @@ and expression_desc = Parsetree.expressi
              {{!Asttypes.rec_flag.Nonrecursive} [Nonrecursive]},
            - [let rec P1 = E1 and ... and Pn = EN in E] when [flag] is
              {{!Asttypes.rec_flag.Recursive} [Recursive]}. *)
@@ -195,7 +204,7 @@
 -          - [let f P = E] is represented using {{!expression_desc.Pexp_fun}
 -            [Pexp_fun]}. *)
 +  | Pexp_function of
-+      function_param list * function_constraint option * function_body
++      function_param list * function_constraint * function_body
 +  (** [Pexp_function ([P1; ...; Pn], C, body)] represents any construct
 +      involving [fun] or [function], including:
 +      - [fun P1 ... Pn -> E]
@@ -212,7 +221,7 @@
    | Pexp_apply of expression * (arg_label * expression) list
        (** [Pexp_apply(E0, \[(l1, E1) ; ... ; (ln, En)\])] represents
            [E0 ~l1:E1 ... ~ln:En]
-@@ -403,10 +457,24 @@ and expression_desc = Parsetree.expressi
+@@ -403,10 +466,24 @@ and expression_desc = Parsetree.expressi
        (** [match E0 with P1 -> E1 | ... | Pn -> En] *)
    | Pexp_try of expression * cases
        (** [try E0 with P1 -> E1 | ... | Pn -> En] *)
@@ -241,8 +250,19 @@
    | Pexp_construct of longident_loc * expression option
        (** [Pexp_construct(C, exp)] represents:
  
-@@ -428,7 +496,8 @@ and expression_desc = Parsetree.expressi
+@@ -425,10 +502,19 @@ and expression_desc = Parsetree.expressi
+           - [{ E0 with l1=P1; ...; ln=Pn }] when [exp0] is [Some E0]
+ 
+           Invariant: [n > 0] *)
++  | Pexp_record_unboxed_product of (longident_loc * expression) list * expression option
++      (** [Pexp_record_unboxed_product([(l1,P1) ; ... ; (ln,Pn)], exp0)] represents
++            - [#{ l1=P1; ...; ln=Pn }]         when [exp0] is [None]
++            - [#{ E0 with l1=P1; ...; ln=Pn }] when [exp0] is [Some E0]
++
++          Invariant: [n > 0]
++        *)
    | Pexp_field of expression * longident_loc  (** [E.l] *)
++  | Pexp_unboxed_field of expression * longident_loc  (** [E.#l] *)
    | Pexp_setfield of expression * longident_loc * expression
        (** [E1.l <- E2] *)
 -  | Pexp_array of expression list  (** [\[| E1; ...; En |\]] *)
@@ -251,7 +271,7 @@
    | Pexp_ifthenelse of expression * expression * expression option
        (** [if E1 then E2 else E3] *)
    | Pexp_sequence of expression * expression  (** [E1; E2] *)
-@@ -440,7 +509,7 @@ and expression_desc = Parsetree.expressi
+@@ -440,7 +526,7 @@ and expression_desc = Parsetree.expressi
              {{!Asttypes.direction_flag.Upto} [Upto]}
            - [for i = E1 downto E2 do E3 done] when [direction] is
              {{!Asttypes.direction_flag.Downto} [Downto]} *)
@@ -260,7 +280,7 @@
    | Pexp_coerce of expression * core_type option * core_type
        (** [Pexp_coerce(E, from, T)] represents
  
-@@ -467,7 +536,8 @@ and expression_desc = Parsetree.expressi
+@@ -467,7 +553,8 @@ and expression_desc = Parsetree.expressi
            {{!class_field_kind.Cfk_concrete} [Cfk_concrete]} for methods (not
            values). *)
    | Pexp_object of class_structure  (** [object ... end] *)
@@ -270,7 +290,7 @@
    | Pexp_pack of module_expr
        (** [(module ME)].
  
-@@ -482,6 +552,13 @@ and expression_desc = Parsetree.expressi
+@@ -482,6 +569,15 @@ and expression_desc = Parsetree.expressi
            - [let* P0 = E00 and* P1 = E01 in E1] *)
    | Pexp_extension of extension  (** [\[%id\]] *)
    | Pexp_unreachable  (** [.] *)
@@ -281,10 +301,12 @@
 +          - [BODY] is an expression.
 +          - [CLAUSES] is a series of [comprehension_clause].
 +      *)
++  | Pexp_overwrite of expression * expression
++  | Pexp_hole
  
  and case = Parsetree.case = {
    pc_lhs : pattern;
-@@ -503,11 +580,120 @@ and binding_op = Parsetree.binding_op = 
+@@ -503,11 +599,130 @@ and binding_op = Parsetree.binding_op = 
    pbop_loc : location;
  }
  
@@ -350,11 +372,21 @@
 +
 +and function_constraint = Parsetree.function_constraint =
 +  { mode_annotations : modes;
-+    (** The mode annotation placed on a function let-binding when the function
-+            has a type constraint on the body, e.g.
-+            [let local_ f x : int -> int = ...].
++    (** The mode annotation placed on a function let-binding, e.g.
++       [let local_ f x : int -> int = ...].
++       The [local_] syntax is parsed into two nodes: the field here, and [pvb_modes].
++       This field only affects the interpretation of [ret_type_constraint], while the
++       latter is translated in [typecore] to [Pexp_constraint] to contrain the mode of the
++       function.
++
 +    *)
-+    type_constraint : type_constraint;
++    ret_mode_annotations : modes;
++    (** The mode annotation placed on a function's body, e.g.
++       [let f x : int -> int @@ local = ...].
++       This field constrains the mode of function's body.
++    *)
++    ret_type_constraint : type_constraint option;
++    (** The type constraint placed on a function's body. *)
 +  }
 +(** See the comment on {{!expression_desc.Pexp_function}[Pexp_function]}. *)
 +
@@ -373,7 +405,7 @@
 +and comprehension_clause_binding = Parsetree.comprehension_clause_binding =
 +  { pcomp_cb_pattern : pattern;
 +    pcomp_cb_iterator : comprehension_iterator;
-+    pcomp_cb_attributes : attribute list
++    pcomp_cb_attributes : attributes
 +  }
 +
 +and comprehension_clause = Parsetree.comprehension_clause =
@@ -401,11 +433,11 @@
  and value_description = Parsetree.value_description = {
    pval_name : string loc;
    pval_type : core_type;
-+  pval_modalities : modality loc list;
++  pval_modalities : modalities;
    pval_prim : string list;
    pval_attributes : attributes;  (** [... \[@@id1\] \[@@id2\]] *)
    pval_loc : location;
-@@ -530,6 +716,7 @@ and type_declaration = Parsetree.type_de
+@@ -530,6 +745,7 @@ and type_declaration = Parsetree.type_de
    ptype_private : private_flag;  (** for [= private ...] *)
    ptype_manifest : core_type option;  (** represents [= T] *)
    ptype_attributes : attributes;  (** [... \[@@id1\] \[@@id2\]] *)
@@ -413,15 +445,21 @@
    ptype_loc : location;
  }
  (** Here are type declarations and their representation, for various
-@@ -560,6 +747,7 @@ and type_kind = Parsetree.type_kind =
+@@ -555,11 +771,13 @@ and type_kind = Parsetree.type_kind =
+   | Ptype_abstract
+   | Ptype_variant of constructor_declaration list
+   | Ptype_record of label_declaration list  (** Invariant: non-empty list *)
++  | Ptype_record_unboxed_product of label_declaration list  (** Invariant: non-empty list *)
+   | Ptype_open
+ 
  and label_declaration = Parsetree.label_declaration = {
    pld_name : string loc;
    pld_mutable : mutable_flag;
-+  pld_modalities : modality loc list;
++  pld_modalities : modalities;
    pld_type : core_type;
    pld_loc : location;
    pld_attributes : attributes;  (** [l : T \[@id1\] \[@id2\]] *)
-@@ -573,15 +761,22 @@ and label_declaration = Parsetree.label_
+@@ -573,15 +791,22 @@ and label_declaration = Parsetree.label_
  
  and constructor_declaration = Parsetree.constructor_declaration = {
    pcd_name : string loc;
@@ -435,7 +473,7 @@
  }
  
 +and constructor_argument = Parsetree.constructor_argument = {
-+  pca_modalities: modality loc list;
++  pca_modalities: modalities;
 +  pca_type: core_type;
 +  pca_loc: location;
 +}
@@ -446,7 +484,7 @@
    | Pcstr_record of label_declaration list
        (** Values of type {!constructor_declaration} represents the constructor
            arguments of:
-@@ -621,7 +816,8 @@ and type_exception = Parsetree.type_exce
+@@ -621,7 +846,8 @@ and type_exception = Parsetree.type_exce
  (** Definition of a new exception ([exception E]). *)
  
  and extension_constructor_kind = Parsetree.extension_constructor_kind =
@@ -456,7 +494,7 @@
        (** [Pext_decl(existentials, c_args, t_opt)] describes a new extension
            constructor. It can be:
  
-@@ -647,7 +843,7 @@ and extension_constructor_kind = Parsetr
+@@ -647,7 +873,7 @@ and extension_constructor_kind = Parsetr
                - [c_args] is [\[T1; ...; Tn\]],
                - [t_opt] is [Some T0].
             }
@@ -465,7 +503,14 @@
                when
  
                - [existentials] is [\['a;...\]],
-@@ -848,6 +1044,7 @@ and module_type_desc = Parsetree.module_
+@@ -842,22 +1068,25 @@ and module_type = Parsetree.module_type 
+ and module_type_desc = Parsetree.module_type_desc =
+   | Pmty_ident of longident_loc  (** [Pmty_ident(S)] represents [S] *)
+   | Pmty_signature of signature  (** [sig ... end] *)
+-  | Pmty_functor of functor_parameter * module_type
++  | Pmty_functor of functor_parameter * module_type * modes
+       (** [functor(X : MT1) -> MT2] *)
+   | Pmty_with of module_type * with_constraint list  (** [MT with ...] *)
    | Pmty_typeof of module_expr  (** [module type of ME] *)
    | Pmty_extension of extension  (** [\[%id\]] *)
    | Pmty_alias of longident_loc  (** [(module M)] *)
@@ -473,18 +518,21 @@
  
  and functor_parameter = Parsetree.functor_parameter =
    | Unit  (** [()] *)
-@@ -857,7 +1054,9 @@ and functor_parameter = Parsetree.functo
+-  | Named of string option loc * module_type
++  | Named of string option loc * module_type * modes
+       (** [Named(name, MT)] represents:
+ 
            - [(X : MT)] when [name] is [Some X],
            - [(_ : MT)] when [name] is [None] *)
  
 -and signature = signature_item list
-+and signature = Parsetree.signature = { psg_items : signature_items }
++and signature = Parsetree.signature = { psg_modalities : modalities; psg_items : signature_items; psg_loc : location }
 +
 +and signature_items = signature_item list
  
  and signature_item = Parsetree.signature_item = {
    psig_desc : signature_item_desc;
-@@ -882,13 +1081,15 @@ and signature_item_desc = Parsetree.sign
+@@ -882,17 +1111,20 @@ and signature_item_desc = Parsetree.sign
        (** [module type S = MT] and [module type S] *)
    | Psig_modtypesubst of module_type_declaration  (** [module type S :=  ...] *)
    | Psig_open of open_description  (** [open X] *)
@@ -501,7 +549,12 @@
  
  and module_declaration = Parsetree.module_declaration = {
    pmd_name : string option loc;
-@@ -946,6 +1147,7 @@ and open_declaration = module_expr open_
+   pmd_type : module_type;
++  pmd_modalities : modalities;
+   pmd_attributes : attributes;  (** [... \[@@id1\] \[@@id2\]] *)
+   pmd_loc : location;
+ }
+@@ -946,6 +1178,7 @@ and open_declaration = module_expr open_
      - [open struct ... end] *)
  
  and 'a include_infos = 'a Parsetree.include_infos = {
@@ -509,8 +562,12 @@
    pincl_mod : 'a;
    pincl_loc : location;
    pincl_attributes : attributes;
-@@ -990,6 +1192,15 @@ and module_expr_desc = Parsetree.module_
-   | Pmod_constraint of module_expr * module_type  (** [(ME : MT)] *)
+@@ -987,9 +1220,18 @@ and module_expr_desc = Parsetree.module_
+   | Pmod_functor of functor_parameter * module_expr
+       (** [functor(X : MT1) -> ME] *)
+   | Pmod_apply of module_expr * module_expr  (** [ME1(ME2)] *)
+-  | Pmod_constraint of module_expr * module_type  (** [(ME : MT)] *)
++  | Pmod_constraint of module_expr * module_type option * modes  (** [(ME : MT)] *)
    | Pmod_unpack of expression  (** [(val E)] *)
    | Pmod_extension of extension  (** [\[%id\]] *)
 +  | Pmod_instance of module_instance
@@ -525,7 +582,7 @@
  
  and structure = structure_item list
  
-@@ -1028,10 +1239,13 @@ and structure_item_desc = Parsetree.stru
+@@ -1028,10 +1270,13 @@ and structure_item_desc = Parsetree.stru
    | Pstr_include of include_declaration  (** [include ME] *)
    | Pstr_attribute of attribute  (** [\[@@@id\]] *)
    | Pstr_extension of extension * attributes  (** [\[%%id\]] *)
@@ -539,7 +596,7 @@
    pvb_attributes : attributes;
    pvb_loc : location;
  }
-@@ -1044,6 +1258,19 @@ and module_binding = Parsetree.module_bi
+@@ -1044,6 +1289,19 @@ and module_binding = Parsetree.module_bi
  }
  (** Values of type [module_binding] represents [module X = ME] *)
  
@@ -547,7 +604,7 @@
 +  | Default
 +  | Abbreviation of string
 +  | Mod of jkind_annotation * modes
-+  | With of jkind_annotation * core_type
++  | With of jkind_annotation * core_type * modalities
 +  | Kind_of of core_type
 +  | Product of jkind_annotation list
 +
@@ -559,8 +616,11 @@
  (** {1 Toplevel} *)
  (** {2 Toplevel phrases} *)
  
-@@ -1072,405 +1299,345 @@ and cases = case list [@@deriving_inline
+@@ -1069,408 +1327,365 @@ and directive_argument_desc = Parsetree.
+   | Pdir_bool of bool
  
+ and cases = case list [@@deriving_inline traverse]
+-
  class virtual map =
    object (self)
 -    method virtual bool : bool -> bool
@@ -987,6 +1047,13 @@
 +                   let a = self#longident_loc a in
 +                   let b = self#pattern b in (a, b)) a in
 +            let b = self#closed_flag b in Ppat_record (a, b)
++        | Ppat_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#longident_loc a in
++                   let b = self#pattern b in (a, b)) a in
++            let b = self#closed_flag b in Ppat_record_unboxed_product (a, b)
 +        | Ppat_array (a, b) ->
 +            let a = self#mutable_flag a in
 +            let b = self#list self#pattern b in Ppat_array (a, b)
@@ -1068,7 +1135,7 @@
 +            let c = self#expression c in Pexp_let (a, b, c)
 +        | Pexp_function (a, b, c) ->
 +            let a = self#list self#function_param a in
-+            let b = self#option self#function_constraint b in
++            let b = self#function_constraint b in
 +            let c = self#function_body c in Pexp_function (a, b, c)
          | Pexp_apply (a, b) ->
              let a = self#expression a in
@@ -1127,16 +1194,26 @@
 -                  (a, b))
 -                a
 -            in
--            let b = self#option self#expression b in
--            Pexp_record (a, b)
 +                   let a = self#longident_loc a in
 +                   let b = self#expression b in (a, b)) a in
 +            let b = self#option self#expression b in Pexp_record (a, b)
++        | Pexp_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#longident_loc a in
++                   let b = self#expression b in (a, b)) a in
+             let b = self#option self#expression b in
+-            Pexp_record (a, b)
++            Pexp_record_unboxed_product (a, b)
          | Pexp_field (a, b) ->
              let a = self#expression a in
 -            let b = self#longident_loc b in
 -            Pexp_field (a, b)
 +            let b = self#longident_loc b in Pexp_field (a, b)
++        | Pexp_unboxed_field (a, b) ->
++            let a = self#expression a in
++            let b = self#longident_loc b in Pexp_unboxed_field (a, b)
          | Pexp_setfield (a, b, c) ->
              let a = self#expression a in
              let b = self#longident_loc b in
@@ -1152,7 +1229,7 @@
          | Pexp_ifthenelse (a, b, c) ->
              let a = self#expression a in
              let b = self#expression b in
-@@ -1478,160 +1645,206 @@ class virtual map =
+@@ -1478,160 +1693,210 @@ class virtual map =
              Pexp_ifthenelse (a, b, c)
          | Pexp_sequence (a, b) ->
              let a = self#expression a in
@@ -1269,6 +1346,10 @@
 +        | Pexp_stack a -> let a = self#expression a in Pexp_stack a
 +        | Pexp_comprehension a ->
 +            let a = self#comprehension_expression a in Pexp_comprehension a
++        | Pexp_overwrite (a, b) ->
++            let a = self#expression a in
++            let b = self#expression b in Pexp_overwrite (a, b)
++        | Pexp_hole -> Pexp_hole
 +    method case : case -> case=
        fun { pc_lhs; pc_guard; pc_rhs } ->
          let pc_lhs = self#pattern pc_lhs in
@@ -1329,10 +1410,12 @@
 +            let a = self#option self#core_type a in
 +            let b = self#core_type b in Pcoerce (a, b)
 +    method function_constraint : function_constraint -> function_constraint=
-+      fun { mode_annotations; type_constraint } ->
++      fun { mode_annotations; ret_mode_annotations; ret_type_constraint } ->
 +        let mode_annotations = self#modes mode_annotations in
-+        let type_constraint = self#type_constraint type_constraint in
-+        { mode_annotations; type_constraint }
++        let ret_mode_annotations = self#modes ret_mode_annotations in
++        let ret_type_constraint =
++          self#option self#type_constraint ret_type_constraint in
++        { mode_annotations; ret_mode_annotations; ret_type_constraint }
 +    method comprehension_iterator :
 +      comprehension_iterator -> comprehension_iterator=
 +      fun x ->
@@ -1348,8 +1431,7 @@
 +      fun { pcomp_cb_pattern; pcomp_cb_iterator; pcomp_cb_attributes } ->
 +        let pcomp_cb_pattern = self#pattern pcomp_cb_pattern in
 +        let pcomp_cb_iterator = self#comprehension_iterator pcomp_cb_iterator in
-+        let pcomp_cb_attributes =
-+          self#list self#attribute pcomp_cb_attributes in
++        let pcomp_cb_attributes = self#attributes pcomp_cb_attributes in
 +        { pcomp_cb_pattern; pcomp_cb_iterator; pcomp_cb_attributes }
 +    method comprehension_clause :
 +      comprehension_clause -> comprehension_clause=
@@ -1380,8 +1462,7 @@
 +        ->
          let pval_name = self#loc self#string pval_name in
          let pval_type = self#core_type pval_type in
-+        let pval_modalities =
-+          self#list (self#loc self#modality) pval_modalities in
++        let pval_modalities = self#modalities pval_modalities in
          let pval_prim = self#list self#string pval_prim in
          let pval_attributes = self#attributes pval_attributes in
          let pval_loc = self#location pval_loc in
@@ -1454,7 +1535,7 @@
          let ptype_loc = self#location ptype_loc in
          {
            ptype_name;
-@@ -1641,10 +1854,10 @@ class virtual map =
+@@ -1641,10 +1906,10 @@ class virtual map =
            ptype_private;
            ptype_manifest;
            ptype_attributes;
@@ -1468,13 +1549,15 @@
        fun x ->
          match x with
          | Ptype_abstract -> Ptype_abstract
-@@ -1652,68 +1865,77 @@ class virtual map =
+@@ -1652,68 +1917,78 @@ class virtual map =
              let a = self#list self#constructor_declaration a in
              Ptype_variant a
          | Ptype_record a ->
--            let a = self#list self#label_declaration a in
--            Ptype_record a
 +            let a = self#list self#label_declaration a in Ptype_record a
++        | Ptype_record_unboxed_product a ->
+             let a = self#list self#label_declaration a in
+-            Ptype_record a
++            Ptype_record_unboxed_product a
          | Ptype_open -> Ptype_open
 -
 -    method label_declaration : label_declaration -> label_declaration =
@@ -1486,8 +1569,7 @@
 +        ->
          let pld_name = self#loc self#string pld_name in
          let pld_mutable = self#mutable_flag pld_mutable in
-+        let pld_modalities =
-+          self#list (self#loc self#modality) pld_modalities in
++        let pld_modalities = self#modalities pld_modalities in
          let pld_type = self#core_type pld_type in
          let pld_loc = self#location pld_loc in
          let pld_attributes = self#attributes pld_attributes in
@@ -1527,8 +1609,7 @@
 +    method constructor_argument :
 +      constructor_argument -> constructor_argument=
 +      fun { pca_modalities; pca_type; pca_loc } ->
-+        let pca_modalities =
-+          self#list (self#loc self#modality) pca_modalities in
++        let pca_modalities = self#modalities pca_modalities in
 +        let pca_type = self#core_type pca_type in
 +        let pca_loc = self#location pca_loc in
 +        { pca_modalities; pca_type; pca_loc }
@@ -1587,7 +1668,7 @@
          let ptyext_private = self#private_flag ptyext_private in
          let ptyext_loc = self#location ptyext_loc in
          let ptyext_attributes = self#attributes ptyext_attributes in
-@@ -1723,224 +1945,172 @@ class virtual map =
+@@ -1723,224 +1998,172 @@ class virtual map =
            ptyext_constructors;
            ptyext_private;
            ptyext_loc;
@@ -1878,7 +1959,7 @@
        fun x ->
          match x with
          | Pcf_inherit (a, b, c) ->
-@@ -1951,1090 +2121,934 @@ class virtual map =
+@@ -1951,1090 +2174,963 @@ class virtual map =
          | Pcf_val a ->
              let a =
                (fun (a, b, c) ->
@@ -1966,16 +2047,17 @@
 -        | Pmty_signature a ->
 -            let a = self#signature a in
 -            Pmty_signature a
+-        | Pmty_functor (a, b) ->
 +    method module_type_desc : module_type_desc -> module_type_desc=
 +      fun x ->
 +        match x with
 +        | Pmty_ident a -> let a = self#longident_loc a in Pmty_ident a
 +        | Pmty_signature a -> let a = self#signature a in Pmty_signature a
-         | Pmty_functor (a, b) ->
++        | Pmty_functor (a, b, c) ->
              let a = self#functor_parameter a in
--            let b = self#module_type b in
+             let b = self#module_type b in
 -            Pmty_functor (a, b)
-+            let b = self#module_type b in Pmty_functor (a, b)
++            let c = self#modes c in Pmty_functor (a, b, c)
          | Pmty_with (a, b) ->
              let a = self#module_type a in
 -            let b = self#list self#with_constraint b in
@@ -2002,18 +2084,22 @@
        fun x ->
          match x with
          | Unit -> Unit
-         | Named (a, b) ->
+-        | Named (a, b) ->
++        | Named (a, b, c) ->
              let a = self#loc (self#option self#string) a in
--            let b = self#module_type b in
+             let b = self#module_type b in
 -            Named (a, b)
 -
 -    method signature : signature -> signature = self#list self#signature_item
 -
 -    method signature_item : signature_item -> signature_item =
-+            let b = self#module_type b in Named (a, b)
++            let c = self#modes c in Named (a, b, c)
 +    method signature : signature -> signature=
-+      fun { psg_items } ->
-+        let psg_items = self#signature_items psg_items in { psg_items }
++      fun { psg_modalities; psg_items; psg_loc } ->
++        let psg_modalities = self#modalities psg_modalities in
++        let psg_items = self#signature_items psg_items in
++        let psg_loc = self#location psg_loc in
++        { psg_modalities; psg_items; psg_loc }
 +    method signature_items : signature_items -> signature_items=
 +      self#list self#signature_item
 +    method signature_item : signature_item -> signature_item=
@@ -2096,19 +2182,22 @@
 -            Psig_extension (a, b)
 -
 -    method module_declaration : module_declaration -> module_declaration =
+-      fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
 +            let b = self#attributes b in Psig_extension (a, b)
 +        | Psig_kind_abbrev (a, b) ->
 +            let a = self#loc self#string a in
 +            let b = self#jkind_annotation b in Psig_kind_abbrev (a, b)
 +    method module_declaration : module_declaration -> module_declaration=
-       fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
++      fun { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc } ->
          let pmd_name = self#loc (self#option self#string) pmd_name in
          let pmd_type = self#module_type pmd_type in
++        let pmd_modalities = self#modalities pmd_modalities in
          let pmd_attributes = self#attributes pmd_attributes in
          let pmd_loc = self#location pmd_loc in
-         { pmd_name; pmd_type; pmd_attributes; pmd_loc }
+-        { pmd_name; pmd_type; pmd_attributes; pmd_loc }
 -
 -    method module_substitution : module_substitution -> module_substitution =
++        { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc }
 +    method module_substitution : module_substitution -> module_substitution=
        fun { pms_name; pms_manifest; pms_attributes; pms_loc } ->
          let pms_name = self#loc self#string pms_name in
@@ -2232,8 +2321,9 @@
              let a = self#module_expr a in
 -            let b = self#module_expr b in
 -            Pmod_apply (a, b)
+-        | Pmod_constraint (a, b) ->
 +            let b = self#module_expr b in Pmod_apply (a, b)
-         | Pmod_constraint (a, b) ->
++        | Pmod_constraint (a, b, c) ->
              let a = self#module_expr a in
 -            let b = self#module_type b in
 -            Pmod_constraint (a, b)
@@ -2247,7 +2337,8 @@
 -    method structure : structure -> structure = self#list self#structure_item
 -
 -    method structure_item : structure_item -> structure_item =
-+            let b = self#module_type b in Pmod_constraint (a, b)
++            let b = self#option self#module_type b in
++            let c = self#modes c in Pmod_constraint (a, b, c)
 +        | Pmod_unpack a -> let a = self#expression a in Pmod_unpack a
 +        | Pmod_extension a -> let a = self#extension a in Pmod_extension a
 +        | Pmod_instance a ->
@@ -2381,9 +2472,11 @@
 +        | Mod (a, b) ->
 +            let a = self#jkind_annotation a in
 +            let b = self#modes b in Mod (a, b)
-+        | With (a, b) ->
++        | With (a, b, c) ->
 +            let a = self#jkind_annotation a in
-+            let b = self#core_type b in With (a, b)
++            let b = self#core_type b in
++            let c = self#modalities c in
++            With (a, b, c)
 +        | Kind_of a -> let a = self#core_type a in Kind_of a
 +        | Product a -> let a = self#list self#jkind_annotation a in Product a
 +    method jkind_annotation : jkind_annotation -> jkind_annotation=
@@ -2773,6 +2866,9 @@
 -            self#core_type b
 +            (self#list (fun (a, b) -> self#longident_loc a; self#pattern b) a;
 +             self#closed_flag b)
++        | Ppat_record_unboxed_product (a, b) ->
++            (self#list (fun (a, b) -> self#longident_loc a; self#pattern b) a;
++             self#closed_flag b)
 +        | Ppat_array (a, b) ->
 +            (self#mutable_flag a; self#list self#pattern b)
 +        | Ppat_or (a, b) -> (self#pattern a; self#pattern b)
@@ -2817,7 +2913,7 @@
 +             self#expression c)
 +        | Pexp_function (a, b, c) ->
 +            (self#list self#function_param a;
-+             self#option self#function_constraint b;
++             self#function_constraint b;
 +             self#function_body c)
          | Pexp_apply (a, b) ->
 -            self#expression a;
@@ -2865,7 +2961,13 @@
 +            (self#list
 +               (fun (a, b) -> self#longident_loc a; self#expression b) a;
 +             self#option self#expression b)
++        | Pexp_record_unboxed_product (a, b) ->
++            (self#list
++               (fun (a, b) -> self#longident_loc a; self#expression b) a;
++             self#option self#expression b)
 +        | Pexp_field (a, b) -> (self#expression a; self#longident_loc b)
++        | Pexp_unboxed_field (a, b) ->
++            (self#expression a; self#longident_loc b)
          | Pexp_setfield (a, b, c) ->
 -            self#expression a;
 -            self#longident_loc b;
@@ -2965,6 +3067,8 @@
 -    method case : case -> unit =
 +        | Pexp_stack a -> self#expression a
 +        | Pexp_comprehension a -> self#comprehension_expression a
++        | Pexp_overwrite (a, b) -> (self#expression a; self#expression b)
++        | Pexp_hole -> ()
 +    method case : case -> unit=
        fun { pc_lhs; pc_guard; pc_rhs } ->
          self#pattern pc_lhs;
@@ -3010,8 +3114,10 @@
 +        | Pconstraint a -> self#core_type a
 +        | Pcoerce (a, b) -> (self#option self#core_type a; self#core_type b)
 +    method function_constraint : function_constraint -> unit=
-+      fun { mode_annotations; type_constraint } ->
-+        self#modes mode_annotations; self#type_constraint type_constraint
++      fun { mode_annotations; ret_mode_annotations; ret_type_constraint } ->
++        self#modes mode_annotations;
++        self#modes ret_mode_annotations;
++        self#option self#type_constraint ret_type_constraint
 +    method comprehension_iterator : comprehension_iterator -> unit=
 +      fun x ->
 +        match x with
@@ -3025,7 +3131,7 @@
 +      fun { pcomp_cb_pattern; pcomp_cb_iterator; pcomp_cb_attributes } ->
 +        self#pattern pcomp_cb_pattern;
 +        self#comprehension_iterator pcomp_cb_iterator;
-+        self#list self#attribute pcomp_cb_attributes
++        self#attributes pcomp_cb_attributes
 +    method comprehension_clause : comprehension_clause -> unit=
 +      fun x ->
 +        match x with
@@ -3048,7 +3154,7 @@
 +        ->
          self#loc self#string pval_name;
          self#core_type pval_type;
-+        self#list (self#loc self#modality) pval_modalities;
++        self#modalities pval_modalities;
          self#list self#string pval_prim;
          self#attributes pval_attributes;
          self#location pval_loc
@@ -3102,6 +3208,8 @@
          | Ptype_abstract -> ()
          | Ptype_variant a -> self#list self#constructor_declaration a
          | Ptype_record a -> self#list self#label_declaration a
++        | Ptype_record_unboxed_product a ->
++            self#list self#label_declaration a
          | Ptype_open -> ()
 -
 -    method label_declaration : label_declaration -> unit =
@@ -3113,7 +3221,7 @@
 +        ->
          self#loc self#string pld_name;
          self#mutable_flag pld_mutable;
-+        self#list (self#loc self#modality) pld_modalities;
++        self#modalities pld_modalities;
          self#core_type pld_type;
          self#location pld_loc;
          self#attributes pld_attributes
@@ -3140,7 +3248,7 @@
 -        | Pcstr_tuple a -> self#list self#core_type a
 +    method constructor_argument : constructor_argument -> unit=
 +      fun { pca_modalities; pca_type; pca_loc } ->
-+        self#list (self#loc self#modality) pca_modalities;
++        self#modalities pca_modalities;
 +        self#core_type pca_type;
 +        self#location pca_loc
 +    method constructor_arguments : constructor_arguments -> unit=
@@ -3451,10 +3559,11 @@
          match x with
          | Pmty_ident a -> self#longident_loc a
          | Pmty_signature a -> self#signature a
-         | Pmty_functor (a, b) ->
+-        | Pmty_functor (a, b) ->
 -            self#functor_parameter a;
 -            self#module_type b
-+            (self#functor_parameter a; self#module_type b)
++        | Pmty_functor (a, b, c) ->
++            (self#functor_parameter a; self#module_type b; self#modes c)
          | Pmty_with (a, b) ->
 -            self#module_type a;
 -            self#list self#with_constraint b
@@ -3470,16 +3579,22 @@
        fun x ->
          match x with
          | Unit -> ()
-         | Named (a, b) ->
+-        | Named (a, b) ->
 -            self#loc (self#option self#string) a;
 -            self#module_type b
 -
 -    method signature : signature -> unit = self#list self#signature_item
 -
 -    method signature_item : signature_item -> unit =
-+            (self#loc (self#option self#string) a; self#module_type b)
++        | Named (a, b, c) ->
++            (self#loc (self#option self#string) a;
++             self#module_type b;
++             self#modes c)
 +    method signature : signature -> unit=
-+      fun { psg_items } -> self#signature_items psg_items
++      fun { psg_modalities; psg_items; psg_loc } ->
++        self#modalities psg_modalities;
++        self#signature_items psg_items;
++        self#location psg_loc
 +    method signature_items : signature_items -> unit=
 +      self#list self#signature_item
 +    method signature_item : signature_item -> unit=
@@ -3500,7 +3615,7 @@
          | Psig_typesubst a -> self#list self#type_declaration a
          | Psig_typext a -> self#type_extension a
          | Psig_exception a -> self#type_exception a
-@@ -3044,125 +3058,100 @@ class virtual iter =
+@@ -3044,125 +3140,102 @@ class virtual iter =
          | Psig_modtype a -> self#module_type_declaration a
          | Psig_modtypesubst a -> self#module_type_declaration a
          | Psig_open a -> self#open_description a
@@ -3515,13 +3630,15 @@
 -            self#attributes b
 -
 -    method module_declaration : module_declaration -> unit =
+-      fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
 +        | Psig_extension (a, b) -> (self#extension a; self#attributes b)
 +        | Psig_kind_abbrev (a, b) ->
 +            (self#loc self#string a; self#jkind_annotation b)
 +    method module_declaration : module_declaration -> unit=
-       fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
++      fun { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc } ->
          self#loc (self#option self#string) pmd_name;
          self#module_type pmd_type;
++        self#modalities pmd_modalities;
          self#attributes pmd_attributes;
          self#location pmd_loc
 -
@@ -3627,7 +3744,8 @@
 -            self#module_type b
 +            (self#functor_parameter a; self#module_expr b)
 +        | Pmod_apply (a, b) -> (self#module_expr a; self#module_expr b)
-+        | Pmod_constraint (a, b) -> (self#module_expr a; self#module_type b)
++        | Pmod_constraint (a, b, c) ->
++            (self#module_expr a; self#option self#module_type b; self#modes c)
          | Pmod_unpack a -> self#expression a
          | Pmod_extension a -> self#extension a
 -
@@ -3669,7 +3787,7 @@
          | Pstr_typext a -> self#type_extension a
          | Pstr_exception a -> self#type_exception a
          | Pstr_module a -> self#module_binding a
-@@ -3173,159 +3162,148 @@ class virtual iter =
+@@ -3173,159 +3246,148 @@ class virtual iter =
          | Pstr_class_type a -> self#list self#class_type_declaration a
          | Pstr_include a -> self#include_declaration a
          | Pstr_attribute a -> self#attribute a
@@ -3705,7 +3823,7 @@
 +        | Default -> ()
 +        | Abbreviation a -> self#string a
 +        | Mod (a, b) -> (self#jkind_annotation a; self#modes b)
-+        | With (a, b) -> (self#jkind_annotation a; self#core_type b)
++        | With (a, b, c) -> (self#jkind_annotation a; self#core_type b; self#modalities c)
 +        | Kind_of a -> self#core_type a
 +        | Product a -> self#list self#jkind_annotation a
 +    method jkind_annotation : jkind_annotation -> unit=
@@ -3908,7 +4026,7 @@
        fun x acc ->
          match x with
          | PStr a -> self#structure a acc
-@@ -3333,160 +3311,156 @@ class virtual ['acc] fold =
+@@ -3333,160 +3395,163 @@ class virtual ['acc] fold =
          | PTyp a -> self#core_type a acc
          | PPat (a, b) ->
              let acc = self#pattern a acc in
@@ -4128,6 +4246,13 @@
 +                   let acc = self#longident_loc a acc in
 +                   let acc = self#pattern b acc in acc) a acc in
 +            let acc = self#closed_flag b acc in acc
++        | Ppat_record_unboxed_product (a, b) ->
++            let acc =
++              self#list
++                (fun (a, b) acc ->
++                   let acc = self#longident_loc a acc in
++                   let acc = self#pattern b acc in acc) a acc in
++            let acc = self#closed_flag b acc in acc
 +        | Ppat_array (a, b) ->
 +            let acc = self#mutable_flag a acc in
 +            let acc = self#list self#pattern b acc in acc
@@ -4146,7 +4271,7 @@
          | Ppat_type a -> self#longident_loc a acc
          | Ppat_lazy a -> self#pattern a acc
          | Ppat_unpack a -> self#loc (self#option self#string) a acc
-@@ -3494,18 +3468,14 @@ class virtual ['acc] fold =
+@@ -3494,18 +3559,14 @@ class virtual ['acc] fold =
          | Ppat_extension a -> self#extension a acc
          | Ppat_open (a, b) ->
              let acc = self#longident_loc a acc in
@@ -4169,7 +4294,7 @@
        fun x acc ->
          match x with
          | Pexp_ident a -> self#longident_loc a acc
-@@ -3513,555 +3483,524 @@ class virtual ['acc] fold =
+@@ -3513,555 +3574,548 @@ class virtual ['acc] fold =
          | Pexp_let (a, b, c) ->
              let acc = self#rec_flag a acc in
              let acc = self#list self#value_binding b acc in
@@ -4185,7 +4310,7 @@
 +            let acc = self#expression c acc in acc
 +        | Pexp_function (a, b, c) ->
 +            let acc = self#list self#function_param a acc in
-+            let acc = self#option self#function_constraint b acc in
++            let acc = self#function_constraint b acc in
 +            let acc = self#function_body c acc in acc
          | Pexp_apply (a, b) ->
              let acc = self#expression a acc in
@@ -4245,10 +4370,20 @@
 +                   let acc = self#longident_loc a acc in
 +                   let acc = self#expression b acc in acc) a acc in
 +            let acc = self#option self#expression b acc in acc
++        | Pexp_record_unboxed_product (a, b) ->
++            let acc =
++              self#list
++                (fun (a, b) acc ->
++                   let acc = self#longident_loc a acc in
++                   let acc = self#expression b acc in acc) a acc in
++            let acc = self#option self#expression b acc in acc
          | Pexp_field (a, b) ->
              let acc = self#expression a acc in
 -            let acc = self#longident_loc b acc in
 -            acc
++            let acc = self#longident_loc b acc in acc
++        | Pexp_unboxed_field (a, b) ->
++            let acc = self#expression a acc in
 +            let acc = self#longident_loc b acc in acc
          | Pexp_setfield (a, b, c) ->
              let acc = self#expression a acc in
@@ -4356,6 +4491,10 @@
 -    method case : case -> 'acc -> 'acc =
 +        | Pexp_stack a -> self#expression a acc
 +        | Pexp_comprehension a -> self#comprehension_expression a acc
++        | Pexp_overwrite (a, b) ->
++            let acc = self#expression a acc in
++            let acc = self#expression b acc in acc
++        | Pexp_hole -> acc
 +    method case : case -> 'acc -> 'acc=
        fun { pc_lhs; pc_guard; pc_rhs } acc ->
          let acc = self#pattern pc_lhs acc in
@@ -4411,9 +4550,15 @@
 +            let acc = self#option self#core_type a acc in
 +            let acc = self#core_type b acc in acc
 +    method function_constraint : function_constraint -> 'acc -> 'acc=
-+      fun { mode_annotations; type_constraint } acc ->
++      fun { mode_annotations; ret_mode_annotations; ret_type_constraint } acc
++        ->
 +        let acc = self#modes mode_annotations acc in
-+        let acc = self#type_constraint type_constraint acc in acc
++        let acc = self#modes ret_mode_annotations acc in
++        let acc = self#option self#type_constraint ret_type_constraint acc in
+         acc
+-
+-    method value_description : value_description -> 'acc -> 'acc =
+-      fun { pval_name; pval_type; pval_prim; pval_attributes; pval_loc } acc ->
 +    method comprehension_iterator : comprehension_iterator -> 'acc -> 'acc=
 +      fun x acc ->
 +        match x with
@@ -4427,7 +4572,7 @@
 +      fun { pcomp_cb_pattern; pcomp_cb_iterator; pcomp_cb_attributes } acc ->
 +        let acc = self#pattern pcomp_cb_pattern acc in
 +        let acc = self#comprehension_iterator pcomp_cb_iterator acc in
-+        let acc = self#list self#attribute pcomp_cb_attributes acc in acc
++        let acc = self#attributes pcomp_cb_attributes acc in acc
 +    method comprehension_clause : comprehension_clause -> 'acc -> 'acc=
 +      fun x acc ->
 +        match x with
@@ -4437,10 +4582,7 @@
 +      fun { pcomp_body; pcomp_clauses } acc ->
 +        let acc = self#expression pcomp_body acc in
 +        let acc = self#list self#comprehension_clause pcomp_clauses acc in
-         acc
--
--    method value_description : value_description -> 'acc -> 'acc =
--      fun { pval_name; pval_type; pval_prim; pval_attributes; pval_loc } acc ->
++        acc
 +    method comprehension_expression :
 +      comprehension_expression -> 'acc -> 'acc=
 +      fun x acc ->
@@ -4456,7 +4598,7 @@
 +        acc ->
          let acc = self#loc self#string pval_name acc in
          let acc = self#core_type pval_type acc in
-+        let acc = self#list (self#loc self#modality) pval_modalities acc in
++        let acc = self#modalities pval_modalities acc in
          let acc = self#list self#string pval_prim acc in
          let acc = self#attributes pval_attributes acc in
 -        let acc = self#location pval_loc acc in
@@ -4530,6 +4672,8 @@
          | Ptype_abstract -> acc
          | Ptype_variant a -> self#list self#constructor_declaration a acc
          | Ptype_record a -> self#list self#label_declaration a acc
++        | Ptype_record_unboxed_product a ->
++            self#list self#label_declaration a acc
          | Ptype_open -> acc
 -
 -    method label_declaration : label_declaration -> 'acc -> 'acc =
@@ -4541,7 +4685,7 @@
 +        acc ->
          let acc = self#loc self#string pld_name acc in
          let acc = self#mutable_flag pld_mutable acc in
-+        let acc = self#list (self#loc self#modality) pld_modalities acc in
++        let acc = self#modalities pld_modalities acc in
          let acc = self#core_type pld_type acc in
          let acc = self#location pld_loc acc in
 -        let acc = self#attributes pld_attributes acc in
@@ -4571,7 +4715,7 @@
 +        let acc = self#attributes pcd_attributes acc in acc
 +    method constructor_argument : constructor_argument -> 'acc -> 'acc=
 +      fun { pca_modalities; pca_type; pca_loc } acc ->
-+        let acc = self#list (self#loc self#modality) pca_modalities acc in
++        let acc = self#modalities pca_modalities acc in
 +        let acc = self#core_type pca_type acc in
 +        let acc = self#location pca_loc acc in acc
 +    method constructor_arguments : constructor_arguments -> 'acc -> 'acc=
@@ -4951,11 +5095,12 @@
          match x with
          | Pmty_ident a -> self#longident_loc a acc
          | Pmty_signature a -> self#signature a acc
-         | Pmty_functor (a, b) ->
+-        | Pmty_functor (a, b) ->
++        | Pmty_functor (a, b, c) ->
              let acc = self#functor_parameter a acc in
--            let acc = self#module_type b acc in
+             let acc = self#module_type b acc in
 -            acc
-+            let acc = self#module_type b acc in acc
++            let acc = self#modes c acc in acc
          | Pmty_with (a, b) ->
              let acc = self#module_type a acc in
 -            let acc = self#list self#with_constraint b acc in
@@ -4973,17 +5118,21 @@
        fun x acc ->
          match x with
          | Unit -> acc
-         | Named (a, b) ->
+-        | Named (a, b) ->
++        | Named (a, b, c) ->
              let acc = self#loc (self#option self#string) a acc in
--            let acc = self#module_type b acc in
+             let acc = self#module_type b acc in
 -            acc
 -
 -    method signature : signature -> 'acc -> 'acc = self#list self#signature_item
 -
 -    method signature_item : signature_item -> 'acc -> 'acc =
-+            let acc = self#module_type b acc in acc
++            let acc = self#modes c acc in acc
 +    method signature : signature -> 'acc -> 'acc=
-+      fun { psg_items } acc -> self#signature_items psg_items acc
++      fun { psg_modalities; psg_items; psg_loc } acc ->
++        let acc = self#modalities psg_modalities acc in
++        let acc = self#signature_items psg_items acc in
++        let acc = self#location psg_loc acc in acc
 +    method signature_items : signature_items -> 'acc -> 'acc=
 +      self#list self#signature_item
 +    method signature_item : signature_item -> 'acc -> 'acc=
@@ -5006,7 +5155,7 @@
          | Psig_typesubst a -> self#list self#type_declaration a acc
          | Psig_typext a -> self#type_extension a acc
          | Psig_exception a -> self#type_exception a acc
-@@ -4071,147 +4010,131 @@ class virtual ['acc] fold =
+@@ -4071,147 +4125,134 @@ class virtual ['acc] fold =
          | Psig_modtype a -> self#module_type_declaration a acc
          | Psig_modtypesubst a -> self#module_type_declaration a acc
          | Psig_open a -> self#open_description a acc
@@ -5023,14 +5172,17 @@
 -            acc
 -
 -    method module_declaration : module_declaration -> 'acc -> 'acc =
+-      fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } acc ->
 +            let acc = self#attributes b acc in acc
 +        | Psig_kind_abbrev (a, b) ->
 +            let acc = self#loc self#string a acc in
 +            let acc = self#jkind_annotation b acc in acc
 +    method module_declaration : module_declaration -> 'acc -> 'acc=
-       fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } acc ->
++      fun { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc } acc
++        ->
          let acc = self#loc (self#option self#string) pmd_name acc in
          let acc = self#module_type pmd_type acc in
++        let acc = self#modalities pmd_modalities acc in
          let acc = self#attributes pmd_attributes acc in
 -        let acc = self#location pmd_loc acc in
 -        acc
@@ -5158,12 +5310,14 @@
              let acc = self#module_expr a acc in
 -            let acc = self#module_expr b acc in
 -            acc
+-        | Pmod_constraint (a, b) ->
 +            let acc = self#module_expr b acc in acc
-         | Pmod_constraint (a, b) ->
++        | Pmod_constraint (a, b, c) ->
              let acc = self#module_expr a acc in
 -            let acc = self#module_type b acc in
 -            acc
-+            let acc = self#module_type b acc in acc
++            let acc = self#option self#module_type b acc in
++            let acc = self#modes c acc in acc
          | Pmod_unpack a -> self#expression a acc
          | Pmod_extension a -> self#extension a acc
 -
@@ -5213,7 +5367,7 @@
          | Pstr_typext a -> self#type_extension a acc
          | Pstr_exception a -> self#type_exception a acc
          | Pstr_module a -> self#module_binding a acc
-@@ -4224,1812 +4147,1838 @@ class virtual ['acc] fold =
+@@ -4224,1812 +4265,1897 @@ class virtual ['acc] fold =
          | Pstr_attribute a -> self#attribute a acc
          | Pstr_extension (a, b) ->
              let acc = self#extension a acc in
@@ -5255,9 +5409,10 @@
 +        | Mod (a, b) ->
 +            let acc = self#jkind_annotation a acc in
 +            let acc = self#modes b acc in acc
-+        | With (a, b) ->
++        | With (a, b, c) ->
 +            let acc = self#jkind_annotation a acc in
-+            let acc = self#core_type b acc in acc
++            let acc = self#core_type b acc in
++            let acc = self#modalities c acc in acc
 +        | Kind_of a -> self#core_type a acc
 +        | Product a -> self#list self#jkind_annotation a acc
 +    method jkind_annotation : jkind_annotation -> 'acc -> 'acc=
@@ -5790,16 +5945,31 @@
 -        | Ppat_tuple a ->
 -            let a, acc = self#list self#pattern a acc in
 -            (Ppat_tuple a, acc)
--        | Ppat_construct (a, b) ->
--            let a, acc = self#longident_loc a acc in
--            let b, acc =
--              self#option
 +            let (a, acc) = self#constant a acc in
 +            let (b, acc) = self#constant b acc in
 +            ((Ppat_interval (a, b)), acc)
 +        | Ppat_tuple (a, b) ->
 +            let (a, acc) =
 +              self#list
++                (fun (a, b) acc ->
++                   let (a, acc) = self#option self#string a acc in
++                   let (b, acc) = self#pattern b acc in ((a, b), acc)) a acc in
++            let (b, acc) = self#closed_flag b acc in
++            ((Ppat_tuple (a, b)), acc)
++        | Ppat_unboxed_tuple (a, b) ->
++            let (a, acc) =
++              self#list
++                (fun (a, b) acc ->
++                   let (a, acc) = self#option self#string a acc in
++                   let (b, acc) = self#pattern b acc in ((a, b), acc)) a acc in
++            let (b, acc) = self#closed_flag b acc in
++            ((Ppat_unboxed_tuple (a, b)), acc)
+         | Ppat_construct (a, b) ->
+-            let a, acc = self#longident_loc a acc in
+-            let b, acc =
++            let (a, acc) = self#longident_loc a acc in
++            let (b, acc) =
+               self#option
                  (fun (a, b) acc ->
 -                  let a, acc = self#list (self#loc self#string) a acc in
 -                  let b, acc = self#pattern b acc in
@@ -5807,17 +5977,18 @@
 -                b acc
 -            in
 -            (Ppat_construct (a, b), acc)
--        | Ppat_variant (a, b) ->
++                   let (a, acc) = self#list (self#loc self#string) a acc in
++                   let (b, acc) = self#pattern b acc in ((a, b), acc)) b acc in
++            ((Ppat_construct (a, b)), acc)
+         | Ppat_variant (a, b) ->
 -            let a, acc = self#label a acc in
 -            let b, acc = self#option self#pattern b acc in
 -            (Ppat_variant (a, b), acc)
--        | Ppat_record (a, b) ->
++            let (a, acc) = self#label a acc in
++            let (b, acc) = self#option self#pattern b acc in
++            ((Ppat_variant (a, b)), acc)
+         | Ppat_record (a, b) ->
 -            let a, acc =
-+                   let (a, acc) = self#option self#string a acc in
-+                   let (b, acc) = self#pattern b acc in ((a, b), acc)) a acc in
-+            let (b, acc) = self#closed_flag b acc in
-+            ((Ppat_tuple (a, b)), acc)
-+        | Ppat_unboxed_tuple (a, b) ->
 +            let (a, acc) =
                self#list
                  (fun (a, b) acc ->
@@ -5831,30 +6002,18 @@
 -        | Ppat_array a ->
 -            let a, acc = self#list self#pattern a acc in
 -            (Ppat_array a, acc)
-+                   let (a, acc) = self#option self#string a acc in
++                   let (a, acc) = self#longident_loc a acc in
 +                   let (b, acc) = self#pattern b acc in ((a, b), acc)) a acc in
 +            let (b, acc) = self#closed_flag b acc in
-+            ((Ppat_unboxed_tuple (a, b)), acc)
-+        | Ppat_construct (a, b) ->
-+            let (a, acc) = self#longident_loc a acc in
-+            let (b, acc) =
-+              self#option
-+                (fun (a, b) acc ->
-+                   let (a, acc) = self#list (self#loc self#string) a acc in
-+                   let (b, acc) = self#pattern b acc in ((a, b), acc)) b acc in
-+            ((Ppat_construct (a, b)), acc)
-+        | Ppat_variant (a, b) ->
-+            let (a, acc) = self#label a acc in
-+            let (b, acc) = self#option self#pattern b acc in
-+            ((Ppat_variant (a, b)), acc)
-+        | Ppat_record (a, b) ->
++            ((Ppat_record (a, b)), acc)
++        | Ppat_record_unboxed_product (a, b) ->
 +            let (a, acc) =
 +              self#list
 +                (fun (a, b) acc ->
 +                   let (a, acc) = self#longident_loc a acc in
 +                   let (b, acc) = self#pattern b acc in ((a, b), acc)) a acc in
 +            let (b, acc) = self#closed_flag b acc in
-+            ((Ppat_record (a, b)), acc)
++            ((Ppat_record_unboxed_product (a, b)), acc)
 +        | Ppat_array (a, b) ->
 +            let (a, acc) = self#mutable_flag a acc in
 +            let (b, acc) = self#list self#pattern b acc in
@@ -5948,7 +6107,7 @@
 +            ((Pexp_let (a, b, c)), acc)
 +        | Pexp_function (a, b, c) ->
 +            let (a, acc) = self#list self#function_param a acc in
-+            let (b, acc) = self#option self#function_constraint b acc in
++            let (b, acc) = self#function_constraint b acc in
 +            let (c, acc) = self#function_body c acc in
 +            ((Pexp_function (a, b, c)), acc)
          | Pexp_apply (a, b) ->
@@ -5956,6 +6115,20 @@
 -            let b, acc =
 +            let (a, acc) = self#expression a acc in
 +            let (b, acc) =
++              self#list
++                (fun (a, b) acc ->
++                   let (a, acc) = self#arg_label a acc in
++                   let (b, acc) = self#expression b acc in ((a, b), acc)) b
++                acc in
++            ((Pexp_apply (a, b)), acc)
++        | Pexp_match (a, b) ->
++            let (a, acc) = self#expression a acc in
++            let (b, acc) = self#cases b acc in ((Pexp_match (a, b)), acc)
++        | Pexp_try (a, b) ->
++            let (a, acc) = self#expression a acc in
++            let (b, acc) = self#cases b acc in ((Pexp_try (a, b)), acc)
++        | Pexp_tuple a ->
++            let (a, acc) =
                self#list
                  (fun (a, b) acc ->
 -                  let a, acc = self#arg_label a acc in
@@ -5964,28 +6137,17 @@
 -                b acc
 -            in
 -            (Pexp_apply (a, b), acc)
-+                   let (a, acc) = self#arg_label a acc in
-+                   let (b, acc) = self#expression b acc in ((a, b), acc)) b
-+                acc in
-+            ((Pexp_apply (a, b)), acc)
-         | Pexp_match (a, b) ->
+-        | Pexp_match (a, b) ->
 -            let a, acc = self#expression a acc in
 -            let b, acc = self#cases b acc in
 -            (Pexp_match (a, b), acc)
-+            let (a, acc) = self#expression a acc in
-+            let (b, acc) = self#cases b acc in ((Pexp_match (a, b)), acc)
-         | Pexp_try (a, b) ->
+-        | Pexp_try (a, b) ->
 -            let a, acc = self#expression a acc in
 -            let b, acc = self#cases b acc in
 -            (Pexp_try (a, b), acc)
-+            let (a, acc) = self#expression a acc in
-+            let (b, acc) = self#cases b acc in ((Pexp_try (a, b)), acc)
-         | Pexp_tuple a ->
+-        | Pexp_tuple a ->
 -            let a, acc = self#list self#expression a acc in
 -            (Pexp_tuple a, acc)
-+            let (a, acc) =
-+              self#list
-+                (fun (a, b) acc ->
 +                   let (a, acc) = self#option self#string a acc in
 +                   let (b, acc) = self#expression b acc in ((a, b), acc)) a
 +                acc in
@@ -6015,6 +6177,15 @@
          | Pexp_record (a, b) ->
 -            let a, acc =
 +            let (a, acc) =
++              self#list
++                (fun (a, b) acc ->
++                   let (a, acc) = self#longident_loc a acc in
++                   let (b, acc) = self#expression b acc in ((a, b), acc)) a
++                acc in
++            let (b, acc) = self#option self#expression b acc in
++            ((Pexp_record (a, b)), acc)
++        | Pexp_record_unboxed_product (a, b) ->
++            let (a, acc) =
                self#list
                  (fun (a, b) acc ->
 -                  let a, acc = self#longident_loc a acc in
@@ -6028,7 +6199,7 @@
 +                   let (b, acc) = self#expression b acc in ((a, b), acc)) a
 +                acc in
 +            let (b, acc) = self#option self#expression b acc in
-+            ((Pexp_record (a, b)), acc)
++            ((Pexp_record_unboxed_product (a, b)), acc)
          | Pexp_field (a, b) ->
 -            let a, acc = self#expression a acc in
 -            let b, acc = self#longident_loc b acc in
@@ -6036,6 +6207,10 @@
 +            let (a, acc) = self#expression a acc in
 +            let (b, acc) = self#longident_loc b acc in
 +            ((Pexp_field (a, b)), acc)
++        | Pexp_unboxed_field (a, b) ->
++            let (a, acc) = self#expression a acc in
++            let (b, acc) = self#longident_loc b acc in
++            ((Pexp_unboxed_field (a, b)), acc)
          | Pexp_setfield (a, b, c) ->
 -            let a, acc = self#expression a acc in
 -            let b, acc = self#longident_loc b acc in
@@ -6210,6 +6385,11 @@
 +        | Pexp_comprehension a ->
 +            let (a, acc) = self#comprehension_expression a acc in
 +            ((Pexp_comprehension a), acc)
++        | Pexp_overwrite (a, b) ->
++            let (a, acc) = self#expression a acc in
++            let (b, acc) = self#expression b acc in
++            ((Pexp_overwrite (a, b)), acc)
++        | Pexp_hole -> (Pexp_hole, acc)
 +    method case : case -> 'acc -> (case * 'acc)=
        fun { pc_lhs; pc_guard; pc_rhs } acc ->
 -        let pc_lhs, acc = self#pattern pc_lhs acc in
@@ -6308,10 +6488,14 @@
 +            let (b, acc) = self#core_type b acc in ((Pcoerce (a, b)), acc)
 +    method function_constraint :
 +      function_constraint -> 'acc -> (function_constraint * 'acc)=
-+      fun { mode_annotations; type_constraint } acc ->
++      fun { mode_annotations; ret_mode_annotations; ret_type_constraint } acc
++        ->
 +        let (mode_annotations, acc) = self#modes mode_annotations acc in
-+        let (type_constraint, acc) = self#type_constraint type_constraint acc in
-+        ({ mode_annotations; type_constraint }, acc)
++        let (ret_mode_annotations, acc) = self#modes ret_mode_annotations acc in
++        let (ret_type_constraint, acc) =
++          self#option self#type_constraint ret_type_constraint acc in
++        ({ mode_annotations; ret_mode_annotations; ret_type_constraint },
++          acc)
 +    method comprehension_iterator :
 +      comprehension_iterator -> 'acc -> (comprehension_iterator * 'acc)=
 +      fun x acc ->
@@ -6331,7 +6515,7 @@
 +        let (pcomp_cb_iterator, acc) =
 +          self#comprehension_iterator pcomp_cb_iterator acc in
 +        let (pcomp_cb_attributes, acc) =
-+          self#list self#attribute pcomp_cb_attributes acc in
++          self#attributes pcomp_cb_attributes acc in
 +        ({ pcomp_cb_pattern; pcomp_cb_iterator; pcomp_cb_attributes }, acc)
 +    method comprehension_clause :
 +      comprehension_clause -> 'acc -> (comprehension_clause * 'acc)=
@@ -6367,8 +6551,7 @@
 +        acc ->
 +        let (pval_name, acc) = self#loc self#string pval_name acc in
 +        let (pval_type, acc) = self#core_type pval_type acc in
-+        let (pval_modalities, acc) =
-+          self#list (self#loc self#modality) pval_modalities acc in
++        let (pval_modalities, acc) = self#modalities pval_modalities acc in
 +        let (pval_prim, acc) = self#list self#string pval_prim acc in
 +        let (pval_attributes, acc) = self#attributes pval_attributes acc in
 +        let (pval_loc, acc) = self#location pval_loc acc in
@@ -6476,6 +6659,9 @@
 -            (Ptype_record a, acc)
 +            let (a, acc) = self#list self#label_declaration a acc in
 +            ((Ptype_record a), acc)
++        | Ptype_record_unboxed_product a ->
++            let (a, acc) = self#list self#label_declaration a acc in
++            ((Ptype_record_unboxed_product a), acc)
          | Ptype_open -> (Ptype_open, acc)
 -
 -    method label_declaration
@@ -6509,8 +6695,7 @@
 +        acc ->
 +        let (pld_name, acc) = self#loc self#string pld_name acc in
 +        let (pld_mutable, acc) = self#mutable_flag pld_mutable acc in
-+        let (pld_modalities, acc) =
-+          self#list (self#loc self#modality) pld_modalities acc in
++        let (pld_modalities, acc) = self#modalities pld_modalities acc in
 +        let (pld_type, acc) = self#core_type pld_type acc in
 +        let (pld_loc, acc) = self#location pld_loc acc in
 +        let (pld_attributes, acc) = self#attributes pld_attributes acc in
@@ -6542,8 +6727,7 @@
 +    method constructor_argument :
 +      constructor_argument -> 'acc -> (constructor_argument * 'acc)=
 +      fun { pca_modalities; pca_type; pca_loc } acc ->
-+        let (pca_modalities, acc) =
-+          self#list (self#loc self#modality) pca_modalities acc in
++        let (pca_modalities, acc) = self#modalities pca_modalities acc in
 +        let (pca_type, acc) = self#core_type pca_type acc in
 +        let (pca_loc, acc) = self#location pca_loc acc in
 +        ({ pca_modalities; pca_type; pca_loc }, acc)
@@ -7120,14 +7304,16 @@
          | Pmty_signature a ->
 -            let a, acc = self#signature a acc in
 -            (Pmty_signature a, acc)
-+            let (a, acc) = self#signature a acc in ((Pmty_signature a), acc)
-         | Pmty_functor (a, b) ->
+-        | Pmty_functor (a, b) ->
 -            let a, acc = self#functor_parameter a acc in
 -            let b, acc = self#module_type b acc in
 -            (Pmty_functor (a, b), acc)
++            let (a, acc) = self#signature a acc in ((Pmty_signature a), acc)
++        | Pmty_functor (a, b, c) ->
 +            let (a, acc) = self#functor_parameter a acc in
 +            let (b, acc) = self#module_type b acc in
-+            ((Pmty_functor (a, b)), acc)
++            let (c, acc) = self#modes c acc in
++            ((Pmty_functor (a, b, c)), acc)
          | Pmty_with (a, b) ->
 -            let a, acc = self#module_type a acc in
 -            let b, acc = self#list self#with_constraint b acc in
@@ -7159,18 +7345,22 @@
        fun x acc ->
          match x with
          | Unit -> (Unit, acc)
-         | Named (a, b) ->
+-        | Named (a, b) ->
 -            let a, acc = self#loc (self#option self#string) a acc in
 -            let b, acc = self#module_type b acc in
 -            (Named (a, b), acc)
 -
 -    method signature : signature -> 'acc -> signature * 'acc =
++        | Named (a, b, c) ->
 +            let (a, acc) = self#loc (self#option self#string) a acc in
-+            let (b, acc) = self#module_type b acc in ((Named (a, b)), acc)
++            let (b, acc) = self#module_type b acc in
++            let (c, acc) = self#modes c acc in ((Named (a, b, c)), acc)
 +    method signature : signature -> 'acc -> (signature * 'acc)=
-+      fun { psg_items } acc ->
++      fun { psg_modalities; psg_items; psg_loc } acc ->
++        let (psg_modalities, acc) = self#modalities psg_modalities acc in
 +        let (psg_items, acc) = self#signature_items psg_items acc in
-+        ({ psg_items }, acc)
++        let (psg_loc, acc) = self#location psg_loc acc in
++        ({ psg_modalities; psg_items; psg_loc }, acc)
 +    method signature_items :
 +      signature_items -> 'acc -> (signature_items * 'acc)=
        self#list self#signature_item
@@ -7276,6 +7466,15 @@
 -
 -    method module_declaration
 -        : module_declaration -> 'acc -> module_declaration * 'acc =
+-      fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } acc ->
+-        let pmd_name, acc = self#loc (self#option self#string) pmd_name acc in
+-        let pmd_type, acc = self#module_type pmd_type acc in
+-        let pmd_attributes, acc = self#attributes pmd_attributes acc in
+-        let pmd_loc, acc = self#location pmd_loc acc in
+-        ({ pmd_name; pmd_type; pmd_attributes; pmd_loc }, acc)
+-
+-    method module_substitution
+-        : module_substitution -> 'acc -> module_substitution * 'acc =
 +            let (a, acc) = self#extension a acc in
 +            let (b, acc) = self#attributes b acc in
 +            ((Psig_extension (a, b)), acc)
@@ -7285,19 +7484,15 @@
 +            ((Psig_kind_abbrev (a, b)), acc)
 +    method module_declaration :
 +      module_declaration -> 'acc -> (module_declaration * 'acc)=
-       fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } acc ->
--        let pmd_name, acc = self#loc (self#option self#string) pmd_name acc in
--        let pmd_type, acc = self#module_type pmd_type acc in
--        let pmd_attributes, acc = self#attributes pmd_attributes acc in
--        let pmd_loc, acc = self#location pmd_loc acc in
++      fun { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc } acc
++        ->
 +        let (pmd_name, acc) = self#loc (self#option self#string) pmd_name acc in
 +        let (pmd_type, acc) = self#module_type pmd_type acc in
++        let (pmd_modalities, acc) = self#modalities pmd_modalities acc in
 +        let (pmd_attributes, acc) = self#attributes pmd_attributes acc in
 +        let (pmd_loc, acc) = self#location pmd_loc acc in
-         ({ pmd_name; pmd_type; pmd_attributes; pmd_loc }, acc)
--
--    method module_substitution
--        : module_substitution -> 'acc -> module_substitution * 'acc =
++        ({ pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc },
++          acc)
 +    method module_substitution :
 +      module_substitution -> 'acc -> (module_substitution * 'acc)=
        fun { pms_name; pms_manifest; pms_attributes; pms_loc } acc ->
@@ -7479,16 +7674,18 @@
 -            let a, acc = self#module_expr a acc in
 -            let b, acc = self#module_expr b acc in
 -            (Pmod_apply (a, b), acc)
-+            let (a, acc) = self#module_expr a acc in
-+            let (b, acc) = self#module_expr b acc in
-+            ((Pmod_apply (a, b)), acc)
-         | Pmod_constraint (a, b) ->
+-        | Pmod_constraint (a, b) ->
 -            let a, acc = self#module_expr a acc in
 -            let b, acc = self#module_type b acc in
 -            (Pmod_constraint (a, b), acc)
 +            let (a, acc) = self#module_expr a acc in
-+            let (b, acc) = self#module_type b acc in
-+            ((Pmod_constraint (a, b)), acc)
++            let (b, acc) = self#module_expr b acc in
++            ((Pmod_apply (a, b)), acc)
++        | Pmod_constraint (a, b, c) ->
++            let (a, acc) = self#module_expr a acc in
++            let (b, acc) = self#option self#module_type b acc in
++            let (c, acc) = self#modes c acc in
++            ((Pmod_constraint (a, b, c)), acc)
          | Pmod_unpack a ->
 -            let a, acc = self#expression a acc in
 -            (Pmod_unpack a, acc)
@@ -7659,9 +7856,10 @@
 +        | Mod (a, b) ->
 +            let (a, acc) = self#jkind_annotation a acc in
 +            let (b, acc) = self#modes b acc in ((Mod (a, b)), acc)
-+        | With (a, b) ->
++        | With (a, b, c) ->
 +            let (a, acc) = self#jkind_annotation a acc in
-+            let (b, acc) = self#core_type b acc in ((With (a, b)), acc)
++            let (b, acc) = self#core_type b acc in
++            let (c, acc) = self#modalities c acc in ((With (a, b, c)), acc)
 +        | Kind_of a ->
 +            let (a, acc) = self#core_type a acc in ((Kind_of a), acc)
 +        | Product a ->
@@ -8174,14 +8372,21 @@
 -                  (a, b))
 -                ctx a
 -            in
--            let b = self#closed_flag ctx b in
++                   let a = self#longident_loc ctx a in
++                   let b = self#pattern ctx b in (a, b)) ctx a in
++            let b = self#closed_flag ctx b in Ppat_record (a, b)
++        | Ppat_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#longident_loc ctx a in
++                   let b = self#pattern ctx b in (a, b)) ctx a in
+             let b = self#closed_flag ctx b in
 -            Ppat_record (a, b)
 -        | Ppat_array a ->
 -            let a = self#list self#pattern ctx a in
 -            Ppat_array a
-+                   let a = self#longident_loc ctx a in
-+                   let b = self#pattern ctx b in (a, b)) ctx a in
-+            let b = self#closed_flag ctx b in Ppat_record (a, b)
++            Ppat_record_unboxed_product (a, b)
 +        | Ppat_array (a, b) ->
 +            let a = self#mutable_flag ctx a in
 +            let b = self#list self#pattern ctx b in Ppat_array (a, b)
@@ -8261,7 +8466,7 @@
 +            let c = self#expression ctx c in Pexp_let (a, b, c)
 +        | Pexp_function (a, b, c) ->
 +            let a = self#list self#function_param ctx a in
-+            let b = self#option self#function_constraint ctx b in
++            let b = self#function_constraint ctx b in
 +            let c = self#function_body ctx c in Pexp_function (a, b, c)
          | Pexp_apply (a, b) ->
              let a = self#expression ctx a in
@@ -8319,16 +8524,26 @@
 -                  (a, b))
 -                ctx a
 -            in
--            let b = self#option self#expression ctx b in
--            Pexp_record (a, b)
 +                   let a = self#longident_loc ctx a in
 +                   let b = self#expression ctx b in (a, b)) ctx a in
 +            let b = self#option self#expression ctx b in Pexp_record (a, b)
++        | Pexp_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#longident_loc ctx a in
++                   let b = self#expression ctx b in (a, b)) ctx a in
+             let b = self#option self#expression ctx b in
+-            Pexp_record (a, b)
++            Pexp_record_unboxed_product (a, b)
          | Pexp_field (a, b) ->
              let a = self#expression ctx a in
 -            let b = self#longident_loc ctx b in
 -            Pexp_field (a, b)
 +            let b = self#longident_loc ctx b in Pexp_field (a, b)
++        | Pexp_unboxed_field (a, b) ->
++            let a = self#expression ctx a in
++            let b = self#longident_loc ctx b in Pexp_unboxed_field (a, b)
          | Pexp_setfield (a, b, c) ->
              let a = self#expression ctx a in
              let b = self#longident_loc ctx b in
@@ -8344,7 +8559,7 @@
          | Pexp_ifthenelse (a, b, c) ->
              let a = self#expression ctx a in
              let b = self#expression ctx b in
-@@ -6037,161 +5986,217 @@ class virtual ['ctx] map_with_context =
+@@ -6037,161 +6163,222 @@ class virtual ['ctx] map_with_context =
              Pexp_ifthenelse (a, b, c)
          | Pexp_sequence (a, b) ->
              let a = self#expression ctx a in
@@ -8462,6 +8677,10 @@
 +        | Pexp_comprehension a ->
 +            let a = self#comprehension_expression ctx a in
 +            Pexp_comprehension a
++        | Pexp_overwrite (a, b) ->
++            let a = self#expression ctx a in
++            let b = self#expression ctx b in Pexp_overwrite (a, b)
++        | Pexp_hole -> Pexp_hole
 +    method case : 'ctx -> case -> case=
        fun ctx { pc_lhs; pc_guard; pc_rhs } ->
          let pc_lhs = self#pattern ctx pc_lhs in
@@ -8524,10 +8743,13 @@
 +            let b = self#core_type ctx b in Pcoerce (a, b)
 +    method function_constraint :
 +      'ctx -> function_constraint -> function_constraint=
-+      fun ctx { mode_annotations; type_constraint } ->
++      fun ctx { mode_annotations; ret_mode_annotations; ret_type_constraint }
++        ->
 +        let mode_annotations = self#modes ctx mode_annotations in
-+        let type_constraint = self#type_constraint ctx type_constraint in
-+        { mode_annotations; type_constraint }
++        let ret_mode_annotations = self#modes ctx ret_mode_annotations in
++        let ret_type_constraint =
++          self#option self#type_constraint ctx ret_type_constraint in
++        { mode_annotations; ret_mode_annotations; ret_type_constraint }
 +    method comprehension_iterator :
 +      'ctx -> comprehension_iterator -> comprehension_iterator=
 +      fun ctx x ->
@@ -8544,8 +8766,7 @@
 +        let pcomp_cb_pattern = self#pattern ctx pcomp_cb_pattern in
 +        let pcomp_cb_iterator =
 +          self#comprehension_iterator ctx pcomp_cb_iterator in
-+        let pcomp_cb_attributes =
-+          self#list self#attribute ctx pcomp_cb_attributes in
++        let pcomp_cb_attributes = self#attributes ctx pcomp_cb_attributes in
 +        { pcomp_cb_pattern; pcomp_cb_iterator; pcomp_cb_attributes }
 +    method comprehension_clause :
 +      'ctx -> comprehension_clause -> comprehension_clause=
@@ -8579,8 +8800,7 @@
 +        ->
          let pval_name = self#loc self#string ctx pval_name in
          let pval_type = self#core_type ctx pval_type in
-+        let pval_modalities =
-+          self#list (self#loc self#modality) ctx pval_modalities in
++        let pval_modalities = self#modalities ctx pval_modalities in
          let pval_prim = self#list self#string ctx pval_prim in
          let pval_attributes = self#attributes ctx pval_attributes in
          let pval_loc = self#location ctx pval_loc in
@@ -8653,7 +8873,7 @@
          let ptype_loc = self#location ctx ptype_loc in
          {
            ptype_name;
-@@ -6201,10 +6206,10 @@ class virtual ['ctx] map_with_context =
+@@ -6201,10 +6388,10 @@ class virtual ['ctx] map_with_context =
            ptype_private;
            ptype_manifest;
            ptype_attributes;
@@ -8667,13 +8887,15 @@
        fun ctx x ->
          match x with
          | Ptype_abstract -> Ptype_abstract
-@@ -6212,69 +6217,79 @@ class virtual ['ctx] map_with_context =
+@@ -6212,69 +6399,80 @@ class virtual ['ctx] map_with_context =
              let a = self#list self#constructor_declaration ctx a in
              Ptype_variant a
          | Ptype_record a ->
--            let a = self#list self#label_declaration ctx a in
--            Ptype_record a
 +            let a = self#list self#label_declaration ctx a in Ptype_record a
++        | Ptype_record_unboxed_product a ->
+             let a = self#list self#label_declaration ctx a in
+-            Ptype_record a
++            Ptype_record_unboxed_product a
          | Ptype_open -> Ptype_open
 -
 -    method label_declaration : 'ctx -> label_declaration -> label_declaration =
@@ -8686,8 +8908,7 @@
 +        ->
          let pld_name = self#loc self#string ctx pld_name in
          let pld_mutable = self#mutable_flag ctx pld_mutable in
-+        let pld_modalities =
-+          self#list (self#loc self#modality) ctx pld_modalities in
++        let pld_modalities = self#modalities ctx pld_modalities in
          let pld_type = self#core_type ctx pld_type in
          let pld_loc = self#location ctx pld_loc in
          let pld_attributes = self#attributes ctx pld_attributes in
@@ -8727,8 +8948,7 @@
 +    method constructor_argument :
 +      'ctx -> constructor_argument -> constructor_argument=
 +      fun ctx { pca_modalities; pca_type; pca_loc } ->
-+        let pca_modalities =
-+          self#list (self#loc self#modality) ctx pca_modalities in
++        let pca_modalities = self#modalities ctx pca_modalities in
 +        let pca_type = self#core_type ctx pca_type in
 +        let pca_loc = self#location ctx pca_loc in
 +        { pca_modalities; pca_type; pca_loc }
@@ -8787,7 +9007,7 @@
          let ptyext_private = self#private_flag ctx ptyext_private in
          let ptyext_loc = self#location ctx ptyext_loc in
          let ptyext_attributes = self#attributes ctx ptyext_attributes in
-@@ -6284,225 +6299,178 @@ class virtual ['ctx] map_with_context =
+@@ -6284,225 +6482,178 @@ class virtual ['ctx] map_with_context =
            ptyext_constructors;
            ptyext_private;
            ptyext_loc;
@@ -9080,7 +9300,7 @@
        fun ctx x ->
          match x with
          | Pcf_inherit (a, b, c) ->
-@@ -6513,3873 +6481,3935 @@ class virtual ['ctx] map_with_context =
+@@ -6513,3873 +6664,4043 @@ class virtual ['ctx] map_with_context =
          | Pcf_val a ->
              let a =
                (fun ctx (a, b, c) ->
@@ -9169,12 +9389,13 @@
          | Pmty_signature a ->
 -            let a = self#signature ctx a in
 -            Pmty_signature a
+-        | Pmty_functor (a, b) ->
 +            let a = self#signature ctx a in Pmty_signature a
-         | Pmty_functor (a, b) ->
++        | Pmty_functor (a, b, c) ->
              let a = self#functor_parameter ctx a in
--            let b = self#module_type ctx b in
+             let b = self#module_type ctx b in
 -            Pmty_functor (a, b)
-+            let b = self#module_type ctx b in Pmty_functor (a, b)
++            let c = self#modes ctx c in Pmty_functor (a, b, c)
          | Pmty_with (a, b) ->
              let a = self#module_type ctx a in
 -            let b = self#list self#with_constraint ctx b in
@@ -9202,16 +9423,20 @@
        fun ctx x ->
          match x with
          | Unit -> Unit
-         | Named (a, b) ->
+-        | Named (a, b) ->
++        | Named (a, b, c) ->
              let a = self#loc (self#option self#string) ctx a in
--            let b = self#module_type ctx b in
+             let b = self#module_type ctx b in
 -            Named (a, b)
 -
 -    method signature : 'ctx -> signature -> signature =
-+            let b = self#module_type ctx b in Named (a, b)
++            let c = self#modes ctx c in Named (a, b, c)
 +    method signature : 'ctx -> signature -> signature=
-+      fun ctx { psg_items } ->
-+        let psg_items = self#signature_items ctx psg_items in { psg_items }
++      fun ctx { psg_modalities; psg_items; psg_loc } ->
++        let psg_modalities = self#modalities ctx psg_modalities in
++        let psg_items = self#signature_items ctx psg_items in
++        let psg_loc = self#location ctx psg_loc in
++        { psg_modalities; psg_items; psg_loc }
 +    method signature_items : 'ctx -> signature_items -> signature_items=
        self#list self#signature_item
 -
@@ -9296,21 +9521,25 @@
 -
 -    method module_declaration : 'ctx -> module_declaration -> module_declaration
 -        =
+-      fun ctx { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
 +            let b = self#attributes ctx b in Psig_extension (a, b)
 +        | Psig_kind_abbrev (a, b) ->
 +            let a = self#loc self#string ctx a in
 +            let b = self#jkind_annotation ctx b in Psig_kind_abbrev (a, b)
 +    method module_declaration :
 +      'ctx -> module_declaration -> module_declaration=
-       fun ctx { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
++      fun ctx { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc }
++        ->
          let pmd_name = self#loc (self#option self#string) ctx pmd_name in
          let pmd_type = self#module_type ctx pmd_type in
++        let pmd_modalities = self#modalities ctx pmd_modalities in
          let pmd_attributes = self#attributes ctx pmd_attributes in
          let pmd_loc = self#location ctx pmd_loc in
-         { pmd_name; pmd_type; pmd_attributes; pmd_loc }
+-        { pmd_name; pmd_type; pmd_attributes; pmd_loc }
 -
 -    method module_substitution
 -        : 'ctx -> module_substitution -> module_substitution =
++        { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc }
 +    method module_substitution :
 +      'ctx -> module_substitution -> module_substitution=
        fun ctx { pms_name; pms_manifest; pms_attributes; pms_loc } ->
@@ -9442,15 +9671,17 @@
              let a = self#module_expr ctx a in
 -            let b = self#module_expr ctx b in
 -            Pmod_apply (a, b)
+-        | Pmod_constraint (a, b) ->
 +            let b = self#module_expr ctx b in Pmod_apply (a, b)
-         | Pmod_constraint (a, b) ->
++        | Pmod_constraint (a, b, c) ->
              let a = self#module_expr ctx a in
 -            let b = self#module_type ctx b in
 -            Pmod_constraint (a, b)
 -        | Pmod_unpack a ->
 -            let a = self#expression ctx a in
 -            Pmod_unpack a
-+            let b = self#module_type ctx b in Pmod_constraint (a, b)
++            let b = self#option self#module_type ctx b in
++            let c = self#modes ctx c in Pmod_constraint (a, b, c)
 +        | Pmod_unpack a -> let a = self#expression ctx a in Pmod_unpack a
          | Pmod_extension a ->
 -            let a = self#extension ctx a in
@@ -9594,9 +9825,10 @@
 +        | Mod (a, b) ->
 +            let a = self#jkind_annotation ctx a in
 +            let b = self#modes ctx b in Mod (a, b)
-+        | With (a, b) ->
++        | With (a, b, c) ->
 +            let a = self#jkind_annotation ctx a in
-+            let b = self#core_type ctx b in With (a, b)
++            let b = self#core_type ctx b in
++            let c = self#modalities ctx c in With (a, b, c)
 +        | Kind_of a -> let a = self#core_type ctx a in Kind_of a
 +        | Product a ->
 +            let a = self#list self#jkind_annotation ctx a in Product a
@@ -10201,14 +10433,21 @@
 -                  self#tuple [ a; b ])
 -                a
 -            in
--            let b = self#closed_flag b in
++                   let a = self#longident_loc a in
++                   let b = self#pattern b in self#tuple [a; b]) a in
++            let b = self#closed_flag b in self#constr "Ppat_record" [a; b]
++        | Ppat_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#longident_loc a in
++                   let b = self#pattern b in self#tuple [a; b]) a in
+             let b = self#closed_flag b in
 -            self#constr "Ppat_record" [ a; b ]
 -        | Ppat_array a ->
 -            let a = self#list self#pattern a in
 -            self#constr "Ppat_array" [ a ]
-+                   let a = self#longident_loc a in
-+                   let b = self#pattern b in self#tuple [a; b]) a in
-+            let b = self#closed_flag b in self#constr "Ppat_record" [a; b]
++            self#constr "Ppat_record_unboxed_product" [a; b]
 +        | Ppat_array (a, b) ->
 +            let a = self#mutable_flag a in
 +            let b = self#list self#pattern b in
@@ -10299,7 +10538,7 @@
 +            let c = self#expression c in self#constr "Pexp_let" [a; b; c]
 +        | Pexp_function (a, b, c) ->
 +            let a = self#list self#function_param a in
-+            let b = self#option self#function_constraint b in
++            let b = self#function_constraint b in
 +            let c = self#function_body c in
 +            self#constr "Pexp_function" [a; b; c]
          | Pexp_apply (a, b) ->
@@ -10366,11 +10605,22 @@
              let b = self#option self#expression b in
 -            self#constr "Pexp_record" [ a; b ]
 +            self#constr "Pexp_record" [a; b]
++        | Pexp_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun (a, b) ->
++                   let a = self#longident_loc a in
++                   let b = self#expression b in self#tuple [a; b]) a in
++            let b = self#option self#expression b in
++            self#constr "Pexp_record_unboxed_product" [a; b]
          | Pexp_field (a, b) ->
              let a = self#expression a in
--            let b = self#longident_loc b in
--            self#constr "Pexp_field" [ a; b ]
 +            let b = self#longident_loc b in self#constr "Pexp_field" [a; b]
++        | Pexp_unboxed_field (a, b) ->
++            let a = self#expression a in
+             let b = self#longident_loc b in
+-            self#constr "Pexp_field" [ a; b ]
++            self#constr "Pexp_unboxed_field" [a; b]
          | Pexp_setfield (a, b, c) ->
              let a = self#expression a in
              let b = self#longident_loc b in
@@ -10508,6 +10758,10 @@
 +        | Pexp_comprehension a ->
 +            let a = self#comprehension_expression a in
 +            self#constr "Pexp_comprehension" [a]
++        | Pexp_overwrite (a, b) ->
++            let a = self#expression a in
++            let b = self#expression b in self#constr "Pexp_overwrite" [a; b]
++        | Pexp_hole -> self#constr "Pexp_hole" []
 +    method case : case -> 'res=
        fun { pc_lhs; pc_guard; pc_rhs } ->
          let pc_lhs = self#pattern pc_lhs in
@@ -10583,12 +10837,15 @@
 +            let a = self#option self#core_type a in
 +            let b = self#core_type b in self#constr "Pcoerce" [a; b]
 +    method function_constraint : function_constraint -> 'res=
-+      fun { mode_annotations; type_constraint } ->
++      fun { mode_annotations; ret_mode_annotations; ret_type_constraint } ->
 +        let mode_annotations = self#modes mode_annotations in
-+        let type_constraint = self#type_constraint type_constraint in
++        let ret_mode_annotations = self#modes ret_mode_annotations in
++        let ret_type_constraint =
++          self#option self#type_constraint ret_type_constraint in
 +        self#record
 +          [("mode_annotations", mode_annotations);
-+          ("type_constraint", type_constraint)]
++          ("ret_mode_annotations", ret_mode_annotations);
++          ("ret_type_constraint", ret_type_constraint)]
 +    method comprehension_iterator : comprehension_iterator -> 'res=
 +      fun x ->
 +        match x with
@@ -10606,8 +10863,7 @@
 +      fun { pcomp_cb_pattern; pcomp_cb_iterator; pcomp_cb_attributes } ->
 +        let pcomp_cb_pattern = self#pattern pcomp_cb_pattern in
 +        let pcomp_cb_iterator = self#comprehension_iterator pcomp_cb_iterator in
-+        let pcomp_cb_attributes =
-+          self#list self#attribute pcomp_cb_attributes in
++        let pcomp_cb_attributes = self#attributes pcomp_cb_attributes in
 +        self#record
 +          [("pcomp_cb_pattern", pcomp_cb_pattern);
 +          ("pcomp_cb_iterator", pcomp_cb_iterator);
@@ -10643,8 +10899,7 @@
 +        ->
          let pval_name = self#loc self#string pval_name in
          let pval_type = self#core_type pval_type in
-+        let pval_modalities =
-+          self#list (self#loc self#modality) pval_modalities in
++        let pval_modalities = self#modalities pval_modalities in
          let pval_prim = self#list self#string pval_prim in
          let pval_attributes = self#attributes pval_attributes in
          let pval_loc = self#location pval_loc in
@@ -10754,6 +11009,9 @@
              let a = self#list self#label_declaration a in
 -            self#constr "Ptype_record" [ a ]
 +            self#constr "Ptype_record" [a]
++        | Ptype_record_unboxed_product a ->
++            let a = self#list self#label_declaration a in
++            self#constr "Ptype_record_unboxed_product" [a]
          | Ptype_open -> self#constr "Ptype_open" []
 -
 -    method label_declaration : label_declaration -> 'res =
@@ -10765,8 +11023,7 @@
 +        ->
          let pld_name = self#loc self#string pld_name in
          let pld_mutable = self#mutable_flag pld_mutable in
-+        let pld_modalities =
-+          self#list (self#loc self#modality) pld_modalities in
++        let pld_modalities = self#modalities pld_modalities in
          let pld_type = self#core_type pld_type in
          let pld_loc = self#location pld_loc in
          let pld_attributes = self#attributes pld_attributes in
@@ -10821,8 +11078,7 @@
 +          ("pcd_attributes", pcd_attributes)]
 +    method constructor_argument : constructor_argument -> 'res=
 +      fun { pca_modalities; pca_type; pca_loc } ->
-+        let pca_modalities =
-+          self#list (self#loc self#modality) pca_modalities in
++        let pca_modalities = self#modalities pca_modalities in
 +        let pca_type = self#core_type pca_type in
 +        let pca_loc = self#location pca_loc in
 +        self#record
@@ -11349,12 +11605,13 @@
          | Pmty_signature a ->
 -            let a = self#signature a in
 -            self#constr "Pmty_signature" [ a ]
+-        | Pmty_functor (a, b) ->
 +            let a = self#signature a in self#constr "Pmty_signature" [a]
-         | Pmty_functor (a, b) ->
++        | Pmty_functor (a, b, c) ->
              let a = self#functor_parameter a in
--            let b = self#module_type b in
+             let b = self#module_type b in
 -            self#constr "Pmty_functor" [ a; b ]
-+            let b = self#module_type b in self#constr "Pmty_functor" [a; b]
++            let c = self#modes c in self#constr "Pmty_functor" [a; b; c]
          | Pmty_with (a, b) ->
              let a = self#module_type a in
              let b = self#list self#with_constraint b in
@@ -11382,19 +11639,25 @@
        fun x ->
          match x with
          | Unit -> self#constr "Unit" []
-         | Named (a, b) ->
+-        | Named (a, b) ->
++        | Named (a, b, c) ->
              let a = self#loc (self#option self#string) a in
--            let b = self#module_type b in
+             let b = self#module_type b in
 -            self#constr "Named" [ a; b ]
 -
 -    method signature : signature -> 'res = self#list self#signature_item
 -
 -    method signature_item : signature_item -> 'res =
-+            let b = self#module_type b in self#constr "Named" [a; b]
++            let c = self#modes c in self#constr "Named" [a; b; c]
 +    method signature : signature -> 'res=
-+      fun { psg_items } ->
++      fun { psg_modalities; psg_items; psg_loc } ->
++        let psg_modalities = self#modalities psg_modalities in
 +        let psg_items = self#signature_items psg_items in
-+        self#record [("psg_items", psg_items)]
++        let psg_loc = self#location psg_loc in
++        self#record
++          [("psg_modalities", psg_modalities);
++          ("psg_items", psg_items);
++          ("psg_loc", psg_loc)]
 +    method signature_items : signature_items -> 'res=
 +      self#list self#signature_item
 +    method signature_item : signature_item -> 'res=
@@ -11476,15 +11739,17 @@
 -            self#constr "Psig_extension" [ a; b ]
 -
 -    method module_declaration : module_declaration -> 'res =
+-      fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
 +            let b = self#attributes b in self#constr "Psig_extension" [a; b]
 +        | Psig_kind_abbrev (a, b) ->
 +            let a = self#loc self#string a in
 +            let b = self#jkind_annotation b in
 +            self#constr "Psig_kind_abbrev" [a; b]
 +    method module_declaration : module_declaration -> 'res=
-       fun { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
++      fun { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc } ->
          let pmd_name = self#loc (self#option self#string) pmd_name in
          let pmd_type = self#module_type pmd_type in
++        let pmd_modalities = self#modalities pmd_modalities in
          let pmd_attributes = self#attributes pmd_attributes in
          let pmd_loc = self#location pmd_loc in
          self#record
@@ -11498,6 +11763,7 @@
 -    method module_substitution : module_substitution -> 'res =
 +          [("pmd_name", pmd_name);
 +          ("pmd_type", pmd_type);
++          ("pmd_modalities", pmd_modalities);
 +          ("pmd_attributes", pmd_attributes);
 +          ("pmd_loc", pmd_loc)]
 +    method module_substitution : module_substitution -> 'res=
@@ -11663,12 +11929,14 @@
              let a = self#module_expr a in
 -            let b = self#module_expr b in
 -            self#constr "Pmod_apply" [ a; b ]
+-        | Pmod_constraint (a, b) ->
 +            let b = self#module_expr b in self#constr "Pmod_apply" [a; b]
-         | Pmod_constraint (a, b) ->
++        | Pmod_constraint (a, b, c) ->
              let a = self#module_expr a in
-             let b = self#module_type b in
+-            let b = self#module_type b in
 -            self#constr "Pmod_constraint" [ a; b ]
-+            self#constr "Pmod_constraint" [a; b]
++            let b = self#option self#module_type b in
++            let c = self#modes c in self#constr "Pmod_constraint" [a; b; c]
          | Pmod_unpack a ->
 -            let a = self#expression a in
 -            self#constr "Pmod_unpack" [ a ]
@@ -11827,9 +12095,10 @@
 +        | Mod (a, b) ->
 +            let a = self#jkind_annotation a in
 +            let b = self#modes b in self#constr "Mod" [a; b]
-+        | With (a, b) ->
++        | With (a, b, c) ->
 +            let a = self#jkind_annotation a in
-+            let b = self#core_type b in self#constr "With" [a; b]
++            let b = self#core_type b in
++            let c = self#modalities c in self#constr "With" [a; b; c]
 +        | Kind_of a -> let a = self#core_type a in self#constr "Kind_of" [a]
 +        | Product a ->
 +            let a = self#list self#jkind_annotation a in
@@ -12659,6 +12928,18 @@
 -              self#constr ctx "Ppat_array" [ Stdlib.snd a ] )
 +            ((Ppat_record ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Ppat_record" [Stdlib.snd a; Stdlib.snd b]))
++        | Ppat_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#longident_loc ctx a in
++                   let b = self#pattern ctx b in
++                   (((Stdlib.fst a), (Stdlib.fst b)),
++                     (self#tuple ctx [Stdlib.snd a; Stdlib.snd b]))) ctx a in
++            let b = self#closed_flag ctx b in
++            ((Ppat_record_unboxed_product ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Ppat_record_unboxed_product"
++                 [Stdlib.snd a; Stdlib.snd b]))
 +        | Ppat_array (a, b) ->
 +            let a = self#mutable_flag ctx a in
 +            let b = self#list self#pattern ctx b in
@@ -12795,7 +13076,7 @@
 +                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
 +        | Pexp_function (a, b, c) ->
 +            let a = self#list self#function_param ctx a in
-+            let b = self#option self#function_constraint ctx b in
++            let b = self#function_constraint ctx b in
 +            let c = self#function_body ctx c in
 +            ((Pexp_function ((Stdlib.fst a), (Stdlib.fst b), (Stdlib.fst c))),
 +              (self#constr ctx "Pexp_function"
@@ -12889,6 +13170,18 @@
 -              self#constr ctx "Pexp_record" [ Stdlib.snd a; Stdlib.snd b ] )
 +            ((Pexp_record ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Pexp_record" [Stdlib.snd a; Stdlib.snd b]))
++        | Pexp_record_unboxed_product (a, b) ->
++            let a =
++              self#list
++                (fun ctx (a, b) ->
++                   let a = self#longident_loc ctx a in
++                   let b = self#expression ctx b in
++                   (((Stdlib.fst a), (Stdlib.fst b)),
++                     (self#tuple ctx [Stdlib.snd a; Stdlib.snd b]))) ctx a in
++            let b = self#option self#expression ctx b in
++            ((Pexp_record_unboxed_product ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Pexp_record_unboxed_product"
++                 [Stdlib.snd a; Stdlib.snd b]))
          | Pexp_field (a, b) ->
              let a = self#expression ctx a in
              let b = self#longident_loc ctx b in
@@ -12896,6 +13189,12 @@
 -              self#constr ctx "Pexp_field" [ Stdlib.snd a; Stdlib.snd b ] )
 +            ((Pexp_field ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Pexp_field" [Stdlib.snd a; Stdlib.snd b]))
++        | Pexp_unboxed_field (a, b) ->
++            let a = self#expression ctx a in
++            let b = self#longident_loc ctx b in
++            ((Pexp_unboxed_field ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Pexp_unboxed_field"
++                 [Stdlib.snd a; Stdlib.snd b]))
          | Pexp_setfield (a, b, c) ->
              let a = self#expression ctx a in
              let b = self#longident_loc ctx b in
@@ -13124,6 +13423,12 @@
 +            let a = self#comprehension_expression ctx a in
 +            ((Pexp_comprehension (Stdlib.fst a)),
 +              (self#constr ctx "Pexp_comprehension" [Stdlib.snd a]))
++        | Pexp_overwrite (a, b) ->
++            let a = self#expression ctx a in
++            let b = self#expression ctx b in
++            ((Pexp_overwrite ((Stdlib.fst a), (Stdlib.fst b))),
++              (self#constr ctx "Pexp_overwrite" [Stdlib.snd a; Stdlib.snd b]))
++        | Pexp_hole -> (Pexp_hole, (self#constr ctx "Pexp_hole" []))
 +    method case : 'ctx -> case -> (case * 'res)=
        fun ctx { pc_lhs; pc_guard; pc_rhs } ->
          let pc_lhs = self#pattern ctx pc_lhs in
@@ -13270,16 +13575,21 @@
 +              (self#constr ctx "Pcoerce" [Stdlib.snd a; Stdlib.snd b]))
 +    method function_constraint :
 +      'ctx -> function_constraint -> (function_constraint * 'res)=
-+      fun ctx { mode_annotations; type_constraint } ->
++      fun ctx { mode_annotations; ret_mode_annotations; ret_type_constraint }
++        ->
 +        let mode_annotations = self#modes ctx mode_annotations in
-+        let type_constraint = self#type_constraint ctx type_constraint in
++        let ret_mode_annotations = self#modes ctx ret_mode_annotations in
++        let ret_type_constraint =
++          self#option self#type_constraint ctx ret_type_constraint in
 +        ({
 +           mode_annotations = (Stdlib.fst mode_annotations);
-+           type_constraint = (Stdlib.fst type_constraint)
++           ret_mode_annotations = (Stdlib.fst ret_mode_annotations);
++           ret_type_constraint = (Stdlib.fst ret_type_constraint)
 +         },
 +          (self#record ctx
 +             [("mode_annotations", (Stdlib.snd mode_annotations));
-+             ("type_constraint", (Stdlib.snd type_constraint))]))
++             ("ret_mode_annotations", (Stdlib.snd ret_mode_annotations));
++             ("ret_type_constraint", (Stdlib.snd ret_type_constraint))]))
 +    method comprehension_iterator :
 +      'ctx -> comprehension_iterator -> (comprehension_iterator * 'res)=
 +      fun ctx x ->
@@ -13310,8 +13620,7 @@
 +        let pcomp_cb_pattern = self#pattern ctx pcomp_cb_pattern in
 +        let pcomp_cb_iterator =
 +          self#comprehension_iterator ctx pcomp_cb_iterator in
-+        let pcomp_cb_attributes =
-+          self#list self#attribute ctx pcomp_cb_attributes in
++        let pcomp_cb_attributes = self#attributes ctx pcomp_cb_attributes in
 +        ({
 +           pcomp_cb_pattern = (Stdlib.fst pcomp_cb_pattern);
 +           pcomp_cb_iterator = (Stdlib.fst pcomp_cb_iterator);
@@ -13367,8 +13676,7 @@
 +        ->
          let pval_name = self#loc self#string ctx pval_name in
          let pval_type = self#core_type ctx pval_type in
-+        let pval_modalities =
-+          self#list (self#loc self#modality) ctx pval_modalities in
++        let pval_modalities = self#modalities ctx pval_modalities in
          let pval_prim = self#list self#string ctx pval_prim in
          let pval_attributes = self#attributes ctx pval_attributes in
          let pval_loc = self#location ctx pval_loc in
@@ -13539,6 +13847,10 @@
 -      fun ctx { pld_name; pld_mutable; pld_type; pld_loc; pld_attributes } ->
 +            ((Ptype_record (Stdlib.fst a)),
 +              (self#constr ctx "Ptype_record" [Stdlib.snd a]))
++        | Ptype_record_unboxed_product a ->
++            let a = self#list self#label_declaration ctx a in
++            ((Ptype_record_unboxed_product (Stdlib.fst a)),
++              (self#constr ctx "Ptype_record_unboxed_product" [Stdlib.snd a]))
 +        | Ptype_open -> (Ptype_open, (self#constr ctx "Ptype_open" []))
 +    method label_declaration :
 +      'ctx -> label_declaration -> (label_declaration * 'res)=
@@ -13548,8 +13860,7 @@
 +        ->
          let pld_name = self#loc self#string ctx pld_name in
          let pld_mutable = self#mutable_flag ctx pld_mutable in
-+        let pld_modalities =
-+          self#list (self#loc self#modality) ctx pld_modalities in
++        let pld_modalities = self#modalities ctx pld_modalities in
          let pld_type = self#core_type ctx pld_type in
          let pld_loc = self#location ctx pld_loc in
          let pld_attributes = self#attributes ctx pld_attributes in
@@ -13642,8 +13953,7 @@
 +    method constructor_argument :
 +      'ctx -> constructor_argument -> (constructor_argument * 'res)=
 +      fun ctx { pca_modalities; pca_type; pca_loc } ->
-+        let pca_modalities =
-+          self#list (self#loc self#modality) ctx pca_modalities in
++        let pca_modalities = self#modalities ctx pca_modalities in
 +        let pca_type = self#core_type ctx pca_type in
 +        let pca_loc = self#location ctx pca_loc in
 +        ({
@@ -14480,15 +14790,18 @@
              let a = self#signature ctx a in
 -            ( Pmty_signature (Stdlib.fst a),
 -              self#constr ctx "Pmty_signature" [ Stdlib.snd a ] )
+-        | Pmty_functor (a, b) ->
 +            ((Pmty_signature (Stdlib.fst a)),
 +              (self#constr ctx "Pmty_signature" [Stdlib.snd a]))
-         | Pmty_functor (a, b) ->
++        | Pmty_functor (a, b, c) ->
              let a = self#functor_parameter ctx a in
              let b = self#module_type ctx b in
 -            ( Pmty_functor (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Pmty_functor" [ Stdlib.snd a; Stdlib.snd b ] )
-+            ((Pmty_functor ((Stdlib.fst a), (Stdlib.fst b))),
-+              (self#constr ctx "Pmty_functor" [Stdlib.snd a; Stdlib.snd b]))
++            let c = self#modes ctx c in
++            ((Pmty_functor ((Stdlib.fst a), (Stdlib.fst b), (Stdlib.fst c))),
++              (self#constr ctx "Pmty_functor"
++                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
          | Pmty_with (a, b) ->
              let a = self#module_type ctx a in
              let b = self#list self#with_constraint ctx b in
@@ -14527,21 +14840,33 @@
        fun ctx x ->
          match x with
 -        | Unit -> (Unit, self#constr ctx "Unit" [])
+-        | Named (a, b) ->
 +        | Unit -> (Unit, (self#constr ctx "Unit" []))
-         | Named (a, b) ->
++        | Named (a, b, c) ->
              let a = self#loc (self#option self#string) ctx a in
              let b = self#module_type ctx b in
 -            ( Named (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Named" [ Stdlib.snd a; Stdlib.snd b ] )
 -
 -    method signature : 'ctx -> signature -> signature * 'res =
-+            ((Named ((Stdlib.fst a), (Stdlib.fst b))),
-+              (self#constr ctx "Named" [Stdlib.snd a; Stdlib.snd b]))
++            let c = self#modes ctx c in
++            ((Named ((Stdlib.fst a), (Stdlib.fst b), (Stdlib.fst c))),
++              (self#constr ctx "Named"
++                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
 +    method signature : 'ctx -> signature -> (signature * 'res)=
-+      fun ctx { psg_items } ->
++      fun ctx { psg_modalities; psg_items; psg_loc } ->
++        let psg_modalities = self#modalities ctx psg_modalities in
 +        let psg_items = self#signature_items ctx psg_items in
-+        ({ psg_items = (Stdlib.fst psg_items) },
-+          (self#record ctx [("psg_items", (Stdlib.snd psg_items))]))
++        let psg_loc = self#location ctx psg_loc in
++        ({
++           psg_modalities = (Stdlib.fst psg_modalities);
++           psg_items = (Stdlib.fst psg_items);
++           psg_loc = (Stdlib.fst psg_loc)
++         },
++          (self#record ctx
++             [("psg_modalities", (Stdlib.snd psg_modalities));
++             ("psg_items", (Stdlib.snd psg_items));
++             ("psg_loc", (Stdlib.snd psg_loc))]))
 +    method signature_items :
 +      'ctx -> signature_items -> (signature_items * 'res)=
        self#list self#signature_item
@@ -14673,6 +14998,7 @@
 -
 -    method module_declaration
 -        : 'ctx -> module_declaration -> module_declaration * 'res =
+-      fun ctx { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
 +            ((Psig_extension ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Psig_extension" [Stdlib.snd a; Stdlib.snd b]))
 +        | Psig_kind_abbrev (a, b) ->
@@ -14683,9 +15009,11 @@
 +                 [Stdlib.snd a; Stdlib.snd b]))
 +    method module_declaration :
 +      'ctx -> module_declaration -> (module_declaration * 'res)=
-       fun ctx { pmd_name; pmd_type; pmd_attributes; pmd_loc } ->
++      fun ctx { pmd_name; pmd_type; pmd_modalities; pmd_attributes; pmd_loc }
++        ->
          let pmd_name = self#loc (self#option self#string) ctx pmd_name in
          let pmd_type = self#module_type ctx pmd_type in
++        let pmd_modalities = self#modalities ctx pmd_modalities in
          let pmd_attributes = self#attributes ctx pmd_attributes in
          let pmd_loc = self#location ctx pmd_loc in
 -        ( {
@@ -14707,12 +15035,14 @@
 +        ({
 +           pmd_name = (Stdlib.fst pmd_name);
 +           pmd_type = (Stdlib.fst pmd_type);
++           pmd_modalities = (Stdlib.fst pmd_modalities);
 +           pmd_attributes = (Stdlib.fst pmd_attributes);
 +           pmd_loc = (Stdlib.fst pmd_loc)
 +         },
 +          (self#record ctx
 +             [("pmd_name", (Stdlib.snd pmd_name));
 +             ("pmd_type", (Stdlib.snd pmd_type));
++             ("pmd_modalities", (Stdlib.snd pmd_modalities));
 +             ("pmd_attributes", (Stdlib.snd pmd_attributes));
 +             ("pmd_loc", (Stdlib.snd pmd_loc))]))
 +    method module_substitution :
@@ -14994,16 +15324,21 @@
              let b = self#module_expr ctx b in
 -            ( Pmod_apply (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Pmod_apply" [ Stdlib.snd a; Stdlib.snd b ] )
+-        | Pmod_constraint (a, b) ->
 +            ((Pmod_apply ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Pmod_apply" [Stdlib.snd a; Stdlib.snd b]))
-         | Pmod_constraint (a, b) ->
++        | Pmod_constraint (a, b, c) ->
              let a = self#module_expr ctx a in
-             let b = self#module_type ctx b in
+-            let b = self#module_type ctx b in
 -            ( Pmod_constraint (Stdlib.fst a, Stdlib.fst b),
 -              self#constr ctx "Pmod_constraint" [ Stdlib.snd a; Stdlib.snd b ]
 -            )
-+            ((Pmod_constraint ((Stdlib.fst a), (Stdlib.fst b))),
-+              (self#constr ctx "Pmod_constraint" [Stdlib.snd a; Stdlib.snd b]))
++            let b = self#option self#module_type ctx b in
++            let c = self#modes ctx c in
++            ((Pmod_constraint
++                ((Stdlib.fst a), (Stdlib.fst b), (Stdlib.fst c))),
++              (self#constr ctx "Pmod_constraint"
++                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
          | Pmod_unpack a ->
              let a = self#expression ctx a in
 -            ( Pmod_unpack (Stdlib.fst a),
@@ -15255,11 +15590,13 @@
 +            let b = self#modes ctx b in
 +            ((Mod ((Stdlib.fst a), (Stdlib.fst b))),
 +              (self#constr ctx "Mod" [Stdlib.snd a; Stdlib.snd b]))
-+        | With (a, b) ->
++        | With (a, b, c) ->
 +            let a = self#jkind_annotation ctx a in
 +            let b = self#core_type ctx b in
-+            ((With ((Stdlib.fst a), (Stdlib.fst b))),
-+              (self#constr ctx "With" [Stdlib.snd a; Stdlib.snd b]))
++            let c = self#modalities ctx c in
++            ((With ((Stdlib.fst a), (Stdlib.fst b), (Stdlib.fst c))),
++              (self#constr ctx "With"
++                 [Stdlib.snd a; Stdlib.snd b; Stdlib.snd c]))
 +        | Kind_of a ->
 +            let a = self#core_type ctx a in
 +            ((Kind_of (Stdlib.fst a)),

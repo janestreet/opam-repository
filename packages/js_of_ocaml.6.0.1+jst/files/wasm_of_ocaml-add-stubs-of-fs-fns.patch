@@ -1,0 +1,26 @@
+--- a/runtime/wasm/fs.wat
++++ b/runtime/wasm/fs.wat
+@@ -119,6 +119,13 @@
+       (call $caml_raise_no_such_file (local.get 0))
+       (ref.i31 (i32.const 0)))
+
++   (data $caml_create_file "caml_create_file")
++
++   (func (export "caml_create_file")
++      (param (ref eq)) (param (ref eq)) (result (ref eq))
++      (call $caml_raise_no_such_file (local.get 0))
++      (ref.i31 (i32.const 0)))
++
+    (func (export "caml_fs_init") (result (ref eq))
+       (ref.i31 (i32.const 0)))
+
+@@ -130,4 +137,9 @@
+          (catch $javascript_exception
+             (call $caml_handle_sys_error (pop externref))
+             (return (ref.i31 (i32.const 0))))))
++
++   (data $caml_mount_autoload "caml_mount_autoload")
++
++   (func (export "caml_mount_autoload") (param (ref eq)) (param (ref eq)) (result (ref eq))
++      (ref.i31 (i32.const 0)))
+ )

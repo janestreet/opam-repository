@@ -50,7 +50,12 @@ url {
     "sha512=8075573ae65579a2606b37dd1b213032a07d220d28c733f9288ae80d36f8a2cc4d91632806df2503c130ea9658dc207ee3a64347c21aa53969050a208f5b2bb4"
   ]
 }
-patches: ["zarith-abs.patch" "zarith-gc.patch" "zarith-local.patch"]
+patches: [
+  "zarith-abs.patch"
+  "zarith-gc.patch"
+  "zarith-local.patch"
+  "zarith-portability.patch"
+]
 extra-files: [
   [
     "zarith-abs.patch"
@@ -63,5 +68,9 @@ extra-files: [
   [
     "zarith-local.patch"
     "sha256=bd168f393265f734efda1cb5b61588bf8edb07e10f1d49d9fc1df81aafcfecc2"
+  ]
+  [
+    "zarith-portability.patch"
+    "sha256=83d51c44618c61163a876ccfbf0eef6c79c1a728bd52b375003dadd51a78abd4"
   ]
 ]
