@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/shell"
+bug-reports: "https://github.com/janestreet/shell/issues"
+dev-repo: "git+https://github.com/janestreet/shell.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/shell/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"      {>= "5.1.0"}
+  "core"       {= "v0.18~preview.130.26+1192"}
+  "core_unix"  {= "v0.18~preview.130.26+1192"}
+  "jst-config" {= "v0.18~preview.130.26+1192"}
+  "ppx_jane"   {= "v0.18~preview.130.26+1192"}
+  "textutils"  {= "v0.18~preview.130.26+1192"}
+  "dune"       {>= "3.17.0"}
+  "spawn"      {>= "v0.15"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Yet another implementation of fork&exec and related functionality"
+description: "
+This library is a relatively featureful and flexible implementation of fork&exec with related functionality, including some basic support for asynchronous I/O. This is an old and unmaintained code. New users are advised to try using [Async.Process] for certain use cases and [Shexp_process] for certain other use cases.
+"
+depexts: ["linux-headers"] {os-family = "alpine"}
+url {
+src: "https://github.com/janestreet/shell/archive/2b3fe10a47485245c625b3ffba7777b0f1768a5c.tar.gz"
+checksum: "sha256=c8e181b30946b1e60c5def28965e52cb1f7d32183786fecb232691042e9391b3"
+}

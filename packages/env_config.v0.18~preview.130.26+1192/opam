@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/env_config"
+bug-reports: "https://github.com/janestreet/env_config/issues"
+dev-repo: "git+https://github.com/janestreet/env_config.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/env_config/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "async_kernel" {= "v0.18~preview.130.26+1192"}
+  "async_log"    {= "v0.18~preview.130.26+1192"}
+  "async_unix"   {= "v0.18~preview.130.26+1192"}
+  "core"         {= "v0.18~preview.130.26+1192"}
+  "core_unix"    {= "v0.18~preview.130.26+1192"}
+  "ppx_jane"     {= "v0.18~preview.130.26+1192"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Helper library for retrieving configuration from an environment variable"
+description: "
+The Env_config library is a helper for retrieving library and program
+configuration from an environment variable. Its goal is to make it easy
+to override a configuration that is loaded from disk, computed, or embedded
+in a library.
+"
+url {
+src: "https://github.com/janestreet/env_config/archive/4d00df8e4190e1988ff972829ce06b4c09ddac46.tar.gz"
+checksum: "sha256=731e847989e7e43b8a437252611ad1477ecf351281f66213951aa518bbe53704"
+}

@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/cohttp_static_handler"
+bug-reports: "https://github.com/janestreet/cohttp_static_handler/issues"
+dev-repo: "git+https://github.com/janestreet/cohttp_static_handler.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/cohttp_static_handler/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "async"        {= "v0.18~preview.130.26+1192"}
+  "core"         {= "v0.18~preview.130.26+1192"}
+  "core_unix"    {= "v0.18~preview.130.26+1192"}
+  "ppx_jane"     {= "v0.18~preview.130.26+1192"}
+  "cohttp"       {>= "2.5.6"}
+  "cohttp-async" {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
+  "dune"         {>= "3.17.0"}
+  "uri"          {>= "3.0.0"}
+  "uri-sexp"     {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for easily creating a cohttp handler for static files"
+description: "
+Single page handlers are handlers that serve user specified JavaScript and css
+   files along with a generated index page that loads those files.
+"
+url {
+src: "https://github.com/janestreet/cohttp_static_handler/archive/d5db5d7942370b1dc14ad8cde5ffe15851710882.tar.gz"
+checksum: "sha256=7c34d2e824f9f271eaeaf07b1f4d85ad0200d5d34fc2c361e5f7f0a41221ac99"
+}
