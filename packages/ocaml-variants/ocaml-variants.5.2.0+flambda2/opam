@@ -6,9 +6,6 @@ homepage: "https://ocaml.org"
 bug-reports: "https://github.com/ocaml-flambda/flambda-backend/issues"
 dev-repo: "git+https://github.com/ocaml-flambda/flambda-backend#main"
 depends: [
-  "init-compiler"
-  "init-dune"
-  "init-menhir"
   "ocaml" {= "5.2.0" & post}
   "base-unix" {post}
   "base-bigarray" {post}
@@ -46,14 +43,49 @@ conflict-class: "ocaml-core-compiler"
 flags: compiler
 setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
 build: [
+  ["tar" "-xf" "init-compiler.tar.gz"]
+  ["tar" "-xf" "init-dune.tbz"]
+  ["tar" "-xf" "init-menhir.tar.gz"]
+  ["sh" "-exc" "cd ocaml-4.14.1 && ./configure --prefix %{build}%/init_deps --disable-ocamldoc"] {os != "openbsd" & os != "macos"}
+  ["sh" "-exc" "cd ocaml-4.14.1 && ./configure --prefix %{build}%/init_deps --disable-ocamldoc CC=cc ASPP='cc -c'"] {os = "openbsd" | os = "macos"}
+  ["sh" "-exc" "make -C ocaml-4.14.1 -j%{jobs}%"]
+  ["sh" "-exc" "make -C ocaml-4.14.1 install"]
+  ["sh" "-exc" "cd dune-3.9.3; PATH=%{build}%/init_deps/bin/:$PATH ocaml boot/bootstrap.ml -j %{jobs}%"]
+  ["sh" "-exc" "cd dune-3.9.3; PATH=%{build}%/init_deps/bin/:$PATH ./_boot/dune.exe build dune.install --release --profile dune-bootstrap -j %{jobs}%"]
+  ["sh" "-exc" "cd dune-3.9.3; PATH=%{build}%/init_deps/bin/:$PATH ./_boot/dune.exe install --root %{build}%/dune-3.9.3 --prefix %{build}%/init_deps/ dune"]
+  ["sh" "-exc" "cd menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa; PATH=%{build}%/init_deps/bin/:$PATH %{build}%/init_deps/bin/dune build --root %{build}%/menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa @install -j %{jobs}%"]
+  ["sh" "-exc" "cd menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa; PATH=%{build}%/init_deps/bin/:$PATH %{build}%/init_deps/bin/dune install --prefix %{build}%/init_deps/ -p menhirLib -j %{jobs}%"]
   ["sh" "-exc" "autoconf || autoconf27"]
-  ["./configure" "--enable-runtime5" "--enable-middle-end=flambda2" "--enable-poll-insertion" "--disable-naked-pointers" "--prefix=%{prefix}%" "--with-dune=%{prefix}%/init_deps/bin/dune"]
-  ["sh" "-exc" "PATH=%{prefix}%/init_deps/bin/:$PATH make -j%{jobs}%"]
+  ["sh" "-exc" "PATH=%{build}%/init_deps/bin/:$PATH ./configure --enable-runtime5 --enable-middle-end=flambda2 --enable-poll-insertion --disable-naked-pointers '--prefix=%{prefix}%' '--with-dune=%{build}%/init_deps/bin/dune'"]
+  ["sh" "-exc" "PATH=%{build}%/init_deps/bin/:$PATH make -j%{jobs}%"]
 ]
 install: [
-  "sh" "-exc" "PATH=%{prefix}%/init_deps/bin/:$PATH make install"
+  "sh" "-exc" "PATH=%{build}%/init_deps/bin/:$PATH make install"
 ]
 url {
   src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-9.tar.gz"
   checksum: ["sha256=e2872c5fc7f4f7dc0e989d20fd67c84cf5f15e62c2430fd1d8070aac8c08778f"]
 }
+extra-source "init-compiler.tar.gz" {
+  src: "https://github.com/ocaml/ocaml/archive/4.14.1.tar.gz"
+  checksum: "sha256=776006e6f0b9bcfb6d9d74381c588e587432ca85562fde93bb80472a5145b028"
+}
+extra-source "init-dune.tbz" {
+  src: "https://github.com/ocaml/dune/releases/download/3.9.3/dune-3.9.3.tbz"
+  checksum: [
+    "sha256=96bf755da267fb46e4af2dda0db56d5863761589618089c429ff85e0f7f65783"
+    "sha512=ce05560a2cff0beb805a259df449b5dbd15420e353cc686a482904b837969bce6f91eedec608ecef4be0ebc232fa013652745a7cc831af1a7f8fe06a391e5488"
+  ]
+}
+extra-source "init-menhir.tar.gz" {
+  src:
+    "https://gitlab.inria.fr/fpottier/menhir/-/archive/20231231/archive.tar.gz"
+  checksum: [
+    "md5=799748bc3b7a542798a85956c7863865"
+    "sha512=620ff3443143535e03ac98c5e8ee2ddf9ba48f8cfe441302118def1da3e03ffac7f48d4d4cb129766b625ecad0fb341da1baa0169dee8b6d07a5b0bbb735cf2f"
+  ]
+}
+patches: [ "ignore-opam.patch" ]
+extra-files: [
+  ["ignore-opam.patch" "sha256=d88e5b89a3dd2111c4fb91dd7f62549b24c63f3f0978c0a0527a9bd02c7c37e8"]
+]
