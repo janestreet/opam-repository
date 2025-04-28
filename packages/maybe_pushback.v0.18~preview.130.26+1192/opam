@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/maybe_pushback"
+bug-reports: "https://github.com/janestreet/maybe_pushback/issues"
+dev-repo: "git+https://github.com/janestreet/maybe_pushback.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/maybe_pushback/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "async_kernel" {= "v0.18~preview.130.26+1192"}
+  "core"         {= "v0.18~preview.130.26+1192"}
+  "ppx_jane"     {= "v0.18~preview.130.26+1192"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Small library for asynchronous pushback"
+description: "
+Many operations have the property that they might return immediately, or they might
+block on some system operation. A ['a Maybe_pushback.t] allows us to chain together
+operations such that we do not jump into the Async scheduler until we hit an operation
+that requires us to. It's the same as [Eager_deferred.t], but with a type that is unique
+from [Deferred.t] so that you have to be more explicit about where you are willing to
+yield to the scheduler.
+"
+url {
+src: "https://github.com/janestreet/maybe_pushback/archive/ceef58806a14ed9c38ad2030be28e1401681b6c0.tar.gz"
+checksum: "sha256=eff32629ebfec1b2bb47c5f6e612d845e9e9e33d8d9b2873d85e92ea0ab1999c"
+}
