@@ -38,6 +38,7 @@ conflicts: [
   "ocaml-index" {!= "1.1+jst"}
   "uutf" {!= "1.0.3+jst"}
   "gen_js_api" {!= "1.1.2+jst"}
+  "topkg" {!= "1.0.8+jst"}
 ]
 conflict-class: "ocaml-core-compiler"
 flags: compiler

@@ -1,0 +1,19 @@
+diff --git a/src/topkg_string.mli b/src/topkg_string.mli
+index 5bd1d23..9a35522 100644
+--- a/src/topkg_string.mli
++++ b/src/topkg_string.mli
+@@ -20,14 +20,11 @@ val exists : (char -> bool) -> string -> bool
+ 
+ val find_byte : ?start:int -> char -> string -> int option
+ 
+-val trim : string -> string
+ val cut : ?rev:bool -> sep:char -> string -> (string * string) option
+ val cuts : ?empty:bool -> sep:char -> string -> string list
+ 
+ val with_index_range : ?first:int -> ?last:int -> string -> string
+ 
+-val uppercase_ascii : string -> string
+-
+ val parse_version : string -> (int * int * int * string option) option
+ val drop_initial_v : string -> string
+ 
