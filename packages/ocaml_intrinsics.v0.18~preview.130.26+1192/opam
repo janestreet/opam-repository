@@ -25,3 +25,12 @@ url {
 src: "https://github.com/janestreet/ocaml_intrinsics/archive/2294e2932707d7a0867d83bfe2b86ba395cdd888.tar.gz"
 checksum: "sha256=5b2bbc09f2ef76378a565760b340f205f16c631f6767687b580f81ed4595f1fc"
 }
+extra-files: [
+  [
+    "popcnt.patch"
+    "sha256=e3b636ca9440efc0208a530dacb11f8d09e406fc16a6bd5d4c1699257e712446"
+  ]
+]
+patches: [
+  "popcnt.patch"
+]
