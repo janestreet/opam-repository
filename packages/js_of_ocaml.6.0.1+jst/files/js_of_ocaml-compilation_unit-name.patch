@@ -104,18 +104,6 @@
    let open Ocaml_compiler in
    let provides = StringSet.singleton (Cmo_format.name cmo) in
    let requires = StringSet.of_list (Cmo_format.requires cmo) in
-@@ -50,8 +50,10 @@
-   in
-   let force_link = Cmo_format.force_link cmo in
-   let crcs =
--    List.fold_left (Cmo_format.imports cmo) ~init:StringMap.empty ~f:(fun acc (s, o) ->
-+    Array.fold_left (Cmo_format.imports cmo) ~init:StringMap.empty ~f:(fun acc import ->
-+        let s = Compilation_unit.Name.to_string (Import_info.name import) in
-+        let o = Import_info.crc import in
-         StringMap.add s o acc)
-   in
-   { provides; requires; primitives = []; force_link; effects_without_cps; crcs }
-
 --- a/compiler/lib/unit_info.mli
 +++ b/compiler/lib/unit_info.mli
 @@ -26,6 +26,6 @@

@@ -2,7 +2,7 @@
 +++ b/src/utils.ml
 @@ -1,5 +1,95 @@
  open Import
- 
+
 +(* We want to make sure we only convert actual odoc comments [(** ... *)] and not
 +   actual instances of [@@ocaml.doc "..."]. When parsed, both get translated as
 +   an attribute.
@@ -96,7 +96,7 @@
  let with_output fn ~binary ~f =
    match fn with
    | None | Some "-" -> f stdout
-@@ -86,16 +176,34 @@ module Ast_io = struct
+@@ -86,9 +176,12 @@ module Ast_io = struct
        lexbuf.lex_curr_p <-
          { pos_fname = input_name; pos_lnum = 1; pos_bol = 0; pos_cnum = 0 };
        Skip_hash_bang.skip_hash_bang lexbuf;
@@ -109,29 +109,3 @@
          | Impl -> Impl (Parse.implementation lexbuf)
        in
        Ok { input_name; input_version; ast }
--    with exn -> (
--      match Location.Error.of_exn exn with
--      | None -> raise exn
--      | Some error -> Error (Source_parse_error (error, input_version)))
-+    with exn ->
-+      (* Run lrgrep to report the error *)
-+      (try
-+        let () = Lrgrep.Frontend.pp_main input_name in
-+        (* This should be unreachable, since Lrgrep should at least raise syntax error *)
-+        raise exn
-+      with
-+      | Lrgrep.Frontend.Syntax_error_with_location (msg, loc) ->
-+        (* Lrgrep reports "Syntax error" if it can't figure out anything else - in that
-+           case, just reraise the original exception *)
-+        if String.equal msg "Syntax error"
-+        then raise exn
-+        else
-+          Error
-+            (Source_parse_error (Location.Error.make ~sub:[] msg ~loc, input_version))
-+      | _ ->
-+        (match Location.Error.of_exn exn with
-+         | None -> raise exn
-+         | Some error -> Error (Source_parse_error (error, input_version))))
- 
-   let magic_length = String.length Astlib.Config.ast_impl_magic_number
- 

@@ -316,7 +316,7 @@
 +            - If Closed, [n >= 2]
 +            - If Open, [n >= 1]
 +          *)
-+    | Ppat_construct of Longident.t loc * (string loc list * pattern) option
++    | Ppat_construct of Longident.t loc * ((string loc * jkind_annotation option) list * pattern) option
 +        (** [Ppat_construct(C, args)] represents:
 +              - [C]               when [args] is [None],
 +              - [C P]             when [args] is [Some ([], P)]
@@ -1344,6 +1344,6 @@
 +end
 +
 +module Config = struct
-+  let ast_impl_magic_number = "Caml1999M558"
-+  let ast_intf_magic_number = "Caml1999N558"
++  let ast_impl_magic_number = "Caml1999M559"
++  let ast_intf_magic_number = "Caml1999N559"
 +end

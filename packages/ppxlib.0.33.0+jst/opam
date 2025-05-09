@@ -92,11 +92,11 @@ patches: [
   "ppxlib+src+location.ml.patch"
   "ppxlib+src+location.mli.patch"
   "ppxlib+src+name.ml.patch"
-  "ppxlib+src+utils.ml.patch"
   "ppxlib+src+utils.mli.patch"
   "ppxlib+traverse+ppxlib_traverse.ml.patch"
   "dune.patch"
   "location_check.ml.patch"
+  "utils.ml.patch"
 ]
 extra-files: [
   [
@@ -145,7 +145,7 @@ extra-files: [
   ]
   [
     "ppxlib+src+code_matcher.ml.patch"
-    "sha256=a08c8f60c4b2471c17845c3a31712b23a16abc73612e4787032d2438217c6588"
+    "sha256=252b7155b35908b002fefa54fd97cb4cbff7f0c30db89f2ba26dead895e3f0ad"
   ]
   [
     "ppxlib+src+code_matcher.mli.patch"
@@ -209,11 +209,7 @@ extra-files: [
   ]
   [
     "ppxlib+src+name.ml.patch"
-    "sha256=aa3ff1484bea746b5dbdc27d102ffe979d00c50930a3c84a3c47936c61d5ae50"
-  ]
-  [
-    "ppxlib+src+utils.ml.patch"
-    "sha256=a6ef119dc9aa4632fe5cf9bf5f7da782a349604c309b84946dfd727da4025685"
+    "sha256=5c742518eb2c40710f3a7ed8de2f0c5ae5fcf4eed896098830ba96c6658729b7"
   ]
   [
     "ppxlib+src+utils.mli.patch"
@@ -229,6 +225,10 @@ extra-files: [
   ]
   [
     "location_check.ml.patch"
-    "sha256=6fbc41954c6289420f2fb1ec0b548a46bc923b09af4a771eb7d5c50958541b3d"
+    "sha256=29aa6beee5428730b9ca84f4d8d45d81d26bbbd7ff6225e2b00e6aa5224ba385"
+  ]
+  [
+    "utils.ml.patch"
+    "sha256=098c41f07f318c838dacafc753dbba6697c6e365305e8344d77a46f6a7df7853"
   ]
 ]

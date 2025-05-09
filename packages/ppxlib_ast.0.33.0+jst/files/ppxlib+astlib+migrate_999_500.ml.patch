@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/astlib/migrate_999_500.ml
-@@ -0,0 +1,1668 @@
+@@ -0,0 +1,1661 @@
 +open Stdlib0
 +module From = Ast_999
 +module To = Ast_500
@@ -454,30 +454,23 @@
 +          loop t
 +        in
 +        let typ = copy_core_type typ in
-+        let pexp_loc = merge_loc pvb_pat.ppat_loc pvb_expr.pexp_loc in
-+        let ptyp_loc =
++        let pexp_loc = ghost_loc (merge_loc typ.ptyp_loc pvb_expr.pexp_loc) in
++        let typ_maybe_poly =
 +          match locally_abstract_univars with
-+          | [] -> ghost_loc typ.ptyp_loc
-+          | _ :: _ -> ghost_loc pexp_loc
-+        in
-+        let typ_poly =
-+          {
-+            typ with
-+            ptyp_loc;
-+            ptyp_attributes = [];
-+            ptyp_desc =
-+              Ast_500.Parsetree.Ptyp_poly
-+                ( List.map (fun x -> x, None) locally_abstract_univars,
-+                  varify_constructors locally_abstract_univars typ );
-+          }
++          | [] -> typ
++          | _ :: _ ->
++            {
++              typ with
++              ptyp_loc = ghost_loc typ.ptyp_loc;
++              ptyp_attributes = [];
++              ptyp_desc =
++                Ast_500.Parsetree.Ptyp_poly
++                  ( List.map (fun x -> x, None) locally_abstract_univars,
++                    varify_constructors locally_abstract_univars typ );
++            }
 +        in
 +
-+        let ppat_loc =
-+          ghost_loc
-+            (merge_loc pvb_pat.Ast_500.Parsetree.ppat_loc
-+               typ.Ast_500.Parsetree.ptyp_loc)
-+        in
-+        let pvb_pat = { (ghost_constraint pvb_pat typ_poly) with ppat_loc }
++        let pvb_pat = ghost_constraint pvb_pat typ_maybe_poly
 +        and pvb_expr =
 +          List.fold_left
 +            (fun expr var ->
@@ -570,7 +563,7 @@
 +          Option.map
 +            (fun x ->
 +              let x0, x1 = x in
-+              (List.map (fun x -> copy_loc (fun x -> x) x) x0, copy_pattern x1))
++              (List.map (fun (x, _) -> copy_loc (fun x -> x) x) x0, copy_pattern x1))
 +            x1 )
 +  | Ast_999.Parsetree.Ppat_variant (x0, x1) ->
 +      Ast_500.Parsetree.Ppat_variant (copy_label x0, Option.map copy_pattern x1)

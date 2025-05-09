@@ -58,21 +58,33 @@
                pexp_loc = { e.pexp_loc with loc_ghost = true };
              },
              ct ))
-@@ -401,11 +401,11 @@ let enforce_invariants fname =
+@@ -399,15 +399,17 @@ let enforce_invariants fname =
+       else
+         let childrens_locs =
            match (x.pvb_pat.ppat_desc, extract_constraint x.pvb_expr) with
-           (* let x : type a b c. ct = e *)
-           | ( Ppat_constraint
+-          (* let x : type a b c. ct = e *)
+-          | ( Ppat_constraint
 -                (pvb_pat, { ptyp_desc = Ptyp_poly (_ :: _, ctp); _ }),
-+                (pvb_pat, Some { ptyp_desc = Ptyp_poly (_ :: _, ctp); _ }, _),
-               Some (pvb_expr, cte) )
-           (* let x :  ct = e
+-              Some (pvb_expr, cte) )
+-          (* let x :  ct = e
++          (* let x :  type a b c. ct = e
++             let x :  ct = e
               let x :> ct = e *)
 -          | ( Ppat_constraint (pvb_pat, { ptyp_desc = Ptyp_poly ([], ctp); _ }),
-+          | ( Ppat_constraint (pvb_pat, Some { ptyp_desc = Ptyp_poly ([], ctp); _ }, _),
-               Some (pvb_expr, cte) )
-             when Location.compare ctp.ptyp_loc cte.ptyp_loc = 0 ->
+-              Some (pvb_expr, cte) )
+-            when Location.compare ctp.ptyp_loc cte.ptyp_loc = 0 ->
++          | ( Ppat_constraint (pvb_pat, Some ctp, _), Some (pvb_expr, cte) )
++            when
++            let ctp =
++              match ctp with
++              | { ptyp_desc = Ptyp_poly (_, ctp); _ } -> ctp
++              | _ -> ctp
++            in
++            Location.compare ctp.ptyp_loc cte.ptyp_loc = 0 ->
                let acc = Non_intersecting_ranges.empty in
-@@ -590,7 +590,7 @@ let enforce_invariants fname =
+               let acc = self#pattern pvb_pat acc in
+               let _acc = self#core_type ctp acc in
+@@ -590,7 +592,7 @@ let enforce_invariants fname =
                      self#longident_loc lid acc
                    else
                      match e.pexp_desc with
@@ -81,7 +93,7 @@
                          (* { foo : int } and { foo : int = x } ... *)
                          let _ = self#core_type c acc in
                          self#expression e acc
-@@ -656,7 +656,7 @@ let enforce_invariants fname =
+@@ -656,7 +658,7 @@ let enforce_invariants fname =
                    self#longident_loc lid acc
                  else
                    match pat.ppat_desc with
@@ -90,7 +102,7 @@
                        (* { foo : int } and { foo : int = x } ... *)
                        let _ = self#core_type c acc in
                        self#pattern p acc
-@@ -668,7 +668,7 @@ let enforce_invariants fname =
+@@ -668,7 +670,7 @@ let enforce_invariants fname =
                  let acc = self#pattern pat acc in
                  acc)
              labels acc

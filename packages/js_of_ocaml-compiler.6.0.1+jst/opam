@@ -13,18 +13,19 @@ homepage: "https://ocsigen.org/js_of_ocaml/latest/manual/overview"
 doc: "https://ocsigen.org/js_of_ocaml/latest/manual/overview"
 bug-reports: "https://github.com/ocsigen/js_of_ocaml/issues"
 depends: [
-  "dune"       {>= "3.7"}
-  "ocaml"      {>= "4.08"}
+  "dune"       {>= "3.17"}
+  "ocaml"      {>= "4.08" & < "5.4"}
   "num"        {with-test}
-  "ppx_expect" {>= "v0.14.2" & with-test}
+  "ppx_expect" {>= "v0.16.1" & with-test}
   "ppxlib"     {>= "0.15.0" & < "0.36.0" & = "0.33.0+jst"}
   "re"         {with-test}
   "cmdliner"   {>= "1.1.0"}
-  "sedlex"     {>= "2.3" & = "3.3+jst"}
+  "sedlex"     {>= "3.3" & = "3.3+jst"}
+  "qcheck"     {with-test}
   "menhir"
   "menhirLib"
   "menhirSdk"
-  "yojson"
+  "yojson"     {>= "2.1"}
   "odoc"       {with-doc}
 ]
 depopts: ["ocamlfind"]
@@ -37,12 +38,12 @@ build: [
   ["dune" "build" "-p" name "-j" jobs "@install" "@doc" {with-doc}]
 ]
 dev-repo: "git+https://github.com/ocsigen/js_of_ocaml.git"
-x-commit-hash: "b9c9a4b8d933c6a7d879b31912c20164ab6232e0"
+x-commit-hash: "b6d60e4f8ff35e7c7b3bb52b97ffedc3eb8e3d08"
 url {
   src:
-    "https://github.com/ocsigen/js_of_ocaml/archive/70aac7fce6825043513923091eb333c8090b3219.tar.gz"
+    "https://github.com/ocsigen/js_of_ocaml/archive/a8e8d2c1696a5fb3ddb4fe15495b1a8625a29b4b.tar.gz"
   checksum:
-    "sha256=66a272f9ed37db9c2b7a972b1cb463cf66a1f11a04739c6c9b17910741e91d5b"
+    "sha256=b1e1ebd799547b33eec43b4d934bfde475b0ff4d20eba36d36147ee6d8db173c"
 }
 patches: [
   "js_of_ocaml-magic_number.ml.patch"
@@ -61,52 +62,34 @@ patches: [
   "js_of_ocaml-wasm-temp-differences.patch"
   "js_of_ocaml-caml_provides_sub_local.patch"
   "js_of_ocaml-caml_hash_exn.patch"
-  "wasm_of_ocaml-build-prefix-sourcemaps.patch"
-  "wasm_of_ocaml-add-stubs-of-fs-fns.patch"
   "wasm_of_ocaml-bring-back-eval.patch"
   "js_of_ocaml-index-by-unboxed-int.patch"
   "js_of_ocaml-mixed-block-bytecode-op.patch"
   "js_of_ocaml-mixed-block-bytecode-op-regression-test.patch"
   "js_of_ocaml-int_u-array-primitives.patch"
-  "wasm_of_ocaml-backtrace.patch"
   "js_of_ocaml-n-ary-functions.patch"
-  "js_of_ocaml-int64-of-string-fixes.patch"
-  "js_of_ocaml-tmp-import-patch.patch"
   "js_of_ocaml-symtable-5.2-api.patch"
-  "js_of_ocaml-set-target-mkcmis.patch"
-  "js_of_ocaml-js-string-concat-bug.patch"
-  "js_of_ocaml-js-object-in-json-recovery.patch"
   "js_of_ocaml-re-allow-int32-nativeint-in-js.patch"
-  "wasm_of_ocaml-blake2.patch"
   "js_of_ocaml-jane-street-5.2-compatibility.patch"
   "js_of_ocaml-migrate-labeled-tuples-shims.patch"
   "js_of_ocaml-floatarray_create_local.patch"
-  "wasm_of_ocaml-sourcemap-contents.patch"
   "js_of_ocaml-jane-street-const_null-support.patch"
   "js_of_ocaml-float32.patch"
-  "js_of_ocaml-obj_dup-mlBytes.patch"
-  "js_of_ocaml-stop-parsing-crcs.patch"
   "js_of_ocaml-caml_array_append.patch"
-  "js_of_ocaml-list_map_tail_mod_cons.patch"
-  "js_of_ocaml-jsoo_link_read_files_once.patch"
-  "js_of_ocaml-short_circuit_javascript_lines_while_linking.patch"
   "js_of_ocaml-5.2.0-compiler-changes.patch"
   "js_of_ocaml-5.3-tests-runtime.patch"
-  "js_of_ocaml-empty-sourcemap.patch"
-  "js_of_ocaml-bigstring-reader-bugfix.patch"
   "js_of_ocaml-caml_bigstring_strncmp.patch"
   "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
-  "js_of_ocaml-gh1904.patch"
   "dune.patch"
 ]
 extra-files: [
   [
     "js_of_ocaml-magic_number.ml.patch"
-    "sha256=88f3c5cbbda94d885625bec98fcd54af5cfcd6d65eb704a0d6e29a157f0d9c4f"
+    "sha256=e15d81f2c5b7b7cf401889b9137571aa6d460afed66e83fd1663257e034b4670"
   ]
   [
     "js_of_ocaml-compilation_unit-name.patch"
-    "sha256=ca9a9bcac814177b9aa58ca2d500a74779b189c33291f0193503a376fddeafa4"
+    "sha256=63ebbb630149ade7f377dc8940d58968d7a44cef4911d67fc49a7fe10446eb1f"
   ]
   [
     "js_of_ocaml-with_async_exns.patch"
@@ -114,7 +97,7 @@ extra-files: [
   ]
   [
     "js_of_ocaml-internal-obj-changes.patch"
-    "sha256=1317dea6db46304bde81a2fbc7df22fd7fc76d6eed896f103336af32903a4251"
+    "sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   ]
   [
     "js_of_ocaml-add-unboxed-and-float-block.patch"
@@ -165,14 +148,6 @@ extra-files: [
     "sha256=eaf87543603ab7f9c5c8e410413f913e572c1815c93a30ac89b245effd435e39"
   ]
   [
-    "wasm_of_ocaml-build-prefix-sourcemaps.patch"
-    "sha256=005e55269d93464093fda54b702d12ca5ce7eeb716840a425c6fb0091519d163"
-  ]
-  [
-    "wasm_of_ocaml-add-stubs-of-fs-fns.patch"
-    "sha256=b2df4689beb0be6abae9fa93d0d02032bad9c29982f3f8d741af4427be53afb0"
-  ]
-  [
     "wasm_of_ocaml-bring-back-eval.patch"
     "sha256=c413d9617e1122a9fdad8f1f63859bdf9f17a8440f78bdfbaecc432bae580fac"
   ]
@@ -193,44 +168,16 @@ extra-files: [
     "sha256=99eba4301613d03e0305017a687c768bd24a22cef0db25ab62cbc3d304f647ba"
   ]
   [
-    "wasm_of_ocaml-backtrace.patch"
-    "sha256=6edd7bcfe6f09e413e3bc0e8006398b82ce56d8f3a3ec7f018d98aa9d1d9fdcf"
-  ]
-  [
     "js_of_ocaml-n-ary-functions.patch"
-    "sha256=db4db05157b465a5aee4fb08bcee822d9f7267071d173c111af2f327097b742b"
-  ]
-  [
-    "js_of_ocaml-int64-of-string-fixes.patch"
-    "sha256=5cb3e9dc3b91ce3613762fb8d40549a45da75a90cbe248d6eb470b2a31785259"
-  ]
-  [
-    "js_of_ocaml-tmp-import-patch.patch"
-    "sha256=bd08a6f9dd6e28a068a96f8889120c10bb183252a1f00b173bd72b1387aaefd4"
+    "sha256=0f6c5da3756755db191492701c2df598426cdf57254b5366798dbd1f893e7e90"
   ]
   [
     "js_of_ocaml-symtable-5.2-api.patch"
     "sha256=9a999950e8984cc582e3830f447111e1082dc720609334de66a011347d26da9b"
   ]
   [
-    "js_of_ocaml-set-target-mkcmis.patch"
-    "sha256=2040705d6f0dc5e20b3dc94903a2472abaeef4a0227e8dc0f4c08d849b0c88e7"
-  ]
-  [
-    "js_of_ocaml-js-string-concat-bug.patch"
-    "sha256=b5598cce22d19b7f883800446297ed02fd0db79e6c55a8717ed9e4c31eb2d0ba"
-  ]
-  [
-    "js_of_ocaml-js-object-in-json-recovery.patch"
-    "sha256=13b7bcee1c64e23a87f5c3a5834da0f9764351cc6f2c041fec901e7ccc51a26f"
-  ]
-  [
     "js_of_ocaml-re-allow-int32-nativeint-in-js.patch"
     "sha256=66afc6da651cd22984aec74f64ad6aaf1b211c6ce5a070fe444377cdaa44f14a"
-  ]
-  [
-    "wasm_of_ocaml-blake2.patch"
-    "sha256=112b299ee2195c708d259f9a33ccf184e1eeca6f5a0438051074a9bd6199f945"
   ]
   [
     "js_of_ocaml-jane-street-5.2-compatibility.patch"
@@ -245,56 +192,24 @@ extra-files: [
     "sha256=f17e392acc941dde475cb7be0654037df9b8d550aeae0d96b65394e4c4a1d4ca"
   ]
   [
-    "wasm_of_ocaml-sourcemap-contents.patch"
-    "sha256=93b7dddf6313836ce02fbe762c40380e20daefdd8b87ec885ee0f4ef779ad76b"
-  ]
-  [
     "js_of_ocaml-jane-street-const_null-support.patch"
     "sha256=e708cdc01c0cef3fce1cb9f31b33324977dcca1c166601905fcac1ef10262c3a"
   ]
   [
     "js_of_ocaml-float32.patch"
-    "sha256=04ff40713b5c5b3555dba9f122ae75d7a5f3d50c203ea0a3aafb422d054c6f25"
-  ]
-  [
-    "js_of_ocaml-obj_dup-mlBytes.patch"
-    "sha256=59ee68b36196a12feed5b074703c9a4be85d22545f10de3f99f2569a76afbd9d"
-  ]
-  [
-    "js_of_ocaml-stop-parsing-crcs.patch"
-    "sha256=917f6a08b2fb65adee1df6d16ed4b117041c5b3e53e7a11128c16efa0a0b218f"
+    "sha256=a16d91cf13f438798f50b0793476f7a613affe20cfdb5b6986d1b18c6b45ba7c"
   ]
   [
     "js_of_ocaml-caml_array_append.patch"
     "sha256=430f2a026ce0738ae65b8b67ba614bae89bc57fffdf58293bae249e2fa8cedbd"
   ]
   [
-    "js_of_ocaml-list_map_tail_mod_cons.patch"
-    "sha256=65153311bfae8b93691a5b91e2572c29bb3240ef6fb8a2e3d172e6ccebf409dd"
-  ]
-  [
-    "js_of_ocaml-jsoo_link_read_files_once.patch"
-    "sha256=e79c355e4abbc8cf07b244c20830c86e0195d478a7b349720928376e5a364eb3"
-  ]
-  [
-    "js_of_ocaml-short_circuit_javascript_lines_while_linking.patch"
-    "sha256=2d46a76a4882d610625aa32c2b614c413f81f352c0355fc60b3aaecc9a2429dd"
-  ]
-  [
     "js_of_ocaml-5.2.0-compiler-changes.patch"
-    "sha256=0c8fff963c74a990b35e7fe7db2e10ae8760a32c31575668424a012d27e168d6"
+    "sha256=f71cba10b0c5ca093aa5150cc63ee3ee5bba390b3342601f77421559d8ae14fe"
   ]
   [
     "js_of_ocaml-5.3-tests-runtime.patch"
     "sha256=bb46bb5c80ace0140edd40c5858c7117f27dc2d0edd869a8b3b4e90aab7199f0"
-  ]
-  [
-    "js_of_ocaml-empty-sourcemap.patch"
-    "sha256=59a046a54937c636b027bd343790d9b76cbac3e39b3c07cfea7c56f48f716d13"
-  ]
-  [
-    "js_of_ocaml-bigstring-reader-bugfix.patch"
-    "sha256=40fbf32dcc106a7ade75344628208388fc706782c42dfeb7bf371bf159fda679"
   ]
   [
     "js_of_ocaml-caml_bigstring_strncmp.patch"
@@ -303,10 +218,6 @@ extra-files: [
   [
     "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
     "sha256=005bce63009b9539b65036b22a7b7cc531755c7caa3cf1ed8d8697698090e136"
-  ]
-  [
-    "js_of_ocaml-gh1904.patch"
-    "sha256=b5730bc2fe171c31bd76ec4f3c82c4bb37d935636384492c7c3a4f9131a63e25"
   ]
   [
     "dune.patch"

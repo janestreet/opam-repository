@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/astlib/migrate_500_999.ml
-@@ -0,0 +1,1646 @@
+@@ -0,0 +1,1647 @@
 +open Stdlib0
 +module From = Ast_500
 +module To = Ast_999
@@ -479,7 +479,8 @@
 +          `Univars (p, pt_tyvars, extern_ct, e)
 +    | `Var (p, pt_tyvars, pt_ct, extern_ct), _ ->
 +        `Univars (p, pt_tyvars, extern_ct, e)
-+    | `NonVar (pat, ct), _ -> `NonVar (pat, ct, e)
++    | `NonVar (p, pt_ct), Some ([], e, e_ct) when pt_ct = e_ct -> `NonVar (p, pt_ct, e)
++    | `NonVar (p, pt_ct), _ -> `NonVar (p, pt_ct, e)
 +    | _ -> `None
 +  in
 +  let with_constraint ty_vars typ =
@@ -554,7 +555,7 @@
 +          Option.map
 +            (fun x ->
 +              let x0, x1 = x in
-+              (List.map (fun x -> copy_loc (fun x -> x) x) x0, copy_pattern x1))
++              (List.map (fun x -> copy_loc (fun x -> x) x, None) x0, copy_pattern x1))
 +            x1 )
 +  | Ast_500.Parsetree.Ppat_variant (x0, x1) ->
 +      Ast_999.Parsetree.Ppat_variant (copy_label x0, Option.map copy_pattern x1)

@@ -1,0 +1,11 @@
+--- a/lib/ojs_exn.ml
++++ b/lib/ojs_exn.ml
+@@ -13,7 +13,7 @@ let to_string x = Ojs.string_of_js (Ojs.
+ exception Error = Jsoo_runtime.Error.Exn
+ 
+ let () =
+-  Printexc.register_printer (function
++  (Printexc.register_printer [@ocaml.alert "-unsafe_multidomain"]) (function
+       | Error x -> Some (to_string x)
+       | _ -> None
+     )

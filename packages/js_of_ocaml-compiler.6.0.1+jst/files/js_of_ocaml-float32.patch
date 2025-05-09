@@ -380,7 +380,7 @@
 +  [%expect {| 123.000000 456.000000 |}]
 --- /dev/null
 +++ b/runtime/js/float32.js
-@@ -0,0 +1,410 @@
+@@ -0,0 +1,419 @@
 +
 +/*
 +    32-bit floats are represented as javascript numbers, i.e. 64-bit floats.
@@ -692,32 +692,41 @@
 +    return Math.fround(caml_fma_float(x, y, z));
 +}
 +
-+//Provides: caml_sse_float32_min_bytecode const
-+function caml_sse_float32_min_bytecode(x, y) {
++//Provides: caml_simd_float32_min_bytecode const
++function caml_simd_float32_min_bytecode(x, y) {
 +    return x < y ? x : y;
 +}
 +
-+//Provides: caml_sse_float32_max_bytecode const
-+function caml_sse_float32_max_bytecode(x, y) {
++//Provides: caml_simd_float32_max_bytecode const
++function caml_simd_float32_max_bytecode(x, y) {
 +    return x > y ? x : y;
 +}
 +
-+//Provides: caml_sse_cast_float32_int64_bytecode const
++//Provides: caml_simd_cast_float32_int64_bytecode const
 +//Requires: caml_int64_of_float, caml_round_float32_bytecode
-+function caml_sse_cast_float32_int64_bytecode(x) {
++function caml_simd_cast_float32_int64_bytecode(x) {
 +    return caml_int64_of_float(caml_round_float32_bytecode(x));
 +}
 +
-+//Provides: caml_sse41_float32_round_bytecode const
-+//Requires: caml_round_float32_bytecode, caml_failwith
-+function caml_sse41_float32_round_bytecode(mode, x) {
-+    switch (mode) {
-+        case 0x9: return Math.fround(Math.floor(x));
-+        case 0xA: return Math.fround(Math.ceil(x));
-+        case 0xB: return Math.fround(Math.trunc(x));
-+        case 0xC: return caml_round_float32_bytecode(x);
-+        default: caml_failwith("caml_sse41_float32_round_bytecode");
-+    }
++//Provides: caml_simd_float32_round_current_bytecode const
++//Requires: caml_round_float32_bytecode
++function caml_simd_float32_round_current_bytecode(x) {
++    return caml_round_float32_bytecode(x);
++}
++
++//Provides: caml_simd_float32_round_neg_inf_bytecode const
++function caml_simd_float32_round_neg_inf_bytecode(x) {
++    return Math.fround(Math.floor(x));
++}
++
++//Provides: caml_simd_float32_round_pos_inf_bytecode const
++function caml_simd_float32_round_pos_inf_bytecode(x) {
++    return Math.fround(Math.ceil(x));
++}
++
++//Provides: caml_simd_float32_round_towards_zero_bytecode const
++function caml_simd_float32_round_towards_zero_bytecode(x) {
++    return Math.fround(Math.trunc(x));
 +}
 +
 +//Provides: caml_make_unboxed_float32_vect_bytecode const (const)
@@ -811,7 +820,7 @@
    (func (export "caml_custom_identifier") (param $v (ref eq)) (result (ref eq))
 --- /dev/null
 +++ b/runtime/wasm/float32.wat
-@@ -0,0 +1,705 @@
+@@ -0,0 +1,708 @@
 +(module
 +    (import "fail" "caml_failwith"
 +        (func $caml_failwith (param (ref eq))))
@@ -1418,7 +1427,7 @@
 +        (call $box_float32 (f32.demote_f64
 +            (call $unbox_float (call $caml_fma_float (local.get $x) (local.get $y) (local.get $z))))))
 +
-+    (func (export "caml_sse_float32_min_bytecode")
++    (func (export "caml_simd_float32_min_bytecode")
 +        (param (ref eq)) (param (ref eq)) (result (ref eq))
 +        (local $x f32) (local $y f32)
 +        (local.set $x (call $unbox_float32 (local.get 0)))
@@ -1428,7 +1437,7 @@
 +                (then (local.get $x))
 +                (else (local.get $y)))))
 +
-+    (func (export "caml_sse_float32_max_bytecode")
++    (func (export "caml_simd_float32_max_bytecode")
 +        (param (ref eq)) (param (ref eq)) (result (ref eq))
 +        (local $x f32) (local $y f32)
 +        (local.set $x (call $unbox_float32 (local.get 0)))
@@ -1438,31 +1447,34 @@
 +                (then (local.get $x))
 +                (else (local.get $y)))))
 +
-+    (func (export "caml_sse_cast_float32_int64_bytecode")
++    (func (export "caml_simd_cast_float32_int64_bytecode")
 +        (param $f (ref eq)) (result (ref eq))
 +        (call $caml_copy_int64
 +            (i64.trunc_sat_f32_s (call $unbox_float32 (local.get $f)))))
 +
-+    (data $unknown_mode "caml_sse41_float32_round_bytecode")
-+
-+    (func (export "caml_sse41_float32_round_bytecode")
-+        (param (ref eq)) (param (ref eq)) (result (ref eq))
-+        (local $mode i32)
++    (func (export "caml_simd_float32_round_current_bytecode")
++        (param (ref eq)) (result (ref eq))
 +        (local $x f32)
-+        (local.set $mode (i31.get_s (ref.cast (ref i31) (local.get 0))))
-+        (local.set $x (call $unbox_float32 (local.get 1)))
-+        (call $box_float32
-+        (if (result f32) (i32.eq (local.get $mode) (i32.const 0x9))
-+            (then (f32.floor (local.get $x)))
-+        (else (if (result f32) (i32.eq (local.get $mode) (i32.const 0xA))
-+            (then (f32.ceil (local.get $x)))
-+        (else (if (result f32) (i32.eq (local.get $mode) (i32.const 0xB))
-+            (then (f32.trunc (local.get $x)))
-+        (else (if (result f32) (i32.eq (local.get $mode) (i32.const 0xC))
-+            (then (f32.nearest (local.get $x)))
-+        (else
-+            (call $caml_failwith (array.new_data $bytes $unknown_mode (i32.const 0) (i32.const 35)))
-+            (f32.const 0)))))))))))
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.nearest (local.get $x))))
++
++    (func (export "caml_simd_float32_round_neg_inf_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.floor (local.get $x))))
++
++    (func (export "caml_simd_float32_round_pos_inf_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.ceil (local.get $x))))
++
++    (func (export "caml_simd_float32_round_towards_zero_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.trunc (local.get $x))))
 +
 +    (func (export "caml_make_unboxed_float32_vect_bytecode")
 +        (param (ref eq)) (result (ref eq))

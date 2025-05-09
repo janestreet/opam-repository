@@ -1,22 +1,3 @@
---- a/compiler/ppx/ppx_optcomp_light.ml
-+++ b/compiler/ppx/ppx_optcomp_light.ml
-@@ -209,9 +209,13 @@
-     method expression_desc : expression_desc -> expression_desc =
-       fun x ->
-         match x with
--        | Pexp_function a ->
--            let a = self#cases a in
--            Pexp_function a
-+        | Pexp_function (a, b, Pfunction_cases (c, d, e)) ->
-+            let a = self#list self#function_param a in
-+            let b = self#function_constraint b in
-+            let c = self#cases c in
-+            let d = self#location d in
-+            let e = self#attributes e in
-+            Pexp_function (a, b, Pfunction_cases (c, d, e))
-         | Pexp_match (a, b) ->
-             let a = self#expression a in
-             let b = self#cases b in
 --- a/ppx/ppx_js/lib_internal/ppx_js_internal.ml
 +++ b/ppx/ppx_js/lib_internal/ppx_js_internal.ml
 @@ -250,7 +250,7 @@
@@ -71,23 +52,25 @@
             ~loc:{ loc with loc_ghost = true }
             nolabel
             None
-@@ -583,9 +582,13 @@
+@@ -583,11 +582,14 @@
      | Pcf_method (id, priv, Cfk_concrete (bang, body)) ->
          let names = check_name id names in
-         let body = format_meth (mappper body) in
--        let rec create_meth_ty exp =
-+        let create_meth_ty exp =
+         let body, body_ty = drop_pexp_poly (mappper body) in
+         let rec create_meth_ty exp =
            match exp.pexp_desc with
 -          | Pexp_fun (label, _, _, body) -> Arg.make ~label () :: create_meth_ty body
+-          | Pexp_function _ -> [ Arg.make () ]
 +          | Pexp_function (params, _, _) ->
 +            List.filter_map params ~f:(fun param ->
 +              match param.pparam_desc with
 +              | Pparam_val (label, _, _) -> Some (Arg.make ~label ())
 +              | Pparam_newtype _ -> None)
+-          | Pexp_newtype (_, body) -> create_meth_ty body
++          | Pexp_newtype (_, _, body) -> create_meth_ty body
            | _ -> []
          in
          let fun_ty = create_meth_ty body in
-@@ -641,7 +644,7 @@
+@@ -641,7 +643,7 @@
    let body = function
      | Val (_, _, _, body) -> body
      | Meth (_, _, _, body, _) ->
@@ -96,7 +79,7 @@
    in
    let extra_types =
      List.concat
-@@ -725,14 +728,17 @@
+@@ -725,14 +727,17 @@
      invoker
      (List.map fields ~f:(fun f -> app_arg (body f))
      @ [ app_arg

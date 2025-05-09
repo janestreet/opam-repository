@@ -39,7 +39,6 @@ conflicts: [
   "uutf" {!= "1.0.3+jst"}
   "gen_js_api" {!= "1.1.2+jst"}
   "topkg" {!= "1.0.8+jst"}
-  "base" {!= "v0.18~preview.130.26+1192"}
 ]
 conflict-class: "ocaml-core-compiler"
 flags: compiler
@@ -53,6 +52,6 @@ install: [
   "sh" "-exc" "PATH=%{prefix}%/init_deps/bin/:$PATH make install"
 ]
 url {
-  src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-8.tar.gz"
-  checksum: ["sha256=d2ac44c3d857c3aba6cfa7628a8dd6ccd786b596d4b378c873b533166ec1eeb2"]
+  src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-9.tar.gz"
+  checksum: ["sha256=e2872c5fc7f4f7dc0e989d20fd67c84cf5f15e62c2430fd1d8070aac8c08778f"]
 }

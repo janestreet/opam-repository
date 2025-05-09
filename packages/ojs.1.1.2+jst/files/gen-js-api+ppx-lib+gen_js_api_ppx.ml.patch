@@ -1,0 +1,262 @@
+--- a/ppx-lib/gen_js_api_ppx.ml
++++ b/ppx-lib/gen_js_api_ppx.ml
+@@ -373,7 +373,7 @@ type decl =
+   | Class of classdecl list
+   | Implem of Parsetree.structure
+   | Open of Parsetree.open_description
+-  | Include of Parsetree.module_expr Parsetree.include_infos
++  | Include of Parsetree.module_expr Parsetree.include_infos * Parsetree.modalities
+ 
+ (** Parsing *)
+ 
+@@ -416,7 +416,7 @@ let rec parse_arg ~variance (ctx: type_c
+ 
+ and parse_typ ~variance ctx ~global_attrs ty =
+   match ty.ptyp_desc with
+-  | Ptyp_arrow (lab, t1, t2) when has_attribute "js.variadic" t1.ptyp_attributes ->
++  | Ptyp_arrow (lab, t1, t2, _, _) when has_attribute "js.variadic" t1.ptyp_attributes ->
+       begin match parse_arg ~variance ctx lab ~global_attrs t1 with
+       | {lab; att; typ=Name ("list", [typ])} ->
+           let ty_vararg = Some {lab; att; typ} in
+@@ -428,7 +428,7 @@ and parse_typ ~variance ctx ~global_attr
+           end
+       | _ -> error t1.ptyp_loc Invalid_variadic_type_arg
+       end
+-  | Ptyp_arrow (lab, t1, t2) ->
++  | Ptyp_arrow (lab, t1, t2, _, _) ->
+       let t1 = parse_arg ~variance ctx lab ~global_attrs t1 in
+       begin match parse_typ ~variance ctx ~global_attrs t2 with
+       | Arrow ({ty_args; ty_vararg = _; unit_arg = _; ty_res = _} as params) when no_attributes t2.ptyp_attributes -> Arrow {params with ty_args = t1 :: ty_args}
+@@ -458,11 +458,12 @@ and parse_typ ~variance ctx ~global_attr
+       in
+       Variant {location; global_attrs; attributes = ty.ptyp_attributes; constrs = List.map prepare_row rows}
+ 
+-  | Ptyp_tuple typs ->
+-      let typs = List.map (parse_typ ~variance ctx ~global_attrs) typs in
+-      Tuple typs
+-
+-  | Ptyp_var label ->
++  | Ptyp_tuple labeled_typs ->
++    begin match Ppxlib_jane.as_unlabeled_tuple labeled_typs with
++    | Some typs -> Tuple (List.map (parse_typ ~variance ctx ~global_attrs) typs)
++    | None -> error ty.ptyp_loc Cannot_parse_type
++    end
++  | Ptyp_var (label, _) ->
+       if List.mem label ctx.type_params then
+         if variance < 0 then
+           error ty.ptyp_loc (Contravariant_type_parameter label)
+@@ -595,7 +596,7 @@ let extract_packages_for_valdecl ty =
+   in
+   let rec go acc ty =
+     match ty.ptyp_desc with
+-    | Ptyp_arrow (Nolabel, { ptyp_desc = Ptyp_package ({ txt = ojs_T; _ }, [{ txt = t; _}, { ptyp_desc = Ptyp_var tyvar; _ }]); ptyp_attributes; _ }, rest)
++    | Ptyp_arrow (Nolabel, { ptyp_desc = Ptyp_package ({ txt = ojs_T; _ }, [{ txt = t; _}, { ptyp_desc = Ptyp_var (tyvar, _); _ }]); ptyp_attributes; _ }, rest, _, _)
+       when is_ojs_T ojs_T t && has_attribute "js" ptyp_attributes ->
+         let module_name =
+           String.mapi (fun i c -> if i = 0 then Char.uppercase_ascii c else c) tyvar
+@@ -625,7 +626,8 @@ let parse_valdecl ~global_attrs ~in_sig 
+ 
+ let rec functor_of_module_type = function
+   | {pmty_desc = Pmty_signature si; pmty_attributes; _} -> Some ([], si, pmty_attributes)
+-  | {pmty_desc = Pmty_functor (params, body); _} ->
++
++  | {pmty_desc = Pmty_functor (params, body, []); _} ->
+       begin match functor_of_module_type body with
+       | Some (parameters, si, attrs) ->
+           Some (params :: parameters, si, attrs)
+@@ -634,8 +636,10 @@ let rec functor_of_module_type = functio
+   | _ -> None
+ 
+ let rec parse_sig_item ~global_attrs rest s =
+-  let parse_module_declaration = function
+-    | {pmd_name = { txt = Some name; _}; pmd_type; pmd_loc = _; pmd_attributes} ->
++  let parse_module_declaration pmd =
++    match Ppxlib_jane.Shim.Module_declaration.of_parsetree pmd with
++
++    | {pmd_name = { txt = Some name; _}; pmd_type; pmd_loc = _; pmd_attributes; pmd_modalities = []} ->
+         begin match functor_of_module_type pmd_type with
+         | None -> error s.psig_loc Cannot_parse_sigitem
+         | Some (functor_parameters, si, attrs) ->
+@@ -669,14 +673,14 @@ let rec parse_sig_item ~global_attrs res
+       let global_attrs = attribute :: global_attrs in
+       rest ~global_attrs
+   | Psig_open descr -> Open descr :: rest ~global_attrs
+-  | Psig_include ({pincl_mod; _} as info) ->
++  | Psig_include ({pincl_mod; _} as info, moda) ->
+       let rec module_expr mod_typ =
+         match mod_typ.pmty_desc with
+         | Pmty_typeof module_expr -> module_expr
+         | Pmty_with (t, _) -> module_expr t
+         | _ -> error s.psig_loc Cannot_parse_sigitem
+       in
+-      Include {info with pincl_mod = module_expr pincl_mod} :: rest ~global_attrs
++      Include ({info with pincl_mod = module_expr pincl_mod}, moda) :: rest ~global_attrs
+   | _ ->
+       error s.psig_loc Cannot_parse_sigitem
+ 
+@@ -689,7 +693,7 @@ and push_module_attributes module_name m
+   in
+   rev_append global_attrs (List.rev module_attributes)
+ 
+-and parse_sig ~global_attrs = function
++and parse_sig_items ~global_attrs = function
+   | [] -> []
+   | {psig_desc = Psig_attribute attribute; _} :: rest when filter_attr_name "js.stop" attribute ->
+       parse_sig_verbatim ~global_attrs rest
+@@ -697,17 +701,21 @@ and parse_sig ~global_attrs = function
+       has_attribute "js.custom" vd.pval_attributes ->
+       let attribute = unoption (get_attribute "js.custom" vd.pval_attributes) in
+       let str = str_of_payload attribute in
+-      Implem str :: parse_sig ~global_attrs rest
++      Implem str :: parse_sig_items ~global_attrs rest
+   | s :: rest ->
+-      parse_sig_item ~global_attrs (parse_sig rest) s
++      parse_sig_item ~global_attrs (parse_sig_items rest) s
++
++and parse_sig ~global_attrs sg =
++    parse_sig_items ~global_attrs sg.psg_items
++
+ 
+ and parse_sig_verbatim ~global_attrs = function
+   | [] -> []
+-  | {psig_desc = Psig_attribute attribute; _} :: rest when filter_attr_name "js.start" attribute -> parse_sig ~global_attrs rest
++  | {psig_desc = Psig_attribute attribute; _} :: rest when filter_attr_name "js.start" attribute -> parse_sig_items ~global_attrs rest
+   | _ :: rest -> parse_sig_verbatim ~global_attrs rest
+ 
+ and parse_class_decl ~global_attrs = function
+-  | {pci_virt = Concrete; pci_params = []; pci_name; pci_expr = {pcty_desc = Pcty_arrow (Nolabel, {ptyp_desc = Ptyp_constr ({txt = Longident.Ldot (Lident "Ojs", "t"); loc = _}, []); ptyp_loc = _; ptyp_attributes = _; ptyp_loc_stack = _}, {pcty_desc = Pcty_signature {pcsig_self = {ptyp_desc = Ptyp_any; _}; pcsig_fields}; pcty_loc = _; pcty_attributes = _}); _}; pci_attributes; pci_loc = _} ->
++  | {pci_virt = Concrete; pci_params = []; pci_name; pci_expr = {pcty_desc = Pcty_arrow (Nolabel, {ptyp_desc = Ptyp_constr ({txt = Longident.Ldot (Lident "Ojs", "t"); loc = _}, []); ptyp_loc = _; ptyp_attributes = _; ptyp_loc_stack = _}, {pcty_desc = Pcty_signature {pcsig_self = {ptyp_desc = Ptyp_any _; _}; pcsig_fields}; pcty_loc = _; pcty_attributes = _}); _}; pci_attributes; pci_loc = _} ->
+       let global_attrs = pci_attributes @ global_attrs in
+       let class_name = pci_name.txt in
+       Declaration { class_name; class_fields = List.map (parse_class_field ~global_attrs) pcsig_fields }
+@@ -820,14 +828,14 @@ let fun_ ?(eta = true) (label, s, typ) e
+   | Pexp_apply (f, [Nolabel, {pexp_desc = Pexp_ident {txt = Lident x; loc = _}; _}])
+     when x = s && eta -> f
+   | _ ->
+-      Exp.fun_ label None (Pat.constraint_ (Pat.var (mknoloc s)) typ) e
++      Ast_builder.Default.pexp_fun ~loc:!Ast_helper.default_loc label None (Pat.constraint_ (Pat.var (mknoloc s)) typ) e
+ 
+ let fun_unit e =
+   match e.pexp_desc with
+   | Pexp_apply (f, [Nolabel, {pexp_desc = Pexp_construct ({txt = Lident "()"; loc = _}, None); _}]) ->
+       f
+   | _ ->
+-      Exp.fun_ Nolabel None (Pat.construct (mknoloc (Lident "()")) None) e
++      Ast_builder.Default.pexp_fun ~loc:!Ast_helper.default_loc Nolabel None (Pat.construct (mknoloc (Lident "()")) None) e
+ 
+ let func args unit_arg body =
+   let body = if unit_arg then fun_unit body else body in
+@@ -928,7 +936,7 @@ let def ?packages s ty body =
+               (Pat.unpack (mknoloc (Some module_name)))
+               (package true)
+           in
+-          Exp.fun_ Nolabel None arg body
++          Ast_builder.Default.pexp_fun ~loc:!Ast_helper.default_loc Nolabel None arg body
+         in
+         ty, body
+       in
+@@ -1301,7 +1309,7 @@ and ml2js ty exp =
+       in
+       let formal_args, concrete_args = List.map fst args, List.map snd args in
+       let res = ml2js_unit ty_res (app exp concrete_args unit_arg) in
+-      let body = if formal_args = [] then Exp.fun_ Nolabel None (Pat.any ()) res else res in
++      let body = if formal_args = [] then Ast_builder.Default.pexp_fun ~loc:!Ast_helper.default_loc Nolabel None (Pat.any ()) res else res in
+       let f = List.fold_right (fun (s, _) -> fun_ (Nolabel, s, ojs_typ)) formal_args body in
+       ojs "fun_to_js" [int (max 1 (List.length formal_args)); f]
+   | Arrow {ty_args; ty_vararg = Some {lab=label_variadic; att=_; typ=ty_variadic};
+@@ -1600,14 +1608,18 @@ let global_object ~global_attrs =
+         begin match get_expr_attribute "js.scope" [hd] with
+         | None -> traverse tl
+         | Some {pexp_desc=Pexp_constant (Pconst_string (prop, _, _)); _} -> ojs_get (traverse tl) prop
+-        | Some {pexp_desc=Pexp_tuple path; _} ->
+-          let init = traverse tl in
+-          let folder state pexp =
+-            match pexp.pexp_desc with
+-            | Pexp_constant (Pconst_string (prop, _, _)) -> ojs_get state prop
+-            | _ -> pexp (* global object *)
+-          in
+-          List.fold_left folder init path
++        | Some {pexp_desc=Pexp_tuple labeled_path; _} ->
++          begin match Ppxlib_jane.as_unlabeled_tuple labeled_path with
++          | Some path ->
++            let init = traverse tl in
++            let folder state pexp =
++              match pexp.pexp_desc with
++              | Pexp_constant (Pconst_string (prop, _, _)) -> ojs_get state prop
++              | _ -> pexp (* global object *)
++            in
++            List.fold_left folder init path
++          | None -> traverse tl
++          end
+         | Some global_object -> global_object
+         end
+   in
+@@ -1622,9 +1634,9 @@ and gen_funs ~global_attrs p =
+   let global_attrs = global_attrs in
+   let ctx_withloc =
+     List.map (function
+-        | {ptyp_desc = Ptyp_any; ptyp_loc = loc; ptyp_attributes = _; ptyp_loc_stack = _}, (NoVariance, _) ->
++        | {ptyp_desc = Ptyp_any _; ptyp_loc = loc; ptyp_attributes = _; ptyp_loc_stack = _}, (NoVariance, _) ->
+             { loc = loc; txt = fresh () }
+-        | {ptyp_desc = Ptyp_var label; ptyp_loc = loc; ptyp_attributes = _; ptyp_loc_stack = _}, (NoVariance, _) ->
++        | {ptyp_desc = Ptyp_var (label, _); ptyp_loc = loc; ptyp_attributes = _; ptyp_loc_stack = _}, (NoVariance, _) ->
+             { loc = loc; txt = label }
+         | _ -> error p.ptype_loc Cannot_parse_type
+       ) p.ptype_params
+@@ -1691,8 +1703,10 @@ and gen_funs ~global_attrs p =
+             | Pcstr_tuple args ->
+                 begin match args with
+                 | [] -> Constant
+-                | [x] -> Unary (parse_typ full_ctx ~global_attrs x)
+-                | _ :: _ :: _ -> Nary (List.map (parse_typ full_ctx ~global_attrs) args)
++                | [x] -> Unary (parse_typ full_ctx ~global_attrs (Ppxlib_jane.Shim.Pcstr_tuple_arg.to_core_type x))
++                | _ :: _ :: _ -> Nary (List.map (fun arg -> arg |>
++                                                            Ppxlib_jane.Shim.Pcstr_tuple_arg.to_core_type |>
++                                                            parse_typ full_ctx ~global_attrs) args)
+                 end
+             | Pcstr_record args ->
+                 let global_attrs = c.pcd_attributes @ global_attrs in
+@@ -1739,7 +1753,7 @@ and gen_funs ~global_attrs p =
+                 (fun label acc ->
+                    let name = (local_type_of_type_var label)^suffix in
+                    let label = Name (local_type_of_type_var label, []) in
+-                   Exp.fun_ Nolabel None (Pat.constraint_ (Pat.var (mknoloc name)) (gen_typ (typ label))) acc
++                   Ast_builder.Default.pexp_fun ~loc:!Ast_helper.default_loc Nolabel None (Pat.constraint_ (Pat.var (mknoloc name)) (gen_typ (typ label))) acc
+                 ) ctx body
+              ))
+   in
+@@ -1796,7 +1810,7 @@ and gen_decl = function
+       let descr = {descr with popen_expr = Mod.ident descr.popen_expr} in
+       [ Str.open_ descr ]
+ 
+-  | Include descr ->
++  | Include (descr, _ ) ->
+       [ Str.include_ descr ]
+ 
+ and gen_module ?module_type functor_parameters s decls : module_binding =
+@@ -1881,14 +1895,14 @@ and gen_class_cast = function
+       let to_js =
+         let arg = fresh() in
+         Vb.mk (Pat.var (mknoloc (class_name ^ "_to_js")))
+-          (Exp.fun_ Nolabel None
++          (Ast_builder.Default.pexp_fun ~loc:!Ast_helper.default_loc Nolabel None
+              (Pat.constraint_ (Pat.var (mknoloc arg)) class_typ)
+              (Exp.constraint_ (Exp.send (var arg) (mknoloc "to_js")) ojs_typ))
+       in
+       let of_js =
+         let arg = fresh() in
+         Vb.mk (Pat.var (mknoloc (class_name ^ "_of_js")))
+-          (Exp.fun_ Nolabel None
++          (Ast_builder.Default.pexp_fun ~loc:!Ast_helper.default_loc Nolabel None
+              (Pat.constraint_ (Pat.var (mknoloc arg)) ojs_typ)
+              (Exp.constraint_ (Exp.apply (Exp.new_ (mknoloc (Longident.Lident class_name))) [Nolabel, var arg]) class_typ))
+       in
+@@ -2051,7 +2065,7 @@ and module_expr_rewriter ~loc ~attrs sg 
+   let str = str_of_sg ~global_attrs:attrs sg in
+   Mod.constraint_
+     (Mod.structure ~attrs:[ merlin_hide ] str)
+-    (Mty.signature ~loc ~attrs (clear_attr_mapper # signature sg))
++    (Mty.mk ~loc ~attrs (Pmty_signature (clear_attr_mapper # signature sg)))
+ 
+ and js_to_rewriter ~loc ty =
+   let e' = with_default_loc {loc with loc_ghost = true }

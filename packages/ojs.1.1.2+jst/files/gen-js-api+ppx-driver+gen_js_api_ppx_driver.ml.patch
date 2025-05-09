@@ -1,0 +1,13 @@
+--- a/ppx-driver/gen_js_api_ppx_driver.ml
++++ b/ppx-driver/gen_js_api_ppx_driver.ml
+@@ -11,6 +11,10 @@ let () =
+   then (
+     Ppxlib.Driver.enable_location_check ()
+   );
++
++  (* We disable the locations check so that we use [@@deriving sexp] together with [@@js] attributes. *)
++  Ppxlib.Driver.disable_location_check ();
++
+   let mapper_for_sig =
+     Gen_js_api_ppx.mark_attributes_as_used
+   in

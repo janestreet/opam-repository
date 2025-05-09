@@ -256,30 +256,6 @@
 
    let raise_ : t -> 'a = Js.js_expr "(function (exn) { throw exn })"
 
---- a/runtime/js/compare.js
-+++ b/runtime/js/compare.js
-@@ -18,6 +18,7 @@
- //Provides: caml_compare_val_tag
- //Requires: caml_is_ml_string, caml_is_ml_bytes
- function caml_compare_val_tag(a) {
-+  if (a === null) return 1010; // null_tag
-   if (typeof a === "number")
-     return 1000; // int_tag (we use it for all numbers)
-   else if (caml_is_ml_bytes(a))
-@@ -93,6 +94,13 @@
-
-       // tags are different
-       if (tag_a !== tag_b) {
-+        if (tag_a === 1010) {
-+          // Null is less than anything else
-+          return -1;
-+        }
-+        if (tag_b === 1010) {
-+          return 1;
-+        }
-         if (tag_a === 1000) {
-           if (tag_b === 1255) {
-             //immediate can compare against custom
 --- a/runtime/js/domain.js
 +++ b/runtime/js/domain.js
 @@ -36,6 +36,13 @@
@@ -397,27 +373,6 @@
 +function caml_is_null(o) {
 +  return o === null;
 +}
---- a/runtime/wasm/compare.wat
-+++ b/runtime/wasm/compare.wat
-@@ -25,6 +25,7 @@
-       (func $caml_obj_tag (param (ref eq)) (result (ref eq))))
-    (import "obj" "caml_is_closure"
-       (func $caml_is_closure (param (ref eq)) (result i32)))
-+   (import "obj" "null" (global $null (ref eq)))
-    (import "fail" "caml_invalid_argument"
-       (func $caml_invalid_argument (param (ref eq))))
-    (import "effect" "caml_is_continuation"
-@@ -238,6 +239,10 @@
-             (if (local.get $total)
-                (then
-                   (br_if $next_item (ref.eq (local.get $v1) (local.get $v2)))))
-+            (if (ref.eq (local.get $v1) (global.get $null))
-+               (then (return (i32.const -1))))
-+            (if (ref.eq (local.get $v2) (global.get $null))
-+               (then (return (i32.const 1))))
-             (drop (block $v1_is_not_int (result (ref eq))
-                (local.set $i1
-                   (br_on_cast_fail $v1_is_not_int (ref eq) (ref i31)
 --- a/runtime/wasm/domain.wat
 +++ b/runtime/wasm/domain.wat
 @@ -34,6 +34,21 @@
@@ -547,3 +502,60 @@
 +            (array.new_data $bytes $int_as_pointer_not_implemented
 +              (i32.const 0) (i32.const 35)))
 +           (ref.i31 (i32.const 0))))))
+--- a/runtime/js/compare.js
++++ b/runtime/js/compare.js
+@@ -18,6 +18,7 @@
+ //Provides: caml_compare_val_tag
+ //Requires: caml_is_ml_string, caml_is_ml_bytes
+ function caml_compare_val_tag(a) {
++  if (a === null) return 1010; // null_tag
+   if (typeof a === "number")
+     return 1000; // int_tag (we use it for all numbers)
+   else if (caml_is_ml_bytes(a))
+@@ -93,6 +94,13 @@
+
+       // tags are different
+       if (tag_a !== tag_b) {
++        if (tag_a === 1010) {
++          // Null is less than anything else
++          return -1;
++        }
++        if (tag_b === 1010) {
++          return 1;
++        }
+         if (tag_a === 1000) {
+           if (tag_b === 1255) {
+             //immediate can compare against custom
+@@ -193,6 +201,8 @@
+             if (!Number.isNaN(b)) return -1;
+           }
+           break;
++        case 1010: // Null pointer
++          return 0;
+         case 1001: // The rest
+           // Here we can be in the following cases:
+           // 1. JavaScript primitive types
+--- a/runtime/wasm/compare.wat
++++ b/runtime/wasm/compare.wat
+@@ -25,6 +25,7 @@
+       (func $caml_obj_tag (param (ref eq)) (result (ref eq))))
+    (import "obj" "caml_is_closure"
+       (func $caml_is_closure (param (ref eq)) (result i32)))
++   (import "obj" "null" (global $null (ref eq)))
+    (import "fail" "caml_invalid_argument"
+       (func $caml_invalid_argument (param (ref eq))))
+    (import "effect" "caml_is_continuation"
+@@ -238,6 +239,13 @@
+             (if (local.get $total)
+                (then
+                   (br_if $next_item (ref.eq (local.get $v1) (local.get $v2)))))
++            (if (ref.eq (local.get $v1) (global.get $null))
++               (then
++                  (if (ref.eq (local.get $v2) (global.get $null))
++                     (then (return (i32.const 0)))
++                     (else (return (i32.const -1))))))
++            (if (ref.eq (local.get $v2) (global.get $null))
++               (then (return (i32.const 1))))
+             (drop (block $v1_is_not_int (result (ref eq))
+                (local.set $i1
+                   (br_on_cast_fail $v1_is_not_int (ref eq) (ref i31)
