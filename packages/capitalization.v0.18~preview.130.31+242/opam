@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/capitalization"
+bug-reports: "https://github.com/janestreet/capitalization/issues"
+dev-repo: "git+https://github.com/janestreet/capitalization.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/capitalization/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.130.31+242"}
+  "ppx_base" {= "v0.18~preview.130.31+242"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Defines case conventions and functions to rename identifiers according to them"
+description: "
+"
+url {
+src: "https://github.com/janestreet/capitalization/archive/fda663ae878cafc72221494897ceeae54cf30fb3.tar.gz"
+checksum: "sha256=3cf421fcda5666d3967a819090ee7a39044f7a6d56b47b5e0dcf0b73825fe429"
+}

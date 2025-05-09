@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/shexp"
+bug-reports: "https://github.com/janestreet/shexp/issues"
+dev-repo: "git+https://github.com/janestreet/shexp.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/shexp/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "posixat"      {= "v0.18~preview.130.31+242"}
+  "sexplib0"     {= "v0.18~preview.130.31+242"}
+  "base-threads"
+  "dune"         {>= "3.17.0"}
+  "spawn"        {>= "v0.15"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Process library and s-expression based shell"
+description: "
+Shexp is composed of two parts: a library providing a process monad
+for shell scripting in OCaml as well as a simple s-expression based
+shell interpreter. Shexp works on both Unix and Windows.
+"
+url {
+src: "https://github.com/janestreet/shexp/archive/c2e35810dea26e11bb7d604ac16fa0614ec81b58.tar.gz"
+checksum: "sha256=2e6218f17a9306815eff54b2337dbfc5ab3a0a8224de674c943e476cdf3236cb"
+}

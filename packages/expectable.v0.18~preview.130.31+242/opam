@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/expectable"
+bug-reports: "https://github.com/janestreet/expectable/issues"
+dev-repo: "git+https://github.com/janestreet/expectable.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/expectable/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"     {>= "4.14.0"}
+  "base"      {= "v0.18~preview.130.31+242"}
+  "core"      {= "v0.18~preview.130.31+242"}
+  "ppx_jane"  {= "v0.18~preview.130.31+242"}
+  "textutils" {= "v0.18~preview.130.31+242"}
+  "dune"      {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library that makes it easier to print ASCII tables in tests. All you need is a sexp, and Expectable will take care of the rest!"
+description: "
+`Expectable` is a library that makes it easier to print ASCII tables in tests. All you need is a sexp, and Expectable will take care of the rest!
+"
+url {
+src: "https://github.com/janestreet/expectable/archive/85d85ff25d9441a6355d08496edd8445e8cb3a98.tar.gz"
+checksum: "sha256=401152f58843292b0a0d3b3429030ceccb735ebaaa25475859ee4f3b9c17feb4"
+}

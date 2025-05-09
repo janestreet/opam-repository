@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_fixed_point"
+bug-reports: "https://github.com/janestreet/hardcaml_fixed_point/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_fixed_point.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_fixed_point/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.130.31+242"}
+  "hardcaml" {= "v0.18~preview.130.31+242"}
+  "ppx_jane" {= "v0.18~preview.130.31+242"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml fixed point arithmetic"
+description: "
+Signed and Unsigned fixed point operations, with a full complement of rounding and
+overflow functionality.
+"
+url {
+src: "https://github.com/janestreet/hardcaml_fixed_point/archive/ae9f2cbfba18ed2085e3a67aac9a64aae018156d.tar.gz"
+checksum: "sha256=197de92b084f1d9ed37de13ee9123c64f65b56c702f6369cbb193a305065c2d6"
+}

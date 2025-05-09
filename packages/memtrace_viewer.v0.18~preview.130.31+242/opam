@@ -1,0 +1,54 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/memtrace_viewer"
+bug-reports: "https://github.com/janestreet/memtrace_viewer/issues"
+dev-repo: "git+https://github.com/janestreet/memtrace_viewer.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/memtrace_viewer/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                 {>= "5.1.0"}
+  "async"                 {= "v0.18~preview.130.31+242"}
+  "async_js"              {= "v0.18~preview.130.31+242"}
+  "async_kernel"          {= "v0.18~preview.130.31+242"}
+  "async_rpc_kernel"      {= "v0.18~preview.130.31+242"}
+  "async_rpc_websocket"   {= "v0.18~preview.130.31+242"}
+  "async_unix"            {= "v0.18~preview.130.31+242"}
+  "bonsai"                {= "v0.18~preview.130.31+242"}
+  "bonsai_web"            {= "v0.18~preview.130.31+242"}
+  "bonsai_web_components" {= "v0.18~preview.130.31+242"}
+  "codicons"              {= "v0.18~preview.130.31+242"}
+  "core"                  {= "v0.18~preview.130.31+242"}
+  "core_kernel"           {= "v0.18~preview.130.31+242"}
+  "core_unix"             {= "v0.18~preview.130.31+242"}
+  "incr_dom"              {= "v0.18~preview.130.31+242"}
+  "incr_map"              {= "v0.18~preview.130.31+242"}
+  "ocaml-embed-file"      {= "v0.18~preview.130.31+242"}
+  "ppx_css"               {= "v0.18~preview.130.31+242"}
+  "ppx_jane"              {= "v0.18~preview.130.31+242"}
+  "ppx_pattern_bind"      {= "v0.18~preview.130.31+242"}
+  "textutils"             {= "v0.18~preview.130.31+242"}
+  "virtual_dom"           {= "v0.18~preview.130.31+242"}
+  "cohttp"                {>= "2.5.6"}
+  "cohttp-async"          {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
+  "dune"                  {>= "3.17.0"}
+  "js_of_ocaml"           {>= "6.0.0"}
+  "js_of_ocaml-ppx"       {>= "6.0.0"}
+  "memtrace"              {>= "0.2.1.2"}
+  "uri"                   {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Interactive memory profiler based on Memtrace"
+description: "
+Processes traces produced by the Memtrace library and displays the
+top allocators in a table or flame graph. To help find space leaks,
+events can be filtered by lifetime, showing only allocations of
+objects that are still live at peak memory usage.
+"
+url {
+src: "https://github.com/janestreet/memtrace_viewer/archive/6b7079818a189b43010ae354bbafab30fe635415.tar.gz"
+checksum: "sha256=08fc428f90d912402d1e7d34afe9b99567caa1b2a827d52626adea8cd3199f1f"
+}
