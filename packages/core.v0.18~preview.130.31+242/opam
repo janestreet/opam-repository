@@ -1,0 +1,55 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core"
+bug-reports: "https://github.com/janestreet/core/issues"
+dev-repo: "git+https://github.com/janestreet/core.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/core/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "base"                {= "v0.18~preview.130.31+242"}
+  "base_bigstring"      {= "v0.18~preview.130.31+242"}
+  "base_quickcheck"     {= "v0.18~preview.130.31+242"}
+  "bin_prot"            {= "v0.18~preview.130.31+242"}
+  "fieldslib"           {= "v0.18~preview.130.31+242"}
+  "jane-street-headers" {= "v0.18~preview.130.31+242"}
+  "jst-config"          {= "v0.18~preview.130.31+242"}
+  "parsexp"             {= "v0.18~preview.130.31+242"}
+  "ppx_assert"          {= "v0.18~preview.130.31+242"}
+  "ppx_base"            {= "v0.18~preview.130.31+242"}
+  "ppx_diff"            {= "v0.18~preview.130.31+242"}
+  "ppx_expect"          {= "v0.18~preview.130.31+242"}
+  "ppx_hash"            {= "v0.18~preview.130.31+242"}
+  "ppx_inline_test"     {= "v0.18~preview.130.31+242"}
+  "ppx_jane"            {= "v0.18~preview.130.31+242"}
+  "ppx_optcomp"         {= "v0.18~preview.130.31+242"}
+  "ppx_sexp_conv"       {= "v0.18~preview.130.31+242"}
+  "ppx_sexp_message"    {= "v0.18~preview.130.31+242"}
+  "ppx_stable_witness"  {= "v0.18~preview.130.31+242"}
+  "sexplib"             {= "v0.18~preview.130.31+242"}
+  "splittable_random"   {= "v0.18~preview.130.31+242"}
+  "stdio"               {= "v0.18~preview.130.31+242"}
+  "time_now"            {= "v0.18~preview.130.31+242"}
+  "typerep"             {= "v0.18~preview.130.31+242"}
+  "univ_map"            {= "v0.18~preview.130.31+242"}
+  "uopt"                {= "v0.18~preview.130.31+242"}
+  "variantslib"         {= "v0.18~preview.130.31+242"}
+  "dune"                {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Industrial strength alternative to OCaml's standard library"
+description: "
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+
+This is the system-independent part of Core. Unix-specific parts were moved to [core_unix].
+"
+url {
+src: "https://github.com/janestreet/core/archive/2237c2f0b775bf5b57d6fadef06c654bb8f01278.tar.gz"
+checksum: "sha256=e0d39caf0ec6b8181c86b5fab38abfc9184647c4dd52792b311a24f14824dc0f"
+}

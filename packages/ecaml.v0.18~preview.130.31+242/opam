@@ -1,0 +1,39 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ecaml"
+bug-reports: "https://github.com/janestreet/ecaml/issues"
+dev-repo: "git+https://github.com/janestreet/ecaml.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ecaml/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "async"                    {= "v0.18~preview.130.31+242"}
+  "async_kernel"             {= "v0.18~preview.130.31+242"}
+  "async_unix"               {= "v0.18~preview.130.31+242"}
+  "base"                     {= "v0.18~preview.130.31+242"}
+  "core"                     {= "v0.18~preview.130.31+242"}
+  "core_kernel"              {= "v0.18~preview.130.31+242"}
+  "core_unix"                {= "v0.18~preview.130.31+242"}
+  "expect_test_helpers_core" {= "v0.18~preview.130.31+242"}
+  "file_path"                {= "v0.18~preview.130.31+242"}
+  "ppx_expect"               {= "v0.18~preview.130.31+242"}
+  "ppx_jane"                 {= "v0.18~preview.130.31+242"}
+  "sexp_pretty"              {= "v0.18~preview.130.31+242"}
+  "sexplib"                  {= "v0.18~preview.130.31+242"}
+  "dune"                     {>= "3.17.0"}
+  "uutf"                     {= "1.0.3+jst"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Library for writing Emacs plugin in OCaml"
+description: "
+Ecaml is a library for writing Emacs plugins in OCaml. It uses Emacs
+25 support for plugins to load native OCaml compiled code.
+"
+url {
+src: "https://github.com/janestreet/ecaml/archive/5f8ae990d99d09ac2a5cca65fb3cbfa22c40fc58.tar.gz"
+checksum: "sha256=3ac75ccb0d00cf521b4ba6d5cf97de1c2282b776e60c85dda7a3674e9b716060"
+}

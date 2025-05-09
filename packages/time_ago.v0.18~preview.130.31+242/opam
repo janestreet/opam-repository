@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/time_ago"
+bug-reports: "https://github.com/janestreet/time_ago/issues"
+dev-repo: "git+https://github.com/janestreet/time_ago.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/time_ago/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "async_kernel"    {= "v0.18~preview.130.31+242"}
+  "core"            {= "v0.18~preview.130.31+242"}
+  "incr_dom"        {= "v0.18~preview.130.31+242"}
+  "ppx_jane"        {= "v0.18~preview.130.31+242"}
+  "dune"            {>= "3.17.0"}
+  "js_of_ocaml"     {= "6.0.1+jst"}
+  "js_of_ocaml-ppx" {= "6.0.1+jst"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for turning elapsed or future times into human-readable strings."
+description: "
+A library for turning elapsed or future times into human-readable strings.
+"
+url {
+src: "https://github.com/janestreet/time_ago/archive/8225b095c1e8cd0a2bb55b49ef830f38558f390b.tar.gz"
+checksum: "sha256=565b90ca815ca02fac48c6bd6a66fbbbe973a55da3138a207c58861dd5592031"
+}
