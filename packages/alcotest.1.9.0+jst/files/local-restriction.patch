@@ -1,0 +1,11 @@
+--- a/src/alcotest-stdlib-ext/alcotest_stdlib_ext.ml
++++ b/src/alcotest-stdlib-ext/alcotest_stdlib_ext.ml
+@@ -15,7 +15,7 @@ end
+ module String = struct
+   include Astring.String
+
+-  let length_utf8 = Uutf.String.fold_utf_8 (fun count _ _ -> count + 1) 0
++  let length_utf8 t = Uutf.String.fold_utf_8 (fun count _ _ -> count + 1) 0 t
+
+   let prefix_utf8 uchars string =
+     let exception Found_new_length of int in
