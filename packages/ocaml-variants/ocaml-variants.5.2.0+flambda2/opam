@@ -26,7 +26,7 @@ conflicts: [
   "ocaml-lsp-server" {!= "1.19.0+jst"}
   "lsp" {!= "1.19.0+jst"}
   "jsonrpc" {!= "1.19.0+jst"}
-  "utop" {!= "2.14.0+jst"}
+  "utop" {!= "2.15.0+jst"}
   "js_of_ocaml-compiler" {!= "6.0.1+jst"}
   "js_of_ocaml" {!= "6.0.1+jst"}
   "js_of_ocaml-ppx" {!= "6.0.1+jst"}
