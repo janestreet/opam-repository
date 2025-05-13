@@ -51,8 +51,8 @@ dev-repo: "git+https://github.com/ocaml-ppx/ocamlformat.git"
 x-commit-hash: "f5727b32127730a2722f86c7119eb6d8f884e26d"
 url {
   src:
-    "https://github.com/janestreet/ocamlformat/archive/79790041bed05d0f4084448e63953e8549512e37.tar.gz"
+    "https://github.com/janestreet/ocamlformat/archive/317ea94a6d89ffac09c41be39233e83dcbaac603.tar.gz"
   checksum:
-    "sha256=1be0b27aa055cd5069bc1652608b9fe2c6be4223fb33ce3339edb3b80a81f6a8"
+    "sha256=143e84de60f0cbfe2faa0836e71d403fb22f119e87df6d50b446efb74d20aa20"
 }
 
