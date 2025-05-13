@@ -1,0 +1,469 @@
+--- a/src/api/ppx_deriving.cppo.ml
++++ b/src/api/ppx_deriving.cppo.ml
+@@ -127,12 +127,12 @@ type deriver = {
+                           path:string list ->
+                           module_type_declaration -> structure;
+   type_decl_sig : options:(string * expression) list -> path:string list ->
+-                   type_declaration list -> signature;
++                   type_declaration list -> signature_item list;
+   type_ext_sig : options:(string * expression) list -> path:string list ->
+-                  type_extension -> signature;
++                  type_extension -> signature_item list;
+   module_type_decl_sig : options:(string * expression) list ->
+                           path:string list ->
+-                          module_type_declaration -> signature;
++                          module_type_declaration -> signature_item list;
+ }
+ 
+ type Ppx_derivers.deriver += T of deriver
+@@ -425,8 +425,8 @@ let mkloc = Ocaml_common.Location.mkloc
+ let fold_left_type_params fn accum params =
+   List.fold_left (fun accum (param, _) ->
+       match param with
+-      | { ptyp_desc = Ptyp_any } -> accum
+-      | { ptyp_desc = Ptyp_var name } ->
++      | { ptyp_desc = Ptyp_any _ } -> accum
++      | { ptyp_desc = Ptyp_var (name, _) } ->
+         let name = mkloc name param.ptyp_loc in
+         fn accum name
+       | _ -> assert false)
+@@ -441,8 +441,8 @@ let fold_left_type_ext fn accum { ptyext_params } =
+ let fold_right_type_params fn params accum =
+   List.fold_right (fun (param, _) accum ->
+       match param with
+-      | { ptyp_desc = Ptyp_any } -> accum
+-      | { ptyp_desc = Ptyp_var name } ->
++      | { ptyp_desc = Ptyp_any _ } -> accum
++      | { ptyp_desc = Ptyp_var (name, _) } ->
+         let name = mkloc name param.ptyp_loc in
+         fn name accum
+       | _ -> assert false)
+@@ -457,17 +457,23 @@ let fold_right_type_ext fn { ptyext_params } accum =
+ let free_vars_in_core_type typ =
+   let rec free_in typ =
+     match typ with
+-    | { ptyp_desc = Ptyp_any } -> []
+-    | { ptyp_desc = Ptyp_var name } ->
++    | { ptyp_desc = Ptyp_any _ } -> []
++    | { ptyp_desc = Ptyp_var (name, _) } ->
+       [mkloc name typ.ptyp_loc]
+-    | { ptyp_desc = Ptyp_arrow (_, x, y) } -> free_in x @ free_in y
+-    | { ptyp_desc = (Ptyp_tuple xs | Ptyp_constr (_, xs)) } ->
++    | { ptyp_desc = Ptyp_arrow (_, x, y, _, _) } -> free_in x @ free_in y
++    | { ptyp_desc = Ptyp_tuple xs } ->
++      List.map (fun (_, x) -> free_in x) xs |> List.concat
++    | { ptyp_desc = Ptyp_constr (_, xs) } ->
+       List.map free_in xs |> List.concat
+-    | { ptyp_desc = Ptyp_alias (x, name) } ->
+-      [mkloc name.txt typ.ptyp_loc]
+-      @ free_in x
++    | { ptyp_desc = Ptyp_alias (x, name, _) } ->
++      let free_name = match name with
++        | None -> []
++        | Some name -> [mkloc name.txt typ.ptyp_loc]
++      in
++      free_name @ free_in x
+     | { ptyp_desc = Ptyp_poly (bound, x) } ->
+-      List.filter (fun y -> not (List.mem y bound)) (free_in x)
++      let is_bound y = List.exists (fun (y', _) -> y = y') bound in
++      List.filter (fun y -> not (is_bound y)) (free_in x)
+     | { ptyp_desc = Ptyp_variant (rows, _, _) } ->
+       List.map (
+           function { prf_desc = Rtag(_,_,ts) } -> List.map free_in ts
+@@ -591,7 +597,7 @@ let derive path pstr_loc item attributes fn arg =
+     match deriving with
+     | Some (PStr [{ pstr_desc = Pstr_eval (
+                     { pexp_desc = Pexp_tuple exprs }, []); pstr_loc }]) ->
+-      exprs, pstr_loc
++      List.map snd exprs, pstr_loc
+     | Some (PStr [{ pstr_desc = Pstr_eval (
+                     { pexp_desc = (Pexp_ident _ | Pexp_apply _) } as expr, []); pstr_loc }]) ->
+       [expr], pstr_loc
+@@ -755,47 +761,50 @@ class mapper = object (self)
+       in derived :: self#structure rest
+     | [] -> []
+ 
+-  method! signature items =
+-    match items with
+-    | { psig_desc = Psig_type(_, typ_decls); psig_loc } as item :: rest when
+-        List.exists (fun ty -> has_attr "deriving" ty.ptype_attributes)
+-          typ_decls ->
+-      let derived =
+-        Ast_helper.with_default_loc psig_loc (fun () ->
+-          derive_type_decl module_nesting typ_decls psig_loc item
+-            (fun deriver -> deriver.type_decl_sig))
+-      in derived @ self#signature rest
+-    | { psig_desc = Psig_typext typ_ext; psig_loc } as item :: rest when
+-        has_attr "deriving" typ_ext.ptyext_attributes ->
+-      let derived =
+-        Ast_helper.with_default_loc psig_loc (fun () ->
+-          derive_type_ext module_nesting typ_ext psig_loc item
+-               (fun deriver -> deriver.type_ext_sig))
+-      in derived @ self#signature rest
+-    | { psig_desc = Psig_modtype modtype; psig_loc } as item :: rest when
+-        has_attr "deriving" modtype.pmtd_attributes ->
+-      let derived =
+-        Ast_helper.with_default_loc psig_loc (fun () ->
+-          derive_module_type_decl module_nesting modtype psig_loc item
+-            (fun deriver -> deriver.module_type_decl_sig))
+-      in derived @ self#signature rest
+-    | { psig_desc = Psig_module ({ pmd_name = { txt = name } } as md) } as item :: rest ->
+-      let derived =
+-        { item with psig_desc = Psig_module (
+-            with_module name
+-              (fun () -> self#module_declaration md)) }
+-      in derived :: self#signature rest
+-    | { psig_desc = Psig_recmodule mds } as item :: rest ->
+-      let derived =
+-        { item with psig_desc = Psig_recmodule (
+-            mds |> List.map (fun ({ pmd_name = { txt = name } } as md) ->
++  method! signature sgn =
++    let rec signature_items items =
++      match items with
++      | { psig_desc = Psig_type(_, typ_decls); psig_loc } as item :: rest when
++          List.exists (fun ty -> has_attr "deriving" ty.ptype_attributes)
++            typ_decls ->
++        let derived =
++          Ast_helper.with_default_loc psig_loc (fun () ->
++            derive_type_decl module_nesting typ_decls psig_loc item
++              (fun deriver -> deriver.type_decl_sig))
++        in derived @ signature_items rest
++      | { psig_desc = Psig_typext typ_ext; psig_loc } as item :: rest when
++          has_attr "deriving" typ_ext.ptyext_attributes ->
++        let derived =
++          Ast_helper.with_default_loc psig_loc (fun () ->
++            derive_type_ext module_nesting typ_ext psig_loc item
++                 (fun deriver -> deriver.type_ext_sig))
++        in derived @ signature_items rest
++      | { psig_desc = Psig_modtype modtype; psig_loc } as item :: rest when
++          has_attr "deriving" modtype.pmtd_attributes ->
++        let derived =
++          Ast_helper.with_default_loc psig_loc (fun () ->
++            derive_module_type_decl module_nesting modtype psig_loc item
++              (fun deriver -> deriver.module_type_decl_sig))
++        in derived @ signature_items rest
++      | { psig_desc = Psig_module ({ pmd_name = { txt = name } } as md) } as item :: rest ->
++        let derived =
++          { item with psig_desc = Psig_module (
+               with_module name
+-                (fun () -> self#module_declaration md))) }
+-      in derived :: self#signature rest
+-    | { psig_loc } as item :: rest ->
+-      let derived = self#signature_item item
+-      in derived :: self#signature rest
+-    | [] -> []
++                (fun () -> self#module_declaration md)) }
++        in derived :: signature_items rest
++      | { psig_desc = Psig_recmodule mds } as item :: rest ->
++        let derived =
++          { item with psig_desc = Psig_recmodule (
++              mds |> List.map (fun ({ pmd_name = { txt = name } } as md) ->
++                with_module name
++                  (fun () -> self#module_declaration md))) }
++        in derived :: signature_items rest
++      | { psig_loc } as item :: rest ->
++        let derived = self#signature_item item
++        in derived :: signature_items rest
++      | [] -> []
++    in
++    { sgn with psg_items = signature_items sgn.psg_items }
+ end
+ 
+ let map_structure s =
+--- a/src/api/ppx_deriving.cppo.mli
++++ b/src/api/ppx_deriving.cppo.mli
+@@ -34,12 +34,12 @@ type deriver = {
+                           path:string list ->
+                           module_type_declaration -> structure;
+   type_decl_sig : options:(string * expression) list -> path:string list ->
+-                   type_declaration list -> signature;
++                   type_declaration list -> signature_item list;
+   type_ext_sig : options:(string * expression) list -> path:string list ->
+-                  type_extension -> signature;
++                  type_extension -> signature_item list;
+   module_type_decl_sig : options:(string * expression) list ->
+                           path:string list ->
+-                          module_type_declaration -> signature;
++                          module_type_declaration -> signature_item list;
+ }
+ 
+ (** [register deriver] registers [deriver] according to its [name] field. *)
+@@ -59,17 +59,17 @@ val create :
+   ?type_ext_str: (options:(string * expression) list -> path:string list ->
+                    type_extension -> structure) ->
+   ?type_ext_sig: (options:(string * expression) list -> path:string list ->
+-                   type_extension -> signature) ->
++                   type_extension -> signature_item list) ->
+   ?type_decl_str: (options:(string * expression) list -> path:string list ->
+                     type_declaration list -> structure) ->
+   ?type_decl_sig: (options:(string * expression) list -> path:string list ->
+-                    type_declaration list -> signature) ->
++                    type_declaration list -> signature_item list) ->
+   ?module_type_decl_str: (options:(string * expression) list ->
+                            path:string list ->
+                            module_type_declaration -> structure) ->
+   ?module_type_decl_sig: (options:(string * expression) list ->
+                            path:string list ->
+-                           module_type_declaration -> signature) ->
++                           module_type_declaration -> signature_item list) ->
+   unit -> deriver
+ 
+ (** [lookup name] looks up a deriver called [name]. *)
+--- a/src/ppx_deriving_main.cppo.ml
++++ b/src/ppx_deriving_main.cppo.ml
+@@ -49,7 +49,7 @@ let get_plugins () =
+   | Some expr ->
+       match From_current.copy_expression expr with
+       | { pexp_desc = Pexp_tuple exprs } ->
+-        exprs |> List.map (fun expr ->
++        exprs |> List.map (fun (_, expr) ->
+           match expr with
+           | { pexp_desc = Pexp_constant (Pconst_string (file, _, None)) } -> file
+           | _ -> assert false)
+@@ -76,9 +76,9 @@ let mapper argv =
+           hd
+         with
+         | ([%stri [@@@findlib.ppxopt [%e? { pexp_desc = Pexp_tuple (
+-            [%expr "ppx_deriving"] :: elems) }]]]) ->
++            (_, [%expr "ppx_deriving"]) :: elems) }]]]) ->
+             elems |>
+-            List.map (fun elem ->
++            List.map (fun (_, elem) ->
+               match elem with
+               | { pexp_desc = Pexp_constant (Pconst_string (file, _, None))} ->
+                   file
+--- a/src_plugins/eq/ppx_deriving_eq.ml
++++ b/src_plugins/eq/ppx_deriving_eq.ml
+@@ -109,7 +109,7 @@ and expr_of_typ quoter typ =
+       end
+     | { ptyp_desc = Ptyp_tuple typs } ->
+       [%expr fun [%p ptuple (pattn `lhs typs)] [%p ptuple (pattn `rhs typs)] ->
+-        [%e exprn quoter typs |> Ppx_deriving.(fold_exprs (binop_reduce [%expr (&&)]))]]
++        [%e exprn quoter (List.map snd typs) |> Ppx_deriving.(fold_exprs (binop_reduce [%expr (&&)]))]]
+     | { ptyp_desc = Ptyp_variant (fields, _, _); ptyp_loc } ->
+       let cases =
+         (fields |> List.map (fun field ->
+@@ -132,8 +132,8 @@ and expr_of_typ quoter typ =
+         [Exp.case (pvar "_") [%expr false]]
+       in
+       [%expr fun lhs rhs -> [%e Exp.match_ [%expr lhs, rhs] cases]]
+-    | { ptyp_desc = Ptyp_var name } -> evar ("poly_"^name)
+-    | { ptyp_desc = Ptyp_alias (typ, _) } -> expr_of_typ typ
++    | { ptyp_desc = Ptyp_var (name, _) } -> evar ("poly_"^name)
++    | { ptyp_desc = Ptyp_alias (typ, _, _) } -> expr_of_typ typ
+     | { ptyp_loc } ->
+       raise_errorf ~loc:ptyp_loc "%s cannot be derived for %s"
+                    deriver (Ppx_deriving.string_of_core_type typ)
+@@ -149,7 +149,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+           with_default_loc pcd_loc @@ fun () ->
+           match pcd_args with
+           | Pcstr_tuple(typs) ->
+-            exprn quoter typs |>
++            exprn quoter (List.map (fun t -> t.pca_type) typs) |>
+             Ppx_deriving.(fold_exprs ~unit:[%expr true] (binop_reduce [%expr (&&)])) |>
+             Exp.case (ptuple [pconstr name (pattn `lhs typs);
+                               pconstr name (pattn `rhs typs)])
+@@ -162,6 +162,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+         [Exp.case (pvar "_") [%expr false]]
+       in
+       [%expr fun lhs rhs -> [%e Exp.match_ [%expr lhs, rhs] cases]]
++    | Ptype_record_unboxed_product labels, _
+     | Ptype_record labels, _ ->
+       let exprs =
+         labels |> List.map (fun ({ pld_loc; pld_name = { txt = name }; _ } as pld) ->
+--- a/src_plugins/fold/ppx_deriving_fold.ml
++++ b/src_plugins/fold/ppx_deriving_fold.ml
+@@ -48,7 +48,7 @@ let rec expr_of_typ typ =
+     | _ -> assert false
+     end
+   | { ptyp_desc = Ptyp_tuple typs } ->
+-    let args = typs |> List.mapi (fun i typ ->
++    let args = typs |> List.mapi (fun i (_, typ) ->
+                   [%expr [%e expr_of_typ typ] acc [%e evar (argn i)]]) in
+     [%expr fun acc [%p ptuple (List.mapi (fun i _ -> pvar (argn i)) typs)] ->
+       [%e Ppx_deriving.(fold_exprs ~unit:[%expr acc] reduce_acc args)]];
+@@ -72,8 +72,8 @@ let rec expr_of_typ typ =
+                        deriver (Ppx_deriving.string_of_core_type typ))
+     in
+     Exp.function_ cases
+-  | { ptyp_desc = Ptyp_var name } -> evar ("poly_"^name)
+-  | { ptyp_desc = Ptyp_alias (typ, name) } ->
++  | { ptyp_desc = Ptyp_var (name, _) } -> evar ("poly_"^name)
++  | { ptyp_desc = Ptyp_alias (typ, Some name, _) } ->
+     [%expr fun acc x -> [%e evar ("poly_"^name.txt)] ([%e expr_of_typ typ] acc x) x]
+   | { ptyp_loc } ->
+     raise_errorf ~loc:ptyp_loc "%s cannot be derived for %s"
+@@ -92,7 +92,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+         match pcd_args with
+         | Pcstr_tuple(typs) ->
+           let args = typs |> List.mapi (fun i typ ->
+-                        [%expr [%e expr_of_typ typ] acc [%e evar (argn i)]]) in
++                        [%expr [%e expr_of_typ typ.pca_type] acc [%e evar (argn i)]]) in
+           Exp.case (pconstr name' (pattn typs))
+                    Ppx_deriving.(fold_exprs ~unit:[%expr acc] reduce_acc args)
+         | Pcstr_record(labels) ->
+@@ -104,6 +104,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+         )
+       in
+       [%expr fun acc -> [%e Exp.function_ cases]]
++    | Ptype_record_unboxed_product labels, _
+     | Ptype_record labels, _ ->
+       let fields =
+         labels |> List.mapi (fun i ({ pld_name = { txt = name }; _ } as pld) ->
+--- a/src_plugins/iter/ppx_deriving_iter.ml
++++ b/src_plugins/iter/ppx_deriving_iter.ml
+@@ -47,7 +47,8 @@ let rec expr_of_typ typ =
+   | { ptyp_desc = Ptyp_tuple typs } ->
+     [%expr fun [%p ptuple (List.mapi (fun i _ -> pvar (argn i)) typs)] ->
+       [%e Ppx_deriving.(fold_exprs seq_reduce
+-            (List.mapi (fun i typ -> app (expr_of_typ typ) [evar (argn i)]) typs))]];
++            (List.mapi (fun i (_label, typ) ->
++              app (expr_of_typ typ) [evar (argn i)]) typs))]];
+   | { ptyp_desc = Ptyp_variant (fields, _, _); ptyp_loc } ->
+     let cases =
+       fields |> List.map (fun field ->
+@@ -68,8 +69,8 @@ let rec expr_of_typ typ =
+                        deriver (Ppx_deriving.string_of_core_type typ))
+     in
+     Exp.function_ cases
+-  | { ptyp_desc = Ptyp_var name } -> [%expr ([%e evar ("poly_"^name)] : [%t Typ.var name] -> unit)]
+-  | { ptyp_desc = Ptyp_alias (typ, name) } ->
++  | { ptyp_desc = Ptyp_var (name, _) } -> [%expr ([%e evar ("poly_"^name)] : [%t Typ.var name] -> unit)]
++  | { ptyp_desc = Ptyp_alias (typ, Some name, _) } ->
+     [%expr fun x -> [%e evar ("poly_"^name.txt)] x; [%e expr_of_typ typ] x]
+   | { ptyp_loc } ->
+     raise_errorf ~loc:ptyp_loc "%s cannot be derived for %s"
+@@ -88,7 +89,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+       List.map (fun { pcd_name = { txt = name' }; pcd_args } ->
+         match pcd_args with
+         | Pcstr_tuple(typs) ->
+-          let args = List.mapi (fun i typ -> app (expr_of_typ typ) [evar (argn i)]) typs in
++          let args = List.mapi (fun i typ -> app (expr_of_typ typ.pca_type) [evar (argn i)]) typs in
+           let result =
+             match args with
+             | []   -> [%expr ()]
+@@ -102,6 +103,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+                    (Ppx_deriving.(fold_exprs seq_reduce) args)
+         ) |>
+       Exp.function_
++    | Ptype_record_unboxed_product labels, _
+     | Ptype_record labels, _ ->
+       let fields =
+         labels |> List.mapi (fun i ({ pld_name = { txt = name }; _ } as pld) ->
+--- a/src_plugins/map/ppx_deriving_map.ml
++++ b/src_plugins/map/ppx_deriving_map.ml
+@@ -45,7 +45,7 @@ let rec expr_of_typ ?decl typ =
+     end
+   | { ptyp_desc = Ptyp_tuple typs } ->
+     [%expr fun [%p ptuple (List.mapi (fun i _ -> pvar (argn i)) typs)] ->
+-      [%e tuple (List.mapi (fun i typ -> app (expr_of_typ ?decl typ) [evar (argn i)]) typs)]];
++      [%e tuple (List.mapi (fun i (_label, typ) -> app (expr_of_typ ?decl typ) [evar (argn i)]) typs)]];
+   | { ptyp_desc = Ptyp_variant (fields, _, _); ptyp_loc } ->
+     let cases =
+       fields |> List.map (fun field ->
+@@ -74,8 +74,8 @@ let rec expr_of_typ ?decl typ =
+                        deriver (Ppx_deriving.string_of_core_type typ))
+     in
+     Exp.function_ cases
+-  | { ptyp_desc = Ptyp_var name } -> evar ("poly_"^name)
+-  | { ptyp_desc = Ptyp_alias (typ, name) } ->
++  | { ptyp_desc = Ptyp_var (name, _) } -> evar ("poly_"^name)
++  | { ptyp_desc = Ptyp_alias (typ, Some name, _) } ->
+     [%expr fun x -> [%e evar ("poly_"^name.txt)] ([%e expr_of_typ ?decl typ] x)]
+   | { ptyp_loc } ->
+     raise_errorf ~loc:ptyp_loc "%s cannot be derived for %s"
+@@ -94,7 +94,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+       List.map (fun { pcd_name = { txt = name' }; pcd_args } ->
+         match pcd_args with
+         | Pcstr_tuple(typs) ->
+-          let args = List.mapi (fun i typ -> app (expr_of_typ ~decl:type_decl typ) [evar (argn i)]) typs in
++          let args = List.mapi (fun i typ -> app (expr_of_typ ~decl:type_decl typ.pca_type) [evar (argn i)]) typs in
+           Exp.case (pconstr name' (pattn typs))
+                    (constr name' args)
+         | Pcstr_record(labels) ->
+@@ -105,6 +105,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+                    (constrrec name' args)
+         ) |>
+       Exp.function_
++    | Ptype_record_unboxed_product labels, _
+     | Ptype_record labels, _ ->
+       let fields =
+         labels |> List.mapi (fun i ({ pld_name = { txt = name }; _ } as pld) ->
+--- a/src_plugins/ord/ppx_deriving_ord.ml
++++ b/src_plugins/ord/ppx_deriving_ord.ml
+@@ -124,7 +124,7 @@ and expr_of_typ quoter typ =
+       end
+     | { ptyp_desc = Ptyp_tuple typs } ->
+       [%expr fun [%p ptuple (pattn `lhs typs)] [%p ptuple (pattn `rhs typs)] ->
+-        [%e exprn quoter typs |> reduce_compare]]
++        [%e exprn quoter (List.map snd typs) |> reduce_compare]]
+     | { ptyp_desc = Ptyp_variant (fields, _, _); ptyp_loc } ->
+       let variant label popt =
+         Pat.variant label.txt popt
+@@ -158,8 +158,8 @@ and expr_of_typ quoter typ =
+       in
+       [%expr fun lhs rhs ->
+         [%e Exp.match_ [%expr lhs, rhs] (cases @ [wildcard_case int_cases])]]
+-    | { ptyp_desc = Ptyp_var name } -> evar ("poly_"^name)
+-    | { ptyp_desc = Ptyp_alias (typ, _) } -> expr_of_typ typ
++    | { ptyp_desc = Ptyp_var (name, _) } -> evar ("poly_"^name)
++    | { ptyp_desc = Ptyp_alias (typ, _, _) } -> expr_of_typ typ
+     | { ptyp_loc } ->
+       raise_errorf ~loc:ptyp_loc "%s cannot be derived for %s"
+                    deriver (Ppx_deriving.string_of_core_type typ)
+@@ -190,7 +190,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+         constrs |> List.map (fun { pcd_name = { txt = name }; pcd_args } ->
+           match pcd_args with
+           | Pcstr_tuple(typs) ->
+-            exprn quoter typs |> reduce_compare |>
++            exprn quoter (List.map (fun t -> t.pca_type) typs) |> reduce_compare |>
+             Exp.case (ptuple [pconstr name (pattn `lhs typs);
+                               pconstr name (pattn `rhs typs)])
+           | Pcstr_record(labels) ->
+@@ -201,6 +201,7 @@ let str_of_type ({ ptype_loc = loc } as type_decl) =
+       in
+       [%expr fun lhs rhs ->
+         [%e Exp.match_ [%expr lhs, rhs] (cases @ [wildcard_case int_cases])]]
++    | Ptype_record_unboxed_product labels, _
+     | Ptype_record labels, _ ->
+       let exprs =
+         labels |> List.map (fun ({ pld_name = { txt = name }; _ } as pld) ->
+--- a/src_plugins/show/ppx_deriving_show.ml
++++ b/src_plugins/show/ppx_deriving_show.ml
+@@ -150,7 +150,7 @@ let rec expr_of_typ quoter typ =
+       | _ -> assert false
+       end
+     | { ptyp_desc = Ptyp_tuple typs } ->
+-      let args = List.mapi (fun i typ -> app (expr_of_typ typ) [evar (argn i)]) typs in
++      let args = List.mapi (fun i (_label, typ) -> app (expr_of_typ typ) [evar (argn i)]) typs in
+       [%expr
+         fun [%p ptuple (List.mapi (fun i _ -> pvar (argn i)) typs)] ->
+         Ppx_deriving_runtime.Format.fprintf fmt "(@[";
+@@ -179,8 +179,8 @@ let rec expr_of_typ quoter typ =
+                          deriver (Ppx_deriving.string_of_core_type typ))
+       in
+       Exp.function_ cases
+-    | { ptyp_desc = Ptyp_var name } -> [%expr [%e evar ("poly_"^name)] fmt]
+-    | { ptyp_desc = Ptyp_alias (typ, _) } -> expr_of_typ typ
++    | { ptyp_desc = Ptyp_var (name, _) } -> [%expr [%e evar ("poly_"^name)] fmt]
++    | { ptyp_desc = Ptyp_alias (typ, _, _) } -> expr_of_typ typ
+     | { ptyp_loc } ->
+       raise_errorf ~loc:ptyp_loc "%s cannot be derived for %s"
+                    deriver (Ppx_deriving.string_of_core_type typ)
+@@ -226,7 +226,7 @@ let str_of_type ~with_path ~path ({ ptype_loc = loc } as type_decl) =
+                      (app (wrap_printer quoter printer) ([%expr fmt] :: args))
+           | None, Pcstr_tuple(typs) ->
+             let args =
+-              List.mapi (fun i typ -> app (expr_of_typ quoter typ) [evar (argn i)]) typs in
++              List.mapi (fun i typ -> app (expr_of_typ quoter typ.pca_type) [evar (argn i)]) typs in
+             let printer =
+               match args with
+               | []   -> [%expr Ppx_deriving_runtime.Format.pp_print_string fmt [%e str constr_name]]
+@@ -264,6 +264,7 @@ let str_of_type ~with_path ~path ({ ptype_loc = loc } as type_decl) =
+           )
+       in
+       [%expr fun fmt -> [%e Exp.function_ cases]]
++    | Ptype_record_unboxed_product labels, _
+     | Ptype_record labels, _ ->
+       let fields =
+         labels |> List.mapi (fun i ({ pld_name = { txt = name }; _} as pld) ->
