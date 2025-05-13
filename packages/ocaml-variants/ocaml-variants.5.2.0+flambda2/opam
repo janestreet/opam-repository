@@ -39,6 +39,8 @@ conflicts: [
   "uutf" {!= "1.0.3+jst"}
   "gen_js_api" {!= "1.1.2+jst"}
   "topkg" {!= "1.0.8+jst"}
+  "alcotest" {!= "1.9.0+jst"}
+  "lwt_ppx" {!= "5.9.1+jst"}
 ]
 conflict-class: "ocaml-core-compiler"
 flags: compiler
