@@ -22,7 +22,7 @@ bug-reports: "https://github.com/ocaml/ocaml-lsp/issues"
 depends: [
   "dune"                {>= "3.0"}
   "yojson"
-  "base"                {>= "v0.16.0"}
+  "base"                {= "v0.18~preview.130.31+242"}
   "lsp"                 {= version & = "1.19.0+jst"}
   "jsonrpc"             {= version & = "1.19.0+jst"}
   "re"                  {>= "1.5.0"}
