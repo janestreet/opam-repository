@@ -57,3 +57,9 @@ url {
   src: "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-9.tar.gz"
   checksum: ["sha256=e2872c5fc7f4f7dc0e989d20fd67c84cf5f15e62c2430fd1d8070aac8c08778f"]
 }
+extra-files: [
+  ["arm64-changes-for-locals-x-effects.patch" "sha256=26107c6d010b1d7b8ec31a6bc95f66700caef4273dbc28db70b0f163ccb85d90"] 
+]
+patches: [
+  "arm64-changes-for-locals-x-effects.patch"
+]
