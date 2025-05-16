@@ -6,7 +6,7 @@ homepage: "https://ocaml.org"
 bug-reports: "https://github.com/ocaml-flambda/flambda-backend/issues"
 dev-repo: "git+https://github.com/ocaml-flambda/flambda-backend#main"
 depends: [
-  "init-compiler"
+  "init-compiler" {= "4.14.2"}
   "init-dune"
   "init-menhir"
   "ocaml" {= "5.2.0" & post}
