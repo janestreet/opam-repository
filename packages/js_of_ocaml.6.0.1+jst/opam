@@ -71,8 +71,18 @@ patches: [
   "js_of_ocaml-caml_bigstring_strncmp.patch"
   "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
   "dune.patch"
+  "js_of_ocaml-top-effects.patch"
+  "js_of_ocaml-toplevel.patch"
 ]
 extra-files: [
+  [
+   "js_of_ocaml-top-effects.patch"
+   "sha256=638247bd3f7bacb99612353b29c0afdcc48598c5771a52602a96baabbc141370"
+  ]
+  [
+   "js_of_ocaml-toplevel.patch"
+   "sha256=a707bd6825838478839f8f5f70c30ce7a41e11a127b5b913c2638b7c8830d059"
+  ]
   [
     "js_of_ocaml-magic_number.ml.patch"
     "sha256=e15d81f2c5b7b7cf401889b9137571aa6d460afed66e83fd1663257e034b4670"

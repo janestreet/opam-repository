@@ -1,0 +1,85 @@
+--- a/compiler/lib/wasm/wa_source_map.ml
++++ b/compiler/lib/wasm/wa_source_map.ml
+@@ -1,5 +1,26 @@
+ open Stdlib
+
++module Yojson_raw_util = struct
++  exception Type_error of string * Yojson.Raw.t
++
++  let typerr msg js = raise (Type_error (msg, js))
++
++  let to_assoc =  function
++  | `Assoc obj -> obj
++  | js -> typerr "Expected object, got " js
++  ;;
++
++  let assoc name obj = try List.assoc name obj with Not_found -> `Null
++
++  let member name = function
++  | `Assoc obj -> assoc name obj
++  | js -> typerr ("Can't get member '" ^ name ^ "' of non-object type ") js
++  ;;
++
++  let to_option f = function `Null -> None | x -> Some (f x)
++  let to_list = function `List l -> l | js -> typerr "Expected array, got " js
++end
++
+ type resize_data =
+   { mutable i : int
+   ; mutable pos : int array
+@@ -129,16 +150,16 @@
+   | _ -> assert false
+
+ let replace_member assoc m v =
+-  `Assoc ((m, v) :: List.remove_assoc m (Yojson.Raw.Util.to_assoc assoc))
++  `Assoc ((m, v) :: List.remove_assoc m (Yojson_raw_util.to_assoc assoc))
+
+ let resize resize_data sm =
+-  let open Yojson.Raw.Util in
++  let open Yojson_raw_util in
+   let mappings = to_raw_string (member "mappings" sm) in
+   let mappings = resize_mappings resize_data mappings in
+   replace_member sm "mappings" (`Stringlit mappings)
+
+ let is_empty sm =
+-  let open Yojson.Raw.Util in
++  let open Yojson_raw_util in
+   match member "mappings" sm with
+   | `Stringlit "\"\"" -> true
+   | _ -> false
+@@ -170,7 +191,7 @@
+ let raw_string_from_string s = Yojson.Basic.to_string (`String s)
+
+ let iter_sources' sm i f =
+-  let open Yojson.Raw.Util in
++  let open Yojson_raw_util in
+   let l = sm |> member "sources" |> to_option to_list |> Option.value ~default:[] in
+   let single = List.length l = 1 in
+   List.iteri
+@@ -179,7 +200,7 @@
+     l
+
+ let iter_sources sm f =
+-  let open Yojson.Raw.Util in
++  let open Yojson_raw_util in
+   match to_option to_list (member "sections" sm) with
+   | None -> iter_sources' sm None f
+   | Some l ->
+@@ -193,7 +214,7 @@
+   let rewrite_path path =
+     raw_string_from_string (rewrite_path (string_from_raw_string path))
+   in
+-  let open Yojson.Raw.Util in
++  let open Yojson_raw_util in
+   let l = sm |> member "sources" |> to_option to_list |> Option.value ~default:[] in
+   let single = List.length l = 1 in
+   let contents =
+@@ -223,7 +244,7 @@
+   sm
+
+ let insert_source_contents ~rewrite_path sm f =
+-  let open Yojson.Raw.Util in
++  let open Yojson_raw_util in
+   match to_option to_list (member "sections" sm) with
+   | None -> insert_source_contents' ~rewrite_path sm None f
+   | Some l ->

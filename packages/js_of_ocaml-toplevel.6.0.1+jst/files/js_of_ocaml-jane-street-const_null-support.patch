@@ -1,0 +1,12 @@
+--- a/compiler/lib/ocaml_compiler.ml
++++ b/compiler/lib/ocaml_compiler.ml
+@@ -45,6 +45,9 @@
+   | Const_mixed_block (tag, _, l) | Const_block (tag, l) ->
+       let l = Array.of_list (List.map l ~f:constant_of_const) in
+       Tuple (tag, l, Unknown)
++  | Const_null ->
++
++    failwith "[Const_null] not supported in JavaScript yet."
+ 
+ let rec find_loc_in_summary ident' = function
+   | Env.Env_empty -> None

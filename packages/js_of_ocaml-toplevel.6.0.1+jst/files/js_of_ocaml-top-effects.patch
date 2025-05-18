@@ -1,0 +1,16 @@
+diff --git a/runtime/js/jslib.js b/runtime/js/jslib.js
+index 6a711bbb1d..081361a841 100644
+--- a/runtime/js/jslib.js
++++ b/runtime/js/jslib.js
+@@ -134,8 +134,9 @@ function caml_jsoo_flags_use_js_string(unit) {
+ }
+ 
+ //Provides: caml_jsoo_flags_effects
++//Requires: caml_string_of_jsstring
+ function caml_jsoo_flags_effects(unit) {
+-  return CONFIG("effects");
++  return caml_string_of_jsstring(CONFIG("effects"));
+ }
+ 
+ //Provides: caml_wrap_exception const (mutable)
+

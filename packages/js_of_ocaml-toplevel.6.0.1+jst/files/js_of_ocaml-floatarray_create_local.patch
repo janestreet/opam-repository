@@ -1,0 +1,25 @@
+--- a/runtime/js/array.js
++++ b/runtime/js/array.js
+@@ -141,6 +141,12 @@
+   return b;
+ }
+
++//Provides: caml_floatarray_create_local const (const)
++//Requires: caml_floatarray_create
++function caml_floatarray_create_local(x) {
++  return caml_floatarray_create(x);
++}
++
+ // Provides: caml_iarray_of_array const
+ function caml_iarray_of_array(a) {
+   return a;
+--- a/runtime/wasm/array.wat
++++ b/runtime/wasm/array.wat
+@@ -52,6 +52,7 @@
+       (array.new $float_array (local.get $f) (local.get $sz)))
+
+    (func $caml_floatarray_create
++      (export "caml_floatarray_create_local")
+       (export "caml_make_float_vect") (export "caml_floatarray_create")
+       (export "caml_array_create_float")
+       (param $n (ref eq)) (result (ref eq))

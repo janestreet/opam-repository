@@ -1,0 +1,91 @@
+--- a/compiler/bin-js_of_ocaml/js_of_ocaml.ml
++++ b/compiler/bin-js_of_ocaml/js_of_ocaml.ml
+@@ -43,31 +43,32 @@
+     | _ -> argv
+   in
+   try
+-    match
+-      Cmdliner.Cmd.eval_value
+-        ~catch:false
+-        ~argv
+-        (Cmdliner.Cmd.group
+-           ~default:Compile.term
+-           (Compile.info "js_of_ocaml")
+-           [ Link.command
+-           ; Build_fs.command
+-           ; Build_runtime.command
+-           ; Print_runtime.command
+-           ; Check_runtime.command
+-           ; Compile.command
+-           ])
+-    with
+-    | Ok (`Ok () | `Help | `Version) ->
+-        if !warnings > 0 && !werror
+-        then (
+-          Format.eprintf "%s: all warnings being treated as errors@." Sys.argv.(0);
+-          exit 1)
+-        else exit 0
+-    | Error `Term -> exit 1
+-    | Error `Parse -> exit Cmdliner.Cmd.Exit.cli_error
+-    | Error `Exn -> ()
+-    (* should not happen *)
++    Sys.with_async_exns (fun () ->
++      match
++        Cmdliner.Cmd.eval_value
++          ~catch:false
++          ~argv
++          (Cmdliner.Cmd.group
++             ~default:Compile.term
++             (Compile.info "js_of_ocaml")
++             [ Link.command
++             ; Build_fs.command
++             ; Build_runtime.command
++             ; Print_runtime.command
++             ; Check_runtime.command
++             ; Compile.command
++             ])
++      with
++      | Ok (`Ok () | `Help | `Version) ->
++          if !warnings > 0 && !werror
++          then (
++            Format.eprintf "%s: all warnings being treated as errors@." Sys.argv.(0);
++            exit 1)
++          else exit 0
++      | Error `Term -> exit 1
++      | Error `Parse -> exit Cmdliner.Cmd.Exit.cli_error
++      | Error `Exn -> ()
++      (* should not happen *))
+   with
+   | (Match_failure _ | Assert_failure _ | Not_found) as exc ->
+       let backtrace = Printexc.get_backtrace () in
+--- a/compiler/bin-jsoo_minify/jsoo_minify.ml
++++ b/compiler/bin-jsoo_minify/jsoo_minify.ml
+@@ -96,10 +96,11 @@
+ 
+ let _ =
+   try
+-    Cmdliner.Cmd.eval
+-      ~catch:false
+-      ~argv:(Jsoo_cmdline.normalize_argv ~warn:(warn "%s") Sys.argv)
+-      main
++    Sys.with_async_exns (fun () ->
++      Cmdliner.Cmd.eval
++        ~catch:false
++        ~argv:(Jsoo_cmdline.normalize_argv ~warn:(warn "%s") Sys.argv)
++        main)
+   with
+   | (Match_failure _ | Assert_failure _ | Not_found) as exc ->
+       let backtrace = Printexc.get_backtrace () in
+--- a/compiler/lib/generate.ml
++++ b/compiler/lib/generate.ml
+@@ -1105,7 +1105,9 @@
+       bool (J.EBin (J.EqEq, cx, cy)));
+   register_bin_prim "caml_js_instanceof" `Mutator (fun cx cy _ ->
+       bool (J.EBin (J.InstanceOf, cx, cy)));
+-  register_un_prim "caml_js_typeof" `Mutator (fun cx _ -> J.EUn (J.Typeof, cx))
++  register_un_prim "caml_js_typeof" `Mutator (fun cx _ -> J.EUn (J.Typeof, cx));
++  register_un_prim "caml_with_async_exns" `Mutator (fun closure loc ->
++      J.call closure [int 0] loc)
+ 
+ (* This is not correct when switching the js-string flag *)
+ (* {[

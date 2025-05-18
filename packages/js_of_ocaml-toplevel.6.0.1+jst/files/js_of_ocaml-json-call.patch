@@ -1,0 +1,14 @@
+diff --git a/lib/js_of_ocaml/json.ml b/lib/js_of_ocaml/json.ml
+Small typo in the upstream that makes this not work in the wasm case. This should be
+submitted as a PR.
+--- a/lib/js_of_ocaml/json.ml
++++ b/lib/js_of_ocaml/json.ml
+@@ -96,7 +96,7 @@ let rec write b v =
+     else if t = Obj.abstract_tag
+     then
+       (* Presumably a JavaScript value *)
+-      Buffer.add_string b (Js.to_string (Unsafe.global##_JSON##stringify v))
++      Buffer.add_string b (Js.to_string (Unsafe.global##._JSON##stringify v))
+     else failwith (Printf.sprintf "Json.output: unsupported tag %d " t)
+
+ let to_json v =
