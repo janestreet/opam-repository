@@ -1,0 +1,288 @@
+--- a/compiler/tests-compiler/effects_continuations.ml
++++ b/compiler/tests-compiler/effects_continuations.ml
+@@ -101,7 +101,6 @@
+   print_fun_decl code (Some "loop3");
+   [%expect
+     {|
+-
+     function exceptions(s, cont){
+      try{var _t_ = runtime.caml_int_of_string(s), n = _t_;}
+      catch(_x_){
+@@ -114,7 +113,7 @@
+      }
+      try{
+       if(caml_string_equal(s, cst$0))
+-       throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++       throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+       var _s_ = 7, m = _s_;
+      }
+      catch(_w_){
+@@ -137,7 +136,7 @@
+                cst_toto,
+                function(_u_){caml_pop_trap(); return cont([0, [0, _u_, n, m]]);});
+      var _r_ = Stdlib[8], raise = caml_pop_trap();
+-     return raise(caml_maybe_attach_backtrace(_r_, 1));
++     return raise(caml_maybe_attach_backtrace(_r_, 0));
+     }
+     //end
+     function cond1(b, cont){
+@@ -209,4 +208,5 @@
+                return _f_(l);
+               });
+     }
+-    //end |}]
++    //end
++    |}]
+--- a/compiler/tests-compiler/effects_exceptions.ml
++++ b/compiler/tests-compiler/effects_exceptions.ml
+@@ -55,7 +55,6 @@
+   print_fun_decl code (Some "exceptions");
+   [%expect
+     {|
+-
+     function exceptions(s, cont){
+      try{var _k_ = runtime.caml_int_of_string(s), n = _k_;}
+      catch(_o_){
+@@ -68,7 +67,7 @@
+      }
+      try{
+       if(caml_string_equal(s, cst$0))
+-       throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++       throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+       var _j_ = 7, m = _j_;
+      }
+      catch(_n_){
+@@ -91,9 +90,10 @@
+                cst_toto,
+                function(_l_){caml_pop_trap(); return cont([0, [0, _l_, n, m]]);});
+      var _i_ = Stdlib[8], raise = caml_pop_trap();
+-     return raise(caml_maybe_attach_backtrace(_i_, 1));
++     return raise(caml_maybe_attach_backtrace(_i_, 0));
+     }
+-    //end |}];
++    //end
++    |}];
+   print_fun_decl code (Some "handler_is_loop");
+   [%expect
+     {|
+@@ -112,7 +112,7 @@
+                    var
+                     exn = match[2],
+                     raise = caml_pop_trap(),
+-                    exn$0 = caml_maybe_attach_backtrace(exn, 1);
++                    exn$0 = caml_maybe_attach_backtrace(exn, 0);
+                    return raise(exn$0);
+                   });
+         }
+@@ -121,7 +121,8 @@
+      return caml_cps_call2
+              (f, 0, function(_d_){caml_pop_trap(); return cont(_d_);});
+     }
+-    //end |}];
++    //end
++    |}];
+   print_fun_decl code (Some "handler_is_merge_node");
+   [%expect
+     {|
+--- a/compiler/tests-compiler/eliminate_exception_handler.ml
++++ b/compiler/tests-compiler/eliminate_exception_handler.ml
+@@ -52,6 +52,7 @@
+   [%expect
+     {|
+     function some_name(param){
+-     try{throw caml_maybe_attach_backtrace(Stdlib[8], 1);}catch(_a_){return 0;}
++     try{throw caml_maybe_attach_backtrace(Stdlib[8], 0);}catch(_a_){return 0;}
+     }
+-    //end |}]
++    //end
++    |}]
+--- a/compiler/tests-compiler/exceptions.ml
++++ b/compiler/tests-compiler/exceptions.ml
+@@ -34,25 +34,27 @@
+     {|
+     function some_name(param){
+      try{
+-      try{throw caml_maybe_attach_backtrace(Stdlib[8], 1);}
++      try{throw caml_maybe_attach_backtrace(Stdlib[8], 0);}
+       catch(x$0){var x = caml_wrap_exception(x$0), i$0 = x;}
+      }
+      catch(i$1){var i = caml_wrap_exception(i$1), i$0 = i;}
+-     throw caml_maybe_attach_backtrace(i$0, 1);
++     throw caml_maybe_attach_backtrace(i$0, 0);
+     }
+-    //end |}];
++    //end
++    |}];
+   print_fun_decl (program ~debug:false) None;
+   [%expect
+     {|
+     function _a_(_b_){
+      try{
+-      try{throw caml_maybe_attach_backtrace(Stdlib[8], 1);}
++      try{throw caml_maybe_attach_backtrace(Stdlib[8], 0);}
+       catch(_f_){var _d_ = caml_wrap_exception(_f_);}
+      }
+      catch(_e_){
+       var _c_ = caml_wrap_exception(_e_);
+-      throw caml_maybe_attach_backtrace(_c_, 1);
++      throw caml_maybe_attach_backtrace(_c_, 0);
+      }
+-     throw caml_maybe_attach_backtrace(_d_, 1);
++     throw caml_maybe_attach_backtrace(_d_, 0);
+     }
+-    //end |}]
++    //end
++    |}]
+--- a/compiler/tests-compiler/gh1354.ml
++++ b/compiler/tests-compiler/gh1354.ml
+@@ -63,7 +63,7 @@
+         _b_ = _a_,
+         _d_ =
+           [0, [4, 0, 0, 0, [12, 10, 0]], runtime.caml_string_of_jsbytes("%d\n")];
+-       try{0; _b_ = _a_ + 1 | 0; throw caml_maybe_attach_backtrace(Stdlib[3], 1);}
++       try{0; _b_ = _a_ + 1 | 0; throw caml_maybe_attach_backtrace(Stdlib[3], 0);}
+        catch(_e_){
+         var _c_ = caml_wrap_exception(_e_);
+         if(_c_ !== Stdlib[3]) throw caml_maybe_attach_backtrace(_c_, 0);
+@@ -75,7 +75,8 @@
+        }
+       }
+       (globalThis));
+-    //end |}];
++    //end
++    |}];
+   Util.compile_and_run ~debug:false prog;
+   [%expect {|
+     1 |}]
+@@ -144,11 +145,11 @@
+          0;
+          _g_ = _i_;
+          _c_ = _i_;
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+         catch(_k_){
+          caml_call3(Stdlib_Printf[3], _h_, _g_ | 0, _b_);
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+        }
+        catch(_j_){
+@@ -162,7 +163,8 @@
+        }
+       }
+       (globalThis));
+-    //end |}];
++    //end
++    |}];
+   Util.compile_and_run ~debug:false prog;
+   [%expect {|
+     2 0
+@@ -220,11 +222,11 @@
+          0;
+          _e_ = _g_;
+          _b_ = _g_;
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+         catch(_i_){
+          caml_call2(Stdlib_Printf[3], _f_, _e_);
+-         throw caml_maybe_attach_backtrace(Stdlib[3], 1);
++         throw caml_maybe_attach_backtrace(Stdlib[3], 0);
+         }
+        }
+        catch(_h_){
+@@ -238,7 +240,8 @@
+        }
+       }
+       (globalThis));
+-    //end |}];
++    //end
++    |}];
+   Util.compile_and_run ~debug:false prog;
+   [%expect {|
+     1
+--- a/compiler/tests-compiler/global_deadcode.ml
++++ b/compiler/tests-compiler/global_deadcode.ml
+@@ -77,7 +77,7 @@
+     function find(x, param){
+      var param$0 = param;
+      for(;;){
+-      if(! param$0) throw caml_maybe_attach_backtrace(Not_found, 1);
++      if(! param$0) throw caml_maybe_attach_backtrace(Not_found, 0);
+       var
+        r = param$0[3],
+        v = param$0[2],
+@@ -89,7 +89,8 @@
+      }
+     }
+     return [0, 0, add, singleton, find];
+-    //end |}]
++    //end
++    |}]
+
+ let%expect_test "Omit unused fields" =
+   let program =
+--- a/compiler/tests-compiler/loops.ml
++++ b/compiler/tests-compiler/loops.ml
+@@ -170,7 +170,7 @@
+        for(;;){
+         if(10 <= caml_div(k, j)) break;
+         try{caml_div(k, j);}
+-        catch(_c_){throw caml_maybe_attach_backtrace(Stdlib[8], 1);}
++        catch(_c_){throw caml_maybe_attach_backtrace(Stdlib[8], 0);}
+         id[1]++;
+        }
+        var _b_ = j + 1 | 0;
+@@ -182,7 +182,8 @@
+       k = _a_;
+      }
+     }
+-    //end |}]
++    //end
++    |}]
+
+ let%expect_test "loop seq.ml" =
+   let program =
+@@ -449,7 +450,7 @@
+        }
+        else{
+         var start$0 = i$4 + 1 | 0;
+-        if(lim$1 <= start$0) throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++        if(lim$1 <= start$0) throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+         var opening = caml_string_get(s, start$0);
+         a:
+         {
+@@ -499,7 +500,7 @@
+          }
+          var lim = caml_ml_string_length(s), k = k$2, stop = new_start;
+          for(;;){
+-          if(lim <= stop) throw caml_maybe_attach_backtrace(Stdlib[8], 1);
++          if(lim <= stop) throw caml_maybe_attach_backtrace(Stdlib[8], 0);
+           if(caml_string_get(s, stop) === opening){
+            var i = stop + 1 | 0, k$0 = k + 1 | 0;
+            k = k$0;
+@@ -544,7 +545,8 @@
+       }
+      }
+     }
+-    //end |}]
++    //end
++    |}]
+
+ let%expect_test "Bytes.trim" =
+   let program =
+@@ -606,10 +608,11 @@
+         var b = r;
+         break a;
+        }
+-       throw caml_maybe_attach_backtrace([0, Invalid_argument, s], 1);
++       throw caml_maybe_attach_backtrace([0, Invalid_argument, s], 0);
+       }
+       var b = empty;
+      }
+      return caml_string_of_bytes(copy(b));
+     }
+-    //end |}]
++    //end
++    |}]

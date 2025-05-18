@@ -1,0 +1,1531 @@
+--- a/compiler/lib-runtime-files/js_of_ocaml_compiler_runtime_files.ml
++++ b/compiler/lib-runtime-files/js_of_ocaml_compiler_runtime_files.ml
+@@ -33,6 +33,7 @@
+     ; graphics
+     ; hash
+     ; ieee_754
++    ; float32
+     ; int64
+     ; internalMod
+     ; ints
+--- a/compiler/lib-runtime-files/tests/all.ml
++++ b/compiler/lib-runtime-files/tests/all.ml
+@@ -21,6 +21,7 @@
+     +dynlink.js
+     +effect.js
+     +fail.js
++    +float32.js
+     +format.js
+     +fs.js
+     +fs_fake.js
+@@ -52,7 +53,8 @@
+     +toplevel.js
+     +unix.js
+     +weak.js
+-    +zstd.js |}];
++    +zstd.js
++    |}];
+   printl runtime;
+   [%expect
+     {|
+@@ -65,6 +67,7 @@
+     +domain.js
+     +effect.js
+     +fail.js
++    +float32.js
+     +format.js
+     +fs.js
+     +fs_fake.js
+@@ -94,7 +97,8 @@
+     +sys.js
+     +unix.js
+     +weak.js
+-    +zstd.js |}];
++    +zstd.js
++    |}];
+   printl extra;
+   [%expect {|
+     +dynlink.js
+--- a/compiler/lib/code.ml
++++ b/compiler/lib/code.ml
+@@ -326,6 +326,7 @@
+   | String of string
+   | NativeString of Native_string.t
+   | Float of float
++  | Float32 of float
+   | Float_array of float array
+   | Int of Targetint.t
+   | Int32 of Int32.t
+@@ -358,8 +359,10 @@
+     | NativeInt a, NativeInt b -> Some (Int32.equal a b)
+     | Float_array a, Float_array b -> Some (Array.equal Float.ieee_equal a b)
+     | Float a, Float b -> Some (Float.ieee_equal a b)
++    | Float32 a, Float32 b -> Some (Float.ieee_equal a b)
+     | String _, NativeString _ | NativeString _, String _ -> None
+     | Int _, Float _ | Float _, Int _ -> None
++    | Int _, Float32 _ | Float32 _, Int _ -> None
+     | Tuple ((0 | 254), _, _), Float_array _ -> None
+     | Float_array _, Tuple ((0 | 254), _, _) -> None
+     | ( Tuple _
+@@ -369,7 +372,7 @@
+         | Int _
+         | Int32 _
+         | NativeInt _
+-        | Float _
++        | Float _ | Float32 _
+         | Float_array _ ) ) -> Some false
+     | ( Float_array _
+       , ( String _
+@@ -378,13 +381,13 @@
+         | Int _
+         | Int32 _
+         | NativeInt _
+-        | Float _
++        | Float _ | Float32 _
+         | Tuple _ ) ) -> Some false
+     | ( String _
+-      , (Int64 _ | Int _ | Int32 _ | NativeInt _ | Float _ | Tuple _ | Float_array _) ) ->
++      , (Int64 _ | Int _ | Int32 _ | NativeInt _ | Float _ | Float32 _ | Tuple _ | Float_array _) ) ->
+         Some false
+     | ( NativeString _
+-      , (Int64 _ | Int _ | Int32 _ | NativeInt _ | Float _ | Tuple _ | Float_array _) ) ->
++      , (Int64 _ | Int _ | Int32 _ | NativeInt _ | Float _ | Float32 _ | Tuple _ | Float_array _) ) ->
+         Some false
+     | ( Int64 _
+       , ( String _
+@@ -392,10 +395,12 @@
+         | Int _
+         | Int32 _
+         | NativeInt _
+-        | Float _
++        | Float _ | Float32 _
+         | Tuple _
+         | Float_array _ ) ) -> Some false
+-    | Float _, (String _ | NativeString _ | Float_array _ | Int64 _ | Tuple (_, _, _)) ->
++    | Float _, (Float32 _ | String _ | NativeString _ | Float_array _ | Int64 _ | Tuple (_, _, _)) ->
++        Some false
++    | Float32 _, (Float _ | String _ | NativeString _ | Float_array _ | Int64 _ | Tuple (_, _, _)) ->
+         Some false
+     | ( (Int _ | Int32 _ | NativeInt _)
+       , (String _ | NativeString _ | Float_array _ | Int64 _ | Tuple (_, _, _)) ) ->
+@@ -404,8 +409,8 @@
+     | Int _, (Int32 _ | NativeInt _)
+     | Int32 _, (Int _ | NativeInt _)
+     | NativeInt _, (Int _ | Int32 _)
+-    | (Int32 _ | NativeInt _), Float _
+-    | Float _, (Int32 _ | NativeInt _) -> None
++    | (Int32 _ | NativeInt _), (Float _ | Float32 _)
++    | (Float _ | Float32 _), (Int32 _ | NativeInt _) -> None
+ end
+
+ type loc =
+@@ -491,6 +496,7 @@
+     | NativeString (Byte s) -> Format.fprintf f "%Sj" s
+     | NativeString (Utf (Utf8 s)) -> Format.fprintf f "%Sj" s
+     | Float fl -> Format.fprintf f "%.12g" fl
++    | Float32 fl -> Format.fprintf f "%.9g" fl
+     | Float_array a ->
+         Format.fprintf f "[|";
+         for i = 0 to Array.length a - 1 do
+@@ -878,7 +884,7 @@
+             match target with
+             | `Wasm -> true
+             | _ -> false)
+-      | String _ | NativeString _ | Float _ | Float_array _ | Int _ | Int64 _
++      | String _ | NativeString _ | Float _ | Float32 _ | Float_array _ | Int _ | Int64 _
+       | Tuple (_, _, _) -> ()
+     in
+     let check_prim_arg = function
+--- a/compiler/lib/code.mli
++++ b/compiler/lib/code.mli
+@@ -172,6 +172,7 @@
+   | String of string
+   | NativeString of Native_string.t
+   | Float of float
++  | Float32 of float
+   | Float_array of float array
+   | Int of Targetint.t
+   | Int32 of Int32.t  (** Only produced when compiling to WebAssembly. *)
+--- a/compiler/lib/eval.ml
++++ b/compiler/lib/eval.ml
+@@ -251,9 +251,11 @@
+   match a, b with
+   | Int i, Int j -> Some (Targetint.equal i j)
+   | Float a, Float b -> Some (Float.ieee_equal a b)
++  | Float32 a, Float32 b -> Some (Float.ieee_equal a b)
++  | Float32 _, Float _ | Float _, Float32 _ -> None
+   | NativeString a, NativeString b -> Some (Native_string.equal a b)
+   | String a, String b when Config.Flag.use_js_string () -> Some (String.equal a b)
+-  | Int _, Float _ | Float _, Int _ -> None
++  | Int _, (Float _ | Float32 _) | (Float _ | Float32 _), Int _ -> None
+   (* All other values may be distinct objects and thus different by [caml_js_equals]. *)
+   | String _, _
+   | _, String _
+@@ -413,6 +415,7 @@
+              ( Int32 _
+              | NativeInt _
+              | Float _
++             | Float32 _
+              | Tuple _
+              | String _
+              | NativeString _
+--- a/compiler/lib/flow.ml
++++ b/compiler/lib/flow.ml
+@@ -354,7 +354,9 @@
+   match a, b, target with
+   | Int i, Int j, _ -> Targetint.equal i j
+   | Float a, Float b, `JavaScript -> Float.bitwise_equal a b
++  | Float32 a, Float32 b, `JavaScript -> Float.bitwise_equal a b
+   | Float _, Float _, `Wasm -> false
++  | Float32 _, Float32 _, `Wasm -> false
+   | NativeString a, NativeString b, `JavaScript -> Native_string.equal a b
+   | NativeString _, NativeString _, `Wasm ->
+       false
+@@ -373,7 +375,7 @@
+   | Int64 _, Int64 _, _ -> false
+   | Tuple _, Tuple _, _ -> false
+   | Float_array _, Float_array _, _ -> false
+-  | (Int _ | Float _ | Int64 _ | Int32 _ | NativeInt _), _, _ -> false
++  | (Int _ | Float _ | Float32 _ | Int64 _ | Int32 _ | NativeInt _), _, _ -> false
+   | (String _ | NativeString _), _, _ -> false
+   | (Float_array _ | Tuple _), _, _ -> false
+
+--- a/compiler/lib/generate.ml
++++ b/compiler/lib/generate.ml
+@@ -438,6 +438,7 @@
+       | Byte x -> Share.get_byte_string str_js_byte x ctx.Ctx.share, instrs
+       | Utf (Utf8 x) -> Share.get_utf_string str_js_utf8 x ctx.Ctx.share, instrs)
+   | Float f -> float_const f, instrs
++  | Float32 f -> float_const f, instrs
+   | Float_array a ->
+       ( Mlvalue.Array.make
+           ~tag:Obj.double_array_tag
+@@ -964,6 +965,13 @@
+   register_bin_prim "caml_le_float" `Pure (fun cx cy _ -> bool (J.EBin (J.Le, cx, cy)));
+   register_bin_prim "caml_gt_float" `Pure (fun cx cy _ -> bool (J.EBin (J.Lt, cy, cx)));
+   register_bin_prim "caml_lt_float" `Pure (fun cx cy _ -> bool (J.EBin (J.Lt, cx, cy)));
++  register_bin_prim "caml_eq_float32" `Pure (fun cx cy _ -> bool (J.EBin (J.EqEq, cx, cy)));
++  register_bin_prim "caml_neq_float32" `Pure (fun cx cy _ ->
++      bool (J.EBin (J.NotEq, cx, cy)));
++  register_bin_prim "caml_ge_float32" `Pure (fun cx cy _ -> bool (J.EBin (J.Le, cy, cx)));
++  register_bin_prim "caml_le_float32" `Pure (fun cx cy _ -> bool (J.EBin (J.Le, cx, cy)));
++  register_bin_prim "caml_gt_float32" `Pure (fun cx cy _ -> bool (J.EBin (J.Lt, cy, cx)));
++  register_bin_prim "caml_lt_float32" `Pure (fun cx cy _ -> bool (J.EBin (J.Lt, cx, cy)));
+   register_bin_prim "caml_add_float" `Pure (fun cx cy _ -> J.EBin (J.Plus, cx, cy));
+   register_bin_prim "caml_sub_float" `Pure (fun cx cy _ -> J.EBin (J.Minus, cx, cy));
+   register_bin_prim "caml_mul_float" `Pure (fun cx cy _ -> J.EBin (J.Mul, cx, cy));
+--- a/compiler/lib/ocaml_compiler.ml
++++ b/compiler/lib/ocaml_compiler.ml
+@@ -25,7 +25,8 @@
+   | Const_base (Const_char c) -> Int (Targetint.of_int_exn (Char.code c))
+   | ((Const_base (Const_string (s, _))) [@if ocaml_version < (4, 11, 0)])
+   | ((Const_base (Const_string (s, _, _))) [@if ocaml_version >= (4, 11, 0)]) -> String s
+-  | Const_base (Const_float32 s | Const_unboxed_float32 s | Const_float s | Const_unboxed_float s) -> Float (float_of_string s)
++  | Const_base (Const_float32 s | Const_unboxed_float32 s) -> Float32 Float32.(of_string s |> to_float)
++  | Const_base (Const_float s | Const_unboxed_float s) -> Float (float_of_string s)
+   | Const_base (Const_int32 i | Const_unboxed_int32 i) -> (
+       match Config.target () with
+       | `JavaScript -> Int (Targetint.of_int32_warning_on_overflow i)
+--- a/compiler/lib/parse_bytecode.ml
++++ b/compiler/lib/parse_bytecode.ml
+@@ -477,6 +477,8 @@
+
+   let ident_native = ident_of_custom (Obj.repr 0n)
+
++  let ident_f32 = ident_of_custom (Obj.repr 0.s)
++
+   let rec parse x =
+     if Obj.is_block x
+     then
+@@ -490,6 +492,8 @@
+       else if tag = Obj.custom_tag
+       then
+         match ident_of_custom x with
++        | Some name when same_ident name ident_f32 ->
++          Float32 ((Obj.magic x : float32) |> Float32.to_float)
+         | Some name when same_ident name ident_32 -> (
+             let i : int32 = Obj.magic x in
+             match Config.target () with
+@@ -518,6 +522,7 @@
+   let inlined = function
+     | String _ | NativeString _ -> false
+     | Float _ -> true
++    | Float32 _ -> true
+     | Float_array _ -> false
+     | Int64 _ -> false
+     | Tuple _ -> false
+--- a/compiler/lib/stdlib.ml
++++ b/compiler/lib/stdlib.ml
+@@ -417,6 +417,17 @@
+   external ( >= ) : t -> t -> bool = "%greaterequal"
+ end
+
++module Float32 = struct
++  type t = float32
++
++  external of_float : float -> t = "%float32offloat"
++  external to_float : t -> float = "%floatoffloat32"
++
++  (* In javascript/wasm, we define float32 parsing as rounding the 64-bit result.
++     This is not equivalent to native code, which parses to 32 bits directly. *)
++  let of_string s = float_of_string s |> of_float
++end
++
+ module Bool = struct
+   external ( <> ) : bool -> bool -> bool = "%notequal"
+
+--- a/compiler/lib-wasm/gc_target.ml
++++ b/compiler/lib-wasm/gc_target.ml
+@@ -170,6 +170,22 @@
+                 ]
+           })
+
++  let float32_type =
++    register_type "float32" (fun () ->
++        let* custom_operations = custom_operations_type in
++        let* custom = custom_type in
++        return
++          { supertype = Some custom
++          ; final = true
++          ; typ =
++              W.Struct
++                [ { mut = false
++                  ; typ = Value (Ref { nullable = false; typ = Type custom_operations })
++                  }
++                ; { mut = false; typ = Value F32 }
++                ]
++          })
++
+   let int32_type =
+     register_type "int32" (fun () ->
+         let* custom_operations = custom_operations_type in
+@@ -853,6 +869,18 @@
+     in
+     if_mismatch
+
++  let make_float32 e =
++    let* custom_operations = Type.custom_operations_type in
++    let* float32_ops =
++      register_import
++        ~name:"float32_ops"
++        (Global
++           { mut = false; typ = Ref { nullable = false; typ = Type custom_operations } })
++    in
++    let* ty = Type.float32_type in
++    let* e = e in
++    return (W.StructNew (ty, [ GlobalGet float32_ops; e ]))
++
+   let make_int32 ~kind e =
+     let* custom_operations = Type.custom_operations_type in
+     let* int32_ops =
+@@ -1023,6 +1051,9 @@
+     | Float f ->
+         let* ty = Type.float_type in
+         return (Const, W.StructNew (ty, [ Const (F64 f) ]))
++    | Float32 f ->
++        let* e = Memory.make_float32 (return (W.Const (F32 f))) in
++        return (Const, e)
+     | Float_array l ->
+         let l = Array.to_list l in
+         let* ty = Type.float_array_type in
+--- /dev/null
++++ b/compiler/tests-jsoo/test_marshal_float32.ml
+@@ -0,0 +1,47 @@
++
++(* In javascript, float32s are represented as floats.
++   In native code and wasm, float32s are custom blocks containing a float32 field. *)
++
++external float_of_float32 : float32 -> float = "%floatoffloat32"
++
++type float64s = { a : float; b : float }
++
++let%expect_test "float64 javascript" [@tags "js-only", "no-wasm"] =
++  let f64 = Marshal.to_string { a = 123.; b = 456. } [] in
++  Printf.printf "%S" f64;
++  [%expect
++    {| "\132\149\166\190\000\000\000\n\000\000\000\001\000\000\000\003\000\000\000\003\b\000\000\b\254\000{\001\001\200" |}];
++  let f64 : float64s = Marshal.from_string f64 0 in
++  Printf.printf "%f %f" f64.a f64.b;
++  [%expect
++    {| 123.000000 456.000000 |}]
++
++let%expect_test "float64 wasm" [@tags "wasm-only"] =
++  let f64 = Marshal.to_string { a = 123.; b = 456. } [] in
++  Printf.printf "%S" f64;
++  [%expect
++    {| "\132\149\166\190\000\000\000\018\000\000\000\001\000\000\000\005\000\000\000\003\014\002\000\000\000\000\000\192^@\000\000\000\000\000\128|@" |}];
++  let f64 : float64s = Marshal.from_string f64 0 in
++  Printf.printf "%f %f" f64.a f64.b;
++  [%expect
++    {| 123.000000 456.000000 |}]
++
++type float32s = { a : float32; b : float32 }
++
++let%expect_test "float32 javascript" [@tags "js-only", "no-wasm"] =
++  let f32 = Marshal.to_string { a = 123.s; b = 456.s } [] in
++  Printf.printf "%S" f32;
++  [%expect
++    {| "\132\149\166\190\000\000\000\006\000\000\000\001\000\000\000\003\000\000\000\003\160\000{\001\001\200" |}];
++  let f32 : float32s = Marshal.from_string f32 0 in
++  Printf.printf "%f %f" (float_of_float32 f32.a) (float_of_float32 f32.b);
++  [%expect {| 123.000000 456.000000 |}]
++
++let%expect_test "float32 wasm" [@tags "wasm-only"] =
++  let f32 = Marshal.to_string { a = 123.s; b = 456.s } [] in
++  Printf.printf "%S" f32;
++  [%expect
++    {| "\132\149\166\190\000\000\000\021\000\000\000\003\000\000\000\t\000\000\000\t\160\025_f32\000B\246\000\000\025_f32\000C\228\000\000" |}];
++  let f32 : float32s = Marshal.from_string f32 0 in
++  Printf.printf "%f %f" (float_of_float32 f32.a) (float_of_float32 f32.b);
++  [%expect {| 123.000000 456.000000 |}]
+--- /dev/null
++++ b/runtime/js/float32.js
+@@ -0,0 +1,419 @@
++
++/*
++    32-bit floats are represented as javascript numbers, i.e. 64-bit floats.
++    Each operation is performed in 64-bit precision and then rounded to the
++    nearest 32-bit float. This is not identical to using true 32-bit operations.
++    For example, if rounding an exact result to 64 bits places it halfway
++    between the two nearest 32-bit numbers, rounding it again to 32 bits
++    may not result in the closest 32-bit number to the exact result.
++
++    Marshalled float32s therefore look like normal floats. This means that
++    javascript programs are not be able to read float32 data marshalled
++    by native programs and vice versa.
++*/
++
++//Provides: caml_float_of_float32 const
++function caml_float_of_float32(x) {
++    return x;
++}
++
++//Provides: caml_float32_of_float const
++function caml_float32_of_float(x) {
++    return Math.fround(x);
++}
++
++//Provides: caml_float32_of_int const
++function caml_float32_of_int(x) {
++    return Math.fround(x);
++}
++
++//Provides: caml_int_of_float32 const
++function caml_int_of_float32(x) {
++    return x | 0;
++}
++
++//Provides: caml_float32_of_bits_bytecode const
++//Requires: caml_int32_float_of_bits
++let caml_float32_of_bits_bytecode = caml_int32_float_of_bits
++
++//Provides: caml_float32_to_bits_bytecode const
++//Requires: caml_int32_bits_of_float
++let caml_float32_to_bits_bytecode = caml_int32_bits_of_float
++
++//Provides: caml_float32_of_int64_bytecode const
++//Requires: caml_int64_to_float
++function caml_float32_of_int64_bytecode(x) {
++    return Math.fround(caml_int64_to_float(x));
++}
++
++//Provides: caml_float32_to_int64_bytecode const
++//Requires: caml_int64_of_float
++let caml_float32_to_int64_bytecode = caml_int64_of_float
++
++//Provides: caml_float32_of_string (const)
++//Requires: caml_float_of_string
++function caml_float32_of_string(x) {
++    return Math.fround(caml_float_of_string(x));
++}
++
++//Provides: caml_format_float32 const
++//Requires: caml_format_float
++let caml_format_float32 = caml_format_float
++
++//Provides: caml_float32_compare const
++//Requires: caml_float_compare
++let caml_float32_compare = caml_float_compare
++
++//Provides: caml_add_float32 const
++function caml_add_float32(x, y) {
++    return Math.fround(x + y);
++}
++
++//Provides: caml_sub_float32 const
++function caml_sub_float32(x, y) {
++    return Math.fround(x - y);
++}
++
++//Provides: caml_mul_float32 const
++function caml_mul_float32(x, y) {
++    return Math.fround(x * y);
++}
++
++//Provides: caml_div_float32 const
++function caml_div_float32(x, y) {
++    return Math.fround(x / y);
++}
++
++//Provides: caml_fmod_float32_bytecode const
++function caml_fmod_float32_bytecode(x, y) {
++    return Math.fround(x % y);
++}
++
++//Provides: caml_neg_float32 const
++function caml_neg_float32(x) {
++    return -x; // Result is exact
++}
++
++//Provides: caml_abs_float32 const
++function caml_abs_float32(x) {
++    return Math.abs(x); // Result is exact
++}
++
++//Provides: caml_modf_float32 const
++//Requires: caml_modf_float
++let caml_modf_float32 = caml_modf_float // Result is exact
++
++//Provides: caml_acos_float32_bytecode const
++function caml_acos_float32_bytecode(x) {
++    return Math.fround(Math.acos(x));
++}
++
++//Provides: caml_asin_float32_bytecode const
++function caml_asin_float32_bytecode(x) {
++    return Math.fround(Math.asin(x));
++}
++
++//Provides: caml_atan_float32_bytecode const
++function caml_atan_float32_bytecode(x) {
++    return Math.fround(Math.atan(x));
++}
++
++//Provides: caml_atan2_float32_bytecode const
++function caml_atan2_float32_bytecode(x, y) {
++    return Math.fround(Math.atan2(x, y));
++}
++
++//Provides: caml_ceil_float32_bytecode const
++function caml_ceil_float32_bytecode(x) {
++    return Math.fround(Math.ceil(x));
++}
++
++//Provides: caml_cos_float32_bytecode const
++function caml_cos_float32_bytecode(x) {
++    return Math.fround(Math.cos(x));
++}
++
++//Provides: caml_exp_float32_bytecode const
++function caml_exp_float32_bytecode(x) {
++    return Math.fround(Math.exp(x));
++}
++
++//Provides: caml_floor_float32_bytecode const
++function caml_floor_float32_bytecode(x) {
++    return Math.fround(Math.floor(x));
++}
++
++//Provides: caml_log_float32_bytecode const
++function caml_log_float32_bytecode(x) {
++    return Math.fround(Math.log(x));
++}
++
++//Provides: caml_power_float32_bytecode const
++function caml_power_float32_bytecode(x, y) {
++    return Math.fround(Math.pow(x, y));
++}
++
++//Provides: caml_sin_float32_bytecode const
++function caml_sin_float32_bytecode(x) {
++    return Math.fround(Math.sin(x));
++}
++
++//Provides: caml_sqrt_float32_bytecode const
++function caml_sqrt_float32_bytecode(x) {
++    return Math.fround(Math.sqrt(x));
++}
++
++//Provides: caml_tan_float32_bytecode const
++function caml_tan_float32_bytecode(x) {
++    return Math.fround(Math.tan(x));
++}
++
++//Provides: caml_nextafter_float32_bytecode const
++//Requires: caml_int32_bits_of_float, caml_int32_float_of_bits
++function caml_nextafter_float32_bytecode(x, y) {
++    if (isNaN(x) || isNaN(y)) return NaN;
++    if (x == y) return y;
++    if (x == 0) {
++        if (y < 0)
++            return -Math.pow(2, -149)
++        else
++            return Math.pow(2, -149)
++    }
++    var bits = caml_int32_bits_of_float(x);
++    if ((x < y) == (x > 0))
++        bits = bits + 1
++    else
++        bits = bits - 1
++    return caml_int32_float_of_bits(bits);
++}
++
++//Provides: caml_trunc_float32_bytecode const
++function caml_trunc_float32_bytecode(x) {
++    return Math.fround(Math.trunc(x));
++}
++
++//Provides: caml_classify_float32_bytecode const
++function caml_classify_float32_bytecode(x) {
++    if (isFinite(x)) {
++        if (Math.abs(x) >= 1.1754943508222875e-38) return 0;
++        if (x != 0) return 1;
++        return 2;
++    }
++    return isNaN(x) ? 4 : 3;
++}
++
++//Provides: caml_ldexp_float32_bytecode const
++//Requires: caml_ldexp_float
++function caml_ldexp_float32_bytecode(x, y) {
++    return Math.fround(caml_ldexp_float(x, y));
++}
++
++//Provides: caml_frexp_float32 const
++//Requires: caml_frexp_float
++let caml_frexp_float32 = caml_frexp_float // Result is exact
++
++//Provides: caml_copysign_float32_bytecode const
++//Requires: caml_copysign_float
++let caml_copysign_float32_bytecode = caml_copysign_float // Result is exact
++
++//Provides: caml_signbit_float32_bytecode const
++//Requires: caml_signbit_float
++let caml_signbit_float32_bytecode = caml_signbit_float
++
++//Provides: caml_expm1_float32_bytecode const
++function caml_expm1_float32_bytecode(x) {
++    return Math.fround(Math.expm1(x));
++}
++
++//Provides: caml_exp2_float32_bytecode const
++function caml_exp2_float32_bytecode(x) {
++    return Math.fround(Math.pow(2, x));
++}
++
++//Provides: caml_log1p_float32_bytecode const
++function caml_log1p_float32_bytecode(x) {
++    return Math.fround(Math.log1p(x));
++}
++
++//Provides: caml_log2_float32_bytecode const
++function caml_log2_float32_bytecode(x) {
++    return Math.fround(Math.log2(x));
++}
++
++//Provides: caml_hypot_float32_bytecode const
++function caml_hypot_float32_bytecode(x, y) {
++    return Math.fround(Math.hypot(x, y));
++}
++
++//Provides: caml_log10_float32_bytecode const
++function caml_log10_float32_bytecode(x) {
++    return Math.fround(Math.log10(x));
++}
++
++//Provides: caml_cosh_float32_bytecode const
++function caml_cosh_float32_bytecode(x) {
++    return Math.fround(Math.cosh(x));
++}
++
++//Provides: caml_acosh_float32_bytecode const
++function caml_acosh_float32_bytecode(x) {
++    return Math.fround(Math.acosh(x));
++}
++
++//Provides: caml_sinh_float32_bytecode const
++function caml_sinh_float32_bytecode(x) {
++    return Math.fround(Math.sinh(x));
++}
++
++//Provides: caml_asinh_float32_bytecode const
++function caml_asinh_float32_bytecode(x) {
++    return Math.fround(Math.asinh(x));
++}
++
++//Provides: caml_tanh_float32_bytecode const
++function caml_tanh_float32_bytecode(x) {
++    return Math.fround(Math.tanh(x));
++}
++
++//Provides: caml_atanh_float32_bytecode const
++function caml_atanh_float32_bytecode(x) {
++    return Math.fround(Math.atanh(x));
++}
++
++//Provides: caml_round_float32_bytecode const
++//Requires: caml_round_float
++function caml_round_float32_bytecode(x) {
++    return Math.fround(caml_round_float(x));
++}
++
++//Provides: caml_cbrt_float32_bytecode const
++function caml_cbrt_float32_bytecode(x) {
++    return Math.fround(Math.cbrt(x));
++}
++
++//Provides: caml_erf_float32_bytecode const
++//Requires: caml_erf_float
++function caml_erf_float32_bytecode(x) {
++    return Math.fround(caml_erf_float(x));
++}
++
++//Provides: caml_erfc_float32_bytecode const
++//Requires: caml_erfc_float
++function caml_erfc_float32_bytecode(x) {
++    return Math.fround(caml_erfc_float(x));
++}
++
++//Provides: caml_fma_float32_bytecode const
++//Requires: caml_fma_float
++function caml_fma_float32_bytecode(x, y, z) {
++    return Math.fround(caml_fma_float(x, y, z));
++}
++
++//Provides: caml_simd_float32_min_bytecode const
++function caml_simd_float32_min_bytecode(x, y) {
++    return x < y ? x : y;
++}
++
++//Provides: caml_simd_float32_max_bytecode const
++function caml_simd_float32_max_bytecode(x, y) {
++    return x > y ? x : y;
++}
++
++//Provides: caml_simd_cast_float32_int64_bytecode const
++//Requires: caml_int64_of_float, caml_round_float32_bytecode
++function caml_simd_cast_float32_int64_bytecode(x) {
++    return caml_int64_of_float(caml_round_float32_bytecode(x));
++}
++
++//Provides: caml_simd_float32_round_current_bytecode const
++//Requires: caml_round_float32_bytecode
++function caml_simd_float32_round_current_bytecode(x) {
++    return caml_round_float32_bytecode(x);
++}
++
++//Provides: caml_simd_float32_round_neg_inf_bytecode const
++function caml_simd_float32_round_neg_inf_bytecode(x) {
++    return Math.fround(Math.floor(x));
++}
++
++//Provides: caml_simd_float32_round_pos_inf_bytecode const
++function caml_simd_float32_round_pos_inf_bytecode(x) {
++    return Math.fround(Math.ceil(x));
++}
++
++//Provides: caml_simd_float32_round_towards_zero_bytecode const
++function caml_simd_float32_round_towards_zero_bytecode(x) {
++    return Math.fround(Math.trunc(x));
++}
++
++//Provides: caml_make_unboxed_float32_vect_bytecode const (const)
++//Requires: caml_make_float_vect
++let caml_make_unboxed_float32_vect_bytecode = caml_make_float_vect
++
++//Provides: caml_ba_float32_get_1
++//Requires: caml_ba_get_1
++let caml_ba_float32_get_1 = caml_ba_get_1
++
++//Provides: caml_ba_float32_get_2
++//Requires: caml_ba_get_2
++let caml_ba_float32_get_2 = caml_ba_get_2
++
++//Provides: caml_ba_float32_get_3
++//Requires: caml_ba_get_3
++let caml_ba_float32_get_3 = caml_ba_get_3
++
++//Provides: caml_ba_float32_set_1
++//Requires: caml_ba_set_1
++let caml_ba_float32_set_1 = caml_ba_set_1
++
++//Provides: caml_ba_float32_set_2
++//Requires: caml_ba_set_2
++let caml_ba_float32_set_2 = caml_ba_set_2
++
++//Provides: caml_ba_float32_set_3
++//Requires: caml_ba_set_3
++let caml_ba_float32_set_3 = caml_ba_set_3
++
++//Provides: caml_ba_uint8_getf32
++//Requires: caml_ba_uint8_get32, caml_int32_float_of_bits
++function caml_ba_uint8_getf32(ba, i0) {
++    return caml_int32_float_of_bits(caml_ba_uint8_get32(ba, i0));
++}
++
++//Provides: caml_ba_uint8_setf32
++//Requires: caml_ba_uint8_set32, caml_int32_bits_of_float
++function caml_ba_uint8_setf32(ba, i0, v) {
++    return caml_ba_uint8_set32(ba, i0, caml_int32_bits_of_float(v));
++}
++
++//Provides: caml_string_getf32
++//Requires: caml_string_get32, caml_int32_float_of_bits
++function caml_string_getf32(s, i) {
++    return caml_int32_float_of_bits(caml_string_get32(s, i));
++}
++
++//Provides: caml_bytes_getf32
++//Requires: caml_bytes_get32, caml_int32_float_of_bits
++function caml_bytes_getf32(s, i) {
++    return caml_int32_float_of_bits(caml_bytes_get32(s, i));
++}
++
++//Provides: caml_bytes_setf32
++//Requires: caml_bytes_set32, caml_int32_bits_of_float
++function caml_bytes_setf32(s, i, f32) {
++    return caml_bytes_set32(s, i, caml_int32_bits_of_float(f32));
++}
++
++//Provides: caml_string_setf32
++//Requires: caml_failwith
++//If: js-string
++function caml_string_setf32(s, i, f32) {
++    caml_failwith("caml_string_setf32");
++}
++
++//Provides: caml_string_setf32
++//Requires: caml_bytes_setf32
++//If: !js-string
++function caml_string_setf32(s, i, f32) {
++    return caml_bytes_setf32(s, i, f32);
++}
+--- a/runtime/wasm/custom.wat
++++ b/runtime/wasm/custom.wat
+@@ -16,6 +16,7 @@
+ ;; Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+ (module
++   (import "float32" "float32_ops" (global $float32_ops (ref $custom_operations)))
+    (import "int32" "int32_ops" (global $int32_ops (ref $custom_operations)))
+    (import "int32" "nativeint_ops"
+       (global $nativeint_ops (ref $custom_operations)))
+@@ -137,6 +138,7 @@
+       (call $caml_register_custom_operations (global.get $nativeint_ops))
+       (call $caml_register_custom_operations (global.get $int64_ops))
+       (call $caml_register_custom_operations (global.get $bigarray_ops))
++      (call $caml_register_custom_operations (global.get $float32_ops))
+       (global.set $initialized (i32.const 1)))
+
+   (func (export "caml_custom_identifier") (param $v (ref eq)) (result (ref eq))
+--- /dev/null
++++ b/runtime/wasm/float32.wat
+@@ -0,0 +1,708 @@
++(module
++    (import "fail" "caml_failwith"
++        (func $caml_failwith (param (ref eq))))
++    (import "marshal" "caml_serialize_int_4"
++        (func $caml_serialize_int_4 (param (ref eq)) (param i32)))
++    (import "marshal" "caml_deserialize_int_4"
++        (func $caml_deserialize_int_4 (param (ref eq)) (result i32)))
++    (import "int32" "Int32_val"
++        (func $Int32_val (param (ref eq)) (result i32)))
++    (import "int32" "caml_copy_int32"
++        (func $caml_copy_int32 (param i32) (result (ref eq))))
++    (import "int64" "Int64_val"
++        (func $Int64_val (param (ref eq)) (result i64)))
++    (import "int64" "caml_copy_int64"
++        (func $caml_copy_int64 (param i64) (result (ref eq))))
++    (import "float" "caml_float_of_string"
++        (func $caml_float_of_string (param (ref eq)) (result (ref eq))))
++    (import "float" "caml_format_float"
++        (func $caml_format_float (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "float" "caml_fma_float"
++        (func $caml_fma_float (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "float" "caml_erf_float"
++        (func $caml_erf_float (param f64) (result f64)))
++    (import "float" "caml_erfc_float"
++        (func $caml_erfc_float (param f64) (result f64)))
++    (import "float" "caml_frexp_float"
++        (func $caml_frexp_float (param (ref eq)) (result (ref eq))))
++    (import "float" "caml_ldexp_float"
++      (func $caml_ldexp_float (param f64) (param (ref eq)) (result f64)))
++    (import "bigarray" "caml_ba_get_1"
++        (func $caml_ba_get_1 (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "bigarray" "caml_ba_get_2"
++        (func $caml_ba_get_2 (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "bigarray" "caml_ba_get_3"
++        (func $caml_ba_get_3 (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "bigarray" "caml_ba_set_1"
++        (func $caml_ba_set_1 (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "bigarray" "caml_ba_set_2"
++        (func $caml_ba_set_2 (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "bigarray" "caml_ba_set_3"
++        (func $caml_ba_set_3 (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
++    (import "bigarray" "caml_ba_uint8_get32"
++        (func $caml_ba_uint8_get32 (param (ref eq)) (param (ref eq)) (result i32)))
++    (import "bigarray" "caml_ba_uint8_set32"
++        (func $caml_ba_uint8_set32 (param (ref eq)) (param (ref eq)) (param i32) (result (ref eq))))
++    (import "string" "caml_string_get32"
++        (func $caml_string_get32 (param (ref eq)) (param (ref eq)) (result i32)))
++    (import "string" "caml_bytes_get32"
++        (func $caml_bytes_get32 (param (ref eq)) (param (ref eq)) (result i32)))
++    (import "string" "caml_bytes_set32"
++        (func $caml_bytes_set32 (param (ref eq)) (param (ref eq)) (param i32) (result (ref eq))))
++    (import "array" "caml_make_vect"
++        (func $caml_make_vect (param (ref eq)) (param (ref eq)) (result (ref eq))))
++
++    (import "Math" "sin" (func $sin (param f64) (result f64)))
++    (import "Math" "cos" (func $cos (param f64) (result f64)))
++    (import "Math" "tan" (func $tan (param f64) (result f64)))
++    (import "Math" "asin" (func $asin (param f64) (result f64)))
++    (import "Math" "acos" (func $acos (param f64) (result f64)))
++    (import "Math" "atan" (func $atan (param f64) (result f64)))
++    (import "Math" "atan2" (func $atan2 (param f64) (param f64) (result f64)))
++    (import "Math" "exp" (func $exp (param f64) (result f64)))
++    (import "Math" "log" (func $log (param f64) (result f64)))
++    (import "Math" "pow" (func $pow (param f64) (param f64) (result f64)))
++    (import "Math" "fmod" (func $fmod (param f64) (param f64) (result f64)))
++    (import "Math" "expm1" (func $expm1 (param f64) (result f64)))
++    (import "Math" "log1p" (func $log1p (param f64) (result f64)))
++    (import "Math" "log2" (func $log2 (param f64) (result f64)))
++    (import "Math" "hypot" (func $hypot (param f64) (param f64) (result f64)))
++    (import "Math" "log10" (func $log10 (param f64) (result f64)))
++    (import "Math" "cosh" (func $cosh (param f64) (result f64)))
++    (import "Math" "acosh" (func $acosh (param f64) (result f64)))
++    (import "Math" "sinh" (func $sinh (param f64) (result f64)))
++    (import "Math" "asinh" (func $asinh (param f64) (result f64)))
++    (import "Math" "tanh" (func $tanh (param f64) (result f64)))
++    (import "Math" "atanh" (func $atanh (param f64) (result f64)))
++    (import "Math" "cbrt" (func $cbrt (param f64) (result f64)))
++
++    (type $float (struct (field f64)))
++
++    (func $box_float
++        (param $f f64) (result (ref eq))
++        (struct.new $float (local.get $f)))
++
++    (func $unbox_float
++        (param $f (ref eq)) (result f64)
++        (struct.get $float 0 (ref.cast (ref $float) (local.get $f))))
++
++    (type $block (array (mut (ref eq))))
++    (type $bytes (array (mut i8)))
++    (type $compare
++        (func (param (ref eq)) (param (ref eq)) (param i32) (result i32)))
++    (type $hash
++        (func (param (ref eq)) (result i32)))
++    (type $fixed_length (struct (field $bsize_32 i32) (field $bsize_64 i32)))
++    (type $serialize
++        (func (param (ref eq)) (param (ref eq)) (result i32) (result i32)))
++    (type $deserialize (func (param (ref eq)) (result (ref eq)) (result i32)))
++    (type $dup (func (param (ref eq)) (result (ref eq))))
++    (type $custom_operations
++        (struct
++            (field $id (ref $bytes))
++            (field $compare (ref null $compare))
++            (field $compare_ext (ref null $compare))
++            (field $hash (ref null $hash))
++            (field $fixed_length (ref null $fixed_length))
++            (field $serialize (ref null $serialize))
++            (field $deserialize (ref null $deserialize))
++            (field $dup (ref null $dup))))
++    (type $custom (sub (struct (field (ref $custom_operations)))))
++
++    (global $float32_ops (export "float32_ops") (ref $custom_operations)
++        (struct.new $custom_operations
++            (array.new_fixed $bytes 4 (i32.const 95) (i32.const 102) (i32.const 51) (i32.const 50)) ;; "_f32"
++            (ref.func $float32_cmp)
++            (ref.null $compare)
++            (ref.func $float32_hash)
++            (struct.new $fixed_length (i32.const 4) (i32.const 4))
++            (ref.func $float32_serialize)
++            (ref.func $float32_deserialize)
++            (ref.func $float32_dup)))
++
++    (type $float32
++        (sub final $custom (struct (field (ref $custom_operations)) (field f32))))
++
++    (func $box_float32
++        (param $f f32) (result (ref eq))
++        (struct.new $float32 (global.get $float32_ops) (local.get $f)))
++
++    (func $unbox_float32
++        (param $f (ref eq)) (result f32)
++        (struct.get $float32 1 (ref.cast (ref $float32) (local.get $f))))
++
++    (func $float32_cmp
++        (param $v1 (ref eq)) (param $v2 (ref eq)) (param i32) (result i32)
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get $v1)))
++        (local.set $y (call $unbox_float32 (local.get $v2)))
++        (i32.add
++            (i32.sub (f32.gt (local.get $x) (local.get $y))
++                     (f32.lt (local.get $x) (local.get $y)))
++            (i32.sub (f32.eq (local.get $x) (local.get $x))
++                     (f32.eq (local.get $y) (local.get $y)))))
++
++    (func $float32_hash
++        (param $v (ref eq)) (result i32)
++        (i32.reinterpret_f32 (call $unbox_float32 (local.get $v))))
++
++    (func $float32_serialize
++        (param $s (ref eq)) (param $v (ref eq)) (result i32) (result i32)
++        (call $caml_serialize_int_4 (local.get $s)
++            (i32.reinterpret_f32 (call $unbox_float32 (local.get $v))))
++        (tuple.make 2 (i32.const 4) (i32.const 4)))
++
++    (func $float32_deserialize
++        (param $s (ref eq)) (result (ref eq)) (result i32)
++        (tuple.make 2
++            (call $box_float32 (f32.reinterpret_i32 (call $caml_deserialize_int_4 (local.get $s))))
++            (i32.const 4)))
++
++    (func $float32_dup
++        (param $v (ref eq)) (result (ref eq))
++        (local $d (ref $float32))
++        (local.set $d (ref.cast (ref $float32) (local.get $v)))
++        (struct.new $float32
++            (struct.get $float32 0 (local.get $d))
++            (struct.get $float32 1 (local.get $d))))
++
++    (func $caml_float_of_float32 (export "caml_float_of_float32")
++        (param $f32 (ref eq)) (result (ref eq))
++        (call $box_float
++            (f64.promote_f32 (call $unbox_float32 (local.get $f32)))))
++
++    (func $caml_float32_of_float (export "caml_float32_of_float")
++        (param $f64 (ref eq)) (result (ref eq))
++        (call $box_float32
++            (f32.demote_f64 (call $unbox_float (local.get $f64)))))
++
++    (func (export "caml_float32_of_int")
++        (param $i (ref eq)) (result (ref eq))
++        (call $box_float32
++            (f32.convert_i32_s (i31.get_s (ref.cast (ref i31) (local.get $i))))))
++
++    (func (export "caml_int_of_float32")
++        (param $f (ref eq)) (result (ref eq))
++        (ref.i31
++            (i32.trunc_sat_f32_s (call $unbox_float32 (local.get $f)))))
++
++    (func (export "caml_float32_of_bits_bytecode")
++        (param $i (ref eq)) (result (ref eq))
++        (call $box_float32
++            (f32.reinterpret_i32 (call $Int32_val (local.get $i)))))
++
++    (func (export "caml_float32_to_bits_bytecode")
++        (param $f (ref eq)) (result (ref eq))
++        (call $caml_copy_int32
++            (i32.reinterpret_f32 (call $unbox_float32 (local.get $f)))))
++
++    (func (export "caml_float32_of_int64_bytecode")
++        (param $i (ref eq)) (result (ref eq))
++        (call $box_float32
++            (f32.convert_i64_s (call $Int64_val (local.get $i)))))
++
++    (func (export "caml_float32_to_int64_bytecode")
++        (param $f (ref eq)) (result (ref eq))
++        (call $caml_copy_int64
++            (i64.trunc_sat_f32_s (call $unbox_float32 (local.get $f)))))
++
++    (func (export "caml_float32_of_string")
++        (param $s (ref eq)) (result (ref eq))
++        (call $caml_float32_of_float (call $caml_float_of_string (local.get $s))))
++
++    (func (export "caml_format_float32")
++        (param $s (ref eq)) (param $f (ref eq)) (result (ref eq))
++        (call $caml_format_float (local.get $s) (call $caml_float_of_float32 (local.get $f))))
++
++    (func (export "caml_float32_compare")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (ref.i31
++            (i32.add
++            (i32.sub (f32.gt (local.get $x) (local.get $y))
++                     (f32.lt (local.get $x) (local.get $y)))
++            (i32.sub (f32.eq (local.get $x) (local.get $x))
++                     (f32.eq (local.get $y) (local.get $y))))))
++
++    (func (export "caml_eq_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (ref.i31 (f32.eq (local.get $x) (local.get $y))))
++
++    (func (export "caml_neq_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (ref.i31 (f32.ne (local.get $x) (local.get $y))))
++
++    (func (export "caml_ge_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (ref.i31 (f32.ge (local.get $x) (local.get $y))))
++
++   (func (export "caml_le_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (ref.i31 (f32.le (local.get $x) (local.get $y))))
++
++    (func (export "caml_gt_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (ref.i31 (f32.gt (local.get $x) (local.get $y))))
++
++    (func (export "caml_lt_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (ref.i31 (f32.lt (local.get $x) (local.get $y))))
++
++    (func (export "caml_add_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (call $box_float32 (f32.add (local.get $x) (local.get $y))))
++
++    (func (export "caml_sub_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (call $box_float32 (f32.sub (local.get $x) (local.get $y))))
++
++    (func (export "caml_mul_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (call $box_float32 (f32.mul (local.get $x) (local.get $y))))
++
++    (func (export "caml_div_float32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (call $box_float32 (f32.div (local.get $x) (local.get $y))))
++
++    (func (export "caml_neg_float32")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.neg (local.get $x))))
++
++    (func (export "caml_abs_float32")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.abs (local.get $x))))
++
++    (func (export "caml_modf_float32")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $a f32) (local $i f32) (local $f f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $a (f32.abs (local.get $x)))
++        (if (f32.ge (local.get $a) (f32.const 0))
++            (then
++            (if (f32.lt (local.get $a) (f32.const inf))
++                (then ;; normal
++                    (local.set $i (f32.floor (local.get $a)))
++                    (local.set $f (f32.sub (local.get $a) (local.get $i)))
++                    (local.set $i (f32.copysign (local.get $i) (local.get $x)))
++                    (local.set $f (f32.copysign (local.get $f) (local.get $x))))
++                (else ;; infinity
++                    (local.set $i (local.get $x))
++                    (local.set $f (f32.copysign (f32.const 0) (local.get $x))))))
++            (else ;; zero or nan
++            (local.set $i (local.get $x))
++            (local.set $f (local.get $x))))
++        (array.new_fixed $block 3 (ref.i31 (i32.const 0))
++            (call $box_float32 (local.get $f)) (call $box_float32 (local.get $i))))
++
++    (func (export "caml_fmod_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f64) (local $y f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (local.set $y (f64.promote_f32 (call $unbox_float32 (local.get 1))))
++        (call $box_float32 (f32.demote_f64 (call $fmod (local.get $x) (local.get $y)))))
++
++    (func (export "caml_acos_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $acos (local.get $x)))))
++
++    (func (export "caml_asin_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $asin (local.get $x)))))
++
++    (func (export "caml_atan_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $atan (local.get $x)))))
++
++    (func (export "caml_atan2_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f64) (local $y f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (local.set $y (f64.promote_f32 (call $unbox_float32 (local.get 1))))
++        (call $box_float32 (f32.demote_f64 (call $atan2 (local.get $x) (local.get $y)))))
++
++    (func (export "caml_ceil_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.ceil (local.get $x))))
++
++    (func (export "caml_floor_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.floor (local.get $x))))
++
++    (func (export "caml_exp_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $exp (local.get $x)))))
++
++    (func (export "caml_log_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $log (local.get $x)))))
++
++    (func (export "caml_power_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f64) (local $y f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (local.set $y (f64.promote_f32 (call $unbox_float32 (local.get 1))))
++        (call $box_float32 (f32.demote_f64 (call $pow (local.get $x) (local.get $y)))))
++
++    (func (export "caml_cos_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $cos (local.get $x)))))
++
++    (func (export "caml_sin_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $sin (local.get $x)))))
++
++    (func (export "caml_tan_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $tan (local.get $x)))))
++
++    (func (export "caml_sqrt_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.sqrt (local.get $x))))
++
++    (func (export "caml_nextafter_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32) (local $i i32) (local $j i32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (if (f32.ne (local.get $x) (local.get $x)) (then (return (local.get 0))))
++        (if (f32.ne (local.get $y) (local.get $y)) (then (return (local.get 1))))
++        (if (f32.eq (local.get $x) (local.get $y))
++            (then (return (local.get 1))))
++        (if (result (ref eq)) (f32.eq (local.get $x) (f32.const 0))
++            (then
++            (if (f32.ge (local.get $y) (f32.const 0))
++                (then (return (call $box_float32 (f32.const 0x1p-149))))
++                (else (return (call $box_float32 (f32.const -0x1p-149))))))
++            (else
++            (local.set $i (i32.reinterpret_f32 (local.get $x)))
++            (local.set $j (i32.reinterpret_f32 (local.get $y)))
++            (if (i32.and (i32.lt_s (local.get $i) (local.get $j))
++                         (i32.lt_u (local.get $i) (local.get $j)))
++                (then (local.set $i (i32.add (local.get $i) (i32.const 1))))
++                (else (local.set $i (i32.sub (local.get $i) (i32.const 1)))))
++            (return (call $box_float32 (f32.reinterpret_i32 (local.get $i)))))))
++
++    (func (export "caml_trunc_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.trunc (local.get $x))))
++
++    (func (export "caml_classify_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $a f32)
++        (local.set $a
++            (f32.abs (call $unbox_float32 (local.get 0))))
++        (ref.i31
++            (if (result i32) (f32.ge (local.get $a) (f32.const 0x1p-126))
++            (then
++                (if (result i32) (f32.lt (local.get $a) (f32.const inf))
++                    (then (i32.const 0)) ;; normal
++                    (else (i32.const 3)))) ;; infinity
++            (else
++                (if (result i32) (f32.eq (local.get $a) (f32.const 0))
++                    (then (i32.const 2)) ;; zero
++                    (else
++                        (if (result i32) (f32.eq (local.get $a) (local.get $a))
++                        (then (i32.const 1)) ;; subnormal
++                        (else (i32.const 4))))))))) ;; nan
++
++    (func (export "caml_ldexp_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_float32_of_float
++            (call $box_float
++                (call $caml_ldexp_float
++                    (call $unbox_float (call $caml_float_of_float32 (local.get 0)))
++                    (local.get 1)))))
++
++    (func (export "caml_frexp_float32")
++        (param (ref eq)) (result (ref eq))
++        (local $frexp (ref $block))
++        (local.set $frexp (ref.cast (ref $block)
++            (call $caml_frexp_float (call $caml_float_of_float32 (local.get 0)))))
++        (array.new_fixed $block 3 (ref.i31 (i32.const 0))
++            (call $caml_float32_of_float (array.get $block (local.get $frexp) (i32.const 1)))
++            (array.get $block (local.get $frexp) (i32.const 2))))
++
++    (func (export "caml_copysign_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (call $box_float32 (f32.copysign (local.get $x) (local.get $y))))
++
++    (func (export "caml_signbit_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (ref.i31 (i32.shr_u
++            (i32.reinterpret_f32 (call $unbox_float32 (local.get 0)))
++            (i32.const 31))))
++
++    (func (export "caml_expm1_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $expm1 (local.get $x)))))
++
++    (func (export "caml_exp2_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $pow (f64.const 2) (local.get $x)))))
++
++    (func (export "caml_log1p_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $log1p (local.get $x)))))
++
++    (func (export "caml_log2_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $log2 (local.get $x)))))
++
++    (func (export "caml_log10_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $log10 (local.get $x)))))
++
++    (func (export "caml_cosh_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $cosh (local.get $x)))))
++
++    (func (export "caml_acosh_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $acosh (local.get $x)))))
++
++    (func (export "caml_sinh_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $sinh (local.get $x)))))
++
++    (func (export "caml_asinh_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $asinh (local.get $x)))))
++
++    (func (export "caml_tanh_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $tanh (local.get $x)))))
++
++    (func (export "caml_atanh_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $atanh (local.get $x)))))
++
++    (func (export "caml_round_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.nearest (local.get $x))))
++
++    (func (export "caml_cbrt_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (call $box_float32 (f32.demote_f64 (call $cbrt (local.get $x)))))
++
++    (func (export "caml_erf_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x (ref eq))
++        (local.set $x (call $box_float (f64.promote_f32 (call $unbox_float32 (local.get 0)))))
++        (call $box_float32 (f32.demote_f64
++             (call $caml_erf_float (call $unbox_float (local.get $x))))))
++
++    (func (export "caml_erfc_float32_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x (ref eq))
++        (local.set $x (call $box_float (f64.promote_f32 (call $unbox_float32 (local.get 0)))))
++        (call $box_float32 (f32.demote_f64
++            (call $caml_erfc_float (call $unbox_float (local.get $x))))))
++
++    (func (export "caml_hypot_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f64) (local $y f64)
++        (local.set $x (f64.promote_f32 (call $unbox_float32 (local.get 0))))
++        (local.set $y (f64.promote_f32 (call $unbox_float32 (local.get 1))))
++        (call $box_float32 (f32.demote_f64 (call $hypot (local.get $x) (local.get $y)))))
++
++    (func (export "caml_fma_float32_bytecode")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x (ref eq)) (local $y (ref eq)) (local $z (ref eq))
++        (local.set $x (call $box_float (f64.promote_f32 (call $unbox_float32 (local.get 0)))))
++        (local.set $y (call $box_float (f64.promote_f32 (call $unbox_float32 (local.get 1)))))
++        (local.set $z (call $box_float (f64.promote_f32 (call $unbox_float32 (local.get 2)))))
++        (call $box_float32 (f32.demote_f64
++            (call $unbox_float (call $caml_fma_float (local.get $x) (local.get $y) (local.get $z))))))
++
++    (func (export "caml_simd_float32_min_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (call $box_float32
++            (if (result f32) (f32.lt (local.get $x) (local.get $y))
++                (then (local.get $x))
++                (else (local.get $y)))))
++
++    (func (export "caml_simd_float32_max_bytecode")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (local $x f32) (local $y f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (local.set $y (call $unbox_float32 (local.get 1)))
++        (call $box_float32
++            (if (result f32) (f32.gt (local.get $x) (local.get $y))
++                (then (local.get $x))
++                (else (local.get $y)))))
++
++    (func (export "caml_simd_cast_float32_int64_bytecode")
++        (param $f (ref eq)) (result (ref eq))
++        (call $caml_copy_int64
++            (i64.trunc_sat_f32_s (call $unbox_float32 (local.get $f)))))
++
++    (func (export "caml_simd_float32_round_current_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.nearest (local.get $x))))
++
++    (func (export "caml_simd_float32_round_neg_inf_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.floor (local.get $x))))
++
++    (func (export "caml_simd_float32_round_pos_inf_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.ceil (local.get $x))))
++
++    (func (export "caml_simd_float32_round_towards_zero_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (local $x f32)
++        (local.set $x (call $unbox_float32 (local.get 0)))
++        (call $box_float32 (f32.trunc (local.get $x))))
++
++    (func (export "caml_make_unboxed_float32_vect_bytecode")
++        (param (ref eq)) (result (ref eq))
++        (call $caml_make_vect (local.get 0) (call $box_float32 (f32.const 0))))
++
++    (func (export "caml_ba_float32_get_1")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_float32_of_float (call $caml_ba_get_1 (local.get 0) (local.get 1))))
++
++    (func (export "caml_ba_float32_get_2")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_float32_of_float (call $caml_ba_get_2 (local.get 0) (local.get 1) (local.get 2))))
++
++    (func (export "caml_ba_float32_get_3")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_float32_of_float (call $caml_ba_get_3 (local.get 0) (local.get 1) (local.get 2) (local.get 3))))
++
++    (func (export "caml_ba_float32_set_1")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_ba_set_1 (local.get 0) (local.get 1) (call $caml_float_of_float32 (local.get 2))))
++
++    (func (export "caml_ba_float32_set_2")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_ba_set_2 (local.get 0) (local.get 1) (local.get 2) (call $caml_float_of_float32 (local.get 3))))
++
++    (func (export "caml_ba_float32_set_3")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_ba_set_3 (local.get 0) (local.get 1) (local.get 2) (local.get 3) (call $caml_float_of_float32 (local.get 4))))
++
++    (func (export "caml_ba_uint8_getf32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $box_float32 (f32.reinterpret_i32
++            (call $caml_ba_uint8_get32 (local.get 0) (local.get 1)))))
++
++    (func (export "caml_ba_uint8_setf32")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_ba_uint8_set32 (local.get 0) (local.get 1)
++            (i32.reinterpret_f32 (call $unbox_float32 (local.get 2)))))
++
++    (func (export "caml_string_getf32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $box_float32 (f32.reinterpret_i32
++            (call $caml_string_get32 (local.get 0) (local.get 1)))))
++
++    (func (export "caml_bytes_getf32")
++        (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $box_float32 (f32.reinterpret_i32
++            (call $caml_bytes_get32 (local.get 0) (local.get 1)))))
++
++    (func (export "caml_bytes_setf32")
++        (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))
++        (call $caml_bytes_set32 (local.get 0) (local.get 1)
++            (i32.reinterpret_f32 (call $unbox_float32 (local.get 2)))))
++)

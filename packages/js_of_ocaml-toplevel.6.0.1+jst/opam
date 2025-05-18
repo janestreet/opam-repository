@@ -1,6 +1,6 @@
 opam-version: "2.0"
 version: "6.0.1+jst"
-name: "js_of_ocaml-compiler"
+name: "js_of_ocaml-toplevel"
 synopsis: "Compiler from OCaml bytecode to JavaScript"
 description:
   "Js_of_ocaml is a compiler from OCaml bytecode to JavaScript. It makes it possible to run pure OCaml programs in JavaScript environment like browsers and Node.js"
@@ -13,25 +13,16 @@ homepage: "https://ocsigen.org/js_of_ocaml/latest/manual/overview"
 doc: "https://ocsigen.org/js_of_ocaml/latest/manual/overview"
 bug-reports: "https://github.com/ocsigen/js_of_ocaml/issues"
 depends: [
-  "dune"       {>= "3.17"}
-  "ocaml"      {>= "4.08" & < "5.4"}
-  "num"        {with-test}
-  "ppx_expect" {>= "v0.16.1" & with-test}
-  "ppxlib"     {>= "0.15.0" & < "0.36.0" & = "0.33.0+jst"}
-  "re"         {with-test}
-  "cmdliner"   {>= "1.1.0"}
-  "sedlex"     {>= "3.3" & = "3.3+jst"}
-  "qcheck"     {with-test}
-  "menhir"
-  "menhirLib"
-  "menhirSdk"
-  "yojson"     {>= "2.1"}
-  "odoc"       {with-doc}
-]
-depopts: ["ocamlfind"]
-conflicts: [
-  "ocamlfind" {< "1.5.1"}
-  "js_of_ocaml" {< "3.0"}
+  "dune" {>= "3.17"}
+  "ocaml" {>= "4.08"}
+  "js_of_ocaml-compiler" {= version & = "6.0.1+jst"}
+  "ppxlib"               {>= "0.15" & = "0.33.0+jst"}
+  "ocamlfind" {>= "1.5.1"}
+  "graphics" {with-test}
+  "num" {with-test}
+  "ppx_expect" {>= "v0.14.2" & with-test}
+  "re" {>= "1.9.0" & with-test}
+  "odoc" {with-doc}
 ]
 build: [
   ["dune" "subst"] {dev}
@@ -73,6 +64,7 @@ patches: [
   "js_of_ocaml-jane-street-5.2-compatibility.patch"
   "js_of_ocaml-migrate-labeled-tuples-shims.patch"
   "js_of_ocaml-floatarray_create_local.patch"
+  "wasm_of_ocaml-sourcemap-contents.patch"
   "js_of_ocaml-jane-street-const_null-support.patch"
   "js_of_ocaml-float32.patch"
   "js_of_ocaml-caml_array_append.patch"
@@ -200,6 +192,10 @@ extra-files: [
   [
     "js_of_ocaml-floatarray_create_local.patch"
     "sha256=f17e392acc941dde475cb7be0654037df9b8d550aeae0d96b65394e4c4a1d4ca"
+  ]
+  [
+    "wasm_of_ocaml-sourcemap-contents.patch"
+    "sha256=93b7dddf6313836ce02fbe762c40380e20daefdd8b87ec885ee0f4ef779ad76b"
   ]
   [
     "js_of_ocaml-jane-street-const_null-support.patch"

@@ -1,0 +1,238 @@
+diff --git a/compiler/lib-dynlink/js_of_ocaml_compiler_dynlink.ml b/compiler/lib-dynlink/js_of_ocaml_compiler_dynlink.ml
+index 140a53b..d857289 100644
+--- a/compiler/lib-dynlink/js_of_ocaml_compiler_dynlink.ml
++++ b/compiler/lib-dynlink/js_of_ocaml_compiler_dynlink.ml
+@@ -4,7 +4,7 @@ module J = Jsoo_runtime.Js
+
+ type bytecode_sections =
+   { symb : Ocaml_compiler.Symtable.GlobalMap.t
+-  ; crcs : (string * Digest.t option) list
++  ; crcs : Import_info.t array
+   ; prim : string list
+   ; dlpt : string list
+   }
+diff --git a/compiler/lib/link_js.ml b/compiler/lib/link_js.ml
+index 68f0c32..3ec9ddc 100644
+--- a/compiler/lib/link_js.ml
++++ b/compiler/lib/link_js.ml
+@@ -426,7 +426,7 @@ let link ~output ~linkall ~mklib ~toplevel ~files ~resolve_sourcemap_url ~(sourc
+             List.fold_left units ~init:StringSet.empty ~f:(fun acc (u : Unit_info.t) ->
+                 StringSet.union acc (StringSet.of_list u.primitives))
+           in
+-          let code = Parse_bytecode.link_info ~symbols:!sym ~primitives ~crcs:[] in
++          let code = Parse_bytecode.link_info ~symbols:!sym ~primitives ~crcs:[||] in
+           let b = Buffer.create 100 in
+           let fmt = Pretty_print.to_buffer b in
+           Driver.configure fmt;
+diff --git a/compiler/lib/parse_bytecode.ml b/compiler/lib/parse_bytecode.ml
+index 79e0c8f..bf8751a 100644
+--- a/compiler/lib/parse_bytecode.ml
++++ b/compiler/lib/parse_bytecode.ml
+@@ -35,6 +35,9 @@ let predefined_exceptions =
+
+ let new_closure_repr = Ocaml_version.compare Ocaml_version.current [ 4; 12 ] >= 0
+
++let crc_name v = Import_info.name v |> Compilation_unit.Name.to_string
++let crc_crc v = Import_info.crc v
++
+ (* Read and manipulate debug section *)
+ module Debug : sig
+   type t
+@@ -76,11 +79,11 @@ module Debug : sig
+     -> unit
+
+   val read :
+-    t -> crcs:(string * string option) list -> includes:string list -> in_channel -> unit
++    t -> crcs:Import_info.t list -> includes:string list -> in_channel -> unit
+
+   val read_event_list :
+        t
+-    -> crcs:(string * string option) list
++    -> crcs:Import_info.t list
+     -> includes:string list
+     -> orig:int
+     -> in_channel
+@@ -146,6 +149,7 @@ end = struct
+     | Some _ as x -> x
+     | None -> Fs.find_in_path paths (name ^ ".ml")
+
++
+   let read_event
+       ~paths
+       ~crcs
+@@ -216,7 +220,7 @@ end = struct
+     fun debug ~crcs ~includes ~orig ic ->
+       let crcs =
+         let t = Hashtbl.create 17 in
+-        List.iter crcs ~f:(fun (m, crc) -> Hashtbl.add t m crc);
++        List.iter crcs ~f:(fun i -> Hashtbl.add t (crc_name i) (crc_crc i));
+         t
+       in
+       let evl : debug_event list = input_value ic in
+@@ -2520,7 +2524,7 @@ module Toc : sig
+
+   val read_data : t -> in_channel -> Obj.t array
+
+-  val read_crcs : t -> in_channel -> (string * Digest.t option) list
++  val read_crcs : t -> in_channel -> Import_info.t array
+
+   val read_prim : t -> in_channel -> string
+
+@@ -2570,9 +2574,10 @@ end = struct
+   let read_crcs toc ic =
+     ignore (seek_section toc ic "CRCS");
+     let orig_crcs : Import_info.t array = input_value ic in
+-    List.map (Array.to_list orig_crcs) ~f:(fun import ->
+-      Import_info.name import |> Compilation_unit.Name.to_string,
+-      Import_info.crc import)
++    orig_crcs
++    (* List.map (Array.to_list orig_crcs) ~f:(fun import -> *)
++    (*   Import_info.name import |> Compilation_unit.Name.to_string, *)
++    (*   Import_info.crc import) *)
+
+   let read_prim toc ic =
+     let prim_size = seek_section toc ic "PRIM" in
+@@ -2587,12 +2592,13 @@ let read_primitives toc ic =
+
+ type bytesections =
+   { symb : Ocaml_compiler.Symtable.GlobalMap.t
+-  ; crcs : (string * Digest.t option) list
++  ; crcs : Import_info.t array
+   ; prim : string list
+   ; dlpt : string list
+   }
+ [@@ocaml.warning "-unused-field"]
+
++
+ let from_exe
+     ?(includes = [])
+     ~linkall
+@@ -2625,7 +2631,7 @@ let from_exe
+       | Some l -> List.mem s ~set:l
+       | None -> true)
+   in
+-  let crcs = List.filter ~f:(fun (unit, _crc) -> keep unit) orig_crcs in
++  let crcs = List.filter ~f:(fun info -> keep (crc_name info)) (Array.to_list orig_crcs) in
+   let symbols =
+     Ocaml_compiler.Symtable.GlobalMap.filter
+       (function
+@@ -2690,7 +2696,7 @@ let from_exe
+         |> Array.of_list
+       in
+       (* Include linking information *)
+-      let sections = { symb = symbols; crcs; prim = primitives; dlpt = [] } in
++      let sections = { symb = symbols; crcs = Array.of_list crcs; prim = primitives; dlpt = [] } in
+       let gdata = Var.fresh () in
+       let need_gdata = ref false in
+       let infos =
+diff --git a/compiler/lib/parse_bytecode.mli b/compiler/lib/parse_bytecode.mli
+index 7bcc822..b34113b 100644
+--- a/compiler/lib/parse_bytecode.mli
++++ b/compiler/lib/parse_bytecode.mli
+@@ -91,5 +91,5 @@ val predefined_exceptions : unit -> Code.program * Unit_info.t
+ val link_info :
+      symbols:Ocaml_compiler.Symtable.GlobalMap.t
+   -> primitives:StringSet.t
+-  -> crcs:(string * Digest.t option) list
++  -> crcs:Import_info.t array
+   -> Code.program
+diff --git a/runtime/js/capsule.js b/runtime/js/capsule.js
+new file mode 100644
+index 0000000..0c02acc
+--- /dev/null
++++ b/runtime/js/capsule.js
+@@ -0,0 +1,14 @@
++//Provides: caml_capsule_mutex_new
++function caml_capsule_mutex_new () {
++  return 0;
++}
++
++//Provides: caml_capsule_mutex_lock
++function caml_capsule_mutex_lock () {
++  return 0;
++}
++
++//Provides: caml_capsule_mutex_unlock
++function caml_capsule_mutex_unlock () {
++  return 0;
++}
+diff --git a/runtime/js/dune b/runtime/js/dune
+index f31ffd1..7e76a14 100644
+--- a/runtime/js/dune
++++ b/runtime/js/dune
+@@ -4,6 +4,7 @@
+  (files
+   bigarray.js
+   bigstring.js
++  capsule.js
+   dynlink.js
+   fs.js
+   fs_fake.js
+diff --git a/runtime/js/float32.js b/runtime/js/float32.js
+index 0c60d3d..74bb433 100644
+--- a/runtime/js/float32.js
++++ b/runtime/js/float32.js
+@@ -12,6 +12,11 @@
+     by native programs and vice versa.
+ */
+
++//Provides: caml_is_boot_compiler
++function caml_is_boot_compiler(x) {
++  return 0;
++}
++
+ //Provides: caml_float_of_float32 const
+ function caml_float_of_float32(x) {
+     return x;
+diff --git a/runtime/js/toplevel.js b/runtime/js/toplevel.js
+index 2e4547e..adaffd3 100644
+--- a/runtime/js/toplevel.js
++++ b/runtime/js/toplevel.js
+@@ -94,7 +94,7 @@ function jsoo_toplevel_init_reloc(f) {
+ //Requires: caml_callback
+ //Requires: caml_string_of_uint8_array, caml_ba_to_typed_array
+ //Requires: jsoo_toplevel_compile, caml_failwith
+-//Version: >= 5.2
++//Version: >= 5.3
+ function caml_reify_bytecode(code, debug, _digest) {
+   if (!jsoo_toplevel_compile) {
+     caml_failwith("Toplevel not initialized (jsoo_toplevel_compile)");
+@@ -107,7 +107,7 @@ function caml_reify_bytecode(code, debug, _digest) {
+ //Requires: caml_callback
+ //Requires: caml_string_of_uint8_array, caml_uint8_array_of_bytes
+ //Requires: jsoo_toplevel_compile, caml_failwith
+-//Version: < 5.2
++//Version: < 5.3
+ function caml_reify_bytecode(code, debug, _digest) {
+   if (!jsoo_toplevel_compile) {
+     caml_failwith("Toplevel not initialized (jsoo_toplevel_compile)");
+diff --git a/toplevel/lib/jsooTop.ml b/toplevel/lib/jsooTop.ml
+index a1e5043..93c8ac0 100644
+--- a/toplevel/lib/jsooTop.ml
++++ b/toplevel/lib/jsooTop.ml
+@@ -65,25 +65,8 @@ let refill_lexbuf s p ppf buffer len =
+     p := !p + len'';
+     len''
+
+-[%%if ocaml_version < (4, 14, 0)]
+-let use ffp content =
+-  let fname, oc =
+-    Filename.open_temp_file ~mode:[ Open_binary ] "jsoo_toplevel" "fake_stdin"
+-  in
+-  output_string oc content;
+-  close_out oc;
+-  try
+-    let b = Toploop.use_silently ffp fname in
+-    Sys.remove fname;
+-    b
+-  with e ->
+-    Sys.remove fname;
+-    raise e
+-[%%endif]
+
+-[%%if ocaml_version >= (4, 14, 0)]
+ let use ffp content = Toploop.use_silently ffp (String content)
+-[%%endif]
+
+ let execute printval ?pp_code ?highlight_location pp_answer s =
+   let lb = Lexing.from_function (refill_lexbuf s (ref 0) pp_code) in

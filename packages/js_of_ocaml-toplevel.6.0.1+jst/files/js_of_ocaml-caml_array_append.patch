@@ -1,0 +1,27 @@
+--- a/runtime/js/array.js
++++ b/runtime/js/array.js
+@@ -54,6 +54,12 @@
+   return a;
+ }
+
++//Provides: caml_array_append_local mutable
++//Requires: caml_array_append
++function caml_array_append_local(a1, a2) {
++  return caml_array_append(a1, a2);
++}
++
+ //Provides: caml_floatarray_append mutable
+ //Requires: caml_array_append
+ //Version: >= 5.3
+--- a/runtime/wasm/array.wat
++++ b/runtime/wasm/array.wat
+@@ -143,7 +143,8 @@
+          (local.get $len))
+       (local.get $a'))
+
+-   (func (export "caml_array_append")
++   (export "caml_array_append_local" (func $caml_array_append))
++   (func $caml_array_append (export "caml_array_append")
+       (param $va1 (ref eq)) (param $va2 (ref eq)) (result (ref eq))
+       (local $a1 (ref $block)) (local $a2 (ref $block)) (local $a (ref $block))
+       (local $fa1 (ref $float_array)) (local $fa2 (ref $float_array))

@@ -1,0 +1,302 @@
+--- a/compiler/lib/flow.ml
++++ b/compiler/lib/flow.ml
+@@ -324,21 +324,29 @@
+ let the_const_of info x =
+   match x with
+   | Pv x ->
+-      get_approx
+-        info
+-        (fun x ->
+-          match info.info_defs.(Var.idx x) with
+-          | Expr (Constant ((Float _ | Int _ | NativeString _) as c)) -> Some c
+-          | Expr (Constant (String _ as c)) when Config.Flag.safe_string () -> Some c
+-          | Expr (Constant c) ->
+-              if Var.ISet.mem info.info_possibly_mutable x then None else Some c
+-          | _ -> None)
+-        None
+-        (fun u v ->
+-          match u, v with
+-          | Some i, Some j when constant_identical ~target i j -> u
+-          | _ -> None)
+-        x
++
++      (* If this variable was minted after we constructed the info table, conservatively
++         assume we know nothing. Transformations of array-access primitives in
++         [specialize_js.ml] mint variables in this way. *)
++      if Var.idx x >= Array.length info.Info.info_defs
++      then None
++      else (
++        get_approx
++          info
++          (fun x ->
++            match info.info_defs.(Var.idx x) with
++            | Expr (Constant ((Float _ | Int _ | NativeString _) as c)) -> Some c
++            | Expr (Constant (String _ as c)) when Config.Flag.safe_string () -> Some c
++            | Expr (Constant c) ->
++                if Var.ISet.mem info.info_possibly_mutable x then None else Some c
++            | _ -> None)
++          None
++          (fun u v ->
++            match u, v with
++            | Some i, Some j when constant_identical ~target i j -> u
++            | _ -> None)
++          x
++      )
+   | Pc c -> Some c
+
+ let the_int info x =
+--- a/compiler/lib/generate.ml
++++ b/compiler/lib/generate.ml
+@@ -1099,6 +1099,7 @@
+       J.call (J.dot (s_var "Math") prim) [ cx; cy ] loc)
+
+ let _ =
++  register_un_prim "%identity" `Pure (fun cx _ -> cx);
+   register_un_prim_ctx "%caml_format_int_special" `Pure (fun ctx cx loc ->
+       let s = J.EBin (J.Plus, str_js_utf8 "", cx) in
+       ocaml_string ~ctx ~loc s);
+@@ -2101,6 +2102,20 @@
+   res
+
+ let init () =
++  (* There are many sets of primitives that have the same behavior in JSOO. The compiler
++     promises to export them as different primitives because there are other systems where
++     their behavior is different. For example, in javascript:
++     - [int]
++     - [int32]
++     - [int32#]
++     - [nativeint]
++     - [nativeint#]
++     have the same representation, and can share the definitions of many primitives.
++
++     [int64] (and [int64#]) have a different representation from these, and so most
++     primitives pertaining to [int64]s are implemented separately as runtime stubs, not as
++     aliases to [int] primitives.
++  *)
+   List.iter
+     ~f:(fun (nm, nm') -> Primitive.alias nm nm')
+     [ "%int_mul", "caml_mul"
+@@ -2120,6 +2135,7 @@
+     ; "caml_int32_shift_right_unsigned", "%int_lsr"
+     ; "caml_int32_of_int", "%identity"
+     ; "caml_int32_to_int", "%identity"
++    ; "caml_checked_int32_to_int", "%identity"
+     ; "caml_int32_of_float", "caml_int_of_float"
+     ; "caml_int32_to_float", "%identity"
+     ; "caml_int32_format", "caml_format_int"
+@@ -2139,6 +2155,7 @@
+     ; "caml_nativeint_shift_right_unsigned", "%int_lsr"
+     ; "caml_nativeint_of_int", "%identity"
+     ; "caml_nativeint_to_int", "%identity"
++    ; "caml_checked_nativeint_to_int", "%identity"
+     ; "caml_nativeint_of_float", "caml_int_of_float"
+     ; "caml_nativeint_to_float", "%identity"
+     ; "caml_nativeint_of_int32", "%identity"
+@@ -2160,9 +2177,13 @@
+     ; "caml_array_set_addr", "caml_array_set"
+     ; "caml_array_unsafe_get_float", "caml_array_unsafe_get"
+     ; "caml_floatarray_unsafe_get", "caml_array_unsafe_get"
++    ; "caml_array_unsafe_get_indexed_by_int32", "caml_array_unsafe_get"
++    ; "caml_array_unsafe_get_indexed_by_nativeint", "caml_array_unsafe_get"
+     ; "caml_array_unsafe_set_float", "caml_array_unsafe_set"
+     ; "caml_array_unsafe_set_addr", "caml_array_unsafe_set"
+     ; "caml_floatarray_unsafe_set", "caml_array_unsafe_set"
++    ; "caml_array_unsafe_set_indexed_by_int32", "caml_array_unsafe_set"
++    ; "caml_array_unsafe_set_indexed_by_nativeint", "caml_array_unsafe_set"
+     ; "caml_check_bound_gen", "caml_check_bound"
+     ; "caml_check_bound_float", "caml_check_bound"
+     ; "caml_alloc_dummy_float", "caml_alloc_dummy"
+--- a/compiler/lib/specialize_js.ml
++++ b/compiler/lib/specialize_js.ml
+@@ -164,6 +164,32 @@
+             ( x
+             , Prim
+                 ( Extern
++                    (( "caml_array_get_indexed_by_int32"
++                     | "caml_array_get_indexed_by_int64"
++                     | "caml_array_get_indexed_by_nativeint")
++                     as prim)
++                , [ y; z ] ) ) ->
++          let conv =
++            match prim with
++            | "caml_array_get_indexed_by_int32" -> "caml_checked_int32_to_int"
++            | "caml_array_get_indexed_by_int64" -> "caml_checked_int64_to_int"
++            | "caml_array_get_indexed_by_nativeint" -> "caml_checked_nativeint_to_int"
++            | _ -> assert false
++          in
++          let z' = Code.Var.fresh () in
++          let r =
++            (Let (z', Prim (Extern conv, [ z ])))
++            (* The recursive call to [aux] will optimize [caml_array_get] into
++               a nominally "unsafe" (but guarded) access.
++            *)
++            :: (Let (x, Prim (Extern "caml_array_get", [ y; Pv z' ])))
++            :: r
++          in
++          aux info checks r acc
++        | Let
++            ( x
++            , Prim
++                ( Extern
+                     (( "caml_array_get"
+                      | "caml_array_get_float"
+                      | "caml_floatarray_get"
+@@ -207,6 +233,32 @@
+             ( x
+             , Prim
+                 ( Extern
++                    (( "caml_array_set_indexed_by_int32"
++                     | "caml_array_set_indexed_by_int64"
++                     | "caml_array_set_indexed_by_nativeint")
++                     as prim)
++                , [ y; z; w ] ) ) ->
++          let conv =
++            match prim with
++            | "caml_array_set_indexed_by_int32" -> "caml_checked_int32_to_int"
++            | "caml_array_set_indexed_by_int64" -> "caml_checked_int64_to_int"
++            | "caml_array_set_indexed_by_nativeint" -> "caml_checked_nativeint_to_int"
++            | _ -> assert false
++          in
++          let z' = Code.Var.fresh () in
++          let r =
++            (Let (z', Prim (Extern conv, [ z ])))
++            (* The recursive call to [aux] will optimize [caml_array_set] into
++               a nominally "unsafe" (but guarded) access.
++            *)
++            :: (Let (x, Prim (Extern "caml_array_set", [ y; Pv z'; w ])))
++            :: r
++          in
++          aux info checks r acc
++        | Let
++            ( x
++            , Prim
++                ( Extern
+                     (( "caml_array_set"
+                      | "caml_array_set_float"
+                      | "caml_floatarray_set"
+--- a/compiler/lib-wasm/generate.ml
++++ b/compiler/lib-wasm/generate.ml
+@@ -159,9 +159,41 @@
+             let l = List.map ~f:transl_prim_arg l in
+             match p, l with
+             | Extern "caml_array_unsafe_get", [ x; y ] -> Memory.gen_array_get x y
++            | Extern (( "caml_array_unsafe_get_indexed_by_int32"
++                      | "caml_array_unsafe_get_indexed_by_int64"
++                      | "caml_array_unsafe_get_indexed_by_nativeint"
++                      ) as prim), [ x; y ] ->
++                let conv =
++                  match prim with
++                  | "caml_array_unsafe_get_indexed_by_int32" -> Memory.unbox_int32
++                  | "caml_array_unsafe_get_indexed_by_int64" ->
++                    fun i ->
++                      let* i = Memory.unbox_int64 i in
++                      return (W.I32WrapI64 i)
++                  | "caml_array_unsafe_get_indexed_by_nativeint" -> Memory.unbox_nativeint
++                  | _ -> assert false
++                in
++                Memory.gen_array_get x (Value.val_int (conv y))
+             | Extern "caml_floatarray_unsafe_get", [ x; y ] -> Memory.float_array_get x y
+             | Extern "caml_array_unsafe_set", [ x; y; z ] ->
+                 seq (Memory.gen_array_set x y z) Value.unit
++            | Extern (( "caml_array_unsafe_set_indexed_by_int32"
++                      | "caml_array_unsafe_set_indexed_by_int64"
++                      | "caml_array_unsafe_set_indexed_by_nativeint"
++                      ) as prim), [ x; y; z ] ->
++                let conv =
++                  match prim with
++                  | "caml_array_unsafe_set_indexed_by_int32" -> Memory.unbox_int32
++                  | "caml_array_unsafe_set_indexed_by_int64" ->
++                    fun i ->
++                      let* i = Memory.unbox_int64 i in
++                      return (W.I32WrapI64 i)
++                  | "caml_array_unsafe_set_indexed_by_nativeint" -> Memory.unbox_nativeint
++                  | _ -> assert false
++                in
++                seq
++                  (Memory.gen_array_set x (Value.val_int (conv y)) z)
++                  Value.unit
+             | Extern "caml_array_unsafe_set_addr", [ x; y; z ] ->
+                 seq (Memory.array_set x y z) Value.unit
+             | Extern "caml_floatarray_unsafe_set", [ x; y; z ] ->
+@@ -1071,7 +1103,8 @@
+     [ "caml_make_array", "%identity"
+     ; "caml_ensure_stack_capacity", "%identity"
+     ; "caml_callback", "caml_trampoline"
+     ; "caml_make_array", "caml_array_of_uniform_array"
++    ; "caml_checked_nativeint_to_int", "caml_checked_int32_to_int"
+     ]
+   in
+
+--- a/runtime/js/int64.js
++++ b/runtime/js/int64.js
+@@ -270,6 +270,27 @@
+ //Provides: caml_int64_to_int32 const
+ function caml_int64_to_int32 (x) { return x.toInt() }
+
++//Provides: caml_checked_int64_to_int const
++//Requires: caml_int64_of_int32, caml_failwith
++function caml_checked_int64_to_int (x) {
++  if (x.compare(caml_int64_of_int32(0x7FFFFFFF)) == 1
++    || x.compare(caml_int64_of_int32(0x80000000)) == -1)
++    caml_failwith("error while converting from int64")
++  return x.toInt()
++}
++
++//Provides: caml_array_unsafe_get_indexed_by_int64 (mutable, const)
++//Requires: caml_int64_to_int32, caml_array_get
++function caml_array_unsafe_get_indexed_by_int64 (array, index) {
++  return caml_array_get(array, caml_int64_to_int32(index));
++}
++
++//Provides: caml_array_unsafe_set_indexed_by_int64 (mutable, const, mutable)
++//Requires: caml_int64_to_int32, caml_array_set
++function caml_array_unsafe_set_indexed_by_int64 (array, index, newval) {
++  return caml_array_set(array, caml_int64_to_int32(index), newval)
++}
++
+ //Provides: caml_int64_to_float const
+ function caml_int64_to_float (x) { return x.toFloat () }
+
+--- a/runtime/wasm/int32.wat
++++ b/runtime/wasm/int32.wat
+@@ -113,6 +113,20 @@
+          (call $parse_int
+             (local.get $v) (i32.const 32) (global.get $INT32_ERRMSG))))
+
++   (data $integer_conversion_error "error while converting from int32")
++
++   (func $caml_checked_int32_to_int (export "caml_checked_int32_to_int")
++      (param (ref eq)) (result (ref eq))
++      (local $i i32)
++      (local.set $i
++         (struct.get $int32 1 (ref.cast (ref $int32) (local.get 0))))
++      (if (i32.or (i32.gt_s (local.get $i) (i32.const  0x3FFFFFFF))
++                  (i32.lt_s (local.get $i) (i32.const -0x40000000)))
++          (then (call $caml_failwith
++                      (array.new_data $bytes $integer_conversion_error
++                                      (i32.const 0) (i32.const 33)))))
++      (ref.i31 (local.get $i)))
++
+    (export "caml_nativeint_compare" (func $caml_int32_compare))
+    (func $caml_int32_compare (export "caml_int32_compare")
+       (param (ref eq)) (param (ref eq)) (result (ref eq))
+--- a/runtime/wasm/int64.wat
++++ b/runtime/wasm/int64.wat
+@@ -328,4 +328,17 @@
+                               (local.get $uppercase)))))))))
+       (local.get $s))
+
++   (data $integer_conversion_error "error while converting from int64")
++
++   (func $caml_checked_int64_to_int (export "caml_checked_int64_to_int")
++      (param (ref eq)) (result (ref eq))
++      (local $i i64)
++      (local.set $i
++         (struct.get $int64 1 (ref.cast (ref $int64) (local.get 0))))
++      (if (i32.or (i64.gt_s (local.get $i) (i64.const  0x3FFFFFFF))
++                  (i64.lt_s (local.get $i) (i64.const -0x40000000)))
++          (then (call $caml_failwith
++                      (array.new_data $bytes $integer_conversion_error
++                                      (i32.const 0) (i32.const 33)))))
++      (ref.i31 (i32.wrap_i64 (local.get $i))))
+ )
