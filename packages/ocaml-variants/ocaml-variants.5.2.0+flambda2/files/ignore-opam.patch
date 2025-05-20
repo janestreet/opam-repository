@@ -1,0 +1,14 @@
+--- a/Makefile.common-jst
++++ b/Makefile.common-jst
+@@ -150,9 +150,9 @@ $(ocamldir)/otherlibs/dune:
+ 
+ $(ocamldir)/dune.runtime_selection:
+ 	if [ "$(RUNTIME_DIR)" = "runtime4" ]; then \
+-          echo "(dirs (:standard \ runtime debugger))" > $@; \
++          echo "(dirs (:standard \ runtime debugger init_deps dune-3.9.3 menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa ocaml-4.14.2))" > $@; \
+ 	else \
+-          echo "(dirs (:standard \ runtime4 debugger4))" > $@; \
++          echo "(dirs (:standard \ runtime4 debugger4 init_deps dune-3.9.3 menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa ocaml-4.14.2))" > $@; \
+ 	fi
+ 
+ _build/_bootinstall: Makefile.config $(dune_config_targets)
