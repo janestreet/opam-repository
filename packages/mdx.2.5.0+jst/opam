@@ -1,6 +1,6 @@
 opam-version: "2.0"
 name: "mdx"
-version: "2.5.0"
+version: "2.5.0+jst"
 synopsis: "Executable code blocks inside markdown files"
 description: """\
 `ocaml-mdx` allows to execute code blocks inside markdown files.
@@ -63,3 +63,10 @@ url {
   ]
 }
 x-commit-hash: "1f83f73e06233ea8745cd0c9473613d40e6999bc"
+patches: [ "ast.patch" ]
+extra-files: [
+  [
+    "ast.patch"
+    "sha256=f205c25c25c6515d0b5b747f08a1e8398d8cee164a3f52eee668b1150f7690e5"
+  ]
+]
