@@ -1,0 +1,133 @@
+:100644 100644 8552415c 00000000 M	lib/top/compat_top.ml
+:100644 100644 426d1b9e 00000000 M	lib/top/compat_top.mli
+:100644 100644 b64c1bf8 00000000 M	lib/top/mdx_top.ml
+
+diff --git a/lib/top/compat_top.ml b/lib/top/compat_top.ml
+index 8552415c..c294a081 100644
+--- a/lib/top/compat_top.ml
++++ b/lib/top/compat_top.ml
+@@ -14,10 +14,11 @@ let lookup_value v env =
+ 
+ let find_value env loc id =
+ #if OCAML_VERSION >= (4, 10, 0)
+-  Env.lookup_value ~loc id env
++  Env.lookup_value ~loc id env 
+ #else
+   Typetexp.find_value env loc id
+ #endif
++|> fun (p,w,_,_) -> p,w
+ 
+ let find_type env loc id =
+ #if OCAML_VERSION >= (4, 10, 0)
+@@ -39,6 +40,7 @@ let find_module env loc id =
+ #else
+   Typetexp.find_module env loc id
+ #endif
++|> fun (p,w,_) -> p,w
+ 
+ let find_modtype env loc id =
+ #if OCAML_VERSION >= (4, 10, 0)
+@@ -53,6 +55,8 @@ let find_class env loc id =
+ #else
+   Typetexp.find_class env loc id
+ #endif
++|> fun (p,w,_) -> p,w
++
+ 
+ let find_class_type env loc id =
+ #if OCAML_VERSION >= (4, 10, 0)
+@@ -89,6 +93,8 @@ let extension_constructor
+   let ext_args =
+     Cstr_tuple ext_args
+   in
++  let ext_shape = Constructor_uniform_value in
++  let ext_constant = true in
+   { ext_type_path
+   ; ext_type_params
+   ; ext_args
+@@ -96,10 +102,12 @@ let extension_constructor
+   ; ext_private
+   ; ext_loc
+   ; ext_attributes
++  ; ext_shape
++  ; ext_constant
+ #if OCAML_VERSION >= (5, 3, 0)
+   ; ext_uid = Uid.mk ~current_unit:None
+ #elif OCAML_VERSION >= (4, 11, 0)
+-  ; ext_uid = Uid.mk ~current_unit:"mdx"
++  ; ext_uid = Uid.mk ~current_unit:(Some (Compilation_unit.of_string "mdx"))
+ #endif
+   }
+ 
+@@ -122,7 +130,7 @@ let match_env
+     env =
+   ignore (constraints, persistent, copy_types, value_unbound, module_unbound);
+   match env with
+-  | Env.Env_value (summary, id, _) ->
++  | Env.Env_value (summary, id, _, _) ->
+     value summary id
+   | Env_empty -> empty ()
+   | Env_open (summary, pid) ->
+@@ -294,7 +302,8 @@ let mk_fun loc exp =
+     { Parsetree.pparam_loc= loc
+     ; pparam_desc= Pparam_val (label, default, punit) }
+   in
+-  Ast_helper.Exp.function_ [param] None (Pfunction_body exp)
++  let function_constraint : Parsetree.function_constraint = { mode_annotations = []; ret_mode_annotations = []; ret_type_constraint = None } in
++  Ast_helper.Exp.function_ [param] function_constraint (Pfunction_body exp)
+ #else
+   Ast_helper.Exp.fun_ label default punit exp
+ #endif
+diff --git a/lib/top/compat_top.mli b/lib/top/compat_top.mli
+index 426d1b9e..f940191f 100644
+--- a/lib/top/compat_top.mli
++++ b/lib/top/compat_top.mli
+@@ -28,7 +28,7 @@ val type_structure :
+ val extension_constructor :
+   ext_type_path:Path.t ->
+   ext_type_params:Types.type_expr list ->
+-  ext_args:Types.type_expr list ->
++  ext_args:Types.constructor_argument list ->
+   ext_ret_type:Types.type_expr option ->
+   ext_private:Asttypes.private_flag ->
+   ext_loc:Location.t ->
+diff --git a/lib/top/mdx_top.ml b/lib/top/mdx_top.ml
+index b64c1bf8..2b052259 100644
+--- a/lib/top/mdx_top.ml
++++ b/lib/top/mdx_top.ml
+@@ -212,7 +212,7 @@ module Rewrite = struct
+     | _ -> path
+ 
+   let is_persistent_value env longident =
+-    let is_persistent_path p = Ident.persistent (get_id_in_path p) in
++    let is_persistent_path p = Ident.is_global_or_predef (get_id_in_path p) in
+     try is_persistent_path (fst (Compat_top.lookup_value longident env))
+     with Not_found -> false
+ 
+@@ -235,7 +235,7 @@ module Rewrite = struct
+   let item ts env pstr_item tstr_item =
+     match (pstr_item.Parsetree.pstr_desc, tstr_item.Typedtree.str_desc) with
+     | ( Parsetree.Pstr_eval (e, _),
+-        Typedtree.Tstr_eval ({ Typedtree.exp_type = typ; _ }, _) ) -> (
++      Typedtree.Tstr_eval ({ Typedtree.exp_type = typ; _ }, _, _) ) -> (
+         match Compat_top.ctype_get_desc typ with
+         | Types.Tconstr (path, _, _) -> apply ts env pstr_item path e
+         | _ -> pstr_item)
+@@ -523,7 +523,7 @@ let mty_path =
+   let open Types in
+   function
+   | Mty_alias path -> Some path
+-  | Mty_ident _ | Mty_signature _ | Mty_functor _ -> None
++  | Mty_ident _ | Mty_signature _ | Mty_functor _ | _ -> None
+ 
+ let map_sig_attributes ~f =
+   let open Types in
+@@ -676,7 +676,7 @@ let init ~verbose:v ~silent:s ~verbose_findlib ~directives ~packages ~predicates
+   t
+ 
+ let envs = Hashtbl.create 8
+-let is_predef_or_global id = Ident.is_predef id || Ident.global id
++let is_predef_or_global id = Ident.is_predef id || Ident.is_global id
+ 
+ let rec save_summary acc s =
+   let default_case summary = save_summary acc summary in
