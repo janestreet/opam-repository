@@ -29,12 +29,12 @@ let () =
 ;;
 ```
 
-Our switch now supports developer tooling such as `ocamlformat` or `merlin`!
-Be sure to install versions of those tools marked with `+jst`, and enjoy
-editor support in VSCode, Emacs and Vim:
+Our switch now supports developer tooling such as `ocamlformat` or `merlin`! By
+default, `opam` should install versions of those tools marked with `+jst`,
+allowing you to enjoy editor support in VSCode, Emacs and Vim:
 
 ```sh
-opam install ocamlformat.0.26.2+jst merlin.5.2.1-502+jst ocaml-lsp-server.1.19.0+jst utop.2.14.0+jst
+opam install ocamlformat merlin ocaml-lsp-server utop
 ```
 
 Our libraries such as Base and Core contain various functions to deal with local values. Install them with `opam install`,
