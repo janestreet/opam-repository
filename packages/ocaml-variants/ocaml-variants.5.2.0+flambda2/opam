@@ -85,8 +85,10 @@ extra-source "init-menhir.tar.gz" {
     "sha512=620ff3443143535e03ac98c5e8ee2ddf9ba48f8cfe441302118def1da3e03ffac7f48d4d4cb129766b625ecad0fb341da1baa0169dee8b6d07a5b0bbb735cf2f"
   ]
 }
-patches: [ "ignore-opam.patch" "macos.patch" ]
+patches: [ "ignore-opam.patch" "macos.patch" "remove-sigwait-check.patch" "macos_x86.patch" ]
 extra-files: [
   ["ignore-opam.patch" "sha256=45a70e1159783d503e56aa02cfb7f8bf75451340935fdf45cb6c5005a829eb6a"]
   ["macos.patch" "sha256=ef572f4878469f52c715213e0a6e24e278b7c9fcc7523336819df392e80451b7"]
+  ["remove-sigwait-check.patch" "sha256=589d10929a4402a0f45ba007b5e46dd88c8c87d9cf4ec26afd6ff883de463aed"]
+  ["macos_x86.patch" "sha256=a5575d6f806f1b4d7efbea193cb74fb4961e2511a66b189fa1beb83c456468a2"]
 ]
