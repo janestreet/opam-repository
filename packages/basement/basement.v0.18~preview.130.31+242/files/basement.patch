@@ -1,0 +1,79 @@
+diff --git a/src/capsule_condition.h b/src/capsule_condition.h
+index 36b1355..65f15f7 100644
+--- a/src/capsule_condition.h
++++ b/src/capsule_condition.h
+@@ -12,6 +12,66 @@
+ #include <errno.h>
+ #include <limits.h>
+ #include <unistd.h>
++
++#ifdef __APPLE__
++#include "caml/mlvalues.h"
++#include "caml/memory.h"
++#include "caml/fail.h"
++#include "caml/alloc.h"
++#include "caml/custom.h"
++#include "caml/domain_state.h"
++#include "caml/signals.h"
++#include "caml/sys.h"
++
++#include "capsule_mutex.h"
++
++CAMLextern value caml_ml_condition_new(value unit);
++CAMLextern value caml_ml_condition_wait(value wcond, value wmut);
++CAMLextern value caml_ml_condition_signal(value wrapper);
++CAMLextern value caml_ml_condition_broadcast(value wrapper);
++
++typedef struct {
++  _Atomic uint64_t counter;
++} * capsule_condition;
++#define Condition_val(v) (*((capsule_condition *)Data_custom_val(v)))
++
++#define CONDITION_SUCCESS 0
++
++Caml_inline int capsule_condition_signal(capsule_condition cond) {
++  value wrapper = caml_alloc_custom(NULL, sizeof(capsule_condition), 0, 1);
++  *((capsule_condition *)Data_custom_val(wrapper)) = cond;
++  caml_ml_condition_signal(wrapper);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_broadcast(capsule_condition cond) {
++  value wrapper = caml_alloc_custom(NULL, sizeof(capsule_condition), 0, 1);
++  *((capsule_condition *)Data_custom_val(wrapper)) = cond;
++  caml_ml_condition_broadcast(wrapper);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_wait(capsule_condition cond, capsule_mutex mut) {
++  value wcond = caml_alloc_custom(NULL, sizeof(capsule_condition), 0, 1);
++  value wmut = caml_alloc_custom(NULL, sizeof(capsule_mutex), 0, 1);
++  *((capsule_condition *)Data_custom_val(wcond)) = cond;
++  *((capsule_mutex *)Data_custom_val(wmut)) = mut;
++  caml_ml_condition_wait(wcond, wmut);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_create(capsule_condition *res) {
++  value unit = Val_unit;
++  value wrapper = caml_ml_condition_new(unit);
++  *res = Condition_val(wrapper);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_destroy(capsule_condition c) {
++  return CONDITION_SUCCESS;
++}
++
++#else
+ #include <sys/syscall.h>
+ #include <linux/futex.h>
+ 
+@@ -87,4 +147,6 @@ Caml_inline int capsule_condition_destroy(capsule_condition c) {
+   return CONDITION_SUCCESS;
+ }
+ 
+-#endif /* CAML_INTERNALS */
++#endif /* __APPLE__ */
++
++#endif /* CAML_INTERNALS */
