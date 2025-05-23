@@ -26,5 +26,5 @@ checksum: "sha256=aa1ea68d13e766e1ad9fd0d366fde032597b19b9cc2635407de5f16afbf3df
 }
 patches: [ "ocaml_intrinsics_kernel.patch" ]
 extra-files: [
-  ["ocaml_intrinsics_kernel.patch" "sha256=d6f5d049a9601ce1cc6e5a6af55ca4e28a338e9649e8e4f1f2aa0c3567037511"]
+  ["ocaml_intrinsics_kernel.patch" "sha256=de04a5cff937bcb1ac7f6a3c48d3651659f6b4b40cbe5c63629e6cceb6dba45a"]
 ]
