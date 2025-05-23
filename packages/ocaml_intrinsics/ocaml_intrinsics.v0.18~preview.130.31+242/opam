@@ -25,3 +25,7 @@ url {
 src: "https://github.com/janestreet/ocaml_intrinsics/archive/2294e2932707d7a0867d83bfe2b86ba395cdd888.tar.gz"
 checksum: "sha256=5b2bbc09f2ef76378a565760b340f205f16c631f6767687b580f81ed4595f1fc"
 }
+patches: [ "ocaml_intrinsics_kernel.patch" ]
+extra-files: [
+  ["ocaml_intrinsics_kernel.patch" "sha256=d6f5d049a9601ce1cc6e5a6af55ca4e28a338e9649e8e4f1f2aa0c3567037511"]
+]
