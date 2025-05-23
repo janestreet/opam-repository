@@ -1,3 +1,78 @@
+diff --git a/src/float.ml b/src/float.ml
+index 3329161..ceff59c 100644
+--- a/src/float.ml
++++ b/src/float.ml
+@@ -4,7 +4,7 @@ external min
+   -> (float[@unboxed])
+   @@ portable
+   = "caml_sse2_float64_min_bytecode" "caml_sse2_float64_min"
+-[@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++[@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ 
+ external max
+   :  (float[@unboxed])
+@@ -12,7 +12,7 @@ external max
+   -> (float[@unboxed])
+   @@ portable
+   = "caml_sse2_float64_max_bytecode" "caml_sse2_float64_max"
+-[@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++[@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ 
+ module Unboxed = struct
+   external min
+@@ -21,7 +21,7 @@ module Unboxed = struct
+     -> (float#[@unboxed])
+     @@ portable
+     = "caml_sse2_float64_min_bytecode" "caml_sse2_float64_min"
+-  [@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++  [@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ 
+   external max
+     :  (float#[@unboxed])
+@@ -29,5 +29,5 @@ module Unboxed = struct
+     -> (float#[@unboxed])
+     @@ portable
+     = "caml_sse2_float64_max_bytecode" "caml_sse2_float64_max"
+-  [@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++  [@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ end
+diff --git a/src/float.mli b/src/float.mli
+index 6cea0ad..9d81a6c 100644
+--- a/src/float.mli
++++ b/src/float.mli
+@@ -17,7 +17,7 @@ external min
+   -> (float[@unboxed])
+   -> (float[@unboxed])
+   = "caml_sse2_float64_min_bytecode" "caml_sse2_float64_min"
+-[@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++[@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ 
+ (** Equivalent to [if x > y then x else y].
+ 
+@@ -28,7 +28,7 @@ external max
+   -> (float[@unboxed])
+   -> (float[@unboxed])
+   = "caml_sse2_float64_max_bytecode" "caml_sse2_float64_max"
+-[@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++[@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ 
+ module Unboxed : sig
+   external min
+@@ -36,12 +36,12 @@ module Unboxed : sig
+     -> (float#[@unboxed])
+     -> (float#[@unboxed])
+     = "caml_sse2_float64_min_bytecode" "caml_sse2_float64_min"
+-  [@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++  [@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ 
+   external max
+     :  (float#[@unboxed])
+     -> (float#[@unboxed])
+     -> (float#[@unboxed])
+     = "caml_sse2_float64_max_bytecode" "caml_sse2_float64_max"
+-  [@@noalloc] [@@builtin] [@@no_effects] [@@no_coeffects]
++  [@@noalloc] (* [@@builtin] *) [@@no_effects] [@@no_coeffects]
+ end
 diff --git a/src/int.ml b/src/int.ml
 index 424d434..12ef966 100644
 --- a/src/int.ml
