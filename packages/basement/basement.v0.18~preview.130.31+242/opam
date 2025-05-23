@@ -27,5 +27,5 @@ checksum: "sha256=9ae01de839a169d91311960df9ae1c28241a814394fe76cab43ce451c50659
 }
 patches: [ "basement.patch" ]
 extra-files: [
-  ["basement.patch" "sha256=832cd8dd734328d1f83b20022fec839c6edad4718bcf2b538ba67b5b3952e648"]
+  ["basement.patch" "sha256=54ce6df3fee184e7d98a7ecc38387c0ead75b03a0027e0e9b6111412a78c2a8d"]
 ]
