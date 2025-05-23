@@ -77,3 +77,4 @@ index 36b1355..65f15f7 100644
 +#endif /* __APPLE__ */
 +
 +#endif /* CAML_INTERNALS */
+\ No newline at end of file
