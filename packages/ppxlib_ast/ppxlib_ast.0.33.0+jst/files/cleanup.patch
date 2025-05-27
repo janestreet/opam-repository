@@ -1,9 +1,9 @@
 --- /dev/null
 +++ b/cleanup.sh
 @@ -0,0 +1,23 @@
-+#!/usr/bin/bash -eu
++#!/usr/bin/env bash
 +
-+set -o pipefail
++set -euo pipefail
 +
 +rm -rf bench dev doc examples metaquot metaquot_lifters old_rtd_doc print-diff runner runner_as_ppx src test traverse ppxlib*.opam
 +

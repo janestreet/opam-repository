@@ -25,3 +25,7 @@ url {
 src: "https://github.com/janestreet/basement/archive/475fb747fbf2c23144a51a60fe0bc14d8354df3e.tar.gz"
 checksum: "sha256=9ae01de839a169d91311960df9ae1c28241a814394fe76cab43ce451c5065999"
 }
+patches: [ "basement.patch" ]
+extra-files: [
+  ["basement.patch" "sha256=54ce6df3fee184e7d98a7ecc38387c0ead75b03a0027e0e9b6111412a78c2a8d"]
+]

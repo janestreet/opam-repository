@@ -1,0 +1,203 @@
+diff --git a/src/capsule_condition.h b/src/capsule_condition.h
+index 36b1355..65f15f7 100644
+--- a/src/capsule_condition.h
++++ b/src/capsule_condition.h
+@@ -12,6 +12,66 @@
+ #include <errno.h>
+ #include <limits.h>
+ #include <unistd.h>
++
++#ifdef __APPLE__
++#include "caml/mlvalues.h"
++#include "caml/memory.h"
++#include "caml/fail.h"
++#include "caml/alloc.h"
++#include "caml/custom.h"
++#include "caml/domain_state.h"
++#include "caml/signals.h"
++#include "caml/sys.h"
++
++#include "capsule_mutex.h"
++
++CAMLextern value caml_ml_condition_new(value unit);
++CAMLextern value caml_ml_condition_wait(value wcond, value wmut);
++CAMLextern value caml_ml_condition_signal(value wrapper);
++CAMLextern value caml_ml_condition_broadcast(value wrapper);
++
++typedef struct {
++  _Atomic uint64_t counter;
++} * capsule_condition;
++#define Condition_val(v) (*((capsule_condition *)Data_custom_val(v)))
++
++#define CONDITION_SUCCESS 0
++
++Caml_inline int capsule_condition_signal(capsule_condition cond) {
++  value wrapper = caml_alloc_custom(NULL, sizeof(capsule_condition), 0, 1);
++  *((capsule_condition *)Data_custom_val(wrapper)) = cond;
++  caml_ml_condition_signal(wrapper);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_broadcast(capsule_condition cond) {
++  value wrapper = caml_alloc_custom(NULL, sizeof(capsule_condition), 0, 1);
++  *((capsule_condition *)Data_custom_val(wrapper)) = cond;
++  caml_ml_condition_broadcast(wrapper);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_wait(capsule_condition cond, capsule_mutex mut) {
++  value wcond = caml_alloc_custom(NULL, sizeof(capsule_condition), 0, 1);
++  value wmut = caml_alloc_custom(NULL, sizeof(capsule_mutex), 0, 1);
++  *((capsule_condition *)Data_custom_val(wcond)) = cond;
++  *((capsule_mutex *)Data_custom_val(wmut)) = mut;
++  caml_ml_condition_wait(wcond, wmut);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_create(capsule_condition *res) {
++  value unit = Val_unit;
++  value wrapper = caml_ml_condition_new(unit);
++  *res = Condition_val(wrapper);
++  return CONDITION_SUCCESS;
++}
++
++Caml_inline int capsule_condition_destroy(capsule_condition c) {
++  return CONDITION_SUCCESS;
++}
++
++#else
+ #include <sys/syscall.h>
+ #include <linux/futex.h>
+ 
+@@ -87,4 +147,6 @@ Caml_inline int capsule_condition_destroy(capsule_condition c) {
+   return CONDITION_SUCCESS;
+ }
+ 
+-#endif /* CAML_INTERNALS */
++#endif /* __APPLE__ */
++
++#endif /* CAML_INTERNALS */
+\ No newline at end of file
+diff --git a/src/capsule_mutex.h b/src/capsule_mutex.h
+index 8153e4d..d047011 100644
+--- a/src/capsule_mutex.h
++++ b/src/capsule_mutex.h
+@@ -6,11 +6,16 @@
+ 
+ #include <assert.h>
+ #include <stdbool.h>
+-#include <semaphore.h>
+ #include <string.h>
+ #include <errno.h>
+ #include <pthread.h>
+ 
++#ifdef __APPLE__
++#include <dispatch/dispatch.h>
++#else
++#include <semaphore.h>
++#endif
++
+ #include "caml/mlvalues.h"
+ #include "caml/memory.h"
+ 
+@@ -71,7 +76,11 @@ static bool capsule_fiber_descends_from(fiber_t parent) {
+ }
+ 
+ typedef struct {
++#ifdef __APPLE__
++  dispatch_semaphore_t sem;
++#else
+   sem_t sem;
++#endif
+   /* ID of the fiber that has locked the mutex. FIBER_NONE if the mutex is unlocked. */
+   _Atomic fiber_t owner;
+ } * capsule_mutex;
+@@ -81,6 +90,28 @@ typedef struct {
+ 
+ Caml_inline int capsule_mutex_lock(capsule_mutex mut) {
+ 
++#ifdef __APPLE__
++  if (dispatch_semaphore_wait(mut->sem, DISPATCH_TIME_NOW) == 0) {
++    atomic_store_explicit(&mut->owner, capsule_fiber_current(), memory_order_relaxed);
++    return MUTEX_SUCCESS;
++  }
++
++  if (capsule_fiber_descends_from(
++          atomic_load_explicit(&mut->owner, memory_order_relaxed))) {
++    // In this case, we did not race on owner
++    return EDEADLK;
++  }
++
++  caml_enter_blocking_section();
++  long rc = dispatch_semaphore_wait(mut->sem, DISPATCH_TIME_FOREVER);
++  caml_leave_blocking_section();
++
++  if (rc == 0) {
++    atomic_store_explicit(&mut->owner, capsule_fiber_current(), memory_order_relaxed);
++    return MUTEX_SUCCESS;
++  }
++  return ETIMEDOUT; // Should not happen with DISPATCH_TIME_FOREVER
++#else
+   if (sem_trywait(&mut->sem) == MUTEX_SUCCESS) {
+     atomic_store_explicit(&mut->owner, capsule_fiber_current(), memory_order_relaxed);
+     return MUTEX_SUCCESS;
+@@ -107,6 +138,7 @@ Caml_inline int capsule_mutex_lock(capsule_mutex mut) {
+     return capsule_mutex_lock(mut);
+   }
+   return errno;
++#endif
+ }
+ 
+ Caml_inline int capsule_mutex_unlock(capsule_mutex mut) {
+@@ -116,10 +148,15 @@ Caml_inline int capsule_mutex_unlock(capsule_mutex mut) {
+     return EPERM;
+   }
+   atomic_store_explicit(&mut->owner, FIBER_NONE, memory_order_relaxed);
++#ifdef __APPLE__
++  dispatch_semaphore_signal(mut->sem);
++  return MUTEX_SUCCESS;
++#else
+   if (sem_post(&mut->sem) == MUTEX_SUCCESS) {
+     return MUTEX_SUCCESS;
+   }
+   return errno;
++#endif
+ }
+ 
+ Caml_inline int capsule_mutex_create(capsule_mutex *res) {
+@@ -128,21 +165,35 @@ Caml_inline int capsule_mutex_create(capsule_mutex *res) {
+     return ENOMEM;
+   }
+   atomic_store_explicit(&mut->owner, FIBER_NONE, memory_order_relaxed);
++#ifdef __APPLE__
++  mut->sem = dispatch_semaphore_create(1);
++  if (mut->sem == NULL) {
++    caml_stat_free(mut);
++    return ENOMEM;
++  }
++#else
+   // 0 = thread-shared, 1 = initial value
+   if (sem_init(&mut->sem, 0, 1) != MUTEX_SUCCESS) {
+     caml_stat_free(mut);
+     return errno;
+   }
++#endif
+   *res = mut;
+   return MUTEX_SUCCESS;
+ }
+ 
+ Caml_inline int capsule_mutex_destroy(capsule_mutex mut) {
++#ifdef __APPLE__
++  dispatch_release(mut->sem);
++  caml_stat_free(mut);
++  return MUTEX_SUCCESS;
++#else
+   if (sem_close(&mut->sem) == MUTEX_SUCCESS) {
+     caml_stat_free(mut);
+     return MUTEX_SUCCESS;
+   }
+   return errno;
++#endif
+ }
+ 
+ #endif /* CAML_INTERNALS */
