@@ -22,7 +22,7 @@ bug-reports: "https://github.com/ocaml/ocaml-lsp/issues"
 depends: [
   "dune"                {>= "3.0"}
   "yojson"
-  "base"                {= "v0.18~preview.130.31+242"}
+  "base"                {>= "v0.16.0"}
   "lsp"                 {= version & = "1.19.0+jst"}
   "jsonrpc"             {= version & = "1.19.0+jst"}
   "re"                  {>= "1.5.0"}
@@ -57,8 +57,8 @@ dev-repo: "git+https://github.com/ocaml/ocaml-lsp.git"
 x-commit-hash: "45f5ddac12bb580b4ecaec2d93ee7fac2c903aff"
 url {
   src:
-    "https://github.com/janestreet/ocaml-lsp/archive/1b6dd3ae5df2178b185d6bd46378ea3136c6518d.tar.gz"
+    "https://github.com/janestreet/ocaml-lsp/archive/32e0cdbd3ea53b4131b9ff2c891fd52f94a3933a.tar.gz"
   checksum:
-    "sha256=41adf36ff28356cf5763c89d0bffe23fc63679303d7333d999c610f19506565c"
+    "sha256=ee55925b8f9137a172a30b073f7a0d2190a0e798c3e5193b0081b974ee004830"
 }
 

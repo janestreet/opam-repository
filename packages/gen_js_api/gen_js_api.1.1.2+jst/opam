@@ -23,7 +23,7 @@ depends: [
   "ppxlib"               {>= "0.26" & = "0.33.0+jst"}
   "js_of_ocaml-compiler" {with-test & = "6.0.1+jst"}
   "conf-npm"             {with-test}
-  "ojs"                  {= "1.1.2+jst"}
+  "ojs"                  {= "1.1.2" & = "1.1.2+jst"}
   "odoc"                 {with-doc}
 "ppxlib_jane"
 ]

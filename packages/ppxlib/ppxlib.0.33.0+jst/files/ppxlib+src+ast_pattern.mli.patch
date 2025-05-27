@@ -1,6 +1,6 @@
 --- a/src/ast_pattern.mli
 +++ b/src/ast_pattern.mli
-@@ -171,6 +171,61 @@ include module type of Ast_pattern_gener
+@@ -171,6 +171,67 @@ include module type of Ast_pattern_gener
          (expression, 'a, 'c) t
      ]} *)
  
@@ -34,6 +34,12 @@
 +  -> expr:(expression, 'b, 'c) t
 +  -> (value_binding, 'a, 'c) t
 +
++val value_description
++  :  name:(string, 'a, 'b) t
++  -> type_:(core_type, 'b, 'c) t
++  -> prim:(string list, 'c, 'd) t
++  -> (value_description, 'a, 'd) t
++
 +val ppat_constraint
 +  :  (pattern, 'a, 'b) t
 +  -> (core_type, 'b, 'c) t
@@ -62,7 +68,7 @@
  val true_ : (bool, 'a, 'a) t
  val false_ : (bool, 'a, 'a) t
  val eint : (int, 'a, 'b) t -> (expression, 'a, 'b) t
-@@ -189,6 +244,8 @@ val pint64 : (int64, 'a, 'b) t -> (patte
+@@ -189,6 +250,8 @@ val pint64 : (int64, 'a, 'b) t -> (patte
  val pnativeint : (nativeint, 'a, 'b) t -> (pattern, 'a, 'b) t
  val single_expr_payload : (expression, 'a, 'b) t -> (payload, 'a, 'b) t
  
@@ -71,7 +77,7 @@
  val no_label :
    (expression, 'a, 'b) t -> (Asttypes.arg_label * expression, 'a, 'b) t
  
-@@ -205,6 +262,9 @@ val elist : (expression, 'a -> 'a, 'b) t
+@@ -205,6 +268,9 @@ val elist : (expression, 'a -> 'a, 'b) t
  val esequence :
    (expression, 'a -> 'a, 'b) t -> (expression, 'b list -> 'c, 'c) t
  

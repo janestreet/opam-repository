@@ -64,6 +64,7 @@ url {
 }
 x-commit-hash: "563d5651e877c6f7d5561f9d8ca93fca05b07d07"
 patches: [
+  "ppxlib+doc+writing_ppxs.mld.patch"
   "ppxlib+metaquot+ppxlib_metaquot.ml.patch"
   "ppxlib+runner_as_ppx+ppxlib_runner_as_ppx.ml.patch"
   "ppxlib+src+ast_builder.ml.patch"
@@ -100,6 +101,10 @@ patches: [
 ]
 extra-files: [
   [
+    "ppxlib+doc+writing_ppxs.mld.patch"
+    "sha256=ce1d3c2e9ede3a6dc24b4a1bf23a5758af651bf62f7f4ee856a9b6c36047c0ab"
+  ]
+  [
     "ppxlib+metaquot+ppxlib_metaquot.ml.patch"
     "sha256=003d0352f4e730aeb961cd992b4291640ca0812dc82026841d94ab9d5a629714"
   ]
@@ -121,11 +126,11 @@ extra-files: [
   ]
   [
     "ppxlib+src+ast_pattern.ml.patch"
-    "sha256=11711611e05630c1282180dc8a748a76545f67e14ed7ad6c6aa4fd94589cfdd3"
+    "sha256=34324b2f590b27456871f640c8744d56f9fcb54599dba1becacc14e444c84239"
   ]
   [
     "ppxlib+src+ast_pattern.mli.patch"
-    "sha256=acc7476fce28e593d837192562212d1dbda460d3f82ada80f9154a92ffec162b"
+    "sha256=3a3ac6aa7373ddc5989e107a6993753386a14eff040ea8c77f1b7fb173d5e5aa"
   ]
   [
     "ppxlib+src+ast_traverse.ml.patch"
@@ -133,11 +138,11 @@ extra-files: [
   ]
   [
     "ppxlib+src+attribute.ml.patch"
-    "sha256=740aab4fc2195bf7acf102ab11e7bda249434595ae19928c6adf759ecabc43ec"
+    "sha256=74ecaaf97f58fa45ddf1c8600c9865ef23dfbba32d359f6d97181f0cdc57c835"
   ]
   [
     "ppxlib+src+attribute.mli.patch"
-    "sha256=496836086c405c9b096acc97c1830d37ad615c10be270e1b037fcf55c0118b44"
+    "sha256=96ba1295d087f5f44d7af09ac34afb92df59508ea888f03a7c2acba084c4cb7e"
   ]
   [
     "ppxlib+src+cinaps+ppxlib_cinaps_helpers.ml.patch"
@@ -161,11 +166,11 @@ extra-files: [
   ]
   [
     "ppxlib+src+context_free.ml.patch"
-    "sha256=f0e0859083214f1ce8d9def7df0956e77613846375713b9d9f8b3eb226515c27"
+    "sha256=5c8d14144863659cb8cbb32360511e32921fa1ae761ec60ec9ab8382bd5f58e5"
   ]
   [
     "ppxlib+src+context_free.mli.patch"
-    "sha256=74dcf6ae6cbcb89a0f48279c64ca1e26db2d14ff6288d71f7d6d1029a106a47e"
+    "sha256=c41b9d84f8540a02d0e3743a1ec8cf686e4de09e052e2cfd6aae4b5c03e457ca"
   ]
   [
     "ppxlib+src+deriving.ml.patch"
