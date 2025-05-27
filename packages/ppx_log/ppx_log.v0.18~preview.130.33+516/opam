@@ -1,0 +1,42 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_log"
+bug-reports: "https://github.com/janestreet/ppx_log/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_log.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_log/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "5.1.0"}
+  "base"              {= "v0.18~preview.130.33+516"}
+  "ppx_compare"       {= "v0.18~preview.130.33+516"}
+  "ppx_enumerate"     {= "v0.18~preview.130.33+516"}
+  "ppx_expect"        {= "v0.18~preview.130.33+516"}
+  "ppx_fields_conv"   {= "v0.18~preview.130.33+516"}
+  "ppx_here"          {= "v0.18~preview.130.33+516"}
+  "ppx_let"           {= "v0.18~preview.130.33+516"}
+  "ppx_sexp_conv"     {= "v0.18~preview.130.33+516"}
+  "ppx_sexp_message"  {= "v0.18~preview.130.33+516"}
+  "ppx_sexp_value"    {= "v0.18~preview.130.33+516"}
+  "ppx_string"        {= "v0.18~preview.130.33+516"}
+  "ppx_variants_conv" {= "v0.18~preview.130.33+516"}
+  "sexplib"           {= "v0.18~preview.130.33+516"}
+  "stdio"             {= "v0.18~preview.130.33+516"}
+  "dune"              {>= "3.17.0"}
+  "ppxlib"            {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "Ppx_sexp_message-like extension nodes for lazily rendering log messages"
+description: """
+Part of the Jane Street's PPX rewriters collection. 
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_log/archive/fa4c72358def67ac531ae74690ffef501d690f59.tar.gz"
+  checksum:
+    "sha256=4a5a512f64091efd2dc7c272d1f2f55320f45ce5289c517024115102024ada84"
+}

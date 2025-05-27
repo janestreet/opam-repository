@@ -1,0 +1,41 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/base_quickcheck"
+bug-reports: "https://github.com/janestreet/base_quickcheck/issues"
+dev-repo: "git+https://github.com/janestreet/base_quickcheck.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/base_quickcheck/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "base"                {= "v0.18~preview.130.33+516"}
+  "ppx_base"            {= "v0.18~preview.130.33+516"}
+  "ppx_fields_conv"     {= "v0.18~preview.130.33+516"}
+  "ppx_let"             {= "v0.18~preview.130.33+516"}
+  "ppx_sexp_message"    {= "v0.18~preview.130.33+516"}
+  "ppx_sexp_value"      {= "v0.18~preview.130.33+516"}
+  "ppx_shorthand"       {= "v0.18~preview.130.33+516"}
+  "ppx_template"        {= "v0.18~preview.130.33+516"}
+  "ppxlib_jane"         {= "v0.18~preview.130.33+516"}
+  "splittable_random"   {= "v0.18~preview.130.33+516"}
+  "dune"                {>= "3.17.0"}
+  "ocaml-compiler-libs" {>= "v0.11.0"}
+  "ppxlib"              {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "Randomized testing framework, designed for compatibility with Base"
+description: """
+Base_quickcheck provides randomized testing in the style of Haskell's Quickcheck library,
+with support for built-in types as well as types provided by Base.
+"""
+url {
+  src:
+    "https://github.com/janestreet/base_quickcheck/archive/1cd012260cbab47b2ad24a216646cc6a7aec0bd7.tar.gz"
+  checksum:
+    "sha256=ae8db708db1d6cbf4768e1c2e103ce0ddd8b6b5337e1a6a4371b3e57bd8b0458"
+}

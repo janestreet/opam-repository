@@ -1,0 +1,45 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/janestreet_csv"
+bug-reports: "https://github.com/janestreet/janestreet_csv/issues"
+dev-repo: "git+https://github.com/janestreet/janestreet_csv.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/janestreet_csv/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "5.1.0"}
+  "async"             {= "v0.18~preview.130.33+516"}
+  "base"              {= "v0.18~preview.130.33+516"}
+  "bignum"            {= "v0.18~preview.130.33+516"}
+  "core"              {= "v0.18~preview.130.33+516"}
+  "core_extended"     {= "v0.18~preview.130.33+516"}
+  "core_kernel"       {= "v0.18~preview.130.33+516"}
+  "core_unix"         {= "v0.18~preview.130.33+516"}
+  "csvfields"         {= "v0.18~preview.130.33+516"}
+  "delimited_parsing" {= "v0.18~preview.130.33+516"}
+  "fieldslib"         {= "v0.18~preview.130.33+516"}
+  "numeric_string"    {= "v0.18~preview.130.33+516"}
+  "ppx_jane"          {= "v0.18~preview.130.33+516"}
+  "re2"               {= "v0.18~preview.130.33+516"}
+  "textutils"         {= "v0.18~preview.130.33+516"}
+  "dune"              {>= "3.17.0"}
+  "pcre"
+  "tyxml"             {>= "4.3.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Tools for working with CSVs on the command line"
+description: """
+A suite of tools for working with CSVs from the command line.  It
+contains subcommands for pretty printing, selecting, and combining
+CSVs, as well as some conversions to other formats.
+"""
+url {
+  src:
+    "https://github.com/janestreet/janestreet_csv/archive/96567714a19de788f5917d6404278acd9e624865.tar.gz"
+  checksum:
+    "sha256=5e9a1fa204edf699b83a98c8509f4ea2f8cb9f94a4dc6375e0e5cec2c97f3c44"
+}

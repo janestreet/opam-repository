@@ -1,0 +1,43 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_verify"
+bug-reports: "https://github.com/janestreet/hardcaml_verify/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_verify.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_verify/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "5.1.0"}
+  "base"              {= "v0.18~preview.130.33+516"}
+  "hardcaml"          {= "v0.18~preview.130.33+516"}
+  "hardcaml_waveterm" {= "v0.18~preview.130.33+516"}
+  "jane_rope"         {= "v0.18~preview.130.33+516"}
+  "ppx_hardcaml"      {= "v0.18~preview.130.33+516"}
+  "ppx_jane"          {= "v0.18~preview.130.33+516"}
+  "ppx_rope"          {= "v0.18~preview.130.33+516"}
+  "stdio"             {= "v0.18~preview.130.33+516"}
+  "dune"              {>= "3.17.0"}
+  "re"                {>= "1.8.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml Verification Tools"
+description: """
+Tools for verifying properties of Hardcaml circuits.
+
+Combinational circuits can be converted to 'conjunctive normal form' for input into SAT
+solvers via DIMAC files. Support for a few opensource solvers is integrated - minisat,
+picosat, Z3 - just ensure they are in your PATH.
+
+Circuits can also be converted to NuSMV format for advanced bounded and unbounded model
+checking tasks.
+"""
+url {
+  src:
+    "https://github.com/janestreet/hardcaml_verify/archive/5a1df3d0f9a5953a51354ec0b78c67f36655bbcc.tar.gz"
+  checksum:
+    "sha256=c15fdf24ed548eec7c1de69689da11615f9611aeb985acbd3e40ff46f7e1791f"
+}
