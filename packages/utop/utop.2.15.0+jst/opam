@@ -1,6 +1,6 @@
 opam-version: "2.0"
-name: "utop"
 version: "2.15.0+jst"
+name: "utop"
 synopsis: "Universal toplevel for OCaml"
 description:
   "utop is an improved toplevel (i.e., Read-Eval-Print Loop or REPL) for OCaml. It can run in a terminal or in Emacs. It supports line edition, history, real-time and context sensitive completion, colors, and more. It integrates with the Tuareg mode in Emacs."
@@ -11,21 +11,21 @@ homepage: "https://github.com/ocaml-community/utop"
 doc: "https://ocaml-community.github.io/utop/"
 bug-reports: "https://github.com/ocaml-community/utop/issues"
 depends: [
-  "dune" {>= "2.7"}
-  "ocaml" {>= "4.11.0"}
+  "dune"         {>= "2.7"}
+  "ocaml"        {>= "4.11.0"}
   "base-unix"
   "base-threads"
-  "ocamlfind" {>= "1.7.2"}
-  "lambda-term" {>= "3.1.0" & < "4.0"}
+  "ocamlfind"    {>= "1.7.2"}
+  "lambda-term"  {>= "3.1.0" & < "4.0"}
   "logs"
   "lwt"
   "lwt_react"
-  "zed" {>= "3.2.0"}
-  "react" {>= "1.0.0"}
-  "cppo" {>= "1.1.2"}
-  "alcotest" {with-test}
-  "xdg" {>= "3.9.0"}
-  "odoc" {with-doc}
+  "zed"          {>= "3.2.0"}
+  "react"        {>= "1.0.0"}
+  "cppo"         {>= "1.1.2"}
+  "alcotest"     {with-test & = "1.9.0+jst"}
+  "xdg"          {>= "3.9.0"}
+  "odoc"         {with-doc}
 ]
 build: [
   ["dune" "subst"] {dev}
@@ -54,6 +54,6 @@ patches: ["diff.patch"]
 extra-files: [
   [
     "diff.patch"
-    "sha256=65c55e63e9e05aecfe83f9a43cab2660cadd72e6853e570c49bdb7b2b6118cc1"
+    "sha256=2e95b78d103ddad677103a20e992ae8a466f80f5938e3612e86084930ec0084a"
   ]
 ]

@@ -1,0 +1,49 @@
+--- a/runtime/js/obj.js
++++ b/runtime/js/obj.js
+@@ -44,6 +44,22 @@
+   return +Array.isArray(x);
+ }
+
++//Provides: caml_obj_is_stack
++function caml_obj_is_stack(x) {
++  return 0;
++}
++
++//Provides: caml_succ_scannable_prefix_len
++function caml_succ_scannable_prefix_len(x) {
++  return 0;
++}
++
++//Provides: caml_obj_uniquely_reachable_words
++//Requires: caml_failwith
++function caml_obj_uniquely_reachable_words(x) {
++  caml_failwith("Obj.uniquely_reachable_words is not available in javascript.");
++}
++
+ //Provides: caml_obj_tag
+ //Requires: caml_is_ml_bytes, caml_is_ml_string
+ function caml_obj_tag(x) {
+--- a/runtime/wasm/obj.wat
++++ b/runtime/wasm/obj.wat
+@@ -101,6 +101,21 @@
+    (global $double_array_tag (export "double_array_tag") i32 (i32.const 254))
+    (global $custom_tag i32 (i32.const 255))
+
++   (func (export "caml_obj_is_stack")
++      (param (ref eq)) (result (ref eq))
++      (ref.i31 (i32.const 0)))
++
++   (func (export "caml_succ_scannable_prefix_len")
++      (param (ref eq)) (result (ref eq))
++      (ref.i31 (i32.const 0)))
++
++   (@string $unique_words_unsupported "Obj.uniquely_reachable_words is not available in wasm.")
++
++   (func (export "caml_obj_uniquely_reachable_words")
++      (param (ref eq)) (result (ref eq))
++      (call $caml_failwith (global.get $unique_words_unsupported))
++      (ref.i31 (i32.const 0)))
++
+    (func $caml_is_closure (export "caml_is_closure")
+       (param $v (ref eq)) (result i32)
+       (i32.or (ref.test (ref $closure) (local.get $v))

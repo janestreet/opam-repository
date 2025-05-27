@@ -133,7 +133,7 @@ extra-files: [
   ]
   [
     "ppxlib+astlib+ast_999.ml.patch"
-    "sha256=2c7c78e373896bf0c8b377e93681e2363ae2fb658f86017a42ee2071b70786f9"
+    "sha256=b25d69759c1b66a47294a11a54a9d66130c0c00e98d72d4d27b650980f5b6d7f"
   ]
   [
     "ppxlib+astlib+ast_metadata.mli.patch"

@@ -80,12 +80,14 @@ patches: [
   "js_of_ocaml-5.3-tests-runtime.patch"
   "js_of_ocaml-caml_bigstring_strncmp.patch"
   "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
+  "js_of_ocaml-version-directive-removal.patch"
+  "js_of_ocaml-obj_stubs.patch"
   "dune.patch"
 ]
 extra-files: [
   [
     "js_of_ocaml-magic_number.ml.patch"
-    "sha256=e15d81f2c5b7b7cf401889b9137571aa6d460afed66e83fd1663257e034b4670"
+    "sha256=c836527a391853d619afba916629ad357bb0a0f18d6a3893b4cd2aa0da13d283"
   ]
   [
     "js_of_ocaml-compilation_unit-name.patch"
@@ -218,6 +220,14 @@ extra-files: [
   [
     "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
     "sha256=005bce63009b9539b65036b22a7b7cc531755c7caa3cf1ed8d8697698090e136"
+  ]
+  [
+    "js_of_ocaml-version-directive-removal.patch"
+    "sha256=4b1565454d0b61bc2450ab7b5fff8c5c82babc104ea6b7b9a5446eb9a929740c"
+  ]
+  [
+    "js_of_ocaml-obj_stubs.patch"
+    "sha256=9e9064f255c065a3152f665bd5b464040f3cfbbd2580aa4bb6e17be9c2b7fcc8"
   ]
   [
     "dune.patch"

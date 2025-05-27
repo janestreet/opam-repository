@@ -1,7 +1,7 @@
 --- a/src/lib/uTop_compat.ml
 +++ b/src/lib/uTop_compat.ml
 @@ -59,7 +59,7 @@ let toploop_load_file ppf fn =
- 
+
  (** Returns whether the given path is persistent. *)
  let rec is_persistent_path = function
 -  | Path.Pident id -> Ident.persistent id
@@ -111,7 +111,7 @@
 +        walk_sig pp ~path:(Longident.Lident cmi_name) cmi_sign
        ) !new_cmis;
        new_cmis := []
- 
+
 @@ -350,15 +352,19 @@ end = struct
        let scan_module env id =
          let name = Longident.Lident (Ident.name id) in
@@ -169,7 +169,7 @@
        Some (Printtyp.tree_of_type_declaration id ty_decl Types.Trec_not)
 @@ -1521,8 +1533,9 @@ type value = V : string * _ -> value
  exception Found of Env.t
- 
+
  let get_required_label name args =
 -  match List.find (fun (lab, _) -> lab = Asttypes.Labelled name) args with
 -  | _, x -> x
@@ -177,7 +177,7 @@
 +  | _, Typedtree.Omitted _ -> None
 +  | _, Typedtree.Arg (x, _) -> Some x
    | exception Not_found -> None
- 
+
  let walk dir ~init ~f =
 @@ -1557,7 +1570,7 @@ let interact ?(search_path=[]) ?(build_dir="_build") ~unit ~loc:(fname, lnum, cn
    let cmt_infos = Cmt_format.read_cmt cmt_fname in

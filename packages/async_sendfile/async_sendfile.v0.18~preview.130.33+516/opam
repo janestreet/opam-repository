@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_sendfile"
+bug-reports: "https://github.com/janestreet/async_sendfile/issues"
+dev-repo: "git+https://github.com/janestreet/async_sendfile.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_sendfile/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "async_kernel" {= "v0.18~preview.130.33+516"}
+  "async_unix"   {= "v0.18~preview.130.33+516"}
+  "core"         {= "v0.18~preview.130.33+516"}
+  "core_unix"    {= "v0.18~preview.130.33+516"}
+  "ppx_jane"     {= "v0.18~preview.130.33+516"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Thin wrapper around [Linux_ext.sendfile] to send full files"
+description: """
+"""
+url {
+  src:
+    "https://github.com/janestreet/async_sendfile/archive/318e619b7107c134f5faa4645622b5dcb9931aa0.tar.gz"
+  checksum:
+    "sha256=d4c5d30c41b6280f0a31dd4b489282ab9d09e42d11f02ed0eff3d136a5734b09"
+}

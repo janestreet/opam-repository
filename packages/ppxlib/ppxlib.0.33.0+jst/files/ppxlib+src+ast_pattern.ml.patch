@@ -1,6 +1,6 @@
 --- a/src/ast_pattern.ml
 +++ b/src/ast_pattern.ml
-@@ -205,6 +205,37 @@ let pack3 t = map t ~f:(fun f x y z -> f
+@@ -205,6 +205,40 @@ let pack3 t = map t ~f:(fun f x y z -> f
  
  include Ast_pattern_generated
  
@@ -18,6 +18,9 @@
 +
 +let value_binding ~pat ~expr =
 +  value_binding ~pat ~expr ~modes:drop
++
++let value_description ~name ~type_ ~prim =
++  value_description ~name ~type_ ~modalities:drop ~prim
 +
 +let ppat_constraint pat cty =
 +  ppat_constraint pat (some cty) drop
@@ -38,7 +41,7 @@
  let echar t = pexp_constant (pconst_char t)
  let estring t = pexp_constant (pconst_string t drop drop)
  let efloat t = pexp_constant (pconst_float t drop)
-@@ -235,6 +266,16 @@ let no_label t = cst Asttypes.Nolabel ~t
+@@ -235,6 +269,16 @@ let no_label t = cst Asttypes.Nolabel ~t
  let ebool t = pexp_construct (lident (bool' t)) none
  let pbool t = ppat_construct (lident (bool' t)) none
  
@@ -55,7 +58,7 @@
  let extension (T f1) (T f2) =
    T
      (fun ctx loc ((name : _ Loc.t), payload) k ->
-@@ -249,7 +290,7 @@ let rec parse_elist (e : Parsetree.expre
+@@ -249,7 +293,7 @@ let rec parse_elist (e : Parsetree.expre
    | Pexp_construct ({ txt = Lident "::"; _ }, Some arg) -> (
        Common.assert_no_attributes arg.pexp_attributes;
        match arg.pexp_desc with

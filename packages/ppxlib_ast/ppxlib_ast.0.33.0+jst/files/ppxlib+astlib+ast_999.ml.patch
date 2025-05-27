@@ -1344,6 +1344,6 @@
 +end
 +
 +module Config = struct
-+  let ast_impl_magic_number = "Caml1999M559"
-+  let ast_intf_magic_number = "Caml1999N559"
++  let ast_impl_magic_number = "Caml1999M560"
++  let ast_intf_magic_number = "Caml1999N560"
 +end
