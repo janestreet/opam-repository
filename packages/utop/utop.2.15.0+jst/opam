@@ -54,6 +54,6 @@ patches: ["diff.patch"]
 extra-files: [
   [
     "diff.patch"
-    "sha256=2e95b78d103ddad677103a20e992ae8a466f80f5938e3612e86084930ec0084a"
+    "sha256=a81c0ea9be5b08e12810ccdd6631fa63bde375ab7fb178842f9f890a98e21b3f"
   ]
 ]
