@@ -88,7 +88,7 @@ extra-source "init-menhir.tar.gz" {
     "sha512=620ff3443143535e03ac98c5e8ee2ddf9ba48f8cfe441302118def1da3e03ffac7f48d4d4cb129766b625ecad0fb341da1baa0169dee8b6d07a5b0bbb735cf2f"
   ]
 }
-patches: [ "ignore-opam.patch" "macos.patch" "macos_x86.patch" ]
+patches: [ "ignore-opam.patch" "macos.patch" "macos2.patch" "macos_x86.patch" ]
 url {
   src:
     "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-10.tar.gz"
@@ -101,6 +101,7 @@ extra-files: [
     "sha256=740fded14984fc0248cb7d055eac7179b5c3b7e6f7f20e914d5c3f1ccf7be20b"
   ]
   ["macos.patch" "sha256=ef572f4878469f52c715213e0a6e24e278b7c9fcc7523336819df392e80451b7"]
+  ["macos2.patch" "sha256=c1562e9ff839a51a5b8a99da2f231f8da79bd6c38f5084495cd2cbc988b259ed"]
   ["macos_x86.patch" "sha256=a5575d6f806f1b4d7efbea193cb74fb4961e2511a66b189fa1beb83c456468a2"]
 
 ]
