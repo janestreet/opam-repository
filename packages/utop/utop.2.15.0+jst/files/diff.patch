@@ -1,7 +1,20 @@
+--- a/src/lib/uTop.ml
++++ b/src/lib/uTop.ml
+@@ -290,6 +290,10 @@ let parse_default parse str eos_is_error =
+                  Printf.sprintf "Error: broken invariant in parsetree: %s" s)
+       | Syntaxerr.Invalid_package_type (loc, err) ->
+           Error ([mkloc loc], UTop_compat.invalid_package_error_to_string err)
++      | Missing_unboxed_literal_suffix loc ->
++          Error ([mkloc loc], "Missing unboxed literal suffix")
++      | Malformed_instance_identifier loc ->
++          Error ([mkloc loc], "Malformed instance identifier")
+ #if OCAML_VERSION >= (5, 0, 0)
+       | Syntaxerr.Removed_string_set loc ->
+           Error ([mkloc loc],
 --- a/src/lib/uTop_compat.ml
 +++ b/src/lib/uTop_compat.ml
 @@ -59,7 +59,7 @@ let toploop_load_file ppf fn =
-
+ 
  (** Returns whether the given path is persistent. *)
  let rec is_persistent_path = function
 -  | Path.Pident id -> Ident.persistent id
@@ -111,13 +124,9 @@
 +        walk_sig pp ~path:(Longident.Lident cmi_name) cmi_sign
        ) !new_cmis;
        new_cmis := []
-
-@@ -350,15 +352,19 @@ end = struct
-       let scan_module env id =
-         let name = Longident.Lident (Ident.name id) in
-         let path, {md_type; _} = Env.find_module_by_name name env in
--        if path = Path.Pident id then
-+        if path = Path.Pident (failwith "id") then
+ 
+@@ -353,12 +355,16 @@ end = struct
+         if path = Path.Pident id then
            walk_mty pp name md_type
        in
 +      let scan_compilation_unit env id =
@@ -169,7 +178,7 @@
        Some (Printtyp.tree_of_type_declaration id ty_decl Types.Trec_not)
 @@ -1521,8 +1533,9 @@ type value = V : string * _ -> value
  exception Found of Env.t
-
+ 
  let get_required_label name args =
 -  match List.find (fun (lab, _) -> lab = Asttypes.Labelled name) args with
 -  | _, x -> x
@@ -177,7 +186,7 @@
 +  | _, Typedtree.Omitted _ -> None
 +  | _, Typedtree.Arg (x, _) -> Some x
    | exception Not_found -> None
-
+ 
  let walk dir ~init ~f =
 @@ -1557,7 +1570,7 @@ let interact ?(search_path=[]) ?(build_dir="_build") ~unit ~loc:(fname, lnum, cn
    let cmt_infos = Cmt_format.read_cmt cmt_fname in
