@@ -10,9 +10,16 @@ extensions, including all Jane Street packages and necessary patches to external
 Start by creating a new switch including our repository in OPAM:
 
 ```sh
+# Update to make sure you get the latest version of all packages
+opam update
 # This may take some time
 opam switch create 5.2.0+flambda2 --repos with-extensions=git+https://github.com/janestreet/opam-repository.git#with-extensions,default
 eval $(opam env --switch 5.2.0+flambda2)
+```
+
+Note for Mac users: `ocaml-flambda` requires `autoconf`, which you can install through Homebrew with
+```
+brew install autoconf
 ```
 
 If the installation was successful, you can now use OCaml with our extensions! Try creating `hello.ml` and running it with `ocamlc -o hello hello.ml && ./hello`:
