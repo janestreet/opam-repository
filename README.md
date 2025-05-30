@@ -17,7 +17,7 @@ opam switch create 5.2.0+flambda2 --repos with-extensions=git+https://github.com
 eval $(opam env --switch 5.2.0+flambda2)
 ```
 
-Note for Mac users: `ocaml-flambda` requires `autoconf`, which you can install through Homebrew with
+Note for Mac users: building our compiler requires `autoconf`, which you can install through Homebrew with
 ```
 brew install autoconf
 ```
@@ -36,12 +36,10 @@ let () =
 ;;
 ```
 
-Our switch now supports developer tooling such as `ocamlformat` or `merlin`! By
-default, `opam` should install versions of those tools marked with `+jst`,
-allowing you to enjoy editor support in VSCode, Emacs and Vim:
+Our switch now supports developer tooling such as `ocamlformat` or `merlin`:
 
 ```sh
-opam install ocamlformat merlin ocaml-lsp-server utop
+opam install ocamlformat merlin ocaml-lsp-server
 ```
 
 Our libraries such as Base and Core contain various functions to deal with local values. Install them with `opam install`,
