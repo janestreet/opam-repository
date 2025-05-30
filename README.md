@@ -46,13 +46,13 @@ Our libraries such as Base and Core contain various functions to deal with local
 and read their documentation and interface files to learn more. For a general introduction to OCaml and our libraries,
 refer to [Real World OCaml](https://dev.realworldocaml.org/index.html).
 
-Some Jane Street extensions, like `or_null`, are unstable and thus hidden behind the `-extension-universe` compiler flag.
+Some Jane Street extensions, like `comprehensions`, are unstable and thus hidden behind the `-extension-universe` compiler flag.
 You can use the `flags` field in `dune` files to enable them:
 
 ```ocaml
 (library
  (name your_lib)
- (flags (:standard -extension-universe alpha)))
+ (flags (:standard -extension-universe beta)))
 ```
 
 ## Known issues
