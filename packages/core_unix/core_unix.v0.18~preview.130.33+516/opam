@@ -38,9 +38,9 @@ url {
   src:
     "https://github.com/janestreet/core_unix/archive/6035b35368fcb3194d3727a3dfaf1743061eeaf7.tar.gz"
   checksum:
-    "sha256=d061d98e087a149586441c5c0e4f71211b44386dccbabf3437522d15bb4a0906"
+    "sha256=029a02b7aa81da151ac03592019ef2ec87edb513c86189aec6073defdd3c8ee5"
 }
 patches: [ "core_unix.patch" ]
 extra-files: [
-  ["core_unix.patch" "sha256=322dfc1113d40856e0d7d64da5beee3c3bd967e05c998e1c29c2254edeef1fe5"]
+  ["core_unix.patch" "sha256=d061d98e087a149586441c5c0e4f71211b44386dccbabf3437522d15bb4a0906"]
 ]
