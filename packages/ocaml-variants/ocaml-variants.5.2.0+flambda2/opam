@@ -4,8 +4,8 @@ synopsis: "flambda2"
 license: "LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception"
 authors: "Xavier Leroy and many contributors"
 homepage: "https://ocaml.org"
-bug-reports: "https://github.com/ocaml-flambda/flambda-backend/issues"
-dev-repo: "git+https://github.com/ocaml-flambda/flambda-backend#main"
+bug-reports: "https://github.com/oxcaml/oxcaml/issues"
+dev-repo: "git+https://github.com/oxcaml/oxcaml#main"
 depends: [
   "ocaml"                 {= "5.2.0" & post}
   "base-unix"             {post}
@@ -91,9 +91,9 @@ extra-source "init-menhir.tar.gz" {
 patches: [ "ignore-opam.patch" "macos.patch" "macos2.patch" "macos_x86.patch" "sigwait.patch" "arm-issue-debugging.patch" ]
 url {
   src:
-    "https://github.com/ocaml-flambda/flambda-backend/archive/refs/tags/5.2.0minus-10.tar.gz"
+    "https://github.com/oxcaml/oxcaml/archive/refs/tags/5.2.0minus-10.tar.gz"
   checksum:
-    "sha256=08de25efba3a380506bf39704e8aa519dac366ad18ac5984833a224037d9e49e"
+    "sha256=1eedf71f4f665cf17b5d5f38206a9c3d35a3f9a697af5922dceb2aa293059bf4"
 }
 extra-files: [
   [
