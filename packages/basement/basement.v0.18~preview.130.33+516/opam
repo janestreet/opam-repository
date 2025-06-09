@@ -29,5 +29,5 @@ url {
 }
 patches: [ "basement.patch" ]
 extra-files: [
-  ["basement.patch" "sha256=54ce6df3fee184e7d98a7ecc38387c0ead75b03a0027e0e9b6111412a78c2a8d"]
+  ["basement.patch" "sha256=a5992276d857c14c446512a1b5b78f4a3dec55b63b6fa767e2b1e49aed692e7d"]
 ]
