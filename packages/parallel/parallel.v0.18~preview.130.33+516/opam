@@ -34,7 +34,7 @@ patches: [
   "macos-heartbeat-compatibility.patch"
 ]
 extra-files: [
-  ["macos-heartbeat-compatibility.patch" "sha256=11a408722681e3a93e4efaa8025951db24ad83a8f3db80da56cb3834b4047e47"]
+  ["macos-heartbeat-compatibility.patch" "sha256=74adde7f140d6f7d216779ce149d57069b85738a29e3c4366a7d02d99f6b8549"]
 ]
 url {
   src:
