@@ -1,8 +1,8 @@
 diff --git a/src/capsule_condition.h b/src/capsule_condition.h
-index 90690a0..f3d062c 100644
+index 90690a0..0faba0c 100644
 --- a/src/capsule_condition.h
 +++ b/src/capsule_condition.h
-@@ -8,57 +8,88 @@
+@@ -8,57 +8,102 @@
  
  #ifdef CAML_INTERNALS
  
@@ -25,7 +25,7 @@ index 90690a0..f3d062c 100644
 +typedef struct {
 +  pthread_cond_t cond;
 +} *capsule_condition;
-+static pthread_mutex_t global_dummy_mutex = PTHREAD_MUTEX_INITIALIZER;
++static pthread_mutex_t global_futex_lock = PTHREAD_MUTEX_INITIALIZER;
 +#else
 +#include <linux/futex.h>
 +#include <sys/syscall.h>
@@ -39,11 +39,18 @@ index 90690a0..f3d062c 100644
  #define CONDITION_SUCCESS 0
  
  Caml_inline int capsule_condition_signal(capsule_condition cond) {
-+#ifdef __APPLE__
-+  return pthread_cond_signal(&cond->cond);
-+#else
    atomic_fetch_add(&cond->counter, 1);
 -  if (syscall(SYS_futex, &cond->counter, FUTEX_WAKE_PRIVATE, 1, NULL, NULL, 0) == -1) {
++#ifdef __APPLE__
++  if (pthread_mutex_lock(&global_futex_lock)) {
++    caml_fatal_error("Failed to acquire futex lock.");
++  }
++  int rc = pthread_cond_signal(&cond->cond);
++  if (pthread_mutex_unlock(&global_futex_lock)) {
++    caml_fatal_error("Failed to release futex lock.");
++  }
++  return rc;
++#else
 +  if (syscall(SYS_futex, &cond->counter, FUTEX_WAKE_PRIVATE, 1, NULL, NULL,
 +              0) == -1) {
      return errno;
@@ -53,12 +60,19 @@ index 90690a0..f3d062c 100644
  }
  
  Caml_inline int capsule_condition_broadcast(capsule_condition cond) {
-+#ifdef __APPLE__
-+  return pthread_cond_broadcast(&cond->cond);
-+#else
    atomic_fetch_add(&cond->counter, 1);
 -  if (syscall(SYS_futex, &cond->counter, FUTEX_WAKE_PRIVATE, INT_MAX, NULL, NULL, 0) ==
 -      -1) {
++#ifdef __APPLE__
++  if (pthread_mutex_lock(&global_futex_lock)) {
++    caml_fatal_error("Failed to acquire futex lock.");
++  }
++  int rc = pthread_cond_broadcast(&cond->cond);
++  if (pthread_mutex_unlock(&global_futex_lock)) {
++    caml_fatal_error("Failed to release futex lock.");
++  }
++  return rc;
++#else
 +  if (syscall(SYS_futex, &cond->counter, FUTEX_WAKE_PRIVATE, INT_MAX, NULL,
 +              NULL, 0) == -1) {
      return errno;
@@ -73,13 +87,10 @@ index 90690a0..f3d062c 100644
    // Save and restore owner, as the current fiber may be a descendant.
 -  uint64_t old_count = atomic_load(&cond->counter);
    fiber_t owner = atomic_load_explicit(&mut->owner, memory_order_relaxed);
++  uint64_t old_count = atomic_load(&cond->counter);
  
 -  // If the mutex operations fail, the condition is in an inconsistent state and it's
 -  // not safe to return to OCaml.
-+#ifndef __APPLE__
-+  uint64_t old_count = atomic_load(&cond->counter);
-+#endif
-+
 +  // If the mutex operations fail, the condition is in an inconsistent state and
 +  // it's not safe to return to OCaml.
    if (capsule_mutex_unlock(mut) != MUTEX_SUCCESS) {
@@ -88,12 +99,15 @@ index 90690a0..f3d062c 100644
  
    caml_enter_blocking_section();
 +#ifdef __APPLE__
-+  if (pthread_mutex_lock(&global_dummy_mutex)) {
-+    caml_fatal_error("Failed to lock dummy mutex.");
++  if (pthread_mutex_lock(&global_futex_lock)) {
++    caml_fatal_error("Failed to acquire futex lock.");
 +  }
-+  int rc = pthread_cond_wait(&cond->cond, &global_dummy_mutex);
-+  if (pthread_mutex_unlock(&global_dummy_mutex)) {
-+    caml_fatal_error("Failed to unlock dummy mutex.");
++  int rc = CONDITION_SUCCESS;
++  if (atomic_load(&cond->counter) == old_count) {
++    rc = pthread_cond_wait(&cond->cond, &global_futex_lock);
++  }
++  if (pthread_mutex_unlock(&global_futex_lock)) {
++    caml_fatal_error("Failed to release futex lock.");
 +  }
 +#else
    int rc = syscall(SYS_futex, &cond->counter, FUTEX_WAIT_PRIVATE, old_count,
@@ -103,7 +117,7 @@ index 90690a0..f3d062c 100644
    // Re-aquire the domain lock to avoid blocking other domains on our systhreads
    caml_leave_blocking_section();
  
-@@ -67,10 +98,14 @@ Caml_inline int capsule_condition_wait(capsule_condition cond, capsule_mutex mut
+@@ -67,10 +112,14 @@ Caml_inline int capsule_condition_wait(capsule_condition cond, capsule_mutex mut
    }
    atomic_store_explicit(&mut->owner, owner, memory_order_relaxed);
  
@@ -118,7 +132,7 @@ index 90690a0..f3d062c 100644
  }
  
  Caml_inline int capsule_condition_create(capsule_condition *res) {
-@@ -78,14 +113,24 @@ Caml_inline int capsule_condition_create(capsule_condition *res) {
+@@ -78,14 +127,24 @@ Caml_inline int capsule_condition_create(capsule_condition *res) {
    if (cond == NULL) {
      return ENOMEM;
    }
