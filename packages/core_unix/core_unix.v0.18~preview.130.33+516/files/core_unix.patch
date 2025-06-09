@@ -1,8 +1,18 @@
 diff --git a/core_unix/src/core_unix_stubs.c b/core_unix/src/core_unix_stubs.c
-index 591fc88..2b3460e 100644
+index 591fc88..258a15c 100644
 --- a/core_unix/src/core_unix_stubs.c
 +++ b/core_unix/src/core_unix_stubs.c
-@@ -514,9 +514,15 @@ static value ns_precision_stat_of_struct_stat(struct stat s) {
+@@ -21,6 +21,9 @@
+ #include <errno.h>
+ #include <limits.h>
+ #include <locale.h>
++#ifdef __APPLE__
++#include <xlocale.h>
++#endif
+ #include <net/if.h>
+ #include <netinet/in.h>
+ #include <signal.h>
+@@ -514,9 +517,15 @@ static value ns_precision_stat_of_struct_stat(struct stat s) {
    Store_field(v_stat, 6, Val_int(s.st_gid));
    Store_field(v_stat, 7, Val_int(s.st_rdev));
    Store_field(v_stat, 8, Val_file_offset(s.st_size));
@@ -18,7 +28,7 @@ index 591fc88..2b3460e 100644
    CAMLreturn(v_stat);
  }
  
-@@ -1561,9 +1567,14 @@ CAMLprim value core_unix_strptime(value v_locale, value v_allow_trailing_input,
+@@ -1561,9 +1570,14 @@ CAMLprim value core_unix_strptime(value v_locale, value v_allow_trailing_input,
                                    value v_fmt, value v_s) {
    locale_t locale = (locale_t)Nativeint_val(v_locale);
    struct tm tm = {0};
@@ -33,7 +43,7 @@ index 591fc88..2b3460e 100644
    if (!end_of_consumed_input)
      caml_failwith("unix_strptime: match failed");
    if (!Bool_val(v_allow_trailing_input) &&
-@@ -2055,7 +2066,32 @@ CAMLprim value core_unix_execvpe(value v_prog, value v_args, value v_env) {
+@@ -2055,7 +2069,32 @@ CAMLprim value core_unix_execvpe(value v_prog, value v_args, value v_env) {
    char *env_storage[nenv + 1];
    char *const *envp = fill_args(env_storage, nenv, v_env);
  
@@ -122,16 +132,3 @@ index fd67b26..3021cdf 100644
        // Here we rely on LC_*_MASK == 1 << LC_* for the standard categories *, which we
        // static assert on:
        static_assert(LC_CTYPE_MASK == 1 << LC_CTYPE, "");
-diff --git a/time_stamp_counter/src/time_stamp_counter.ml b/time_stamp_counter/src/time_stamp_counter.ml
-index 9720244..7cceb20 100644
---- a/time_stamp_counter/src/time_stamp_counter.ml
-+++ b/time_stamp_counter/src/time_stamp_counter.ml
-@@ -97,7 +97,7 @@ let zero = Int63.zero
- [%%ifdef JSC_ARCH_SIXTYFOUR]
- 
- external rdtsc : unit -> (int64[@unboxed]) = "caml_rdtsc" "caml_rdtsc_unboxed"
--[@@noalloc] [@@builtin]
-+[@@noalloc] (* [@@builtin] *)
- 
- (* noalloc on x86_64 only *)
- let[@inline] now () =
