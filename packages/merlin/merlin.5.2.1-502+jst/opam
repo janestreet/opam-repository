@@ -16,7 +16,7 @@ depends: [
   "merlin-lib"        {= version & = "5.2.1-502+jst"}
   "dot-merlin-reader" {= version & = "5.2.1-502+jst"}
   "ocaml-index"       {>= "1.0" & post & = "1.1+jst"}
-  "yojson"            {>= "2.0.0"}
+  "yojson"            {>= "2.0.0"} & {< "3.0.0"}
   "conf-jq"           {with-test}
   "ppxlib"            {with-test & = "0.33.0+jst"}
   "alcotest"          {with-test & = "1.9.0+jst"}

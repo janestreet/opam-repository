@@ -20,7 +20,7 @@ depends: [
   "dune"            {>= "3.17.0"}
   "jsonrpc"         {= "1.19.0+jst"}
   "lsp"             {= "1.19.0+jst"}
-  "yojson"          {>= "1.7.0"}
+  "yojson"          {>= "1.7.0"} & {< "3.0.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Library for building LSPs in OCaml"
