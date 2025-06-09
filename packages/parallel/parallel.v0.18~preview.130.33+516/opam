@@ -30,6 +30,12 @@ synopsis: "OxCaml Parallelism"
 description: """
  Parallelism infrastructure.
 """
+patches: [
+  "macos-heartbeat-compatibility.patch"
+]
+extra-files: [
+  ["macos-heartbeat-compatibility.patch" "sha256=11a408722681e3a93e4efaa8025951db24ad83a8f3db80da56cb3834b4047e47"]
+]
 url {
   src:
     "https://github.com/janestreet/parallel/archive/19319dd1a442c91ec3f1fac998484d75a3109b40.tar.gz"
