@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/variantslib"
+bug-reports: "https://github.com/janestreet/variantslib/issues"
+dev-repo: "git+https://github.com/janestreet/variantslib.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/variantslib/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "base"  {= "v0.18~preview.130.36+188"}
+  "dune"  {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Part of Jane Street's Core library"
+description: """
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"""
+url {
+  src:
+    "https://github.com/janestreet/variantslib/archive/6203209c6599596bcda0c446172ab8c96d9c5a93.tar.gz"
+  checksum:
+    "sha256=348ac7f09a9f67e100fa3cab6e784e109a6347a15a9a9737b74c4c2812102bf0"
+}

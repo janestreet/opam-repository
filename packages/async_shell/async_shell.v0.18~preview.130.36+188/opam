@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_shell"
+bug-reports: "https://github.com/janestreet/async_shell/issues"
+dev-repo: "git+https://github.com/janestreet/async_shell.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_shell/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "async"    {= "v0.18~preview.130.36+188"}
+  "core"     {= "v0.18~preview.130.36+188"}
+  "ppx_jane" {= "v0.18~preview.130.36+188"}
+  "shell"    {= "v0.18~preview.130.36+188"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Shell helpers for Async"
+description: """
+"""
+url {
+  src:
+    "https://github.com/janestreet/async_shell/archive/c00a8f6746a89f80b1e91c55f86cdf51ccbc9342.tar.gz"
+  checksum:
+    "sha256=1c2630968f3ed1313574654f33d3bd9d5dd339cdf48a2d191f9acd731b7fb2dc"
+}
