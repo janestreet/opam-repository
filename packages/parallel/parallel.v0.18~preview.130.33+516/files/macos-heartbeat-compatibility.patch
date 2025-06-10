@@ -1,8 +1,18 @@
 diff --git a/kernel/heartbeat_stubs.c b/kernel/heartbeat_stubs.c
-index e17d9ee..2c477e2 100644
+index e17d9ee..77f2866 100644
 --- a/kernel/heartbeat_stubs.c
 +++ b/kernel/heartbeat_stubs.c
-@@ -30,10 +30,18 @@ static void *heartbeat_thread(void *interval_us) {
+@@ -1,4 +1,9 @@
+ #include <caml/mlvalues.h>
++#include <caml/fail.h>
++
++CAMLprim value parallel_fatal_error(const char* message) {
++  caml_fatal_error(message);
++}
+ 
+ #ifdef CAML_RUNTIME_5
+ 
+@@ -30,10 +35,18 @@ static void *heartbeat_thread(void *interval_us) {
  
    while (true) {
      struct timespec remain = {0};
@@ -21,3 +31,19 @@ index e17d9ee..2c477e2 100644
  
      if (err) {
        caml_fatal_error("Heartbeat thread failed to sleep: %d\n", err);
+diff --git a/kernel/panic.ml b/kernel/panic.ml
+index 2f1ad8d..dfd80ef 100644
+--- a/kernel/panic.ml
++++ b/kernel/panic.ml
+@@ -14,9 +14,9 @@ let raw_backtrace_to_lines backtrace =
+   Backtrace.to_string backtrace |> String.strip |> String.split_lines
+ ;;
+ 
+-external caml_fatal_error : string -> 'a @ portable @@ portable = "caml_fatal_error"
++external parallel_fatal_error : string -> 'a @ portable @@ portable = "parallel_fatal_error"
+ 
+-let abort_nested_panic () = caml_fatal_error "Panicked in on_panic, terminating program."
++let abort_nested_panic () = parallel_fatal_error "Panicked in on_panic, terminating program."
+ 
+ module Incident = struct
+   module Id : sig @@ portable
