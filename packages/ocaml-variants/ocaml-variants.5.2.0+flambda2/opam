@@ -134,4 +134,5 @@ conflicts: [
   "uutf" {!= "1.0.3+jst"}
   "wasm_of_ocaml-compiler" {!= "6.0.1+jst"}
   "zarith" {!= "1.12+jst"}
+  "base" {!= "v0.18~preview.130.33+516"}
 ]
