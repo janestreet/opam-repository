@@ -20,7 +20,6 @@ depends: [
   "sexplib"                 {= "v0.18~preview.130.36+188"}
   "typerep"                 {= "v0.18~preview.130.36+188"}
   "dune"                    {>= "3.17.0"}
-  "stdlib_stable"
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Unboxed types for OxCaml"
@@ -29,7 +28,7 @@ description: """
 """
 url {
   src:
-    "https://github.com/janestreet/unboxed/archive/087cd767384449a6c8f2cbe742b3cda79d94beb4.tar.gz"
+    "https://github.com/janestreet/unboxed/archive/100e296680cef3a782bf87f124950a2ed5f24ce8.tar.gz"
   checksum:
-    "sha256=187dbc72d8d23b719270cae5632f87523f4810827238f8bd5229164c08515938"
+    "sha256=27d82e29ff1d47a86487325a23554b49683bedea62e6fa4bec1f9245475f2648"
 }

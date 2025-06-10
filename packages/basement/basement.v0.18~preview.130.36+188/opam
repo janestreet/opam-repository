@@ -23,7 +23,7 @@ sexplib0
 """
 url {
   src:
-    "https://github.com/janestreet/basement/archive/b35d3a482ef1328b90b87145a99aa4c720872c46.tar.gz"
+    "https://github.com/janestreet/basement/archive/a5de74fe1cd506ecf575eb63c558b0beb9da29fe.tar.gz"
   checksum:
-    "sha256=6e7440bde679b292c3b9e45fa88ea3daf10556e84cb11e9d257968a49f946ede"
+    "sha256=7ed685f3444e5c550cf847fb5670317649e70ffbd8226f6db843fdd684d59d5c"
 }

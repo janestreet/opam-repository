@@ -32,7 +32,7 @@ description: """
 """
 url {
   src:
-    "https://github.com/janestreet/parallel/archive/08e00f1e5c96a8ab49ae68d9c14127f9ccd50136.tar.gz"
+    "https://github.com/janestreet/parallel/archive/5f521ccddca57dffd8e503042d9720ec4f4bf58a.tar.gz"
   checksum:
-    "sha256=cae2b1f368dff63022c0cde3cb01b3c6191583c57fe27fe9ab4d6c8ba7297ac6"
+    "sha256=f0ad48da7f027ffffeefb8d2eb3a8d2546b09ae30f3594d5b2d127fe03b8d281"
 }
