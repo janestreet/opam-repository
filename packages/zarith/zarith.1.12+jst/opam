@@ -71,6 +71,6 @@ extra-files: [
   ]
   [
     "zarith-portability.patch"
-    "sha256=83d51c44618c61163a876ccfbf0eef6c79c1a728bd52b375003dadd51a78abd4"
+    "sha256=92c4036a9fc4eb5e996b0e704a032d748bf09197ee567909513bc991d6b4dddd"
   ]
 ]

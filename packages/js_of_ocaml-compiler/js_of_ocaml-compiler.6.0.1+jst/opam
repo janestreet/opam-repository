@@ -82,6 +82,7 @@ patches: [
   "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
   "js_of_ocaml-version-directive-removal.patch"
   "js_of_ocaml-obj_stubs.patch"
+  "js_of_ocaml-float32-2.patch"
   "dune.patch"
 ]
 extra-files: [
@@ -228,6 +229,10 @@ extra-files: [
   [
     "js_of_ocaml-obj_stubs.patch"
     "sha256=9e9064f255c065a3152f665bd5b464040f3cfbbd2580aa4bb6e17be9c2b7fcc8"
+  ]
+  [
+    "js_of_ocaml-float32-2.patch"
+    "sha256=3ff1eda6175f96cc3a5b2c2ae1ee395c9317d248554282c5f157c723a9fae32f"
   ]
   [
     "dune.patch"

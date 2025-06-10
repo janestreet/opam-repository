@@ -70,6 +70,7 @@ patches: [
   "js_of_ocaml-5.3-tests-runtime.patch"
   "js_of_ocaml-caml_bigstring_strncmp.patch"
   "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
+  "js_of_ocaml-float32-2.patch"
   "dune.patch"
 ]
 extra-files: [
@@ -212,6 +213,10 @@ extra-files: [
   [
     "wasm_of_ocaml-stub-caml_ml_set_channel_refill.patch"
     "sha256=005bce63009b9539b65036b22a7b7cc531755c7caa3cf1ed8d8697698090e136"
+  ]
+  [
+    "js_of_ocaml-float32-2.patch"
+    "sha256=3ff1eda6175f96cc3a5b2c2ae1ee395c9317d248554282c5f157c723a9fae32f"
   ]
   [
     "dune.patch"
