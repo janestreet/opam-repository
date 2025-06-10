@@ -1,0 +1,116 @@
+--- a/compiler/bin-js_of_ocaml/compile.ml
++++ b/compiler/bin-js_of_ocaml/compile.ml
+@@ -235,7 +235,7 @@
+     sm
+   in
+   let output_partial
+-      (cmo : Cmo_format.compilation_unit)
++      (cmo : Cmo_format.compilation_unit_descr)
+       ~standalone
+       ~source_map
+       code
+--- a/compiler/lib/ocaml_compiler.ml
++++ b/compiler/lib/ocaml_compiler.ml
+@@ -213,16 +213,16 @@
+ end
+
+ module Cmo_format = struct
+-  type t = Cmo_format.compilation_unit
++  type t = Cmo_format.compilation_unit_descr
+
+-  let name (t : t) = t.cu_name [@@if ocaml_version < (5, 2, 0)]
++  let name (t : t) = t.cu_name |> Compilation_unit.name_as_string [@@if ocaml_version < (5, 2, 0)]
+
+   let name (t : t) =
+     let (Compunit name) = t.cu_name in
+     name
+   [@@if ocaml_version >= (5, 2, 0)]
+
+-  let requires (t : t) = List.map ~f:Ident.name t.cu_required_globals
++  let requires (t : t) = List.map ~f:Compilation_unit.name_as_string t.cu_required_globals
+   [@@if ocaml_version < (5, 2, 0)]
+
+   let requires (t : t) = List.map t.cu_required_compunits ~f:(fun (Compunit u) -> u)
+--- a/compiler/lib/ocaml_compiler.mli
++++ b/compiler/lib/ocaml_compiler.mli
+@@ -55,7 +55,7 @@
+ end
+
+ module Cmo_format : sig
+-  type t = Cmo_format.compilation_unit
++  type t = Cmo_format.compilation_unit_descr
+
+   val name : t -> string
+
+@@ -65,5 +65,5 @@
+
+   val force_link : t -> bool
+
+-  val imports : t -> (string * string option) list
++  val imports : t -> Import_info.t array
+ end
+--- a/compiler/lib/parse_bytecode.ml
++++ b/compiler/lib/parse_bytecode.ml
+@@ -2633,8 +2633,10 @@
+
+   let read_crcs toc ic =
+     ignore (seek_section toc ic "CRCS");
+-    let orig_crcs : (string * Digest.t option) list = input_value ic in
+-    orig_crcs
++    let orig_crcs : Import_info.t array = input_value ic in
++    List.map (Array.to_list orig_crcs) ~f:(fun import ->
++      Import_info.name import |> Compilation_unit.Name.to_string,
++      Import_info.crc import)
+
+   let read_prim toc ic =
+     let prim_size = seek_section toc ic "PRIM" in
+@@ -3096,7 +3098,7 @@
+           then raise Magic_number.(Bad_magic_version magic);
+           let compunit_pos = input_binary_int ic in
+           seek_in ic compunit_pos;
+-          let compunit : Cmo_format.compilation_unit = input_value ic in
++          let compunit : Cmo_format.compilation_unit_descr = input_value ic in
+           `Cmo compunit
+       | `Cma ->
+           if Config.Flag.check_magic ()
+--- a/compiler/lib/parse_bytecode.mli
++++ b/compiler/lib/parse_bytecode.mli
+@@ -65,7 +65,7 @@
+      ?includes:string list
+   -> ?include_cmis:bool
+   -> ?debug:bool
+-  -> Cmo_format.compilation_unit
++  -> Cmo_format.compilation_unit_descr
+   -> in_channel
+   -> one
+
+@@ -79,7 +79,7 @@
+
+ val from_channel :
+      in_channel
+-  -> [ `Cmo of Cmo_format.compilation_unit | `Cma of Cmo_format.library | `Exe ]
++  -> [ `Cmo of Cmo_format.compilation_unit_descr | `Cma of Cmo_format.library | `Exe ]
+
+ val from_string :
+      prims:string array
+--- a/compiler/lib/unit_info.ml
++++ b/compiler/lib/unit_info.ml
+@@ -37,7 +37,7 @@
+   ; effects_without_cps = false
+   }
+
+-let of_cmo (cmo : Cmo_format.compilation_unit) =
++let of_cmo (cmo : Cmo_format.compilation_unit_descr) =
+   let open Ocaml_compiler in
+   let provides = StringSet.singleton (Cmo_format.name cmo) in
+   let requires = StringSet.of_list (Cmo_format.requires cmo) in
+--- a/compiler/lib/unit_info.mli
++++ b/compiler/lib/unit_info.mli
+@@ -26,6 +26,6 @@
+   ; effects_without_cps : bool
+   }
+
+-val of_cmo : Cmo_format.compilation_unit -> t
++val of_cmo : Cmo_format.compilation_unit_descr -> t
+
+ val union : t -> t -> t

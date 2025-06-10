@@ -51,10 +51,14 @@ url {
     "sha512=50cc4486021da46fb08156e9daec0d57b4ca469b07309c508d5a9a41e9dbcf1f32dec2ed7be027326544453dcaf9c2534919395fd826dc7768efc6cc4bfcc9f8"
 }
 x-maintenance-intent: ["(latest)"]
-patches: ["uutf-locals.patch"]
+patches: ["uutf-locals.patch" "uutf-portable.patch"]
 extra-files: [
   [
     "uutf-locals.patch"
     "sha256=cf3a0969653b405ad165312dfa6ef9038fe087ac9dd070f4b27bf4790e84e0ce"
+  ]
+  [
+    "uutf-portable.patch"
+    "sha256=06130fcb93a61add6f7f0ca80d6a220c5e9f24568da5bd6f60f975f67417e5c9"
   ]
 ]

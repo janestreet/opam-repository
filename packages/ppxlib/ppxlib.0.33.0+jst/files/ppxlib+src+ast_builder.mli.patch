@@ -1,6 +1,15 @@
 --- a/src/ast_builder.mli
 +++ b/src/ast_builder.mli
-@@ -43,6 +43,17 @@ module Default : sig
+@@ -20,6 +20,8 @@ module Default : sig
+ 
+   include module type of Ast_builder_generated.M
+ 
++  val pexp_apply : loc:location -> expression -> (arg_label * expression) list -> expression
++
+   module Latest : sig
+     (** This module contains updated versions of node constructors that were
+         kept stable when the node changed. For every function in this module,
+@@ -43,6 +45,17 @@ module Default : sig
        res:core_type option ->
        unit ->
        constructor_declaration
@@ -18,7 +27,7 @@
    end
  
    val ppat_construct :
-@@ -84,6 +95,16 @@ module type S = sig
+@@ -84,6 +97,16 @@ module type S = sig
        res:core_type option ->
        unit ->
        constructor_declaration

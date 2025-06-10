@@ -1,0 +1,25 @@
+--- a/runtime/js/hash.js	Sun Apr 28 23:53:39 2024 -0400
++++ b/runtime/js/hash.js	Tue Apr 30 11:19:08 2024 +0800
+@@ -185,5 +185,5 @@
+ }
+
+-//Provides: caml_hash mutable
++//Provides: caml_hash_exn mutable
+ //Requires: caml_is_ml_string, caml_is_ml_bytes
+ //Requires: caml_hash_mix_int, caml_hash_mix_final
+@@ -191,5 +191,5 @@
+ //Requires: caml_hash_mix_jsbytes
+ //Requires: caml_is_continuation_tag
+-function caml_hash(count, limit, seed, obj) {
++function caml_hash_exn(count, limit, seed, obj) {
+   var queue, rd, wr, sz, num, h, v, i, len;
+   sz = limit;
+--- a/runtime/wasm/hash.wat	Sun Apr 28 23:53:39 2024 -0400
++++ b/runtime/wasm/hash.wat	Tue Apr 30 11:19:08 2024 +0800
+@@ -147,5 +147,5 @@
+       (array.new $block (ref.i31 (i32.const 0)) (global.get $HASH_QUEUE_SIZE)))
+
+-   (func (export "caml_hash")
++   (func (export "caml_hash_exn")
+       (param $count (ref eq)) (param $limit (ref eq)) (param $seed (ref eq))
+       (param $obj (ref eq)) (result (ref eq))

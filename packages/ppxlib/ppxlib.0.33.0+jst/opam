@@ -118,11 +118,11 @@ extra-files: [
   ]
   [
     "ppxlib+src+ast_builder.mli.patch"
-    "sha256=52d672b30e2f884eb197c56884e96dc75c51f08349f569f2facb7487e6041853"
+    "sha256=00538c2bc0a4a2da140fc434ef1e2f739f2e48b8447d9e0558a07da0e2dc1700"
   ]
   [
     "ppxlib+src+ast_builder_intf.ml.patch"
-    "sha256=9b55f5bd1f7796363e9483f1dc32da5ded8e1cb4c46aa9b9c82840bb877cf253"
+    "sha256=7367078d362fc570fada77005a72e3fbe01d4174f6bcd662df92876aca20acda"
   ]
   [
     "ppxlib+src+ast_pattern.ml.patch"

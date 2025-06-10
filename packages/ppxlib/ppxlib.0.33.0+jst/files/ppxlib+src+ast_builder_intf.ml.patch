@@ -84,3 +84,11 @@
  end
  
  module type Located = sig
+@@ -133,5 +203,7 @@ module type S = sig
+     let loc = Location.none
+   end)
+ 
++  val pexp_apply : expression -> (arg_label * expression) list -> expression
++
+   include Additional_helpers with type 'a with_loc := 'a without_location
+ end

@@ -1,0 +1,561 @@
+--- a/compiler/lib/code.ml
++++ b/compiler/lib/code.ml
+@@ -333,6 +333,7 @@
+   | Int64 of Int64.t
+   | NativeInt of Int32.t (* Native int are 32bit on all known backend *)
+   | Tuple of int * constant array * array_or_not
++  | Null
+
+ module Constant = struct
+   type t = constant
+@@ -360,6 +361,7 @@
+     | Float_array a, Float_array b -> Some (Array.equal Float.ieee_equal a b)
+     | Float a, Float b -> Some (Float.ieee_equal a b)
+     | Float32 a, Float32 b -> Some (Float.ieee_equal a b)
++    | Null, Null -> Some true
+     | String _, NativeString _ | NativeString _, String _ -> None
+     | Int _, Float _ | Float _, Int _ -> None
+     | Int _, Float32 _ | Float32 _, Int _ -> None
+@@ -405,6 +407,7 @@
+     | ( (Int _ | Int32 _ | NativeInt _)
+       , (String _ | NativeString _ | Float_array _ | Int64 _ | Tuple (_, _, _)) ) ->
+         Some false
++    | (Null, _) | (_, Null) -> Some false
+     (* Note: the following cases should not occur when compiling to Javascript *)
+     | Int _, (Int32 _ | NativeInt _)
+     | Int32 _, (Int _ | NativeInt _)
+@@ -524,6 +527,7 @@
+               constant f a.(i)
+             done;
+             Format.fprintf f ")")
++    | Null -> Format.fprintf f "null"
+
+   let arg f a =
+     match a with
+@@ -885,7 +889,7 @@
+             | `Wasm -> true
+             | _ -> false)
+       | String _ | NativeString _ | Float _ | Float32 _ | Float_array _ | Int _ | Int64 _
+-      | Tuple (_, _, _) -> ()
++      | Tuple (_, _, _)  | Null -> ()
+     in
+     let check_prim_arg = function
+       | Pc c -> check_constant c
+--- a/compiler/lib/code.mli
++++ b/compiler/lib/code.mli
+@@ -179,6 +179,7 @@
+   | Int64 of Int64.t
+   | NativeInt of Int32.t  (** Only produced when compiling to WebAssembly. *)
+   | Tuple of int * constant array * array_or_not
++  | Null
+
+ module Constant : sig
+   type t = constant
+--- a/compiler/lib/eval.ml
++++ b/compiler/lib/eval.ml
+@@ -255,6 +255,7 @@
+   | Float32 _, Float _ | Float _, Float32 _ -> None
+   | NativeString a, NativeString b -> Some (Native_string.equal a b)
+   | String a, String b when Config.Flag.use_js_string () -> Some (String.equal a b)
++  | Null, Null -> Some true
+   | Int _, (Float _ | Float32 _) | (Float _ | Float32 _), Int _ -> None
+   (* All other values may be distinct objects and thus different by [caml_js_equals]. *)
+   | String _, _
+@@ -270,7 +271,9 @@
+   | NativeInt _, _
+   | _, NativeInt _
+   | Tuple _, _
+-  | _, Tuple _ -> None
++  | _, Tuple _
++  | Null, _
++  | _, Null -> None
+
+ let eval_instr ~target info ((x, loc) as i) =
+   match x with
+@@ -408,6 +411,7 @@
+     (fun x ->
+       match Flow.Info.def info x with
+       | Some (Constant (Int x)) -> if Targetint.is_zero x then Zero else Non_zero
++      | Some (Constant Null) -> Zero
+       | Some
+           (Constant
+             ( Int32 _
+--- a/compiler/lib/flow.ml
++++ b/compiler/lib/flow.ml
+@@ -371,11 +371,12 @@
+   | NativeInt _, NativeInt _, `Wasm ->
+       false (* [NativeInt]s are boxed in Wasm and are possibly different objects *)
+   | NativeInt _, NativeInt _, `JavaScript -> assert false
++  | Null, Null, _ -> true
+   (* All other values may be distinct objects and thus different by [caml_js_equals]. *)
+   | Int64 _, Int64 _, _ -> false
+   | Tuple _, Tuple _, _ -> false
+   | Float_array _, Float_array _, _ -> false
+-  | (Int _ | Float _ | Float32 _ | Int64 _ | Int32 _ | NativeInt _), _, _ -> false
++  | (Int _ | Float _ | Float32 _ | Int64 _ | Int32 _ | NativeInt _ | Null), _, _ -> false
+   | (String _ | NativeString _), _, _ -> false
+   | (Float_array _ | Tuple _), _, _ -> false
+
+--- a/compiler/lib/generate.ml
++++ b/compiler/lib/generate.ml
+@@ -497,6 +497,7 @@
+   | Int i -> targetint i, instrs
+   | Int32 i | NativeInt i ->
+     J.ENum (J.Num.of_targetint (Targetint.of_int32_exn i)), instrs
++  | Null -> s_var "null", instrs
+
+ let constant ~ctx x level =
+   let expr, instr = constant_rec ~ctx x level [] in
+--- a/compiler/lib/ocaml_compiler.ml
++++ b/compiler/lib/ocaml_compiler.ml
+@@ -45,9 +45,7 @@
+   | Const_mixed_block (tag, _, l) | Const_block (tag, l) ->
+       let l = Array.of_list (List.map l ~f:constant_of_const) in
+       Tuple (tag, l, Unknown)
+-  | Const_null ->
+-
+-    failwith "[Const_null] not supported in JavaScript yet."
++  | Const_null -> Null
+
+ let rec find_loc_in_summary ident' = function
+   | Env.Env_empty -> None
+--- a/compiler/lib/parse_bytecode.ml
++++ b/compiler/lib/parse_bytecode.ml
+@@ -479,8 +479,14 @@
+
+   let ident_f32 = ident_of_custom (Obj.repr 0.s)
+
++  external is_null : Obj.t -> bool = "%is_null"
++
++  let is_null obj = is_null (Sys.opaque_identity obj)
++
+   let rec parse x =
+-    if Obj.is_block x
++    if is_null x then
++      Null
++    else if Obj.is_block x
+     then
+       let tag = Obj.tag x in
+       if tag = Obj.string_tag
+@@ -528,6 +534,7 @@
+     | Tuple _ -> false
+     | Int _ -> true
+     | Int32 _ | NativeInt _ -> false
++    | Null -> true
+ end
+
+ let const32 i = Constant (Int (Targetint.of_int32_exn i))
+@@ -2960,9 +2967,6 @@
+     }
+
+   let constant_of_const x = Ocaml_compiler.constant_of_const x
+-  [@@if ocaml_version < (5, 1, 0)]
+-
+-  let constant_of_const x = Constants.parse x [@@if ocaml_version >= (5, 1, 0)]
+
+   (* We currently rely on constants to be relocated before globals. *)
+   let step1 t compunit code =
+--- a/compiler/lib-wasm/gc_target.ml
++++ b/compiler/lib-wasm/gc_target.ml
+@@ -1068,6 +1068,13 @@
+     | NativeInt i ->
+         let* e = Memory.make_int32 ~kind:`Nativeint (return (W.Const (I32 i))) in
+         return (Const, e)
++    | Null ->
++      let* var =
++        register_import
++          ~name:"null"
++          (Global { mut = false; typ = Type.value })
++      in
++      return (Const, W.GlobalGet var)
+
+   let translate c =
+     let* const, c = translate_rec c in
+--- a/compiler/tests-ocaml/lib-atomic/test_atomic.ml
++++ b/compiler/tests-ocaml/lib-atomic/test_atomic.ml
+@@ -1,39 +1,39 @@
+ (* TEST *)
+
+-let r = Atomic.make 1
+-let () = assert (Atomic.get r = 1)
++let r = (Atomic.make [@ocaml.alert "-unsafe_multidomain"]) 1
++let () = assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r = 1)
+
+-let () = Atomic.set r 2
+-let () = assert (Atomic.get r = 2)
++let () = (Atomic.set [@ocaml.alert "-unsafe_multidomain"]) r 2
++let () = assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r = 2)
+
+-let () = assert (Atomic.exchange r 3 = 2)
++let () = assert ((Atomic.exchange [@ocaml.alert "-unsafe_multidomain"]) r 3 = 2)
+
+-let () = assert (Atomic.compare_and_set r 3 4 = true)
+-let () = assert (Atomic.get r = 4)
++let () = assert ((Atomic.compare_and_set [@ocaml.alert "-unsafe_multidomain"]) r 3 4 = true)
++let () = assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r = 4)
+
+-let () = assert (Atomic.compare_and_set r 3 (-4) = false)
+-let () = assert (Atomic.get r = 4 )
++let () = assert ((Atomic.compare_and_set [@ocaml.alert "-unsafe_multidomain"]) r 3 (-4) = false)
++let () = assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r = 4 )
+
+-let () = assert (Atomic.compare_and_set r 3 4 = false)
++let () = assert ((Atomic.compare_and_set [@ocaml.alert "-unsafe_multidomain"]) r 3 4 = false)
+
+ let () = assert (Atomic.fetch_and_add r 2 = 4)
+-let () = assert (Atomic.get r = 6)
++let () = assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r = 6)
+
+ let () = assert (Atomic.fetch_and_add r (-2) = 6)
+-let () = assert (Atomic.get r = 4)
++let () = assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r = 4)
+
+-let () = assert ((Atomic.incr r; Atomic.get r) = 5)
++let () = assert ((Atomic.incr r; (Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r) = 5)
+
+-let () = assert ((Atomic.decr r; Atomic.get r) = 4)
++let () = assert ((Atomic.decr r; (Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r) = 4)
+
+ let () =
+-  let r = Atomic.make 0 in
+-  let cur = Atomic.get r in
+-  ignore (Atomic.set r (cur + 1), Atomic.set r (cur - 1));
+-  assert (Atomic.get r <> cur)
++  let r = (Atomic.make [@ocaml.alert "-unsafe_multidomain"]) 0 in
++  let cur = (Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r in
++  ignore ((Atomic.set [@ocaml.alert "-unsafe_multidomain"]) r (cur + 1), (Atomic.set [@ocaml.alert "-unsafe_multidomain"]) r (cur - 1));
++  assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r <> cur)
+
+ let () =
+-  let r = Atomic.make 0 in
+-  let cur = Atomic.get r in
++  let r = (Atomic.make [@ocaml.alert "-unsafe_multidomain"]) 0 in
++  let cur = (Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r in
+   ignore (Atomic.incr r, Atomic.decr r);
+-  assert (Atomic.get r = cur)
++  assert ((Atomic.get [@ocaml.alert "-unsafe_multidomain"]) r = cur)
+--- a/lib/js_of_ocaml/js.ml
++++ b/lib/js_of_ocaml/js.ml
+@@ -813,7 +813,7 @@
+   if isNaN s then failwith "parseFloat" else s
+
+ let _ =
+-  Printexc.register_printer (fun e ->
++  (Printexc.register_printer [@ocaml.alert "-unsafe_multidomain"]) (fun e ->
+       if instanceof (Obj.magic e : < .. > t) error_constr
+       then
+         let e = Js_error.of_error (Obj.magic e : error t) in[]
+--- a/lib/runtime/jsoo_runtime.ml
++++ b/lib/runtime/jsoo_runtime.ml
+@@ -162,7 +162,7 @@
+
+   exception Exn of t
+
+-  let _ = Callback.register_exception "jsError" (Exn (Obj.magic [||]))
++  let _ = (Callback.register_exception [@ocaml.alert "-unsafe_multidomain"]) "jsError" (Exn (Obj.magic [||]))
+
+   let raise_ : t -> 'a = Js.js_expr "(function (exn) { throw exn })"
+
+--- a/runtime/js/domain.js
++++ b/runtime/js/domain.js
+@@ -36,6 +36,13 @@
+   return 0;
+ }
+
++//Provides: caml_atomic_compare_exchange
++function caml_atomic_compare_exchange(ref, o, n) {
++  var old = ref[1];
++  if (old === o) ref[1] = n;
++  return old;
++}
++
+ //Provides: caml_atomic_fetch_add
+ function caml_atomic_fetch_add(ref, i) {
+   var old = ref[1];
+@@ -43,6 +50,41 @@
+   return old;
+ }
+
++//Provides: caml_atomic_add
++function caml_atomic_add(ref, i) {
++  var old = ref[1];
++  ref[1] += i;
++  return 0;
++}
++
++//Provides: caml_atomic_sub
++function caml_atomic_sub(ref, i) {
++  var old = ref[1];
++  ref[1] -= i;
++  return 0;
++}
++
++//Provides: caml_atomic_land
++function caml_atomic_land(ref, i) {
++  var old = ref[1];
++  ref[1] &= i;
++  return 0;
++}
++
++//Provides: caml_atomic_lor
++function caml_atomic_lor(ref, i) {
++  var old = ref[1];
++  ref[1] |= i;
++  return 0;
++}
++
++//Provides: caml_atomic_lxor
++function caml_atomic_lxor(ref, i) {
++  var old = ref[1];
++  ref[1] ^= i;
++  return 0;
++}
++
+ //Provides: caml_atomic_exchange
+ function caml_atomic_exchange(ref, v) {
+   var r = ref[1];
+--- a/runtime/js/marshal.js
++++ b/runtime/js/marshal.js
+@@ -44,6 +44,7 @@
+   CODE_CUSTOM: 0x12,
+   CODE_CUSTOM_LEN: 0x18,
+   CODE_CUSTOM_FIXED: 0x19,
++  CODE_NULL: 0x1f
+ };
+
+ //Provides: UInt8ArrayReader
+@@ -539,6 +540,8 @@
+             }
+             if (intern_obj_table) intern_obj_table[obj_counter++] = v;
+             return v;
++          case 0x1f: //cst.CODE_NULL:
++            return null;
+           default:
+             caml_failwith("input_value: ill-formed message");
+         }
+@@ -742,7 +745,9 @@
+     }
+
+     function extern_rec(v) {
+-      if (v.caml_custom) {
++      if (v === null) {
++        writer.write(8, 0x1f /*cst.CODE_NULL*/);
++      } else if (v.caml_custom) {
+         if (memo(v)) return;
+         var name = v.caml_custom;
+         var ops = caml_custom_ops[name];
+--- a/runtime/js/obj.js
++++ b/runtime/js/obj.js
+@@ -46,7 +46,8 @@
+ //Provides: caml_obj_tag
+ //Requires: caml_is_ml_bytes, caml_is_ml_string
+ function caml_obj_tag(x) {
+-  if (Array.isArray(x) && x[0] === x[0] >>> 0) return x[0];
++  if (x === null) return 1010;
++  else if (Array.isArray(x) && x[0] === x[0] >>> 0) return x[0];
+   else if (caml_is_ml_bytes(x)) return 252;
+   else if (caml_is_ml_string(x)) return 252;
+   else if (x instanceof Function || typeof x == "function") return 247;
+@@ -272,3 +273,16 @@
+ function caml_custom_identifier(o) {
+   return caml_string_of_jsstring(o.caml_custom);
+ }
++
++//Provides: caml_int_as_pointer
++//Requires: caml_failwith
++function caml_int_as_pointer(i) {
++  // Special-case null pointers for [or_null].
++  if (i == 0) return null;
++  caml_failwith("%int_as_pointer is not supported in javascript.");
++}
++
++//Provides: caml_is_null
++function caml_is_null(o) {
++  return o === null;
++}
+--- a/runtime/wasm/domain.wat
++++ b/runtime/wasm/domain.wat
+@@ -34,6 +34,21 @@
+          (else
+             (ref.i31 (i32.const 0)))))
+
++   (func (export "caml_atomic_compare_exchange")
++      (param $ref (ref eq)) (param $o (ref eq)) (param $n (ref eq))
++      (result (ref eq))
++      (local $b (ref $block))
++      (local $old (ref eq))
++      (local.set $b (ref.cast (ref $block) (local.get $ref)))
++      (local.set $old (array.get $block (local.get $b) (i32.const 1)))
++      (if (result (ref eq))
++         (ref.eq (local.get $old) (local.get $o))
++         (then
++            (array.set $block (local.get $b) (i32.const 1) (local.get $n))
++            (local.get $old))
++         (else
++            (local.get $old))))
++
+    (func (export "caml_atomic_load") (param (ref eq)) (result (ref eq))
+       (array.get $block (ref.cast (ref $block) (local.get 0)) (i32.const 1)))
+
+@@ -48,6 +63,61 @@
+                            (i31.get_s (ref.cast (ref i31) (local.get $i))))))
+       (local.get $old))
+
++   (func (export "caml_atomic_add")
++      (param $ref (ref eq)) (param $i (ref eq)) (result (ref eq))
++      (local $b (ref $block))
++      (local $old (ref eq))
++      (local.set $b (ref.cast (ref $block) (local.get $ref)))
++      (local.set $old (array.get $block (local.get $b) (i32.const 1)))
++      (array.set $block (local.get $b) (i32.const 1)
++         (ref.i31 (i32.add (i31.get_s (ref.cast (ref i31) (local.get $old)))
++                           (i31.get_s (ref.cast (ref i31) (local.get $i))))))
++      (ref.i31 (i32.const 0)))
++
++   (func (export "caml_atomic_sub")
++      (param $ref (ref eq)) (param $i (ref eq)) (result (ref eq))
++      (local $b (ref $block))
++      (local $old (ref eq))
++      (local.set $b (ref.cast (ref $block) (local.get $ref)))
++      (local.set $old (array.get $block (local.get $b) (i32.const 1)))
++      (array.set $block (local.get $b) (i32.const 1)
++         (ref.i31 (i32.sub (i31.get_s (ref.cast (ref i31) (local.get $old)))
++                           (i31.get_s (ref.cast (ref i31) (local.get $i))))))
++      (ref.i31 (i32.const 0)))
++
++   (func (export "caml_atomic_land")
++      (param $ref (ref eq)) (param $i (ref eq)) (result (ref eq))
++      (local $b (ref $block))
++      (local $old (ref eq))
++      (local.set $b (ref.cast (ref $block) (local.get $ref)))
++      (local.set $old (array.get $block (local.get $b) (i32.const 1)))
++      (array.set $block (local.get $b) (i32.const 1)
++         (ref.i31 (i32.and (i31.get_s (ref.cast (ref i31) (local.get $old)))
++                           (i31.get_s (ref.cast (ref i31) (local.get $i))))))
++      (ref.i31 (i32.const 0)))
++
++   (func (export "caml_atomic_lor")
++      (param $ref (ref eq)) (param $i (ref eq)) (result (ref eq))
++      (local $b (ref $block))
++      (local $old (ref eq))
++      (local.set $b (ref.cast (ref $block) (local.get $ref)))
++      (local.set $old (array.get $block (local.get $b) (i32.const 1)))
++      (array.set $block (local.get $b) (i32.const 1)
++         (ref.i31 (i32.or (i31.get_s (ref.cast (ref i31) (local.get $old)))
++                           (i31.get_s (ref.cast (ref i31) (local.get $i))))))
++      (ref.i31 (i32.const 0)))
++
++   (func (export "caml_atomic_lxor")
++      (param $ref (ref eq)) (param $i (ref eq)) (result (ref eq))
++      (local $b (ref $block))
++      (local $old (ref eq))
++      (local.set $b (ref.cast (ref $block) (local.get $ref)))
++      (local.set $old (array.get $block (local.get $b) (i32.const 1)))
++      (array.set $block (local.get $b) (i32.const 1)
++         (ref.i31 (i32.xor (i31.get_s (ref.cast (ref i31) (local.get $old)))
++                           (i31.get_s (ref.cast (ref i31) (local.get $i))))))
++      (ref.i31 (i32.const 0)))
++
+    (func (export "caml_atomic_exchange")
+       (param $ref (ref eq)) (param $v (ref eq)) (result (ref eq))
+       (local $b (ref $block))
+--- a/runtime/wasm/obj.wat
++++ b/runtime/wasm/obj.wat
+@@ -86,6 +86,9 @@
+             (field (ref $function_2))
+             (field (mut (ref null $cps_closure))))))
+
++   (type $null (struct))
++   (global $null (export "null") (ref eq) (struct.new $null))
++
+    (global $forcing_tag i32 (i32.const 244))
+    (global $cont_tag (export "cont_tag") i32 (i32.const 245))
+    (global $lazy_tag (export "lazy_tag") i32 (i32.const 246))
+@@ -239,6 +242,8 @@
+       (local.get $res))
+
+    (func (export "caml_obj_tag") (param $v (ref eq)) (result (ref eq))
++      (if (ref.eq (local.get $v) (global.get $null))
++         (then (return (ref.i31 (i32.const 1010)))))
+       (if (ref.test (ref i31) (local.get $v))
+          (then (return (ref.i31 (i32.const 1000)))))
+       (drop (block $not_block (result (ref eq))
+@@ -487,4 +492,20 @@
+                (array.new_fixed $block 3 (ref.i31 (i32.const 0))
+                  (local.get $x) (local.get $y))
+                (ref.as_non_null (global.get $caml_trampoline_ref))))))
+-)
++
++   (func (export "caml_is_null") (param $x (ref eq)) (result (ref eq))
++      (if (result (ref eq)) (ref.eq (local.get $x) (global.get $null))
++        (then (ref.i31 (i32.const 1)))
++        (else (ref.i31 (i32.const 0)))))
++
++   (data $int_as_pointer_not_implemented "caml_int_as_pointer is not supported")
++
++   (func (export "caml_int_as_pointer") (param $x (ref eq)) (result (ref eq))
++      (if (result (ref eq))
++         (i32.eq (i31.get_s (ref.cast (ref i31) (local.get $x))) (i32.const 0))
++         (then (global.get $null))
++         (else
++          (call $caml_failwith
++            (array.new_data $bytes $int_as_pointer_not_implemented
++              (i32.const 0) (i32.const 35)))
++           (ref.i31 (i32.const 0))))))
+--- a/runtime/js/compare.js
++++ b/runtime/js/compare.js
+@@ -18,6 +18,7 @@
+ //Provides: caml_compare_val_tag
+ //Requires: caml_is_ml_string, caml_is_ml_bytes
+ function caml_compare_val_tag(a) {
++  if (a === null) return 1010; // null_tag
+   if (typeof a === "number")
+     return 1000; // int_tag (we use it for all numbers)
+   else if (caml_is_ml_bytes(a))
+@@ -93,6 +94,13 @@
+
+       // tags are different
+       if (tag_a !== tag_b) {
++        if (tag_a === 1010) {
++          // Null is less than anything else
++          return -1;
++        }
++        if (tag_b === 1010) {
++          return 1;
++        }
+         if (tag_a === 1000) {
+           if (tag_b === 1255) {
+             //immediate can compare against custom
+@@ -193,6 +201,8 @@
+             if (!Number.isNaN(b)) return -1;
+           }
+           break;
++        case 1010: // Null pointer
++          return 0;
+         case 1001: // The rest
+           // Here we can be in the following cases:
+           // 1. JavaScript primitive types
+--- a/runtime/wasm/compare.wat
++++ b/runtime/wasm/compare.wat
+@@ -25,6 +25,7 @@
+       (func $caml_obj_tag (param (ref eq)) (result (ref eq))))
+    (import "obj" "caml_is_closure"
+       (func $caml_is_closure (param (ref eq)) (result i32)))
++   (import "obj" "null" (global $null (ref eq)))
+    (import "fail" "caml_invalid_argument"
+       (func $caml_invalid_argument (param (ref eq))))
+    (import "effect" "caml_is_continuation"
+@@ -238,6 +239,13 @@
+             (if (local.get $total)
+                (then
+                   (br_if $next_item (ref.eq (local.get $v1) (local.get $v2)))))
++            (if (ref.eq (local.get $v1) (global.get $null))
++               (then
++                  (if (ref.eq (local.get $v2) (global.get $null))
++                     (then (return (i32.const 0)))
++                     (else (return (i32.const -1))))))
++            (if (ref.eq (local.get $v2) (global.get $null))
++               (then (return (i32.const 1))))
+             (drop (block $v1_is_not_int (result (ref eq))
+                (local.set $i1
+                   (br_on_cast_fail $v1_is_not_int (ref eq) (ref i31)

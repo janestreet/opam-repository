@@ -87,7 +87,7 @@ patches: [
 extra-files: [
   [
     "js_of_ocaml-magic_number.ml.patch"
-    "sha256=c836527a391853d619afba916629ad357bb0a0f18d6a3893b4cd2aa0da13d283"
+    "sha256=7feef837352414b5f102705c01915da98c3186f3559d92e94b63ad912c11dddd"
   ]
   [
     "js_of_ocaml-compilation_unit-name.patch"
@@ -199,7 +199,7 @@ extra-files: [
   ]
   [
     "js_of_ocaml-float32.patch"
-    "sha256=a16d91cf13f438798f50b0793476f7a613affe20cfdb5b6986d1b18c6b45ba7c"
+    "sha256=5f83c34b274dd002e28ace3a93c7beca470bfb85d0037da5e090dcc05a792a20"
   ]
   [
     "js_of_ocaml-caml_array_append.patch"

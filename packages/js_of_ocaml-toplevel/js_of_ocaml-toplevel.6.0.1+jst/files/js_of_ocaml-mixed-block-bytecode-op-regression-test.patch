@@ -1,0 +1,18 @@
+--- a/compiler/lib/instr.ml
++++ b/compiler/lib/instr.ml
+@@ -419,3 +419,7 @@
+   let ins = ops.(i) in
+   if Poly.(ins.kind = K_will_not_happen) then raise (Bad_instruction i);
+   ins
++
++let get_instr_name i =
++  if i < 0 || i >= Array.length ops then raise (Bad_instruction i);
++  ops.(i).name
+--- a/compiler/lib/instr.mli
++++ b/compiler/lib/instr.mli
+@@ -207,3 +207,5 @@
+ val gets32 : string -> int -> int32
+ 
+ val getu32 : string -> int -> int32
++
++val get_instr_name : int -> string

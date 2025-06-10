@@ -1,6 +1,6 @@
 opam-version: "2.0"
-name: "mdx"
 version: "2.5.0+jst"
+name: "mdx"
 synopsis: "Executable code blocks inside markdown files"
 description: """\
 `ocaml-mdx` allows to execute code blocks inside markdown files.
@@ -19,22 +19,22 @@ license: "ISC"
 homepage: "https://github.com/realworldocaml/mdx"
 bug-reports: "https://github.com/realworldocaml/mdx/issues"
 depends: [
-  "dune" {>= "3.5"}
-  "ocaml" {>= "4.08.0"}
+  "dune"          {>= "3.5"}
+  "ocaml"         {>= "4.08.0"}
   "ocamlfind"
-  "fmt" {>= "0.8.7"}
-  "cppo" {build & >= "1.1.0"}
-  "csexp" {>= "1.3.2"}
+  "fmt"           {>= "0.8.7"}
+  "cppo"          {build & >= "1.1.0"}
+  "csexp"         {>= "1.3.2"}
   "astring"
-  "logs" {>= "0.7.0"}
-  "cmdliner" {>= "1.1.0" & < "2.0.0"}
-  "re" {>= "1.7.2"}
+  "logs"          {>= "0.7.0"}
+  "cmdliner"      {>= "1.1.0" & < "2.0.0"}
+  "re"            {>= "1.7.2"}
   "ocaml-version" {>= "2.3.0"}
-  "lwt" {with-test}
+  "lwt"           {with-test}
   "camlp-streams"
   "result"
-  "alcotest" {with-test}
-  "odoc" {with-doc}
+  "alcotest"      {with-test & = "1.9.0+jst"}
+  "odoc"          {with-doc}
 ]
 conflicts: [
   "result" {< "1.5"}
@@ -63,10 +63,10 @@ url {
   ]
 }
 x-commit-hash: "1f83f73e06233ea8745cd0c9473613d40e6999bc"
-patches: [ "ast.patch" ]
+patches: ["ast.patch"]
 extra-files: [
   [
     "ast.patch"
-    "sha256=f205c25c25c6515d0b5b747f08a1e8398d8cee164a3f52eee668b1150f7690e5"
+    "sha256=c96ebc9dca741eded8f9ee2b5c15e075795c1be5ee741730d8096f825a20499f"
   ]
 ]

@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/astlib/ast_999.ml
-@@ -0,0 +1,1346 @@
+@@ -0,0 +1,1347 @@
 +module Asttypes = struct
 +  type constant (*IF_CURRENT = Asttypes.constant *) =
 +      Const_int of int
@@ -233,6 +233,7 @@
 +           *)
 +    | Ptyp_package of package_type  (** [(module S)]. *)
 +    | Ptyp_open of Longident.t loc * core_type (** [M.(T)] *)
++    | Ptyp_of_kind of jkind_annotation (** [(type : k)] *)
 +    | Ptyp_extension of extension  (** [[%id]]. *)
 +
 +  and package_type = Longident.t loc * (Longident.t loc * core_type) list
@@ -1344,6 +1345,6 @@
 +end
 +
 +module Config = struct
-+  let ast_impl_magic_number = "Caml1999M560"
-+  let ast_intf_magic_number = "Caml1999N560"
++  let ast_impl_magic_number = "Caml1999M561"
++  let ast_intf_magic_number = "Caml1999N561"
 +end

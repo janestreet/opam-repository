@@ -1,0 +1,88 @@
+--- a/src/uutf.ml
++++ b/src/uutf.ml
+@@ -4,6 +4,9 @@
+    uutf v1.0.2
+   ---------------------------------------------------------------------------*)
+ 
++(* Safe because the array in question is immutable. *)
++external magic_uncontended : 'a array @ contended -> 'a array @@ portable = "%identity"
++
+ let io_buffer_size = 65536                           (* IO_BUFFER_SIZE 4.0.0 *)
+ 
+ let pp = Format.fprintf
+@@ -140,6 +143,7 @@ let r_utf_16_lo hi s j0 j1 =          (*
+ let r_encoding s j l =                  (* guess encoding with max. 3 bytes. *)
+   (* assert (0 <= j && 0 <= l && j + l <= String.length s) *)
+   let some i = if i < l then Some (unsafe_byte s (j + i)) else None in
++  let utf_8_len = magic_uncontended utf_8_len in
+   match (some 0), (some 1), (some 2) with
+   | Some 0xEF, Some 0xBB, Some 0xBF                 -> `UTF_8 `BOM
+   | Some 0xFE, Some 0xFF, _                         -> `UTF_16BE `BOM
+@@ -201,7 +205,7 @@ type decoder =
+ 
+ let i_rem d = d.i_max - d.i_pos + 1     (* remaining bytes to read in [d.i]. *)
+ let eoi d =
+-  d.i <- Bytes.empty; d.i_pos <- 0; d.i_max <- min_int   (* set eoi in [d]. *)
++  d.i <- Bytes.create 0; d.i_pos <- 0; d.i_max <- min_int   (* set eoi in [d]. *)
+ 
+ let src d s j l =                                     (* set [d.i] with [s]. *)
+   if (j < 0 || l < 0 || j + l > Bytes.length s) then invalid_bounds j l else
+@@ -253,6 +257,7 @@ let rec t_decode_utf_8 d =              
+ and decode_utf_8 d =
+   let rem = i_rem d in
+   if rem <= 0 then (if rem < 0 then `End else refill decode_utf_8 d) else
++  let utf_8_len = magic_uncontended utf_8_len in
+   let need = unsafe_array_get utf_8_len (unsafe_byte d.i d.i_pos) in
+   if rem < need then (t_need d need; t_fill t_decode_utf_8 d) else
+   let j = d.i_pos in
+@@ -323,6 +328,7 @@ and decode_utf_16le d =
+    back in the stream. *)
+ 
+ let guessed_utf_8 d =                   (* start decoder after `UTF_8 guess. *)
++  let utf_8_len = magic_uncontended utf_8_len in
+   let b3 d =                                 (* handles the third read byte. *)
+     let b3 = unsafe_byte d.t 2 in
+     match utf_8_len.(b3) with
+@@ -384,7 +390,7 @@ let guessed_utf_16 d be v =     (* start
+       | `Malformed _ | `Uchar _ as v -> ret (b3 t_decode_utf_16) v 2 d
+       | `Hi hi ->
+         if d.t_len < 3
+-        then ret decode_utf_16 (malformed_pair be hi Bytes.empty 0 0) d.t_len d
++        then ret decode_utf_16 (malformed_pair be hi (Bytes.create 0) 0 0) d.t_len d
+         else (b3 (t_decode_utf_16_lo hi)) d
+ 
+ let guess_encoding d =                  (* guess encoding and start decoder. *)
+@@ -500,7 +506,7 @@ let decoder ?nln ?encoding src =
+   | Some e -> (e :> decoder_encoding), decode_fun e
+   in
+   let i, i_pos, i_max = match src with
+-  | `Manual -> Bytes.empty, 1, 0                  (* implies src_rem d = 0. *)
++  | `Manual -> Bytes.create 0, 1, 0                  (* implies src_rem d = 0. *)
+   | `Channel _ -> Bytes.create io_buffer_size, 1, 0                (* idem. *)
+   | `String s -> Bytes.unsafe_of_string s, 0, String.length s - 1
+   in
+@@ -689,7 +695,7 @@ let encode_fun = function
+ 
+ let encoder encoding dst =
+   let o, o_pos, o_max = match dst with
+-  | `Manual -> Bytes.empty, 1, 0                     (* implies o_rem e = 0. *)
++  | `Manual -> Bytes.create 0, 1, 0                     (* implies o_rem e = 0. *)
+   | `Buffer _
+   | `Channel _ -> Bytes.create io_buffer_size, 0, io_buffer_size - 1
+   in
+@@ -724,6 +730,7 @@ module String = struct
+   let fold_utf_8 ?(pos = 0) ?len f acc s =
+     let rec loop acc f s i last =
+       if i > last then acc else
++      let utf_8_len = magic_uncontended utf_8_len in
+       let need = unsafe_array_get utf_8_len (unsafe_byte s i) in
+       if need = 0 then loop (f acc i (malformed s i 1)) f s (i + 1) last else
+       let rem = last - i + 1 in
+--- a/src/uutf.mli
++++ b/src/uutf.mli
+@@ -1,3 +1,5 @@
++@@ portable
++
+ (*---------------------------------------------------------------------------
+    Copyright (c) 2012 Daniel C. Bünzli. All rights reserved.
+    Distributed under the ISC license, see terms at the end of the file.

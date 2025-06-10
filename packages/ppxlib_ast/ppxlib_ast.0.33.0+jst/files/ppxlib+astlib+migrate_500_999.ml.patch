@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/astlib/migrate_500_999.ml
-@@ -0,0 +1,1647 @@
+@@ -0,0 +1,1650 @@
 +open Stdlib0
 +module From = Ast_500
 +module To = Ast_999
@@ -398,6 +398,7 @@
 +        | Ptyp_package (longident, lst) ->
 +            Ptyp_package
 +              (longident, List.map (fun (n, typ) -> (n, loop typ)) lst)
++        | Ptyp_of_kind x1 -> Ptyp_of_kind x1
 +        | Ptyp_extension (s, arg) -> Ptyp_extension (s, arg)
 +      in
 +      { t with ptyp_desc = desc }
@@ -658,6 +659,8 @@
 +        (List.map copy_bound_var x0, copy_core_type x1)
 +  | Ast_500.Parsetree.Ptyp_package x0 ->
 +      Ast_999.Parsetree.Ptyp_package (copy_package_type x0)
++  | Ast_500.Parsetree.Ptyp_of_kind x0 ->
++      Ast_999.Parsetree.Ptyp_of_kind (copy_jkind_annotation x0)
 +  | Ast_500.Parsetree.Ptyp_extension x0 ->
 +      Ast_999.Parsetree.Ptyp_extension (copy_extension x0)
 +

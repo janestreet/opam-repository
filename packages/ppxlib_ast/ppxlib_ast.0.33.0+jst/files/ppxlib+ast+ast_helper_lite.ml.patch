@@ -32,7 +32,7 @@
    let package ?loc ?attrs a b = mk ?loc ?attrs (Ptyp_package (a, b))
    let extension ?loc ?attrs a = mk ?loc ?attrs (Ptyp_extension a)
  
-@@ -101,34 +110,42 @@ module Typ = struct
+@@ -101,39 +110,48 @@ module Typ = struct
        if List.mem v vl then
          Location.raise_errorf ~loc "variable in scope syntax error: %s" v
      in
@@ -86,7 +86,13 @@
                string_lst;
              Ptyp_poly (string_lst, loop core_type)
          | Ptyp_package (longident, lst) ->
-@@ -170,16 +187,17 @@ module Pat = struct
+             Ptyp_package
+               (longident, List.map (fun (n, typ) -> (n, loop typ)) lst)
++        | Ptyp_of_kind jkind -> Ptyp_of_kind jkind
+         | Ptyp_extension (s, arg) -> Ptyp_extension (s, arg)
+       in
+       { t with ptyp_desc = desc }
+@@ -170,16 +188,17 @@ module Pat = struct
    let alias ?loc ?attrs a b = mk ?loc ?attrs (Ppat_alias (a, b))
    let constant ?loc ?attrs a = mk ?loc ?attrs (Ppat_constant a)
    let interval ?loc ?attrs a b = mk ?loc ?attrs (Ppat_interval (a, b))
@@ -107,7 +113,7 @@
    let type_ ?loc ?attrs a = mk ?loc ?attrs (Ppat_type a)
    let lazy_ ?loc ?attrs a = mk ?loc ?attrs (Ppat_lazy a)
    let unpack ?loc ?attrs a = mk ?loc ?attrs (Ppat_unpack a)
-@@ -201,23 +219,34 @@ module Exp = struct
+@@ -201,23 +220,34 @@ module Exp = struct
    let ident ?loc ?attrs a = mk ?loc ?attrs (Pexp_ident a)
    let constant ?loc ?attrs a = mk ?loc ?attrs (Pexp_constant a)
    let let_ ?loc ?attrs a b c = mk ?loc ?attrs (Pexp_let (a, b, c))
@@ -147,7 +153,7 @@
    let coerce ?loc ?attrs a b c = mk ?loc ?attrs (Pexp_coerce (a, b, c))
    let send ?loc ?attrs a b = mk ?loc ?attrs (Pexp_send (a, b))
    let new_ ?loc ?attrs a = mk ?loc ?attrs (Pexp_new a)
-@@ -229,7 +258,7 @@ module Exp = struct
+@@ -229,7 +259,7 @@ module Exp = struct
    let lazy_ ?loc ?attrs a = mk ?loc ?attrs (Pexp_lazy a)
    let poly ?loc ?attrs a b = mk ?loc ?attrs (Pexp_poly (a, b))
    let object_ ?loc ?attrs a = mk ?loc ?attrs (Pexp_object a)
@@ -156,7 +162,7 @@
    let pack ?loc ?attrs a = mk ?loc ?attrs (Pexp_pack a)
    let open_ ?loc ?attrs a b = mk ?loc ?attrs (Pexp_open (a, b))
  
-@@ -238,10 +267,14 @@ module Exp = struct
+@@ -238,10 +268,14 @@ module Exp = struct
  
    let extension ?loc ?attrs a = mk ?loc ?attrs (Pexp_extension a)
    let unreachable ?loc ?attrs () = mk ?loc ?attrs Pexp_unreachable
@@ -171,7 +177,7 @@
  end
  
  module Mty = struct
-@@ -251,8 +284,9 @@ module Mty = struct
+@@ -251,8 +285,9 @@ module Mty = struct
    let attr d a = { d with pmty_attributes = d.pmty_attributes @ [ a ] }
    let ident ?loc ?attrs a = mk ?loc ?attrs (Pmty_ident a)
    let alias ?loc ?attrs a = mk ?loc ?attrs (Pmty_alias a)
@@ -183,7 +189,7 @@
    let with_ ?loc ?attrs a b = mk ?loc ?attrs (Pmty_with (a, b))
    let typeof_ ?loc ?attrs a = mk ?loc ?attrs (Pmty_typeof a)
    let extension ?loc ?attrs a = mk ?loc ?attrs (Pmty_extension a)
-@@ -267,7 +301,7 @@ module Mod = struct
+@@ -267,7 +302,7 @@ module Mod = struct
    let structure ?loc ?attrs x = mk ?loc ?attrs (Pmod_structure x)
    let functor_ ?loc ?attrs arg body = mk ?loc ?attrs (Pmod_functor (arg, body))
    let apply ?loc ?attrs m1 m2 = mk ?loc ?attrs (Pmod_apply (m1, m2))
@@ -192,7 +198,7 @@
    let unpack ?loc ?attrs e = mk ?loc ?attrs (Pmod_unpack e)
    let extension ?loc ?attrs a = mk ?loc ?attrs (Pmod_extension a)
  end
-@@ -284,7 +318,7 @@ module Sig = struct
+@@ -284,7 +319,7 @@ module Sig = struct
    let rec_module ?loc a = mk ?loc (Psig_recmodule a)
    let modtype ?loc a = mk ?loc (Psig_modtype a)
    let open_ ?loc a = mk ?loc (Psig_open a)
@@ -201,7 +207,7 @@
    let class_ ?loc a = mk ?loc (Psig_class a)
    let class_type ?loc a = mk ?loc (Psig_class_type a)
    let extension ?loc ?(attrs = []) a = mk ?loc (Psig_extension (a, attrs))
-@@ -367,10 +401,12 @@ module Cf = struct
+@@ -367,10 +402,12 @@ module Cf = struct
  end
  
  module Val = struct
@@ -215,7 +221,7 @@
        pval_attributes = attrs;
        pval_loc = loc;
        pval_prim = prim;
-@@ -379,7 +415,7 @@ end
+@@ -379,7 +416,7 @@ end
  
  module Md = struct
    let mk ?(loc = !default_loc) ?(attrs = []) name typ =
@@ -224,7 +230,7 @@
  end
  
  module Ms = struct
-@@ -419,12 +455,12 @@ end
+@@ -419,12 +456,12 @@ end
  
  module Incl = struct
    let mk ?(loc = !default_loc) ?(attrs = []) mexpr =
@@ -239,7 +245,7 @@
  end
  
  module Ci = struct
-@@ -450,12 +486,14 @@ module Type = struct
+@@ -450,12 +487,14 @@ module Type = struct
        ptype_kind = kind;
        ptype_private = priv;
        ptype_manifest = manifest;
@@ -254,7 +260,7 @@
      {
        pcd_name = name;
        pcd_vars = vars;
-@@ -465,10 +503,12 @@ module Type = struct
+@@ -465,10 +504,12 @@ module Type = struct
        pcd_attributes = attrs;
      }
  
@@ -268,7 +274,7 @@
        pld_type = typ;
        pld_loc = loc;
        pld_attributes = attrs;
-@@ -505,6 +545,7 @@ module Te = struct
+@@ -505,6 +546,7 @@ module Te = struct
  
    let decl ?(loc = !default_loc) ?(attrs = []) ?(vars = [])
        ?(args = Pcstr_tuple []) ?res name =

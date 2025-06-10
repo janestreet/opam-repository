@@ -5,7 +5,7 @@ license: "LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception"
 authors: "Xavier Leroy and many contributors"
 homepage: "https://ocaml.org"
 bug-reports: "https://github.com/oxcaml/oxcaml/issues"
-dev-repo: "git+https://github.com/oxcaml/oxcaml#main"
+dev-repo: "git+https://github.com/oxcaml/oxcaml/flambda-backend#main"
 depends: [
   "ocaml"                 {= "5.2.0" & post}
   "base-unix"             {post}
@@ -88,35 +88,32 @@ extra-source "init-menhir.tar.gz" {
     "sha512=620ff3443143535e03ac98c5e8ee2ddf9ba48f8cfe441302118def1da3e03ffac7f48d4d4cb129766b625ecad0fb341da1baa0169dee8b6d07a5b0bbb735cf2f"
   ]
 }
-patches: [ "ignore-opam.patch" "macos.patch" "macos2.patch" "macos_x86.patch" "sigwait.patch" "arm-issue-debugging.patch" ]
 url {
   src:
-    "https://github.com/oxcaml/oxcaml/archive/refs/tags/5.2.0minus-10.tar.gz"
+    "https://github.com/oxcaml/oxcaml/archive/refs/tags/5.2.0minus-11.tar.gz"
   checksum:
-    "sha256=1eedf71f4f665cf17b5d5f38206a9c3d35a3f9a697af5922dceb2aa293059bf4"
+    "sha256=sha256=24089d48ba9f9fcfb84e74ef7e803f65f5bccc9def05961dd7290f31da71a10a"
 }
+patches: ["ignore-opam.patch"]
 extra-files: [
   [
     "ignore-opam.patch"
     "sha256=740fded14984fc0248cb7d055eac7179b5c3b7e6f7f20e914d5c3f1ccf7be20b"
   ]
-  ["macos.patch" "sha256=ef572f4878469f52c715213e0a6e24e278b7c9fcc7523336819df392e80451b7"]
-  ["macos2.patch" "sha256=c1562e9ff839a51a5b8a99da2f231f8da79bd6c38f5084495cd2cbc988b259ed"]
-  ["macos_x86.patch" "sha256=a5575d6f806f1b4d7efbea193cb74fb4961e2511a66b189fa1beb83c456468a2"]
-  ["sigwait.patch" "sha256=261f19f09911bbdcd7d2caee18806f3b56f3d10ef53aaf351a522bf9f5f03a8e"]
-  ["arm-issue-debugging.patch" "sha256=7730fdae0e848adbb08f64912bfeabab707ee77dd73043181d2a229a1b87fa41"]
-
 ]
 conflicts: [
   "alcotest" {!= "1.9.0+jst"}
+  "backoff" {!= "0.1.1+jst"}
   "dot-merlin-reader" {!= "5.2.1-502+jst"}
   "gen_js_api" {!= "1.1.2+jst"}
   "js_of_ocaml" {!= "6.0.1+jst"}
   "js_of_ocaml-compiler" {!= "6.0.1+jst"}
   "js_of_ocaml-ppx" {!= "6.0.1+jst"}
+  "js_of_ocaml-toplevel" {!= "6.0.1+jst"}
   "jsonrpc" {!= "1.19.0+jst"}
   "lsp" {!= "1.19.0+jst"}
   "lwt_ppx" {!= "5.9.1+jst"}
+  "mdx" {!= "2.5.0+jst"}
   "merlin" {!= "5.2.1-502+jst"}
   "merlin-lib" {!= "5.2.1-502+jst"}
   "ocaml-compiler-libs" {!= "v0.17.0+jst"}
