@@ -1,3 +1,12 @@
+diff --git a/src/basement.ml b/src/basement.ml
+index 71402ce..98c9d45 100644
+--- a/src/basement.ml
++++ b/src/basement.ml
+@@ -7,4 +7,3 @@ module Portable_atomic = Portable_atomic
+ module Portable_lazy = Portable_lazy
+ module Stdlib_iarray_labels = Stdlib_iarray_labels
+ module Stdlib_shim = Stdlib_shim
+-module Stdlib_shim_upstream = Stdlib_shim_upstream
 diff --git a/src/capsule_condition.h b/src/capsule_condition.h
 index 90690a0..7701e02 100644
 --- a/src/capsule_condition.h
