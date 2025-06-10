@@ -27,3 +27,7 @@ url {
   checksum:
     "sha256=a8091494f10c2eacd2076c32e3adf4ea0fa641194d11567d58f9f61b1d04c6c9"
 }
+patches: [ "ocaml_intrinsics_kernel.patch" ]
+extra-files: [
+  ["ocaml_intrinsics_kernel.patch" "sha256=8e4cdc15784ebdb3d0d197aeaef06c418d27132088a304568d53d7db1f23fdbb"]
+]
