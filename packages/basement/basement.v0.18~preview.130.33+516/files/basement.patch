@@ -1,12 +1,3 @@
-diff --git a/src/basement.ml b/src/basement.ml
-index 71402ce..98c9d45 100644
---- a/src/basement.ml
-+++ b/src/basement.ml
-@@ -7,4 +7,3 @@ module Portable_atomic = Portable_atomic
- module Portable_lazy = Portable_lazy
- module Stdlib_iarray_labels = Stdlib_iarray_labels
- module Stdlib_shim = Stdlib_shim
--module Stdlib_shim_upstream = Stdlib_shim_upstream
 diff --git a/src/capsule_condition.h b/src/capsule_condition.h
 index 90690a0..7701e02 100644
 --- a/src/capsule_condition.h
@@ -173,7 +164,7 @@ index 90690a0..7701e02 100644
 +#endif /* CAML_INTERNALS */
 \ No newline at end of file
 diff --git a/src/capsule_mutex.h b/src/capsule_mutex.h
-index 8153e4d..893acb6 100644
+index 8153e4d..7240663 100644
 --- a/src/capsule_mutex.h
 +++ b/src/capsule_mutex.h
 @@ -6,11 +6,18 @@
@@ -268,11 +259,10 @@ index 8153e4d..893acb6 100644
  }
  
  Caml_inline int capsule_mutex_create(capsule_mutex *res) {
-@@ -129,20 +157,34 @@ Caml_inline int capsule_mutex_create(capsule_mutex *res) {
+@@ -128,21 +156,35 @@ Caml_inline int capsule_mutex_create(capsule_mutex *res) {
+     return ENOMEM;
    }
    atomic_store_explicit(&mut->owner, FIBER_NONE, memory_order_relaxed);
-   // 0 = thread-shared, 1 = initial value
--  if (sem_init(&mut->sem, 0, 1) != MUTEX_SUCCESS) {
 +#ifdef __APPLE__
 +  mut->sem = dispatch_semaphore_create(1);
 +  if(mut->sem == NULL) {
@@ -280,7 +270,8 @@ index 8153e4d..893acb6 100644
 +    return ENOMEM;
 +  }
 +#else
-+  if (SEM_INIT(&mut->sem) != MUTEX_SUCCESS) {
+   // 0 = thread-shared, 1 = initial value
+   if (sem_init(&mut->sem, 0, 1) != MUTEX_SUCCESS) {
      caml_stat_free(mut);
      return errno;
    }
