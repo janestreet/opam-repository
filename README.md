@@ -12,7 +12,7 @@ Note: building our compiler requires `autoconf`, which is not available on certa
 # Ubuntu
 sudo apt install autoconf
 
-# MacOS
+# MacOS, using Homebrew
 brew install autoconf
 ```
 
