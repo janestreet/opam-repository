@@ -7,6 +7,15 @@ extensions, including all Jane Street packages and necessary patches to external
 
 **WARNING**: this repository is experimental and is not officially supported by Jane Street. Use at your own risk.
 
+Note: building our compiler requires `autoconf`, which is not available on certain platforms by default. You can install it with:
+```
+# Ubuntu
+sudo apt install autoconf
+
+# MacOS
+brew install autoconf
+```
+
 Start by creating a new switch including our repository in OPAM:
 
 ```sh
@@ -15,15 +24,6 @@ opam update --all
 # This may take some time
 opam switch create 5.2.0+flambda2 --repos with-extensions=git+https://github.com/janestreet/opam-repository.git#with-extensions,default
 eval $(opam env --switch 5.2.0+flambda2)
-```
-
-Note f: building our compiler requires `autoconf`, which is not available on certain platforms by default. You can install it with:
-```
-# Ubuntu
-sudo apt install autoconf
-
-# MacOS
-brew install autoconf
 ```
 
 If the installation was successful, you can now use OCaml with our extensions! Try creating `hello.ml` and running it with `ocamlc -o hello hello.ml && ./hello`:
