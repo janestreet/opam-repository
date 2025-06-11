@@ -11,7 +11,7 @@ Start by creating a new switch including our repository in OPAM:
 
 ```sh
 # Update to make sure you get the latest version of all packages
-opam update
+opam update --all
 # This may take some time
 opam switch create 5.2.0+flambda2 --repos with-extensions=git+https://github.com/janestreet/opam-repository.git#with-extensions,default
 eval $(opam env --switch 5.2.0+flambda2)
