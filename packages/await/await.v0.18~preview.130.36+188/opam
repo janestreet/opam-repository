@@ -38,7 +38,7 @@ and resuming fibers with support for propagation of cancelation and termination.
 """
 url {
   src:
-    "https://github.com/janestreet/await/archive/18764e3cc95264bebf9dfda1a583b7be0148542e.tar.gz"
+    "https://github.com/janestreet/await/archive/bbe9c09ce6d7edd58cb77d240b50ff235415cdb8.tar.gz"
   checksum:
-    "sha256=dd3ab0e73e4779fe6c4cb267e738468d09f8b557f49acd09f1523c08dccd6a00"
+    "sha256=e578ed58f65003a21f568abf53d846630577020560dabcfe0888523a59cbbeff"
 }

@@ -20,7 +20,7 @@ depends: [
   "dune"            {>= "3.17.0"}
   "jsonrpc"         {= "1.19.0+jst"}
   "lsp"             {= "1.19.0+jst"}
-  "yojson"          {>= "1.7.0"}
+  "yojson"          {>= "1.7.0" & < "3.0.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Library for building LSPs in OCaml"
@@ -32,7 +32,7 @@ OCaml-LSP project; this library provides an Async RPC layer on top of them.
 """
 url {
   src:
-    "https://github.com/janestreet/lsp_rpc/archive/bdc2a5757d43113d284e708326d12dd20ea6400a.tar.gz"
+    "https://github.com/janestreet/lsp_rpc/archive/8c1be300d160a6703a529367f69d0314e220958f.tar.gz"
   checksum:
-    "sha256=f770eb9d71c923d230df444833c124b215c64b6a05cc33153586782691c897cb"
+    "sha256=41ca8628274cf7304bfe1c77c8b254b8703ed22439ea00cea871ccc1a27a4e0e"
 }

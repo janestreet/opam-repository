@@ -13,7 +13,7 @@ build: [
 depends: [
   "ocaml"  {>= "5.1.0"}
   "dune"   {>= "3.17.0"}
-  "yojson" {>= "1.7.0"}
+  "yojson" {>= "1.7.0" & < "3.0.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Runtime lib for ppx_yojson_conv"
@@ -22,7 +22,7 @@ Part of the Jane Street's PPX rewriters collection.
 """
 url {
   src:
-    "https://github.com/janestreet/ppx_yojson_conv_lib/archive/655cefa3b12d54eb829e119c0a543b3a7c528e8f.tar.gz"
+    "https://github.com/janestreet/ppx_yojson_conv_lib/archive/5bfb7d416b6daffbf9ab568ff89f8c48d4187a4b.tar.gz"
   checksum:
-    "sha256=5fe38090b2a111181576d5f9a7718af225ace37ed100ea71c28b20043680bb4a"
+    "sha256=7a24ecc41b35818e567b8e9cadda9461479be427e1a460ac3a71f737ed21fea1"
 }

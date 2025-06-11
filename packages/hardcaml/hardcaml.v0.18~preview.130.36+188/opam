@@ -37,7 +37,7 @@ VHDL to interact with standard back end tooling.
 """
 url {
   src:
-    "https://github.com/janestreet/hardcaml/archive/134c800ca8e7322fa40fcdc71d5d43b64f0fb4d8.tar.gz"
+    "https://github.com/janestreet/hardcaml/archive/3581845cd16349393f23ff8b7e9c59a4ce3226d0.tar.gz"
   checksum:
-    "sha256=4eaf98827968d64d050dd12ea5ab5a2923696dcbd2fcc39572eb81a291a8b8a9"
+    "sha256=748051b2502b62221e75b2bf0ab4a8ae06594c9b4ec57c0e217a9b8927e2b242"
 }
