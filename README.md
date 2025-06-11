@@ -17,8 +17,12 @@ opam switch create 5.2.0+flambda2 --repos with-extensions=git+https://github.com
 eval $(opam env --switch 5.2.0+flambda2)
 ```
 
-Note for Mac users: building our compiler requires `autoconf`, which you can install through Homebrew with
+Note f: building our compiler requires `autoconf`, which is not available on certain platforms by default. You can install it with:
 ```
+# Ubuntu
+sudo apt install autoconf
+
+# MacOS
 brew install autoconf
 ```
 
