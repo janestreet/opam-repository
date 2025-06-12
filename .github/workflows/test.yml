@@ -1,0 +1,47 @@
+---
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - with-extensions
+  pull_request:
+    branches:
+      - with-extensions
+
+jobs:
+  test-setup:
+    strategy:
+      fail-fast: false
+      matrix:
+        # For info on the OS versions, architecture, etc., see
+        # https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+        os: [ubuntu-latest, ubuntu-24.04-arm, macos-13, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout the current branch that triggers the build
+        # Currently, only runs on PRs or pushes to with-extensions branch
+        uses: actions/checkout@v4
+
+      - name: Get hash of the ocaml-variant opam file
+        id: hash-opam-file
+        run: |
+          HASH=$(shasum -a 256 packages/ocaml-variants/ocaml-variants.5.2.0+ox/opam | awk '{print $1}')
+          echo "hash=${HASH}" >> "$GITHUB_OUTPUT"
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          # Invalidate cache when opam file for the ocaml-variant changes
+          cache-prefix: ${{ steps.hash-opam-file.outputs.hash }}
+          ocaml-compiler: ocaml-variants.5.2.0+ox
+          opam-pin: false
+          opam-repositories: |
+            with-extensions: .
+            default: https://github.com/ocaml/opam-repository.git
+
+      - name: opam install packages
+        run: |
+          opam --version
+          opam repository list
+          opam list
+          opam install ocamlformat merlin ocaml-lsp-server utop
+          opam list
