@@ -14,7 +14,7 @@ bug-reports: "https://github.com/LexiFi/gen_js_api/issues"
 depends: [
   "dune"                 {>= "2.7"}
   "ocaml"                {>= "4.08"}
-  "js_of_ocaml-compiler" {>= "4.0.0" & = "6.0.1+ox"}
+  "js_of_ocaml-compiler" {= "6.0.1+ox"}
   "odoc"                 {with-doc}
 ]
 build: [

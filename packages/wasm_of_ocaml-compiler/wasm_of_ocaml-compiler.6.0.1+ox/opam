@@ -18,11 +18,11 @@ depends: [
   "js_of_ocaml"  {= version & = "6.0.1+ox"}
   "num"          {with-test}
   "ppx_expect"   {>= "v0.14.2" & with-test}
-  "ppxlib"       {>= "0.15.0" & = "0.33.0+ox"}
+  "ppxlib"       {= "0.33.0+ox"}
   "re"           {with-test}
   "cmdliner"     {>= "1.1.0"}
   "opam-format"  {with-test}
-  "sedlex"       {>= "2.3" & = "3.3+ox"}
+  "sedlex"       {= "3.3+ox"}
   "menhir"
   "menhirLib"
   "menhirSdk"

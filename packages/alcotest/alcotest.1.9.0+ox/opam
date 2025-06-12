@@ -26,7 +26,7 @@ depends: [
   "cmdliner"           {>= "1.2.0"}
   "re"                 {>= "1.7.2"}
   "stdlib-shims"
-  "uutf"               {>= "1.0.1" & = "1.0.3+ox"}
+  "uutf"               {= "1.0.3+ox"}
   "ocaml-syntax-shims"
   "odoc"               {with-doc}
 ]

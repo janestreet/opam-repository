@@ -28,8 +28,8 @@ depends: [
   "ppx_yojson_conv_lib" {>= "v0.14"}
   "ppx_yojson_conv"
   "cinaps"              {with-test}
-  "ppx_expect"          {>= "v0.15.0" & < "0.17.0" & with-test}
-  "uutf"                {>= "1.0.2" & = "1.0.3+ox"}
+  "ppx_expect"          {with-test}
+  "uutf"                {= "1.0.3+ox"}
   "odoc"                {with-doc}
   "ocaml"               {>= "4.14"}
 ]
@@ -45,3 +45,4 @@ url {
   checksum:
     "sha256=7d38472fa68c6aa283941f15fe4155d04164904db2a9740904b67b62ff44a282"
 }
+

@@ -46,7 +46,7 @@ depends: [
   "csexp"               {>= "1.5"}
   "ocamlformat-rpc-lib" {>= "0.21.0"}
   "odoc"                {with-doc}
-  "merlin-lib"          {>= "5.0" & < "6.0" & = "5.2.1-502+ox"}
+  "merlin-lib"          {= "5.2.1-502+ox"}
   "ocaml-index"         {>= "1.0" & post & = "1.1+ox"}
   "ppx_yojson_conv"
   "core_unix"
@@ -54,7 +54,7 @@ depends: [
   "cmarkit"
   "expectree"
   "re2"
-  "odoc-parser" {= "2.0.0"}
+  "odoc-parser"         {= "2.0.0"}
 ]
 build: [
   ["dune" "subst"] {dev}
@@ -68,3 +68,4 @@ url {
   checksum:
     "sha256=7d38472fa68c6aa283941f15fe4155d04164904db2a9740904b67b62ff44a282"
 }
+

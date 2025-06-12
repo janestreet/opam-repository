@@ -36,7 +36,7 @@ depends: [
   "ocp-indent"          {with-test = "false" & >= "1.8.0" | with-test & >= "1.8.1"}
   "stdio"
   "uuseg"               {>= "10.0.0"}
-  "uutf"                {>= "1.0.1" & = "1.0.3+ox"}
+  "uutf"                {= "1.0.3+ox"}
   "csexp"               {>= "1.4.0"}
   "astring"
   "result"
@@ -65,3 +65,4 @@ url {
   checksum:
     "sha256=6e2329afc063710677c2aebf8695a1c201e6b70020e95c4e701f9ac5014b763e"
 }
+

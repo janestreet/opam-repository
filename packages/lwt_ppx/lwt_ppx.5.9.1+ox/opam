@@ -14,7 +14,7 @@ bug-reports: "https://github.com/ocsigen/lwt/issues"
 depends: [
   "dune"    {>= "2.7"}
   "ocaml"   {>= "4.08"}
-  "ppxlib"  {>= "0.16.0" & < "0.36" & = "0.33.0+ox"}
+  "ppxlib"  {= "0.33.0+ox"}
   "ppx_let" {with-test}
   "lwt"     {>= "5.7.0"}
   "odoc"    {with-doc}
