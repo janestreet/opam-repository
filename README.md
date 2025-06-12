@@ -22,8 +22,8 @@ Start by creating a new switch including our repository in OPAM:
 # Update to make sure you get the latest version of all packages
 opam update --all
 # This may take some time
-opam switch create 5.2.0+flambda2 --repos with-extensions=git+https://github.com/janestreet/opam-repository.git#with-extensions,default
-eval $(opam env --switch 5.2.0+flambda2)
+opam switch create 5.2.0+ox --repos ox=git+https://github.com/janestreet/opam-repository.git#with-extensions,default
+eval $(opam env --switch 5.2.0+ox)
 ```
 
 If the installation was successful, you can now use OCaml with our extensions! Try creating `hello.ml` and running it with `ocamlc -o hello hello.ml && ./hello`:
