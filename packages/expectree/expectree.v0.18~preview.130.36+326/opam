@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/expectree"
+bug-reports: "https://github.com/janestreet/expectree/issues"
+dev-repo: "git+https://github.com/janestreet/expectree.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/expectree/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.130.36+326"}
+  "core"     {= "v0.18~preview.130.36+326"}
+  "ppx_jane" {= "v0.18~preview.130.36+326"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A utility library for pretty-printing sexps as trees."
+description: """
+Inspired by the unix `tree` utility, expectree is a a general purpose tree printer
+     which renders a tree-shaped sexp using ansi box-drawing characters to make the
+     nesting more apparent.
+"""
+url {
+  src:
+    "https://github.com/janestreet/expectree/archive/f2983c6e727e1ed04a9bd878a35aec9aedd10180.tar.gz"
+  checksum:
+    "sha256=902732eeffb19c5947887753576e9592d63fd9db41995f3040145ad68bac5e43"
+}

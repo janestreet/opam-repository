@@ -1,0 +1,50 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_web"
+bug-reports: "https://github.com/janestreet/bonsai_web/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_web.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_web/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                       {>= "5.1.0"}
+  "am_running_how_js"           {= "v0.18~preview.130.36+326"}
+  "async_durable"               {= "v0.18~preview.130.36+326"}
+  "async_js"                    {= "v0.18~preview.130.36+326"}
+  "async_kernel"                {= "v0.18~preview.130.36+326"}
+  "async_rpc_kernel"            {= "v0.18~preview.130.36+326"}
+  "babel"                       {= "v0.18~preview.130.36+326"}
+  "bonsai"                      {= "v0.18~preview.130.36+326"}
+  "bonsai_concrete"             {= "v0.18~preview.130.36+326"}
+  "core"                        {= "v0.18~preview.130.36+326"}
+  "core_kernel"                 {= "v0.18~preview.130.36+326"}
+  "incr_dom"                    {= "v0.18~preview.130.36+326"}
+  "ocaml-embed-file"            {= "v0.18~preview.130.36+326"}
+  "polling_state_rpc"           {= "v0.18~preview.130.36+326"}
+  "ppx_css"                     {= "v0.18~preview.130.36+326"}
+  "ppx_jane"                    {= "v0.18~preview.130.36+326"}
+  "streamable"                  {= "v0.18~preview.130.36+326"}
+  "toplayer"                    {= "v0.18~preview.130.36+326"}
+  "versioned_polling_state_rpc" {= "v0.18~preview.130.36+326"}
+  "virtual_dom"                 {= "v0.18~preview.130.36+326"}
+  "dune"                        {>= "3.17.0"}
+  "js_of_ocaml"                 {= "6.0.1+ox"}
+  "js_of_ocaml-ppx"             {= "6.0.1+ox"}
+  "uri"                         {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for building dynamic webapps, using Js_of_ocaml"
+description: """
+Bonsai is a library for building reusable UI components inside an
+     Incremental-style UI framework such as Incr_dom or React.
+"""
+url {
+  src:
+    "https://github.com/janestreet/bonsai_web/archive/c0eaad43a85893d88857879442d78f3a4c421da4.tar.gz"
+  checksum:
+    "sha256=8da3a87ddba378177a7972a204f69c7e3547f343e92df7bf7030290026a9573b"
+}

@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_rope"
+bug-reports: "https://github.com/janestreet/ppx_rope/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_rope.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_rope/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"      {>= "5.1.0"}
+  "base"       {= "v0.18~preview.130.36+326"}
+  "dedent"     {= "v0.18~preview.130.36+326"}
+  "jane_rope"  {= "v0.18~preview.130.36+326"}
+  "ppx_string" {= "v0.18~preview.130.36+326"}
+  "dune"       {>= "3.17.0"}
+  "ppxlib"     {= "0.33.0+ox"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Ppx extension for string interpolation using ropes"
+description: """
+Construct ropes using using a PPX extension based on ppx_string
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_rope/archive/1d021d2b3b997cf3b4c6da60f3766e62af4b148b.tar.gz"
+  checksum:
+    "sha256=27f17a52507ea6df485c28bdb51158ee15697e13c911995198ebc8f587925369"
+}

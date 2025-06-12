@@ -1,0 +1,43 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml"
+bug-reports: "https://github.com/janestreet/hardcaml/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"             {>= "5.1.0"}
+  "base"              {= "v0.18~preview.130.36+326"}
+  "bignum"            {= "v0.18~preview.130.36+326"}
+  "bin_prot"          {= "v0.18~preview.130.36+326"}
+  "core"              {= "v0.18~preview.130.36+326"}
+  "core_kernel"       {= "v0.18~preview.130.36+326"}
+  "jane_rope"         {= "v0.18~preview.130.36+326"}
+  "ppx_jane"          {= "v0.18~preview.130.36+326"}
+  "ppx_rope"          {= "v0.18~preview.130.36+326"}
+  "ppx_sexp_conv"     {= "v0.18~preview.130.36+326"}
+  "sexplib"           {= "v0.18~preview.130.36+326"}
+  "splittable_random" {= "v0.18~preview.130.36+326"}
+  "stdio"             {= "v0.18~preview.130.36+326"}
+  "dune"              {>= "3.17.0"}
+  "ppxlib"            {= "0.33.0+ox"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "RTL Hardware Design in OCaml"
+description: """
+Hardcaml is an embedded DSL for designing and simulating hardware in OCaml.
+Generic hardware designs are easily expressed using features such as higher
+order functions, lists, maps etc.  A built in simulator allows designs to
+be simulated within Hardcaml.  Designs are converted to either Verilog or
+VHDL to interact with standard back end tooling.
+"""
+url {
+  src:
+    "https://github.com/janestreet/hardcaml/archive/33527b10d2f053c864b4b0d47cc31062e6eb9498.tar.gz"
+  checksum:
+    "sha256=66f08f578a2e4b799a76e3d5f3a1168a0edf0dcb43c326e33198add859d3f77e"
+}

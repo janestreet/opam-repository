@@ -1,0 +1,39 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bin_prot"
+bug-reports: "https://github.com/janestreet/bin_prot/issues"
+dev-repo: "git+https://github.com/janestreet/bin_prot.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/bin_prot/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"              {>= "5.1.0"}
+  "base"               {= "v0.18~preview.130.36+326"}
+  "ppx_compare"        {= "v0.18~preview.130.36+326"}
+  "ppx_custom_printf"  {= "v0.18~preview.130.36+326"}
+  "ppx_fields_conv"    {= "v0.18~preview.130.36+326"}
+  "ppx_globalize"      {= "v0.18~preview.130.36+326"}
+  "ppx_optcomp"        {= "v0.18~preview.130.36+326"}
+  "ppx_sexp_conv"      {= "v0.18~preview.130.36+326"}
+  "ppx_stable_witness" {= "v0.18~preview.130.36+326"}
+  "ppx_template"       {= "v0.18~preview.130.36+326"}
+  "ppx_variants_conv"  {= "v0.18~preview.130.36+326"}
+  "dune"               {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A binary protocol generator"
+description: """
+Part of Jane Street's Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"""
+url {
+  src:
+    "https://github.com/janestreet/bin_prot/archive/1bed8c93880fc7f70772a407434936c2e635deab.tar.gz"
+  checksum:
+    "sha256=2f01647028193f0ff023bdc48905a9b6105a931c18a5be1ccd586b14099fc36a"
+}

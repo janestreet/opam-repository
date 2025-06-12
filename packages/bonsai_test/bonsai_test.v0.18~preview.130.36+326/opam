@@ -1,0 +1,47 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_test"
+bug-reports: "https://github.com/janestreet/bonsai_test/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_test.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_test/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "async"                    {= "v0.18~preview.130.36+326"}
+  "async_js"                 {= "v0.18~preview.130.36+326"}
+  "base"                     {= "v0.18~preview.130.36+326"}
+  "bonsai"                   {= "v0.18~preview.130.36+326"}
+  "bonsai_concrete"          {= "v0.18~preview.130.36+326"}
+  "core"                     {= "v0.18~preview.130.36+326"}
+  "core_unix"                {= "v0.18~preview.130.36+326"}
+  "expect_test_helpers_core" {= "v0.18~preview.130.36+326"}
+  "expectable"               {= "v0.18~preview.130.36+326"}
+  "incr_map"                 {= "v0.18~preview.130.36+326"}
+  "incremental"              {= "v0.18~preview.130.36+326"}
+  "ocaml-embed-file"         {= "v0.18~preview.130.36+326"}
+  "patdiff"                  {= "v0.18~preview.130.36+326"}
+  "ppx_expect"               {= "v0.18~preview.130.36+326"}
+  "ppx_jane"                 {= "v0.18~preview.130.36+326"}
+  "ppx_pattern_bind"         {= "v0.18~preview.130.36+326"}
+  "ppx_quick_test"           {= "v0.18~preview.130.36+326"}
+  "virtual_dom"              {= "v0.18~preview.130.36+326"}
+  "dune"                     {>= "3.17.0"}
+  "re"                       {>= "1.8.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for testing Bonsai state machines."
+description: """
+Bonsai is a library for building composable state machines. This libary
+    provides testing capabilities.
+"""
+url {
+  src:
+    "https://github.com/janestreet/bonsai_test/archive/2352d71f7d9503a77a4277480709aaa30cf40707.tar.gz"
+  checksum:
+    "sha256=27fc8e9834d4c5e4a0d3f3d7c44fdeb101d2f352a5b41e057a4faa3b0fd1e7b3"
+}

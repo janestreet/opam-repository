@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_ignore_instrumentation"
+bug-reports:
+  "https://github.com/janestreet/ppx_ignore_instrumentation/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_ignore_instrumentation.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_ignore_instrumentation/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "5.1.0"}
+  "dune"   {>= "3.17.0"}
+  "ppxlib" {= "0.33.0+ox"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Ignore Jane Street specific instrumentation extensions"
+description: """
+Ignore Jane Street specific instrumentation extensions from internal PPXs or compiler
+   features not yet upstreamed.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_ignore_instrumentation/archive/71b3d7af6e7f4fe2617b447fb71b233211f919d4.tar.gz"
+  checksum:
+    "sha256=41f20849284b815ee73a10a5987a9e625ad29cab7d4beeff5fab8f0a9d3338b5"
+}

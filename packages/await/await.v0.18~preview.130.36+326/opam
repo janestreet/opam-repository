@@ -1,0 +1,44 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/await"
+bug-reports: "https://github.com/janestreet/await/issues"
+dev-repo: "git+https://github.com/janestreet/await.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/await/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.2.0"}
+  "async"                    {= "v0.18~preview.130.36+326"}
+  "base"                     {= "v0.18~preview.130.36+326"}
+  "basement"                 {= "v0.18~preview.130.36+326"}
+  "core"                     {= "v0.18~preview.130.36+326"}
+  "core_kernel"              {= "v0.18~preview.130.36+326"}
+  "core_unix"                {= "v0.18~preview.130.36+326"}
+  "expect_test_helpers_core" {= "v0.18~preview.130.36+326"}
+  "oxcaml_effect"            {= "v0.18~preview.130.36+326"}
+  "portable"                 {= "v0.18~preview.130.36+326"}
+  "ppx_debug_assert"         {= "v0.18~preview.130.36+326"}
+  "ppx_jane"                 {= "v0.18~preview.130.36+326"}
+  "ppx_sexp_conv"            {= "v0.18~preview.130.36+326"}
+  "stdio"                    {= "v0.18~preview.130.36+326"}
+  "unique"                   {= "v0.18~preview.130.36+326"}
+  "uopt"                     {= "v0.18~preview.130.36+326"}
+  "backoff"                  {= "0.1.1+ox"}
+  "base-threads"
+  "dune"                     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Low-level support for suspending and resuming fibers in OxCaml"
+description: """
+[Await] is a library that provides low-level support for suspending
+and resuming fibers with support for propagation of cancelation and termination.
+"""
+url {
+  src:
+    "https://github.com/janestreet/await/archive/c520dae19bcfdaeba1362a42bf526c4b53795aa0.tar.gz"
+  checksum:
+    "sha256=777b6759f8d94ef17d3a55fd85c98f9d25d07ac92f54c70a9e672855cf47c9ae"
+}

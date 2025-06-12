@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_let"
+bug-reports: "https://github.com/janestreet/ppx_let/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_let.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_let/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "base"        {= "v0.18~preview.130.36+326"}
+  "ppx_here"    {= "v0.18~preview.130.36+326"}
+  "ppxlib_jane" {= "v0.18~preview.130.36+326"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {= "0.33.0+ox"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Monadic let-bindings"
+description: """
+Part of the Jane Street's PPX rewriters collection.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_let/archive/67a4f29a4f20486b6e5d61850a6694e62a15daa9.tar.gz"
+  checksum:
+    "sha256=1b55b292ff61945f2dc20ff51707addcf934c2f7a4ab7e3840274287d3d309fe"
+}

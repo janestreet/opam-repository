@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/textutils_kernel"
+bug-reports: "https://github.com/janestreet/textutils_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/textutils_kernel.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/textutils_kernel/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "core"     {= "v0.18~preview.130.36+326"}
+  "ppx_jane" {= "v0.18~preview.130.36+326"}
+  "dune"     {>= "3.17.0"}
+  "uutf"     {= "1.0.3+ox"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Text output utilities"
+description: """
+"""
+url {
+  src:
+    "https://github.com/janestreet/textutils_kernel/archive/5973d55bcd791d9e255c146185020303d1d8a949.tar.gz"
+  checksum:
+    "sha256=d7f31ae56f62fa17d8150abd1e377fae660299dfea3c29e64b110303b37a81ab"
+}
