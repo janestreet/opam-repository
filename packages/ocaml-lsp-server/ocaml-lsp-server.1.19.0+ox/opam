@@ -54,7 +54,7 @@ depends: [
   "cmarkit"
   "expectree"
   "re2"
-  "odoc_parser" {>= "2.0.0" & < "3.0.0"}
+  "odoc-parser" {>= "2.0.0" & < "3.0.0"}
 ]
 build: [
   ["dune" "subst"] {dev}
