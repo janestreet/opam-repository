@@ -14,10 +14,15 @@ jobs:
         os: [ubuntu-latest, ubuntu-24.04-arm, macos-13, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Get latest commit hash on with-extensions branch
+      - name: Checkout with-extensions branch
+        uses: actions/checkout@v4
+        with:
+          ref: with-extensions
+
+      - name: Get latest commit hash
         id: with-extensions-rev
         run: |
-          HASH=$(git ls-remote https://github.com/janestreet/opam-repository.git refs/heads/with-extensions | cut -f1)
+          HASH=$(git rev-parse HEAD)
           echo "hash=${HASH}" >> "$GITHUB_OUTPUT"
 
       - name: Install autoconf on macOS
