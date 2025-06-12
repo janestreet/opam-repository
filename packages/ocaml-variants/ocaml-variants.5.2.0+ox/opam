@@ -7,6 +7,7 @@ homepage: "https://ocaml.org"
 bug-reports: "https://github.com/oxcaml/oxcaml/issues"
 dev-repo: "git+https://github.com/oxcaml/oxcaml/flambda-backend#main"
 depends: [
+  "conf-autoconf"
   "ocaml"                 {= "5.2.0" & post}
   "base-unix"             {post}
   "base-bigarray"         {post}
