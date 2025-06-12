@@ -1,0 +1,33 @@
+opam-version: "2.0"
+version: "v0.17.0+ox"
+name: "ocaml-compiler-libs"
+synopsis: "OCaml compiler libraries repackaged"
+description: """\
+This packages exposes the OCaml compiler libraries repackages under
+the toplevel names Ocaml_common, Ocaml_bytecomp, Ocaml_optcomp, ..."""
+maintainer: "opensource@janestreet.com"
+authors: "Jane Street Group, LLC <opensource@janestreet.com>"
+license: "MIT"
+homepage: "https://github.com/janestreet/ocaml-compiler-libs"
+bug-reports: "https://github.com/janestreet/ocaml-compiler-libs/issues"
+depends: [
+  "ocaml" {>= "5.2.0"}
+  "dune"  {>= "1.5.1"}
+]
+build: ["dune" "build" "-p" name "-j" jobs]
+dev-repo: "git+https://github.com/janestreet/ocaml-compiler-libs.git"
+url {
+  src:
+    "https://github.com/janestreet/ocaml-compiler-libs/archive/refs/tags/v0.17.0.tar.gz"
+  checksum: [
+    "md5=aaf66efea8752475c25a942443579b41"
+    "sha512=c5cd418b0eb74e00c3f63235754bbdb3a3328ac743d6ae885424d8c50b4edaa7068572e689cb3456d222793283927f2984a1ff840b1bc3817f810b5314faf897"
+  ]
+}
+patches: ["read_cma.patch"]
+extra-files: [
+  [
+    "read_cma.patch"
+    "sha256=65c1f6a92d5c52781a0b6241d97ad0ce14dcd7834c14cef9a1e810ce85b27be4"
+  ]
+]

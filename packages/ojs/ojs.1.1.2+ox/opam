@@ -1,0 +1,60 @@
+opam-version: "2.0"
+version: "1.1.2+ox"
+name: "ojs"
+synopsis: "Runtime Library for gen_js_api generated libraries"
+description: "To be used in conjunction with gen_js_api"
+maintainer: "Alain Frisch <alain.frisch@lexifi.com>"
+authors: [
+  "Alain Frisch <alain.frisch@lexifi.com>"
+  "Sebastien Briais <sebastien.briais@lexifi.com>"
+]
+license: "MIT"
+homepage: "https://github.com/LexiFi/gen_js_api"
+bug-reports: "https://github.com/LexiFi/gen_js_api/issues"
+depends: [
+  "dune"                 {>= "2.7"}
+  "ocaml"                {>= "4.08"}
+  "js_of_ocaml-compiler" {>= "4.0.0" & = "6.0.1+ox"}
+  "odoc"                 {with-doc}
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs "@install" "@doc" {with-doc}]
+]
+dev-repo: "git+https://github.com/LexiFi/gen_js_api.git"
+url {
+  src: "https://github.com/LexiFi/gen_js_api/archive/refs/tags/v1.1.2.tar.gz"
+  checksum: [
+    "md5=58ab892f1702400247d692f44215b365"
+    "sha512=26196c124f6c4dc488012990ac99dbde2377b17ac178709e55cf493385ba6253c05d1118415f55accc4cb487e6b4494c24a2f8ac113f65a374e55f3036f6b9ec"
+  ]
+}
+patches: [
+  "gen-js-api+js_of_ocaml-globalThis.patch"
+  "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
+  "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
+  "gen-js-api+unsafe_multidomain_alert.patch"
+  "dune.patch"
+]
+extra-files: [
+  [
+    "gen-js-api+js_of_ocaml-globalThis.patch"
+    "sha256=7828fe1796e89139bbfe38e9fdf6b0d959d15bf4e9762f24bfe3749de409398d"
+  ]
+  [
+    "gen-js-api+ppx-driver+gen_js_api_ppx_driver.ml.patch"
+    "sha256=4bcca59531d1c30227f153728b653a03cfca4048fe0dd6e14c0702fde8739e12"
+  ]
+  [
+    "gen-js-api+ppx-lib+gen_js_api_ppx.ml.patch"
+    "sha256=813d51aee7836858c33494e3bc458516a39aac6f3f515ae70631cf66e026e329"
+  ]
+  [
+    "gen-js-api+unsafe_multidomain_alert.patch"
+    "sha256=41fd51a6dd20b44bc07451e4635623554c4aa80e5e5f9472faf4161c7a7b0a7a"
+  ]
+  [
+    "dune.patch"
+    "sha256=486d4235a5baa84b63b867ceaa9000b8c7fa6c9429999ab247e4ba3401da214e"
+  ]
+]

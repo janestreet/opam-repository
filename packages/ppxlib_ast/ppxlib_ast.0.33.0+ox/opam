@@ -1,0 +1,186 @@
+opam-version: "2.0"
+version: "0.33.0+ox"
+name: "ppxlib_ast"
+synopsis: "Standard infrastructure for ppx rewriters"
+description: """\
+Ppxlib is the standard infrastructure for ppx rewriters
+and other programs that manipulate the in-memory representation of
+OCaml programs, a.k.a the "Parsetree".
+
+It also comes bundled with two ppx rewriters that are commonly used to
+write tools that manipulate and/or generate Parsetree values;
+`ppxlib.metaquot` which allows to construct Parsetree values using the
+OCaml syntax directly and `ppxlib.traverse` which provides various
+ways of automatically traversing values of a given type, in particular
+allowing to inject a complex structured value into generated code."""
+maintainer: "opensource@janestreet.com"
+authors: "Jane Street Group, LLC <opensource@janestreet.com>"
+license: "MIT"
+homepage: "https://github.com/ocaml-ppx/ppxlib"
+doc: "https://ocaml-ppx.github.io/ppxlib/"
+bug-reports: "https://github.com/ocaml-ppx/ppxlib/issues"
+depends: [
+  "dune"                {>= "2.7"}
+  "ocaml"               {>= "4.04.1" & < "5.3.0"}
+  "ocaml-compiler-libs" {>= "v0.11.0" & = "v0.17.0+ox"}
+  "ppx_derivers"        {>= "1.0"}
+  "sexplib0"            {>= "v0.12"}
+  "sexplib0"            {with-test & >= "v0.15"}
+  "stdlib-shims"
+  "ocamlfind"           {with-test}
+  "re"                  {with-test & >= "1.9.0"}
+  "cinaps"              {with-test & >= "v0.12.1"}
+  "odoc"                {with-doc}
+]
+conflicts: [
+  "ocaml-migrate-parsetree" {< "2.0.0"}
+  "ocaml-base-compiler" {= "5.1.0~alpha1"}
+  "ocaml-variants" {= "5.1.0~alpha1+options"}
+  "base-effects"
+]
+build: [
+  ["./cleanup.sh"]
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/ocaml-ppx/ppxlib.git"
+x-commit-hash: "563d5651e877c6f7d5561f9d8ca93fca05b07d07"
+url {
+  src:
+    "https://github.com/ocaml-ppx/ppxlib/archive/1f788de67fd04d7e608376ac26ee57deeeb93fdd.tar.gz"
+  checksum:
+    "sha256=54afd640f863c2f39a6c844f6ceff63c8796e865da7db6d49c60019516fc00d4"
+}
+patches: [
+  "ppxlib+ast+ast.ml.patch"
+  "ppxlib+ast+ast_helper_lite.ml.patch"
+  "ppxlib+ast+ast_helper_lite.mli.patch"
+  "ppxlib+ast+location_error.ml.patch"
+  "ppxlib+ast+location_error.mli.patch"
+  "ppxlib+ast+supported_version+supported_version.ml.patch"
+  "ppxlib+ast+versions.ml.patch"
+  "ppxlib+ast+versions.mli.patch"
+  "ppxlib+astlib+ast_414.ml.patch"
+  "ppxlib+astlib+ast_500.ml.patch"
+  "ppxlib+astlib+ast_999.ml.patch"
+  "ppxlib+astlib+ast_metadata.mli.patch"
+  "ppxlib+astlib+astlib.ml.patch"
+  "ppxlib+astlib+cinaps+astlib_cinaps_helpers.ml.patch"
+  "ppxlib+astlib+config+gen.ml.patch"
+  "ppxlib+astlib+migrate_500_999.ml.patch"
+  "ppxlib+astlib+migrate_999_500.ml.patch"
+  "ppxlib+astlib+parse.mli.patch"
+  "ppxlib+astlib+pprintast.ml.patch"
+  "ppxlib+astlib+pprintast.mli.patch"
+  "ppxlib+astlib+stdlib0.ml.patch"
+  "ppxlib+stdppx+stdppx.ml.patch"
+  "dune.patch"
+]
+extra-files: [
+  [
+    "cleanup.sh"
+    "sha256=155384e36ed934037a17b790b87897af588194ebffa57146c93ccb776c816d7c"
+  ]
+  [
+    "ppxlib+ast+ast.ml.patch"
+    "sha256=2c12102816bf5599dae10039fb4973ca97cd3a4b294a964cf8b1225e681f81da"
+  ]
+  [
+    "ppxlib+ast+ast_helper_lite.ml.patch"
+    "sha256=b20584b83318532d9bf05b695175a322ef556783beb9ac9cd6150a769041621c"
+  ]
+  [
+    "ppxlib+ast+ast_helper_lite.mli.patch"
+    "sha256=ee1f7dbff5ab1bb5c2ce3635ff948b75de376d9b632d7c5f763eca09e3010cd1"
+  ]
+  [
+    "ppxlib+ast+location_error.ml.patch"
+    "sha256=c6392beb60da208e53264e8ef2b6aff87333dd616b4cdd7b7d639c58d781fa18"
+  ]
+  [
+    "ppxlib+ast+location_error.mli.patch"
+    "sha256=1f8146d575a3c0e95170b309b90c78c05f56cd8b4547ce536ed3ed91d9ddd8c5"
+  ]
+  [
+    "ppxlib+ast+supported_version+supported_version.ml.patch"
+    "sha256=a7762cf03e1aeb12d3916da21e08874737a0324e7e3ebd4d13431e04641dec7d"
+  ]
+  [
+    "ppxlib+ast+versions.ml.patch"
+    "sha256=b0860295416b010107a99dbd14f094376c6b44109747f3436935ad861aeda19d"
+  ]
+  [
+    "ppxlib+ast+versions.mli.patch"
+    "sha256=3ea1dd81309fa433ef498a9e756f6a6f815cc3a919bfbe177ceb1e085ffdb055"
+  ]
+  [
+    "ppxlib+astlib+ast_414.ml.patch"
+    "sha256=6daec29f25537dae70c440cc02dd5b49164040c94ce91bc167b72c0eb73f223e"
+  ]
+  [
+    "ppxlib+astlib+ast_500.ml.patch"
+    "sha256=cfb9281d210a4b7744b938afb39c06cb360b86b7fbdef86f0a496e9ce87e006d"
+  ]
+  [
+    "ppxlib+astlib+ast_999.ml.patch"
+    "sha256=77386466602a452e2fca0b30efe57c800986f2cbcf9c16916c867e67be96d8bf"
+  ]
+  [
+    "ppxlib+astlib+ast_metadata.mli.patch"
+    "sha256=f57b43dba6f1abba33cf8c302e12448f4c7262d9831bcfe5545f83f201d90549"
+  ]
+  [
+    "ppxlib+astlib+astlib.ml.patch"
+    "sha256=fc728f66702ffcd43060a8d034c053a2e24939eba89a18f1a3b4d86dee71c41b"
+  ]
+  [
+    "ppxlib+astlib+cinaps+astlib_cinaps_helpers.ml.patch"
+    "sha256=8a45c26531773e7bbc0ca0a195ac0ad7fc7b559fe97110f3adde66181e6f7781"
+  ]
+  [
+    "ppxlib+astlib+config+gen.ml.patch"
+    "sha256=63e1849d90ca2a6c391a401b0e87ce853dbfc44488ba3b8d449af7a81b5ddbad"
+  ]
+  [
+    "ppxlib+astlib+migrate_500_999.ml.patch"
+    "sha256=d9068afe43d4d59af4bb4b5c1bd3ab7162d3ce12bd069fcc3c1b6878438606b0"
+  ]
+  [
+    "ppxlib+astlib+migrate_999_500.ml.patch"
+    "sha256=eb3d0ac8a07586ed4f7d7e2c56bf86d2cbbe41f51e992267a3bb2ef35712cc29"
+  ]
+  [
+    "ppxlib+astlib+parse.mli.patch"
+    "sha256=48120552f6d9ac715f5c953d1182fb0d4f5aa294467b23e4f50ca4eeede9993a"
+  ]
+  [
+    "ppxlib+astlib+pprintast.ml.patch"
+    "sha256=3c70c302711a0e05843a720df746d3d3aa8c06b63b89079e07834a8ee716d56f"
+  ]
+  [
+    "ppxlib+astlib+pprintast.mli.patch"
+    "sha256=fa622981e0270f8233b4edaf7e6dde917d74664e53bf4d4b9aeff4c07a09e609"
+  ]
+  [
+    "ppxlib+astlib+stdlib0.ml.patch"
+    "sha256=b96db1df2b603c7c715529261993fdaa82e99972b014f63d8274b8bc1ff6ed80"
+  ]
+  [
+    "ppxlib+stdppx+stdppx.ml.patch"
+    "sha256=dec070c22971345938d20d5b77208497bb500c61ff176f9cc39df7279285ca95"
+  ]
+  [
+    "dune.patch"
+    "sha256=e1ccb1e74d85bc4630d3950558b81c6bf00ec0224523e5a9a0ca6493f98337b2"
+  ]
+]

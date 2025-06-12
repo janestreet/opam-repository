@@ -1,0 +1,68 @@
+opam-version: "2.0"
+version: "1.19.0+ox"
+name: "ocaml-lsp-server"
+synopsis: "LSP Server for OCaml"
+description: "An LSP server for OCaml."
+maintainer: "Rudi Grinberg <me@rgrinberg.com>"
+authors: [
+  "Andrey Popp <8mayday@gmail.com>"
+  "Rusty Key <iam@stfoo.ru>"
+  "Louis Roché <louis@louisroche.net>"
+  "Oleksiy Golovko <alexei.golovko@gmail.com>"
+  "Rudi Grinberg <me@rgrinberg.com>"
+  "Sacha Ayoun <sachaayoun@gmail.com>"
+  "cannorin <cannorin@gmail.com>"
+  "Ulugbek Abdullaev <ulugbekna@gmail.com>"
+  "Thibaut Mattio <thibaut.mattio@gmail.com>"
+  "Max Lantas <mnxndev@outlook.com>"
+]
+license: "ISC"
+homepage: "https://github.com/ocaml/ocaml-lsp"
+bug-reports: "https://github.com/ocaml/ocaml-lsp/issues"
+depends: [
+  "dune"                {>= "3.0"}
+  "yojson"              {>= "2.0.0" & < "3.0.0"}
+  "base"                {>= "v0.18~"}
+  "lsp"                 {= version & = "1.19.0+ox"}
+  "jsonrpc"             {= version & = "1.19.0+ox"}
+  "re"                  {>= "1.5.0"}
+  "ppx_yojson_conv_lib" {>= "v0.14"}
+  "dune-rpc"            {>= "3.4.0"}
+  "chrome-trace"        {>= "3.3.0"}
+  "dyn"
+  "stdune"
+  "fiber"               {>= "3.1.1" & < "4.0.0"}
+  "ocaml"               {>= "5.2.0" & < "5.3.0"}
+  "xdg"
+  "ordering"
+  "dune-build-info"
+  "spawn"
+  "astring"
+  "camlp-streams"
+  "ppx_expect"          {>= "v0.15.0" & < "0.17.0" & with-test}
+  "ocamlformat"         {with-test & = "0.26.2" & = "0.26.2+ox"}
+  "ocamlc-loc"          {>= "3.7.0"}
+  "pp"                  {>= "1.1.2"}
+  "csexp"               {>= "1.5"}
+  "ocamlformat-rpc-lib" {>= "0.21.0"}
+  "odoc"                {with-doc}
+  "merlin-lib"          {>= "5.0" & < "6.0" & = "5.2.1-502+ox"}
+  "ocaml-index"         {>= "1.0" & post & = "1.1+ox"}
+  "ppx_yojson_conv"
+  "core_unix"
+  "async"
+  "cmarkit"
+  "expectree"
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs "@install" "@doc" {with-doc}]
+]
+dev-repo: "git+https://github.com/ocaml/ocaml-lsp.git"
+x-commit-hash: "45f5ddac12bb580b4ecaec2d93ee7fac2c903aff"
+url {
+  src:
+    "https://github.com/oxcaml/ocaml-lsp/archive/c0a3e5d5fdffa5fc362c0c8190e4794cd731d09a.tar.gz"
+  checksum:
+    "sha256=7d38472fa68c6aa283941f15fe4155d04164904db2a9740904b67b62ff44a282"
+}

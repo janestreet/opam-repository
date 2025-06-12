@@ -1,0 +1,39 @@
+opam-version: "2.0"
+version: "1.19.0+ox"
+name: "jsonrpc"
+synopsis: "Jsonrpc protocol implemenation"
+description: "See https://www.jsonrpc.org/specification"
+maintainer: "Rudi Grinberg <me@rgrinberg.com>"
+authors: [
+  "Andrey Popp <8mayday@gmail.com>"
+  "Rusty Key <iam@stfoo.ru>"
+  "Louis Roché <louis@louisroche.net>"
+  "Oleksiy Golovko <alexei.golovko@gmail.com>"
+  "Rudi Grinberg <me@rgrinberg.com>"
+  "Sacha Ayoun <sachaayoun@gmail.com>"
+  "cannorin <cannorin@gmail.com>"
+  "Ulugbek Abdullaev <ulugbekna@gmail.com>"
+  "Thibaut Mattio <thibaut.mattio@gmail.com>"
+  "Max Lantas <mnxndev@outlook.com>"
+]
+license: "ISC"
+homepage: "https://github.com/ocaml/ocaml-lsp"
+bug-reports: "https://github.com/ocaml/ocaml-lsp/issues"
+depends: [
+  "dune"  {>= "3.0"}
+  "ocaml" {>= "4.08"}
+  "yojson" {>= "2.0.0" & < "3.0.0"}
+  "odoc"  {with-doc}
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs "@install" "@doc" {with-doc}]
+]
+dev-repo: "git+https://github.com/ocaml/ocaml-lsp.git"
+x-commit-hash: "45f5ddac12bb580b4ecaec2d93ee7fac2c903aff"
+url {
+  src:
+    "https://github.com/oxcaml/ocaml-lsp/archive/c0a3e5d5fdffa5fc362c0c8190e4794cd731d09a.tar.gz"
+  checksum:
+    "sha256=7d38472fa68c6aa283941f15fe4155d04164904db2a9740904b67b62ff44a282"
+}

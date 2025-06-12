@@ -1,0 +1,134 @@
+opam-version: "2.0"
+version: "5.2.0+ox"
+synopsis: "flambda2"
+license: "LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception"
+authors: "Xavier Leroy and many contributors"
+homepage: "https://ocaml.org"
+bug-reports: "https://github.com/oxcaml/oxcaml/issues"
+dev-repo: "git+https://github.com/oxcaml/oxcaml/flambda-backend#main"
+depends: [
+  "ocaml"                 {= "5.2.0" & post}
+  "base-unix"             {post}
+  "base-bigarray"         {post}
+  "base-threads"          {post}
+  "base-domains"          {post}
+  "base-nnp"              {post}
+  "ocaml-options-vanilla" {post}
+]
+conflict-class: "ocaml-core-compiler"
+flags: compiler
+setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
+build: [
+  ["tar" "-xf" "init-compiler.tar.gz"]
+  ["tar" "-xf" "init-dune.tbz"]
+  ["tar" "-xf" "init-menhir.tar.gz"]
+  [
+    "sh"
+    "-exc"
+    "cd ocaml-4.14.2 && ./configure --prefix %{build}%/init_deps --disable-ocamldoc"
+  ] {os != "openbsd" & os != "macos"}
+  [
+    "sh"
+    "-exc"
+    "cd ocaml-4.14.2 && ./configure --prefix %{build}%/init_deps --disable-ocamldoc CC=cc ASPP='cc -c'"
+  ] {os = "openbsd" | os = "macos"}
+  ["sh" "-exc" "make -C ocaml-4.14.2 -j%{jobs}%"]
+  ["sh" "-exc" "make -C ocaml-4.14.2 install"]
+  [
+    "sh"
+    "-exc"
+    "cd dune-3.9.3; PATH=%{build}%/init_deps/bin/:$PATH ocaml boot/bootstrap.ml -j %{jobs}%"
+  ]
+  [
+    "sh"
+    "-exc"
+    "cd dune-3.9.3; PATH=%{build}%/init_deps/bin/:$PATH ./_boot/dune.exe build dune.install --release --profile dune-bootstrap -j %{jobs}%"
+  ]
+  [
+    "sh"
+    "-exc"
+    "cd dune-3.9.3; PATH=%{build}%/init_deps/bin/:$PATH ./_boot/dune.exe install --root %{build}%/dune-3.9.3 --prefix %{build}%/init_deps/ dune"
+  ]
+  [
+    "sh"
+    "-exc"
+    "cd menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa; PATH=%{build}%/init_deps/bin/:$PATH %{build}%/init_deps/bin/dune build --root %{build}%/menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa @install -j %{jobs}%"
+  ]
+  [
+    "sh"
+    "-exc"
+    "cd menhir-20231231-d3d815e4f554da68b8c247241c8f8678926eecaa; PATH=%{build}%/init_deps/bin/:$PATH %{build}%/init_deps/bin/dune install --prefix %{build}%/init_deps/ -p menhirLib -j %{jobs}%"
+  ]
+  ["sh" "-exc" "autoconf || autoconf27"]
+  [
+    "sh"
+    "-exc"
+    "PATH=%{build}%/init_deps/bin/:$PATH ./configure --enable-runtime5 --enable-middle-end=flambda2 --enable-poll-insertion --enable-multidomain --enable-stack-checks --disable-naked-pointers '--prefix=%{prefix}%' '--with-dune=%{build}%/init_deps/bin/dune'"
+  ]
+  ["sh" "-exc" "PATH=%{build}%/init_deps/bin/:$PATH make -j%{jobs}%"]
+]
+install: ["sh" "-exc" "PATH=%{build}%/init_deps/bin/:$PATH make install"]
+extra-source "init-compiler.tar.gz" {
+  src: "https://github.com/ocaml/ocaml/archive/4.14.2.tar.gz"
+  checksum:
+    "sha256=c2d706432f93ba85bd3383fa451d74543c32a4e84a1afaf3e8ace18f7f097b43"
+}
+extra-source "init-dune.tbz" {
+  src: "https://github.com/ocaml/dune/releases/download/3.9.3/dune-3.9.3.tbz"
+  checksum: [
+    "sha256=96bf755da267fb46e4af2dda0db56d5863761589618089c429ff85e0f7f65783"
+    "sha512=ce05560a2cff0beb805a259df449b5dbd15420e353cc686a482904b837969bce6f91eedec608ecef4be0ebc232fa013652745a7cc831af1a7f8fe06a391e5488"
+  ]
+}
+extra-source "init-menhir.tar.gz" {
+  src:
+    "https://gitlab.inria.fr/fpottier/menhir/-/archive/20231231/archive.tar.gz"
+  checksum: [
+    "md5=799748bc3b7a542798a85956c7863865"
+    "sha512=620ff3443143535e03ac98c5e8ee2ddf9ba48f8cfe441302118def1da3e03ffac7f48d4d4cb129766b625ecad0fb341da1baa0169dee8b6d07a5b0bbb735cf2f"
+  ]
+}
+url {
+  src:
+    "https://github.com/oxcaml/oxcaml/archive/refs/tags/5.2.0minus-11.tar.gz"
+  checksum:
+    "sha256=23b4418a2c538e072e9a82f2cbd31a8c275a4f5568c1fc1762a0b0580fdfd45c"
+}
+patches: ["ignore-opam.patch"]
+extra-files: [
+  [
+    "ignore-opam.patch"
+    "sha256=740fded14984fc0248cb7d055eac7179b5c3b7e6f7f20e914d5c3f1ccf7be20b"
+  ]
+]
+conflicts: [
+  "alcotest" {!= "1.9.0+ox"}
+  "backoff" {!= "0.1.1+ox"}
+  "dot-merlin-reader" {!= "5.2.1-502+ox"}
+  "gen_js_api" {!= "1.1.2+ox"}
+  "js_of_ocaml" {!= "6.0.1+ox"}
+  "js_of_ocaml-compiler" {!= "6.0.1+ox"}
+  "js_of_ocaml-ppx" {!= "6.0.1+ox"}
+  "js_of_ocaml-toplevel" {!= "6.0.1+ox"}
+  "jsonrpc" {!= "1.19.0+ox"}
+  "lsp" {!= "1.19.0+ox"}
+  "lwt_ppx" {!= "5.9.1+ox"}
+  "mdx" {!= "2.5.0+ox"}
+  "merlin" {!= "5.2.1-502+ox"}
+  "merlin-lib" {!= "5.2.1-502+ox"}
+  "ocaml-compiler-libs" {!= "v0.17.0+ox"}
+  "ocaml-index" {!= "1.1+ox"}
+  "ocaml-lsp-server" {!= "1.19.0+ox"}
+  "ocamlbuild" {!= "0.15.0+ox"}
+  "ocamlformat" {!= "0.26.2+ox"}
+  "ocamlformat-lib" {!= "0.26.2+ox"}
+  "ojs" {!= "1.1.2+ox"}
+  "ppxlib" {!= "0.33.0+ox"}
+  "ppxlib_ast" {!= "0.33.0+ox"}
+  "sedlex" {!= "3.3+ox"}
+  "topkg" {!= "1.0.8+ox"}
+  "uTop" {!= "2.15.0+ox"}
+  "uutf" {!= "1.0.3+ox"}
+  "wasm_of_ocaml-compiler" {!= "6.0.1+ox"}
+  "zarith" {!= "1.12+ox"}
+]
