@@ -1,0 +1,34 @@
+---
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 0 * * *"
+
+jobs:
+  test-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest commit hash on with-extensions branch
+        id: with-extensions-rev
+        run: |
+          HASH=$(git ls-remote https://github.com/janestreet/opam-repository.git refs/heads/with-extensions | cut -f1)
+          echo "hash=${HASH}" >> "$GITHUB_OUTPUT"
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          # Invalidate cache when with-extensions has new commits, since the
+          # archive URL in the opam file for 5.2.0+flambda2 might have changed.
+          cache-prefix: ${{ steps.with-extensions-rev.outputs.hash }}
+          ocaml-compiler: ocaml-variants.5.2.0+flambda2
+          opam-pin: false
+          opam-repositories: |
+            with-extensions: git+https://github.com/janestreet/opam-repository.git#with-extensions
+            default: https://github.com/ocaml/opam-repository.git
+
+      - name: Run opam install tests
+        run: |
+          opam --version
+          opam list
+          opam repository list
+          opam install ocamlformat.0.26.2+jst merlin.5.2.1-502+jst ocaml-lsp-server.1.19.0+jst utop.2.15.0+jst
+          opam list
