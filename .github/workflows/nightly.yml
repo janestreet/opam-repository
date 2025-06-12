@@ -40,10 +40,19 @@ jobs:
             with-extensions: git+https://github.com/janestreet/opam-repository.git#with-extensions
             default: https://github.com/ocaml/opam-repository.git
 
-      - name: Run opam install tests
+      - name: Find and install latest packages
         run: |
           opam --version
-          opam list
           opam repository list
-          opam install ocamlformat.0.26.2+jst merlin.5.2.1-502+jst ocaml-lsp-server.1.19.0+jst utop.2.15.0+jst
+          opam list
+          PACKAGES=("ocamlformat" "merlin" "ocaml-lsp-server" "utop")
+          PKGS=""
+          for pkg in "${PACKAGES[@]}"; do
+            latest=$(find packages/$pkg -type f -name 'opam' \
+                      | grep '+jst' | sed -E 's|.*/([^/]+)/opam|\1|' \
+                      | sort -V | tail -1)
+            PKGS="$PKGS $latest"
+          done
+          echo "Installing:$PKGS"
+          opam install $PKGS
           opam list
