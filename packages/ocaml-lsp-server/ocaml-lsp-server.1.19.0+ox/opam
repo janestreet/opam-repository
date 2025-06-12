@@ -53,6 +53,7 @@ depends: [
   "async"
   "cmarkit"
   "expectree"
+  "re2"
 ]
 build: [
   ["dune" "subst"] {dev}
