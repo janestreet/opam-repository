@@ -1,5 +1,5 @@
---- a/Makefile.common-jst
-+++ b/Makefile.common-jst
+--- a/Makefile.common-ox
++++ b/Makefile.common-ox
 @@ -150,9 +150,9 @@ $(ocamldir)/otherlibs/dune:
 
  $(ocamldir)/dune.runtime_selection:
