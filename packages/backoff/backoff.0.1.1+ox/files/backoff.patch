@@ -1,3 +1,35 @@
+--- a/src/backoff.ml
++++ b/src/backoff.ml
+@@ -19,7 +19,19 @@
+
+ type t = int
+
+-let single_mask = Bool.to_int (Domain.recommended_domain_count () = 1) - 1
++external is_runtime5 : unit -> bool = "%runtime5"
++
++let cpu_relax =
++  if is_runtime5 ()
++  then Domain.cpu_relax
++  else fun () -> ()
++
++let recommended_domain_count =
++  if is_runtime5 ()
++  then Domain.recommended_domain_count
++  else fun () -> 1
++
++let single_mask = Bool.to_int (recommended_domain_count () = 1) - 1
+ let bits = 5
+ let max_wait_log = 30 (* [Random.bits] returns 30 random bits. *)
+ let mask = (1 lsl bits) - 1
+@@ -52,7 +64,7 @@ let[@inline never] once backoff =
+      not allocate with native compiler. *)
+   let t = ref (t land wait_mask land single_mask) in
+   while 0 <= !t do
+-    Domain.cpu_relax ();
++    cpu_relax ();
+     t := !t - 1
+   done;
+   let upper_wait_log = get_upper_wait_log backoff in
 --- a/src/backoff.mli
 +++ b/src/backoff.mli
 @@ -1,3 +1,5 @@
