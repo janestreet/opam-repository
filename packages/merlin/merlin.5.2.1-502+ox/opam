@@ -78,5 +78,5 @@ url {
   src:
     "https://github.com/oxcaml/merlin/archive/ea30d975583ede2946f0cc4950489a4f6fa33872.tar.gz"
   checksum:
-    "sha256=0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+    "sha256=aca9f110b46c51d71c440d87e3d0ffbfa6d71fccbc7f826ccbbcc896e84e8ffc"
 }
