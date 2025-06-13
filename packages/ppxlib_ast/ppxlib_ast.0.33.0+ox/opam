@@ -39,7 +39,7 @@ conflicts: [
   "base-effects"
 ]
 build: [
-  ["./cleanup.sh"]
+  ["sh" "./cleanup.sh"]
   ["dune" "subst"] {dev}
   [
     "dune"
