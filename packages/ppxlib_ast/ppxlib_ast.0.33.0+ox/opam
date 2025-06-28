@@ -89,7 +89,7 @@ patches: [
 extra-files: [
   [
     "cleanup.sh"
-    "sha256=155384e36ed934037a17b790b87897af588194ebffa57146c93ccb776c816d7c"
+    "sha256=29db7be4fd7860181a36b8c052d1ef944f32918a7c8d6c74fc9b3e7539916d8c"
   ]
   [
     "ppxlib+ast+ast.ml.patch"

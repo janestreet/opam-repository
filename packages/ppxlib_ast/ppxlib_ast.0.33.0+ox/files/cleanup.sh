@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 rm -rf bench dev doc examples metaquot metaquot_lifters old_rtd_doc print-diff runner runner_as_ppx src test traverse ppxlib*.opam
 
