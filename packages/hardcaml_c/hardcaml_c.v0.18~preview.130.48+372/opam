@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_c"
+bug-reports: "https://github.com/janestreet/hardcaml_c/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_c.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_c/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"          {>= "5.1.0"}
+  "core"           {= "v0.18~preview.130.48+372"}
+  "core_unix"      {= "v0.18~preview.130.48+372"}
+  "hardcaml"       {= "v0.18~preview.130.48+372"}
+  "jane_rope"      {= "v0.18~preview.130.48+372"}
+  "ppx_hardcaml"   {= "v0.18~preview.130.48+372"}
+  "ppx_jane"       {= "v0.18~preview.130.48+372"}
+  "ppx_rope"       {= "v0.18~preview.130.48+372"}
+  "ctypes"         {>= "0.18.0"}
+  "ctypes-foreign"
+  "dune"           {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml C Simulation Backend"
+description: """
+A fast C-based simulation backend for Hardcaml circuits.
+
+The library transparently compiles a Hardcaml Circuit to C code, which is in turn compiled
+and linked into the running executable. The generated simulation object can be used like
+any other cyclesim simulation.
+"""
+url {
+  src:
+    "https://github.com/janestreet/hardcaml_c/archive/96772404449f6e36a17f5c0182db774a9d1e9020.tar.gz"
+  checksum:
+    "sha256=f6f0f7b83125074b9b831f93340bf52a6c6b87a6c667f3ba0f1fd6930275c431"
+}

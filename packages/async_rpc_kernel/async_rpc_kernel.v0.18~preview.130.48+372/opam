@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/async_rpc_kernel"
+bug-reports: "https://github.com/janestreet/async_rpc_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/async_rpc_kernel.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/async_rpc_kernel/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                   {>= "5.1.0"}
+  "async_kernel"            {= "v0.18~preview.130.48+372"}
+  "base"                    {= "v0.18~preview.130.48+372"}
+  "bin_prot"                {= "v0.18~preview.130.48+372"}
+  "core"                    {= "v0.18~preview.130.48+372"}
+  "core_extended"           {= "v0.18~preview.130.48+372"}
+  "core_kernel"             {= "v0.18~preview.130.48+372"}
+  "pipe_with_writer_error"  {= "v0.18~preview.130.48+372"}
+  "ppx_jane"                {= "v0.18~preview.130.48+372"}
+  "protocol_version_header" {= "v0.18~preview.130.48+372"}
+  "sexplib"                 {= "v0.18~preview.130.48+372"}
+  "dune"                    {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Platform-independent core of Async RPC library"
+description: """
+Part of Jane Street's Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"""
+url {
+  src:
+    "https://github.com/janestreet/async_rpc_kernel/archive/e574c31a4864b73176cf7885230a9dc7af5d935e.tar.gz"
+  checksum:
+    "sha256=3ca9367683c9c4e154500b06af0ecac4cfe15c1374a493167db5114f29596264"
+}
