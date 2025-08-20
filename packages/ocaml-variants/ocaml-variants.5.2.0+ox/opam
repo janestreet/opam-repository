@@ -129,7 +129,7 @@ conflicts: [
   "ppxlib_ast" {!= "0.33.0+ox"}
   "sedlex" {!= "3.3+ox"}
   "topkg" {!= "1.0.8+ox"}
-  "uTop" {!= "2.15.0+ox"}
+  "utop" {!= "2.15.0+ox"}
   "uutf" {!= "1.0.3+ox"}
   "wasm_of_ocaml-compiler" {!= "6.0.1+ox"}
   "zarith" {!= "1.12+ox"}
