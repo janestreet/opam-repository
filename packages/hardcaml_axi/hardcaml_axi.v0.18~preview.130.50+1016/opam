@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_axi"
+bug-reports: "https://github.com/janestreet/hardcaml_axi/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_axi.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_axi/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"              {>= "5.1.0"}
+  "base"               {= "v0.18~preview.130.50+1016"}
+  "core"               {= "v0.18~preview.130.50+1016"}
+  "hardcaml"           {= "v0.18~preview.130.50+1016"}
+  "hardcaml_circuits"  {= "v0.18~preview.130.50+1016"}
+  "hardcaml_handshake" {= "v0.18~preview.130.50+1016"}
+  "ppx_hardcaml"       {= "v0.18~preview.130.50+1016"}
+  "ppx_jane"           {= "v0.18~preview.130.50+1016"}
+  "stdio"              {= "v0.18~preview.130.50+1016"}
+  "dune"               {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml AXI Interface Types"
+description: """
+AXI Lite, Full and Stream Interfaces for Hardcaml
+"""
+url {
+  src:
+    "https://github.com/janestreet/hardcaml_axi/archive/8832ea596a14f7bd7a048d8e068c5b7f49d09c2b.tar.gz"
+  checksum:
+    "sha256=ae944c2fb041d723441818c6d3f423f5b4cd547c66777f91d987ca2ad9b37805"
+}

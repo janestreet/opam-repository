@@ -1,0 +1,49 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_examples"
+bug-reports: "https://github.com/janestreet/bonsai_examples/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_examples.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_examples/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "async"               {= "v0.18~preview.130.50+1016"}
+  "async_extra"         {= "v0.18~preview.130.50+1016"}
+  "async_js"            {= "v0.18~preview.130.50+1016"}
+  "async_kernel"        {= "v0.18~preview.130.50+1016"}
+  "async_rpc_kernel"    {= "v0.18~preview.130.50+1016"}
+  "async_rpc_websocket" {= "v0.18~preview.130.50+1016"}
+  "base"                {= "v0.18~preview.130.50+1016"}
+  "bonsai"              {= "v0.18~preview.130.50+1016"}
+  "bonsai_web"          {= "v0.18~preview.130.50+1016"}
+  "core"                {= "v0.18~preview.130.50+1016"}
+  "core_kernel"         {= "v0.18~preview.130.50+1016"}
+  "ocaml-embed-file"    {= "v0.18~preview.130.50+1016"}
+  "ppx_jane"            {= "v0.18~preview.130.50+1016"}
+  "virtual_dom"         {= "v0.18~preview.130.50+1016"}
+  "cohttp"              {>= "2.5.6"}
+  "cohttp-async"        {>= "2.5.7" & < "3.0.0" | >= "5.1.1" & < "6.0.0"}
+  "dune"                {>= "3.17.0"}
+  "js_of_ocaml"         {>= "6.0.0"}
+  "js_of_ocaml-ppx"     {>= "6.0.0"}
+  "uri"                 {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "Examples for bonsai_web, a library for building dynamic webapps, using Js_of_ocaml"
+description: """
+A collection of bonsai_web examples. Bonsai is a library for building
+    reusable UI components inside an Incremental-style UI framework such as
+    Incr_dom or React. This repository contains its examples.
+"""
+url {
+  src:
+    "https://github.com/janestreet/bonsai_examples/archive/eb15c2417868d4cef5bf72dcbd621eb9955d78de.tar.gz"
+  checksum:
+    "sha256=6cc167955cd1655a869cc853af71f5236781a42b7791c6efbd68f6dcb95ad5fe"
+}
