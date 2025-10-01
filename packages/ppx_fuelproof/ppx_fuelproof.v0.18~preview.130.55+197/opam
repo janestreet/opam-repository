@@ -1,0 +1,39 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_fuelproof"
+bug-reports: "https://github.com/janestreet/ppx_fuelproof/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_fuelproof.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_fuelproof/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "5.1.0"}
+  "base"          {= "v0.18~preview.130.55+197"}
+  "ppx_compare"   {= "v0.18~preview.130.55+197"}
+  "ppx_let"       {= "v0.18~preview.130.55+197"}
+  "ppx_sexp_conv" {= "v0.18~preview.130.55+197"}
+  "ppxlib_jane"   {= "v0.18~preview.130.55+197"}
+  "dune"          {>= "3.17.0"}
+  "ppxlib"        {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Get better error messages and improve mode crossing for types"
+description: """
+ppx_fuelproof helps work around several issues when trying to make your
+type mode-cross in the way you want:
+
+  1. It generates better error messages when your type doesn't mode-cross.
+  2. It helps you avoid running out of fuel. (The mode-crossing check in
+     the compiler limits how hard it will try to prove mode-crossing.)
+  3. It lets you have some amount of mode-crossing GADTs.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_fuelproof/archive/897ede715e75ca6395e1fc4b783eda6ec7d3af13.tar.gz"
+  checksum:
+    "sha256=dd3e72766b00f70469aed4d8d72e00fc29b3198758fd47ccc16bfce9d62e5cd8"
+}

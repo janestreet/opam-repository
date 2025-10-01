@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_debug_assert"
+bug-reports: "https://github.com/janestreet/ppx_debug_assert/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_debug_assert.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_debug_assert/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "5.2.0"}
+  "dune"   {>= "3.17.0"}
+  "ppxlib" {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Ppx for debug assertions"
+description: """
+A ppx rewriter for debug assertions.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_debug_assert/archive/61d9597a77a0ad86e275bfd875eba8a102baad7b.tar.gz"
+  checksum:
+    "sha256=8259289e878a7d95406eea4e30e9a8db34fed37c20a2825cd491633775d663d2"
+}

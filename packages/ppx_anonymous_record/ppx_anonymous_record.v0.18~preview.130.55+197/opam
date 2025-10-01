@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_anonymous_record"
+bug-reports: "https://github.com/janestreet/ppx_anonymous_record/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_anonymous_record.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_anonymous_record/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "base"        {= "v0.18~preview.130.55+197"}
+  "ppx_jane"    {= "v0.18~preview.130.55+197"}
+  "ppx_string"  {= "v0.18~preview.130.55+197"}
+  "ppxlib_jane" {= "v0.18~preview.130.55+197"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "A ppx expander that expands anonymous records into (typed) tuples."
+description: """
+A ppx expander that allows you to write safer code by (effectively) labelling tuples.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_anonymous_record/archive/e92eaf7e5d2adc878d7204792bbf757313f7f202.tar.gz"
+  checksum:
+    "sha256=d6111089b7661ecabdcc8f58d99cdf78a0225e992f8965c7819bb0c548ffc3ca"
+}

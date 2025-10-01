@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/lsp_rpc"
+bug-reports: "https://github.com/janestreet/lsp_rpc/issues"
+dev-repo: "git+https://github.com/janestreet/lsp_rpc.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/lsp_rpc/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "4.14.0"}
+  "async"           {= "v0.18~preview.130.55+197"}
+  "core"            {= "v0.18~preview.130.55+197"}
+  "core_kernel"     {= "v0.18~preview.130.55+197"}
+  "core_unix"       {= "v0.18~preview.130.55+197"}
+  "ppx_jane"        {= "v0.18~preview.130.55+197"}
+  "ppx_yojson_conv" {= "v0.18~preview.130.55+197"}
+  "dune"            {>= "3.17.0"}
+  "jsonrpc"
+  "lsp"             {>= "1.18.0"}
+  "yojson"          {>= "1.7.0" & < "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Library for building LSPs in OCaml"
+description: """
+
+This library provides an implementation of the RPC layer for language servers to enable
+writing language servers in OCaml. The underlying LSP and JSON RPC libraries come from the
+OCaml-LSP project; this library provides an Async RPC layer on top of them.
+"""
+url {
+  src:
+    "https://github.com/janestreet/lsp_rpc/archive/a837d82537064c6dd3d6f8c0347ab95c10f2babc.tar.gz"
+  checksum:
+    "sha256=9b85eb2625510545540ec762bd510f8be6334473fc8a6d3196dfbb42587b8466"
+}

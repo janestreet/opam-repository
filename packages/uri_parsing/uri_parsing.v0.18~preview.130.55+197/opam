@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/uri_parsing"
+bug-reports: "https://github.com/janestreet/uri_parsing/issues"
+dev-repo: "git+https://github.com/janestreet/uri_parsing.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/uri_parsing/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "core"             {= "v0.18~preview.130.55+197"}
+  "ppx_jane"         {= "v0.18~preview.130.55+197"}
+  "ppx_typed_fields" {= "v0.18~preview.130.55+197"}
+  "textutils"        {= "v0.18~preview.130.55+197"}
+  "base64"           {>= "3.4.0"}
+  "dune"             {>= "3.17.0"}
+  "js_of_ocaml-ppx"  {>= "6.0.0"}
+  "re"               {>= "1.8.0"}
+  "uri"              {>= "3.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "A library for building composable URI parsers using ppx_typed_fields."
+description: """
+A library for building composable URI parsers using ppx_typed_fields.
+"""
+url {
+  src:
+    "https://github.com/janestreet/uri_parsing/archive/f778e876329759626dc436193f90125eecef6974.tar.gz"
+  checksum:
+    "sha256=777ae105642fa9f4e78e9bc1ae3fb501952e83c52ed955e2b0fb851821e2c5c9"
+}

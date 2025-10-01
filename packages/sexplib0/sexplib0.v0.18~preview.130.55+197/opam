@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sexplib0"
+bug-reports: "https://github.com/janestreet/sexplib0/issues"
+dev-repo: "git+https://github.com/janestreet/sexplib0.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexplib0/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "4.14.0"}
+  "basement" {= "v0.18~preview.130.55+197"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "Library containing the definition of S-expressions and some base converters"
+description: """
+Part of Jane Street's Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"""
+url {
+  src:
+    "https://github.com/janestreet/sexplib0/archive/60e85a871b5095372cda796bcadeadce1cad73c3.tar.gz"
+  checksum:
+    "sha256=aa3e3964c7d9f2e1367cf9fb5eea75ea2656158b791ff52c7f945c7e7e5aee6f"
+}

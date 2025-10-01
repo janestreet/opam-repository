@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_array_base"
+bug-reports: "https://github.com/janestreet/ppx_array_base/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_array_base.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_array_base/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "ppx_helpers" {= "v0.18~preview.130.55+197"}
+  "ppxlib_jane" {= "v0.18~preview.130.55+197"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Defines array functions used in [Base.Array]."
+description: """
+This PPX defines array functions used in [Base.Array] via attribute expansion. It also contains the expansion code for [ppx_array], which registers the deriving and extension PPXes.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_array_base/archive/b09bac76de1558d3708aef45086a34eadfc4883b.tar.gz"
+  checksum:
+    "sha256=85556a9f009df7214160ccf0d2e511555951a48d54c2a0b759ec8c89a54fddf4"
+}
