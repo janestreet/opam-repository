@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_bench"
+bug-reports: "https://github.com/janestreet/ppx_bench/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_bench.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_bench/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "ppx_inline_test" {= "v0.18~preview.130.72+278"}
+  "ppxlib_jane"     {= "v0.18~preview.130.72+278"}
+  "dune"            {>= "3.17.0"}
+  "ppxlib"          {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Syntax extension for writing in-line benchmarks in ocaml code"
+description: """
+Part of the Jane Street's PPX rewriters collection.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_bench/archive/df397e155d051f53523eb6c0a5565a01317fa515.tar.gz"
+  checksum:
+    "sha256=18fca6c6fa30742193323692c9266b35d6984b1ba03f169d66e868b7fe54e0e2"
+}

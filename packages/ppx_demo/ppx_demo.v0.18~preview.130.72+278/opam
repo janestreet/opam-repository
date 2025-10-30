@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_demo"
+bug-reports: "https://github.com/janestreet/ppx_demo/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_demo.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_demo/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "core"                     {= "v0.18~preview.130.72+278"}
+  "dedent"                   {= "v0.18~preview.130.72+278"}
+  "expect_test_helpers_core" {= "v0.18~preview.130.72+278"}
+  "ppx_here"                 {= "v0.18~preview.130.72+278"}
+  "ppx_jane"                 {= "v0.18~preview.130.72+278"}
+  "ppx_module_timer"         {= "v0.18~preview.130.72+278"}
+  "ppxlib_jane"              {= "v0.18~preview.130.72+278"}
+  "re2"                      {= "v0.18~preview.130.72+278"}
+  "dune"                     {>= "3.17.0"}
+  "ppxlib"                   {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "PPX that exposes the source code string of an expression/module structure."
+description: """
+PPX that exposes the source code string of an expression/module structure.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_demo/archive/984338ff19133523aec0a564c2d8e8f5c0b6758c.tar.gz"
+  checksum:
+    "sha256=5b12339751d92c6cead840597ddd3b27d6edf1c51f31fb84167c37c7aaf02f29"
+}

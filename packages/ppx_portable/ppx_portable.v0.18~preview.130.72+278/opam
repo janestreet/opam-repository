@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_portable"
+bug-reports: "https://github.com/janestreet/ppx_portable/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_portable.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_portable/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "base"         {= "v0.18~preview.130.72+278"}
+  "ppx_js_style" {= "v0.18~preview.130.72+278"}
+  "ppxlib_jane"  {= "v0.18~preview.130.72+278"}
+  "dune"         {>= "3.17.0"}
+  "ppxlib"       {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "Syntactic help for writing portable code, especially Portable_lazy values."
+description: """
+
+Syntactic help for writing portable code, especially Portable_lazy values. Provides
+`lazy%portable` for constructing them and `let%portable rec` for defining recursive and
+mutually recursive values using Portable_lazy.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_portable/archive/749388e957a14e73f6e487151fff5ec245434c3e.tar.gz"
+  checksum:
+    "sha256=271dd42db90f6a23d8d1204966f1e1d1c966ce03dc11168a9df848912700ffc7"
+}

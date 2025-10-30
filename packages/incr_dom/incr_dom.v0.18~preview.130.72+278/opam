@@ -1,0 +1,55 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/incr_dom"
+bug-reports: "https://github.com/janestreet/incr_dom/issues"
+dev-repo: "git+https://github.com/janestreet/incr_dom.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/incr_dom/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "async_js"        {= "v0.18~preview.130.72+278"}
+  "async_kernel"    {= "v0.18~preview.130.72+278"}
+  "bonsai_concrete" {= "v0.18~preview.130.72+278"}
+  "core"            {= "v0.18~preview.130.72+278"}
+  "incr_map"        {= "v0.18~preview.130.72+278"}
+  "incr_select"     {= "v0.18~preview.130.72+278"}
+  "incremental"     {= "v0.18~preview.130.72+278"}
+  "ppx_jane"        {= "v0.18~preview.130.72+278"}
+  "virtual_dom"     {= "v0.18~preview.130.72+278"}
+  "dune"            {>= "3.17.0"}
+  "js_of_ocaml"     {>= "6.0.0"}
+  "js_of_ocaml-ppx" {>= "6.0.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A library for building dynamic webapps, using Js_of_ocaml"
+description: """
+The library is designed roughly on a model/view/controller model.
+Your application is built out of:
+
+- A functional model type that tracks the state of your application.
+
+- An incremental /view/ function for computing an HTML-like
+  representation of how your application should render on the browser.
+  The is based on the [[https://github.com/Matt-Esch/virtual-dom][virtual-dom]] javascript library.
+
+- An action type that is used to schedule events that update the
+  model.
+
+Combined with the ability to use Async, and in particular to send out
+network requests using websockets, this should allow the easy
+construction of rich web applications in a fairly comprehensible
+style.
+
+If you want a more concrete sense of how this works, look in the
+examples directory.
+"""
+url {
+  src:
+    "https://github.com/janestreet/incr_dom/archive/50807f2bd7fd779eadd4d982b73abc741eb58402.tar.gz"
+  checksum:
+    "sha256=dc9c42bd869bc5c3a02448c1b8be71b22c8577ceaa441fa3dd7779e1a949c0a5"
+}

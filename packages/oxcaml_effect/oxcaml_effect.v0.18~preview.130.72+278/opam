@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/oxcaml_effect"
+bug-reports: "https://github.com/janestreet/oxcaml_effect/issues"
+dev-repo: "git+https://github.com/janestreet/oxcaml_effect.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/oxcaml_effect/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.130.72+278"}
+  "basement" {= "v0.18~preview.130.72+278"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Typed effects API for OxCaml"
+description: """
+Effect provides a type-safe wrapper for algebraic effects
+    using Jane Street compiler extensions.
+"""
+url {
+  src:
+    "https://github.com/janestreet/oxcaml_effect/archive/7bb9b090a32f15e5735d36dc19363d483fff9705.tar.gz"
+  checksum:
+    "sha256=4d77a494e42b5b3a6f1a01878177b187f7c6939271098f83e77aa5f55a9a6ed8"
+}

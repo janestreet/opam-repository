@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_array"
+bug-reports: "https://github.com/janestreet/ppx_array/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_array.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_array/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"          {>= "5.1.0"}
+  "base"           {= "v0.18~preview.130.72+278"}
+  "ppx_array_base" {= "v0.18~preview.130.72+278"}
+  "ppx_helpers"    {= "v0.18~preview.130.72+278"}
+  "ppx_template"   {= "v0.18~preview.130.72+278"}
+  "ppxlib_jane"    {= "v0.18~preview.130.72+278"}
+  "dune"           {>= "3.17.0"}
+  "ppxlib"         {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "Copies array functions for unboxed types so they can be compiled for the type's specific layout."
+description: """
+This deriving PPX rewriter is used internally at Jane Street to allow unboxed types to use common array functions. The deriver copies array functions under unboxed types so they can be compiled for the type's specific layout. It is used to simulate layout polymorphism until it is supported first class by the compiler. The long-term goal is thus to delete it entirely.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_array/archive/ae6a04c4fe383f2c5458604f1e9d98ad9ed30e5b.tar.gz"
+  checksum:
+    "sha256=3fb453e07c96788730d00c2db6cc7d804568b1163f08c9c51ed013f9c99aa4a5"
+}

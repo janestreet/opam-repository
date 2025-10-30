@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_handshake"
+bug-reports: "https://github.com/janestreet/hardcaml_handshake/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_handshake.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_handshake/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "base"         {= "v0.18~preview.130.72+278"}
+  "hardcaml"     {= "v0.18~preview.130.72+278"}
+  "ppx_hardcaml" {= "v0.18~preview.130.72+278"}
+  "ppx_jane"     {= "v0.18~preview.130.72+278"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Hardcaml Handshake"
+description: """
+Library for constructing circuits with a pair of valid and ready handshake signals.
+"""
+url {
+  src:
+    "https://github.com/janestreet/hardcaml_handshake/archive/56f628df439e0d1f3d20764b1032c0e604d4d750.tar.gz"
+  checksum:
+    "sha256=81d29e434dd8b846053dfadb506d9eb3dc23de90475501269d20d6681c067e93"
+}

@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/insertion_ordered_map"
+bug-reports: "https://github.com/janestreet/insertion_ordered_map/issues"
+dev-repo: "git+https://github.com/janestreet/insertion_ordered_map.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/insertion_ordered_map/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "core"     {= "v0.18~preview.130.72+278"}
+  "ppx_jane" {= "v0.18~preview.130.72+278"}
+  "sexplib"  {= "v0.18~preview.130.72+278"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A Core.Map with a notion of insertion order."
+description: """
+A Core.Map where any operation that iterates through keys (e.g. fold, iter_keys) will iterate in insertion order with O(N) complexity.
+"""
+url {
+  src:
+    "https://github.com/janestreet/insertion_ordered_map/archive/bfd64df3b7af6ccdfb827cc051024bdc417479ec.tar.gz"
+  checksum:
+    "sha256=074bddf59f07970c0b98e20b620f8b88e224cb1cef817804d32da03989486cf5"
+}

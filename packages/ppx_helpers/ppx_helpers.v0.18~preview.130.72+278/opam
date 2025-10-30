@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_helpers"
+bug-reports: "https://github.com/janestreet/ppx_helpers/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_helpers.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_helpers/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "ppxlib_jane" {= "v0.18~preview.130.72+278"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Miscellaneous helpers for writing PPXes"
+description: """
+Part of the Jane Street PPX rewriters collection.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_helpers/archive/96b424decff182e4f90392366bf9e9212e96da6e.tar.gz"
+  checksum:
+    "sha256=f315edc49d63cebe56e8ac0206b8f68ca2830eba199bc3933677f1d8bc747132"
+}

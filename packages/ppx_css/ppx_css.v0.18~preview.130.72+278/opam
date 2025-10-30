@@ -1,0 +1,47 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_css"
+bug-reports: "https://github.com/janestreet/ppx_css/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_css.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_css/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "am_running_how_js"   {= "v0.18~preview.130.72+278"}
+  "core"                {= "v0.18~preview.130.72+278"}
+  "core_kernel"         {= "v0.18~preview.130.72+278"}
+  "core_unix"           {= "v0.18~preview.130.72+278"}
+  "file_path"           {= "v0.18~preview.130.72+278"}
+  "filesystem"          {= "v0.18~preview.130.72+278"}
+  "ppx_here"            {= "v0.18~preview.130.72+278"}
+  "ppx_jane"            {= "v0.18~preview.130.72+278"}
+  "ppx_let"             {= "v0.18~preview.130.72+278"}
+  "ppx_module_timer"    {= "v0.18~preview.130.72+278"}
+  "ppx_sexp_conv"       {= "v0.18~preview.130.72+278"}
+  "ppx_string"          {= "v0.18~preview.130.72+278"}
+  "ppxlib_jane"         {= "v0.18~preview.130.72+278"}
+  "virtual_dom"         {= "v0.18~preview.130.72+278"}
+  "dune"                {>= "3.17.0"}
+  "js_of_ocaml"         {>= "6.0.0"}
+  "js_of_ocaml-ppx"     {>= "6.0.0"}
+  "ocaml-compiler-libs" {>= "v0.11.0"}
+  "ocamlgraph"          {= "2.0.0"}
+  "ppxlib"              {>= "0.33.0" & < "0.36.0"}
+  "sedlex"              {>= "3.6"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "A ppx that takes in css strings and produces a module for accessing the unique names defined within"
+description: """
+A ppx that takes in css strings and produces a module for accessing the unique names defined within.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_css/archive/7ef93bd266dadcc511f4d1adcffeb9d134ba1bf8.tar.gz"
+  checksum:
+    "sha256=e0ca4cfe2c47c87c60671d25343845d74448c0b2c87a12503fe0675221ae860a"
+}

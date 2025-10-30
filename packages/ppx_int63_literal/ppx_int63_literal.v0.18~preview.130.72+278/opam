@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_int63_literal"
+bug-reports: "https://github.com/janestreet/ppx_int63_literal/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_int63_literal.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_int63_literal/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"  {>= "5.2.0"}
+  "base"   {= "v0.18~preview.130.72+278"}
+  "dune"   {>= "3.17.0"}
+  "ppxlib" {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "Syntax extension for writing int63 literals."
+description: """
+This ppx allows users to write `Int63.t` values as literals, e.g. `Int63.zero` is `0J`.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_int63_literal/archive/af4fca7ced103f44c350c15e11f691be689eadb7.tar.gz"
+  checksum:
+    "sha256=1d80beae147cee53dc4d9e6c72f971e3e99aa848da8e987cce81cf4024448043"
+}

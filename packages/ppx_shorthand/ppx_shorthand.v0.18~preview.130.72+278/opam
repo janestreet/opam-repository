@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_shorthand"
+bug-reports: "https://github.com/janestreet/ppx_shorthand/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_shorthand.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_shorthand/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "ppxlib_jane" {= "v0.18~preview.130.72+278"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis: "A grab-bag of small but useful AST transformations"
+description: """
+This ppx is a collection of small AST transformations that might not otherwise warrant their own ppx.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_shorthand/archive/5021f505c783293f585ba5a9f98145a98f054f74.tar.gz"
+  checksum:
+    "sha256=b884e764b8cfacf4fbe206bb1a1d8c515b950465624717ccdde96864b97f31db"
+}

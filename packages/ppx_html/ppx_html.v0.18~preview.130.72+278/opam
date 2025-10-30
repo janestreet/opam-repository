@@ -1,0 +1,42 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_html"
+bug-reports: "https://github.com/janestreet/ppx_html/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_html.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_html/index.html"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "base"                     {= "v0.18~preview.130.72+278"}
+  "bonsai"                   {= "v0.18~preview.130.72+278"}
+  "bonsai_web"               {= "v0.18~preview.130.72+278"}
+  "core"                     {= "v0.18~preview.130.72+278"}
+  "core_kernel"              {= "v0.18~preview.130.72+278"}
+  "expect_test_helpers_core" {= "v0.18~preview.130.72+278"}
+  "expectable"               {= "v0.18~preview.130.72+278"}
+  "patdiff"                  {= "v0.18~preview.130.72+278"}
+  "ppx_css"                  {= "v0.18~preview.130.72+278"}
+  "ppx_jane"                 {= "v0.18~preview.130.72+278"}
+  "virtual_dom"              {= "v0.18~preview.130.72+278"}
+  "angstrom"                 {>= "0.15.0"}
+  "dune"                     {>= "3.17.0"}
+  "js_of_ocaml-ppx"          {>= "6.0.0"}
+  "ocaml-compiler-libs"      {>= "v0.11.0"}
+  "ppxlib"                   {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "arm32" & arch != "x86_32"
+synopsis:
+  "PPX_HTML is a way of constructing Vdom.Node.t's using HTML syntax."
+description: """
+PPX_HTML is a way of constructing Vdom.Node.t's using HTML syntax.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_html/archive/7dd720926849a3836bfd9c57e7fca5347bc76c6d.tar.gz"
+  checksum:
+    "sha256=937adee143723b4fe5f04960398e7766a7ee93a24ea217a98626211bdb46153c"
+}
