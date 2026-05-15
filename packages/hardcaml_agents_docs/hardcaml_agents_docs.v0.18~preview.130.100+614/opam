@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_agents_docs"
+bug-reports: "https://github.com/janestreet/hardcaml_agents_docs/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_agents_docs.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_agents_docs/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "ppx_jane" {= "v0.18~preview.130.100+614"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Hardcaml Agents Docs"
+description: """
+Hardcaml Agents Docs provides AI tooling context bundles that can be used to increase the quality of AI-produced Hardcaml code.
+"""
+url {
+  src:
+    "https://github.com/janestreet/hardcaml_agents_docs/archive/34839e9288d9a14a021a1425b74f3fb2dfedd315.tar.gz"
+  checksum:
+    "sha256=86f4a68e451d59d44025a033cd9ab9cddc62a517f89543146e4564ac23fca375"
+}

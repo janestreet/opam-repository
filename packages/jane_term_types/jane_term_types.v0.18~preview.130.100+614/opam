@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/jane_term_types"
+bug-reports: "https://github.com/janestreet/jane_term_types/issues"
+dev-repo: "git+https://github.com/janestreet/jane_term_types.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/jane_term_types/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.2.0"}
+  "core"     {= "v0.18~preview.130.100+614"}
+  "ppx_jane" {= "v0.18~preview.130.100+614"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Types for interacting with the terminal."
+description: """
+Types for interacting with the terminal.
+"""
+url {
+  src:
+    "https://github.com/janestreet/jane_term_types/archive/992bee0d824b6aa02462f8cab3360385ccec8701.tar.gz"
+  checksum:
+    "sha256=8243b406a8c67ba9c5ac80996b9043378c08cbcb6c498f8021150491d9d1ca15"
+}

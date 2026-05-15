@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/timezone"
+bug-reports: "https://github.com/janestreet/timezone/issues"
+dev-repo: "git+https://github.com/janestreet/timezone.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/timezone/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"              {>= "5.1.0"}
+  "core"               {= "v0.18~preview.130.100+614"}
+  "ppx_diff"           {= "v0.18~preview.130.100+614"}
+  "ppx_jane"           {= "v0.18~preview.130.100+614"}
+  "ppx_stable_witness" {= "v0.18~preview.130.100+614"}
+  "sexplib"            {= "v0.18~preview.130.100+614"}
+  "stdio"              {= "v0.18~preview.130.100+614"}
+  "dune"               {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Time-zone handling"
+description: """
+Timezone handles parsing timezone data and create [Timezone.t] that
+can later be used to manipulate time in core_kernel or core.
+"""
+url {
+  src:
+    "https://github.com/janestreet/timezone/archive/fa130918c2f662b16f031fd2ffeade851b45e9bf.tar.gz"
+  checksum:
+    "sha256=a3611b4625966f15a96cd4ea87504736b28c3b48dff965a0b47f0f0ca6e4daad"
+}

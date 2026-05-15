@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/base_internalhash_types"
+bug-reports: "https://github.com/janestreet/base_internalhash_types/issues"
+dev-repo: "git+https://github.com/janestreet/base_internalhash_types.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/base_internalhash_types/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune"  {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Types and simple helpers for building up hash functions"
+description: """
+Used by (and formerly part of) ppx_hash; extracted into its own lightweight
+package to allow hand-writing ppx_hash-compatible hash functions without
+depending on ppx_hash.
+"""
+url {
+  src:
+    "https://github.com/janestreet/base_internalhash_types/archive/793732c8555249e0b55f3a213f63cbdd3bb0aa0e.tar.gz"
+  checksum:
+    "sha256=ec026e7cbdf6c6481f4a5226f8083bfffeb8a1b8e135576e848bff1dc39894ba"
+}

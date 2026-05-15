@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/csvfields"
+bug-reports: "https://github.com/janestreet/csvfields/issues"
+dev-repo: "git+https://github.com/janestreet/csvfields.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/csvfields/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "core"     {= "v0.18~preview.130.100+614"}
+  "ppx_jane" {= "v0.18~preview.130.100+614"}
+  "sexplib"  {= "v0.18~preview.130.100+614"}
+  "dune"     {>= "3.17.0"}
+  "num"
+]
+available: arch != "x86_32"
+synopsis: "Runtime support for ppx_xml_conv and ppx_csv_conv_deprecated"
+description: """
+"""
+url {
+  src:
+    "https://github.com/janestreet/csvfields/archive/d519c6f9513b6b54ba63da94d3f3fa8da7f8cc11.tar.gz"
+  checksum:
+    "sha256=0b2153c1178dfb8d53d3e28691dd1f412c2a57207ddd8ec655052825ec7085a9"
+}

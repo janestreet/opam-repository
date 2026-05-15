@@ -1,0 +1,45 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_kernel"
+bug-reports: "https://github.com/janestreet/core_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/core_kernel.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_kernel/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"              {>= "5.1.0"}
+  "base"               {= "v0.18~preview.130.100+614"}
+  "bin_prot"           {= "v0.18~preview.130.100+614"}
+  "core"               {= "v0.18~preview.130.100+614"}
+  "int_repr"           {= "v0.18~preview.130.100+614"}
+  "parsexp"            {= "v0.18~preview.130.100+614"}
+  "ppx_jane"           {= "v0.18~preview.130.100+614"}
+  "ppx_optcomp"        {= "v0.18~preview.130.100+614"}
+  "ppx_sexp_conv"      {= "v0.18~preview.130.100+614"}
+  "ppx_stable_witness" {= "v0.18~preview.130.100+614"}
+  "sexplib"            {= "v0.18~preview.130.100+614"}
+  "univ_map"           {= "v0.18~preview.130.100+614"}
+  "uopt"               {= "v0.18~preview.130.100+614"}
+  "base-threads"
+  "dune"               {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Industrial strength alternative to OCaml's standard library"
+description: """
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+
+Core_kernel is the system-independent part of Core.
+"""
+url {
+  src:
+    "https://github.com/janestreet/core_kernel/archive/4e6048fb3487243de0f66c10996d9d8e72ba6ed1.tar.gz"
+  checksum:
+    "sha256=338c244208f77ba3ef5672f120837dc9ac82a4dbf931b33fcda88c6f1e6c3448"
+}

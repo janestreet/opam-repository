@@ -1,0 +1,45 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ocaml_openapi_generator"
+bug-reports: "https://github.com/janestreet/ocaml_openapi_generator/issues"
+dev-repo: "git+https://github.com/janestreet/ocaml_openapi_generator.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ocaml_openapi_generator/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                        {>= "5.1.0"}
+  "async"                        {= "v0.18~preview.130.100+614"}
+  "async_interactive"            {= "v0.18~preview.130.100+614"}
+  "base"                         {= "v0.18~preview.130.100+614"}
+  "capitalization"               {= "v0.18~preview.130.100+614"}
+  "core"                         {= "v0.18~preview.130.100+614"}
+  "core_kernel"                  {= "v0.18~preview.130.100+614"}
+  "core_unix"                    {= "v0.18~preview.130.100+614"}
+  "file_path"                    {= "v0.18~preview.130.100+614"}
+  "jsonaf"                       {= "v0.18~preview.130.100+614"}
+  "ocaml-embed-file"             {= "v0.18~preview.130.100+614"}
+  "ppx_derive_at_runtime"        {= "v0.18~preview.130.100+614"}
+  "ppx_jane"                     {= "v0.18~preview.130.100+614"}
+  "ppx_jsonaf_conv"              {= "v0.18~preview.130.100+614"}
+  "roundtrippable_command_param" {= "v0.18~preview.130.100+614"}
+  "dune"                         {>= "3.17.0"}
+  "httpaf"                       {>= "0.7.1"}
+  "jingoo"                       {>= "1.4.4" & < "1.5.0"}
+  "uri"                          {>= "3.0.0"}
+]
+available: arch != "x86_32"
+synopsis: "An OpenAPI 3 to OCaml client generator."
+description: """
+An OpenAPI 3 to OCaml client generator.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ocaml_openapi_generator/archive/6a0e461a91d4e840aead604e2e23224c3752741a.tar.gz"
+  checksum:
+    "sha256=83728fe5dfd29fedb5f1da86574bac3a263c177bc3718d0e7506c2c71364181a"
+}

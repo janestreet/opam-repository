@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/splay_tree"
+bug-reports: "https://github.com/janestreet/splay_tree/issues"
+dev-repo: "git+https://github.com/janestreet/splay_tree.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/splay_tree/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "core"     {= "v0.18~preview.130.100+614"}
+  "ppx_jane" {= "v0.18~preview.130.100+614"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "A splay tree implementation"
+description: """
+Splay trees are binary search trees that move recently accessed nodes
+closer to the root for easier access.  They have amortized O(log
+n)-time access for a large enough sequence of primitive operations.
+
+A splay trees may outperform other trees such as red-black trees when
+recently accessed items are more likely to be accessed in the near
+future.
+
+Notably, this splay tree implementation is parameterized by a
+reduction operation which lets you specify an extra accumulator value,
+which can then be searched by efficiently.
+"""
+url {
+  src:
+    "https://github.com/janestreet/splay_tree/archive/678c4c6753f05ba7116122a3d8f35e52d8d3fe62.tar.gz"
+  checksum:
+    "sha256=86cf1454a76101264187da18e34f277259b90ec5fcf6c63cc10e9341c9c5bc98"
+}

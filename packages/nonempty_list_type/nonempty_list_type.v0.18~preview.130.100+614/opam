@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/nonempty_list_type"
+bug-reports: "https://github.com/janestreet/nonempty_list_type/issues"
+dev-repo: "git+https://github.com/janestreet/nonempty_list_type.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/nonempty_list_type/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.14.0"}
+  "dune"  {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Underlying type of `Base.Nonempty_list.t`."
+description: """
+Type for non-empty lists: like `'a list`, with at least one element. Supporting functions are provided in `Base.Nonempty_list`.
+"""
+url {
+  src:
+    "https://github.com/janestreet/nonempty_list_type/archive/98613182ae8c8aa8ad28cc1f85bad386e9fe5c42.tar.gz"
+  checksum:
+    "sha256=c26f7122b16cf7882b31a231059cbc333f52df687706d4530af666530c956fc8"
+}

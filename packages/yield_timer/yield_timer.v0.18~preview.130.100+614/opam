@@ -1,0 +1,44 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/yield_timer"
+bug-reports: "https://github.com/janestreet/yield_timer/issues"
+dev-repo: "git+https://github.com/janestreet/yield_timer.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/yield_timer/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                  {>= "5.1.0"}
+  "async_kernel"           {= "v0.18~preview.130.100+614"}
+  "core"                   {= "v0.18~preview.130.100+614"}
+  "pipe_with_writer_error" {= "v0.18~preview.130.100+614"}
+  "ppx_jane"               {= "v0.18~preview.130.100+614"}
+  "dune"                   {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "Helpers for periodically yielding control to Async during long synchronous tasks"
+description: """
+Yield_timer is a single-module library that makes it easier for functions
+performing long synchronous tasks to behave nicely with Async, by providing
+an easy way to periodically call a [yield] function within some iterator.
+
+A [Yield_timer.t] is configured with a [yield_every] span and a [yield]
+function (defaulting to [Scheduler.yield]), and offers primitives such as
+[yield_if_its_time] and [repeat_until_finished] that only yield when enough
+time has passed since the last yield.
+
+Convenience helpers are provided for iterating over [Sequence.t], [Map.t],
+[Set.t], [List.t], and [Pipe.t] (folds, iters, maps, filters, etc.) that
+transparently interleave yields at the configured cadence.
+"""
+url {
+  src:
+    "https://github.com/janestreet/yield_timer/archive/a6ff7589dfa832dbfff8d43e96321baa13e60d62.tar.gz"
+  checksum:
+    "sha256=01d37a2e93a9e5d2dd7ed464256f1a0e94cd836f7e8eb7c0533836a3bab2eac1"
+}

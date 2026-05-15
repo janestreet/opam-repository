@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/js_of_ocaml_patches"
+bug-reports: "https://github.com/janestreet/js_of_ocaml_patches/issues"
+dev-repo: "git+https://github.com/janestreet/js_of_ocaml_patches.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/js_of_ocaml_patches/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "dune"            {>= "3.17.0"}
+  "js_of_ocaml"     {>= "6.0.0"}
+  "js_of_ocaml-ppx" {>= "6.0.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "Additions to js_of_ocaml's standard library that are required by Jane Street libraries."
+description: """
+Additions to js_of_ocaml's standard library that are required by Jane Street libraries. Most, if not everything in this library is intended to be upstreamed.
+"""
+url {
+  src:
+    "https://github.com/janestreet/js_of_ocaml_patches/archive/b95804bf41830303e47429aeb6edd9ea6c9b4390.tar.gz"
+  checksum:
+    "sha256=c0f2c56b6025f4366cc759055744a549649cb54612ca153b6501423ad0963f46"
+}

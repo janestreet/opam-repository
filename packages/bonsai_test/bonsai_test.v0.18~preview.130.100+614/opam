@@ -1,0 +1,49 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_test"
+bug-reports: "https://github.com/janestreet/bonsai_test/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_test.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_test/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "async"                    {= "v0.18~preview.130.100+614"}
+  "async_js"                 {= "v0.18~preview.130.100+614"}
+  "base"                     {= "v0.18~preview.130.100+614"}
+  "bonsai"                   {= "v0.18~preview.130.100+614"}
+  "bonsai_concrete"          {= "v0.18~preview.130.100+614"}
+  "core"                     {= "v0.18~preview.130.100+614"}
+  "core_unix"                {= "v0.18~preview.130.100+614"}
+  "expect_test_helpers_base" {= "v0.18~preview.130.100+614"}
+  "expect_test_helpers_core" {= "v0.18~preview.130.100+614"}
+  "expectable"               {= "v0.18~preview.130.100+614"}
+  "incr_map"                 {= "v0.18~preview.130.100+614"}
+  "incremental"              {= "v0.18~preview.130.100+614"}
+  "ocaml-embed-file"         {= "v0.18~preview.130.100+614"}
+  "patdiff"                  {= "v0.18~preview.130.100+614"}
+  "ppx_expect"               {= "v0.18~preview.130.100+614"}
+  "ppx_jane"                 {= "v0.18~preview.130.100+614"}
+  "ppx_pattern_bind"         {= "v0.18~preview.130.100+614"}
+  "ppx_quick_test"           {= "v0.18~preview.130.100+614"}
+  "virtual_dom"              {= "v0.18~preview.130.100+614"}
+  "dune"                     {>= "3.17.0"}
+  "re"                       {>= "1.8.0"}
+]
+available: arch != "x86_32"
+synopsis: "A library for testing Bonsai state machines."
+description: """
+Bonsai is a library for building composable state machines. This libary
+    provides testing capabilities.
+"""
+url {
+  src:
+    "https://github.com/janestreet/bonsai_test/archive/497ec589033d201c3e801c74a2d8f5678f078b36.tar.gz"
+  checksum:
+    "sha256=d3081f742feb17ff5e28bd5dccfb06127a3a5aab920ed3fe2928cca14cad9db5"
+}
