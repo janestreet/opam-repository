@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/base_yojson"
+bug-reports: "https://github.com/janestreet/base_yojson/issues"
+dev-repo: "git+https://github.com/janestreet/base_yojson.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/base_yojson/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "base"                {= "v0.18~preview.130.106+341"}
+  "ppx_sexp_conv"       {= "v0.18~preview.130.106+341"}
+  "ppx_yojson_conv_lib" {= "v0.18~preview.130.106+341"}
+  "dune"                {>= "3.17.0"}
+  "yojson"              {>= "1.7.0" & < "3.0.0"}
+]
+available: arch != "x86_32"
+synopsis: "Yojson with additional support for common Base idioms"
+description: """
+Base_yojson provides bindings to make Yojson compatible with the Jane Street's PPX
+rewriters collection, including ppx_yojson_conv.
+"""
+url {
+  src:
+    "https://github.com/janestreet/base_yojson/archive/25ee0d184b1516ecaa59dac94519e7a5936bbe06.tar.gz"
+  checksum:
+    "sha256=450bc614578e648ac76ab8f46eccf0680c1ff5af1932c2d96e92ee5d54c58306"
+}

@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/stored_reversed"
+bug-reports: "https://github.com/janestreet/stored_reversed/issues"
+dev-repo: "git+https://github.com/janestreet/stored_reversed.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/stored_reversed/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "core"     {= "v0.18~preview.130.106+341"}
+  "ppx_jane" {= "v0.18~preview.130.106+341"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "A library for representing a list temporarily stored in reverse order."
+description: """
+A ['a list t] represents a list temporarily stored in the reverse of its logical order.
+"""
+url {
+  src:
+    "https://github.com/janestreet/stored_reversed/archive/4ac936159f4d9d46b12e9693816a2cc879fde1ca.tar.gz"
+  checksum:
+    "sha256=e8d113e033545841908b3200aac889c10433518e2149b7b6c6a6cf61b5a2783b"
+}

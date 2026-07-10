@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/protocol_version_header"
+bug-reports: "https://github.com/janestreet/protocol_version_header/issues"
+dev-repo: "git+https://github.com/janestreet/protocol_version_header.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/protocol_version_header/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"              {>= "5.1.0"}
+  "core"               {= "v0.18~preview.130.106+341"}
+  "ppx_jane"           {= "v0.18~preview.130.106+341"}
+  "ppx_stable_witness" {= "v0.18~preview.130.106+341"}
+  "dune"               {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Protocol versioning"
+description: """
+This library offers a lightweight way for applications protocols to
+version themselves. The more protocols that add themselves to
+[Known_protocol], the nicer error messages we will get when connecting
+to a service while using the wrong protocol.
+"""
+url {
+  src:
+    "https://github.com/janestreet/protocol_version_header/archive/ad6dd119e232658fea3e39407d83d06004be14fa.tar.gz"
+  checksum:
+    "sha256=c45b29128456ca009ad7f45a2f967c181aa06c101cdffe700e60c4bf5688a00c"
+}

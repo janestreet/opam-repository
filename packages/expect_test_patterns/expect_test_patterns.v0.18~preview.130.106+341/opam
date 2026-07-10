@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/expect_test_patterns"
+bug-reports: "https://github.com/janestreet/expect_test_patterns/issues"
+dev-repo: "git+https://github.com/janestreet/expect_test_patterns.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/expect_test_patterns/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.2.0"}
+  "base"                     {= "v0.18~preview.130.106+341"}
+  "expect_test_helpers_base" {= "v0.18~preview.130.106+341"}
+  "ppx_variants_conv"        {= "v0.18~preview.130.106+341"}
+  "dune"                     {>= "3.17.0"}
+  "re"                       {>= "1.8.0"}
+]
+available: arch != "x86_32"
+synopsis: "Pattern matching for expect test output"
+description: """
+[Expect_test_patterns] is a library for matching expect test output against patterns.It supports literal, glob, regexp, and escaped line matchers, making it easy to write expect tests whose output contains variable content such as timestamps, hashes, or temporary file paths.
+"""
+url {
+  src:
+    "https://github.com/janestreet/expect_test_patterns/archive/28d959b5ee47b48042d5cf08bbe2d2ae1ba9899b.tar.gz"
+  checksum:
+    "sha256=1c5be5e3b1ed0027618dec7c9ad89cf8426835fd8f47df7613c246df2c2c647d"
+}

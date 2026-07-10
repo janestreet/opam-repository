@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/capsule0"
+bug-reports: "https://github.com/janestreet/capsule0/issues"
+dev-repo: "git+https://github.com/janestreet/capsule0.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/capsule0/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "basement"     {= "v0.18~preview.130.106+341"}
+  "ppx_template" {= "v0.18~preview.130.106+341"}
+  "sexp_type"    {= "v0.18~preview.130.106+341"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "The primitive capsule api for the OxCaml mode ecosystem"
+description: """
+Part of Jane Street's Core library
+The capsule api provides a safe interface for partitioning mutable data into shareable
+memory locations. The `blocking_sync` library provides a naive implementation of some
+synchronization mechanisms that interact with the capsule api.
+"""
+url {
+  src:
+    "https://github.com/janestreet/capsule0/archive/f7fbbadb2be12682821e7562ee8d49834abc0cf8.tar.gz"
+  checksum:
+    "sha256=8980e2b140af0d1e9dedeeac3c8dbba1893a48620bb239aa9a8a35be59e2a791"
+}

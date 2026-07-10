@@ -1,0 +1,39 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/n_ary"
+bug-reports: "https://github.com/janestreet/n_ary/issues"
+dev-repo: "git+https://github.com/janestreet/n_ary.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/n_ary/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "base"                     {= "v0.18~preview.130.106+341"}
+  "expect_test_helpers_base" {= "v0.18~preview.130.106+341"}
+  "ppx_compare"              {= "v0.18~preview.130.106+341"}
+  "ppx_enumerate"            {= "v0.18~preview.130.106+341"}
+  "ppx_hash"                 {= "v0.18~preview.130.106+341"}
+  "ppx_jane"                 {= "v0.18~preview.130.106+341"}
+  "ppx_sexp_conv"            {= "v0.18~preview.130.106+341"}
+  "ppx_sexp_message"         {= "v0.18~preview.130.106+341"}
+  "dune"                     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "A library for N-ary datatypes and operations."
+description: """
+
+A library for N-ary datatypes and operations.
+
+Provides tuples, enumerations, variants, and list operations
+implemented for N from 2 to 16, inclusive.
+"""
+url {
+  src:
+    "https://github.com/janestreet/n_ary/archive/14b04b9eb1f7710b9f974ac1fd52eeabfb1fb6a2.tar.gz"
+  checksum:
+    "sha256=bffafc9424692ded8eb95f74596e19ecbb410b61b1dad12c1bee8ae51a6d81ed"
+}

@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/parsexp_prefix"
+bug-reports: "https://github.com/janestreet/parsexp_prefix/issues"
+dev-repo: "git+https://github.com/janestreet/parsexp_prefix.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/parsexp_prefix/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                      {>= "4.14.0"}
+  "parsexp"                    {= "v0.18~preview.130.106+341"}
+  "parsexp_symbolic_automaton" {= "v0.18~preview.130.106+341"}
+  "ppx_compare"                {= "v0.18~preview.130.106+341"}
+  "ppx_enumerate"              {= "v0.18~preview.130.106+341"}
+  "ppx_hash"                   {= "v0.18~preview.130.106+341"}
+  "ppx_js_style"               {= "v0.18~preview.130.106+341"}
+  "ppx_sexp_conv"              {= "v0.18~preview.130.106+341"}
+  "ppx_template"               {= "v0.18~preview.130.106+341"}
+  "ppx_variants_conv"          {= "v0.18~preview.130.106+341"}
+  "sexplib0"                   {= "v0.18~preview.130.106+341"}
+  "dune"                       {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "S-expression prefix parsing library"
+description: """
+This library provides utility parsers for prefixes of sexps, where the sexp
+    is expected to finish on something that is yet to be typed, like when you're 
+    in the middle of writing a sexp in a text editor.
+"""
+url {
+  src:
+    "https://github.com/janestreet/parsexp_prefix/archive/189df6612816bc351a3922ec907bdba17bf2326f.tar.gz"
+  checksum:
+    "sha256=921abc153b7689280cad17bc1612c5b395ab6dc544ca6c9c88f9fec4cd9b0b56"
+}

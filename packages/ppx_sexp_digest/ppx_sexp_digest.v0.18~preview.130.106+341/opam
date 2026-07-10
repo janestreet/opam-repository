@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_sexp_digest"
+bug-reports: "https://github.com/janestreet/ppx_sexp_digest/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_sexp_digest.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_sexp_digest/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.2.0"}
+  "base"                     {= "v0.18~preview.130.106+341"}
+  "bin_prot"                 {= "v0.18~preview.130.106+341"}
+  "expect_test_helpers_base" {= "v0.18~preview.130.106+341"}
+  "ppx_jane"                 {= "v0.18~preview.130.106+341"}
+  "ppx_sexp_conv"            {= "v0.18~preview.130.106+341"}
+  "sexp_grammar"             {= "v0.18~preview.130.106+341"}
+  "stdio"                    {= "v0.18~preview.130.106+341"}
+  "dune"                     {>= "3.17.0"}
+  "ppxlib"                   {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "x86_32"
+synopsis: "A ppx extension for hashing the sexp_grammar of a type."
+description: """
+This is meant to be used similarly to `[%bin_digest: t]`. Common sexp serialization
+    changes like adding record field annotations don't affect the `[%bin_digest: t]`
+    output but do affect this ppx output.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_sexp_digest/archive/deed1547338be0552316d5c4794f1c7302b7af4b.tar.gz"
+  checksum:
+    "sha256=6c57802a33942f21899517dc0e120e13c0bae1b6438967282c92389f91f5ff9a"
+}

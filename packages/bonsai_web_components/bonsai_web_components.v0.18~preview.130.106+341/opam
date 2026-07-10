@@ -1,0 +1,69 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_web_components"
+bug-reports: "https://github.com/janestreet/bonsai_web_components/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_web_components.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_web_components/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "am_running_how_js"        {= "v0.18~preview.130.106+341"}
+  "async_kernel"             {= "v0.18~preview.130.106+341"}
+  "base"                     {= "v0.18~preview.130.106+341"}
+  "bin_prot"                 {= "v0.18~preview.130.106+341"}
+  "bonsai"                   {= "v0.18~preview.130.106+341"}
+  "bonsai_concrete"          {= "v0.18~preview.130.106+341"}
+  "bonsai_web"               {= "v0.18~preview.130.106+341"}
+  "bonsai_web_test"          {= "v0.18~preview.130.106+341"}
+  "core"                     {= "v0.18~preview.130.106+341"}
+  "core_extended"            {= "v0.18~preview.130.106+341"}
+  "core_kernel"              {= "v0.18~preview.130.106+341"}
+  "expect_test_helpers_base" {= "v0.18~preview.130.106+341"}
+  "fuzzy_match"              {= "v0.18~preview.130.106+341"}
+  "incr_map"                 {= "v0.18~preview.130.106+341"}
+  "ocaml-embed-file"         {= "v0.18~preview.130.106+341"}
+  "ordinal_abbreviation"     {= "v0.18~preview.130.106+341"}
+  "patdiff"                  {= "v0.18~preview.130.106+341"}
+  "ppx_bench"                {= "v0.18~preview.130.106+341"}
+  "ppx_css"                  {= "v0.18~preview.130.106+341"}
+  "ppx_expect"               {= "v0.18~preview.130.106+341"}
+  "ppx_html"                 {= "v0.18~preview.130.106+341"}
+  "ppx_jane"                 {= "v0.18~preview.130.106+341"}
+  "ppx_module_timer"         {= "v0.18~preview.130.106+341"}
+  "ppx_pattern_bind"         {= "v0.18~preview.130.106+341"}
+  "ppx_typed_fields"         {= "v0.18~preview.130.106+341"}
+  "profunctor"               {= "v0.18~preview.130.106+341"}
+  "record_builder"           {= "v0.18~preview.130.106+341"}
+  "sexp_grammar"             {= "v0.18~preview.130.106+341"}
+  "sexplib0"                 {= "v0.18~preview.130.106+341"}
+  "textutils"                {= "v0.18~preview.130.106+341"}
+  "toplayer"                 {= "v0.18~preview.130.106+341"}
+  "uri_parsing"              {= "v0.18~preview.130.106+341"}
+  "virtual_dom"              {= "v0.18~preview.130.106+341"}
+  "dune"                     {>= "3.17.0"}
+  "gen_js_api"               {>= "1.0.8"}
+  "js_of_ocaml"              {>= "6.0.0"}
+  "js_of_ocaml-ppx"          {>= "6.0.0"}
+  "re"                       {>= "1.8.0"}
+  "uri"                      {>= "3.0.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "Examples for bonsai_web, a library for building dynamic webapps, using Js_of_ocaml"
+description: """
+A collection of bonsai_web examples. Bonsai is a library for building
+    reusable UI components inside an Incremental-style UI framework such as
+    Incr_dom or React. This repository contains its examples.
+"""
+url {
+  src:
+    "https://github.com/janestreet/bonsai_web_components/archive/f87534894c3bb08c751eedc837c0bfdf2472ee1d.tar.gz"
+  checksum:
+    "sha256=46406994a15295a7d176c9e36ed3c3cd265be48fdb02baa1ce6039188b8d40df"
+}

@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_sexp_message"
+bug-reports: "https://github.com/janestreet/ppx_sexp_message/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_sexp_message.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_sexp_message/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"         {>= "5.1.0"}
+  "base"          {= "v0.18~preview.130.106+341"}
+  "ppx_here"      {= "v0.18~preview.130.106+341"}
+  "ppx_sexp_conv" {= "v0.18~preview.130.106+341"}
+  "dune"          {>= "3.17.0"}
+  "ppxlib"        {>= "0.33.0" & < "0.36.0"}
+]
+available: arch != "x86_32"
+synopsis: "A ppx rewriter for easy construction of s-expressions"
+description: """
+Part of the Jane Street's PPX rewriters collection.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_sexp_message/archive/01e65bf5b6975b9e688e349d9dd3fb72d581b0ca.tar.gz"
+  checksum:
+    "sha256=91b39f0dc30cc5dd6b46209af367ec143587e09a1c5d404126e707223d44dbf7"
+}

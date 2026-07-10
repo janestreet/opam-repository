@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/netlib"
+bug-reports: "https://github.com/janestreet/netlib/issues"
+dev-repo: "git+https://github.com/janestreet/netlib.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/netlib/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.2.0"}
+  "core"     {= "v0.18~preview.130.106+341"}
+  "ppx_jane" {= "v0.18~preview.130.106+341"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Functions for working with and formatting 48-bit MAC addresses."
+description: """
+Functions for working with and formatting 48-bit MAC addresses.
+"""
+url {
+  src:
+    "https://github.com/janestreet/netlib/archive/1924fa8e46f934a8d2d19638f3a90f3a151944ad.tar.gz"
+  checksum:
+    "sha256=a158e1f6f2e4fa1821d0eaa6d37eab9d4df29409323cdc0b16e43b64b15fb5e4"
+}

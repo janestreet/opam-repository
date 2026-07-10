@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/fixed_list"
+bug-reports: "https://github.com/janestreet/fixed_list/issues"
+dev-repo: "git+https://github.com/janestreet/fixed_list.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/fixed_list/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "core"     {= "v0.18~preview.130.106+341"}
+  "ppx_jane" {= "v0.18~preview.130.106+341"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Lists whose length is tracked in the OCaml type system"
+description: """
+`Fixed_list` provides lists whose length is tracked in the OCaml type system. This lets APIs express and preserve length relationships statically: for example, `map2` and `zip` only accept lists of the same length, and mapping over a fixed list returns a fixed list of the same length.
+"""
+url {
+  src:
+    "https://github.com/janestreet/fixed_list/archive/77e23a071834e8e1b6693c65333a1d61c7e1ac6e.tar.gz"
+  checksum:
+    "sha256=9c21da0e9c2355ec18305ccb7f1fd3bcbcabe5f94ae9c2016acb983392bb721f"
+}

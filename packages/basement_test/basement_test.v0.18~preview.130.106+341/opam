@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/basement_test"
+bug-reports: "https://github.com/janestreet/basement_test/issues"
+dev-repo: "git+https://github.com/janestreet/basement_test.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/basement_test/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+run-test: [
+  ["dune" "runtest" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "basement"                 {= "v0.18~preview.130.106+341"}
+  "core"                     {= "v0.18~preview.130.106+341"}
+  "expect_test_helpers_base" {= "v0.18~preview.130.106+341"}
+  "expect_test_helpers_core" {= "v0.18~preview.130.106+341"}
+  "ppx_jane"                 {= "v0.18~preview.130.106+341"}
+  "dune"                     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Tests for Basement"
+description: """
+Part of Jane Street's Core library
+Tests for the Basement library.
+"""
+url {
+  src:
+    "https://github.com/janestreet/basement_test/archive/aa7c7c25e741810bc9999ec81086d42b82fb9bf8.tar.gz"
+  checksum:
+    "sha256=7f0583e417d8ac205a16932041b9a90cf0f54dcca1b133a43720b8a4911fc3bf"
+}

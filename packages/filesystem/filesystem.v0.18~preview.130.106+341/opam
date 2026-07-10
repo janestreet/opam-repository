@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/filesystem"
+bug-reports: "https://github.com/janestreet/filesystem/issues"
+dev-repo: "git+https://github.com/janestreet/filesystem.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/filesystem/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "async_kernel" {= "v0.18~preview.130.106+341"}
+  "async_log"    {= "v0.18~preview.130.106+341"}
+  "async_unix"   {= "v0.18~preview.130.106+341"}
+  "core"         {= "v0.18~preview.130.106+341"}
+  "core_unix"    {= "v0.18~preview.130.106+341"}
+  "file_path"    {= "v0.18~preview.130.106+341"}
+  "ppx_jane"     {= "v0.18~preview.130.106+341"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "A library for filesystem operations with the file_path library."
+description: """
+A library for filesystem operations with the file_path library.
+"""
+url {
+  src:
+    "https://github.com/janestreet/filesystem/archive/d8b0f7d6d3dd52d3ae118831ba17e33b2ed87415.tar.gz"
+  checksum:
+    "sha256=896a00bb239ba8c4634ceb77a8e010cfbf5a43290b53b97fd65e6fe4ecaa6127"
+}

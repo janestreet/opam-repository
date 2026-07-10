@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/record_builder"
+bug-reports: "https://github.com/janestreet/record_builder/issues"
+dev-repo: "git+https://github.com/janestreet/record_builder.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/record_builder/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.130.106+341"}
+  "ppx_jane" {= "v0.18~preview.130.106+341"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "A library which provides traversal of records with an applicative"
+description: """
+This is a very small library which utilises the functionality provided by the
+=ppx_fields= syntax extension, more specifically it acts as a wrapper to the
+derived =Fields.make_creator= function for a given record type. The wrapper
+automatically handles all of the mapping and combining of applicative terms
+needed to build the record from a single applicative term for each field.
+"""
+url {
+  src:
+    "https://github.com/janestreet/record_builder/archive/52b71a7fed0bd9cada67b66e479b7ff9924f5898.tar.gz"
+  checksum:
+    "sha256=7eb9f80d64abe80b9a03b1a5f88ed592f50e98649bffaa945e1f2d8702120075"
+}

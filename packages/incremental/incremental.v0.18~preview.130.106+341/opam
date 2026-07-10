@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/incremental"
+bug-reports: "https://github.com/janestreet/incremental/issues"
+dev-repo: "git+https://github.com/janestreet/incremental.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/incremental/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                {>= "5.1.0"}
+  "core"                 {= "v0.18~preview.130.106+341"}
+  "core_kernel"          {= "v0.18~preview.130.106+341"}
+  "janestreet_lru_cache" {= "v0.18~preview.130.106+341"}
+  "ppx_jane"             {= "v0.18~preview.130.106+341"}
+  "ppx_optcomp"          {= "v0.18~preview.130.106+341"}
+  "textutils_kernel"     {= "v0.18~preview.130.106+341"}
+  "dune"                 {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Library for incremental computations"
+description: """
+Part of Jane Street's Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
+"""
+url {
+  src:
+    "https://github.com/janestreet/incremental/archive/98b5750ec3c006641351bfd858a89136a5dbc52c.tar.gz"
+  checksum:
+    "sha256=df4056efbc2a97605b23e13b76147241deda77b11ef155d53a2fc23b93b5a694"
+}
