@@ -1,0 +1,45 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_test"
+bug-reports: "https://github.com/janestreet/core_test/issues"
+dev-repo: "git+https://github.com/janestreet/core_test.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_test/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+run-test: [
+  ["dune" "runtest" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "base_quickcheck"          {= "v0.18~preview.133.03+642"}
+  "base_test"                {= "v0.18~preview.133.03+642"}
+  "core"                     {= "v0.18~preview.133.03+642"}
+  "core_kernel"              {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_base" {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_core" {= "v0.18~preview.133.03+642"}
+  "expectable"               {= "v0.18~preview.133.03+642"}
+  "patdiff"                  {= "v0.18~preview.133.03+642"}
+  "ppx_bin_and_sexp_digest"  {= "v0.18~preview.133.03+642"}
+  "ppx_jane"                 {= "v0.18~preview.133.03+642"}
+  "ppx_quick_test"           {= "v0.18~preview.133.03+642"}
+  "sexp_grammar"             {= "v0.18~preview.133.03+642"}
+  "sexplib"                  {= "v0.18~preview.133.03+642"}
+  "dune"                     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Tests for Core"
+description: """
+Part of Jane Street's Core library
+Tests for the Core library.
+"""
+url {
+  src:
+    "https://github.com/janestreet/core_test/archive/f4e2979928c624e1cb0ecb42eafde1ee42e9f463.tar.gz"
+  checksum:
+    "sha256=9ef0b3a8337790bc2ce57cff07efb46441b20e224e11cf4e495cf09cb3181001"
+}

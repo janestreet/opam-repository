@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/username"
+bug-reports: "https://github.com/janestreet/username/issues"
+dev-repo: "git+https://github.com/janestreet/username.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/username/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "core"         {= "v0.18~preview.133.03+642"}
+  "ppx_template" {= "v0.18~preview.133.03+642"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "An identifier for a user"
+description: """
+A string representation for a user, typically a UNIX username
+"""
+url {
+  src:
+    "https://github.com/janestreet/username/archive/0ce50f4a8a68b4d8d8d2ee8907ca1f59ab0af69b.tar.gz"
+  checksum:
+    "sha256=aa3edb0ac6d21698ddedce28e8d310ad654345e62bbed66e1f844c932377a8f3"
+}

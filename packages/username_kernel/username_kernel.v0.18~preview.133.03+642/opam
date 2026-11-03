@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/username_kernel"
+bug-reports: "https://github.com/janestreet/username_kernel/issues"
+dev-repo: "git+https://github.com/janestreet/username_kernel.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/username_kernel/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "ppx_template" {= "v0.18~preview.133.03+642"}
+  "username"     {= "v0.18~preview.133.03+642"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "An identifier for a user (compatibility wrapper around [username])"
+description: """
+Re-exports the [username] library under its historical module path
+[Username_kernel.Username] so that existing callers keep working.
+"""
+url {
+  src:
+    "https://github.com/janestreet/username_kernel/archive/80085d954de30d577f21d90a242a4f16bfb54ef0.tar.gz"
+  checksum:
+    "sha256=73db4ef4b7622b89b4d9c34b3ea7d24d1dd84403635e39b990e8cae6423b1b6d"
+}

@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/portable_intrusive_stack"
+bug-reports: "https://github.com/janestreet/portable_intrusive_stack/issues"
+dev-repo: "git+https://github.com/janestreet/portable_intrusive_stack.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/portable_intrusive_stack/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.133.03+642"}
+  "portable" {= "v0.18~preview.133.03+642"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Multicore-safe stack storing next-pointer intrusively in nodes"
+description: """
+Multicore-safe stack storing next-pointer intrusively in nodes
+"""
+url {
+  src:
+    "https://github.com/janestreet/portable_intrusive_stack/archive/886f613bf3944c8735acf26375702785a175bc02.tar.gz"
+  checksum:
+    "sha256=cc7f1b6870dd26e1deca522dcb76bf6fee3542cda7bc3440657133e3badbc237"
+}

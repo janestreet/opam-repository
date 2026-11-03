@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/effect_test_helpers"
+bug-reports: "https://github.com/janestreet/effect_test_helpers/issues"
+dev-repo: "git+https://github.com/janestreet/effect_test_helpers.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/effect_test_helpers/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "base"                     {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_base" {= "v0.18~preview.133.03+642"}
+  "handled_effect"           {= "v0.18~preview.133.03+642"}
+  "ppx_jane"                 {= "v0.18~preview.133.03+642"}
+  "dune"                     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Test helpers for checking whether code allocates fibers"
+description: """
+Effect_test_helpers counts every fiber created in the process by wrapping the
+runtime functions that allocate fiber stacks, and provides expect-test helpers for
+requiring that code creates no fibers, or no more than a given number.
+"""
+url {
+  src:
+    "https://github.com/janestreet/effect_test_helpers/archive/04ad3d51a0c99cec130fa8a7a5fa07cdf12b1fe5.tar.gz"
+  checksum:
+    "sha256=26758720bf72be6f52608b0c400805422873a4e2f892a98c08454ec72cbf96c3"
+}

@@ -1,0 +1,43 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/base_lite"
+bug-reports: "https://github.com/janestreet/base_lite/issues"
+dev-repo: "git+https://github.com/janestreet/base_lite.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/base_lite/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                   {>= "5.1.0"}
+  "base"                    {= "v0.18~preview.133.03+642"}
+  "base_stubs"              {= "v0.18~preview.133.03+642"}
+  "basement"                {= "v0.18~preview.133.03+642"}
+  "capsule0"                {= "v0.18~preview.133.03+642"}
+  "nonempty_list_type"      {= "v0.18~preview.133.03+642"}
+  "ocaml_intrinsics_kernel" {= "v0.18~preview.133.03+642"}
+  "ppx_compare"             {= "v0.18~preview.133.03+642"}
+  "ppx_enumerate"           {= "v0.18~preview.133.03+642"}
+  "ppx_hash"                {= "v0.18~preview.133.03+642"}
+  "ppx_sexp_conv"           {= "v0.18~preview.133.03+642"}
+  "sexplib0"                {= "v0.18~preview.133.03+642"}
+  "dune"                    {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Base, with ppx_template and OxCaml syntax erased"
+description: """
+
+Base, with ppx_template and OxCaml syntax erased.
+
+In vanilla OCaml this is the same as Base, but in OxCaml this is a pared-down version that
+is faster to compile and link.
+"""
+url {
+  src:
+    "https://github.com/janestreet/base_lite/archive/f9414d079a640a49f587c8e78eb2f723309413bd.tar.gz"
+  checksum:
+    "sha256=a6d8edab49e7507eb2785ebf70e43406a09c6b6737301b8149534895babeed16"
+}

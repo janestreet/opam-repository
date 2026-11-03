@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_profiler"
+bug-reports: "https://github.com/janestreet/core_profiler/issues"
+dev-repo: "git+https://github.com/janestreet/core_profiler.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_profiler/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.1.0"}
+  "core"             {= "v0.18~preview.133.03+642"}
+  "core_kernel"      {= "v0.18~preview.133.03+642"}
+  "core_unix"        {= "v0.18~preview.133.03+642"}
+  "ppx_jane"         {= "v0.18~preview.133.03+642"}
+  "re2"              {= "v0.18~preview.133.03+642"}
+  "shell"            {= "v0.18~preview.133.03+642"}
+  "textutils"        {= "v0.18~preview.133.03+642"}
+  "textutils_kernel" {= "v0.18~preview.133.03+642"}
+  "dune"             {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Profiling library"
+description: """
+Core_profiler is a library that helps you profile programs and
+estimate various costs.
+"""
+url {
+  src:
+    "https://github.com/janestreet/core_profiler/archive/ab29c3748287d6950f157aaa11d3e9fb293d54ee.tar.gz"
+  checksum:
+    "sha256=9eaee8889f5d5477a862569efc841c3aa9bad5fe7b3c105850498e277e288b4f"
+}

@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/testable_timeout"
+bug-reports: "https://github.com/janestreet/testable_timeout/issues"
+dev-repo: "git+https://github.com/janestreet/testable_timeout.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/testable_timeout/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "async_kernel"    {= "v0.18~preview.133.03+642"}
+  "core"            {= "v0.18~preview.133.03+642"}
+  "ppx_jane"        {= "v0.18~preview.133.03+642"}
+  "dune"            {>= "3.17.0"}
+  "js_of_ocaml-ppx" {>= "6.0.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "An API like the browser's setTimeout, but driven by an overridable async time source."
+description: """
+An API like the browser's setTimeout, but driven by an overridable async time source.
+"""
+url {
+  src:
+    "https://github.com/janestreet/testable_timeout/archive/ff18cfba9fb159eae80d05926a250c6377ce5b84.tar.gz"
+  checksum:
+    "sha256=b1470bebae761cf17fb2add0db89b7e28adc3619bae634c9ba40aa0bb3cfd4cb"
+}

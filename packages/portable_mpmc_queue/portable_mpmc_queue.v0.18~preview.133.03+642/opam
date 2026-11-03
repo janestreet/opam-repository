@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/portable_mpmc_queue"
+bug-reports: "https://github.com/janestreet/portable_mpmc_queue/issues"
+dev-repo: "git+https://github.com/janestreet/portable_mpmc_queue.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/portable_mpmc_queue/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.133.03+642"}
+  "portable" {= "v0.18~preview.133.03+642"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Portable MPMC queue for OxCaml"
+description: """
+Portable lock-free multi-producer multi-consumer queue for OxCaml
+"""
+url {
+  src:
+    "https://github.com/janestreet/portable_mpmc_queue/archive/d82ade9548f70636b3a72277bd3eb7d96e8f3a8b.tar.gz"
+  checksum:
+    "sha256=b6714e701422f4259662d98d5ad28f558a85a5bbef323b662701342a1aa3c2e2"
+}

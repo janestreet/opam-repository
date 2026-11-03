@@ -1,0 +1,37 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/rpc_parallel"
+bug-reports: "https://github.com/janestreet/rpc_parallel/issues"
+dev-repo: "git+https://github.com/janestreet/rpc_parallel.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/rpc_parallel/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "async"       {= "v0.18~preview.133.03+642"}
+  "core"        {= "v0.18~preview.133.03+642"}
+  "core_kernel" {= "v0.18~preview.133.03+642"}
+  "core_unix"   {= "v0.18~preview.133.03+642"}
+  "current_exe" {= "v0.18~preview.133.03+642"}
+  "ppx_jane"    {= "v0.18~preview.133.03+642"}
+  "dune"        {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Type-safe parallel library built on top of Async_rpc"
+description: """
+Rpc_parallel offers an API to define various workers and protocols,
+spawn workers as separate processes, and communicate with them using
+Async Rpc.
+
+"""
+url {
+  src:
+    "https://github.com/janestreet/rpc_parallel/archive/85e669c1478980bd6e2b92e9eac1da9180164541.tar.gz"
+  checksum:
+    "sha256=2c874b40c2995edf3481bbe4faf30b455337765a4fe6cd082e8e108f2fac2758"
+}

@@ -1,0 +1,69 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bonsai_web_components"
+bug-reports: "https://github.com/janestreet/bonsai_web_components/issues"
+dev-repo: "git+https://github.com/janestreet/bonsai_web_components.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/bonsai_web_components/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "am_running_how_js"        {= "v0.18~preview.133.03+642"}
+  "async_kernel"             {= "v0.18~preview.133.03+642"}
+  "base"                     {= "v0.18~preview.133.03+642"}
+  "bin_prot"                 {= "v0.18~preview.133.03+642"}
+  "bonsai"                   {= "v0.18~preview.133.03+642"}
+  "bonsai_concrete"          {= "v0.18~preview.133.03+642"}
+  "bonsai_web"               {= "v0.18~preview.133.03+642"}
+  "bonsai_web_test"          {= "v0.18~preview.133.03+642"}
+  "browser"                  {= "v0.18~preview.133.03+642"}
+  "core"                     {= "v0.18~preview.133.03+642"}
+  "core_extended"            {= "v0.18~preview.133.03+642"}
+  "core_kernel"              {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_base" {= "v0.18~preview.133.03+642"}
+  "fuzzy_match"              {= "v0.18~preview.133.03+642"}
+  "incr_map"                 {= "v0.18~preview.133.03+642"}
+  "ocaml-embed-file"         {= "v0.18~preview.133.03+642"}
+  "ordinal_abbreviation"     {= "v0.18~preview.133.03+642"}
+  "patdiff"                  {= "v0.18~preview.133.03+642"}
+  "ppx_bench"                {= "v0.18~preview.133.03+642"}
+  "ppx_css"                  {= "v0.18~preview.133.03+642"}
+  "ppx_expect"               {= "v0.18~preview.133.03+642"}
+  "ppx_html"                 {= "v0.18~preview.133.03+642"}
+  "ppx_jane"                 {= "v0.18~preview.133.03+642"}
+  "ppx_module_timer"         {= "v0.18~preview.133.03+642"}
+  "ppx_pattern_bind"         {= "v0.18~preview.133.03+642"}
+  "ppx_typed_fields"         {= "v0.18~preview.133.03+642"}
+  "profunctor"               {= "v0.18~preview.133.03+642"}
+  "record_builder"           {= "v0.18~preview.133.03+642"}
+  "sexp_grammar"             {= "v0.18~preview.133.03+642"}
+  "sexplib0"                 {= "v0.18~preview.133.03+642"}
+  "textutils"                {= "v0.18~preview.133.03+642"}
+  "toplayer"                 {= "v0.18~preview.133.03+642"}
+  "uri_parsing"              {= "v0.18~preview.133.03+642"}
+  "virtual_dom"              {= "v0.18~preview.133.03+642"}
+  "dune"                     {>= "3.17.0"}
+  "gen_js_api"               {>= "1.0.8"}
+  "js_of_ocaml"              {>= "6.0.0"}
+  "js_of_ocaml-ppx"          {>= "6.0.0"}
+  "re"                       {>= "1.8.0"}
+  "uri"                      {>= "3.0.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "A collection of relatively unopinionated components for bonsai_web."
+description: """
+A collection of components for bonsai_web, from low-level utilities (e.g. url_var)
+     to higher-level UI components (e.g. partial render table).
+"""
+url {
+  src:
+    "https://github.com/janestreet/bonsai_web_components/archive/2164322ad3d7d0147117ed7654f88ae01e8f8959.tar.gz"
+  checksum:
+    "sha256=884bb028481de2b45e09a9b009716a539daec7fe2da642b39d304dfba7d533f8"
+}

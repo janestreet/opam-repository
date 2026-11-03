@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/postgres_oids"
+bug-reports: "https://github.com/janestreet/postgres_oids/issues"
+dev-repo: "git+https://github.com/janestreet/postgres_oids.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/postgres_oids/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "OIDs of built-in PostgreSQL types"
+description: """
+postgres_oids is a tiny dependency-free library exporting the OIDs of
+commonly-used built-in PostgreSQL types, as assigned in the pg_type system
+catalog. Built-in type OIDs are stable across PostgreSQL versions, so these
+constants can be used when speaking the PostgreSQL wire protocol, e.g. to
+select per-column result formats.
+"""
+url {
+  src:
+    "https://github.com/janestreet/postgres_oids/archive/3a48334c6b02815ed19dbbae7edd857261d97afa.tar.gz"
+  checksum:
+    "sha256=13d752fa5ef4e0d409f5fe0dc6f2635499df98a326bfbff535ca6b700d7fbe8e"
+}

@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/assert_false"
+bug-reports: "https://github.com/janestreet/assert_false/issues"
+dev-repo: "git+https://github.com/janestreet/assert_false.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/assert_false/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.2.0"}
+  "dune"  {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "A locatable replacement for unreachable-code assertions."
+description: """
+Assert_false provides helpers for marking unreachable branches with failure messages that include source locations and grep-friendly identifiers.
+"""
+url {
+  src:
+    "https://github.com/janestreet/assert_false/archive/52a35e1b4084bed1ad7daad090c2dc6e382d93b4.tar.gz"
+  checksum:
+    "sha256=b7df7d4f2bffde82730bdb44e9f23ae9115f313cf5e2a178ef44f9fdcfcc03df"
+}

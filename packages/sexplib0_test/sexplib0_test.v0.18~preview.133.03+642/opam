@@ -1,0 +1,44 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sexplib0_test"
+bug-reports: "https://github.com/janestreet/sexplib0_test/issues"
+dev-repo: "git+https://github.com/janestreet/sexplib0_test.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexplib0_test/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+run-test: [
+  ["dune" "runtest" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "base"                     {= "v0.18~preview.133.03+642"}
+  "base_quickcheck"          {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_base" {= "v0.18~preview.133.03+642"}
+  "parsexp"                  {= "v0.18~preview.133.03+642"}
+  "ppx_compare"              {= "v0.18~preview.133.03+642"}
+  "ppx_expect"               {= "v0.18~preview.133.03+642"}
+  "ppx_here"                 {= "v0.18~preview.133.03+642"}
+  "ppx_sexp_conv"            {= "v0.18~preview.133.03+642"}
+  "ppx_sexp_value"           {= "v0.18~preview.133.03+642"}
+  "ppx_template"             {= "v0.18~preview.133.03+642"}
+  "sexplib"                  {= "v0.18~preview.133.03+642"}
+  "sexplib0"                 {= "v0.18~preview.133.03+642"}
+  "dune"                     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Tests for sexplib0"
+description: """
+Part of Jane Street's Core library
+Tests for the sexplib0 library.
+"""
+url {
+  src:
+    "https://github.com/janestreet/sexplib0_test/archive/0db5403990807034c781b722eb6ea76cfc6513f3.tar.gz"
+  checksum:
+    "sha256=c73bda85a509c7491468a6e8b6be8d26b919f09d7138474912dbcd0a4405b843"
+}

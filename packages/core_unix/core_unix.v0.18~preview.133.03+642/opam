@@ -1,0 +1,46 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/core_unix"
+bug-reports: "https://github.com/janestreet/core_unix/issues"
+dev-repo: "git+https://github.com/janestreet/core_unix.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/core_unix/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.1.0"}
+  "base"                     {= "v0.18~preview.133.03+642"}
+  "basement"                 {= "v0.18~preview.133.03+642"}
+  "core"                     {= "v0.18~preview.133.03+642"}
+  "core_kernel"              {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_core" {= "v0.18~preview.133.03+642"}
+  "jane-street-headers"      {= "v0.18~preview.133.03+642"}
+  "jst-config"               {= "v0.18~preview.133.03+642"}
+  "portable_intrusive_stack" {= "v0.18~preview.133.03+642"}
+  "ppx_builtin"              {= "v0.18~preview.133.03+642"}
+  "ppx_diff"                 {= "v0.18~preview.133.03+642"}
+  "ppx_jane"                 {= "v0.18~preview.133.03+642"}
+  "ppx_optcomp"              {= "v0.18~preview.133.03+642"}
+  "ppx_stable_witness"       {= "v0.18~preview.133.03+642"}
+  "sexplib"                  {= "v0.18~preview.133.03+642"}
+  "base-threads"
+  "dune"                     {>= "3.17.0"}
+  "spawn"                    {>= "v0.15"}
+]
+synopsis: "Unix-specific portions of Core"
+description: """
+Unix-specific extensions to some of the modules defined in [core] and [core_kernel].
+"""
+depexts: ["linux-headers"] {os-family = "alpine"}
+available:
+  arch != "arm32" & arch != "x86_32" & arch != "riscv32" & arch != "riscv64"
+url {
+  src:
+    "https://github.com/janestreet/core_unix/archive/1a413eef89e2fc1b3bbeb61a21ad4d68b073066f.tar.gz"
+  checksum:
+    "sha256=35b7c1e5f4813e267e457d58d2314d38aa8c6c29528a8b619d3e2e1e04f50015"
+}

@@ -1,0 +1,41 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/roundtrippable_command_param"
+bug-reports:
+  "https://github.com/janestreet/roundtrippable_command_param/issues"
+dev-repo:
+  "git+https://github.com/janestreet/roundtrippable_command_param.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/roundtrippable_command_param/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.2.0"}
+  "base"        {= "v0.18~preview.133.03+642"}
+  "core"        {= "v0.18~preview.133.03+642"}
+  "core_kernel" {= "v0.18~preview.133.03+642"}
+  "file_path"   {= "v0.18~preview.133.03+642"}
+  "ppx_helpers" {= "v0.18~preview.133.03+642"}
+  "ppx_jane"    {= "v0.18~preview.133.03+642"}
+  "ppxlib_jane" {= "v0.18~preview.133.03+642"}
+  "profunctor"  {= "v0.18~preview.133.03+642"}
+  "univ_map"    {= "v0.18~preview.133.03+642"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {>= "0.39.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "A library for building Command.Param.t values that can roundtrip to command-line arguments"
+description: """
+Roundtrippable_command_param provides utilities for creating Command.Param.t values that can be converted back to command-line arguments, enabling serialization of command parameters.
+"""
+url {
+  src:
+    "https://github.com/janestreet/roundtrippable_command_param/archive/3c812449f0bf708792b1c90aff1eac061d3b93a3.tar.gz"
+  checksum:
+    "sha256=62a39742c82374f4aeb2ab083830b4feb934e5ec1c75b9cfc4c9e84883d06074"
+}

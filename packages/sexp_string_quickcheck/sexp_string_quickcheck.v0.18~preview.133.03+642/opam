@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/sexp_string_quickcheck"
+bug-reports: "https://github.com/janestreet/sexp_string_quickcheck/issues"
+dev-repo: "git+https://github.com/janestreet/sexp_string_quickcheck.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/sexp_string_quickcheck/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "core"     {= "v0.18~preview.133.03+642"}
+  "parsexp"  {= "v0.18~preview.133.03+642"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Quickcheck helpers for strings parsing to sexps"
+description: """
+This library provides quickcheck generators, helpers, and shrinkers for
+quickcheck-based tests that wish to exercise the concrete syntax of sexps,
+including escape sequences and comments.
+"""
+url {
+  src:
+    "https://github.com/janestreet/sexp_string_quickcheck/archive/bbfba7e56546dde1ed752b52660056defdb1efcf.tar.gz"
+  checksum:
+    "sha256=de99b80ff12ddd54a56c4929abdacca9fc6315bf194abdfca674d3b400dc608e"
+}

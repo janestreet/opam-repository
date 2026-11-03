@@ -1,0 +1,34 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/command_nodejs"
+bug-reports: "https://github.com/janestreet/command_nodejs/issues"
+dev-repo: "git+https://github.com/janestreet/command_nodejs.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/command_nodejs/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"           {>= "5.1.0"}
+  "core"            {= "v0.18~preview.133.03+642"}
+  "core_kernel"     {= "v0.18~preview.133.03+642"}
+  "ppx_jane"        {= "v0.18~preview.133.03+642"}
+  "dune"            {>= "3.17.0"}
+  "js_of_ocaml"     {>= "6.0.0"}
+  "js_of_ocaml-ppx" {>= "6.0.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "A library for running [Command.t]s in JS/Wasm executables running on Node."
+description: """
+A library for running [Command.t]s in JS/Wasm executables running on Node.
+"""
+url {
+  src:
+    "https://github.com/janestreet/command_nodejs/archive/e83e85af72a9cbf44465f53ba279f4baffe839fb.tar.gz"
+  checksum:
+    "sha256=78abd36ccc8e6c1734af655e418651ff801baac90801596fffd210f6de655f21"
+}

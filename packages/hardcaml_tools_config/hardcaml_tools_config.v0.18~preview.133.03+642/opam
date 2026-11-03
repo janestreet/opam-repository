@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/hardcaml_tools_config"
+bug-reports: "https://github.com/janestreet/hardcaml_tools_config/issues"
+dev-repo: "git+https://github.com/janestreet/hardcaml_tools_config.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/hardcaml_tools_config/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Hardcaml EDA Tools Config"
+description: """
+Library for configuring paths to external EDA tool paths used by Hardcaml libraries. This
+can be used to configure Hardcaml to use your local environment setup by pinning a custom
+(local-install) version of this library. Defaults to relying on tools available in PATH.
+"""
+url {
+  src:
+    "https://github.com/janestreet/hardcaml_tools_config/archive/abbc3196d38905e066ad24d03eca4835d2fc876d.tar.gz"
+  checksum:
+    "sha256=a4f2e2ec1231e9119864f3a1db1fdfb436b7765f9cf4478c4fb08fbfc0127172"
+}

@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/portable_memo"
+bug-reports: "https://github.com/janestreet/portable_memo/issues"
+dev-repo: "git+https://github.com/janestreet/portable_memo.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/portable_memo/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                    {>= "5.2.0"}
+  "core"                     {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_core" {= "v0.18~preview.133.03+642"}
+  "ppx_jane"                 {= "v0.18~preview.133.03+642"}
+  "dune"                     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Drop-in replacement for [Memo] in a multi-domain setting"
+description: """
+[Portable_memo] is a mostly-read cache, intended as a drop-in replacement for [Core.Memo] in OxCaml programs that use multiple domains. It maintains a per-domain hashtable and synchronizes between domains using an atomic map.
+"""
+url {
+  src:
+    "https://github.com/janestreet/portable_memo/archive/c9b48c696225071206bd5db4012e81856e78d170.tar.gz"
+  checksum:
+    "sha256=de415c2b47cfca30a2e8f39b8ba1bedf9b036e6ae8f87ed771a4c7e739e4d137"
+}

@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_optional"
+bug-reports: "https://github.com/janestreet/ppx_optional/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_optional.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_optional/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.1.0"}
+  "ppx_helpers" {= "v0.18~preview.133.03+642"}
+  "ppxlib_jane" {= "v0.18~preview.133.03+642"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {>= "0.39.0"}
+]
+available: arch != "x86_32"
+synopsis: "Pattern matching on flat options"
+description: """
+A ppx rewriter that rewrites simple match statements with an if then
+else expression.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_optional/archive/8f78cbfdb6ab3970fb157e1bcdb55a78f0378c60.tar.gz"
+  checksum:
+    "sha256=badab2f29763cde826c9900210c483aaffb9e69863381fa27160eaf674e2d67d"
+}

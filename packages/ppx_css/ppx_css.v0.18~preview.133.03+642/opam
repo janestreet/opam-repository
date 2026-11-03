@@ -1,0 +1,49 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_css"
+bug-reports: "https://github.com/janestreet/ppx_css/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_css.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_css/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"               {>= "5.1.0"}
+  "am_running_how_js"   {= "v0.18~preview.133.03+642"}
+  "core"                {= "v0.18~preview.133.03+642"}
+  "core_kernel"         {= "v0.18~preview.133.03+642"}
+  "core_unix"           {= "v0.18~preview.133.03+642"}
+  "css_values"          {= "v0.18~preview.133.03+642"}
+  "file_path"           {= "v0.18~preview.133.03+642"}
+  "filesystem"          {= "v0.18~preview.133.03+642"}
+  "ppx_here"            {= "v0.18~preview.133.03+642"}
+  "ppx_jane"            {= "v0.18~preview.133.03+642"}
+  "ppx_let"             {= "v0.18~preview.133.03+642"}
+  "ppx_module_timer"    {= "v0.18~preview.133.03+642"}
+  "ppx_sexp_conv"       {= "v0.18~preview.133.03+642"}
+  "ppx_string"          {= "v0.18~preview.133.03+642"}
+  "ppxlib_jane"         {= "v0.18~preview.133.03+642"}
+  "virtual_dom"         {= "v0.18~preview.133.03+642"}
+  "dune"                {>= "3.17.0"}
+  "js_of_ocaml"         {>= "6.0.0"}
+  "js_of_ocaml-ppx"     {>= "6.0.0"}
+  "ocaml-compiler-libs" {>= "v0.11.0"}
+  "ocamlgraph"          {= "2.0.0"}
+  "ppxlib"              {>= "0.39.0"}
+  "sedlex"              {>= "3.6"}
+]
+available: arch != "x86_32"
+synopsis:
+  "A ppx that takes in css strings and produces a module for accessing the unique names defined within"
+description: """
+A ppx that takes in css strings and produces a module for accessing the unique names defined within.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_css/archive/e2fe18a19f0252995a542e387ee5f3e1cf51e79c.tar.gz"
+  checksum:
+    "sha256=06f316abf3ddff0a7edef7badf296ec36cdec62c210032b00fcffe7444ceba53"
+}

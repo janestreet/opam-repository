@@ -1,0 +1,57 @@
+opam-version: "2.0"
+synopsis: "OCaml Language Server Protocol implementation for oxcaml"
+depends: [
+  "dune"                      {= "3.23.1"}
+  "async"                     {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "base"                      {= "v0.17.3" & = "v0.18~preview.133.03+642"}
+  "cmarkit"                   {= "0.4.0"}
+  "cppo"                      {= "1.8.0" & build}
+  "core"                      {= "v0.17.2" & = "v0.18~preview.133.03+642"}
+  "core_unix"                 {= "v0.17.1" & = "v0.18~preview.133.03+642"}
+  "core_kernel"               {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "csexp"                     {= "1.5.2"}
+  "expect_test_helpers_async" {= "v0.17.0" & with-test & = "v0.18~preview.133.03+642"}
+  "expect_test_helpers_core"  {= "v0.17.0" & with-test & = "v0.18~preview.133.03+642"}
+  "alcotest"                  {= "1.9.1" & with-test}
+  "file_path"                 {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "lrgrep"                    {= "0.3"}
+  "merlin-lib"
+  "odoc-parser"               {= "2.0.0"}
+  "ppx_bin_prot"              {= "v0.17.1" & = "v0.18~preview.133.03+642"}
+  "ppx_compare"               {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ppx_enumerate"             {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ppx_expect"                {= "v0.17.3" & with-test & = "v0.18~preview.133.03+642"}
+  "ppx_jane"                  {= "v0.17.0" & with-test & = "v0.18~preview.133.03+642"}
+  "ppx_js_style"              {= "v0.17.1" & = "v0.18~preview.133.03+642"}
+  "ppx_let"                   {= "v0.17.1" & = "v0.18~preview.133.03+642"}
+  "ppx_log"                   {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ppx_here"                  {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ppx_sexp_conv"             {= "v0.17.1" & = "v0.18~preview.133.03+642"}
+  "ppx_sexp_message"          {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ppx_sexp_value"            {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ppx_string"                {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ppx_yojson_conv"           {= "v0.17.1" & = "v0.18~preview.133.03+642"}
+  "re"                        {= "1.14.0"}
+  "re2"                       {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "spawn"                     {= "v0.17.0"}
+  "uutf"                      {= "1.0.4"}
+  "yojson"                    {= "2.2.2"}
+  "menhir"                    {= "20231231"}
+  "menhirLib"                 {= "20231231"}
+  "menhirSdk"                 {= "20231231"}
+  "dyn"                       {= "3.23.1"}
+  "sexplib"                   {= "v0.17.0" & = "v0.18~preview.133.03+642"}
+  "ocamlc-loc"                {= "3.23.1"}
+]
+build: [
+  ["dune" "build" "-p" name "@install"]
+]
+run-test: [
+  ["dune" "runtest" "-p" name]
+]
+url {
+  src:
+    "https://github.com/oxcaml/ocaml-lsp/archive/7f2c4613c8c622ff104cec790a3ef1b5f3887e19.tar.gz"
+  checksum:
+    "sha256=35e3da57fc611b4e9ef6418e09e500fe099ba4984813540fdad7f5b4f836869b"
+}

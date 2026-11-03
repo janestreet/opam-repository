@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/am_running_test"
+bug-reports: "https://github.com/janestreet/am_running_test/issues"
+dev-repo: "git+https://github.com/janestreet/am_running_test.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/am_running_test/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune"  {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Determine if the current process is running as part of a test"
+description: """
+A single-value library which can be used to determine if the current process is running as part of a test. Part of Core.
+"""
+url {
+  src:
+    "https://github.com/janestreet/am_running_test/archive/b8305011f02ff59b04b558af0fc6734a50f590f3.tar.gz"
+  checksum:
+    "sha256=ce547e5d75b91629d5a3cc48e09093bcfbfdc4bb8e66899d25affe221a1c178c"
+}

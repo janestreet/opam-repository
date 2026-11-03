@@ -1,0 +1,36 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_tested"
+bug-reports: "https://github.com/janestreet/ppx_tested/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_tested.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_tested/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"       {>= "5.2.0"}
+  "ppx_here"    {= "v0.18~preview.133.03+642"}
+  "ppxlib_jane" {= "v0.18~preview.133.03+642"}
+  "dune"        {>= "3.17.0"}
+  "ppxlib"      {>= "0.39.0"}
+]
+available: arch != "x86_32"
+synopsis: "Compatibility rewriter for ppx_tested coverage annotations"
+description: """
+A ppx for coverage testing. Lets you mark expressions and code paths that must be
+exercised by your inline tests; if a marked point is not hit by any test, a build-time
+check fails.
+
+Upstream OCaml does not support the underlying probe instrumentation this ppx uses, so in
+practice it only type-checks relevant extension points and drops annotations.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_tested/archive/e42acb0271535ef87db4e58735641f0f32aea671.tar.gz"
+  checksum:
+    "sha256=c4a80bc71df3d6514440ffb7460c1905a4914588ec8852a83d16554d16202a9a"
+}

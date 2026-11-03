@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/ppx_loc"
+bug-reports: "https://github.com/janestreet/ppx_loc/issues"
+dev-repo: "git+https://github.com/janestreet/ppx_loc.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_loc/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.2.0"}
+  "core"     {= "v0.18~preview.133.03+642"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+  "ppxlib"   {>= "0.39.0"}
+]
+available: arch != "x86_32"
+synopsis: "A ppx for referencing code locations and names."
+description: """
+A ppx for referencing code locations and names.
+"""
+url {
+  src:
+    "https://github.com/janestreet/ppx_loc/archive/e895f82599b7adc1183af229947f8ae89d66c661.tar.gz"
+  checksum:
+    "sha256=7c69e00286a224d9e17395069b74e66c8579dd71d20fab15bd52a2523e9cf4f6"
+}

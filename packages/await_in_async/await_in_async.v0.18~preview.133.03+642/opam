@@ -1,0 +1,35 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/await_in_async"
+bug-reports: "https://github.com/janestreet/await_in_async/issues"
+dev-repo: "git+https://github.com/janestreet/await_in_async.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/await_in_async/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"            {>= "5.4.0"}
+  "async_kernel"     {= "v0.18~preview.133.03+642"}
+  "await"            {= "v0.18~preview.133.03+642"}
+  "core"             {= "v0.18~preview.133.03+642"}
+  "handled_effect"   {= "v0.18~preview.133.03+642"}
+  "ppx_debug_assert" {= "v0.18~preview.133.03+642"}
+  "ppx_jane"         {= "v0.18~preview.133.03+642"}
+  "dune"             {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "Implementations of awaiting and synchronization primitives for OxCaml"
+description: """
+[Await] provides implementations of awaiting and synchronization primitives for OxCaml.
+"""
+url {
+  src:
+    "https://github.com/janestreet/await_in_async/archive/239e88287ee2357d82af9c39ecacfa15609325b0.tar.gz"
+  checksum:
+    "sha256=dbcbe86bf444bba64b0d6fd3362ff079055106bee1a8ae3ca71f66329308a4e4"
+}

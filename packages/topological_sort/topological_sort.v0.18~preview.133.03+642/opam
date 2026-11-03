@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/topological_sort"
+bug-reports: "https://github.com/janestreet/topological_sort/issues"
+dev-repo: "git+https://github.com/janestreet/topological_sort.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/topological_sort/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "base"     {= "v0.18~preview.133.03+642"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Topological sort algorithm"
+description: """
+Topological_sort is a single-module library that implements a simple
+topological-sort algorithm.
+"""
+url {
+  src:
+    "https://github.com/janestreet/topological_sort/archive/9b5ebc816c60780a8051caff4a9691f3800fbbfc.tar.gz"
+  checksum:
+    "sha256=227cb945f6e91862c0ecee792fc9437d79d6096adb75160fbecb943f017b0486"
+}

@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/handled_effect"
+bug-reports: "https://github.com/janestreet/handled_effect/issues"
+dev-repo: "git+https://github.com/janestreet/handled_effect.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/handled_effect/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "base"         {= "v0.18~preview.133.03+642"}
+  "basement"     {= "v0.18~preview.133.03+642"}
+  "ppx_template" {= "v0.18~preview.133.03+642"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Handled effects API for OxCaml"
+description: """
+Handled_effect provides an effect-safe wrapper for algebraic effects
+    using Jane Street compiler extensions.
+"""
+url {
+  src:
+    "https://github.com/janestreet/handled_effect/archive/89a18e890bca40aee4b8b79f9ff7fac7c89161b5.tar.gz"
+  checksum:
+    "sha256=75915f5836c934cf37506729cda1728c1515d5e4e044bcc855e07412447a357b"
+}

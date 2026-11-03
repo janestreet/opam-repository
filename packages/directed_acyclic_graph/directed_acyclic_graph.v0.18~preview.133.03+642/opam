@@ -1,0 +1,33 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/directed_acyclic_graph"
+bug-reports: "https://github.com/janestreet/directed_acyclic_graph/issues"
+dev-repo: "git+https://github.com/janestreet/directed_acyclic_graph.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/directed_acyclic_graph/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"        {>= "5.1.0"}
+  "async_kernel" {= "v0.18~preview.133.03+642"}
+  "core"         {= "v0.18~preview.133.03+642"}
+  "ppx_jane"     {= "v0.18~preview.133.03+642"}
+  "dune"         {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "A library for directed acyclic graphs"
+description: """
+Directed_acyclic_graph represents well-formed directed acyclic graphs. It supports
+construction with cycle detection, topological traversal, ancestor and descendant queries,
+pruning, mapping, and clustering adjacent nodes.
+"""
+url {
+  src:
+    "https://github.com/janestreet/directed_acyclic_graph/archive/449bc7426c18c678adecb008fae12d6896ebf927.tar.gz"
+  checksum:
+    "sha256=20042a58aa3dc69e24254260618c7958faaa99e07c4b6ce6b1533a8552ac135b"
+}

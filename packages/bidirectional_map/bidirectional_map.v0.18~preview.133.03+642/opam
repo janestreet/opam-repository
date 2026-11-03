@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/bidirectional_map"
+bug-reports: "https://github.com/janestreet/bidirectional_map/issues"
+dev-repo: "git+https://github.com/janestreet/bidirectional_map.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/bidirectional_map/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune"  {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "A library for bidirectional maps and multimaps."
+description: """
+
+A library for bidirectional maps with one-to-one key relationships,
+and bidirectional multimaps with many-to-many key relationships.
+"""
+url {
+  src:
+    "https://github.com/janestreet/bidirectional_map/archive/a9d031d96912f8c7db0257eb9ea71156ab9dedf0.tar.gz"
+  checksum:
+    "sha256=369ad2a7457673b15e4420e643a22bb3f735b27c3c4adef9e5ea86d4cc28c807"
+}

@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/dedent"
+bug-reports: "https://github.com/janestreet/dedent/issues"
+dev-repo: "git+https://github.com/janestreet/dedent.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/dedent/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"    {>= "5.1.0"}
+  "ppx_jane" {= "v0.18~preview.133.03+642"}
+  "stdio"    {= "v0.18~preview.133.03+642"}
+  "dune"     {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "A library for improving redability of multi-line string constants in code."
+description: """
+A library for improving redability of multi-line string constants in code.
+"""
+url {
+  src:
+    "https://github.com/janestreet/dedent/archive/c122173f839aa228cf2e183d76099476eefa14df.tar.gz"
+  checksum:
+    "sha256=dde93ed8b1cbe8547525800a12680b0ec604bc9e82f588d948f819da9499a7b3"
+}

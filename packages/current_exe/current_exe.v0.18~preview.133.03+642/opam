@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/current_exe"
+bug-reports: "https://github.com/janestreet/current_exe/issues"
+dev-repo: "git+https://github.com/janestreet/current_exe.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/current_exe/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"     {>= "5.2.0"}
+  "core"      {= "v0.18~preview.133.03+642"}
+  "core_unix" {= "v0.18~preview.133.03+642"}
+  "ppx_jane"  {= "v0.18~preview.133.03+642"}
+  "dune"      {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis:
+  "A library for getting the path to the currently running executable, with support for overriding in special environments."
+description: """
+In some environments, arg0 does not contain the path necessary to launch the current program. This library can serve as a coordination point so that environment setup code can supply the correct path to other code that will need it, without the other code having to be aware that it's in an unusual environment.
+"""
+url {
+  src:
+    "https://github.com/janestreet/current_exe/archive/0551b2f0ab12b7ca7113b713d168e96003dc53e8.tar.gz"
+  checksum:
+    "sha256=fe9a4f467d67938af03b9b55a18270d26f73dd0827a7f0dd956076a9b58ee84c"
+}

@@ -1,0 +1,28 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/small_numbers_shim"
+bug-reports: "https://github.com/janestreet/small_numbers_shim/issues"
+dev-repo: "git+https://github.com/janestreet/small_numbers_shim.git"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/small_numbers_shim/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune"  {>= "3.17.0"}
+]
+available: arch != "x86_32"
+synopsis: "Shim for OxCaml small number types."
+description: """
+Shim for OxCaml small number types.
+"""
+url {
+  src:
+    "https://github.com/janestreet/small_numbers_shim/archive/d143144aa968ddf92674826479acf3c92bd94a2b.tar.gz"
+  checksum:
+    "sha256=f9ffaabae18af161b79b8496b466efc5e325ee9b6bccc35d6f5920df946de26b"
+}

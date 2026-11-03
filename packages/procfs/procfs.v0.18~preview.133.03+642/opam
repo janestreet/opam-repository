@@ -1,0 +1,38 @@
+opam-version: "2.0"
+maintainer: "Jane Street developers"
+authors: ["Jane Street Group, LLC"]
+homepage: "https://github.com/janestreet/procfs"
+bug-reports: "https://github.com/janestreet/procfs/issues"
+dev-repo: "git+https://github.com/janestreet/procfs.git"
+doc: "https://ocaml.janestreet.com/ocaml-core/latest/doc/procfs/index.html"
+license: "MIT"
+x-maintenance-intent: ["(latest)"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml"                     {>= "5.2.0"}
+  "async"                     {= "v0.18~preview.133.03+642"}
+  "core"                      {= "v0.18~preview.133.03+642"}
+  "core_kernel"               {= "v0.18~preview.133.03+642"}
+  "core_unix"                 {= "v0.18~preview.133.03+642"}
+  "expect_test_helpers_async" {= "v0.18~preview.133.03+642"}
+  "file_path"                 {= "v0.18~preview.133.03+642"}
+  "filesystem"                {= "v0.18~preview.133.03+642"}
+  "mmap"                      {= "v0.18~preview.133.03+642"}
+  "netlib"                    {= "v0.18~preview.133.03+642"}
+  "ppx_jane"                  {= "v0.18~preview.133.03+642"}
+  "dune"                      {>= "3.17.0"}
+  "num"
+]
+available: arch != "x86_32"
+synopsis: "A parser for values in the Linux `/proc` filesystem."
+description: """
+A parser for values in the Linux `/proc` filesystem.
+"""
+url {
+  src:
+    "https://github.com/janestreet/procfs/archive/db4036d01e6e0639a8b02127dff5c26f1babd6d6.tar.gz"
+  checksum:
+    "sha256=61db19aef68110240c9727200c696428301e9d2ec155fbeaddfce5699c38d4dc"
+}
