@@ -17,5 +17,5 @@ can be made available with:
 opam repo add janestreet-bleeding-external https://github.com/janestreet/opam-repository.git#external-packages
 ```
 
-If you are looking to install the repository with our compiler extensions,
-please click [here](https://github.com/janestreet/opam-repository/tree/with-extensions).
+If you are looking to install the repository with OxCaml extensions,
+please click [here](https://github.com/oxcaml/opam-repository).
